@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>가이드</title>
+
+    <link rel="stylesheet" href="../resources/css/main.css">
+
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/js/main.js"></script>
+
+    <style>
+        .guide-box{margin-top:20px;}
+        .guide-box + .guide-box{margin-top:30px;}
+        .guide-box h2{color:#333;font-size:30px;font-weight:700;margin-bottom:10px;}
+        .guide-box .in{display:flex;flex-wrap:wrap;gap:10px;}
+        .guide-box .in.columns{flex-direction:column;}
+        .check + .check{margin-left:20px;}
+    </style>
+</head>
+<body id="guide">
+<!-- header 헤더는 js에서 append -->
+<header>
+    <div class="inner">
+        <button type="button" class="menu-btn"></button>
+        <a href="#">IAMS V2</a>
+    </div>
+    <div class="inner">
+        <div class="account">
+            [<span>홍길동</span> / <span>IT운영</span>]
+        </div>
+        <button type="button" class="logout-btn">Logout</button>
+    </div>
+</header>
+<!-- // header -->
+
+<!-- contents -->
+<div id="wrapper">
+
+    <!-- sidebar 사이드바는 js에서 append -->
+    <div class="sidebar">
+        <div class="menu">
+            <ul>
+                <li>
+                    <button type="button" class="btn">자산신청</button>
+                    <div class="depth active">
+                        <ul>
+                            <li><a href="#" class="btn">자산신청현황</a></li>
+                            <li><a href="#" class="btn">신규신청</a></li>
+                            <li><a href="#" class="btn">교체신청</a></li>
+                            <li><a href="#" class="btn">대여/연장신청</a></li>
+                            <li><a href="#" class="btn">반납신청</a></li>
+                            <li><a href="#" class="btn">인수인계신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산현황</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">자산조회</a></li>
+                            <li><a href="#" class="btn">부서자산조회</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">서비스데스크</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">서비스신청현황</a></li>
+                            <li><a href="#" class="btn">서비스신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산등록</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">자산등록</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산등록</a>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산실사</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- // sidebar -->
+
+    <div class="contents">
+
+        <!-- contents -->
+        <div class="guide-box">
+            <h2>- Buttons</h2>
+            <div class="in">
+                <button type="button" class="btn">버튼1</button>
+                <button type="button" class="btn primary">버튼2</button>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h2>- Input</h2>
+            <div class="in columns">
+                <label class="input">
+                    <input type="text">
+                </label>
+                <label class="input">
+                    <textarea rows="6"></textarea>
+                </label>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h2>- Select</h2>
+            <div class="in">
+                <label class="select">
+                    <select>
+                        <option value="">1번</option>
+                        <option value="">2번</option>
+                    </select>
+                </label>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h2>- Checkbox & Radio</h2>
+            <div class="in columns">
+                <div>
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>체크1</span>
+                    </label>
+                    <label class="check">
+                        <input type="checkbox">
+                        <span>체크2</span>
+                    </label>
+                </div>
+                <div>
+                    <label class="check">
+                        <input type="radio" name="a">
+                        <span>라디오1</span>
+                    </label>
+                    <label class="check">
+                        <input type="radio" name="a">
+                        <span>라디오2</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h2>- File</h2>
+            <div class="in">
+                <div class="file-box">
+                    <label class="file">
+                        <input type="file">
+                        <span class="btn">파일선택</span>
+                    </label>
+                    <span>선택된 파일 없음</span>
+                </div>
+            </div>
+        </div>
+        <div class="guide-box">
+            <h2>- Popup</h2>
+            <div class="in">
+                <button type="button" class="btn" data-popup="test1">일반 팝업</button>
+                <button type="button" class="btn" data-popup="test2">딤처리 없는 팝업</button>
+            </div>
+
+            <div id="test1" class="popup">
+                <div class="pop-box">
+                    <div class="pop-head">
+                        <h3>팝업1</h3>
+                        <button type="button" class="close-btn"></button>
+                    </div>
+                    <div class="pop-body">
+                        <div>테스트</div>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn" data-btn="cancel">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="test2" class="popup no">
+                <div class="pop-box">
+                    <div class="pop-head">
+                        <h3>팝업1</h3>
+                        <button type="button" class="close-btn"></button>
+                    </div>
+                    <div class="pop-body">
+                        <div>테스트</div>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn" data-btn="cancel">닫기</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- // contents -->
+
+        <!-- footer 푸터는 js에서 append -->
+        <footer>
+            <div class="contact">
+                <ul>
+                    <li>IT 자산관련 문의 : 555-XXXX</li>
+                    <li>기타 자산관련 문의 : 555-XXXX</li>
+                    <li>서비스데스크 : 555-XXXX</li>
+                </ul>
+            </div>
+            <div class="logos">
+                <img src="../resources/img/h_logo.png" alt="logo">
+            </div>
+        </footer>
+        <!-- footer -->
+    </div>
+</div>
+<!-- // contents -->
+</body>
+</html>
