@@ -44,4 +44,19 @@ $(function(){
             $(e.target).removeClass("open");
         }
     });
+
+    /* sidebar 아코디언 */
+    $('.sidebar .menu ul li .btn').on('click',function(){
+        var num = $(this).siblings('.depth').find('ul li').length;
+
+        if($(this).hasClass('active')){
+            $(this).removeClass('active');
+            $(this).siblings('.depth').css('height','0')
+        } else if(!$(this).hasClass('active')){
+            $(this).closest('.menu').find('.depth').css('height','0');
+            $(this).closest('.menu').find('.btn.active').removeClass('active');
+            $(this).addClass('active');
+            $(this).siblings('.depth').css(`height`,`${num * 39.2}`);
+        }
+    })
 });

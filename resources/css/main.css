@@ -38,10 +38,10 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .sidebar .btn{color:#fff;position:relative;}
 .sidebar a.btn{width:100%;background:#eb6620;display:block;padding:10px 10px 10px 20px;}
 .sidebar a.btn:hover{background:#d05e22;}
-.sidebar button.btn:after{content:"";width:24px;height:24px;background:url("../../resources/img/icon/arrow_down_w.png") no-repeat;background-size:100%;position:absolute;top:50%;right:10px;transform:translateY(-50%);}
+.sidebar button.btn:after{content:"";width:24px;height:24px;background:url("../../resources/img/icon/arrow_down_w.png") no-repeat;background-size:100%;position:absolute;top:50%;right:10px;transform:translateY(-50%);transition:.2s;}
 .sidebar .menu > ul > li > .btn{width:100%;background:#fe7912;display:block;font-size:18px;text-align:left;border-bottom:1px solid #eee;padding:10px 20px;}
-.sidebar .btn + .depth{height:0;overflow:hidden;}
-.sidebar .btn + .depth.active{height:auto;}
+.sidebar .btn + .depth{height:0;overflow:hidden; transition:height 200ms ease;}
+.sidebar .btn.active::after{transform:translateY(-50%) rotate(180deg);}
 .sidebar .depth .btn{font-size:16px;}
 
 /* footer */
