@@ -10,6 +10,19 @@ $(function(){
             contents.removeClass("active");
         }
     });
+    /* datepicker */
+    $(".date input").datepicker({
+        changeMonth:true,
+        changeYear:true,
+    });
+
+    $(".date input").keydown(function(){
+        $(this).val("");
+    });
+
+    $(".date input").keyup(function(){
+        $(this).val("");
+    });
 
     /* 팝업 열기 */
     $("[data-popup]").on("click", function(){

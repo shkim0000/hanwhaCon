@@ -7,8 +7,11 @@
     <title>가이드</title>
 
     <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
 
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
     <script src="../resources/js/main.js"></script>
 
     <!--font-awesome -->
@@ -125,6 +128,52 @@
                 <label class="input">
                     <textarea rows="6"></textarea>
                 </label>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+        </div>
+
+        <div class="guide-box">
+            <div class="input-wrap">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">검색</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">신청구분</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">날짜</span>
+                        <div class="date-wrap">
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                            <span>~</span>
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">선택</span>
+                        <label class="select">
+                            <select>
+                                <option value="">하나둘셋넷다섯여섯일곱여덟</option>
+                                <option value="">둘</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
             </div>
         </div>
         <div class="guide-box">
