@@ -33,14 +33,17 @@
 
         /* AUI GRID 커스텀 */
         .aui-grid{border-color:#ddd;}
+        .aui-grid select{padding:0 5px;background:#fff;}
         .aui-grid-default-header{background:#f2f4f6;}
         .aui-grid-default-header *{font-size:15px;}
         .aui-grid-fixed-column-rule{background:#ddd;}
         .aui-grid-renderer-base{font-size:13px;}
         .aui-grid-row-background{background:#f9f9f9;}
         .aui-grid-cell-edited-marker{border:0;}
+        .aui-grid-paging-panel{background:#f2f4f6;}
         .aui-grid-header-panel .aui-grid-table tr td{border-color:#ddd;}
         .aui-grid-body-panel .aui-grid-table tr td:hover{background:#e2e2e2;}
+
     </style>
 </head>
 <body id="guide">
@@ -119,8 +122,194 @@
     <div class="contents">
 
         <!-- contents -->
-        <!-- 에이유아이 그리드가 이곳에 생성됩니다. -->
+        <!-- 1. AUI Grid -->
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">자산정보</h3>
+            </div>
+        </div>
         <div id="grid_wrap" class="grid-box"></div>
+        <!-- // AUI Grid -->
+        <!-- 2. 기본테이블 -->
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">신청정보</h3>
+            </div>
+        </div>
+        <div class="table">
+            <table>
+                <tbody>
+                <tr>
+                    <th>
+                        <p>신청번호</p>
+                    </th>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">자산정보</h3>
+            </div>
+        </div>
+        <div class="table">
+            <table>
+                <colgroup>
+                    <col style="width:50px">
+                    <col>
+                    <col>
+                    <col style="width:200px">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>
+                        <div class="th-wrap center">
+                            <label class="check no-text">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th><p>자산분류</p></th>
+                    <th><p class="important">품목</p></th>
+                    <th><p class="important">수랑신청</p></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="td-wrap center">
+                            <label class="check no-text">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">데스트탑1</option>
+                                    <option value="">데스크탑2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">데스트탑 모델1</option>
+                                    <option value="">데스크탑 모델2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="input whole">
+                                <input type="number">
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <div class="td-wrap center">
+                            <label class="check no-text">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="select">
+                                <select>
+                                    <option value="">데스트탑1</option>
+                                    <option value="">데스크탑2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="select">
+                                <select>
+                                    <option value="">데스트탑 모델1</option>
+                                    <option value="">데스크탑 모델2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="number">
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">첨부파일</h3>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn model">모델 정보</button>
+                <button type="button" class="btn excel">엑셀다운로드</button>
+                <button type="button" class="btn add-column">행 추가</button>
+                <button type="button" class="btn trash">선택 삭제</button>
+            </div>
+        </div>
+        <div class="table">
+            <table>
+                <colgroup>
+                    <col style="width:50px">
+                    <col style="width:calc(100% - 50px);">
+                </colgroup>
+                <thead>
+                <tr>
+                    <th>
+                        <div class="th-wrap center">
+                            <label class="check no-text">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </th>
+                    <th><p>자산분류</p></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>
+                        <div class="td-wrap center">
+                            <label class="check no-text">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <div class="file-box long">
+                                <label class="file">
+                                    <input type="file">
+                                    <span class="btn">파일선택</span>
+                                </label>
+                                <span>선택된 파일 없음</span>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
         <!-- // contents -->
 
         <!-- footer 푸터는 js에서 append -->
@@ -238,7 +427,19 @@ function createAUIGrid() {
         // 데이터 없을 경우
         noDataMessage: "출력할 데이터가 없습니다.",
         // 기본 헤더 높이 지정
-        headerHeight : 30
+        headerHeight : 30,
+        // 페이징 사용
+        usePaging: true,
+
+        // 페이징을 간단한 유형으로 나오도록 설정
+        pagingMode: "simple",
+
+        // 한 화면에 출력되는 행 개수 30개로 지정
+        // pageRowCount: 10,
+
+        // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        showPageRowSelect: true,
+        // autoGridHeight : true
     };
 
     // 실제로 #grid_wrap 에 그리드 생성
