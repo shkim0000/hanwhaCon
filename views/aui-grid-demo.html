@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>AUI 그리드 데모</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <!-- jQuery 사용한다면, 해당 2개의 JS는 불필요 합니다.  -->
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/main.js"></script>
+
+    <style>
+        .grid-box{width:100%;height:380px;}
+        .grid-box .aui-grid{width:100%!important;}
+
+        /* AUI GRID 커스텀 */
+        .aui-grid{border-color:#ddd;}
+        .aui-grid-default-header{background:#f2f4f6;}
+        .aui-grid-default-header *{font-size:15px;}
+        .aui-grid-fixed-column-rule{background:#ddd;}
+        .aui-grid-renderer-base{font-size:13px;}
+        .aui-grid-row-background{background:#f9f9f9;}
+        .aui-grid-cell-edited-marker{border:0;}
+        .aui-grid-header-panel .aui-grid-table tr td{border-color:#ddd;}
+        .aui-grid-body-panel .aui-grid-table tr td:hover{background:#e2e2e2;}
+    </style>
+</head>
+<body id="guide">
+<!-- header 헤더는 js에서 append -->
+<header>
+    <div class="inner">
+        <button type="button" class="menu-btn"></button>
+        <a href="#">IAMS V2</a>
+    </div>
+    <div class="inner">
+        <div class="account">
+            [<span>홍길동</span> / <span>IT운영</span>]
+        </div>
+        <button type="button" class="logout-btn">Logout</button>
+    </div>
+</header>
+<!-- // header -->
+
+<!-- contents -->
+<div id="wrapper">
+
+    <!-- sidebar 사이드바는 js에서 append -->
+    <div class="sidebar">
+        <div class="menu">
+            <ul>
+                <li>
+                    <button type="button" class="btn">자산신청</button>
+                    <div class="depth active">
+                        <ul>
+                            <li><a href="#" class="btn">자산신청현황</a></li>
+                            <li><a href="#" class="btn">신규신청</a></li>
+                            <li><a href="#" class="btn">교체신청</a></li>
+                            <li><a href="#" class="btn">대여/연장신청</a></li>
+                            <li><a href="#" class="btn">반납신청</a></li>
+                            <li><a href="#" class="btn">인수인계신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산현황</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">자산조회</a></li>
+                            <li><a href="#" class="btn">부서자산조회</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">서비스데스크</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">서비스신청현황</a></li>
+                            <li><a href="#" class="btn">서비스신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산등록</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">자산등록</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산등록</a>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산실사</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- // sidebar -->
+
+    <div class="contents">
+
+        <!-- contents -->
+        <!-- 에이유아이 그리드가 이곳에 생성됩니다. -->
+        <div id="grid_wrap" class="grid-box"></div>
+        <!-- // contents -->
+
+        <!-- footer 푸터는 js에서 append -->
+        <footer>
+            <div class="contact">
+                <ul>
+                    <li>IT 자산관련 문의 : 555-XXXX</li>
+                    <li>기타 자산관련 문의 : 555-XXXX</li>
+                    <li>서비스데스크 : 555-XXXX</li>
+                </ul>
+            </div>
+            <div class="logos">
+                <img src="../resources/img/h_logo.png" alt="logo">
+            </div>
+        </footer>
+        <!-- footer -->
+    </div>
+</div>
+<!-- // contents -->
+
+<script type="text/javascript">
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+var myGridID;
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createAUIGrid();
+
+    /* 데이터 요청 후 상단 그리드 삽입 */
+    requestData("../resources/lib/aui-grid/data/sample-datas.json");
+};
+
+/* 3. AUIGrid 그리드 옵션 */
+function createAUIGrid() {
+    // AUIGrid 칼럼 설정
+    var columnLayout = [
+    {
+        dataField: "checkbox",
+        dataType: "boolean",
+        width: 80,
+        headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+        headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+        headerRenderer: { // 헤더 렌더러
+            type: "CheckBoxHeaderRenderer",
+            // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+            // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
+            dependentMode: true
+        },
+        renderer: {
+            type: "CheckBoxEditRenderer",
+            editable: true
+        }
+    }, {
+        dataField: "catagory_product_name",
+        headerText: "물품명",
+        width: 160,
+    }, {
+        dataField: "category_asset_num",
+        headerText: "자산번호",
+        width: 180
+    }, {
+        dataField: "category_model_name",
+        headerText: "모델명",
+        width: 280
+    }, {
+        dataField: "category_user",
+        headerText: "사용자",
+        width: 160
+    }, {
+        dataField: "category_usage1",
+        headerText: "용도1",
+        width: 160
+    }, {
+        dataField: "category_usage2",
+        headerText: "용도2",
+        width: 160
+    }, {
+        dataField: "category_application_type",
+        headerText: "신청구분",
+        width: 160
+    }, {
+        dataField: "category_application_content",
+        headerText: "신청내용",
+        width: 160
+    }, {
+        dataField: "category_place",
+        headerText: "사용장소",
+        width: 160
+    }, {
+        dataField: "category_asset_status",
+        headerText: "자산상태",
+        width: 160
+    }, {
+        dataField: "category_note",
+        headerText: "비고",
+        width: 160
+    }]
+
+    // 그리드 속성 설정
+    var gridPros = {
+        selectionMode: "multipleCells",
+        // 드래깅 행 이동 가능 여부 (기본값 : false)
+        enableDrag: true,
+        // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        enableMultipleDrag: true,
+        // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        enableDragByCellDrag: true,
+        // 드랍 가능 여부 (기본값 : true)
+        enableDrop: true,
+        editable: true,
+        // 소팅
+        enableSorting: true,
+        // 데이터 없을 경우
+        noDataMessage: "출력할 데이터가 없습니다.",
+        // 기본 헤더 높이 지정
+        headerHeight : 30
+    };
+
+    // 실제로 #grid_wrap 에 그리드 생성
+    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+}
+
+/* 4. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof myGridID !== "undefined") {
+        AUIGrid.resize(myGridID);
+    }
+};
+</script>
+</body>
+</html>
