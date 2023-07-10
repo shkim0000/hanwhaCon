@@ -1,0 +1,62 @@
+[
+  {
+    "category_asset_num":"2234580-1",
+    "category_product_name":"PC",
+    "category_item_name":"데스크탑",
+    "category_department":"IT운영",
+    "category_user_name":"홍길동",
+    "category_before_change":"미확인",
+    "category_after_change":"",
+    "category_reason_non-existence":"",
+    "category_investigate-date":"2023-06-20 16:23:32",
+    "category_investigator":"고길동"
+  },
+  {
+    "category_asset_num":"2234580-2",
+    "category_product_name":"모니터",
+    "category_item_name":"27인칭",
+    "category_department":"IT운영",
+    "category_user_name":"윤미자",
+    "category_before_change":"존재",
+    "category_after_change":"",
+    "category_reason_non-existence":"",
+    "category_investigate-date":"2023-06-20 16:23:32",
+    "category_investigator":"신길동"
+  },
+  {
+    "category_asset_num":"2234580-3",
+    "category_product_name":"마우스",
+    "category_item_name":"",
+    "category_department":"IT운영",
+    "category_user_name":"홍길동",
+    "category_before_change":"미확인",
+    "category_after_change":"",
+    "category_reason_non-existence":"",
+    "category_investigate-date":"2023-06-20 16:23:32",
+    "category_investigator":"윤길동"
+  },
+  {
+    "category_asset_num":"2234580-4",
+    "category_product_name":"스피커",
+    "category_item_name":"데스크탑",
+    "category_department":"IT운영",
+    "category_user_name":"김미동",
+    "category_before_change":"미확인",
+    "category_after_change":"존재",
+    "category_reason_non-existence":"",
+    "category_investigate-date":"2023-06-20 16:23:32",
+    "category_investigator":"고길동"
+  },
+  {
+    "category_asset_num":"2234580-5",
+    "category_product_name":"PC",
+    "category_item_name":"데스크탑",
+    "category_department":"IT운영",
+    "category_user_name":"홍길동",
+    "category_before_change":"미확인",
+    "category_after_change":"미존재",
+    "category_reason_non-existence":"",
+    "category_investigate-date":"2023-06-20 16:23:32",
+    "category_investigator":"고길동"
+  }
+]

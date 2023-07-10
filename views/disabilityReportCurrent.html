@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>자산실사</title>
+    <title>장애신고현황</title>
 
     <!-- jQuery -->
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
@@ -81,15 +81,16 @@
                     </div>
                 </li>
                 <li>
-                    <button type="button" class="btn">자산등록</button>
-                    <div class="depth">
+                    <button type="button" class="btn active">장애신고</button>
+                    <div class="depth active">
                         <ul>
-                            <li><a href="#" class="linkBtn">자산등록</a></li>
+                            <li><a href="#" class="linkBtn">장애신고</a></li>
+                            <li><a href="#" class="linkBtn">장애신고현황</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="#" class="btn active">자산등록</a>
+                    <a href="#" class="btn">공지사항</a>
                 </li>
                 <li>
                     <a href="#" class="btn">자산실사</a>
@@ -103,38 +104,33 @@
         <div class="page-indicator">
             <ul>
                 <li><i class="fa-solid fa-house"></i></li>
-                <li>자산실사</li>
-                <li>자산실사</li>
+                <li>장애신고</li>
+                <li>장애신고현황</li>
             </ul>
         </div>
-        <div class="input-wrap a-end">
+        <div class="title-box">
+            <div class="title">
+                <h3>신청자정보</h3>
+            </div>
+        </div>
+        <div class="input-wrap">
             <div class="input-lists">
-                <div class="input-list c-medium">
+                <div class="input-list">
                     <span class="input-title">사용자</span>
                     <label class="input search">
-                        <input type="text">
+                        <input type="text" placeholder="홍길동">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
-                <div class="input-list large">
-                    <span class="input-title">부서</span>
+                <div class="input-list">
+                    <span class="input-title">부서명</span>
                     <label class="input search">
                         <input type="text">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
-                <div class="input-list medium">
-                    <span class="input-title">제목</span>
-                    <label class="select">
-                        <select>
-                            <option value="">제목1</option>
-                            <option value="">제목2</option>
-                            <option value="">제목3</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="input-list medium">
-                    <span class="input-title">기간</span>
+                <div class="input-list regular">
+                    <span class="input-title">조회기간</span>
                     <div class="date-wrap">
                         <label class="date">
                             <input type="text">
@@ -143,17 +139,14 @@
                         <label class="date">
                             <input type="text">
                         </label>
+                        <label class="select">
+                            <select>
+                                <option value="">당일</option>
+                                <option value="">최근 1주일</option>
+                                <option value="">최근 3개월</option>
+                            </select>
+                        </label>
                     </div>
-                </div>
-                <div class="input-list medium">
-                    <span class="input-title">조사결과</span>
-                    <label class="select">
-                        <select>
-                            <option value="">존재</option>
-                            <option value="">미존재</option>
-                            <option value="">미확인</option>
-                        </select>
-                    </label>
                 </div>
             </div>
             <button type="button" class="btn search">검색</button>
@@ -163,9 +156,8 @@
             <ul class="quantity-list">
                 <li>
                     <button type="button">
-                        <span class="quantity orange">
-                            <span class="num">4</span>
-                            <span class="name">총수량</span>
+                        <span class="quantity yellow">
+                            <span class="title">서비스상태</span>
                         </span>
                     </button>
                 </li>
@@ -173,7 +165,7 @@
                     <button type="button">
                         <span class="quantity blue">
                             <span class="num">2</span>
-                            <span class="name">데스크탑</span>
+                            <span class="name">신청</span>
                         </span>
                     </button>
                 </li>
@@ -181,7 +173,7 @@
                     <button type="button">
                         <span class="quantity green">
                             <span class="num">2</span>
-                            <span class="name">모니터</span>
+                            <span class="name">접수</span>
                         </span>
                     </button>
                 </li>
@@ -189,7 +181,15 @@
                     <button type="button">
                         <span class="quantity purple">
                             <span class="num">1</span>
-                            <span class="name">공용</span>
+                            <span class="name">조치중</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity lightOrange">
+                            <span class="num">3</span>
+                            <span class="name">완료</span>
                         </span>
                     </button>
                 </li>
@@ -197,22 +197,37 @@
                     <button type="button">
                         <span class="quantity gray">
                             <span class="num">3</span>
-                            <span class="name">개인</span>
+                            <span class="name">수리중</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity">
+                            <span class="num">15</span>
+                            <span class="name">전체</span>
                         </span>
                     </button>
                 </li>
             </ul>
         </div>
 
-        <div class="title-box end">
+
+
+        <div class="title-box">
+            <div class="title">
+                <h3>장애 신고 목록</h3>
+            </div>
             <div class="btn-wrap">
-                <button type="button" class="btn excel">엑셀다운로드</button>
-                <button type="button" class="btn save">저장</button>
+                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+                <button type="button" class="btn trash">선택 삭제</button>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-medium"></div>
+
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
+            <button type="button" class="btn" data-popup="gridPop_user">사용자 정보</button>
+            <button type="button" class="btn" data-popup="gridPop_asset">자산추가</button>
         </div>
     </div>
 </div>
@@ -237,6 +252,22 @@
         </div>
     </div>
 </div>
+
+<div id="gridPop_asset" class="popup grid no big">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>보유자산</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div id="popup_grid_asset" class="grid-box"></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- // 팝업 -->
 
 <script>
@@ -244,6 +275,7 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 var myGridID;
 var popup_grid_user;
+var popup_grid_asset;
 var groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
@@ -251,10 +283,12 @@ function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
     createPopupAUIGrid2();
+    createPopupAUIGrid3();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
     requestData2();
+    requestData3();
 };
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -278,48 +312,40 @@ function createAUIGrid() {
                 editable: true
             }
         }, {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
+            dataField: "category_disable_num",
+            headerText: "장애접수번호",
             width: 180
         }, {
-            dataField: "category_product_name",
-            headerText: "물품명",
+            dataField: "category_registration_date",
+            headerText: "장애등록일시",
             width: 160,
         }, {
-            dataField: "category_item_name",
-            headerText: "품목명",
+            dataField: "category_status",
+            headerText: "상태",
             width: 280
         }, {
-            dataField: "category_department",
-            headerText: "부서명",
+            dataField: "category_item_name",
+            headerText: "물품명",
             width: 160
         }, {
-            dataField: "category_user_name",
-            headerText: "사용자명",
+            dataField: "category_model_name",
+            headerText: "모델명",
             width: 160
         }, {
-            dataField: "category_before_change",
-            headerText: "변경전",
+            dataField: "category_asset_num",
+            headerText: "자산번호",
             width: 160
         }, {
-            dataField: "category_after_change",
-            headerText: "변경후",
+            dataField: "category_registrant",
+            headerText: "등록자",
             width: 160,
-            renderer: {
-                type: "DropDownListRenderer",
-                list: groupList
-            }
         }, {
-            dataField: "category_reason_non-existence",
-            headerText: "미존재 사유",
+            dataField: "category_publisher",
+            headerText: "발행자",
             width: 160
         }, {
-            dataField: "category_investigate-date",
-            headerText: "조사일",
-            width: 160
-        }, {
-            dataField: "category_investigator",
-            headerText: "조사자",
+            dataField: "category_person_charge",
+            headerText: "조치자",
             width: 160
         }]
     /* 2. 그리드 속성 설정 */
@@ -340,6 +366,11 @@ function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     var columnLayout2 = [
+        {
+            dataField: "category_employeeID",
+            headerText: "사번",
+            width: 180
+        },
         {
             dataField: "category_user_name",
             headerText: "사용자명",
@@ -365,16 +396,104 @@ function createPopupAUIGrid2(){
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
+
+function createPopupAUIGrid3(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    var columnLayout3 = [
+        {
+            dataField: "checkbox",
+            dataType: "boolean",
+            width: 80,
+            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+            headerRenderer: { // 헤더 렌더러
+                type: "CheckBoxHeaderRenderer",
+                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
+            },
+            renderer: {
+                type: "CheckBoxEditRenderer",
+                editable: true
+            }
+        },
+        {
+            dataField: "category_product_name",
+            headerText: "물품종류",
+            width: 180
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180
+        },
+        {
+            dataField: "category_model_name",
+            headerText: "모델명",
+            width: 160
+        },
+        {
+            dataField: "categroy_department",
+            headerText: "부서",
+            width: 160
+        },
+        {
+            dataField: "categroy_user_name",
+            headerText: "사용자",
+            width: 160
+        },
+        {
+            dataField: "categroy_classification_use",
+            headerText: "용도구분",
+            width: 160
+        },
+        {
+            dataField: "categroy_asset_place",
+            headerText: "자산위치",
+            width: 160
+        },
+        {
+            dataField: "categroy_date",
+            headerText: "설치일",
+            width: 160
+        },
+        {
+            dataField: "categroy_asset_status",
+            headerText: "자산상태",
+            width: 160
+        }
+
+        ]
+    /* 2. 그리드 속성 설정 */
+    var gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    };
+
+    /* 그리드 생성 */
+    popup_grid_asset = AUIGrid.create("#popup_grid_asset", columnLayout3, gridPros3);
+}
 /* 4. 데이터 불러오기 */
 function requestData() {
-    $.get("../resources/lib/aui-grid/data/sample-datas5.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas7.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
     });
 };
 
 function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
         AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+        AUIGrid.setGridData(popup_grid_asset, data);
     });
 }
 
