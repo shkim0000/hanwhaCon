@@ -50,7 +50,7 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .sidebar .linkBtn:hover{background:#d05e22;}
 .sidebar .linkBtn.active{background:#d05e22;}
 .sidebar button.btn:after{content:"";width:24px;height:24px;background:url("../../resources/img/icon/arrow_down_w.png") no-repeat;background-size:100%;position:absolute;top:50%;right:10px;transform:translateY(-50%);transition:.2s;}
-.sidebar .menu > ul > li > .btn{width:100%;background:#fe7912;display:block;font-size:18px;text-align:left;border-bottom:1px solid #eee;padding:10px 20px;}
+.sidebar .menu > ul > li > .btn{width:100%;background:#fe7912;display:block;font-size:18px;text-align:left;border-bottom:1px solid #eee;padding:10px 20px;border-radius:0;}
 .sidebar .btn + .depth{height:0;overflow:hidden; transition:height 200ms ease;}
 .sidebar .btn.active::after{transform:translateY(-50%) rotate(180deg);}
 .sidebar .depth .btn{font-size:16px;}
@@ -193,8 +193,21 @@ select{min-width:100px;width:100%;height:38px;background:none;border:0;padding:8
 .important{display:inline-block;position:relative;padding-right:16px;}
 .important::before{content:'*';position:absolute;top:2px;right:0;color:var(--color8);}
 .title-box{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.title-box.column{flex-direction:column;align-items:flex-start;}
 .title-box h3{font-size:24px;font-weight:var(--bold);}
 .btn-wrap{gap:8px;}
+.page-indicator ul{display:flex;justify-content: flex-end;}
+.page-indicator ul li{position:relative;padding:10px 16px;}
+.page-indicator ul li:first-child{color:#f37321;}
+.page-indicator ul li:first-child::after{color:#000;}
+.page-indicator ul li::after{content:'\f054';font-family:"Font Awesome 6 Free";font-size:12px;font-weight:600;position:absolute;top:53%;transform:translateY(-50%);right:-5px;}
+.page-indicator ul li:last-child::after{display:none;}
+.desc-list{width:100%;margin-top:20px;border:1px solid #ddd;}
+.desc-list ul{display:flex;gap:120px;}
+.desc-list ul li{display:flex;align-items:center;}
+.desc-list .desc-title{position:relative;background-color:#eeeeee;padding:10px 10px 10px 20px;}
+.desc-list .desc-title:before{content:'';position:absolute;left:5px;top:50%;transform:translateY(-50%);width:4px;height:18px;background-color:var(--color1);}
+.desc-list .desc-content{padding:10px 10px 10px 20px;}
 
 @media (max-width:697px){
     .title-box{flex-direction:column;align-items:flex-start;gap:8px;}
