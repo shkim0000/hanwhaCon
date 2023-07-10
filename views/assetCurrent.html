@@ -9,6 +9,12 @@
     <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
 
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
 
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
     <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
@@ -17,14 +23,6 @@
     <!--font-awesome -->
     <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
 
-    <style>
-        .guide-box{margin-top:20px;}
-        .guide-box + .guide-box{margin-top:30px;}
-        .guide-box h2{color:#333;font-size:30px;font-weight:700;margin-bottom:10px;}
-        .guide-box .in{display:flex;flex-wrap:wrap;gap:10px;}
-        .guide-box .in.columns{flex-direction:column;}
-        .check + .check{margin-left:20px;}
-    </style>
 </head>
 <body id="guide">
 <!-- header 헤더는 js에서 append -->
@@ -53,12 +51,12 @@
                     <button type="button" class="btn active">자산신청</button>
                     <div class="depth active">
                         <ul>
-                            <li><a href="#" class="btn">자산신청현황</a></li>
-                            <li><a href="#" class="btn">신규신청</a></li>
-                            <li><a href="#" class="btn">교체신청</a></li>
-                            <li><a href="#" class="btn">대여/연장신청</a></li>
-                            <li><a href="#" class="btn">반납신청</a></li>
-                            <li><a href="#" class="btn">인수인계신청</a></li>
+                            <li><a href="#" class="linkBtn">자산신청현황</a></li>
+                            <li><a href="#" class="linkBtn">신규신청</a></li>
+                            <li><a href="#" class="linkBtn">교체신청</a></li>
+                            <li><a href="#" class="linkBtn">대여/연장신청</a></li>
+                            <li><a href="#" class="linkBtn">반납신청</a></li>
+                            <li><a href="#" class="linkBtn">인수인계신청</a></li>
                         </ul>
                     </div>
                 </li>
@@ -66,8 +64,8 @@
                     <button type="button" class="btn">자산현황</button>
                     <div class="depth">
                         <ul>
-                            <li><a href="#" class="btn">자산조회</a></li>
-                            <li><a href="#" class="btn">부서자산조회</a></li>
+                            <li><a href="#" class="linkBtn">자산조회</a></li>
+                            <li><a href="#" class="linkBtn">부서자산조회</a></li>
                         </ul>
                     </div>
                 </li>
@@ -75,8 +73,8 @@
                     <button type="button" class="btn">서비스데스크</button>
                     <div class="depth">
                         <ul>
-                            <li><a href="#" class="btn">서비스신청현황</a></li>
-                            <li><a href="#" class="btn">서비스신청</a></li>
+                            <li><a href="#" class="linkBtn">서비스신청현황</a></li>
+                            <li><a href="#" class="linkBtn">서비스신청</a></li>
                         </ul>
                     </div>
                 </li>
@@ -84,7 +82,7 @@
                     <button type="button" class="btn">자산등록</button>
                     <div class="depth">
                         <ul>
-                            <li><a href="#" class="btn">자산등록</a></li>
+                            <li><a href="#" class="linkBtn">자산등록</a></li>
                         </ul>
                     </div>
                 </li>
@@ -100,7 +98,9 @@
     <!-- // sidebar -->
 
     <div class="contents active">
-        <h3>검색조건</h3>
+        <div class="title-box">
+            <h3>검색조건</h3>
+        </div>
         <div class="input-wrap">
             <div class="input-lists">
                 <div class="input-list">
@@ -108,9 +108,13 @@
                     <label class="select">
                         <select>
                             <option value="">선택</option>
-                            <option value="">선택</option>
-                            <option value="">선택</option>
-                            <option value="">선택</option>
+                            <option value="">신규신청</option>
+                            <option value="">교체신청</option>
+                            <option value="">대여신청</option>
+                            <option value="">대여연장</option>
+                            <option value="">반납신청</option>
+                            <option value="">인수인계</option>
+                            <option value="">신청</option>
                         </select>
                     </label>
                 </div>
@@ -119,9 +123,11 @@
                     <label class="select">
                         <select>
                             <option value="">선택</option>
-                            <option value="">선택</option>
-                            <option value="">선택</option>
-                            <option value="">선택</option>
+                            <option value="">신규충원</option>
+                            <option value="">업무편의</option>
+                            <option value="">가나다라마바</option>
+                            <option value="">가나다라마바</option>
+                            <option value="">가나다라마바</option>
                         </select>
                     </label>
                 </div>
@@ -142,8 +148,15 @@
                     <label class="select">
                         <select>
                             <option value="">선택</option>
-                            <option value="">선택</option>
-                            <option value="">선택</option>
+                            <option value="">신청</option>
+                            <option value="">접수</option>
+                            <option value="">출고</option>
+                            <option value="">결제상신</option>
+                            <option value="">결제완료</option>
+                            <option value="">결제취소</option>
+                            <option value="">가나다라마바</option>
+                            <option value="">가나다라마바</option>
+                            <option value="">가나다라마바</option>
                         </select>
                     </label>
                 </div>
@@ -176,8 +189,192 @@
             </div>
             <button type="button" class="btn search">검색</button>
         </div>
+        <div class="title-box">
+            <h3>신청현황</h3>
+            <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+        </div>
+
+        <div id="grid_wrap" class="grid-box"></div>
+        <button type="button" class="btn" data-popup="test2">사용자, 부서 검색버튼 눌렀을 때 팝업</button>
+        <div id="test2" class="popup no">
+            <div class="pop-box">
+                <div class="pop-head">
+                    <h3>사용자 검색</h3>
+                    <button type="button" class="close-btn"></button>
+                </div>
+                <div class="pop-body">
+                    <div class="input-list">
+                        <span class="input-title">검색</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                    <div id="popup_grid_user" class="grid-box"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- // contents -->
+<script type="text/javascript">
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    var myGridID;
+    var popup_grid_user;
+
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+    function documentReady() {
+        /* 그리드 생성 */
+        createAUIGrid();
+        createPopupAUIGrid2();
+
+        /* 그리드 삽입 */
+        requestData();// 데이터 요청 후 상단 그리드 삽입
+        requestData2();
+    };
+
+    /* 3. AUIGrid 그리드 옵션 */
+    function createAUIGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        var columnLayout = [
+            {
+                dataField: "checkbox",
+                dataType: "boolean",
+                width: 80,
+                headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+                headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+                headerRenderer: { // 헤더 렌더러
+                    type: "CheckBoxHeaderRenderer",
+                    // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                    dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
+                },
+                renderer: {
+                    type: "CheckBoxEditRenderer",
+                    editable: true
+                }
+            }, {
+                dataField: "catagory_product_name",
+                headerText: "물품명",
+                width: 160,
+            }, {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                width: 180
+            }, {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                width: 280
+            }, {
+                dataField: "category_user",
+                headerText: "사용자",
+                width: 160
+            }, {
+                dataField: "category_usage1",
+                headerText: "용도1",
+                width: 160
+            }, {
+                dataField: "category_usage2",
+                headerText: "용도2",
+                width: 160
+            }, {
+                dataField: "category_application_type",
+                headerText: "신청구분",
+                width: 160
+            }, {
+                dataField: "category_application_content",
+                headerText: "신청내용",
+                width: 160
+            }, {
+                dataField: "category_place",
+                headerText: "사용장소",
+                width: 160
+            }, {
+                dataField: "category_asset_status",
+                headerText: "자산상태",
+                width: 160
+            }, {
+                dataField: "category_note",
+                headerText: "비고",
+                width: 160
+            }]
+        /* 2. 그리드 속성 설정 */
+        var gridPros = {
+            selectionMode: "multipleCells",
+            /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+            /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+            /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+            /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+            /*editable: true,*/
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* autoGridHeight : true */
+        };
+
+        /* 그리드 생성 */
+        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    }
+    function createPopupAUIGrid2(){
+        /* 팝업 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        var columnLayout2 = [
+            {
+                dataField: "category_user_number",
+                headerText: "사번",
+                width: 180,
+            },
+            {
+                dataField: "category_user_name",
+                headerText: "사용자명",
+                width: 180
+            }, {
+                dataField: "category_department",
+                headerText: "부서",
+                width: 160
+            }]
+        /* 2. 그리드 속성 설정 */
+        var gridPros2 = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+        };
+
+        /* 그리드 생성 */
+        popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+    }
+
+    /* 4. 데이터 불러오기 */
+    function requestData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+            AUIGrid.setGridData(myGridID, data);
+        });
+    };
+    function requestData2() {
+        $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+            AUIGrid.setGridData(popup_grid_user, data);
+        });
+    }
+
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof myGridID !== "undefined") {
+            AUIGrid.resize(myGridID);
+        } else if (typeof popup_grid_user !== "undefined"){
+            AUIGrid.resize(popup_grid_user);
+        }
+    };
+</script>
 </body>
 </html>

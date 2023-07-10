@@ -46,8 +46,9 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .sidebar{width:260px;height:calc(100% - 45px);background:#f37321;position:fixed;top:45px;left:-260px;z-index:100;transition:left 200ms ease-in-out;overflow-y:auto;}
 .sidebar.open{left:0;}
 .sidebar .btn{color:#fff;position:relative;}
-.sidebar a.btn{width:100%;background:#eb6620;display:block;padding:10px 10px 10px 20px;}
-.sidebar a.btn:hover{background:#d05e22;}
+.sidebar .linkBtn{color:#fff;position:relative;width:100%;background:#eb6620;display:block;padding:10px 10px 10px 20px;}
+.sidebar .linkBtn:hover{background:#d05e22;}
+.sidebar .linkBtn.active{background:#d05e22;}
 .sidebar button.btn:after{content:"";width:24px;height:24px;background:url("../../resources/img/icon/arrow_down_w.png") no-repeat;background-size:100%;position:absolute;top:50%;right:10px;transform:translateY(-50%);transition:.2s;}
 .sidebar .menu > ul > li > .btn{width:100%;background:#fe7912;display:block;font-size:18px;text-align:left;border-bottom:1px solid #eee;padding:10px 20px;}
 .sidebar .btn + .depth{height:0;overflow:hidden; transition:height 200ms ease;}
@@ -108,13 +109,13 @@ footer .logos > img{width:314px;}
 .btn.primary.mail::before{content:'\f0e0';font-family:"Font Awesome 6 Free";font-weight:700;position:absolute;left:16px;top:51%;transform:translateY(-50%);}
 
 /* input */
-.input-wrap{display:flex;align-items:center;justify-content:space-between;background-color: #eeeeee;padding:10px;gap:10px;}
+.input-wrap{display:flex;align-items:center;justify-content:space-between;background-color: #eeeeee;padding:10px;gap:10px;margin-bottom:40px;}
 .input-wrap .btn.search{min-width:90px;}
 .input-lists{display:flex;align-items:center;flex-wrap:wrap;gap:10px 50px;}
 .input-wrap .input-list{display:flex;align-items:center;}
-.input-wrap .input-list .input-title{padding-left:10px;position:relative;margin-right:10px;}
+.input-wrap .input-list .input-title{padding-left:10px;position:relative;margin-right:10px;min-width:100px;}
 .input-wrap .input-list .input-title::before{content:'';position:absolute;left:0;top:50%;transform:translateY(-50%);width:4px;height:18px;background-color:var(--color1);}
-input{width:100%;height:38px;background:none;border:0;padding:8px 12px;}
+input{width:100%;height:38px;background:none;border:0;padding:8px 12px;outline:none;}
 textarea{width:100%;background:none;border:0;padding:8px 12px;resize:none;}
 .input{background:#fff;display:inline-flex;align-items:center;border:1px solid #6e6e6e;border-radius:4px;}
 .input.search{position:relative;padding-right:25px;}
@@ -129,7 +130,9 @@ textarea{width:100%;background:none;border:0;padding:8px 12px;resize:none;}
 [class*=datepicker] select + select{margin-left:20px;}
 .ui-datepicker .ui-datepicker-header{display:flex;align-items:center;justify-content:center;height:70px;}
 .ui-datepicker .ui-datepicker-title{display:flex;gap:10px;}
+.ui-datepicker select.ui-datepicker-month, .ui-datepicker select.ui-datepicker-year{border:none;background-color:transparent;}
 .ui-datepicker-prev, .ui-datepicker-next{display:flex;justify-content:center;align-items:center;top:18px!important;}
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default, .ui-button, html .ui-button.ui-state-disabled:hover, html .ui-button.ui-state-disabled:active{padding:5px;}
 .ui-datepicker-prev span, .ui-datepicker-next span{display:none!important;}
 .ui-datepicker-prev:before{content:"";width:9px;height:12px;background:url("/resources/img/icon/icon_left.svg") no-repeat;background-size:100%;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
 .ui-datepicker-next:before{content:"";width:9px;height:12px;background:url("/resources/img/icon/icon_right.svg") no-repeat;background-size:100%;position:absolute;top:50%;left:50%;transform:translate(-50%, -50%);}
@@ -174,7 +177,7 @@ select{min-width:100px;width:100%;height:38px;background:none;border:0;padding:8
 
 /* popup >  grid */
 .popup.grid .pop-body{padding:20px 14px;}
-.popup .input-list{background-color:#f2f4f6;padding:5px 10px;border-radius:4px;}
+.popup .input-list{background-color:#eeeeee;padding:5px 10px;border-radius:4px;}
 .popup .input-list + *{margin-top:12px;}
 .popup .input-title{font-weight:var(--bold);min-width:60px;}
 .popup .input{width:calc(100% - 65px);height:30px;border-color:#ddd;}
