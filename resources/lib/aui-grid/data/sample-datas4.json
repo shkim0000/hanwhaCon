@@ -1,0 +1,27 @@
+[
+  {
+    "category_employeeID":"123456",
+    "category_user_name":"홍길동",
+    "category_department":"마케팅"
+  },
+  {
+    "category_employeeID":"123456",
+    "category_user_name":"윤민우",
+    "category_department":"마케팅"
+  },
+  {
+    "category_employeeID":"123456",
+    "category_user_name":"강남수",
+    "category_department":"마케팅"
+  },
+  {
+    "category_employeeID":"123456",
+    "category_user_name":"기형우",
+    "category_department":"마케팅"
+  },
+  {
+    "category_employeeID":"123456",
+    "category_user_name":"손나진",
+    "category_department":"마케팅"
+  }
+]

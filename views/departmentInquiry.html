@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>부서자산조회</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/main.js"></script>
+</head>
+<body id="guide">
+<!-- header 헤더는 js에서 append -->
+<header>
+    <div class="inner">
+        <button type="button" class="menu-btn"></button>
+        <a href="#">IAMS V2</a>
+    </div>
+    <div class="inner">
+        <div class="account">
+            [<span>홍길동</span> / <span>IT운영</span>]
+        </div>
+        <button type="button" class="logout-btn">Logout</button>
+    </div>
+</header>
+<!-- // header -->
+
+<!-- contents -->
+<div id="wrapper">
+
+    <!-- sidebar 사이드바는 js에서 append -->
+    <div class="sidebar open">
+        <div class="menu">
+            <ul>
+                <li>
+                    <button type="button" class="btn">자산신청</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="linkBtn">자산신청현황</a></li>
+                            <li><a href="#" class="linkBtn">신규신청</a></li>
+                            <li><a href="#" class="linkBtn">교체신청</a></li>
+                            <li><a href="#" class="linkBtn">대여/연장신청</a></li>
+                            <li><a href="#" class="linkBtn">반납신청</a></li>
+                            <li><a href="#" class="linkBtn">인수인계신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn active">자산현황</button>
+                    <div class="depth active">
+                        <ul>
+                            <li><a href="#" class="linkBtn">자산조회</a></li>
+                            <li><a href="#" class="linkBtn">부서자산조회</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">서비스데스크</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="linkBtn">서비스신청현황</a></li>
+                            <li><a href="#" class="linkBtn">서비스신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산등록</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="linkBtn">자산등록</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산등록</a>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산실사</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- // sidebar -->
+
+    <div class="contents active">
+        <div class="title-box">
+            <div class="title">
+                <h3>사용자</h3>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">부서명</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3>부서 관리 자산 현황</h3>
+            </div>
+        </div>
+        <div class="table fixed-height">
+            <table>
+                <thead>
+                <tr>
+                    <th><div class="th-wrap center">물품명</div></th>
+                    <th><div class="th-wrap center">총 보유자산</div></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><div class="td-wrap center">데스크탑</div></td>
+                    <td><div class="td-wrap center">2</div></td>
+                </tr>
+                <tr>
+                    <td><div class="td-wrap center">모니터</div></td>
+                    <td><div class="td-wrap center">3</div></td>
+                </tr>
+                <tr>
+                    <td><div class="td-wrap center">노트북</div></td>
+                    <td><div class="td-wrap center">1</div></td>
+                </tr>
+                <tr>
+                    <td><div class="td-wrap center">데스크탑</div></td>
+                    <td><div class="td-wrap center">2</div></td>
+                </tr>
+                <tr>
+                    <td><div class="td-wrap center">모니터</div></td>
+                    <td><div class="td-wrap center">3</div></td>
+                </tr>
+                <tr>
+                    <td><div class="td-wrap center">노트북</div></td>
+                    <td><div class="td-wrap center">1</div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="table no-line">
+            <table>
+                <colgroup>
+                    <col style="width:50%"/>
+                    <col style="width:50%">
+                </colgroup>
+                <tr>
+                    <th><div class="th-wrap center">전체</div></th>
+                    <td><div class="td-wrap center">2</div></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3>세부 관리 자산 내역</h3>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn excel">엑셀다운로드</button>
+            </div>
+        </div>
+        <div id="grid_wrap" class="grid-box"></div>
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+
+<!-- 팝업 -->
+<div id="gridPop_user" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>부서 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">부서</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+<!-- // 팝업 -->
+<script>
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+var myGridID;
+var popup_grid_user;
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createAUIGrid();
+    createPopupAUIGrid2();
+
+    /* 그리드 삽입 */
+    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
+};
+
+/* 3. AUIGrid 그리드 옵션 */
+function createAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    var columnLayout = [
+       {
+            dataField: "catagory_product_name",
+            headerText: "물품명",
+            width: 160,
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델명",
+            width: 280
+        }, {
+            dataField: "category_user",
+            headerText: "사용자",
+            width: 160
+        }, {
+            dataField: "category_usage1",
+            headerText: "용도1",
+            width: 160
+        }, {
+            dataField: "category_usage2",
+            headerText: "용도2",
+            width: 160
+        }, {
+            dataField: "category_application_type",
+            headerText: "신청구분",
+            width: 160
+        }, {
+            dataField: "category_application_content",
+            headerText: "신청내용",
+            width: 160
+        }, {
+            dataField: "category_place",
+            headerText: "사용장소",
+            width: 160
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+            width: 160
+        }, {
+            dataField: "category_note",
+            headerText: "비고",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    var gridPros = {
+        selectionMode: "multipleCells",
+        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+        /*editable: true,*/
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* autoGridHeight : true */
+    };
+
+    /* 그리드 생성 */
+    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+}
+function createPopupAUIGrid2(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    var columnLayout2 = [
+        {
+            dataField: "category_department",
+            headerText: "사용자명",
+        }, {
+            dataField: "category_depart_code",
+            headerText: "부서",
+        }]
+    /* 2. 그리드 속성 설정 */
+    var gridPros2 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    };
+
+    /* 그리드 생성 */
+    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+}
+
+/* 4. 데이터 불러오기 */
+function requestData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+        AUIGrid.setGridData(myGridID, data);
+    });
+};
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof myGridID !== "undefined") {
+        AUIGrid.resize(myGridID);
+    } else if (typeof popup_grid_user !== "undefined"){
+        AUIGrid.resize(popup_grid_user);
+    }
+};
+</script>
+</body>
+</html>

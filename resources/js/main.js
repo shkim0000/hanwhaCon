@@ -49,7 +49,7 @@ $(function(){
     $('.depth.active').each(function(){
         let num = $(this).find('ul li').length;
         $(this).css(`height`,`${num * 39.2}`)
-    })
+    });
 
     $('.sidebar .menu ul li .btn').on('click',function(){
         if($(this).hasClass('active')){
@@ -62,7 +62,7 @@ $(function(){
             let num = $(this).siblings('.depth').find('ul li').length;
             $(this).siblings('.depth').addClass('active').css(`height`,`${num * 39.2}`);
         }
-    })
+    });
     /* title에 있는 text와 linkBtn에 있는 text가 같다면 active 클래스 부여 */
     $(document).ready(function(){
         var pageTitle = $('title').text();
@@ -72,6 +72,6 @@ $(function(){
             if(btnText === pageTitle){
                 $(this).addClass('active');
             }
-        })
-    })
+        });
+    });
 });
