@@ -1,4 +1,76 @@
 $(function(){
+    /* header 추가 */
+    $('#guide').prepend(`
+        <header>
+            <div class="inner">
+                <button type="button" class="menu-btn"></button>
+                <a href="#">IAMS V2</a>
+            </div>
+            <div class="inner">
+                <div class="account">
+                    [<span>홍길동</span> / <span>IT운영</span>]
+                </div>
+                <button type="button" class="logout-btn">Logout</button>
+            </div>
+        </header>
+    `);
+    /* sidebar 추가 */
+    $('#wrapper').prepend(`
+    <div class="sidebar open">
+        <div class="menu">
+            <ul>
+                <li>
+                    <button type="button" class="btn active">자산신청</button>
+                    <div class="depth active">
+                        <ul>
+                            <li><a href="#" class="linkBtn">자산신청현황</a></li>
+                            <li><a href="#" class="linkBtn">신규신청</a></li>
+                            <li><a href="#" class="linkBtn">교체신청</a></li>
+                            <li><a href="#" class="linkBtn">대여/연장신청</a></li>
+                            <li><a href="#" class="linkBtn">반납신청</a></li>
+                            <li><a href="#" class="linkBtn">인수인계신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산현황</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="linkBtn">자산조회</a></li>
+                            <li><a href="#" class="linkBtn">부서자산조회</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">서비스데스크</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="linkBtn">서비스신청현황</a></li>
+                            <li><a href="#" class="linkBtn">서비스신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산등록</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="linkBtn">자산등록</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산등록</a>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산실사</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    `)
+})
+
+$(function(){
     $(document).on("click", ".menu-btn", function(){
         let sidebar = $(".sidebar");
         let contents = $(".contents");
