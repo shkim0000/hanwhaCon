@@ -45,18 +45,22 @@ $(function(){
         }
     });
 
-    /* sidebar 아코디언 */
-    $('.sidebar .menu ul li .btn').on('click',function(){
-        var num = $(this).siblings('.depth').find('ul li').length;
+    /* sidebar 설정 */
+    $('.depth.active').each(function(){
+        let num = $(this).find('ul li').length;
+        $(this).css(`height`,`${num * 39.2}`)
+    })
 
+    $('.sidebar .menu ul li .btn').on('click',function(){
         if($(this).hasClass('active')){
             $(this).removeClass('active');
-            $(this).siblings('.depth').css('height','0')
+            $(this).siblings('.depth').removeClass('active').css('height','0');
         } else if(!$(this).hasClass('active')){
-            $(this).closest('.menu').find('.depth').css('height','0');
+            $(this).closest('.menu').find('.depth.active').removeClass('active').css('height','0');
             $(this).closest('.menu').find('.btn.active').removeClass('active');
             $(this).addClass('active');
-            $(this).siblings('.depth').css(`height`,`${num * 39.2}`);
+            let num = $(this).siblings('.depth').find('ul li').length;
+            $(this).siblings('.depth').addClass('active').css(`height`,`${num * 39.2}`);
         }
     })
 });

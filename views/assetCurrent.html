@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>자산신청현황</title>
+
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../resources/js/main.js"></script>
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <style>
+        .guide-box{margin-top:20px;}
+        .guide-box + .guide-box{margin-top:30px;}
+        .guide-box h2{color:#333;font-size:30px;font-weight:700;margin-bottom:10px;}
+        .guide-box .in{display:flex;flex-wrap:wrap;gap:10px;}
+        .guide-box .in.columns{flex-direction:column;}
+        .check + .check{margin-left:20px;}
+    </style>
+</head>
+<body id="guide">
+<!-- header 헤더는 js에서 append -->
+<header>
+    <div class="inner">
+        <button type="button" class="menu-btn"></button>
+        <a href="#">IAMS V2</a>
+    </div>
+    <div class="inner">
+        <div class="account">
+            [<span>홍길동</span> / <span>IT운영</span>]
+        </div>
+        <button type="button" class="logout-btn">Logout</button>
+    </div>
+</header>
+<!-- // header -->
+
+<!-- contents -->
+<div id="wrapper">
+
+    <!-- sidebar 사이드바는 js에서 append -->
+    <div class="sidebar open">
+        <div class="menu">
+            <ul>
+                <li>
+                    <button type="button" class="btn active">자산신청</button>
+                    <div class="depth active">
+                        <ul>
+                            <li><a href="#" class="btn">자산신청현황</a></li>
+                            <li><a href="#" class="btn">신규신청</a></li>
+                            <li><a href="#" class="btn">교체신청</a></li>
+                            <li><a href="#" class="btn">대여/연장신청</a></li>
+                            <li><a href="#" class="btn">반납신청</a></li>
+                            <li><a href="#" class="btn">인수인계신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산현황</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">자산조회</a></li>
+                            <li><a href="#" class="btn">부서자산조회</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">서비스데스크</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">서비스신청현황</a></li>
+                            <li><a href="#" class="btn">서비스신청</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <button type="button" class="btn">자산등록</button>
+                    <div class="depth">
+                        <ul>
+                            <li><a href="#" class="btn">자산등록</a></li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산등록</a>
+                </li>
+                <li>
+                    <a href="#" class="btn">자산실사</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- // sidebar -->
+
+    <div class="contents active">
+        <h3>검색조건</h3>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">신청구분</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">신청사유</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">기간</span>
+                    <div class="date-wrap">
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                        <span>~</span>
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">진행 상태</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                            <option value="">선택</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">사용자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">자산번호</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">신청내용</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="btn search">검색</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+</body>
+</html>
