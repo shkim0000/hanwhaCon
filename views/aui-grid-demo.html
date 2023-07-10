@@ -136,16 +136,82 @@
                 <h3 class="important">신청정보</h3>
             </div>
         </div>
-        <div class="table">
-            <table>
-                <tbody>
-                <tr>
-                    <th>
-                        <p>신청번호</p>
-                    </th>
-                </tr>
-                </tbody>
-            </table>
+        <div class="custom-table">
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">신청번호</div></div>
+                <div class="td"><div class="td-wrap"></div></div>
+                <div class="th"><div class="th-wrap center">신청구분</div></div>
+                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                <div class="th"><div class="th-wrap center">신청상태</div></div>
+                <div class="td"><div class="td-wrap"></div></div>
+            </div>
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">신청자</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" placeholder="홍길동">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" placeholder="양현모">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center">사용자 부서</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" placeholder="IT 운영">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">사용장소</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="select whole">
+                            <select>
+                                <option value="">데스트탑1</option>
+                                <option value="">데스크탑2</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center">상세위치</div></div>
+                <div class="td"><div class="td-wrap"> </div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">설치 요청일</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">신청사유</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="select whole">
+                            <select>
+                                <option value="">데스트탑1</option>
+                                <option value="">데스크탑2</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
+                <div class="td line"><div class="td-wrap"></div></div>
+            </div>
         </div>
 
         <div class="title-box">
@@ -357,8 +423,7 @@ function createAUIGrid() {
         headerRenderer: { // 헤더 렌더러
             type: "CheckBoxHeaderRenderer",
             // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-            // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-            dependentMode: true
+            dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
         },
         renderer: {
             type: "CheckBoxEditRenderer",
@@ -413,33 +478,19 @@ function createAUIGrid() {
     // 그리드 속성 설정
     var gridPros = {
         selectionMode: "multipleCells",
-        // 드래깅 행 이동 가능 여부 (기본값 : false)
-        enableDrag: true,
-        // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-        enableMultipleDrag: true,
-        // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-        enableDragByCellDrag: true,
-        // 드랍 가능 여부 (기본값 : true)
-        enableDrop: true,
+        enableDrag: true, // 드래깅 행 이동 가능 여부 (기본값 : false)
+        enableMultipleDrag: true, // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        enableDragByCellDrag: true, // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        enableDrop: true, // 드랍 가능 여부 (기본값 : true)
         editable: true,
-        // 소팅
-        enableSorting: true,
-        // 데이터 없을 경우
-        noDataMessage: "출력할 데이터가 없습니다.",
-        // 기본 헤더 높이 지정
-        headerHeight : 30,
-        // 페이징 사용
-        usePaging: true,
-
-        // 페이징을 간단한 유형으로 나오도록 설정
-        pagingMode: "simple",
-
-        // 한 화면에 출력되는 행 개수 30개로 지정
-        // pageRowCount: 10,
-
-        // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        showPageRowSelect: true,
-        // autoGridHeight : true
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* autoGridHeight : true */
     };
 
     // 실제로 #grid_wrap 에 그리드 생성
