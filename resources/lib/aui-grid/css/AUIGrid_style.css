@@ -100,7 +100,7 @@
 
 /* 노데이터 메세지 레이어*/
 .aui-grid-nodata-msg-layer {
-	background: url(./images/info.png) 0 50% no-repeat;
+	background: url(../images/info.png) 0 50% no-repeat;
 	position: absolute;
 	padding: 44px 0 0 80px;
 	margin: 0 auto;
@@ -674,7 +674,7 @@
 }
 
 /* 수정한 셀 표시 스타일(마커) */
-.aui-grid-cell-edited-marker {
+/*.aui-grid-cell-edited-marker {
 	top: 0px;
 	margin: 0px !important;
 	width: 0px;
@@ -683,7 +683,7 @@
 	border-top: 4px solid #990085;
 	border-bottom: 4px solid transparent;
 	border-right: 4px solid transparent;
-}
+}*/
 
 /* 엑스트차 체크박스 체크된 행 스타일*/
 .aui-grid-extra-checked-row {

@@ -376,6 +376,113 @@
                 </tbody>
             </table>
         </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">팝업: AUI Grid</h3>
+            </div>
+        </div>
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
+        </div>
+
+        <div class="title-box" style="margin-top:30px;">
+            <div class="title">
+                <h3 class="important">요소 리스트1</h3>
+            </div>
+        </div>
+        <div class="list-box">
+            <ul class="quantity-list">
+                <li>
+                    <div class="quantity orange">
+                        <span class="num">4</span>
+                        <span class="name">총수량</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity blue">
+                        <span class="num">2</span>
+                        <span class="name">데스크탑</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity green">
+                        <span class="num">2</span>
+                        <span class="name">모니터</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity purple">
+                        <span class="num">1</span>
+                        <span class="name">공용</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity gray">
+                        <span class="num">3</span>
+                        <span class="name">개인</span>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+        <div class="title-box" style="margin-top:30px;">
+            <div class="title">
+                <h3 class="important">요소 리스트2</h3>
+            </div>
+        </div>
+        <div class="list-box">
+            <ul class="quantity-list">
+                <li>
+                    <div class="quantity yellow">
+                        <span class="title">서비스상태</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity blue">
+                        <span class="num">2</span>
+                        <span class="name">신청</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity green">
+                        <span class="num">2</span>
+                        <span class="name">접수</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity purple">
+                        <span class="num">1</span>
+                        <span class="name">조치중</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity gray">
+                        <span class="num">3</span>
+                        <span class="name">완료</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity purple">
+                        <span class="num">1</span>
+                        <span class="name">보류</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity lightOrange">
+                        <span class="num">3</span>
+                        <span class="name">수리중</span>
+                    </div>
+                </li>
+                <li>
+                    <div class="quantity">
+                        <span class="num">3</span>
+                        <span class="name">전체</span>
+                    </div>
+                </li>
+
+            </ul>
+        </div>
         <!-- // contents -->
 
         <!-- footer 푸터는 js에서 append -->
@@ -396,23 +503,49 @@
 </div>
 <!-- // contents -->
 
+<!-- 팝업 -->
+<div id="gridPop_user" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>사용자 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">검색</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+<!-- // 팝업 -->
+
+
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 var myGridID;
+var popup_grid_user;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
+    createPopupAUIGrid2();
 
-    /* 데이터 요청 후 상단 그리드 삽입 */
-    requestData("../resources/lib/aui-grid/data/sample-datas.json");
+    /* 그리드 삽입 */
+    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
 };
 
 /* 3. AUIGrid 그리드 옵션 */
 function createAUIGrid() {
-    // AUIGrid 칼럼 설정
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
     var columnLayout = [
     {
         dataField: "checkbox",
@@ -474,15 +607,14 @@ function createAUIGrid() {
         headerText: "비고",
         width: 160
     }]
-
-    // 그리드 속성 설정
+    /* 2. 그리드 속성 설정 */
     var gridPros = {
         selectionMode: "multipleCells",
-        enableDrag: true, // 드래깅 행 이동 가능 여부 (기본값 : false)
-        enableMultipleDrag: true, // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-        enableDragByCellDrag: true, // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-        enableDrop: true, // 드랍 가능 여부 (기본값 : true)
-        editable: true,
+        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+        /*editable: true,*/
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
@@ -493,14 +625,57 @@ function createAUIGrid() {
         /* autoGridHeight : true */
     };
 
-    // 실제로 #grid_wrap 에 그리드 생성
+    /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 }
+function createPopupAUIGrid2(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    var columnLayout2 = [
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    var gridPros2 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    };
 
-/* 4. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    /* 그리드 생성 */
+    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+}
+
+/* 4. 데이터 불러오기 */
+function requestData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+        AUIGrid.setGridData(myGridID, data);
+    });
+};
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
     if (typeof myGridID !== "undefined") {
         AUIGrid.resize(myGridID);
+    } else if (typeof popup_grid_user !== "undefined"){
+        AUIGrid.resize(popup_grid_user);
     }
 };
 </script>

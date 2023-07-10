@@ -1,0 +1,70 @@
+[
+  {
+    "category_user_name":"홍길동",
+    "category_department":"IT 운영"
+  },
+  {
+    "category_user_name":"김춘자",
+    "category_department":"인사팀"
+  },
+  {
+    "category_user_name":"박민성",
+    "category_department":"글로벌 인사팀"
+  },
+  {
+    "category_user_name":"윤희승",
+    "category_department":"인사팀"
+  },
+  {
+    "category_user_name":"김차령",
+    "category_department":"글로벌 인사팀"
+  },
+  {
+    "category_user_name":"최민성",
+    "category_department":"마케팅"
+  },
+  {
+    "category_user_name":"정민준",
+    "category_department":"마케팅"
+  },
+  {
+    "category_user_name":"강민주",
+    "category_department":"회계팀"
+  },
+  {
+    "category_user_name":"고상우",
+    "category_department":"기획팀"
+  },
+  {
+    "category_user_name":"신성훈",
+    "category_department":"기획팀"
+  },
+  {
+    "category_user_name":"윤희승",
+    "category_department":"인사팀"
+  },
+  {
+    "category_user_name":"김차령",
+    "category_department":"글로벌 인사팀"
+  },
+  {
+    "category_user_name":"최민성",
+    "category_department":"마케팅"
+  },
+  {
+    "category_user_name":"정민준",
+    "category_department":"마케팅"
+  },
+  {
+    "category_user_name":"강민주",
+    "category_department":"회계팀"
+  },
+  {
+    "category_user_name":"고상우",
+    "category_department":"기획팀"
+  },
+  {
+    "category_user_name":"신성훈",
+    "category_department":"기획팀"
+  }
+]
