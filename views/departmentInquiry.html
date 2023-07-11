@@ -120,7 +120,7 @@
         </div>
         <div id="grid_wrap" class="grid-box"></div>
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
+            <button type="button" class="btn" data-popup="gridPop_user">부서 검색</button>
         </div>
     </div>
 </div>
@@ -240,10 +240,13 @@ function createPopupAUIGrid2(){
     var columnLayout2 = [
         {
             dataField: "category_department",
-            headerText: "사용자명",
-        }, {
+            headerText: "부서명",
+            width: 180
+        },
+        {
             dataField: "category_depart_code",
-            headerText: "부서",
+            headerText: "부서명",
+            width: 180
         }]
     /* 2. 그리드 속성 설정 */
     var gridPros2 = {
