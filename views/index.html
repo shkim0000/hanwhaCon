@@ -760,7 +760,7 @@ function createAUIGrid() {
                 editable: true
             }
         }, {
-            dataField: "catagory_product_name",
+            dataField: "cataeory_product_name",
             headerText: "물품명",
             width: 160,
         }, {
@@ -954,11 +954,12 @@ window.onresize = function () {
 /* 행 삭제 */
 $(document).on("click",".btn.trash",function(){
     let gridName = $(this).closest(".title-box").next(".grid-box").data("grid-name");
-    AUIGrid.removeRow(gridName,"selected");
+    console.log(gridName);
+    AUIGrid.removeRow(`${gridName}`,"selected");
 });
 
 /* 행추가 삽입 */
-/*$(document).on("click",".btn.add",function(){
+$(document).on("click",".btn.add",function(){
     let gridName = $(this).closest(".title-box").next(".grid-box").data("grid-name");
     console.log(gridName)
 
@@ -970,7 +971,7 @@ $(document).on("click",".btn.trash",function(){
         // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
         // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
         AUIGrid.addRow(gridName, item,"last");
-});*/
+});
 </script>
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>장애신고현황</title>
+    <title>대여연장신청</title>
 
     <!-- jQuery -->
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
@@ -39,48 +39,79 @@
                 <li>장애신고현황</li>
             </ul>
         </div>
-        <div class="title-box">
+
+        <div class="title-box column">
             <div class="title">
                 <h3>신청자정보</h3>
             </div>
         </div>
-        <div class="input-wrap">
-            <div class="input-lists">
-                <div class="input-list">
-                    <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text" placeholder="홍길동">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-                <div class="input-list">
-                    <span class="input-title">부서명</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-                <div class="input-list regular">
-                    <span class="input-title">조회기간</span>
-                    <div class="date-wrap">
-                        <label class="date">
-                            <input type="text">
+        <div class="custom-table">
+            <div class="row con-2">
+                <div class="th"><div class="th-wrap center">신청부서</div></div>
+                <div class="td"><div class="td-wrap">IT 운영</div></div>
+                <div class="th"><div class="th-wrap center">신청자</div></div>
+                <div class="td"><div class="td-wrap">홍길동</div></div>
+            </div>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3>신청 정보</h3>
+            </div>
+        </div>
+        <div class="custom-table">
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">신청번호</div></div>
+                <div class="td"><div class="td-wrap"></div></div>
+                <div class="th"><div class="th-wrap center">신청구분</div></div>
+                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                <div class="th"><div class="th-wrap center">신청상태</div></div>
+                <div class="td"><div class="td-wrap"></div></div>
+            </div>
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">신청자</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" placeholder="홍길동">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
-                        <span>~</span>
-                        <label class="date">
-                            <input type="text">
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p class="important">대여자</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" placeholder="양현모">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
-                        <label class="select">
-                            <select>
-                                <option value="">당일</option>
-                                <option value="">최근 1주일</option>
-                                <option value="">최근 3개월</option>
-                            </select>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center">대여 부서</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" placeholder="IT 운영">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
             </div>
-            <button type="button" class="btn search">검색</button>
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">신청사유</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="select whole">
+                            <select>
+                                <option value="">데스트탑1</option>
+                                <option value="">데스크탑2</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
+                <div class="td"><div class="td-wrap"></div></div>
+            </div>
         </div>
 
         <div class="list-box">
@@ -143,18 +174,16 @@
             </ul>
         </div>
 
-
-
         <div class="title-box">
             <div class="title">
-                <h3>장애 신고 목록</h3>
+                <h3>대여자산</h3>
             </div>
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
         </div>
-        <div id="grid_wrap" class="grid-box h-medium"></div>
+        <div id="grid_wrap" class="grid-box h-small"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 정보</button>
@@ -242,43 +271,54 @@ function createAUIGrid() {
                 type: "CheckBoxEditRenderer",
                 editable: true
             }
-        }, {
-            dataField: "category_disable_num",
-            headerText: "장애접수번호",
+        },
+        {
+            dataField: "category_product_name",
+            headerText: "물품종류",
             width: 180
-        }, {
-            dataField: "category_registration_date",
-            headerText: "장애등록일시",
-            width: 160,
-        }, {
-            dataField: "category_status",
-            headerText: "상태",
-            width: 280
-        }, {
-            dataField: "category_item_name",
-            headerText: "물품명",
-            width: 160
-        }, {
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180
+        },
+        {
             dataField: "category_model_name",
             headerText: "모델명",
             width: 160
-        }, {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
+        },
+        {
+            dataField: "category_department",
+            headerText: "부서",
             width: 160
-        }, {
-            dataField: "category_registrant",
-            headerText: "등록자",
-            width: 160,
-        }, {
-            dataField: "category_publisher",
-            headerText: "발행자",
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자",
             width: 160
-        }, {
-            dataField: "category_person_charge",
-            headerText: "조치자",
+        },
+        {
+            dataField: "category_classification_use",
+            headerText: "용도구분",
             width: 160
-        }]
+        },
+        {
+            dataField: "category_asset_place",
+            headerText: "자산위치",
+            width: 160
+        },
+        {
+            dataField: "category_date",
+            headerText: "반납일",
+            width: 160
+        },
+        {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+            width: 160
+        }
+
+    ]
     /* 2. 그리드 속성 설정 */
     var gridPros = {
         selectionMode: "multipleCells",
@@ -287,6 +327,7 @@ function createAUIGrid() {
         headerHeight : 30, // 기본 헤더 높이 지정
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     };
 
@@ -412,7 +453,7 @@ function createPopupAUIGrid3(){
 }
 /* 4. 데이터 불러오기 */
 function requestData() {
-    $.get("../resources/lib/aui-grid/data/sample-datas7.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
     });
 };
