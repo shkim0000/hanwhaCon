@@ -270,112 +270,44 @@
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send">상신</button>
         </div>
+        <button type="button" class="btn" data-popup="test2">사용자, 부서 검색버튼 눌렀을 때 팝업</button>
+        <div id="test2" class="popup no">
+            <div class="pop-box">
+                <div class="pop-head">
+                    <h3>사용자 검색</h3>
+                    <button type="button" class="close-btn"></button>
+                </div>
+                <div class="pop-body">
+                    <div class="input-list">
+                        <span class="input-title">검색</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                    <div id="popup_grid_user" class="grid-box"></div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 <!-- // contents -->
 <script type="text/javascript">
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    var myGridID;
     var popup_grid_user;
+    var popup_grid_user2;
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
     function documentReady() {
         /* 그리드 생성 */
-        createAUIGrid();
         createPopupAUIGrid2();
 
         /* 그리드 삽입 */
-        requestData();// 데이터 요청 후 상단 그리드 삽입
         requestData2();
     };
 
     /* 3. AUIGrid 그리드 옵션 */
-    function createAUIGrid() {
-        /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout = [
-            {
-                dataField: "checkbox",
-                dataType: "boolean",
-                width: 80,
-                headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-                headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-                headerRenderer: { // 헤더 렌더러
-                    type: "CheckBoxHeaderRenderer",
-                    // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                    dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-                },
-                renderer: {
-                    type: "CheckBoxEditRenderer",
-                    editable: true
-                }
-            }, {
-                dataField: "catagory_product_name",
-                headerText: "물품명",
-                width: 160,
-            }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                width: 180
-            }, {
-                dataField: "category_model_name",
-                headerText: "모델명",
-                width: 280
-            }, {
-                dataField: "category_user",
-                headerText: "사용자",
-                width: 160
-            }, {
-                dataField: "category_usage1",
-                headerText: "용도1",
-                width: 160
-            }, {
-                dataField: "category_usage2",
-                headerText: "용도2",
-                width: 160
-            }, {
-                dataField: "category_application_type",
-                headerText: "신청구분",
-                width: 160
-            }, {
-                dataField: "category_application_content",
-                headerText: "신청내용",
-                width: 160
-            }, {
-                dataField: "category_place",
-                headerText: "사용장소",
-                width: 160
-            }, {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                width: 160
-            }, {
-                dataField: "category_note",
-                headerText: "비고",
-                width: 160
-            }]
-        /* 2. 그리드 속성 설정 */
-        var gridPros = {
-            selectionMode: "multipleCells",
-            /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-            /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-            /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-            /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-            /*editable: true,*/
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            /* autoGridHeight : true */
-        };
-
-        /* 그리드 생성 */
-        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-    }
     function createPopupAUIGrid2(){
         /* 팝업 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
@@ -393,7 +325,7 @@
                 dataField: "category_department",
                 headerText: "부서",
                 width: 160
-            }]
+            }];
         /* 2. 그리드 속성 설정 */
         var gridPros2 = {
             selectionMode: "multipleCells",
@@ -410,13 +342,7 @@
         /* 그리드 생성 */
         popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
     }
-
     /* 4. 데이터 불러오기 */
-    function requestData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
-            AUIGrid.setGridData(myGridID, data);
-        });
-    };
     function requestData2() {
         $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
             AUIGrid.setGridData(popup_grid_user, data);
@@ -425,9 +351,7 @@
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof myGridID !== "undefined") {
-            AUIGrid.resize(myGridID);
-        } else if (typeof popup_grid_user !== "undefined"){
+        if (typeof popup_grid_user !== "undefined"){
             AUIGrid.resize(popup_grid_user);
         }
     };

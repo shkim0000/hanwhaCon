@@ -146,4 +146,50 @@ $(function(){
             }
         });
     });
+
+    /* 행 추가 버튼 클릭 */
+    $('.btn.add-column').on('click',function(){
+        $(this).closest('.title-box').next('.table').find('tbody').append(`
+            <tr>
+                    <td>
+                        <div class="td-wrap center">
+                            <label class="check no-text">
+                                <input type="checkbox">
+                                <span></span>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">데스트탑1</option>
+                                    <option value="">데스크탑2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">데스트탑 모델1</option>
+                                    <option value="">데스크탑 모델2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="td-wrap">
+                            <label class="input whole">
+                                <input type="number">
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+        `)
+    })
+    $('.btn.trash').on('click',function(){
+        $(this).closest('.title-box').siblings('.table').find('tbody tr').has('input[type="checkbox"]:checked').remove();
+    })
 });
