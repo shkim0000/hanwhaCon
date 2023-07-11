@@ -952,9 +952,16 @@ window.onresize = function () {
 
 /* 6. 사용하는 함수 */
 /* 행 삭제 */
+
 $(document).on("click",".btn.trash",function(){
     let gridName = $(this).closest(".title-box").next(".grid-box").data("grid-name");
     console.log(gridName);
+
+    function deleteCustomRow(rowId){
+        let grid = AUI().grid;
+        let tableId = ''
+    }
+
     AUIGrid.removeRow(`${gridName}`,"selected");
 });
 
