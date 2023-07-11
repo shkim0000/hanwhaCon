@@ -103,6 +103,8 @@ footer .logos > img{width:314px;}
 .btn.save::before{content:'\f0c7';font-family:"Font Awesome 6 Free";font-weight:700;position:absolute;left:16px;top:51%;transform:translateY(-50%);}
 .btn.search{position:relative;padding-left:40px;}
 .btn.search::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:700;position:absolute;left:16px;top:51%;transform:translateY(-50%);}
+.btn.asset{position:relative;padding-left:40px;}
+.btn.asset::before{content:'\f51e';font-family:"Font Awesome 6 Free";font-weight:700;position:absolute;left:16px;top:51%;transform:translateY(-50%);}
 .btn.primary.send{position:relative;padding-left:40px;}
 .btn.primary.send::before{content:'\f574';font-family:"Font Awesome 6 Free";font-weight:700;position:absolute;left:16px;top:51%;transform:translateY(-50%);}
 .btn.primary.check{position:relative;padding-left:40px;}
