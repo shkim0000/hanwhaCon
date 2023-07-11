@@ -110,7 +110,9 @@
     <!-- // sidebar -->
 
     <div class="contents">
+        <!-- contents -->
 
+        <!-- 1. Page Indicator -->
         <div class="guide-box">
             <div class="page-indicator">
                 <ul>
@@ -121,12 +123,28 @@
             </div>
         </div>
 
-        <div class="title-box column">
-            <div class="title">
-                <h3>신청자정보</h3>
+        <!-- 2. 제목 -->
+        <div class="guide-box">
+            <h2>- 제목</h2>
+            <div class="title-box column">
+                <div class="title">
+                    <h3>신청자정보</h3>
+                </div>
+            </div>
+            <div class="title-box">
+                <div class="title">
+                    <h3 class="important">첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn model">모델 정보</button>
+                    <button type="button" class="btn excel">엑셀다운로드</button>
+                    <button type="button" class="btn add-column">행 추가</button>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
             </div>
         </div>
-        <!-- contents -->
+
+        <!-- 3. Buttons -->
         <div class="guide-box">
             <h2>- Buttons</h2>
             <div class="in">
@@ -148,6 +166,8 @@
                 <button type="button" class="btn primary mail">인계 메일</button>
             </div>
         </div>
+
+        <!-- 4. Input -->
         <div class="guide-box">
             <h2>- Input</h2>
             <div class="in columns">
@@ -164,7 +184,9 @@
             </div>
         </div>
 
+        <!-- 5. 검색창 -->
         <div class="guide-box">
+            <h2>- 검색창</h2>
             <div class="input-wrap">
                 <div class="input-lists">
                     <div class="input-list">
@@ -213,6 +235,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- 6. Select -->
         <div class="guide-box">
             <h2>- Select</h2>
             <div class="in">
@@ -224,6 +248,8 @@
                 </label>
             </div>
         </div>
+
+        <!-- 7. Checkbox / Radio -->
         <div class="guide-box">
             <h2>- Checkbox & Radio</h2>
             <div class="in columns">
@@ -249,6 +275,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- 8. File -->
         <div class="guide-box">
             <h2>- File</h2>
             <div class="in">
@@ -261,6 +289,8 @@
                 </div>
             </div>
         </div>
+
+        <!-- 9. Popup -->
         <div class="guide-box">
             <h2>- Popup</h2>
             <div class="in">
@@ -299,110 +329,15 @@
             </div>
         </div>
 
-
-        <!-- 테이블 / 그리드 관련 -->
-        <!-- 1. AUI Grid -->
+        <!-- 10. AUI Grid -->
         <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">자산정보</h3>
-                </div>
-            </div>
+            <h2>- AUI Grid</h2>
             <div id="grid_wrap" class="grid-box"></div>
         </div>
-        <!-- // AUI Grid -->
-        <!-- 2. 기본테이블 -->
-        <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">신청정보</h3>
-                </div>
-            </div>
-            <div class="custom-table">
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">신청번호</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                    <div class="th"><div class="th-wrap center">신청구분</div></div>
-                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
-                    <div class="th"><div class="th-wrap center">신청상태</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">신청자</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="input search">
-                                <input type="text" placeholder="홍길동">
-                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="input search">
-                                <input type="text" placeholder="양현모">
-                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center">사용자 부서</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="input search">
-                                <input type="text" placeholder="IT 운영">
-                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">사용장소</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">데스트탑1</option>
-                                    <option value="">데스크탑2</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center">상세위치</div></div>
-                    <div class="td"><div class="td-wrap"> </div></div>
-                    <div class="th"><div class="th-wrap center"><p class="important">설치 요청일</p></div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="date">
-                                <input type="text">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">신청사유</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">데스트탑1</option>
-                                    <option value="">데스크탑2</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
-                    <div class="td line"><div class="td-wrap"></div></div>
-                </div>
-            </div>
-        </div>
 
+        <!-- 11. Table -->
         <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">자산정보</h3>
-                </div>
-            </div>
+            <h2>- Table</h2>
             <div class="table">
                 <table>
                     <colgroup>
@@ -506,18 +441,91 @@
             </div>
         </div>
 
+        <!-- 12. Custom Table -->
         <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">첨부파일</h3>
+            <h2>- Custom Table</h2>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
                 </div>
-                <div class="btn-wrap">
-                    <button type="button" class="btn model">모델 정보</button>
-                    <button type="button" class="btn excel">엑셀다운로드</button>
-                    <button type="button" class="btn add-column">행 추가</button>
-                    <button type="button" class="btn trash">선택 삭제</button>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청자</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" placeholder="홍길동">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" placeholder="양현모">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">사용자 부서</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" placeholder="IT 운영">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">사용장소</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">데스트탑1</option>
+                                    <option value="">데스크탑2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td"><div class="td-wrap"> </div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">설치 요청일</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청사유</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">데스트탑1</option>
+                                    <option value="">데스크탑2</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
+                    <div class="td line"><div class="td-wrap"></div></div>
                 </div>
             </div>
+        </div>
+
+        <!-- 13. 첨부파일 Table -->
+        <div class="guide-box">
+            <h2>- 첨부파일</h2>
             <div class="table">
                 <table>
                     <colgroup>
@@ -564,113 +572,73 @@
             </div>
         </div>
 
+        <!-- 14. AUI Grid 삽입 팝업 -->
         <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">팝업: AUI Grid</h3>
-                </div>
-            </div>
+            <h2>- AUI Grid 삽입 팝업</h2>
             <div class="btn-wrap">
                 <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
             </div>
         </div>
 
+        <!-- 15. 요소 리스트 -->
         <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">요소 리스트1</h3>
-                </div>
-            </div>
+            <h2>- 요소 리스트1</h2>
             <div class="list-box">
                 <ul class="quantity-list">
                     <li>
-                        <div class="quantity orange">
-                            <span class="num">4</span>
-                            <span class="name">총수량</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="quantity blue">
-                            <span class="num">2</span>
-                            <span class="name">데스크탑</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="quantity green">
-                            <span class="num">2</span>
-                            <span class="name">모니터</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="quantity purple">
-                            <span class="num">1</span>
-                            <span class="name">공용</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="quantity gray">
-                            <span class="num">3</span>
-                            <span class="name">개인</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="guide-box">
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">요소 리스트2</h3>
-                </div>
-            </div>
-            <div class="list-box">
-                <ul class="quantity-list">
-                    <li>
-                        <div class="quantity yellow">
+                        <button type="button">
+                        <span class="quantity yellow">
                             <span class="title">서비스상태</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                     <li>
-                        <div class="quantity blue">
+                        <button type="button">
+                        <span class="quantity blue">
                             <span class="num">2</span>
                             <span class="name">신청</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                     <li>
-                        <div class="quantity green">
+                        <button type="button">
+                        <span class="quantity green">
                             <span class="num">2</span>
                             <span class="name">접수</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                     <li>
-                        <div class="quantity purple">
+                        <button type="button">
+                        <span class="quantity purple">
                             <span class="num">1</span>
                             <span class="name">조치중</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                     <li>
-                        <div class="quantity gray">
+                        <button type="button">
+                        <span class="quantity lightOrange">
                             <span class="num">3</span>
                             <span class="name">완료</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                     <li>
-                        <div class="quantity purple">
-                            <span class="num">1</span>
-                            <span class="name">보류</span>
-                        </div>
-                    </li>
-                    <li>
-                        <div class="quantity lightOrange">
+                        <button type="button">
+                        <span class="quantity gray">
                             <span class="num">3</span>
                             <span class="name">수리중</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                     <li>
-                        <div class="quantity">
-                            <span class="num">3</span>
+                        <button type="button">
+                        <span class="quantity">
+                            <span class="num">15</span>
                             <span class="name">전체</span>
-                        </div>
+                        </span>
+                        </button>
                     </li>
                 </ul>
             </div>
