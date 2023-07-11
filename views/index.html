@@ -158,7 +158,6 @@
                     <input type="file">
                     <span type="button" class="btn add-file">파일추가</span>
                 </label>
-                <button type="button" class="btn add-file">파일추가</button>
                 <button type="button" class="btn save">저장</button>
                 <button type="button" class="btn search">검색</button>
                 <button type="button" class="btn asset">자산추가</button>
@@ -333,12 +332,42 @@
         <!-- 10. AUI Grid -->
         <div class="guide-box">
             <h2>- AUI Grid</h2>
-            <div id="grid_wrap" class="grid-box"></div>
+            <div class="title-box">
+                <div class="title">
+                    <h3 class="important">첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn add-column">행 추가</button>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
+            <div id="grid_wrap" class="grid-box" data-grid-name="myGridID"></div>
+        </div>
+
+        <!-- 10-1. AUI Grid  > 행 추가 기능 -->
+        <div class="guide-box">
+            <h2>- AUI Grid - select / 수량 </h2>
+            <div class="title-box">
+                <div class="title">
+                    <h3 class="important">첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" id="addSelect_btn" class="btn add-column">행 추가</button>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
+            <div id="grid_wrap2" class="grid-box" data-grid-name="myGridID2"></div>
         </div>
 
         <!-- 11. Table -->
         <div class="guide-box">
             <h2>- Table</h2>
+            <div class="title-box end">
+                <div class="btn-wrap">
+                    <button type="button" class="btn add-column">행 추가</button>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
             <div class="table">
                 <table>
                     <colgroup>
@@ -689,16 +718,24 @@
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 var myGridID;
+var myGridID2;
 var popup_grid_user;
+
+/* 1-2. dropdown menu 리스트 */
+var groupList1 = ["데스크탑", "모니터"];
+var groupList2 = ["데스크탑 모델", "모니터 모델"];
+
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
+    createAUIGrid2();
     createPopupAUIGrid2();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData3();
     requestData2();
 };
 
@@ -788,6 +825,74 @@ function createAUIGrid() {
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 }
+
+function createAUIGrid2() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    var columnLayout = [
+        {
+            dataField: "checkbox",
+            dataType: "boolean",
+            width: 80,
+            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+            headerRenderer: { // 헤더 렌더러
+                type: "CheckBoxHeaderRenderer",
+                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
+            },
+            renderer: {
+                type: "CheckBoxEditRenderer",
+                editable: true
+            }
+        }, {
+            dataField: "category_product",
+            headerText: "물품종류",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList1
+            }
+        }, {
+            dataField: "category_item",
+            headerText: "자산번호",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList2
+            }
+        }, {
+            dataField: "category_amount",
+            headerText: "신청수량",
+            renderer: {
+                type: "NumberStepRenderer",
+                min: 0,
+                max: 50,
+                step: 1,
+                inputHeight: 28, // input 높이 지정
+                textEditable: false
+            }
+        }]
+    /* 2. 그리드 속성 설정 */
+    var gridPros = {
+        selectionMode: "multipleCells",
+        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+        /*editable: true,*/
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* autoGridHeight : true */
+        fillColumnSizeMode:true
+    };
+
+    /* 그리드 생성 */
+    myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+}
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -830,6 +935,12 @@ function requestData2() {
     });
 }
 
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas8.json", function (data) {
+        AUIGrid.setGridData(myGridID2, data);
+    });
+}
+
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
     if (typeof myGridID !== "undefined") {
@@ -838,6 +949,28 @@ window.onresize = function () {
         AUIGrid.resize(popup_grid_user);
     }
 };
+
+/* 6. 사용하는 함수 */
+/* 행 삭제 */
+$(document).on("click",".btn.trash",function(){
+    let gridName = $(this).closest(".title-box").next(".grid-box").data("grid-name");
+    AUIGrid.removeRow(gridName,"selected");
+});
+
+/* 행추가 삽입 */
+/*$(document).on("click",".btn.add",function(){
+    let gridName = $(this).closest(".title-box").next(".grid-box").data("grid-name");
+    console.log(gridName)
+
+    var item = new Object();
+    item.category_product = '',
+        item.category_item = '',
+        item.category_amount = '0',
+        // parameter
+        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+        AUIGrid.addRow(gridName, item,"last");
+});*/
 </script>
 </body>
 </html>

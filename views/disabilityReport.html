@@ -92,7 +92,7 @@
                 <h3>장애 대상 목록</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn">자산추가</button>
+                <button type="button" class="btn asset">자산추가</button>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
         </div>
@@ -103,7 +103,10 @@
                 <h3>첨부파일</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn add-file">파일추가</button>
+                <label class="file">
+                    <input type="file">
+                    <span type="button" class="btn add-file">파일추가</span>
+                </label>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
         </div>
@@ -159,7 +162,7 @@
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 정보</button>
-            <button type="button" class="btn" data-popup="gridPop_asset">자산추가</button>
+            <button type="button" class="btn asset" data-popup="gridPop_asset">자산추가</button>
         </div>
     </div>
 </div>
