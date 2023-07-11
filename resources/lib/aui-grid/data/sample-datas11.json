@@ -1,0 +1,41 @@
+[
+  {
+    "category_application_num":"202306111101",
+    "category_application_division":"신규신청",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_content":"자산 신규 신청합니다.",
+    "category_application_reason":"신규 증원",
+    "category_department": "IT운영",
+    "category_user_name": "홍길동",
+    "category_count": "1",
+    "category_status": "신청",
+    "category_processing_date": "2023-06-12 12:34:12",
+    "category_final_arbiter": "홍길순"
+  },
+  {
+    "category_application_num":"202306111101",
+    "category_application_division":"신규신청",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_content":"자산 신규 신청합니다.",
+    "category_application_reason":"신규 증원",
+    "category_department": "IT운영",
+    "category_user_name": "홍길동",
+    "category_count": "1",
+    "category_status": "신청",
+    "category_processing_date": "2023-06-12 12:34:12",
+    "category_final_arbiter": "홍길순"
+  },
+  {
+    "category_application_num":"202306111101",
+    "category_application_division":"신규신청",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_content":"자산 신규 신청합니다.",
+    "category_application_reason":"신규 증원",
+    "category_department": "IT운영",
+    "category_user_name": "홍길동",
+    "category_count": "1",
+    "category_status": "신청",
+    "category_processing_date": "2023-06-12 12:34:12",
+    "category_final_arbiter": "홍길순"
+  }
+]

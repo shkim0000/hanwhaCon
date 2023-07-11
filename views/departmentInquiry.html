@@ -120,14 +120,14 @@
         </div>
         <div id="grid_wrap" class="grid-box"></div>
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">부서 검색</button>
+            <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 
 <!-- 팝업 -->
-<div id="gridPop_user" class="popup grid no">
+<div id="gridPop_department" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
             <h3>부서 검색</h3>
@@ -141,7 +141,7 @@
                     <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                 </label>
             </div>
-            <div id="popup_grid_user" class="grid-box"></div>
+            <div id="popup_grid_department" class="grid-box"></div>
         </div>
     </div>
 </div>
@@ -150,7 +150,7 @@
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 var myGridID;
-var popup_grid_user;
+var popup_grid_department;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
@@ -262,7 +262,7 @@ function createPopupAUIGrid2(){
     };
 
     /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout2, gridPros2);
 }
 
 /* 4. 데이터 불러오기 */
@@ -273,7 +273,7 @@ function requestData() {
 };
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
-        AUIGrid.setGridData(popup_grid_user, data);
+        AUIGrid.setGridData(popup_grid_department, data);
     });
 }
 

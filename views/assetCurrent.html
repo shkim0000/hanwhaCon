@@ -49,10 +49,9 @@
                             <option value="">신규신청</option>
                             <option value="">교체신청</option>
                             <option value="">대여신청</option>
-                            <option value="">대여연장</option>
                             <option value="">반납신청</option>
-                            <option value="">인수인계</option>
-                            <option value="">신청</option>
+                            <option value="">이동연장</option>
+                            <option value="">인수인계 신청</option>
                         </select>
                     </label>
                 </div>
@@ -92,9 +91,6 @@
                             <option value="">결제상신</option>
                             <option value="">결제완료</option>
                             <option value="">결제취소</option>
-                            <option value="">가나다라마바</option>
-                            <option value="">가나다라마바</option>
-                            <option value="">가나다라마바</option>
                         </select>
                     </label>
                 </div>
@@ -193,66 +189,59 @@
                     editable: true
                 }
             }, {
-                dataField: "category_product_name",
-                headerText: "물품명",
+                dataField: "category_application_num",
+                headerText: "신청번호",
                 width: 160,
             }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
+                dataField: "category_application_division",
+                headerText: "신청구분",
                 width: 180
             }, {
-                dataField: "category_model_name",
-                headerText: "모델명",
+                dataField: "category_application_date",
+                headerText: "신청일자",
                 width: 280
             }, {
-                dataField: "category_user",
+                dataField: "category_content",
+                headerText: "내용",
+                width: 160
+            }, {
+                dataField: "category_application_reason",
+                headerText: "신청사유",
+                width: 160
+            }, {
+                dataField: "category_department",
+                headerText: "부서명",
+                width: 160
+            }, {
+                dataField: "category_user_name",
                 headerText: "사용자",
                 width: 160
             }, {
-                dataField: "category_usage1",
-                headerText: "용도1",
+                dataField: "category_count",
+                headerText: "수량",
                 width: 160
             }, {
-                dataField: "category_usage2",
-                headerText: "용도2",
+                dataField: "category_status",
+                headerText: "상태",
                 width: 160
             }, {
-                dataField: "category_application_type",
-                headerText: "신청구분",
+                dataField: "category_processing_date",
+                headerText: "처리일자",
                 width: 160
             }, {
-                dataField: "category_application_content",
-                headerText: "신청내용",
-                width: 160
-            }, {
-                dataField: "category_place",
-                headerText: "사용장소",
-                width: 160
-            }, {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                width: 160
-            }, {
-                dataField: "category_note",
-                headerText: "비고",
+                dataField: "category_final_arbiter",
+                headerText: "최종 결재자",
                 width: 160
             }]
         /* 2. 그리드 속성 설정 */
         var gridPros = {
             selectionMode: "multipleCells",
-            /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-            /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-            /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-            /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-            /*editable: true,*/
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             headerHeight : 30, // 기본 헤더 높이 지정
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            /* autoGridHeight : true */
         };
 
         /* 그리드 생성 */
@@ -295,7 +284,7 @@
 
     /* 4. 데이터 불러오기 */
     function requestData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
             AUIGrid.setGridData(myGridID, data);
         });
     };

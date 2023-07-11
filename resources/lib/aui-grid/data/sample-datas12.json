@@ -1,0 +1,32 @@
+[
+  {
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍길순",
+    "category_service_status": "상신",
+    "category_note": ""
+  },
+  {
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍길순",
+    "category_service_status": "상신",
+    "category_note": ""
+  },
+  {
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍길순",
+    "category_service_status": "상신",
+    "category_note": ""
+  }
+]
