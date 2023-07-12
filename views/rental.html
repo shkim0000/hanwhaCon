@@ -155,7 +155,7 @@
             <div class="btn-wrap">
                 <label class="file">
                     <input type="file">
-                    <span type="button" class="btn add-file">파일추가</span>
+                    <span  class="btn add-file">파일추가</span>
                 </label>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
@@ -275,190 +275,190 @@
 <!-- // 팝업 -->
 
 <script>
-    /* AUIGrid */
-    /* 1. AUIGrid 생성 후 반환 ID */
-    var myGridID;
-    var popup_grid_user;
-    var popup_grid_department;
-    var groupList1 = ["데스크탑", "모니터"];
-    var groupList2 = ["데스크탑 모델", "모니터 모델"];
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let myGridID;
+let popup_grid_user;
+let popup_grid_department;
+let groupList1 = ["데스크탑", "모니터"];
+let groupList2 = ["데스크탑 모델", "모니터 모델"];
 
-    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
-    function documentReady() {
-        /* 그리드 생성 */
-        createAUIGrid();
-        createPopupAUIGrid2();
-        createPopupAUIGrid3();
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createAUIGrid();
+    createPopupAUIGrid2();
+    createPopupAUIGrid3();
 
-        /* 그리드 삽입 */
-        requestData();// 데이터 요청 후 상단 그리드 삽입
-        requestData2();
-        requestData3();
-    };
+    /* 그리드 삽입 */
+    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
+    requestData3();
+}
 
-    /* 3. AUIGrid 그리드 옵션 */
-    /* 보유자산 그리드 */
-    function createAUIGrid() {
-        /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout = [
-            {
-                dataField: "checkbox",
-                dataType: "boolean",
-                width: 80,
-                headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-                headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-                headerRenderer: { // 헤더 렌더러
-                    type: "CheckBoxHeaderRenderer",
-                    // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                    dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-                },
-                renderer: {
-                    type: "CheckBoxEditRenderer",
-                    editable: true
-                }
-            }, {
-                dataField: "category_product",
-                headerText: "물품종류",
-                renderer: {
-                    type: "DropDownListRenderer",
-                    list: groupList1
-                }
-            }, {
-                dataField: "category_item",
-                headerText: "품목",
-                renderer: {
-                    type: "DropDownListRenderer",
-                    list: groupList2
-                }
-            }, {
-                dataField: "category_amount",
-                headerText: "신청수량",
-                renderer: {
-                    type: "NumberStepRenderer",
-                    min: 0,
-                    max: 50,
-                    step: 1,
-                    inputHeight: 28, // input 높이 지정
-                    textEditable: false
-                }
-            }]
-        /* 2. 그리드 속성 설정 */
-        var gridPros = {
-            selectionMode: "multipleCells",
-            /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-            /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-            /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-            /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-            /*editable: true,*/
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            /* autoGridHeight : true */
-            fillColumnSizeMode:true
-        };
-
-        /* 그리드 생성 */
-        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-    }
-
-    /* [팝업] 사용자검색 */
-    function createPopupAUIGrid2(){
-        /* 팝업 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout2 = [
-            {
-                dataField: "category_employeeID",
-                headerText: "사번",
-                width: 180
+/* 3. AUIGrid 그리드 옵션 */
+/* 보유자산 그리드 */
+function createAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "checkbox",
+            dataType: "boolean",
+            width: 80,
+            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+            headerRenderer: { // 헤더 렌더러
+                type: "CheckBoxHeaderRenderer",
+                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
             },
-            {
-                dataField: "category_user_name",
-                headerText: "사용자명",
-                width: 180
-            }, {
-                dataField: "category_department",
-                headerText: "부서",
-                width: 160
-            }]
-        /* 2. 그리드 속성 설정 */
-        var gridPros2 = {
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-        };
-
-        /* 그리드 생성 */
-        popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-    }
-
-    /* [팝업] 부서 검색 */
-    function createPopupAUIGrid3(){
-        /* 팝업 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout3 = [
-            {
-                dataField: "category_department",
-                headerText: "부서명",
-                width: 180
-            },
-            {
-                dataField: "category_depart_code",
-                headerText: "부서명",
-                width: 180
+            renderer: {
+                type: "CheckBoxEditRenderer",
+                editable: true
             }
-        ]
-        /* 2. 그리드 속성 설정 */
-        var gridPros3 = {
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-        };
-
-        /* 그리드 생성 */
-        popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
+        }, {
+            dataField: "category_product",
+            headerText: "물품종류",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList1
+            }
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList2
+            }
+        }, {
+            dataField: "category_amount",
+            headerText: "신청수량",
+            renderer: {
+                type: "NumberStepRenderer",
+                min: 0,
+                max: 50,
+                step: 1,
+                inputHeight: 28, // input 높이 지정
+                textEditable: false
+            }
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+        /*editable: true,*/
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* autoGridHeight : true */
+        fillColumnSizeMode:true
     }
 
-    /* 4. 데이터 불러오기 */
-    function requestData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas8.json", function (data) {
-            AUIGrid.setGridData(myGridID, data);
-        });
-    };
-    function requestData2() {
-        $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
-            AUIGrid.setGridData(popup_grid_user, data);
-        });
-    };
+    /* 그리드 생성 */
+    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+}
 
-    function requestData3() {
-        $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
-            AUIGrid.setGridData(popup_grid_department, data);
-        });
-    };
+/* [팝업] 사용자검색 */
+function createPopupAUIGrid2(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout2 = [
+        {
+            dataField: "category_employeeID",
+            headerText: "사번",
+            width: 180
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros2 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    }
 
-    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-    window.onresize = function () {
-        if (typeof myGridID !== "undefined") {
-            AUIGrid.resize(myGridID);
+    /* 그리드 생성 */
+    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+}
+
+/* [팝업] 부서 검색 */
+function createPopupAUIGrid3(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 180
+        },
+        {
+            dataField: "category_depart_code",
+            headerText: "부서명",
+            width: 180
         }
-    };
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+    }
+
+    /* 그리드 생성 */
+    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
+}
+
+/* 4. 데이터 불러오기 */
+function requestData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas8.json", function (data) {
+        AUIGrid.setGridData(myGridID, data);
+    });
+}
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
+        AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_department, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof myGridID !== "undefined") {
+        AUIGrid.resize(myGridID);
+    }
+}
 </script>
 </body>
 </html>

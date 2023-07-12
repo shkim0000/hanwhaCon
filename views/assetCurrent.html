@@ -152,156 +152,156 @@
 </div>
 <!-- // contents -->
 <script type="text/javascript">
-    /* AUIGrid */
-    /* 1. AUIGrid 생성 후 반환 ID */
-    var myGridID;
-    var popup_grid_user;
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let myGridID;
+let popup_grid_user;
 
-    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
-    function documentReady() {
-        /* 그리드 생성 */
-        createAUIGrid();
-        createPopupAUIGrid2();
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createAUIGrid();
+    createPopupAUIGrid2();
 
-        /* 그리드 삽입 */
-        requestData();// 데이터 요청 후 상단 그리드 삽입
-        requestData2();
-    };
+    /* 그리드 삽입 */
+    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
+}
 
-    /* 3. AUIGrid 그리드 옵션 */
-    function createAUIGrid() {
-        /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout = [
-            {
-                dataField: "checkbox",
-                dataType: "boolean",
-                width: 80,
-                headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-                headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-                headerRenderer: { // 헤더 렌더러
-                    type: "CheckBoxHeaderRenderer",
-                    // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                    dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-                },
-                renderer: {
-                    type: "CheckBoxEditRenderer",
-                    editable: true
-                }
-            }, {
-                dataField: "category_application_num",
-                headerText: "신청번호",
-                width: 160,
-            }, {
-                dataField: "category_application_division",
-                headerText: "신청구분",
-                width: 180
-            }, {
-                dataField: "category_application_date",
-                headerText: "신청일자",
-                width: 280
-            }, {
-                dataField: "category_content",
-                headerText: "내용",
-                width: 160
-            }, {
-                dataField: "category_application_reason",
-                headerText: "신청사유",
-                width: 160
-            }, {
-                dataField: "category_department",
-                headerText: "부서명",
-                width: 160
-            }, {
-                dataField: "category_user_name",
-                headerText: "사용자",
-                width: 160
-            }, {
-                dataField: "category_count",
-                headerText: "수량",
-                width: 160
-            }, {
-                dataField: "category_status",
-                headerText: "상태",
-                width: 160
-            }, {
-                dataField: "category_processing_date",
-                headerText: "처리일자",
-                width: 160
-            }, {
-                dataField: "category_final_arbiter",
-                headerText: "최종 결재자",
-                width: 160
-            }]
-        /* 2. 그리드 속성 설정 */
-        var gridPros = {
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        };
-
-        /* 그리드 생성 */
-        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-    }
-    function createPopupAUIGrid2(){
-        /* 팝업 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout2 = [
-            {
-                dataField: "category_user_number",
-                headerText: "사번",
-                width: 180,
+/* 3. AUIGrid 그리드 옵션 */
+function createAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "checkbox",
+            dataType: "boolean",
+            width: 80,
+            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+            headerRenderer: { // 헤더 렌더러
+                type: "CheckBoxHeaderRenderer",
+                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
             },
-            {
-                dataField: "category_user_name",
-                headerText: "사용자명",
-                width: 180
-            }, {
-                dataField: "category_department",
-                headerText: "부서",
-                width: 160
-            }]
-        /* 2. 그리드 속성 설정 */
-        var gridPros2 = {
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-        };
-
-        /* 그리드 생성 */
-        popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+            renderer: {
+                type: "CheckBoxEditRenderer",
+                editable: true
+            }
+        }, {
+            dataField: "category_application_num",
+            headerText: "신청번호",
+            width: 160,
+        }, {
+            dataField: "category_application_division",
+            headerText: "신청구분",
+            width: 180
+        }, {
+            dataField: "category_application_date",
+            headerText: "신청일자",
+            width: 280
+        }, {
+            dataField: "category_content",
+            headerText: "내용",
+            width: 160
+        }, {
+            dataField: "category_application_reason",
+            headerText: "신청사유",
+            width: 160
+        }, {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 160
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 160
+        }, {
+            dataField: "category_count",
+            headerText: "수량",
+            width: 160
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+            width: 160
+        }, {
+            dataField: "category_processing_date",
+            headerText: "처리일자",
+            width: 160
+        }, {
+            dataField: "category_final_arbiter",
+            headerText: "최종 결재자",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
-    /* 4. 데이터 불러오기 */
-    function requestData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
-            AUIGrid.setGridData(myGridID, data);
-        });
-    };
-    function requestData2() {
-        $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-            AUIGrid.setGridData(popup_grid_user, data);
-        });
+    /* 그리드 생성 */
+    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+}
+function createPopupAUIGrid2(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout2 = [
+        {
+            dataField: "category_user_number",
+            headerText: "사번",
+            width: 180,
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros2 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
     }
 
-    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-    window.onresize = function () {
-        if (typeof myGridID !== "undefined") {
-            AUIGrid.resize(myGridID);
-        } else if (typeof popup_grid_user !== "undefined"){
-            AUIGrid.resize(popup_grid_user);
-        }
-    };
+    /* 그리드 생성 */
+    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+}
+
+/* 4. 데이터 불러오기 */
+function requestData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+        AUIGrid.setGridData(myGridID, data);
+    });
+}
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof myGridID !== "undefined") {
+        AUIGrid.resize(myGridID);
+    } else if (typeof popup_grid_user !== "undefined"){
+        AUIGrid.resize(popup_grid_user);
+    }
+}
 </script>
 </body>
 </html>

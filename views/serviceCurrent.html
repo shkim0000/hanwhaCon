@@ -95,8 +95,8 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-var myGridID;
-var popup_grid_user;
+let myGridID;
+let popup_grid_user;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
@@ -105,13 +105,13 @@ function documentReady() {
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
-};
+}
 
 /* 3. AUIGrid 그리드 옵션 */
 function createAUIGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
-    var columnLayout = [
+    let columnLayout = [
         {
             dataField: "checkbox",
             dataType: "boolean",
@@ -161,7 +161,7 @@ function createAUIGrid() {
             width: 200
         }]
     /* 2. 그리드 속성 설정 */
-    var gridPros = {
+    let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -169,7 +169,7 @@ function createAUIGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-    };
+    }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
@@ -180,14 +180,14 @@ function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas12.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
     });
-};
+}
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
     if (typeof myGridID !== "undefined") {
         AUIGrid.resize(myGridID);
     }
-};
+}
 </script>
 </body>
 </html>

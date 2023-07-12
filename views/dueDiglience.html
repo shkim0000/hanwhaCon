@@ -174,9 +174,9 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-var myGridID;
-var popup_grid_user;
-var groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
+let myGridID;
+let popup_grid_user;
+let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
@@ -187,13 +187,13 @@ function documentReady() {
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
     requestData2();
-};
+}
 
 /* 3. AUIGrid 그리드 옵션 */
 function createAUIGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
-    var columnLayout = [
+    let columnLayout = [
         {
             dataField: "checkbox",
             dataType: "boolean",
@@ -255,7 +255,7 @@ function createAUIGrid() {
             width: 160
         }]
     /* 2. 그리드 속성 설정 */
-    var gridPros = {
+    let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -263,7 +263,7 @@ function createAUIGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-    };
+    }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
@@ -271,7 +271,7 @@ function createAUIGrid() {
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
-    var columnLayout2 = [
+    let columnLayout2 = [
         {
             dataField: "category_user_name",
             headerText: "사용자명",
@@ -282,7 +282,7 @@ function createPopupAUIGrid2(){
             width: 160
         }]
     /* 2. 그리드 속성 설정 */
-    var gridPros2 = {
+    let gridPros2 = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -292,7 +292,7 @@ function createPopupAUIGrid2(){
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    };
+    }
 
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
@@ -302,7 +302,7 @@ function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas5.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
     });
-};
+}
 
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
@@ -317,7 +317,7 @@ window.onresize = function () {
     } else if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
     }
-};
+}
 </script>
 </body>
 </html>

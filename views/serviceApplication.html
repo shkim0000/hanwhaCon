@@ -126,7 +126,10 @@
                 <h3>첨부파일</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn add-file">파일추가</button>
+                <label class="file">
+                    <input type="file">
+                    <span class="btn add-file">파일추가</span>
+                </label>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
         </div>
@@ -209,7 +212,7 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-var popup_grid_user;
+let popup_grid_user;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
@@ -218,13 +221,13 @@ function documentReady() {
 
     /* 그리드 삽입 */
     requestData2();// 데이터 요청 후 상단 그리드 삽입
-};
+}
 
 /* 3. AUIGrid 그리드 옵션 */
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
-    var columnLayout2 = [
+    let columnLayout2 = [
         {
             dataField: "category_employeeID",
             headerText: "사번",
@@ -240,7 +243,7 @@ function createPopupAUIGrid2(){
             width: 160
         }]
     /* 2. 그리드 속성 설정 */
-    var gridPros2 = {
+    let gridPros2 = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -250,7 +253,7 @@ function createPopupAUIGrid2(){
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    };
+    }
 
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
@@ -268,7 +271,7 @@ window.onresize = function () {
     if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
     }
-};
+}
 </script>
 </body>
 </html>

@@ -217,7 +217,7 @@
             <div class="btn-wrap">
                 <label class="file">
                     <input type="file">
-                    <span type="button" class="btn add-file">파일추가</span>
+                    <span  class="btn add-file">파일추가</span>
                 </label>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
@@ -293,68 +293,68 @@
 </div>
 <!-- // contents -->
 <script type="text/javascript">
-    /* AUIGrid */
-    /* 1. AUIGrid 생성 후 반환 ID */
-    var popup_grid_user;
-    var popup_grid_user2;
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let popup_grid_user;
+let popup_grid_user2;
 
-    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
-    function documentReady() {
-        /* 그리드 생성 */
-        createPopupAUIGrid2();
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createPopupAUIGrid2();
 
-        /* 그리드 삽입 */
-        requestData2();
-    };
+    /* 그리드 삽입 */
+    requestData2();
+}
 
-    /* 3. AUIGrid 그리드 옵션 */
-    function createPopupAUIGrid2(){
-        /* 팝업 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        var columnLayout2 = [
-            {
-                dataField: "category_user_number",
-                headerText: "사번",
-                width: 180,
-            },
-            {
-                dataField: "category_user_name",
-                headerText: "사용자명",
-                width: 180
-            }, {
-                dataField: "category_department",
-                headerText: "부서",
-                width: 160
-            }];
-        /* 2. 그리드 속성 설정 */
-        var gridPros2 = {
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-        };
-
-        /* 그리드 생성 */
-        popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-    }
-    /* 4. 데이터 불러오기 */
-    function requestData2() {
-        $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-            AUIGrid.setGridData(popup_grid_user, data);
-        });
+/* 3. AUIGrid 그리드 옵션 */
+function createPopupAUIGrid2(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout2 = [
+        {
+            dataField: "category_user_number",
+            headerText: "사번",
+            width: 180,
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros2 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
     }
 
-    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-    window.onresize = function () {
-        if (typeof popup_grid_user !== "undefined"){
-            AUIGrid.resize(popup_grid_user);
-        }
-    };
+    /* 그리드 생성 */
+    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+}
+/* 4. 데이터 불러오기 */
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof popup_grid_user !== "undefined"){
+        AUIGrid.resize(popup_grid_user);
+    }
+}
 </script>
 </body>
 </html>
