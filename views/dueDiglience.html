@@ -177,6 +177,7 @@
 let myGridID;
 let popup_grid_user;
 let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
+let hideList = ["분실", "수리", "기타등등"]; // -- 미존재일때 입력될 리스트
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
@@ -244,7 +245,7 @@ function createAUIGrid() {
         }, {
             dataField: "category_reason_non-existence",
             headerText: "미존재 사유",
-            width: 160
+            width: 160,
         }, {
             dataField: "category_investigate-date",
             headerText: "조사일",
@@ -267,6 +268,15 @@ function createAUIGrid() {
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    });
+
 }
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */

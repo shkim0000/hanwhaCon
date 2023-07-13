@@ -72,27 +72,27 @@
                 <tbody>
                 <tr>
                     <td><div class="td-wrap center">데스크탑</div></td>
-                    <td><div class="td-wrap center">2</div></td>
+                    <td><div class="td-wrap center inBtn"><button type="button">2</button></div></td>
                 </tr>
                 <tr>
                     <td><div class="td-wrap center">모니터</div></td>
-                    <td><div class="td-wrap center">3</div></td>
+                    <td><div class="td-wrap center inBtn"><button type="button">3</button></div></td>
                 </tr>
                 <tr>
                     <td><div class="td-wrap center">노트북</div></td>
-                    <td><div class="td-wrap center">1</div></td>
+                    <td><div class="td-wrap center inBtn"><button type="button">1</button></div></td>
                 </tr>
                 <tr>
                     <td><div class="td-wrap center">데스크탑</div></td>
-                    <td><div class="td-wrap center">2</div></td>
+                    <td><div class="td-wrap center inBtn"><button type="button">2</button></div></td>
                 </tr>
                 <tr>
                     <td><div class="td-wrap center">모니터</div></td>
-                    <td><div class="td-wrap center">3</div></td>
+                    <td><div class="td-wrap center inBtn"><button type="button">3</button></div></td>
                 </tr>
                 <tr>
                     <td><div class="td-wrap center">노트북</div></td>
-                    <td><div class="td-wrap center">1</div></td>
+                    <td><div class="td-wrap center inBtn"><button type="button">1</button></div></td>
                 </tr>
                 </tbody>
             </table>
@@ -233,6 +233,14 @@ function createAUIGrid() {
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    })
 }
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */

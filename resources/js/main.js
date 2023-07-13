@@ -27,7 +27,8 @@ $(function(){
                                 "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>신규신청</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>교체신청</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>대여/연장신청</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>대여신청</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>대여연장신청</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>반납신청</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>인수인계신청</a></li>\n"+
                             "</ul>\n"+

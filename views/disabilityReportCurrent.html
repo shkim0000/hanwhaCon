@@ -159,7 +159,7 @@
             </div>
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
-                <button type="button" class="btn trash">선택 삭제</button>
+                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-medium"></div>
@@ -236,20 +236,9 @@ function createAUIGrid() {
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "checkbox",
-            dataType: "boolean",
-            width: 80,
-            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-            headerRenderer: { // 헤더 렌더러
-                type: "CheckBoxHeaderRenderer",
-                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-            },
-            renderer: {
-                type: "CheckBoxEditRenderer",
-                editable: true
-            }
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
         }, {
             dataField: "category_disable_num",
             headerText: "장애접수번호",
@@ -289,6 +278,9 @@ function createAUIGrid() {
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -296,10 +288,19 @@ function createAUIGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
     }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    })
 }
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
@@ -341,20 +342,9 @@ function createPopupAUIGrid3(){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout3 = [
         {
-            dataField: "checkbox",
-            dataType: "boolean",
-            width: 80,
-            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-            headerRenderer: { // 헤더 렌더러
-                type: "CheckBoxHeaderRenderer",
-                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-            },
-            renderer: {
-                type: "CheckBoxEditRenderer",
-                editable: true
-            }
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
         },
         {
             dataField: "category_product_name",
@@ -405,6 +395,9 @@ function createPopupAUIGrid3(){
         ]
     /* 2. 그리드 속성 설정 */
     let gridPros3 = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -443,6 +436,17 @@ window.onresize = function () {
     } else if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
     }
+}
+
+/* 6. 함수관련 */
+function deleteRowGrid(){
+    AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
+    let removedRows = AUIGrid.getRemovedItems(myGridID, true); // 삭제 처리된 아이템 있는지 보기
+    if (removedRows.length <= 0) {
+        alert("삭제 처리되어 마크된 행이 없습니다.")
+        return;
+    }
+    AUIGrid.removeSoftRows(myGridID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
 }
 </script>
 </body>

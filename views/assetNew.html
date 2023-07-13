@@ -109,7 +109,7 @@
                 </div>
                 <div class="th"><div class="th-wrap center">상세위치</div></div>
                 <div class="td"><div class="td-wrap"> </div></div>
-                <div class="th"><div class="th-wrap center"><p class="important">설치 요청일</p></div></div>
+                <div class="th"><div class="th-wrap center"><p>설치 요청일</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="date">
@@ -119,7 +119,7 @@
                 </div>
             </div>
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청사유</div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청사유</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="select whole">
@@ -243,25 +243,6 @@
                 </thead>
                 <tbody>
                 <tr>
-                    <td>
-                        <div class="td-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="td-wrap">
-                            <div class="file-box long">
-                                <label class="file">
-                                    <input type="file">
-                                    <span class="btn">파일선택</span>
-                                </label>
-                                <span>선택된 파일 없음</span>
-                            </div>
-                        </div>
-                    </td>
                 </tr>
                 </tbody>
             </table>
@@ -274,6 +255,7 @@
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
             <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
+            <button type="button" class="btn" data-popup="model_pop">모델정보</button>
         </div>
 
     </div>
@@ -317,13 +299,26 @@
         </div>
     </div>
 </div>
+<div id="model_pop" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>모델 정보</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="image-box"></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- // 팝업 -->
 
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let popup_grid_user;
-let popup_grid_user2;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {

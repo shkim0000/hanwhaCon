@@ -1,5 +1,6 @@
 [
   {
+    "id": "#grid_id_1",
     "category_product_type":"데스크",
     "category_asset_num":"12093049",
     "category_model_name":"DESK-SS-IM1824",
@@ -10,7 +11,19 @@
     "category_changeProduct_name":"표준PC",
     "category_product_quantity":"1"
   }, {
-    "category_product_type":"데스크",
+    "id": "#grid_id_2",
+    "category_product_type":"모니터",
+    "category_asset_num":"12093049",
+    "category_model_name":"DESK-SS-IM1824",
+    "category_use_type":"개인",
+    "category_installation_place":"행정동",
+    "category_asset_state":"교체1",
+    "category_changeProduct_type":"데스크",
+    "category_changeProduct_name":"표준PC",
+    "category_product_quantity":"1"
+  }, {
+    "id": "#grid_id_3",
+    "category_product_type":"키보드",
     "category_asset_num":"12093049",
     "category_model_name":"DESK-SS-IM1824",
     "category_use_type":"개인",
@@ -20,43 +33,36 @@
     "category_changeProduct_name":"표준PC",
     "category_product_quantity":"1"
   }, {
-  "category_product_type":"데스크",
-  "category_asset_num":"12093049",
-  "category_model_name":"DESK-SS-IM1824",
-  "category_use_type":"개인",
-  "category_installation_place":"행정동",
-  "category_asset_state":"교체1",
-  "category_changeProduct_type":"모니터",
-  "category_changeProduct_name":"표준PC",
-  "category_product_quantity":"1"
-  }, {
-  "category_product_type":"데스크",
-  "category_asset_num":"12093049",
-  "category_model_name":"DESK-SS-IM1824",
-  "category_use_type":"개인",
-  "category_installation_place":"행정동",
-  "category_asset_state":"교체1",
-  "category_changeProduct_type":"모니터",
-  "category_changeProduct_name":"표준PC",
-  "category_product_quantity":"1"
+    "id": "#grid_id_4",
+    "category_product_type":"마우스",
+    "category_asset_num":"12093049",
+    "category_model_name":"DESK-SS-IM1824",
+    "category_use_type":"개인",
+    "category_installation_place":"행정동",
+    "category_asset_state":"교체1",
+    "category_changeProduct_type":"모니터",
+    "category_changeProduct_name":"표준PC",
+    "category_product_quantity":"1"
 }, {
-  "category_product_type":"데스크",
-  "category_asset_num":"12093049",
-  "category_model_name":"DESK-SS-IM1824",
-  "category_use_type":"개인",
-  "category_installation_place":"행정동",
-  "category_asset_state":"교체1",
-  "category_changeProduct_type":"모니터",
-  "category_changeProduct_name":"표준PC",
-  "category_product_quantity":"1"
+    "id": "#grid_id_5",
+    "category_product_type":"노트북",
+    "category_asset_num":"12093049",
+    "category_model_name":"DESK-SS-IM1824",
+    "category_use_type":"개인",
+    "category_installation_place":"행정동",
+    "category_asset_state":"교체1",
+    "category_changeProduct_type":"모니터",
+    "category_changeProduct_name":"표준PC",
+    "category_product_quantity":"1"
 }, {
-  "category_product_type":"데스크",
-  "category_asset_num":"12093049",
-  "category_model_name":"DESK-SS-IM1824",
-  "category_use_type":"개인",
-  "category_installation_place":"행정동",
-  "category_asset_state":"교체1",
-  "category_changeProduct_type":"모니터",
-  "category_changeProduct_name":"표준PC",
-  "category_product_quantity":"1"
+    "id": "#grid_id_6",
+    "category_product_type":"갤럭시",
+    "category_asset_num":"12093049",
+    "category_model_name":"DESK-SS-IM1824",
+    "category_use_type":"개인",
+    "category_installation_place":"행정동",
+    "category_asset_state":"교체1",
+    "category_changeProduct_type":"아이폰",
+    "category_changeProduct_name":"표준PC",
+    "category_product_quantity":"1"
 }]

@@ -892,7 +892,7 @@ function createAUIGrid2() {
         /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* autoGridHeight : true */
-        fillColumnSizeMode:true
+        fillColumnSizeMode:true,
     }
 
     /* 그리드 생성 */
@@ -965,16 +965,6 @@ window.onresize = function () {
 
 /* 6. 사용하는 함수 */
 /* 그리드 행 선택 삭제 */
-
-function resizeGrid(){
-    if(myGridID){
-        AUIGrid.resize(myGridID);
-    }
-}
-
-$('.menu-btn').on('click',function(){
-
-})
 
 function deleteRowGrid(){
     AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리

@@ -113,20 +113,9 @@ function createAUIGrid() {
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "checkbox",
-            dataType: "boolean",
-            width: 80,
-            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-            headerRenderer: { // 헤더 렌더러
-                type: "CheckBoxHeaderRenderer",
-                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-            },
-            renderer: {
-                type: "CheckBoxEditRenderer",
-                editable: true
-            }
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
         }, {
             dataField: "category_application_num",
             headerText: "신청번호",
@@ -162,6 +151,9 @@ function createAUIGrid() {
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -169,10 +161,19 @@ function createAUIGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode:true,
     }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    })
 }
 
 /* 4. 데이터 불러오기 */

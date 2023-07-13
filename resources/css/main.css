@@ -337,6 +337,10 @@ tbody tr p{text-align:center;}
 .long{width:100%;max-width:700px;}
 .medium{max-width:300px;}
 
+/* table 안의 button태그 */
+.table .td-wrap.center.inBtn{padding:0;}
+.table .td-wrap.center.inBtn button{width:100%;padding:8px 15px;}
+
 /* table 내의 row 존재 1개 이하 */
 .table.no-line tbody tr{border-top:0;}
 

@@ -1,5 +1,6 @@
 [
   {
+    "id": "#grid_id_1",
     "category_disable_num":"20230710",
     "category_registration_date":"20230615142536",
     "category_status":"조치중",
@@ -11,6 +12,7 @@
     "category_person_charge":"김삿갓"
   },
   {
+    "id": "#grid_id_2",
     "category_disable_num":"20230710",
     "category_registration_date":"20230615142536",
     "category_status":"조치중",
@@ -22,6 +24,7 @@
     "category_person_charge":"김삿갓"
   },
   {
+    "id": "#grid_id_3",
     "category_disable_num":"20230710",
     "category_registration_date":"20230615142536",
     "category_status":"조치중",

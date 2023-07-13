@@ -1,5 +1,6 @@
 [
   {
+    "id": "#grid_id_1",
     "category_rental_start":"2023-07-11",
     "category_rental_finish":"2023-08-11",
     "category_product":"데스크탑",
@@ -8,6 +9,7 @@
     "category_application_content": "자산을 대여 요청합니다. 업무 효율을 위한 PC 대여"
   },
   {
+    "id": "#grid_id_2",
     "category_rental_start":"2023-07-11",
     "category_rental_finish":"2023-08-11",
     "category_product":"데스크탑",

@@ -1,5 +1,6 @@
 [
   {
+    "id": "#grid_id_1",
     "category_asset_num":"2234580-1",
     "category_product_name":"PC",
     "category_item_name":"데스크탑",
@@ -12,6 +13,7 @@
     "category_investigator":"고길동"
   },
   {
+    "id": "#grid_id_2",
     "category_asset_num":"2234580-2",
     "category_product_name":"모니터",
     "category_item_name":"27인칭",
@@ -24,6 +26,7 @@
     "category_investigator":"신길동"
   },
   {
+    "id": "#grid_id_3",
     "category_asset_num":"2234580-3",
     "category_product_name":"마우스",
     "category_item_name":"",
@@ -36,6 +39,7 @@
     "category_investigator":"윤길동"
   },
   {
+    "id": "#grid_id_4",
     "category_asset_num":"2234580-4",
     "category_product_name":"스피커",
     "category_item_name":"데스크탑",
@@ -48,6 +52,7 @@
     "category_investigator":"고길동"
   },
   {
+    "id": "#grid_id_5",
     "category_asset_num":"2234580-5",
     "category_product_name":"PC",
     "category_item_name":"데스크탑",

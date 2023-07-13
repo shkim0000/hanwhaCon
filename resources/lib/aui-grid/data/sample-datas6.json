@@ -1,5 +1,6 @@
 [
   {
+    "id": "#grid_id_1",
     "category_product_name":"데스크탑",
     "category_asset_num":"12346578",
     "category_model_name":"DEXC-ss-1KLM",
@@ -11,6 +12,7 @@
     "category_asset_status":"운영"
   },
   {
+    "id": "#grid_id_2",
     "category_product_name":"데스크탑",
     "category_asset_num":"12346578",
     "category_model_name":"DEXC-ss-1KLM",
@@ -22,6 +24,7 @@
     "category_asset_status":"운영"
   },
   {
+    "id": "#grid_id_3",
     "category_product_name":"데스크탑",
     "category_asset_num":"12346578",
     "category_model_name":"DEXC-ss-1KLM",
