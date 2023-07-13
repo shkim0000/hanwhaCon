@@ -828,6 +828,14 @@ function createAUIGrid() {
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    })
 }
 
 function createAUIGrid2() {
@@ -889,6 +897,14 @@ function createAUIGrid2() {
 
     /* 그리드 생성 */
     myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap2');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+            requestData3();
+        },200);
+    })
 }
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
@@ -949,6 +965,17 @@ window.onresize = function () {
 
 /* 6. 사용하는 함수 */
 /* 그리드 행 선택 삭제 */
+
+function resizeGrid(){
+    if(myGridID){
+        AUIGrid.resize(myGridID);
+    }
+}
+
+$('.menu-btn').on('click',function(){
+
+})
+
 function deleteRowGrid(){
     AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
     let removedRows = AUIGrid.getRemovedItems(myGridID, true); // 삭제 처리된 아이템 있는지 보기

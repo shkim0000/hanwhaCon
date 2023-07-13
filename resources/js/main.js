@@ -167,17 +167,6 @@ $(function(){
             $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);
         }
     });
-    /* title에 있는 text와 linkBtn에 있는 text가 같다면 active 클래스 부여 */
-    $(document).ready(function(){
-        var pageTitle = $('title').text();
-
-        $('.linkBtn').each(function(){
-            var btnText = $(this).text();
-            if(btnText === pageTitle){
-                $(this).addClass('active');
-            }
-        });
-    });
 
     /* 행 추가 버튼 클릭 : 일반 테이블 */
     $(".btn.add-column").on("click",function(){
