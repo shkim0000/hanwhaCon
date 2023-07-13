@@ -17,12 +17,12 @@ $(function(){
 
     /* sidebar 추가 */
     $('#wrapper').prepend(
-"<div class='sidebar open'>\n"+
+"<div class='sidebar'>\n"+
             "<div class='menu'>\n"+
                 "<ul>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn active'>자산신청</button>\n"+
-                        "<div class='depth active'>\n"+
+                        "<button type='button' class='btn'>자산신청</button>\n"+
+                        "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>신규신청</a></li>\n"+
@@ -46,8 +46,17 @@ $(function(){
                         "<button type='button' class='btn'>서비스데스크</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>서비스신청현황</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>서비스신청</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>서비스 신청현황</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>서비스 신청</a></li>\n"+
+                            "</ul>\n"+
+                        "</div>\n"+
+                    "</li>\n"+
+                    "<li>\n"+
+                        "<button type='button' class='btn'>장애신고</button>\n"+
+                        "<div class='depth'>\n"+
+                            "<ul>\n"+
+                                "<li><a href='#' class='linkBtn'>장애신고</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>장애신고현황</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -60,10 +69,12 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<a href='#' class='btn'>자산등록</a>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<a href='#' class='btn'>자산실사</a>\n"+
+                        "<button type='button' class='btn'>자산실사</button>\n"+
+                        "<div class='depth'>\n"+
+                            "<ul>\n"+
+                                "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
+                            "</ul>\n"+
+                        "</div>\n"+
                     "</li>\n"+
                 "</ul>\n"+
             "</div>\n"+
@@ -118,10 +129,31 @@ $(function(){
     });
 
     /* sidebar 설정 */
-    $(".depth.active").each(function(){
-        let num = $(this).find("ul li").length;
-        $(this).css(`height`,`${num * 39.2}`)
-    });
+    $(document).ready(function(){
+        let pageName = $('.page-indicator ul li:nth-child(2)').text();
+        let finalDepthName = $('.page-indicator ul li:last-child').text();
+
+        // HTML 페이지의 title과 page-indicator에 있는 텍스트가 일치하면, sidebar에 open 클래스를 부여합니다.
+        if($('title').text() === pageName){
+            $('.sidebar').addClass('open');
+            let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
+                return $(this).text() === pageName;
+            });
+            currentListEl.addClass('active');
+            currentListEl.siblings('.depth').addClass('active');
+        }
+        if($('title').text() === finalDepthName){
+            $('.sidebar').addClass('open');
+            let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
+                return $(this).text() === finalDepthName;
+            });
+            currentListEl.closest('.depth').siblings('.btn').addClass('active');
+            currentListEl.addClass('active');
+            currentListEl.closest('.depth').addClass('active');
+            let num = currentListEl.closest('.depth').find('ul li').length;
+            currentListEl.closest('.depth').css(`height`, `${num * 39.2}`);
+        }
+    })
 
     $(".sidebar .menu ul li .btn").on("click",function(){
         if($(this).hasClass("active")){
