@@ -37,7 +37,7 @@
             </ul>
         </div>
         <div class="title-box">
-            <h3>검색조건</h3>
+            <div class="title"><h3>검색조건</h3></div>
         </div>
         <div class="input-wrap">
             <div class="input-lists">
@@ -124,33 +124,62 @@
             <button type="button" class="btn search">검색</button>
         </div>
         <div class="title-box">
-            <h3>신청현황</h3>
-            <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+            <div class="title">
+                <h3>신청현황</h3>
+            </div>
+            <div class="btn-wrap">
+                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+            </div>
         </div>
 
         <div id="grid_wrap" class="grid-box"></div>
-        <button type="button" class="btn" data-popup="test2">사용자, 부서 검색버튼 눌렀을 때 팝업</button>
-        <div id="test2" class="popup no">
-            <div class="pop-box">
-                <div class="pop-head">
-                    <h3>사용자 검색</h3>
-                    <button type="button" class="close-btn"></button>
-                </div>
-                <div class="pop-body">
-                    <div class="input-list">
-                        <span class="input-title">검색</span>
-                        <label class="input search">
-                            <input type="text">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </label>
-                    </div>
-                    <div id="popup_grid_user" class="grid-box"></div>
-                </div>
-            </div>
+
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
+            <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
+<!-- 팝업 -->
+<div id="gridPop_user" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>사용자 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">검색</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<div id="gridPop_department" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>부서 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">부서</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+<!-- // 팝업 -->
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -162,10 +191,12 @@ function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
     createPopupAUIGrid2();
+    createPopupAUIGrid3();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
     requestData2();
+    requestData3();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -255,14 +286,16 @@ function createAUIGrid() {
         },200);
     })
 }
+
+/* [팝업] 사용자 검색 */
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [
         {
-            dataField: "category_user_number",
+            dataField: "category_employeeID",
             headerText: "사번",
-            width: 180,
+            width: 180
         },
         {
             dataField: "category_user_name",
@@ -290,6 +323,39 @@ function createPopupAUIGrid2(){
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
 
+/* [팝업] 부서 검색 */
+function createPopupAUIGrid3(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 180
+        },
+        {
+            dataField: "category_depart_code",
+            headerText: "부서명",
+            width: 180
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+    }
+
+    /* 그리드 생성 */
+    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
+}
+
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
@@ -299,6 +365,12 @@ function requestData() {
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
         AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_department, data);
     });
 }
 

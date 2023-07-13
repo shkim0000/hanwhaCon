@@ -1,0 +1,1077 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>자산신청현황</title>
+
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <script src="../resources/js/main.js"></script>
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+</head>
+<body id="guide">
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents active">
+        <div class="page-indicator">
+            <ul>
+                <li><i class="fa-solid fa-house"></i></li>
+                <li>자산신청</li>
+                <li>자산신청현황</li>
+            </ul>
+        </div>
+        <div class="title-box">
+            <div class="title"><h3>검색조건</h3></div>
+        </div>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">신청구분</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">신규신청</option>
+                            <option value="">교체신청</option>
+                            <option value="">대여신청</option>
+                            <option value="">반납신청</option>
+                            <option value="">이동연장</option>
+                            <option value="">인수인계 신청</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">신청사유</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">신규충원</option>
+                            <option value="">업무편의</option>
+                            <option value="">가나다라마바</option>
+                            <option value="">가나다라마바</option>
+                            <option value="">가나다라마바</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">기간</span>
+                    <div class="date-wrap">
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                        <span>~</span>
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">진행 상태</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">신청</option>
+                            <option value="">접수</option>
+                            <option value="">출고</option>
+                            <option value="">결제상신</option>
+                            <option value="">결제완료</option>
+                            <option value="">결제취소</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">사용자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">자산번호</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">신청내용</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="btn search">검색</button>
+        </div>
+        <div class="title-box">
+            <div class="title">
+                <h3>신청현황</h3>
+            </div>
+            <div class="btn-wrap">
+                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+            </div>
+        </div>
+
+        <div id="grid_wrap" class="grid-box"></div>
+
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
+            <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
+            <button type="button" class="btn" data-popup="newEnroll_pop">신규신청</button>
+            <button type="button" class="btn" data-popup="changeEnroll_pop">교체신청</button>
+            <button type="button" class="btn" data-popup="rentalEnroll_pop">대여신청</button>
+            <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대여연장신청</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+<!-- 팝업 -->
+<div id="gridPop_user" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>사용자 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">검색</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<div id="gridPop_department" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>부서 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">부서</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<div id="newEnroll_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>신규신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">56478945</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">신규신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청자</div></div>
+                    <div class="td"><div class="td-wrap">홍길동</div></div>
+                    <div class="th"><div class="th-wrap center">사용자</div></div>
+                    <div class="td"><div class="td-wrap">김종민</div></div>
+                    <div class="th"><div class="th-wrap center">사용부서</div></div>
+                    <div class="td"><div class="td-wrap">IT운영</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">사용장소</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">성수동</option>
+                                    <option value="">길음동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">6층 604호</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청사유</div></div>
+                    <div class="td"><div class="td-wrap">신규충원</div></div>
+                    <div class="th"><div class="th-wrap center">신청내용</div></div>
+                    <div class="td medium"><div class="td-wrap">자세한 상세위치에 대해 설명이 적혀있습니다.</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">대여기간</div></div>
+                    <div class="td whole"><div class="td-wrap">2023-06-07 ~ 2023-08-09</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">관리자 메모</div></div>
+                    <div class="td whole"><div class="td-wrap"></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>자산 정보</h4>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><div class="th-wrap center">자산분류</div></th>
+                        <th><div class="th-wrap center">품목</div></th>
+                        <th><div class="th-wrap center">자산번호</div></th>
+                        <th><div class="th-wrap center">모델명</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><div class="td-wrap center">데스크탑</div></td>
+                        <td><div class="td-wrap center">표준형 PC</div></td>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="input search">
+                                    <input type="text">
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </td>
+                        <td><div class="td-wrap center">xxxxxxxxx</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>업무배정</h4>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">담당부서</div></div>
+                    <div class="td"><div class="td-wrap">케이원</div></div>
+                    <div class="th"><div class="th-wrap center">담당자</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">연락처</div></div>
+                    <div class="td"><div class="td-wrap">xxxxxxxx</div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <label class="file">
+                        <input type="file">
+                        <span class="btn add-file">파일추가</span>
+                    </label>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <colgroup>
+                        <col style="width:50px">
+                        <col style="width:calc(100% - 50px);">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="th-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th><p>자산분류</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="td-wrap">
+                                <div class="file-box long">
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
+                                    <span>선택된 파일 없음</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">배정</button>
+                <button type="button" class="btn">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="changeEnroll_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>교체신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">56478945</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">신규신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청자</div></div>
+                    <div class="td"><div class="td-wrap">홍길동</div></div>
+                    <div class="th"><div class="th-wrap center">사용자</div></div>
+                    <div class="td"><div class="td-wrap">김종민</div></div>
+                    <div class="th"><div class="th-wrap center">사용부서</div></div>
+                    <div class="td"><div class="td-wrap">IT운영</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">사용장소</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">성수동</option>
+                                    <option value="">길음동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">6층 604호</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청사유</div></div>
+                    <div class="td"><div class="td-wrap">신규충원</div></div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">자세한 상세위치에 대해 설명이 적혀있습니다.</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">대여기간</div></div>
+                    <div class="td whole"><div class="td-wrap">2023-06-07 ~ 2023-08-09</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">관리자 메모</div></div>
+                    <div class="td whole"><div class="td-wrap"></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>자산 정보</h4>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><div class="th-wrap center">자산분류</div></th>
+                        <th><div class="th-wrap center">품목</div></th>
+                        <th><div class="th-wrap center">자산번호</div></th>
+                        <th><div class="th-wrap center">모델명</div></th>
+                        <th><div class="th-wrap center">구자산번호</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><div class="td-wrap center">데스크탑</div></td>
+                        <td><div class="td-wrap center">표준형 PC</div></td>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="input search">
+                                    <input type="text">
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </td>
+                        <td><div class="td-wrap center">xxxxxxxxx</div></td>
+                        <td><div class="td-wrap center">xxxxxxxxx</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>업무배정</h4>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">담당부서</div></div>
+                    <div class="td"><div class="td-wrap">케이원</div></div>
+                    <div class="th"><div class="th-wrap center">담당자</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">연락처</div></div>
+                    <div class="td"><div class="td-wrap">xxxxxxxx</div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <label class="file">
+                        <input type="file">
+                        <span class="btn add-file">파일추가</span>
+                    </label>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <colgroup>
+                        <col style="width:50px">
+                        <col style="width:calc(100% - 50px);">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="th-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th><p>자산분류</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="td-wrap">
+                                <div class="file-box long">
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
+                                    <span>선택된 파일 없음</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">배정</button>
+                <button type="button" class="btn">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rentalEnroll_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>신규신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">56478945</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">신규신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청자</div></div>
+                    <div class="td"><div class="td-wrap">홍길동</div></div>
+                    <div class="th"><div class="th-wrap center">사용자</div></div>
+                    <div class="td"><div class="td-wrap">김종민</div></div>
+                    <div class="th"><div class="th-wrap center">사용부서</div></div>
+                    <div class="td"><div class="td-wrap">IT운영</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">사용장소</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">제목1</option>
+                                    <option value="">제목2</option>
+                                    <option value="">제목3</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">6층 604호</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청사유</div></div>
+                    <div class="td"><div class="td-wrap">신규충원</div></div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">자세한 상세위치에 대해 설명이 적혀있습니다.</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">대여기간</div></div>
+                    <div class="td whole"><div class="td-wrap">2023-06-07 ~ 2023-08-09</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">관리자 메모</div></div>
+                    <div class="td whole"><div class="td-wrap"></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>자산 정보</h4>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><div class="th-wrap center">자산분류</div></th>
+                        <th><div class="th-wrap center">품목</div></th>
+                        <th><div class="th-wrap center">자산번호</div></th>
+                        <th><div class="th-wrap center">모델명</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><div class="td-wrap center">데스크탑</div></td>
+                        <td><div class="td-wrap center">표준형 PC</div></td>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="input search">
+                                    <input type="text">
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </td>
+                        <td><div class="td-wrap center">xxxxxxxxx</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>업무배정</h4>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">담당부서</div></div>
+                    <div class="td"><div class="td-wrap">케이원</div></div>
+                    <div class="th"><div class="th-wrap center">담당자</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">연락처</div></div>
+                    <div class="td"><div class="td-wrap">xxxxxxxx</div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <label class="file">
+                        <input type="file">
+                        <span class="btn add-file">파일추가</span>
+                    </label>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <colgroup>
+                        <col style="width:50px">
+                        <col style="width:calc(100% - 50px);">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="th-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th><p>자산분류</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="td-wrap">
+                                <div class="file-box long">
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
+                                    <span>선택된 파일 없음</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">배정</button>
+                <button type="button" class="btn">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="rentalExtensionEnroll_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>대여연장신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">56478945</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">신규신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청자</div></div>
+                    <div class="td"><div class="td-wrap">홍길동</div></div>
+                    <div class="th"><div class="th-wrap center">사용자</div></div>
+                    <div class="td"><div class="td-wrap">김종민</div></div>
+                    <div class="th"><div class="th-wrap center">사용부서</div></div>
+                    <div class="td"><div class="td-wrap">IT운영</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">사용장소</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">제목1</option>
+                                    <option value="">제목2</option>
+                                    <option value="">제목3</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">6층 604호</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청사유</div></div>
+                    <div class="td"><div class="td-wrap">신규충원</div></div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td medium"><div class="td-wrap">자세한 상세위치에 대해 설명이 적혀있습니다.</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">대여기간</div></div>
+                    <div class="td whole"><div class="td-wrap">2023-06-07 ~ 2023-08-09</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">관리자 메모</div></div>
+                    <div class="td whole"><div class="td-wrap"></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h4>대여자산 연장신청정보</h4>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><div class="th-wrap center">자산분류</div></th>
+                        <th><div class="th-wrap center">품목</div></th>
+                        <th><div class="th-wrap center">자산번호</div></th>
+                        <th><div class="th-wrap center">모델명</div></th>
+                        <th><div class="th-wrap center">대여기간연장</div></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td><div class="td-wrap center">데스크탑</div></td>
+                        <td><div class="td-wrap center">표준형 PC</div></td>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="input search">
+                                    <input type="text">
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </td>
+                        <td><div class="td-wrap center">xxxxxxxxx</div></td>
+                        <td><div class="td-wrap center">xxxxxxxxx</div></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>첨부파일</h3>
+                </div>
+                <div class="btn-wrap">
+                    <label class="file">
+                        <input type="file">
+                        <span class="btn add-file">파일추가</span>
+                    </label>
+                    <button type="button" class="btn trash">선택 삭제</button>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <colgroup>
+                        <col style="width:50px">
+                        <col style="width:calc(100% - 50px);">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th>
+                            <div class="th-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th><p>자산분류</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="td-wrap">
+                                <div class="file-box long">
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
+                                    <span>선택된 파일 없음</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">배정</button>
+                <button type="button" class="btn">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // 팝업 -->
+<script type="text/javascript">
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let myGridID;
+let popup_grid_user;
+let popup_grid_department;
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createAUIGrid();
+    createPopupAUIGrid2();
+    createPopupAUIGrid3();
+
+    /* 그리드 삽입 */
+    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
+    requestData3();
+}
+
+/* 3. AUIGrid 그리드 옵션 */
+function createAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "checkbox",
+            dataType: "boolean",
+            width: 80,
+            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+            headerRenderer: { // 헤더 렌더러
+                type: "CheckBoxHeaderRenderer",
+                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
+            },
+            renderer: {
+                type: "CheckBoxEditRenderer",
+                editable: true
+            }
+        }, {
+            dataField: "category_application_num",
+            headerText: "신청번호",
+            width: 160,
+        }, {
+            dataField: "category_application_division",
+            headerText: "신청구분",
+            width: 180
+        }, {
+            dataField: "category_application_date",
+            headerText: "신청일자",
+            width: 280
+        }, {
+            dataField: "category_content",
+            headerText: "내용",
+            width: 160
+        }, {
+            dataField: "category_application_reason",
+            headerText: "신청사유",
+            width: 160
+        }, {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 160
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 160
+        }, {
+            dataField: "category_count",
+            headerText: "수량",
+            width: 160
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+            width: 160
+        }, {
+            dataField: "category_processing_date",
+            headerText: "처리일자",
+            width: 160
+        }, {
+            dataField: "category_final_arbiter",
+            headerText: "최종 결재자",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    }
+
+    /* 그리드 생성 */
+    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+}
+
+/* [팝업] 사용자 검색 */
+function createPopupAUIGrid2(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout2 = [
+        {
+            dataField: "category_user",
+            headerText: "사번",
+            width: 180
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros2 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    }
+
+    /* 그리드 생성 */
+    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+}
+
+/* [팝업] 부서 검색 */
+function createPopupAUIGrid3(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 180
+        },
+        {
+            dataField: "category_depart_code",
+            headerText: "부서명",
+            width: 180
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+    }
+
+    /* 그리드 생성 */
+    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
+}
+
+/* 4. 데이터 불러오기 */
+function requestData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+        AUIGrid.setGridData(myGridID, data);
+    });
+}
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
+        AUIGrid.setGridData(popup_grid_user, data);
+    });
+}
+
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_department, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof myGridID !== "undefined") {
+        AUIGrid.resize(myGridID);
+    } else if (typeof popup_grid_user !== "undefined"){
+        AUIGrid.resize(popup_grid_user);
+    }
+}
+</script>
+</body>
+</html>
