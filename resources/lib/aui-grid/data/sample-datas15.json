@@ -1,0 +1,20 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_state":"신청",
+    "category_manager":"홍길동",
+    "category_time":"2023-06-11 10:15:47"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_state":"상신",
+    "category_manager":"길동자",
+    "category_time":"2023-06-13 21:25:17"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_state":"상신완료",
+    "category_manager":"강강강",
+    "category_time":"2023-06-01 13:55:01"
+  }
+]

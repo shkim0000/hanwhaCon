@@ -290,4 +290,7 @@ $(function(){
             $(this).closest("tbody").prev('thead').find("input[type='checkbox']").prop("checked", true);
         }
     });
+
+    /* popup model-list 클릭 */
+
 });

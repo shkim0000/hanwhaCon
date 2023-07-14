@@ -618,6 +618,8 @@
             <h2>- AUI Grid 삽입 팝업</h2>
             <div class="btn-wrap">
                 <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
+                <button type="button" class="btn" data-popup="gridPop_rental">AUI Grid big pop</button>
+                <button type="button" class="btn" data-popup="gridPop_detail">AUI Grid big detail pop</button>
             </div>
         </div>
 
@@ -724,6 +726,110 @@
         </div>
     </div>
 </div>
+<div id="gridPop_rental" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>대여자산연장</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">부서</span>
+                <label class="input search">
+                    <input type="text">
+                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </label>
+            </div>
+            <div id="popup_grid_rental" class="grid-box"></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn">대여자산연장</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="gridPop_detail" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>신청 등록 정보</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>신규충원</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>새상품</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>업무배정</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- // 팝업 -->
 <script>
 /* AUIGrid */
@@ -731,6 +837,8 @@
 let myGridID;
 let myGridID2;
 let popup_grid_user;
+let popup_grid_rental;
+let popup_grid_detail;
 
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터"];
@@ -743,11 +851,15 @@ function documentReady() {
     createAUIGrid();
     createAUIGrid2();
     createPopupAUIGrid2();
+    createPopupAUIGrid4();
+    createPopupAUIGrid5();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
     requestData3();
     requestData2();
+    requestData5();
+    requestData6();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -936,6 +1048,127 @@ function createPopupAUIGrid2(){
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
 
+function createPopupAUIGrid4(){
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "checkbox",
+            dataType: "boolean",
+            width: 80,
+            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
+            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
+            headerRenderer: { // 헤더 렌더러
+                type: "CheckBoxHeaderRenderer",
+                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
+                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
+            },
+            renderer: {
+                type: "CheckBoxEditRenderer",
+                editable: true
+            }
+        },
+        {
+            dataField: "category_product_name",
+            headerText: "물품종류",
+            width: 180
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180
+        },
+        {
+            dataField: "category_model_name",
+            headerText: "모델명",
+            width: 160
+        },
+        {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 160
+        },
+        {
+            dataField: "category_classification_use",
+            headerText: "용도구분",
+            width: 160
+        },
+        {
+            dataField: "category_asset_place",
+            headerText: "자산위치",
+            width: 160
+        },
+        {
+            dataField: "category_date",
+            headerText: "반납일",
+            width: 160
+        },
+        {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+            width: 160
+        }
+
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    }
+
+    /* 그리드 생성 */
+    popup_grid_rental = AUIGrid.create("#popup_grid_rental", columnLayout, gridPros);
+}
+
+function createPopupAUIGrid5() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_product",
+            headerText: "자산분류",
+        },{
+            dataField: "category_product",
+            headerText: "품목",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
+}
+
+
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
@@ -951,6 +1184,18 @@ function requestData2() {
 function requestData3() {
     $.get("../resources/lib/aui-grid/data/sample-datas8.json", function (data) {
         AUIGrid.setGridData(myGridID2, data);
+    });
+}
+
+function requestData5() {
+    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+        AUIGrid.setGridData(popup_grid_rental, data);
+    });
+}
+
+function requestData6() {
+    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail, data);
     });
 }
 

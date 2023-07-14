@@ -139,7 +139,7 @@
         <div class="title-box end">
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
-                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn save" onclick="updateRow(1)">저장</button>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-medium"></div>
@@ -243,9 +243,13 @@ function createAUIGrid() {
                 list: groupList
             }
         }, {
-            dataField: "category_reason_non-existence",
+            dataField: "category_reason_non_existence",
             headerText: "미존재 사유",
             width: 160,
+            renderer:{
+                type: "DropDownListRenderer",
+                list: [],
+            },
         }, {
             dataField: "category_investigate-date",
             headerText: "조사일",
@@ -264,6 +268,7 @@ function createAUIGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        simplifySelectionEvent: true,
     }
 
     /* 그리드 생성 */
@@ -276,6 +281,17 @@ function createAUIGrid() {
             requestData();
         },200);
     });
+
+    AUIGrid.bind(myGridID, "selectionChange", function(event){
+        let whatRow = AUIGrid.getSelectedIndex(myGridID)[0]; //현재 클릭한게 몇번째 Row임?
+        let currentVal = AUIGrid.getCellValue(myGridID, whatRow, 7);
+
+        if(currentVal === "미존재"){
+            updateRow(1);
+        } else if(currentVal === "존재" || currentVal === ""){
+            updateRow(2);
+        }
+    })
 
 }
 function createPopupAUIGrid2(){
@@ -326,6 +342,35 @@ window.onresize = function () {
         AUIGrid.resize(myGridID);
     } else if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
+    }
+}
+/* 6. 함수관련 */
+
+function updateRow(opt){
+    var selIdx, whatRow, getVal, nextIdx;
+    switch(opt){
+        case 1:
+            selIdx = AUIGrid.getSelectedIndex(myGridID); // 현재 선택한 Idx
+            whatRow = selIdx[0]; // 현재 Idx의 row
+            nextIdx = [selIdx[0], selIdx[1] + 1]; // 입력한 Idx의 다음 Idx
+            //[n, 7] 번째가 selection의 selIdx
+            getVal = AUIGrid.getCellValue(myGridID,whatRow,7); // 선택한 row의 미존재여부를 확인할 값
+
+            if(getVal === "미존재"){
+                AUIGrid.setRendererProp(myGridID, 8, {list: hideList});
+            }
+            break;
+
+        case 2:
+            selIdx = AUIGrid.getSelectedIndex(myGridID); // 현재 선택한 Idx
+            whatRow = selIdx[0]; // 현재 Idx의 row
+            nextIdx = [selIdx[0], selIdx[1] + 1]; // 입력한 Idx의 다음 Idx
+            //[n, 7] 번째가 selection의 selIdx
+            getVal = AUIGrid.getCellValue(myGridID,whatRow,7); // 선택한 row의 미존재여부를 확인할 값
+
+            if(getVal === "존재"){
+                AUIGrid.setRendererProp(myGridID, 8, {list: []});
+            }
     }
 }
 </script>

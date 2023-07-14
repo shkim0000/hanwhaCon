@@ -8,7 +8,7 @@
     "category_user_name":"홍길동",
     "category_before_change":"미확인",
     "category_after_change":"",
-    "category_reason_non-existence":"",
+    "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
     "category_investigator":"고길동"
   },
@@ -21,7 +21,7 @@
     "category_user_name":"윤미자",
     "category_before_change":"존재",
     "category_after_change":"",
-    "category_reason_non-existence":"",
+    "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
     "category_investigator":"신길동"
   },
@@ -34,7 +34,7 @@
     "category_user_name":"홍길동",
     "category_before_change":"미확인",
     "category_after_change":"",
-    "category_reason_non-existence":"",
+    "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
     "category_investigator":"윤길동"
   },
@@ -47,7 +47,7 @@
     "category_user_name":"김미동",
     "category_before_change":"미확인",
     "category_after_change":"존재",
-    "category_reason_non-existence":"",
+    "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
     "category_investigator":"고길동"
   },
@@ -60,7 +60,7 @@
     "category_user_name":"홍길동",
     "category_before_change":"미확인",
     "category_after_change":"미존재",
-    "category_reason_non-existence":"",
+    "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
     "category_investigator":"고길동"
   }
