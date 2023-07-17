@@ -398,6 +398,7 @@ tbody tr p{text-align:center;}
 
 /* custom-table > td 길이 */
 .row.con-2 .td{width:calc(50% - 120px);}
+.row.con-3 .td{width:calc(33.3% - 120px);}
 .row.con-3 .td.whole{width:calc(100% - 120px);}
 .row.con-3 .td.whole .date-wrap{width:100%;}
 .row.con-3 .td.half{width:calc(50% - 120px);}
