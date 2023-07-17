@@ -136,78 +136,14 @@
         </div>
         <div class="title-box">
             <div class="title">
-                <h3 class="important">자산정보</h3>
+                <h3 class="important">신청내역</h3>
             </div>
             <div class="btn-wrap">
                 <button type="button" class="btn model">모델 정보</button>
-                <button type="button" class="btn add-column">행 추가</button>
-                <button type="button" class="btn trash">선택 삭제</button>
+                <button type="button" class="btn add-column" onclick="addRow()">행 추가</button>
             </div>
         </div>
-        <div class="table">
-            <table>
-                <colgroup>
-                    <col style="width:50px">
-                    <col>
-                    <col>
-                    <col style="width:200px">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>
-                        <div class="th-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th><p>자산분류</p></th>
-                    <th><p class="important">품목</p></th>
-                    <th><p class="important">수랑신청</p></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>
-                        <div class="td-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">데스트탑1</option>
-                                    <option value="">데스크탑2</option>
-                                </select>
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">데스트탑 모델1</option>
-                                    <option value="">데스크탑 모델2</option>
-                                </select>
-                            </label>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="td-wrap">
-                            <label class="input whole">
-                                <input type="number">
-                            </label>
-                        </div>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        <div id="grid_wrap" class="grid-box h-small" data-grid-name="myGridID"></div>
 
         <div class="title-box">
             <div class="title">
@@ -308,6 +244,57 @@
             <button type="button" class="close-btn"></button>
         </div>
         <div class="pop-body">
+            <div class="tab-box">
+                <div class="tab-title"><h4>데스크탑</h4></div>
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">표준 PC</button></li>
+                        <li><button type="button" class="popBtn">고성능 PC</button></li>
+                        <li><button type="button" class="popBtn">삼성 PC</button></li>
+                        <li><button type="button" class="popBtn">DESKI7</button></li>
+                        <li><button type="button" class="popBtn">DESK-XXX</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on"><img src="../resources/img/sample_desktop.png" alt=""></div>
+                <div class="tabs"><img src="" alt="2"></div>
+                <div class="tabs"><img src="" alt="3"></div>
+                <div class="tabs"><img src="" alt="4"></div>
+                <div class="tabs"><img src="" alt="5"></div>
+            </div>
+            <div class="tab-box">
+                <div class="tab-title"><h4>노트북</h4></div>
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">표준 노트북</button></li>
+                        <li><button type="button" class="popBtn">LG 그램</button></li>
+                        <li><button type="button" class="popBtn">삼성 갤럭시</button></li>
+                        <li><button type="button" class="popBtn">HP 표준</button></li>
+                        <li><button type="button" class="popBtn">씽크패드</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on"><img src="../resources/img/sample_notebook.jpeg" alt=""></div>
+                <div class="tabs"><img src="" alt="2"></div>
+                <div class="tabs"><img src="" alt="3"></div>
+                <div class="tabs"><img src="" alt="4"></div>
+                <div class="tabs"><img src="" alt="5"></div>
+            </div>
+            <div class="tab-box">
+                <div class="tab-title"><h4>프린터</h4></div>
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">잉크젯</button></li>
+                        <li><button type="button" class="popBtn">레이저</button></li>
+                        <li><button type="button" class="popBtn">칼라레이저</button></li>
+                        <li><button type="button" class="popBtn">복합기</button></li>
+                        <li><button type="button" class="popBtn">칼라복합기</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on"><img src="../resources/img/sample_printer.jpeg" alt=""></div>
+                <div class="tabs"><img src="" alt="2"></div>
+                <div class="tabs"><img src="" alt="3"></div>
+                <div class="tabs"><img src="" alt="4"></div>
+                <div class="tabs"><img src="" alt="5"></div>
+            </div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
@@ -320,20 +307,114 @@
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
+let myGridID;
 let popup_grid_user;
+
+/* 1-2. dropdown menu 리스트 */
+let groupList1 = ["데스크탑", "모니터"];
+let groupList2 = ["데스크탑 모델", "모니터 모델"];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
     /* 그리드 생성 */
+    createAUIGrid();
     createPopupAUIGrid2();
     createPopupAUIGrid3();
 
     /* 그리드 삽입 */
+    requestData();
     requestData2();
     requestData3();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
+
+/* 자산정보 그리드 */
+function createAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_product",
+            headerText: "물품종류",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList1
+            }
+        }, {
+            dataField: "category_item",
+            headerText: "자산번호",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList2
+            }
+        }, {
+            dataField: "category_amount",
+            headerText: "신청수량",
+            renderer: {
+                type: "NumberStepRenderer",
+                min: 0,
+                max: 50,
+                step: 1,
+                inputHeight: 28, // input 높이 지정
+                textEditable: false
+            }
+        }, {
+            dataField: "category_del_btn", //임의의 고유값
+            headerText: "",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12,
+                iconHeight:16,
+                iconPosition:"aisleCenter",
+                iconTableRef:{
+                    "default":"../resources/img/icon/icon_delete.svg"
+                },
+                onClick: function(){
+                    AUIGrid.removeRow(myGridID, "selectedIndex");
+                }
+            }
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+        /*editable: true,*/
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* autoGridHeight : true */
+        fillColumnSizeMode:true,
+        softRemoveRowMode:false,
+    }
+
+    /* 그리드 생성 */
+    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#grid_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    })
+}
+
 /* [팝업] 사용자 검색 */
 function createPopupAUIGrid2(){
     /* 팝업 그리드(예시) */
@@ -403,6 +484,12 @@ function createPopupAUIGrid3(){
     popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
 }
 /* 4. 데이터 불러오기 */
+
+function requestData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas8.json", function (data) {
+        AUIGrid.setGridData(myGridID, data);
+    });
+}
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
         AUIGrid.setGridData(popup_grid_user, data);
@@ -421,6 +508,26 @@ window.onresize = function () {
         AUIGrid.resize(popup_grid_user);
     }
 }
+
+/* 6. 함수 관련 */
+function deleteRowGrid(){
+    AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
+}
+
+/* 행 추가 */
+let cnt = 0;
+function addRow() {
+    var item = new Object();
+    item.id = "grid_ID_1" + (++cnt),
+        item.category_product = '',
+        item.category_item = '',
+        item.category_amount = '',
+
+        // parameter
+        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+        AUIGrid.addRow(myGridID, item, "first");
+};
 </script>
 </body>
 </html>

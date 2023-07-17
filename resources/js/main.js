@@ -99,6 +99,7 @@ $(function(){
     $(".date input").datepicker({
         changeMonth:true,
         changeYear:true,
+        maxDate:"+1m",
     });
 
     $(".date input").keydown(function(){
@@ -232,10 +233,7 @@ $(function(){
                         "<td>\n"+
                             "<div class='td-wrap'>\n"+
                                 "<div class='file-box long'>\n"+
-                                    "<label class='file'>\n"+
-                                        "<input type='file' value='"+fileName+ "'>\n"+
-                                        "<span class='btn'>파일선택</span>\n"+
-                                    "</label>\n"+
+                                    "<span class='btn'>파일명</span>\n"+
                                     "<span>"+fileNameSlice+"</span>\n"+
                                 "</div>\n"+
                             "</div>\n"+
@@ -292,5 +290,18 @@ $(function(){
     });
 
     /* popup model-list 클릭 */
-
+    $(".tab-wrap").each(function(){
+        let length = $(this).find("li").length;
+        for(let i = 0; i <= length; i++){
+            $(this).find("li").eq(i).attr("data-tab", "tab" + (i + 1));
+            $(this).parent().find(".tabs").eq(i).attr("data-tabs", "tab" + (i + 1));
+        }
+        $(this).find(".popBtn").on("click", function(){
+            let i = $(this).parent().attr("data-tab");
+            $(this).closest(".tab-wrap").find("li").removeClass("on");
+            $(this).parent().addClass("on");
+            $(this).closest(".tab-box").find(".tabs").removeClass("on");
+            $(this).closest(".tab-box").find("[data-tabs="+i+"]").addClass("on");
+        });
+    });
 });

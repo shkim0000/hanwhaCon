@@ -143,7 +143,7 @@
             <div class="btn-wrap">
                 <button type="button" class="btn model">모델정보</button>
                 <button type="button" class="btn add-column" onclick="addRow()">행 추가</button>
-                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
+<!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>-->
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-small"></div>
@@ -187,7 +187,7 @@
         </div>
 
         <div class="btn-wrap form">
-            <button type="button" class="btn save">저장</button>
+<!--            <button type="button" class="btn save">저장</button>-->
             <button type="button" class="btn primary send">상신</button>
         </div>
 
@@ -250,7 +250,58 @@
             <button type="button" class="close-btn"></button>
         </div>
         <div class="pop-body">
-            <div class="image-box"></div>
+            <div class="tab-box">
+                <div class="tab-title"><h4>데스크탑</h4></div>
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">표준 PC</button></li>
+                        <li><button type="button" class="popBtn">고성능 PC</button></li>
+                        <li><button type="button" class="popBtn">삼성 PC</button></li>
+                        <li><button type="button" class="popBtn">DESKI7</button></li>
+                        <li><button type="button" class="popBtn">DESK-XXX</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on"><img src="../resources/img/sample_desktop.png" alt=""></div>
+                <div class="tabs"><img src="" alt="2"></div>
+                <div class="tabs"><img src="" alt="3"></div>
+                <div class="tabs"><img src="" alt="4"></div>
+                <div class="tabs"><img src="" alt="5"></div>
+            </div>
+            <div class="tab-box">
+                <div class="tab-title"><h4>노트북</h4></div>
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">표준 노트북</button></li>
+                        <li><button type="button" class="popBtn">LG 그램</button></li>
+                        <li><button type="button" class="popBtn">삼성 갤럭시</button></li>
+                        <li><button type="button" class="popBtn">HP 표준</button></li>
+                        <li><button type="button" class="popBtn">씽크패드</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on"><img src="../resources/img/sample_notebook.jpeg" alt=""></div>
+                <div class="tabs"><img src="" alt="2"></div>
+                <div class="tabs"><img src="" alt="3"></div>
+                <div class="tabs"><img src="" alt="4"></div>
+                <div class="tabs"><img src="" alt="5"></div>
+            </div>
+            <div class="tab-box">
+                <div class="tab-title"><h4>프린터</h4></div>
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">잉크젯</button></li>
+                        <li><button type="button" class="popBtn">레이저</button></li>
+                        <li><button type="button" class="popBtn">칼라레이저</button></li>
+                        <li><button type="button" class="popBtn">복합기</button></li>
+                        <li><button type="button" class="popBtn">칼라복합기</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on"><img src="../resources/img/sample_printer.jpeg" alt=""></div>
+                <div class="tabs"><img src="" alt="2"></div>
+                <div class="tabs"><img src="" alt="3"></div>
+                <div class="tabs"><img src="" alt="4"></div>
+                <div class="tabs"><img src="" alt="5"></div>
+            </div>
+
             <div class="btn-wrap">
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
@@ -316,6 +367,21 @@ function createAUIGrid() {
                 inputHeight: 28, // input 높이 지정
                 textEditable: false
             }
+        }, {
+            dataField: "category_del_btn", //임의의 고유값
+            headerText: "",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12,
+                iconHeight:16,
+                iconPosition:"aisleCenter",
+                iconTableRef:{
+                    "default":"../resources/img/icon/icon_delete.svg"
+                },
+                onClick: function(){
+                    AUIGrid.removeRow(myGridID, "selectedIndex");
+                }
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -336,7 +402,8 @@ function createAUIGrid() {
         /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* autoGridHeight : true */
-        fillColumnSizeMode:true
+        fillColumnSizeMode:true,
+        softRemoveRowMode: false,
     }
 
     /* 그리드 생성 */
