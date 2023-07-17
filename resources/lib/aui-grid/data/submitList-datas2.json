@@ -1,0 +1,29 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_kinds" : "유형",
+    "category_name" : "안진규",
+    "category_employeeID":"13570",
+    "category_ID":"admin1",
+    "category_status":"rookan",
+    "category_department":"이기선 / 팀장 / IT기획팀"
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_kinds" : "유형",
+    "category_name" : "안진규",
+    "category_employeeID":"13570",
+    "category_ID":"admin1",
+    "category_status":"rookan",
+    "category_department":"이기선 / 팀장 / IT기획팀"
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_kinds" : "유형",
+    "category_name" : "안진규",
+    "category_employeeID":"13570",
+    "category_ID":"admin1",
+    "category_status":"rookan",
+    "category_department":"이기선 / 팀장 / IT기획팀"
+  }
+]
