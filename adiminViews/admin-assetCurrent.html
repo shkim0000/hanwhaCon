@@ -144,7 +144,7 @@
             <button type="button" class="btn" data-popup="submit_pop">상신 팝업</button>
             <button type="button" class="btn" data-popup="submitSearch_pop">상신 > 검색조건 팝업</button>
             <button type="button" class="btn" data-popup="submitApprovalChange_pop">상신 > 결재선 변경 팝업</button>
-            <button type="button" class="btn" >상신 > 미리보기</button>
+            <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
     </div>
 </div>
@@ -954,7 +954,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn">미리보기</button>
+                <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">미리보기</button>
                 <button type="button" class="btn primary send">상신</button>
             </div>
         </div>
@@ -1641,6 +1641,12 @@ function moveRowsToUp() {
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* [윈도우 팝업] 미리보기 */
+function openWindowPop(url, name){
+    var options = 'top=10, left=10, width=1000, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
+}
 </script>
 </body>
 </html>
