@@ -25,6 +25,7 @@
     <!--Dropzone-->
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css' />
 
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
@@ -700,7 +701,35 @@
                     <h3 class="important">첨부파일</h3>
                 </div>
             </div>
-            <form action="/target" class="dropzone" id="myDropzone"></form>
+            <div class="dropzone">
+                <ul id="dropzone-preview">
+                    <li id="dropzone-preview-list">
+                        <div>
+                            <div class="dropzone-preview-card">
+<!--                                <div class="dropzone-image-box">-->
+<!--                                    <div>-->
+<!--                                        <img data-dz-thumbnail="data-dz-thumbnail" src="#" alt="Dropzone-Image"/>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+                                <div class="dropzone-title-box">
+                                    <div>
+                                        <h6 data-dz-name="data-dz-name">&nbsp;</h6>
+<!--                                        <p data-dz-size="data-dz-size"></p>-->
+<!--                                        <strong class="error text-danger" data-dz-errormessage="data-dz-errormessage"></strong>-->
+                                    </div>
+                                </div>
+                                <div class="dropzone-button-box">
+                                    <button class="btn trash" data-dz-remove="data-dz-remove">삭제</button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+
+
+
+
         </div>
 
         <!-- // contents -->
@@ -916,6 +945,34 @@
     </div>
 </div>
 <!-- // 팝업 -->
+
+<script>
+    Dropzone.autoDiscover = false;
+    var dropzonePreviewNode = document.querySelector('#dropzone-preview-list');
+    dropzonePreviewNode.id = '';
+    var previewTemplate = dropzonePreviewNode.parentNode.innerHTML;
+    dropzonePreviewNode.parentNode.removeChild(dropzonePreviewNode);
+
+    const dropzone = new Dropzone(".dropzone", {
+        url: "https://httpbin.org/post", // 파일을 업로드할 서버 주소 url.
+        method: "post", // 기본 post로 request 감. put으로도 할수있음
+
+        previewTemplate: previewTemplate, // 만일 기본 테마를 사용하지않고 커스텀 업로드 테마를 사용하고 싶다면
+        previewsContainer: '#dropzone-preview', // 드롭존 영역을 .dropzone이 아닌 다른 엘리먼트에서 하고싶을때
+    });
+    $('.dz-message').text("클릭하거나 파일을 드래그해서 업로드하세요.");
+    $('.dropzone').on("click",function(){
+        if($("#dropzone-preview").length === 0){
+            $('.dz-message').text("클릭하거나 파일을 드래그해서 업로드하세요.");
+        } else {
+            $('.dz-message').text("");
+        }
+    })
+
+
+
+</script>
+
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */

@@ -546,3 +546,11 @@ tbody tr p{text-align:center;}
     .preview-title-box > span{width:100%;padding:5px 15px;}
     .preview-title-box > h1{width:100%;padding:8px 15px;}
 }
+
+/* Dropzone css */
+#dropzone-preview{display:flex;flex-wrap:wrap;gap: 40px;}
+.dropzone-preview-card{display:flex;align-items:center;max-width:500px;gap:40px;}
+.dropzone-preview-card .dropzone-image-box{max-width:200px;}
+.dropzone-preview-card .dropzone-title-box h6{margin-bottom:0;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.dropzone-preview-card .dropzone-title-box p{margin-bottom:0;}
+.dropzone-preview-card .dropzone-button-box .btn{cursor:pointer;}

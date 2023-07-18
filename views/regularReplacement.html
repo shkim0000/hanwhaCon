@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>모델신청</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/main.js"></script>
+</head>
+<body id="guide">
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents active">
+        <div class="page-indicator">
+            <ul>
+                <li><i class="fa-solid fa-house"></i></li>
+                <li>정기교체</li>
+                <li>모델신청</li>
+            </ul>
+        </div>
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">신청자정보</h3>
+            </div>
+        </div>
+        <div class="custom-table">
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center">사용자</div></div>
+                <div class="td"><div class="td-wrap">홍길동</div></div>
+                <div class="th"><div class="th-wrap center">부서</div></div>
+                <div class="td"><div class="td-wrap">IT운영</div></div>
+                <div class="th"><div class="th-wrap center">제목</div></div>
+                <div class="td"><div class="td-wrap">전반기 정기교체</div></div>
+            </div>
+            <div class="row con-2">
+                <div class="th"><div class="th-wrap center">신청기간</div></div>
+                <div class="td"><div class="td-wrap">2023-06-20 ~ 2023-06-24</div></div>
+                <div class="th"><div class="th-wrap center">교체기간</div></div>
+                <div class="td"><div class="td-wrap">2023-07-01 ~ 2023-07-31</div></div>
+            </div>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">보유자산(정기교체대상)</h3>
+            </div>
+        </div>
+        <div id="grid_wrap" class="grid-box h-small"></div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">신청자산정보</h3>
+            </div>
+        </div>
+        <div id="grid_wrap2" class="grid-box h-small"></div>
+
+        <div class="btn-wrap form">
+            <button type="button" class="btn">미신청</button>
+            <button type="button" class="btn save">저장</button>
+<!--            <button type="button" class="btn primary send">상신</button>-->
+        </div>
+
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+<!-- 팝업 -->
+
+<!-- // 팝업 -->
+<script>
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    let myGridID;
+    let myGridID2;
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+    function documentReady() {
+        /* 그리드 생성 */
+        createAUIGrid();
+        createAUIGrid2();
+
+        /* 그리드 삽입 */
+        requestData();
+        requestData2();
+    }
+
+    /* 3. AUIGrid 그리드 옵션 */
+    function createAUIGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            },
+            {
+                dataField: "category_product_name",
+                headerText: "물품종류",
+                width: 180
+            },
+            {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                width: 180
+            },
+            {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                width: 160
+            },
+            {
+                dataField: "category_department",
+                headerText: "부서",
+                width: 160
+            },
+            {
+                dataField: "category_user_name",
+                headerText: "사용자",
+                width: 160
+            },
+            {
+                dataField: "category_classification_use",
+                headerText: "용도구분",
+                width: 160
+            },
+            {
+                dataField: "category_asset_place",
+                headerText: "자산위치",
+                width: 160
+            },
+            {
+                dataField: "category_date",
+                headerText: "반납일",
+                width: 160
+            },
+            {
+                dataField: "category_asset_status",
+                headerText: "자산상태",
+                width: 160
+            }
+
+        ]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode:true,
+        }
+
+        /* 그리드 생성 */
+        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+        $('.menu-btn').on('click',function(){
+            AUIGrid.destroy('#grid_wrap');
+            setTimeout(function(){
+                AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+                requestData();
+            },200);
+        })
+    }
+
+    function createAUIGrid2() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            }, {
+                dataField: "category_product_name",
+                headerText: "물품종류",
+                width: 160
+            }, {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                width: 160,
+            }, {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                width:200
+            }, {
+                dataField: "category_use_usage1",
+                headerText: "용도구분",
+                width: 140
+            }, {
+                dataField: "category_place",
+                headerText: "설치장소",
+                width: 160,
+            }, {
+                dataField: "category_asset_status",
+                headerText: "자산상태",
+                width: 160,
+            }, {
+                dataField: "category_note",
+                headerText: "교체물품종류",
+                width: 160,
+            }, {
+                dataField: "category_changeProduct_name",
+                headerText: "모델명",
+                width: 160,
+            }, {
+                dataField: "category_product_quantity",
+                headerText: "수량",
+                width: 160
+            }, {
+                dataField: "category_del_btn", //임의의 고유값
+                headerText: "",
+                renderer: {
+                    type: "IconRenderer",
+                    iconWidth:12,
+                    iconHeight:16,
+                    iconPosition:"aisleCenter",
+                    iconTableRef:{
+                        "default":"../resources/img/icon/icon_delete.svg"
+                    },
+                    onClick: function(){
+                        AUIGrid.removeRow(myGridID2, "selectedIndex");
+                    }
+                }
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true,
+            softRemoveRowMode: false,
+        }
+
+        /* 그리드 생성 */
+        myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+
+        $('.menu-btn').on('click',function(){
+            AUIGrid.destroy('#grid_wrap2');
+            setTimeout(function(){
+                AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+                requestData2();
+            },200);
+        })
+    }
+    /* 4. 데이터 불러오기 */
+    function requestData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+            AUIGrid.setGridData(myGridID, data);
+        });
+    }
+    function requestData2() {
+        $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
+            AUIGrid.setGridData(myGridID2, data);
+        });
+    }
+
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof popup_grid_user !== "undefined"){
+            AUIGrid.resize(popup_grid_user);
+        }
+    }
+</script>
+</body>
+</html>
