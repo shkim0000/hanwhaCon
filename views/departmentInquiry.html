@@ -127,6 +127,7 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!-- 부서 검색 -->
 <div id="gridPop_department" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -154,14 +155,15 @@
 let myGridID;
 let popup_grid_department;
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    createPopupAUIGrid2();
+
+    popupDepartmentSearch(); // 부서 검색
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
 }
 
@@ -244,7 +246,9 @@ function createAUIGrid() {
         },200);
     })
 }
-function createPopupAUIGrid2(){
+
+/* [팝업] 부서 검색 */
+function popupDepartmentSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [

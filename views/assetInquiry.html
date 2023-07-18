@@ -241,7 +241,8 @@ let popup_grid_detail;
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    createPopupAUIGrid();
+
+    popupAssetInfo(); // 자산정보
 
     /* 그리드 삽입 */
     requestData();
@@ -322,7 +323,7 @@ function createAUIGrid() {
 }
 
 /* [팝업] 자산정보 */
-function createPopupAUIGrid() {
+function popupAssetInfo() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [

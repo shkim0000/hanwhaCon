@@ -151,6 +151,7 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!-- 사용자 검색 -->
 <div id="gridPop_user" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -177,19 +178,21 @@
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
-let popup_grid_user;
+let popup_grid_user; // 사용자 검색
+
+/* 1-2. dropdown menu 리스트 */
 let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
 let hideList = ["분실", "수리", "기타등등"]; // -- 미존재일때 입력될 리스트
 let cleanList = [];
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    createPopupAUIGrid2();
+    popupUserSearch(); // 사용자 검색
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
 }
 
@@ -291,7 +294,7 @@ function createAUIGrid() {
         },200);
     });
 }
-function createPopupAUIGrid2(){
+function popupUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [

@@ -155,7 +155,9 @@
         </div>
     </div>
 </div>
-
+<!-- // contents -->
+<!-- 팝업 -->
+<!-- 서비스 신청 현황 -->
 <div id="gridPop_detail" class="popup grid big no">
     <div class="pop-box">
         <div class="pop-head">
@@ -210,7 +212,7 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail" class="grid-box h-small"></div>
+            <div id="popup_grid_assetInfo" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -232,7 +234,15 @@
                     </colgroup>
                     <thead>
                     <tr>
-                        <th colspan="2"><p>파일명</p></th>
+                        <th>
+                            <div class="th-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </th>
+                        <th><p>자산분류</p></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -248,7 +258,10 @@
                         <td>
                             <div class="td-wrap">
                                 <div class="file-box long">
-                                    <span class="btn">파일명</span>
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
                                     <span>선택된 파일 없음</span>
                                 </div>
                             </div>
@@ -264,25 +277,24 @@
         </div>
     </div>
 </div>
-
-<!-- // contents -->
+<!-- // 팝업 -->
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
-let popup_grid_user;
-let popup_grid_detail;
-let popup_grid_history;
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+let popup_grid_assetInfo; // 자산정보
+let popup_grid_history; // 처리이력
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    createPopupAUIGrid();
-    createPopupAUIGrid2();
+    popupAssetInfo(); // 자산정보
+    popupDetail(); // 처리이력
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
     requestData3();
 }
@@ -356,7 +368,8 @@ function createAUIGrid() {
     })
 }
 
-function createPopupAUIGrid() {
+/* [팝업] 서비스데스크 신청 현황 > 자산정보 */
+function popupAssetInfo() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -393,10 +406,11 @@ function createPopupAUIGrid() {
     }
 
     /* 그리드 생성 */
-    popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
+    popup_grid_assetInfo = AUIGrid.create("#popup_grid_assetInfo", columnLayout, gridPros);
 }
 
-function createPopupAUIGrid2() {
+/* [팝업] 서비스데스크 신청 현황 > 처리이력 */
+function popupDetail() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -442,7 +456,7 @@ function requestData() {
 
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
-        AUIGrid.setGridData(popup_grid_detail, data);
+        AUIGrid.setGridData(popup_grid_assetInfo, data);
     });
 }
 function requestData3() {
