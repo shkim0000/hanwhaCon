@@ -564,12 +564,14 @@ let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
 let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
 let popup_subGrid_approvalChange; // 상신 > 결재선변경
 
+/* 1-2. dropdown menu 리스트 */
+let groupList1 = ["데스크탑", "모니터"];
+
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
     createAUIGrid2();
-
     popupUserSearch(); // 사용자 검색
     popupDepartmentSearch(); // 부서검색
     popupRentalAssetExt(); // 대여자산 연장
