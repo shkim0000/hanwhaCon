@@ -1,0 +1,23 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_history_desc": "접수 후 담당자 배정 - 임꺽정",
+    "category_manager": "김종민",
+    "category_date": "2023-07-05-16:05:41",
+    "category_state": "배정"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_history_desc": "방문 처리 출발",
+    "category_manager": "임꺽정",
+    "category_date": "2023-07-05-16:30:11",
+    "category_state": "조치중"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_history_desc": "세번째 샘플",
+    "category_manager": "가나다",
+    "category_date": "2023-07-11-13:05:41",
+    "category_state": "조치중"
+  }
+]

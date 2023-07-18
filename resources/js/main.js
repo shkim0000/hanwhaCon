@@ -99,7 +99,6 @@ $(function(){
     $(".date input").datepicker({
         changeMonth:true,
         changeYear:true,
-        maxDate:"+1m",
     });
 
     $(".date input").keydown(function(){
@@ -118,7 +117,6 @@ $(function(){
 
     /* 팝업 닫기 */
     $(".popup .close-btn, [data-btn='cancel']").on("click", function(){
-        console.log("Sdfgsdf");
         $(this).closest(".popup").removeClass("open");
     });
 

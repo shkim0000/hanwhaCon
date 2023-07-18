@@ -83,28 +83,208 @@
             <button type="button" class="btn search">검색</button>
         </div>
 
+        <div class="list-box">
+            <ul class="quantity-list">
+                <li>
+                    <button type="button">
+                        <span class="quantity yellow">
+                            <span class="title">서비스상태</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity blue">
+                            <span class="num">2</span>
+                            <span class="name">신청</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity green">
+                            <span class="num">2</span>
+                            <span class="name">접수</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity purple">
+                            <span class="num">1</span>
+                            <span class="name">조치중</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity lightOrange">
+                            <span class="num">3</span>
+                            <span class="name">완료</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity gray">
+                            <span class="num">3</span>
+                            <span class="name">수리중</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity">
+                            <span class="num">15</span>
+                            <span class="name">전체</span>
+                        </span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+
         <div class="title-box end">
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box"></div>
+
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_detail">서비스데스크 신청 현황</button>
+        </div>
     </div>
 </div>
+
+<div id="gridPop_detail" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>서비스데스크 신청 현황</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">PC부품</div></div>
+                    <div class="th"><div class="th-wrap center">상태</div></div>
+                    <div class="td"><div class="td-wrap">조치중</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>김종민</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>6층 604호</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>등록시간</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>2023-07-05 15:54:12</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>요청내용</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>해당 사유로 PC부품을 요청합니다.</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>처리이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_history" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>첨부파일</h3>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <colgroup>
+                        <col style="width:50px">
+                        <col style="width:calc(100% - 50px);">
+                    </colgroup>
+                    <thead>
+                    <tr>
+                        <th colspan="2"><p>파일명</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="td-wrap center">
+                                <label class="check no-text">
+                                    <input type="checkbox">
+                                    <span></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="td-wrap">
+                                <div class="file-box long">
+                                    <span class="btn">파일명</span>
+                                    <span>선택된 파일 없음</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- // contents -->
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 let popup_grid_user;
+let popup_grid_detail;
+let popup_grid_history;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
+    createPopupAUIGrid();
+    createPopupAUIGrid2();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
+    requestData3();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -176,10 +356,98 @@ function createAUIGrid() {
     })
 }
 
+function createPopupAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        },{
+            dataField: "category_product",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_product",
+            headerText: "품목",
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+        }, {
+            dataField: "category_place",
+            headerText: "자산위치"
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
+}
+
+function createPopupAUIGrid2() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_history_desc",
+            headerText: "처리내용",
+        },{
+            dataField: "category_manager",
+            headerText: "조치자",
+        }, {
+            dataField: "category_date",
+            headerText: "처리일시",
+        }, {
+            dataField: "category_state",
+            headerText: "상태",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout, gridPros);
+}
+
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas12.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
+    });
+}
+
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail, data);
+    });
+}
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
+        AUIGrid.setGridData(popup_grid_history, data);
     });
 }
 

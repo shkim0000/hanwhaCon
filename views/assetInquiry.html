@@ -121,21 +121,125 @@
         </div>
         <div id="grid_wrap" class="grid-box"></div>
 
+        <div class="btn-wrap">
+            <button type="button" class="btn" data-popup="gridPop_detail">자산정보</button>
+        </div>
     </div>
 </div>
+
+<div id="gridPop_detail" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>자산 상세정보</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">물품종류</div></div>
+                    <div class="td"><div class="td-wrap">모니터</div></div>
+                    <div class="th"><div class="th-wrap center">품목</div></div>
+                    <div class="td"><div class="td-wrap">27인치</div></div>
+                    <div class="th"><div class="th-wrap center">자산번호</div></div>
+                    <div class="td"><div class="td-wrap">4763728</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>자산상태</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>운영</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>모델</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>LG-MO-27MD</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>규격#1</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>규격#2</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>규격#3</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>규격#4</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>규격#5</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>공용</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="check">
+                                <input type="checkbox">
+                                <span>(공용이라면 체크)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>도입일</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>2022-06-17</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>자산위치</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>1층 IT운영부</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>사용자정보</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>사번</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>756398</p></div></div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- // contents -->
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
+let popup_grid_detail;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
+    createPopupAUIGrid();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData2();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -218,10 +322,53 @@ function createAUIGrid() {
     })
 }
 
+function createPopupAUIGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_product",
+            headerText: "자산분류",
+        },{
+            dataField: "category_product",
+            headerText: "품목",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
+}
+
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
+    });
+}
+
+function requestData2() {
+    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail, data);
     });
 }
 

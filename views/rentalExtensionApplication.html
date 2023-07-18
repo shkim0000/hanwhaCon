@@ -179,7 +179,7 @@
                 <h3>대여자산</h3>
             </div>
             <div class="btn-wrap">
-                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+<!--                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>-->
                 <button type="button" class="btn primary check">선택</button>
             </div>
         </div>
@@ -187,10 +187,10 @@
 
         <div class="title-box">
             <div class="title">
-                <h3>대여연장정보</h3>
+                <h3>대여자산정보</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>
+<!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>-->
             </div>
         </div>
         <div id="grid_wrap2" class="grid-box h-small"></div>
@@ -462,6 +462,22 @@ function createAUIGrid2() {
         {
             dataField: "category_application_content",
             headerText: "신청내용",
+        },
+        {
+            dataField: "category_del_btn", //임의의 고유값
+            headerText: "",
+            renderer: {
+                type: "iconRenderer",
+                iconWidth:12,
+                iconHeight:16,
+                iconPosition:"aisleCenter",
+                iconTableRef:{
+                    "default":"../resources/img/icon/icon_delete.svg"
+                },
+                onClick: function(){
+                    AUIGrid.removeRow(myGridID2, "selectedIndex");
+                }
+            }
         }
     ]
     /* 2. 그리드 속성 설정 */
@@ -478,6 +494,7 @@ function createAUIGrid2() {
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 X
+        softRemoveRowMode: false,
     }
 
     /* 그리드 생성 */
@@ -615,8 +632,39 @@ function createPopupAUIGrid4(){
         },
         {
             dataField: "category_date",
-            headerText: "반납일",
-            width: 160
+            headerText: "대여 연장일",
+            dataType: "date",
+            dateInputFormat: "yyyy/mm/dd", // 실제 데이터의 형식 지정
+            formatString: "yyyy년 mm월 dd일", // 실제 데이터 형식을 어떻게 표시할지 지정
+            width: 160,
+            renderer: {
+                type: "IconRenderer",
+                iconWidth: 16, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
+                iconHeight: 16,
+                iconPosition: "aisleRight",
+                iconTableRef: { // icon 값 참조할 테이블 레퍼런스
+                    "default": "../resources/lib/aui-grid/images/calendar-icon.png" // default
+                },
+                onClick: function (event) {
+                    // 달력 아이콘 클릭하면 실제로 달력을 띄움.
+                    // 즉, 수정으로 진입함.
+                    AUIGrid.openInputer(event.pid);
+                }
+            },
+            editRenderer: {
+                type: "JQCalendarRenderer",
+                defaultFormat: "yyyy/mm/dd", // 달력 선택 시 데이터에 적용되는 날짜 형식
+                showEditorBtn: false,
+                showEditorBtnOver: false, // 마우스 오버 시 에디터버턴 출력 여부
+                onlyCalendar: true, // 사용자 입력 불가, 즉 달력으로만 날짜입력 (기본값 : true)
+                showExtraDays: true, // 지난 달, 다음 달 여분의 날짜(days) 출력
+                jqOpts: {
+                    selectOtherMonths: true,
+                    showOtherMonths: true,
+                    minDate: 0,
+                    maxDate:"+1m",
+                },
+            }
         },
         {
             dataField: "category_asset_status",
@@ -635,6 +683,7 @@ function createPopupAUIGrid4(){
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        editable: true,
     }
 
     /* 그리드 생성 */
