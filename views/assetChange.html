@@ -204,12 +204,12 @@
 
         <div class="title-box">
             <div class="title">
-                <h3>첨부파일</h3>
+                <h3 class="important">첨부파일</h3>
             </div>
             <div class="btn-wrap">
                 <label class="file">
                     <input type="file">
-                    <span  class="btn add-file">파일추가</span>
+                    <span class="btn add-file">파일추가</span>
                 </label>
                 <button type="button" class="btn trash">선택 삭제</button>
             </div>
@@ -234,14 +234,11 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                </tr>
                 </tbody>
             </table>
         </div>
 
         <div class="btn-wrap center">
-<!--            <button type="button" class="btn save">저장</button>-->
             <button type="button" class="btn primary send">상신</button>
         </div>
 
@@ -251,11 +248,18 @@
             <button type="button" class="btn" data-popup="gridPop_rental_info">교체자산정보</button>
             <button type="button" class="btn model" data-popup="model_pop">모델 정보</button>
         </div>
+        <div class="btn-wrap" style="margin-top:10px;">
+            <button type="button" class="btn" data-popup="submit_pop">상신 팝업</button>
+            <button type="button" class="btn" data-popup="submitSearch_pop">상신 > 검색조건 팝업</button>
+            <button type="button" class="btn" data-popup="submitApprovalChange_pop">상신 > 결재선 변경 팝업</button>
+            <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
+        </div>
     </div>
 </div>
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!-- 사용자 검색 -->
 <div id="gridPop_user" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -277,6 +281,7 @@
     </div>
 </div>
 
+<!-- 부서 검색 -->
 <div id="gridPop_department" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -298,6 +303,7 @@
     </div>
 </div>
 
+<!-- 교체자산 정보 -->
 <div id="gridPop_rental_info" class="popup grid no big">
     <div class="pop-box">
         <div class="pop-head">
@@ -319,7 +325,8 @@
     </div>
 </div>
 
-<div id="model_pop" class="popup grid no">
+<!-- 모델 정보 -->
+<div id="model_pop" class="popup no">
     <div class="pop-box">
         <div class="pop-head">
             <h3>모델 정보</h3>
@@ -384,6 +391,235 @@
         </div>
     </div>
 </div>
+
+<!-- 상신 -->
+<div id="submit_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>결재상신 화면</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table design-ver">
+                <div class="row">
+                    <div class="th"><div class="th-wrap">상신제목</div></div>
+                    <div class="td"><div class="td-wrap">[정보자산관리시스템]신규신청</div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap">결재경로</div></div>
+                    <div class="td">
+                        <div class="td-wrap column">
+                            <ul class="submit-list">
+                                <li>
+                                    <p>결재</p>
+                                    <span>[01]</span>
+                                </li>
+                                <li>
+                                    <p>협조결재</p>
+                                    <span>[01]</span>
+                                </li>
+                                <li>
+                                    <p>결재참조</p>
+                                    <span>[01]</span>
+                                </li>
+                                <li>
+                                    <p>병렬결재</p>
+                                    <span>[01]</span>
+                                </li>
+                                <li>
+                                    <p>병렬협조결재</p>
+                                    <span>[01]</span>
+                                </li>
+                                <li>
+                                    <p>참조</p>
+                                    <span>[01]</span>
+                                </li>
+                                <li>
+                                    <p>수신</p>
+                                    <span>[07]</span>
+                                </li>
+                            </ul>
+                            <div class="btn-wrap end">
+                                <button type="button" class="btn" onclick="moveRowsToDown()";><i class="fa-solid fa-chevron-down"></i></button>
+                                <button type="button" class="btn" onclick="moveRowsToUp();"><i class="fa-solid fa-chevron-up"></i></button>
+                                <button type="button" class="btn" data-popup="addSubmitList">결재선추가</button>
+                            </div>
+                            <div id="popup_grid_submitList" class="grid-box"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap">상신의견</div></div>
+                    <div class="td">
+                        <div class="td-wrap column">
+                            <label class="input textarea">
+                                <textarea rows="3"></textarea>
+                            </label>
+                            <span class="count-words"><span>0</span> / 500</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">미리보기</button>
+                <button type="button" class="btn primary send">상신</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="submitSearch_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>Search Employee (<span>Employee No.</span>)</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="box">
+                <div class="title-box">
+                    <div class="title">
+                        <h4>검색조건</h4>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn search">조회</button>
+                    </div>
+                </div>
+                <div class="input-wrap search-ver">
+                    <div class="input-list">
+                        <span class="input-title">성명</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">Circle ID</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">부서명</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list whole">
+                        <span class="input-title">결재종류</span>
+                        <div class="check-wrap">
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>결재</span>
+                            </label>
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>협조결재</span>
+                            </label>
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>결재참조</span>
+                            </label>
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>병렬협조결재</span>
+                            </label>
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>결재참조</span>
+                            </label>
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>참조</span>
+                            </label>
+                            <label class="check">
+                                <input type="radio" name="a">
+                                <span>수신</span>
+                            </label>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title-box">
+                    <div class="title">
+                        <h4>검색한 임직원</h4>
+                    </div>
+                </div>
+                <div class="box-wrap">
+                    <div id="popup_subGrid_searchExecutives" class="grid-box h-small"></div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title-box">
+                    <div class="title">
+                        <h4>결재라인에 추가할 임직원</h4>
+                    </div>
+                </div>
+                <div class="box-wrap">
+                    <div id="popup_subGrid_addExecutives" class="grid-box h-small"></div>
+                </div>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn">미리보기</button>
+                <button type="button" class="btn primary send">상신</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="submitApprovalChange_pop" class="popup no regular">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>Search Employee (<span>Employee No.</span>)</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="box">
+                <div class="title-box">
+                    <div class="title">
+                        <h4>검색조건</h4>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn search">조회</button>
+                    </div>
+                </div>
+                <div class="input-wrap search-ver">
+                    <div class="input-list">
+                        <span class="input-title">성명</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">Circle ID</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">부서명</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="box">
+                <div class="title-box">
+                    <div class="title">
+                        <h4>검색한 임직원</h4>
+                    </div>
+                </div>
+                <div class="box-wrap">
+                    <div id="popup_subGrid_approvalChange" class="grid-box h-small"></div>
+                </div>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- // 팝업 -->
 
 <script>
@@ -391,28 +627,40 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 let myGridID2;
-let popup_grid_user;
-let popup_grid_department;
-let popup_grid_rental_info;
+let popup_grid_user; // 사용자 검색
+let popup_grid_department; // 부서 검색
+let popup_grid_rental_info; // 교체 자산정보
+let popup_grid_submitList; // 상신
+let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
+let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
+let popup_subGrid_approvalChange; // 상신 > 결재선변경
 
+/* 1-1. AUIGrid에서 사용하는 select 메뉴 */
 let groupList1 = ["대형","소형"];
 
-
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
     createAUIGrid2();
-    createPopupAUIGrid2();
-    createPopupAUIGrid3();
-    createPopupAUIGrid4();
+
+    popupUserSearch(); // 사용자 검색
+    popupDepartmentSearch(); // 부서검색
+    popupChangeAssetInfo(); // 교체자산정보
+    popupSubmitList(); // 상신
+    subPopupSearchExecutives(); // 상신 > 검색한 임직원
+    subPopupAddExecutives(); // 상신 > 결재라인에 추가할 임직원
+    subPopupApprovalChange(); // 상신 > 결재선변경
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
     requestData3();
     requestData4();
     requestData5();
+    requestData6();
+    requestData7();
+    requestData8();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -579,7 +827,7 @@ function createAUIGrid2() {
 }
 
 /* [팝업] 사용자 검색 */
-function createPopupAUIGrid2(){
+function popupUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [
@@ -615,7 +863,7 @@ function createPopupAUIGrid2(){
 }
 
 /* [팝업] 부서 검색 */
-function createPopupAUIGrid3(){
+function popupDepartmentSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout3 = [
@@ -648,7 +896,7 @@ function createPopupAUIGrid3(){
 }
 
 /* [팝업] 교체자산정보 */
-function createPopupAUIGrid4(){
+function popupChangeAssetInfo(){
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -714,7 +962,293 @@ function createPopupAUIGrid4(){
     /* 그리드 생성 */
     popup_grid_rental_info= AUIGrid.create("#popup_grid_rental_info", columnLayout, gridPros);
 }
+/* [팝업] 상신 */
+function popupSubmitList(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_submit",
+            headerText: "결재내용",
+            width: 180,
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList1
+            }
+        },
+        {
+            dataField: "category_submit_person",
+            headerText: "결재자",
+            width: 180,
+        },
+        {
+            dataField: "category_submit_change",
+            headerText: "결재선 변경",
+            width: 160,
+            renderer: {
+                type: "ButtonRenderer",
+                onClick: function (event) {
+                    $("#submitApprovalChange_pop").addClass("open");
+                },
+            }
+        },
+        {
+            dataField: "category_submit_delete",
+            headerText: "결재선 삭제",
+            width: 120,
+            renderer: {
+                type: "ButtonRenderer",
+                onClick: function (event) {
+                    AUIGrid.removeRow(event.pid, event.rowIndex);
+                },
+            }
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        showHeader : false,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode:false,
+    }
 
+    /* 그리드 생성 */
+    popup_grid_submitList = AUIGrid.create("#popup_grid_submitList", columnLayout, gridPros);
+
+}
+
+/* [팝업] 상신 > 검색한 임직원 */
+function subPopupSearchExecutives(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_kinds",
+            headerText: "유형",
+            width: 180,
+        },
+        {
+            dataField: "category_name",
+            headerText: "성명",
+            width: 180,
+        },
+        {
+            dataField: "category_employeeID",
+            headerText: "사번",
+            width: 180,
+        },
+        {
+            dataField: "category_ID",
+            headerText: "ID",
+            width: 180,
+        },
+        {
+            dataField: "category_status",
+            headerText: "직급",
+            width: 180,
+        },
+        {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 180,
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode: false // 소프트 제거 모드 사용 안함
+    }
+
+    // gridPros.showHeader = false;
+    /* 그리드 생성 */
+    popup_subGrid_searchExecutives = AUIGrid.create("#popup_subGrid_searchExecutives", columnLayout, gridPros);
+
+    // 셀클릭 이벤트 바인딩
+    AUIGrid.bind(popup_subGrid_searchExecutives, "cellClick",function(){
+        /* 선택한 행들 얻기 */
+        let rows = AUIGrid.getSelectedRows(popup_subGrid_searchExecutives);
+
+        if (rows.length <= 0) {
+            alert('상단 그리드에서 체크된 행이 없습니다.');
+            return;
+        }
+        // 얻은 행을 하단 그리드에 추가하기
+        AUIGrid.addRow( popup_subGrid_addExecutives, rows, "last");
+
+        // 선택한 상단 그리드 행들 삭제
+        AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
+    });
+}
+
+/* [팝업] 상신 > 결재라인에 추가할 임직원 */
+function subPopupAddExecutives(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_del_btn", // 임의의 고유값
+            headerText: "Del ",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
+                iconHeight:16,
+                iconPosition: "aisleCenter",
+                iconTableRef: { // icon 값 참조할 테이블 레퍼런스
+                    "default": "../resources/img/icon/icon_delete.svg" // default
+                },
+                onClick: function (event) {
+                    /* 선택한 행들 얻기 */
+                    let rows = AUIGrid.getSelectedRows(popup_subGrid_addExecutives);
+
+                    if (rows.length <= 0) {
+                        alert('상단 그리드에서 체크된 행이 없습니다.');
+                        return;
+                    }
+                    // 얻은 행을 하단 그리드에 추가하기
+                    AUIGrid.addRow( popup_subGrid_searchExecutives, rows, "last");
+
+                    // 선택한 상단 그리드 행들 삭제
+                    AUIGrid.removeRow(popup_subGrid_addExecutives, "selectedIndex");
+                }
+            }
+        },
+        {
+            dataField: "category_kinds",
+            headerText: "유형",
+            width: 180,
+        },
+        {
+            dataField: "category_name",
+            headerText: "성명",
+            width: 180,
+        },
+        {
+            dataField: "category_employeeID",
+            headerText: "사번",
+            width: 180,
+        },
+        {
+            dataField: "category_ID",
+            headerText: "ID",
+            width: 180,
+        },
+        {
+            dataField: "category_status",
+            headerText: "직급",
+            width: 180,
+        },
+        {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 180,
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode: false// 소프트 제거 모드 사용 안함
+
+    }
+    // 그리드 헤더를 표시하지 않습니다.
+    // gridPros.showHeader = false;
+    /* 그리드 생성 */
+    popup_subGrid_addExecutives = AUIGrid.create("#popup_subGrid_addExecutives", columnLayout, gridPros);
+}
+
+/* [팝업] 상신 > 결재선변경 */
+function subPopupApprovalChange(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_kinds",
+            headerText: "유형",
+            width: 180,
+        },
+        {
+            dataField: "category_name",
+            headerText: "성명",
+            width: 180,
+        },
+        {
+            dataField: "category_employeeID",
+            headerText: "사번",
+            width: 180,
+        },
+        {
+            dataField: "category_ID",
+            headerText: "ID",
+            width: 180,
+        },
+        {
+            dataField: "category_status",
+            headerText: "직급",
+            width: 180,
+        },
+        {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 180,
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode: false// 소프트 제거 모드 사용 안함
+
+    }
+    // 그리드 헤더를 표시하지 않습니다.
+    // gridPros.showHeader = false;
+    /* 그리드 생성 */
+    popup_subGrid_approvalChange = AUIGrid.create("#popup_subGrid_approvalChange", columnLayout, gridPros);
+}
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
@@ -737,12 +1271,28 @@ function requestData4() {
         AUIGrid.setGridData(myGridID2, data);
     });
 }
-
 function requestData5() {
     $.get("../resources/lib/aui-grid/data/sample-datas9.json", function (data) {
         AUIGrid.setGridData(popup_grid_rental_info, data);
     });
 }
+function requestData6() {
+    $.get("../resources/lib/aui-grid/data/submitList-datas1.json", function (data) {
+        AUIGrid.setGridData(popup_grid_submitList, data);
+    });
+}
+
+function requestData7() {
+    $.get("../resources/lib/aui-grid/data/submitList-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_subGrid_searchExecutives, data);
+    });
+}
+function requestData8() {
+    $.get("../resources/lib/aui-grid/data/submitList-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_subGrid_approvalChange, data);
+    });
+}
+
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
@@ -752,9 +1302,16 @@ window.onresize = function () {
         AUIGrid.resize(popup_grid_user);
     }
 }
+
 /* 6. 관련 함수 */
+/* 행 삭제 */
 function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(myGridID2); // 체크된 행 삭제 처리
+    AUIGrid.removeCheckedRows(myGridID2);
+}
+/* [윈도우 팝업] 미리보기 */
+function openWindowPop(url, name){
+    var options = 'top=10, left=10, width=1000, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
 }
 </script>
 </body>

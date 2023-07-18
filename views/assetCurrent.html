@@ -137,13 +137,19 @@
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
             <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
-            <button type="button" class="btn" data-popup="gridPop_detail">신청정보(더블클릭시)</button>
+            <button type="button" class="btn" data-popup="newEnroll_pop">신규신청</button>
+            <button type="button" class="btn" data-popup="changeEnroll_pop">교체신청</button>
+            <button type="button" class="btn" data-popup="rentalEnroll_pop">대여신청</button>
+            <button type="button" class="btn" data-popup="returnEnroll_pop">반납신청</button>
+            <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
+            <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대연연장신청</button>
             <button type="button" class="btn" data-popup="gridPop_history">처리이력(신청정보 팝업 내)</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 <!-- 팝업 -->
+<!-- 사용자 검색 -->
 <div id="gridPop_user" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -165,6 +171,7 @@
     </div>
 </div>
 
+<!-- 부서 검색 -->
 <div id="gridPop_department" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -186,10 +193,11 @@
     </div>
 </div>
 
-<div id="gridPop_detail" class="popup grid big no">
+<!-- 신규신청 -->
+<div id="newEnroll_pop" class="popup grid big no">
     <div class="pop-box">
         <div class="pop-head">
-            <h3>신청 등록 정보</h3>
+            <h3>신규신청</h3>
             <button type="button" class="close-btn"></button>
         </div>
         <div class="pop-body">
@@ -242,7 +250,7 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail" class="grid-box h-small"></div>
+            <div id="popup_grid_detail1" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -261,13 +269,437 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn">처리이력</button>
+                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
+<!-- 교체신청 -->
+<div id="changeEnroll_pop" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>교체신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">자산노후</option>
+                                    <option value="">자산노후</option>
+                                    <option value="">자산노후</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail2" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>업무배정</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 대여신청 -->
+<div id="rentalEnroll_pop" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>대여신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">신규충원</option>
+                                    <option value="">신규충원</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>대여자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail3" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>업무배정</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 반납신청 -->
+<div id="returnEnroll_pop" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>반납신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">대여반납</option>
+                                    <option value="">대여반납</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>반납자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail4" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>업무배정</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 인수인계 신청 -->
+<div id="takingOverEnroll_pop" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>인수인계신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>인수자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>임꺽정</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>인수부서</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>총무부</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">인수인계</option>
+                                    <option value="">인수인계</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>관련 내용이 작성됩니다.</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>인수인계자산</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail5" class="grid-box h-small"></div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 대여연장 신청 -->
+<div id="rentalExtensionEnroll_pop" class="popup grid big no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>대여연장신청</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">신규충원</option>
+                                    <option value="">신규충원</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>관련 내용이 작성됩니다.</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">대여기간</div></div>
+                    <div class="td whole"><div class="td-wrap">2023-06-07 ~ 2023-08-09</div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>대여자산 연장신청정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_detail6" class="grid-box h-small"></div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 처리이력 -->
 <div id="gridPop_history" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -294,28 +726,46 @@
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
-let popup_grid_user;
-let popup_grid_detail;
-let popup_grid_history;
+let popup_grid_user; // 사용자 검색
+let popup_grid_department; // 부서 검색
+let popup_grid_detail1; // 신규신청
+let popup_grid_detail2; // 교체신청
+let popup_grid_detail3; // 대여신청
+let popup_grid_detail4; // 반납신청
+let popup_grid_detail5; // 인수인계신청
+let popup_grid_detail6; // 대여연장신청
+let popup_grid_history; // 처리이력
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    createPopupAUIGrid2();
-    createPopupAUIGrid3();
-    createPopupAUIGrid4();
-    createPopupAUIGrid5();
+
+    popupUserSearch(); // 사용자검색
+    popupDepartmentSearch(); // 부서검색
+    popupNewEnroll(); // 신규신청
+    popupChangeEnroll(); // 교체신청
+    popupRentalEnroll(); // 대여신청
+    popupReturnEnroll(); // 반납신청
+    popupTakeOverEnroll(); // 인수인계신청
+    popupRentalExtensionEnroll(); // 대여연장신청
+    popupHistory(); // 처리이력
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
     requestData3();
     requestData4();
     requestData5();
+    requestData6();
+    requestData7();
+    requestData8();
+    requestData9();
+    requestData10();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
+/* 신청정보 */
 function createAUIGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -394,6 +844,13 @@ function createAUIGrid() {
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
+    // 셀 더블클릭 이벤트 바인딩
+    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
+        if(event.columnIndex === 1) {
+            $("#gridPop_detail").addClass("open");
+        }
+    });
+
     $('.menu-btn').on('click',function(){
         AUIGrid.destroy('#grid_wrap');
         setTimeout(function(){
@@ -402,9 +859,8 @@ function createAUIGrid() {
         },200);
     })
 }
-
 /* [팝업] 사용자 검색 */
-function createPopupAUIGrid2(){
+function popupUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [
@@ -438,9 +894,8 @@ function createPopupAUIGrid2(){
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
-
 /* [팝업] 부서 검색 */
-function createPopupAUIGrid3(){
+function popupDepartmentSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout3 = [
@@ -471,17 +926,11 @@ function createPopupAUIGrid3(){
     /* 그리드 생성 */
     popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
 }
-
-/*[팝업] 상세 정보 */
-function createPopupAUIGrid4() {
+/* [팝업] 신규신청 */
+function popupNewEnroll() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
         {
             dataField: "category_product",
             headerText: "자산분류",
@@ -507,11 +956,185 @@ function createPopupAUIGrid4() {
     }
 
     /* 그리드 생성 */
-    popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
+    popup_grid_detail1 = AUIGrid.create("#popup_grid_detail1", columnLayout, gridPros);
 }
+/* [팝업] 교체신청 */
+function popupChangeEnroll() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "category_product",
+            headerText: "자산분류",
+        },{
+            dataField: "category_product",
+            headerText: "품목",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+        }, {
+            dataField: "category_before_asset_num",
+            headerText: "구자산번호",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
 
-/*[팝업] 처리 이력 */
-function createPopupAUIGrid5(){
+    /* 그리드 생성 */
+    popup_grid_detail2 = AUIGrid.create("#popup_grid_detail2", columnLayout, gridPros);
+}
+/* [팝업] 대여신청 */
+function popupRentalEnroll() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "category_product",
+            headerText: "자산분류",
+        },{
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail3 = AUIGrid.create("#popup_grid_detail3", columnLayout, gridPros);
+}
+/* [팝업] 반납신청  */
+function popupReturnEnroll() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {   dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_product",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_model_name",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail4 = AUIGrid.create("#popup_grid_detail4", columnLayout, gridPros);
+}
+/* [팝업] 인수인계신청  */
+function popupTakeOverEnroll() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {   dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_product",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델명",
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+        }, {
+            dataField: "category_takeover_time",
+            headerText: "인수완료시간",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail5 = AUIGrid.create("#popup_grid_detail5", columnLayout, gridPros);
+}
+/* [팝업] 대여연장신청  */
+function popupRentalExtensionEnroll() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {   dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_product",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델명",
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+        }, {
+            dataField: "category_rental_extension_time",
+            headerText: "대여연장기간",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_detail6 = AUIGrid.create("#popup_grid_detail6", columnLayout, gridPros);
+}
+/* [팝업] 처리 이력 */
+function popupHistory(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout3 = [
@@ -556,20 +1179,42 @@ function requestData2() {
         AUIGrid.setGridData(popup_grid_user, data);
     });
 }
-
 function requestData3() {
     $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
         AUIGrid.setGridData(popup_grid_department, data);
     });
 }
-
 function requestData4() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
-        AUIGrid.setGridData(popup_grid_detail, data);
+        AUIGrid.setGridData(popup_grid_detail1, data);
     });
 }
-
 function requestData5() {
+    $.get("../resources/lib/aui-grid/data/sample-datas17.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail2, data);
+    });
+}
+function requestData6() {
+    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail3, data);
+    });
+}
+function requestData7() {
+    $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail4, data);
+    });
+}
+function requestData8() {
+    $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail5, data);
+    });
+}
+function requestData9() {
+    $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
+        AUIGrid.setGridData(popup_grid_detail6, data);
+    });
+}
+function requestData10() {
     $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
         AUIGrid.setGridData(popup_grid_history, data);
     });

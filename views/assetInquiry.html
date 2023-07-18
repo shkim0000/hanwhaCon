@@ -126,7 +126,11 @@
         </div>
     </div>
 </div>
+<!-- // contents -->
 
+<!-- popup -->
+
+<!-- 자산 정보 -->
 <div id="gridPop_detail" class="popup grid big no">
     <div class="pop-box">
         <div class="pop-head">
@@ -223,22 +227,24 @@
         </div>
     </div>
 </div>
+<!-- // 자산 정보 -->
 
-<!-- // contents -->
+<!-- // popup -->
+
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 let popup_grid_detail;
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
     createPopupAUIGrid();
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
 }
 
@@ -295,19 +301,12 @@ function createAUIGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode: "multipleCells",
-        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-        /*editable: true,*/
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        /* autoGridHeight : true */
     }
 
     /* 그리드 생성 */
@@ -322,6 +321,7 @@ function createAUIGrid() {
     })
 }
 
+/* [팝업] 자산정보 */
 function createPopupAUIGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -365,7 +365,6 @@ function requestData() {
         AUIGrid.setGridData(myGridID, data);
     });
 }
-
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail, data);

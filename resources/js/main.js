@@ -231,7 +231,10 @@ $(function(){
                         "<td>\n"+
                             "<div class='td-wrap'>\n"+
                                 "<div class='file-box long'>\n"+
-                                    "<span class='btn'>파일명</span>\n"+
+                                       "<label class='file'>\n" +
+                                           "<input type='file' class='fileUpload'>\n"+
+                                               "<span class='btn'>파일선택</span>\n"+
+                                       "</label>\n"+
                                     "<span>"+fileNameSlice+"</span>\n"+
                                 "</div>\n"+
                             "</div>\n"+

@@ -1120,7 +1120,7 @@
 let myGridID;
 let popup_grid_user;
 let popup_grid_department;
-let popup_grid_submitList;
+let popup_grid_submitList; // 상신
 let popup_subGrid_searchExecutives;
 let popup_subGrid_addExecutives;
 let popup_subGrid_approvalChange;
@@ -1133,15 +1133,15 @@ let groupList1 = ["결재", "협조결제", "수신"];
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    createPopupAUIGrid2();
-    createPopupAUIGrid3();
+    popUserSearch();
+    popupDepartmentSearch();
     createPopupSubmitList();
     createSubPopupSearchExecutives();
     createSubPopupAddExecutives();
     createSubPopupApprovalChange();
 
     /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
+    requestData();
     requestData2();
     requestData3();
     requestData4();
@@ -1230,7 +1230,7 @@ function createAUIGrid() {
 }
 
 /* [팝업] 사용자 검색 */
-function createPopupAUIGrid2(){
+function popUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [
@@ -1266,7 +1266,7 @@ function createPopupAUIGrid2(){
 }
 
 /* [팝업] 부서 검색 */
-function createPopupAUIGrid3(){
+function popupDepartmentSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout3 = [
@@ -1438,7 +1438,6 @@ function createSubPopupSearchExecutives(){
         AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
     });
 }
-
 
 /* [팝업] 상신 > 결재라인에 추가할 임직원*/
 function createSubPopupAddExecutives(){
