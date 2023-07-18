@@ -122,6 +122,7 @@
 <!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>-->
             </div>
         </div>
+        <!-- 장애 대상 목록 그리드 -->
         <div id="grid_wrap" class="grid-box h-small"></div>
 
         <div class="title-box">
@@ -176,6 +177,7 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!--[팝업] 사용자 검색-->
 <div id="gridPop_user" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -197,6 +199,7 @@
     </div>
 </div>
 
+<!--[팝업] 자산 추가-->
 <div id="gridPop_asset" class="popup grid no big">
     <div class="pop-box">
         <div class="pop-head">
@@ -217,17 +220,17 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let myGridID;
-let popup_grid_user;
-let popup_grid_asset;
+let myGridID; // 장애 대상 목록
+let popup_grid_user; // 사용자 검색
+let popup_grid_asset; // 자산 추가
 let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createAUIGrid();
-    createPopupAUIGrid2();
-    createPopupAUIGrid3();
+    createAUIGrid(); // 장애 대상 목록
+    popupUserSearch(); // 사용자 검색
+    popupAddAsset(); // 자산추가
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
@@ -316,7 +319,7 @@ function createAUIGrid() {
         },200);
     })
 }
-function createPopupAUIGrid2(){
+function popupUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [
@@ -351,7 +354,7 @@ function createPopupAUIGrid2(){
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
 
-function createPopupAUIGrid3(){
+function popupAddAsset(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout3 = [
@@ -450,16 +453,6 @@ window.onresize = function () {
     } else if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
     }
-}
-/* 6. 함수관련 */
-function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
-    let removedRows = AUIGrid.getRemovedItems(myGridID, true); // 삭제 처리된 아이템 있는지 보기
-    if (removedRows.length <= 0) {
-        alert("삭제 처리되어 마크된 행이 없습니다.")
-        return;
-    }
-    AUIGrid.removeSoftRows(myGridID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
 }
 </script>
 </body>
