@@ -81,7 +81,6 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .aui-grid-body-panel .aui-grid-table tr td:hover{background:#e2e2e2;}
 
 /* AUI GRID 버튼 커스텀 */
-.aui-grid-button-renderer{background:pink;}
 
 /* footer */
 footer{width:calc(100% + 40px);margin:40px -20px 0;}

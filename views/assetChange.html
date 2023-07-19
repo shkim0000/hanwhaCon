@@ -1313,6 +1313,15 @@ function openWindowPop(url, name){
     var options = 'top=10, left=10, width=1000, height=600, status=no, menubar=no, toolbar=no, resizable=no';
     window.open(url, name, options);
 }
+/* 선택 행들 위로 한 단계 올림 */
+function moveRowsToUp() {
+    AUIGrid.moveRowsToUp(popup_grid_submitList);
+};
+
+/* 선택 행들 아래로 한 단계 올림 */
+function moveRowsToDown() {
+    AUIGrid.moveRowsToDown(popup_grid_submitList);
+};
 </script>
 </body>
 </html>

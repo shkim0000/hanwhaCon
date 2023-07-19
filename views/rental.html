@@ -1088,6 +1088,7 @@ window.onresize = function () {
 }
 
 /* 6. 관련 함수 */
+/* 행 삭제 */
 function deleteRowGrid(){
     AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
     let removedRows = AUIGrid.getRemovedItems(myGridID, true); // 삭제 처리된 아이템 있는지 보기
@@ -1111,6 +1112,21 @@ function addRow() {
         // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
         // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
         AUIGrid.addRow(myGridID, item, "first");
+};
+/* [윈도우 팝업] 미리보기 */
+function openWindowPop(url, name){
+    var options = 'top=10, left=10, width=1000, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
+}
+
+/* 선택 행들 위로 한 단계 올림 */
+function moveRowsToUp() {
+    AUIGrid.moveRowsToUp(popup_grid_submitList);
+};
+
+/* 선택 행들 아래로 한 단계 올림 */
+function moveRowsToDown() {
+    AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
 </script>
 </body>

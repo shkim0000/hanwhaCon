@@ -1114,6 +1114,7 @@ window.onresize = function () {
     }
 }
 /* 6. 함수 관련 */
+/* 행 삭제 */
 function deleteRowGrid(){
     AUIGrid.removeCheckedRows(myGridID2); // 체크된 행 삭제 처리
     let removedRows = AUIGrid.getRemovedItems(myGridID2, true); // 삭제 처리된 아이템 있는지 보기
@@ -1123,7 +1124,21 @@ function deleteRowGrid(){
     }
     AUIGrid.removeSoftRows(myGridID2); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
 }
+/* [윈도우 팝업] 미리보기 */
+function openWindowPop(url, name){
+    var options = 'top=10, left=10, width=1000, height=600, status=no, menubar=no, toolbar=no, resizable=no';
+    window.open(url, name, options);
+}
 
+/* 선택 행들 위로 한 단계 올림 */
+function moveRowsToUp() {
+    AUIGrid.moveRowsToUp(popup_grid_submitList);
+};
+
+/* 선택 행들 아래로 한 단계 올림 */
+function moveRowsToDown() {
+    AUIGrid.moveRowsToDown(popup_grid_submitList);
+};
 </script>
 </body>
 </html>
