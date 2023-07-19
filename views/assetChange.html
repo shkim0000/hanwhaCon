@@ -71,8 +71,7 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="홍길동">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="홍길동" disabled>
                         </label>
                     </div>
                 </div>
@@ -81,7 +80,7 @@
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" placeholder="양현모">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -89,8 +88,8 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="IT 운영">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="IT 운영" disabled>
+                            <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -101,8 +100,12 @@
                     <div class="td-wrap">
                         <label class="select whole">
                             <select>
-                                <option value="">데스트탑1</option>
-                                <option value="">데스크탑2</option>
+                                <option value="">선택</option>
+                                <option value="">행정동</option>
+                                <option value="">생산1라인</option>
+                                <option value="">생산2라인</option>
+                                <option value="">생산3라인</option>
+                                <option value="">생산4라인</option>
                             </select>
                         </label>
                     </div>
@@ -125,8 +128,10 @@
                         <label class="select whole">
                             <select>
                                 <option value="">선택</option>
-                                <option value="">장비 노후</option>
-                                <option value="">장비 고장</option>
+                                <option value="">신규충원</option>
+                                <option value="">업무편의</option>
+                                <option value="">장비노후</option>
+                                <option value="">기타사유</option>
                             </select>
                         </label>
                     </div>
@@ -638,6 +643,21 @@ let popup_subGrid_approvalChange; // 상신 > 결재선변경
 /* 1-1. AUIGrid에서 사용하는 select 메뉴 */
 let groupList1 = ["대형","소형"];
 
+/* 1-2. Grid 클릭이벤트 중 데이터를 담아놓을 변수 */
+let rowData;
+let whatRow;
+let clickItem = {
+    category_product_name : "", // 물품종류
+    category_asset_num: "", // 자산번호
+    category_model_name: "", //모델명
+    category_department: "", // 부서
+    category_user_name:"", // 사용자
+    category_classification_use: "", // 용도구분
+    category_asset_place:"", // 설치장소
+    category_date: "", // 설치일
+    category_asset_status: "", // 자산상태
+};
+
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
@@ -723,10 +743,22 @@ function createAUIGrid() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true,
+        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
     }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
+    AUIGrid.bind(myGridID, "cellClick", function(event) {
+        $("#model_pop").addClass("open");
+
+        //클릭한 row의 정보를 clickItem 변수에 저장
+        clickItem = AUIGrid.getSelectedRows(myGridID)[0];
+
+        whatRow = event.rowIndex;
+        rowData = AUIGrid.getSelectedRows(myGridID);
+    });
 
     $('.menu-btn').on('click',function(){
         AUIGrid.destroy('#grid_wrap');
@@ -759,11 +791,11 @@ function createAUIGrid2() {
             headerText: "모델명",
             width:200
         }, {
-            dataField: "category_use_usage1",
+            dataField: "category_classification_use",
             headerText: "용도구분",
             width: 140
         }, {
-            dataField: "category_place",
+            dataField: "category_asset_place",
             headerText: "설치장소",
             width: 160,
         }, {
@@ -794,8 +826,11 @@ function createAUIGrid2() {
                     "default":"../resources/img/icon/icon_delete.svg"
                 },
                 onClick: function(){
+                    clickItem = AUIGrid.getSelectedRows(myGridID2)[0];
                     AUIGrid.removeRow(myGridID2, "selectedIndex");
-                }
+                    AUIGrid.addRow(myGridID, clickItem, "last");
+                },
+                width:100,
             }
         }]
     /* 2. 그리드 속성 설정 */
@@ -1322,6 +1357,31 @@ function moveRowsToUp() {
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* 모델정보에서 더블클릭하면, 신청내역으로 정보 이동 */
+$(".popBtn").on("dblclick", function(){
+    let itemName = $(this).text();
+    let productName = $(this).closest(".tab-box").find(".tab-title").children("h4").text();
+
+    let insertObj = {
+        category_product_name: clickItem.category_product_name,
+        category_asset_num: clickItem.category_asset_num,
+        category_model_name: clickItem.category_model_name,
+        category_department: clickItem.category_department,
+        category_user_name: clickItem.category_user_name,
+        category_classification_use: clickItem.category_classification_use,
+        category_asset_place: clickItem.category_asset_place,
+        category_date: clickItem.category_date,
+        category_asset_status: clickItem.category_asset_status,
+        category_note: productName,
+        category_changeProduct_name: itemName,
+        category_product_quantity: 1,
+    }
+    AUIGrid.removeRow(myGridID, whatRow);
+    AUIGrid.addRow(myGridID2, insertObj, "last");
+    $(this).closest("#model_pop").removeClass("open");
+})
+
 </script>
 </body>
 </html>

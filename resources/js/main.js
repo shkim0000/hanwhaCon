@@ -96,10 +96,17 @@ $(function(){
         }
     });
     /* datepicker */
+    $(".date.limit input").datepicker({
+        changeMonth:true,
+        changeYear:true,
+        maxDate: "+1m",
+    });
+
     $(".date input").datepicker({
         changeMonth:true,
         changeYear:true,
     });
+
 
     $(".date input").keydown(function(){
         $(this).val("");

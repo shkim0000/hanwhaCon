@@ -50,14 +50,13 @@
                     <span class="input-title">사용자</span>
                     <label class="input search">
                         <input type="text" placeholder="홍길동">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서명</span>
                     <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" disabled>
                     </label>
                 </div>
                 <div class="input-list regular">
@@ -74,6 +73,7 @@
                             <select>
                                 <option value="">당일</option>
                                 <option value="">최근 1주일</option>
+                                <option value="">최근 1개월</option>
                                 <option value="">최근 3개월</option>
                             </select>
                         </label>
@@ -167,7 +167,6 @@
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
-            <button type="button" class="btn asset" data-popup="gridPop_asset">자산추가</button>
             <button type="button" class="btn" data-popup="gridPop_detail">장애 신고 신청 현황</button>
         </div>
     </div>
@@ -193,23 +192,6 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
-
-<!--자산 추가-->
-<div id="gridPop_asset" class="popup grid no big">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>보유자산</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div id="popup_grid_asset" class="grid-box"></div>
-            <div class="btn-wrap">
-                <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
         </div>
     </div>
 </div>
@@ -326,7 +308,6 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 let popup_grid_user; // 사용자 검색
-let popup_grid_asset; // 자산 추가
 let popup_grid_detail; // 장애신고신청현황 팝업 중 자산정보 그리드
 let popup_grid_history; // 장애신고신청현황 팝업 중 처리이력 그리드
 
@@ -336,7 +317,6 @@ function documentReady() {
     createAUIGrid();
 
     popupUserSearch(); // 사용자 검색
-    popupAddAsset(); // 자산추가
     popupAssetDetail(); // 장애신고신청현황 팝업 중 자산정보 그리드
     popupHistory(); // 장애신고신청현황 팝업 중 처리이력 그리드
 
@@ -345,7 +325,6 @@ function documentReady() {
     requestData2();
     requestData3();
     requestData4();
-    requestData5();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -412,6 +391,11 @@ function createAUIGrid() {
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
+    AUIGrid.bind(myGridID, "cellClick",function(){
+        /* 선택한 행들 얻기 */
+        $("#gridPop_detail").addClass("open");
+    });
+
     $('.menu-btn').on('click',function(){
         AUIGrid.destroy('#grid_wrap');
         setTimeout(function(){
@@ -455,82 +439,6 @@ function popupUserSearch(){
 
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-}
-
-/* [팝업] 자산추가 */
-function popupAddAsset(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout3 = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_product_name",
-            headerText: "물품종류",
-            width: 180
-        },
-        {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
-            width: 180
-        },
-        {
-            dataField: "category_model_name",
-            headerText: "모델명",
-            width: 160
-        },
-        {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자",
-            width: 160
-        },
-        {
-            dataField: "category_classification_use",
-            headerText: "용도구분",
-            width: 160
-        },
-        {
-            dataField: "category_asset_place",
-            headerText: "자산위치",
-            width: 160
-        },
-        {
-            dataField: "category_date",
-            headerText: "설치일",
-            width: 160
-        },
-        {
-            dataField: "category_asset_status",
-            headerText: "자산상태",
-            width: 160
-        }
-
-        ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros3 = {
-        rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-    }
-
-    /* 그리드 생성 */
-    popup_grid_asset = AUIGrid.create("#popup_grid_asset", columnLayout3, gridPros3);
 }
 
 /* [팝업] 장애신고신청현황 팝업 중 자산정보 그리드 */
@@ -624,19 +532,14 @@ function requestData2() {
         AUIGrid.setGridData(popup_grid_user, data);
     });
 }
-function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
-        AUIGrid.setGridData(popup_grid_asset, data);
-    });
-}
 
-function requestData4() {
+function requestData3() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail, data);
     });
 }
 
-function requestData5() {
+function requestData4() {
     $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
         AUIGrid.setGridData(popup_grid_history, data);
     });

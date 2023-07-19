@@ -79,8 +79,7 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="홍길동">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="홍길동" disabled>
                         </label>
                     </div>
                 </div>
@@ -89,7 +88,7 @@
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" placeholder="양현모">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -98,7 +97,7 @@
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" placeholder="IT 운영">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -108,11 +107,11 @@
                 <div class="td whole">
                     <div class="td-wrap">
                         <div class="date-wrap">
-                            <label class="date">
+                            <label class="date limit">
                                 <input type="text">
                             </label>
                             <span>~</span>
-                            <label class="date">
+                            <label class="date limit">
                                 <input type="text">
                             </label>
                         </div>
@@ -125,8 +124,10 @@
                     <div class="td-wrap">
                         <label class="select whole">
                             <select>
-                                <option value="">데스트탑1</option>
-                                <option value="">데스크탑2</option>
+                                <option value="">신규충원</option>
+                                <option value="">업무편의</option>
+                                <option value="">기타사유</option>
+                                <option value="">드럼사유</option>
                             </select>
                         </label>
                     </div>
@@ -141,7 +142,7 @@
                 <h3>자산정보</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn model">모델정보</button>
+                <button type="button" class="btn model" data-popup="model_pop">모델정보</button>
                 <button type="button" class="btn add-column" onclick="addRow()">행 추가</button>
 <!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>-->
             </div>
@@ -188,7 +189,7 @@
 
         <div class="btn-wrap form">
 <!--            <button type="button" class="btn save">저장</button>-->
-            <button type="button" class="btn primary send">상신</button>
+            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
         <div class="btn-wrap">
@@ -390,7 +391,7 @@
                             <div class="btn-wrap end">
                                 <button type="button" class="btn" onclick="moveRowsToDown()";><i class="fa-solid fa-chevron-down"></i></button>
                                 <button type="button" class="btn" onclick="moveRowsToUp();"><i class="fa-solid fa-chevron-up"></i></button>
-                                <button type="button" class="btn" data-popup="addSubmitList">결재선추가</button>
+                                <button type="button" class="btn" data-popup="submitSearch_pop">결재선추가</button>
                             </div>
                             <div id="popup_grid_submitList" class="grid-box"></div>
                         </div>
@@ -582,7 +583,8 @@ let popup_subGrid_approvalChange; // 상신 > 결재선변경
 
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터"];
-let groupList2 = ["데스크탑 모델", "모니터 모델"];
+let groupList2 = ["표준PC", "노트북", "고성능 PC", "프린터", "모니터"];
+
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
@@ -654,7 +656,8 @@ function createAUIGrid() {
                 onClick: function(){
                     AUIGrid.removeRow(myGridID, "selectedIndex");
                 }
-            }
+            },
+            width:100,
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -1128,6 +1131,21 @@ function moveRowsToUp() {
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* 모델정보 더블클릭 시 행추가 */
+$(".popBtn").on("dblclick", function(){
+    let itemName = $(this).text();
+    let productName = $(this).closest(".tab-box").find(".tab-title").children("h4").text();
+
+    let insertObj = {
+        category_product: productName,
+        category_item: itemName,
+        category_amount: 1,
+    }
+    AUIGrid.addRow(myGridID, insertObj, "last");
+    $(this).closest("#model_pop").removeClass("open");
+})
+
 </script>
 </body>
 </html>

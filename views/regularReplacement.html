@@ -160,6 +160,22 @@
     /* 1. AUIGrid 생성 후 반환 ID */
     let myGridID;
     let myGridID2;
+
+    /* 1-2. Grid 클릭이벤트 중 데이터를 담아놓을 변수 */
+    let rowData;
+    let whatRow;
+    let clickItem = {
+        category_product_name : "", // 물품종류
+        category_asset_num: "", // 자산번호
+        category_model_name: "", //모델명
+        category_department: "", // 부서
+        category_user_name:"", // 사용자
+        category_classification_use: "", // 용도구분
+        category_asset_place:"", // 설치장소
+        category_date: "", // 설치일
+        category_asset_status: "", // 자산상태
+    };
+
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
     function documentReady() {
         /* 그리드 생성 */
@@ -242,10 +258,23 @@
             pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             fillColumnSizeMode:true,
+            softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+
         }
 
         /* 그리드 생성 */
         myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+        /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
+        AUIGrid.bind(myGridID, "cellClick", function(event) {
+            $("#model_pop").addClass("open");
+
+            //클릭한 row의 정보를 clickItem 변수에 저장
+            clickItem = AUIGrid.getSelectedRows(myGridID)[0];
+
+            whatRow = event.rowIndex;
+            rowData = AUIGrid.getSelectedRows(myGridID);
+        });
 
         $('.menu-btn').on('click',function(){
             AUIGrid.destroy('#grid_wrap');
@@ -277,11 +306,11 @@
                 headerText: "모델명",
                 width:200
             }, {
-                dataField: "category_use_usage1",
+                dataField: "category_classification_use",
                 headerText: "용도구분",
                 width: 140
             }, {
-                dataField: "category_place",
+                dataField: "category_asset_place",
                 headerText: "설치장소",
                 width: 160,
             }, {
@@ -312,9 +341,12 @@
                         "default":"../resources/img/icon/icon_delete.svg"
                     },
                     onClick: function(){
+                        clickItem = AUIGrid.getSelectedRows(myGridID2)[0];
                         AUIGrid.removeRow(myGridID2, "selectedIndex");
+                        AUIGrid.addRow(myGridID, clickItem, "last");
                     }
-                }
+                },
+                width:100,
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
@@ -361,6 +393,30 @@
             AUIGrid.resize(popup_grid_user);
         }
     }
+
+    /* 모델정보에서 더블클릭하면, 신청내역으로 정보 이동 */
+    $(".popBtn").on("dblclick", function(){
+        let itemName = $(this).text();
+        let productName = $(this).closest(".tab-box").find(".tab-title").children("h4").text();
+
+        let insertObj = {
+            category_product_name: clickItem.category_product_name,
+            category_asset_num: clickItem.category_asset_num,
+            category_model_name: clickItem.category_model_name,
+            category_department: clickItem.category_department,
+            category_user_name: clickItem.category_user_name,
+            category_classification_use: clickItem.category_classification_use,
+            category_asset_place: clickItem.category_asset_place,
+            category_date: clickItem.category_date,
+            category_asset_status: clickItem.category_asset_status,
+            category_note: productName,
+            category_changeProduct_name: itemName,
+            category_product_quantity: 1,
+        }
+        AUIGrid.removeRow(myGridID, whatRow);
+        AUIGrid.addRow(myGridID2, insertObj, "last");
+        $(this).closest("#model_pop").removeClass("open");
+    })
 </script>
 </body>
 </html>

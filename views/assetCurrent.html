@@ -49,9 +49,9 @@
                             <option value="">신규신청</option>
                             <option value="">교체신청</option>
                             <option value="">대여신청</option>
+                            <option value="">대여연장신청</option>
                             <option value="">반납신청</option>
-                            <option value="">이동연장</option>
-                            <option value="">인수인계 신청</option>
+                            <option value="">인수인계신청</option>
                         </select>
                     </label>
                 </div>
@@ -98,14 +98,13 @@
                     <span class="input-title">사용자</span>
                     <label class="input search">
                         <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서</span>
                     <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" disabled>
                     </label>
                 </div>
                 <div class="input-list">
@@ -128,7 +127,7 @@
                 <h3>신청현황</h3>
             </div>
             <div class="btn-wrap">
-                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+                <button type="button" class="btn excel" onclick="exportToLocal()">엑셀다운로드</button>
             </div>
         </div>
 
@@ -136,7 +135,6 @@
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
-            <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
             <button type="button" class="btn" data-popup="newEnroll_pop">신규신청</button>
             <button type="button" class="btn" data-popup="changeEnroll_pop">교체신청</button>
             <button type="button" class="btn" data-popup="rentalEnroll_pop">대여신청</button>
@@ -167,28 +165,6 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
-
-<!-- 부서 검색 -->
-<div id="gridPop_department" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>부서 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">부서</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_department" class="grid-box"></div>
         </div>
     </div>
 </div>
@@ -613,6 +589,7 @@
             <div id="popup_grid_detail5" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
+                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -727,7 +704,6 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 let popup_grid_user; // 사용자 검색
-let popup_grid_department; // 부서 검색
 let popup_grid_detail1; // 신규신청
 let popup_grid_detail2; // 교체신청
 let popup_grid_detail3; // 대여신청
@@ -742,7 +718,6 @@ function documentReady() {
     createAUIGrid();
 
     popupUserSearch(); // 사용자검색
-    popupDepartmentSearch(); // 부서검색
     popupNewEnroll(); // 신규신청
     popupChangeEnroll(); // 교체신청
     popupRentalEnroll(); // 대여신청
@@ -761,7 +736,6 @@ function documentReady() {
     requestData7();
     requestData8();
     requestData9();
-    requestData10();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -844,10 +818,21 @@ function createAUIGrid() {
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
-    // 셀 더블클릭 이벤트 바인딩
+    // 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여)
     AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
-        if(event.columnIndex === 1) {
-            $("#gridPop_detail").addClass("open");
+        let result = AUIGrid.getCellValue(myGridID, event.rowIndex, "category_application_division");
+        if(result === "신규신청"){
+            $("#newEnroll_pop").addClass("open");
+        } else if(result === "교체신청"){
+            $("#changeEnroll_pop").addClass("open");
+        } else if(result === "대여신청"){
+            $("#rentalEnroll_pop").addClass("open");
+        } else if(result === "반납신청"){
+            $("#returnEnroll_pop").addClass("open");
+        } else if(result === "인수인계신청"){
+            $("#takingOverEnroll_pop").addClass("open");
+        } else if(result === "대여연장신청"){
+            $("#rentalExtensionEnroll_pop").addClass("open");
         }
     });
 
@@ -894,38 +879,7 @@ function popupUserSearch(){
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
-/* [팝업] 부서 검색 */
-function popupDepartmentSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout3 = [
-        {
-            dataField: "category_department",
-            headerText: "부서명",
-            width: 180
-        },
-        {
-            dataField: "category_depart_code",
-            headerText: "부서명",
-            width: 180
-        }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros3 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-    }
 
-    /* 그리드 생성 */
-    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
-}
 /* [팝업] 신규신청 */
 function popupNewEnroll() {
     /* 기본 그리드(예시) */
@@ -1180,41 +1134,36 @@ function requestData2() {
     });
 }
 function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
-        AUIGrid.setGridData(popup_grid_department, data);
-    });
-}
-function requestData4() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail1, data);
     });
 }
-function requestData5() {
+function requestData4() {
     $.get("../resources/lib/aui-grid/data/sample-datas17.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail2, data);
     });
 }
-function requestData6() {
+function requestData5() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail3, data);
     });
 }
-function requestData7() {
+function requestData6() {
     $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail4, data);
     });
 }
-function requestData8() {
+function requestData7() {
     $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail5, data);
     });
 }
-function requestData9() {
+function requestData8() {
     $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail6, data);
     });
 }
-function requestData10() {
+function requestData9() {
     $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
         AUIGrid.setGridData(popup_grid_history, data);
     });
