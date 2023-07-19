@@ -1,0 +1,29 @@
+[
+  {
+    "id": "#grid_1",
+    "category_product_type": "데스크탑",
+    "category_asset_num":"2123445",
+    "category_model_name":"DESC-SS_I147",
+    "category_department":"IT운영",
+    "category_user": "양현모",
+    "category_kinds": "개인",
+    "category_asset_place": "행정동",
+    "category_rental_extension_date": "ㅇㅇ",
+    "category_asset_status": "운영",
+    "category_start_date" : "2023-06-15"
+
+  },
+  {
+    "id": "#grid_2",
+    "category_product_type": "데스크탑",
+    "category_asset_num":"2123445",
+    "category_model_name":"DESC-SS_I147",
+    "category_department":"IT운영",
+    "category_user": "양현모",
+    "category_kinds": "개인",
+    "category_asset_place": "행정동",
+    "category_rental_extension_date": "",
+    "category_asset_status": "운영",
+    "category_start_date" : "2023-06-15"
+  }
+]

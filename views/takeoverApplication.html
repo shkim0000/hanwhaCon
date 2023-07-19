@@ -216,7 +216,7 @@
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-            <button type="button" class="btn primary send">상신</button>
+            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
         <div class="btn-wrap">
@@ -519,6 +519,9 @@ let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
 let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
 let popup_subGrid_approvalChange; // 상신 > 결재선변경
 
+/* 1-2. dropdown menu 리스트 */
+let groupList1 = ["데스크탑", "모니터"];
+
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
@@ -624,7 +627,23 @@ function createAUIGrid() {
             AUIGrid.create("#grid_wrap", columnLayout, gridPros);
             requestData();
         },200);
-    })
+    });
+
+    /* 키보드로 클릭하기 기능 구현중 */
+    AUIGrid.bind(myGridID, "cellClick,keyDown",	function(event) {
+        if(event.keyCode === 32){
+            var item = event.item, rowIdField, rowId;
+            rowIdField = AUIGrid.getProp(event.pid, "rowIdField"); // rowIdField 얻기
+            rowId = item[rowIdField];
+            // 이미 체크 선택되었는지 검사
+            if(AUIGrid.isCheckedRowById(event.pid, rowId)) {
+
+            }else{
+                // 엑스트라 체크박스 체크 추가
+                AUIGrid.addCheckedRowsByIds(event.pid, rowId);
+            }
+        }
+    });
 }
 
 function createAUIGrid2() {

@@ -64,7 +64,16 @@
                 <div class="th"><div class="th-wrap center">신청번호</div></div>
                 <div class="td"><div class="td-wrap"></div></div>
                 <div class="th"><div class="th-wrap center">신청구분</div></div>
-                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="select whole">
+                            <select>
+                                <option value="">대여신청</option>
+                                <option value="">대여신청</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
                 <div class="th"><div class="th-wrap center">신청상태</div></div>
                 <div class="td"><div class="td-wrap"></div></div>
             </div>
@@ -180,7 +189,7 @@
             </div>
             <div class="btn-wrap">
 <!--                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>-->
-                <button type="button" class="btn primary check">선택</button>
+                <button type="button" class="btn primary check" onclick="checkNum();">선택</button>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-small"></div>
@@ -235,7 +244,7 @@
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-            <button type="button" class="btn primary send">상신</button>
+            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
         <div class="btn-wrap">
@@ -306,17 +315,13 @@
             <button type="button" class="close-btn"></button>
         </div>
         <div class="pop-body">
-            <div class="input-list">
-                <span class="input-title">부서</span>
-                <label class="input search">
-                    <input type="text">
-                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                </label>
-            </div>
             <div id="popup_grid_rental_info" class="grid-box"></div>
             <div class="btn-wrap">
-                <button type="button" class="btn">대여자산연장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <label class="date btn">
+                    <span>대여자산연장</span>
+                    <input type="text">
+                </label>
+                <button type="button" class="btn" data-btn="cancel">선택</button>
             </div>
         </div>
     </div>
@@ -715,7 +720,8 @@ function createAUIGrid2() {
         },
         {
             dataField: "category_del_btn", //임의의 고유값
-            headerText: "",
+            headerText: "Del",
+            width:100,
             renderer: {
                 type: "iconRenderer",
                 iconWidth:12,
@@ -850,32 +856,28 @@ function popupRentalAssetExt(){
             headerText: "모델명",
             width:200
         }, {
-            dataField: "category_use_type",
-            headerText: "용도구분",
+            dataField: "category_department",
+            headerText: "부서",
             width: 140
         }, {
-            dataField: "category_installation_place",
-            headerText: "설치장소",
+            dataField: "category_user",
+            headerText: "사용자",
             width: 160,
         }, {
-            dataField: "category_asset_state",
+            dataField: "category_kinds",
+            headerText: "용도구분",
+            width: 160,
+        }, {
+            dataField: "category_asset_place",
+            headerText: "자산위치",
+            width: 160,
+        }, {
+            dataField: "category_rental_extension_date",
+            headerText: "대여연장일",
+            width: 160,
+        }, {
+            dataField: "category_asset_status",
             headerText: "자산상태",
-            width: 160,
-        }, {
-            dataField: "category_changeProduct_type",
-            headerText: "교체물품종류",
-            width: 160,
-        }, {
-            dataField: "category_changeProduct_name",
-            headerText: "모델명",
-            width: 160,
-            renderer: {
-                type: "DropDownListRenderer",
-                list: groupList1
-            }
-        }, {
-            dataField: "category_product_quantity",
-            headerText: "수량",
             width: 160
         }]
     /* 2. 그리드 속성 설정 */
@@ -894,6 +896,10 @@ function popupRentalAssetExt(){
 
     /* 그리드 생성 */
     popup_grid_rental_info= AUIGrid.create("#popup_grid_rental_info", columnLayout, gridPros);
+
+    AUIGrid.bind(popup_grid_rental_info, "rowCheckClick", function (event) {
+        checkedRowIndex = event.rowIndex;
+    });
 }
 /* [팝업] 상신 */
 function popupSubmitList(){
@@ -1207,7 +1213,7 @@ function requestData3() {
 }
 
 function requestData5() {
-    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas19.json", function (data) {
         AUIGrid.setGridData(popup_grid_rental_info, data);
     });
 }
@@ -1264,6 +1270,85 @@ function moveRowsToUp() {
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* 대여연장신청 > 선택한 날짜 그리드 삽입 */
+$(".date.btn input").datepicker( {
+    beforeShow: function(){
+
+        let checkedItems = AUIGrid.getCheckedRowItems(popup_grid_rental_info);
+        let str = [];
+        let dateList = []
+        let rowItem;
+        for (let i = 0, len = checkedItems.length; i < len; i++) {
+            rowItem = checkedItems[i];
+            str.push(rowItem.item.category_start_date);
+
+            for (let i = 0, len = str.length; i<len; i++){
+                dateList.push(str[i].split("-"));
+            }
+        }
+        ;
+        console.log(dateList + "날짜끊어읽기")
+        /*2023-06-15*/
+        // console.log(str[0].split("-"));
+
+        /*  */
+        let now = new Date();
+        let year = now.getFullYear();
+        let month = now.getMonth();
+        let date = now.getDate();
+
+
+        // console.log(customDate + "오늘")
+
+        // var date2 = new Date('2020-10-22');
+
+        /*
+        체크한 친구들의 시작 날짜를 가지고 옴 --> 배열로 담음
+        오늘 날짜를 구함
+        오늘 날짜 기준으로 한달 후를 정함
+        옵션 설정을 함
+        maxDate : new Date('2022-05-05'), // 이런식으로 사용해도 됨
+        new date안에는 체크된 날짜들 중 더 빠른 날짜가 들어가야 함.
+        * */
+    },
+    onSelect: function() {
+        let realDate = $(this).datepicker("getDate");
+        let date = $.datepicker.formatDate("yy-mm-dd", realDate);
+
+        let checkedItems = AUIGrid.getCheckedRowItems(popup_grid_rental_info);
+        if (checkedItems.length <= 0) {
+            alert("체크한 행이 없습니다.");
+            return;
+        }
+        let str = [];
+        let rowItem;
+        for (let i = 0, len = checkedItems.length; i < len; i++) {
+            rowItem = checkedItems[i];
+            let object ={
+                id : rowItem.item.id,
+                category_rental_extension_date : date,
+            }
+            str.push(object);
+        }
+
+        /* 체크된 행의 특정 cell값 변경하기 */
+        AUIGrid.updateRowsById(popup_grid_rental_info, str);
+    }
+});
+
+/* 대여자산 체크 */
+function checkNum(){
+    let checkedItems = AUIGrid.getCheckedRowItems(myGridID);
+    if (checkedItems.length <= 0) {
+        alert("체크한 행이 없습니다.");
+        return;
+    }else{
+        if(!$("#gridPop_rental").hasClass("open")){
+            $("#gridPop_rental").addClass("open");
+        }
+    }
+}
 </script>
 </body>
 </html>

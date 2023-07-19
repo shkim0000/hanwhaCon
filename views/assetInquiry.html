@@ -182,7 +182,7 @@
                     <div class="th"><div class="th-wrap center"><p>자산위치</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="select whole">
+                            <label class="select medium">
                                 <select>
                                     <option value="">행정동</option>
                                     <option value="">행정동</option>
@@ -191,7 +191,13 @@
                         </div>
                     </div>
                     <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>1층 IT운영부</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text" value="1층 IT 운영부">
+                             </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -319,7 +325,14 @@ function createAUIGrid() {
             AUIGrid.create("#grid_wrap", columnLayout, gridPros);
             requestData();
         },200);
-    })
+    });
+
+    /* 더블 클릭시 팝업 */
+    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
+        if(!$("#gridPop_detail").hasClass("open")){
+            $("#gridPop_detail").addClass("open");
+        }
+    });
 }
 
 /* [팝업] 자산정보 */
