@@ -77,6 +77,14 @@ $(function(){
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
+                    "<li>\n"+
+                        "<button type='button' class='btn'>정기교체</button>\n"+
+                        "<div class='depth'>\n"+
+                            "<ul>\n"+
+                                "<li><a href='#' class='linkBtn'>모델신청</a></li>\n"+
+                            "</ul>\n"+
+                        "</div>\n"+
+                    "</li>\n"+
                 "</ul>\n"+
             "</div>\n"+
         "</div>\n"

@@ -82,8 +82,8 @@
         </div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
             <button type="button" class="btn model" data-popup="model_pop">모델 정보</button>
+            <button type="button" class="btn" data-popup="reason_pop">미신청 사유</button>
         </div>
     </div>
 </div>
@@ -154,6 +154,25 @@
         </div>
     </div>
 </div>
+
+<div id="reason_pop" class="popup no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>미신청 입력</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-list">
+                <span class="input-title">미신청 사유를 입력해주세요.</span>
+            </div>
+            <textarea rows="6"></textarea>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- // 팝업 -->
 <script>
     /* AUIGrid */
@@ -200,47 +219,66 @@
             {
                 dataField: "category_product_name",
                 headerText: "물품종류",
-                width: 180
             },
             {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
-                width: 180
             },
             {
                 dataField: "category_model_name",
                 headerText: "모델명",
-                width: 160
             },
             {
                 dataField: "category_department",
                 headerText: "부서",
-                width: 160
             },
             {
                 dataField: "category_user_name",
                 headerText: "사용자",
-                width: 160
             },
             {
                 dataField: "category_classification_use",
                 headerText: "용도구분",
-                width: 160
             },
             {
                 dataField: "category_asset_place",
                 headerText: "자산위치",
-                width: 160
             },
             {
                 dataField: "category_date",
                 headerText: "반납일",
-                width: 160
             },
             {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
-                width: 160
+            },
+            {
+                dataField: "category_model_button",
+                headerText: "",
+                renderer: {
+                    type: "ButtonRenderer",
+                    labelText: "모델정보",
+                    onClick: function(event){
+                        $("#model_pop").addClass("open");
+
+                        //클릭한 row의 정보를 clickItem 변수에 저장
+                        clickItem = AUIGrid.getSelectedRows(myGridID)[0];
+
+                        whatRow = event.rowIndex;
+                        rowData = AUIGrid.getSelectedRows(myGridID);
+                    }
+                },
+            },
+            {
+                dataField: "category_reason",
+                headerText:"",
+                renderer:{
+                    type:"ButtonRenderer",
+                    labelText: "미신청",
+                    onClick: function(event){
+
+                    }
+                }
             }
 
         ]
@@ -267,13 +305,7 @@
 
         /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
         AUIGrid.bind(myGridID, "cellClick", function(event) {
-            $("#model_pop").addClass("open");
 
-            //클릭한 row의 정보를 clickItem 변수에 저장
-            clickItem = AUIGrid.getSelectedRows(myGridID)[0];
-
-            whatRow = event.rowIndex;
-            rowData = AUIGrid.getSelectedRows(myGridID);
         });
 
         $('.menu-btn').on('click',function(){
