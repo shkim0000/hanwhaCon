@@ -17,7 +17,11 @@
     "category_rental_finish":"2023-08-11",
     "category_product":"데스크탑",
     "category_application_content": "자산을 대여 요청합니다. 업무 효율을 위한 PC 대여",
-    "category_product_count": "10"
+    "category_product_count": 10,
+    "category_product_desktop" : 2,
+    "category_product_laptop" : 1,
+    "category_product_monitor" : 2,
+    "category_product_printer" : 6
   },
   {
     "id": "#grid_id_2",
@@ -37,7 +41,11 @@
     "category_rental_finish":"2023-08-11",
     "category_product":"데스크탑",
     "category_application_content": "자산을 대여 요청합니다. 업무 효율을 위한 PC 대여",
-    "category_product_count": "10"
+    "category_product_count": 10,
+    "category_product_desktop" : 9,
+    "category_product_laptop" : 7,
+    "category_product_monitor" : 4,
+    "category_product_printer" : 31
   },
   {
     "id": "#grid_id_3",
@@ -57,6 +65,10 @@
     "category_rental_finish":"2023-08-11",
     "category_product":"데스크탑",
     "category_application_content": "자산을 대여 요청합니다. 업무 효율을 위한 PC 대여",
-    "category_product_count": "10"
+    "category_product_count": 10,
+    "category_product_desktop" : 12,
+    "category_product_laptop" : 51,
+    "category_product_monitor" : 21,
+    "category_product_printer" : 27
   }
 ]
