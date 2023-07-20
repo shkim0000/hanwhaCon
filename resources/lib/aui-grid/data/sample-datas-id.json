@@ -12,7 +12,8 @@
     "category_asset_status": "운영",
     "category_note": "모니터",
     "category_changeProduct_name": "LG-G10402",
-    "category_product_quantity": 1
+    "category_product_quantity": 1,
+    "category_changeAsset_num": "190492"
   },
   {
     "id": "#grid_id_2",
@@ -27,6 +28,7 @@
     "category_asset_status": "운영",
     "category_note": "데스크탑",
     "category_changeProduct_name": "LG-G10402",
-    "category_product_quantity": 1
+    "category_product_quantity": 1,
+    "category_changeAsset_num": "490129"
   }
 ]
