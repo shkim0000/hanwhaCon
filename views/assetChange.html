@@ -59,14 +59,6 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청번호</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-                <div class="th"><div class="th-wrap center">신청구분</div></div>
-                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
-                <div class="th"><div class="th-wrap center">신청상태</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-            </div>
-            <div class="row con-3">
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -95,7 +87,7 @@
                 </div>
             </div>
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">사용장소</div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">사용장소</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="select whole">
@@ -111,7 +103,7 @@
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center">상세위치</div></div>
-                <div class="td"><div class="td-wrap"> </div></div>
+                <div class="td"><div class="td-wrap"></div></div>
                 <div class="th"><div class="th-wrap center"><p class="important">설치 요청일</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -122,7 +114,7 @@
                 </div>
             </div>
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청사유</div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청구분</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="select whole">
@@ -142,20 +134,17 @@
         </div>
 
         <div class="list-box">
+            <div class="title-box">
+                <div class="title">
+                    <h3 class="list-title"><span>양현모</span>의 보유자산</h3>
+                </div>
+            </div>
             <ul class="quantity-list">
-                <li>
-                    <button type="button">
-                        <span class="quantity orange">
-                            <span class="num">4</span>
-                            <span class="name">총 수량</span>
-                        </span>
-                    </button>
-                </li>
                 <li>
                     <button type="button">
                         <span class="quantity blue">
                             <span class="num">2</span>
-                            <span class="name">데스크탑</span>
+                            <span class="name">총수량</span>
                         </span>
                     </button>
                 </li>
@@ -163,13 +152,21 @@
                     <button type="button">
                         <span class="quantity green">
                             <span class="num">2</span>
-                            <span class="name">모니터</span>
+                            <span class="name">데스크탑</span>
                         </span>
                     </button>
                 </li>
                 <li>
                     <button type="button">
                         <span class="quantity purple">
+                            <span class="num">2</span>
+                            <span class="name">모니터</span>
+                        </span>
+                    </button>
+                </li>
+                <li>
+                    <button type="button">
+                        <span class="quantity lightOrange">
                             <span class="num">1</span>
                             <span class="name">공용</span>
                         </span>
@@ -184,64 +181,18 @@
                     </button>
                 </li>
             </ul>
+            <div class="title-box">
+                <p>교체할 자산을 더블클릭해주세요.</p>
+            </div>
+            <div id="grid_wrap" class="grid-box h-small"></div>
         </div>
 
         <div class="title-box">
             <div class="title">
-                <h3>보유 자산</h3>
-            </div>
-            <div class="btn-wrap">
-<!--                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>-->
-<!--                <button type="button" class="btn primary check">선택</button>-->
-            </div>
-        </div>
-        <div id="grid_wrap" class="grid-box h-small"></div>
-
-        <div class="title-box">
-            <div class="title">
-                <h3>신청내역</h3>
-            </div>
-            <div class="btn-wrap">
-<!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>-->
+                <h3>신청자산정보</h3>
             </div>
         </div>
         <div id="grid_wrap2" class="grid-box h-small"></div>
-
-        <div class="title-box">
-            <div class="title">
-                <h3 class="important">첨부파일</h3>
-            </div>
-            <div class="btn-wrap">
-                <label class="file">
-                    <input type="file">
-                    <span class="btn add-file">파일추가</span>
-                </label>
-                <button type="button" class="btn trash">선택 삭제</button>
-            </div>
-        </div>
-        <div class="table">
-            <table>
-                <colgroup>
-                    <col style="width:50px">
-                    <col style="width:calc(100% - 50px);">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>
-                        <div class="th-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th><p>자산분류</p></th>
-                </tr>
-                </thead>
-                <tbody>
-                </tbody>
-            </table>
-        </div>
 
         <div class="btn-wrap center">
             <button type="button" class="btn primary send">상신</button>
@@ -274,7 +225,7 @@
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
-                    <span class="input-title">검색</span>
+                    <span class="input-title">사용자</span>
                     <label class="input search">
                         <input type="text">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>

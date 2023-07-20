@@ -59,22 +59,6 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청번호</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-                <div class="th"><div class="th-wrap center">신청구분</div></div>
-                <div class="td">
-                    <div class="td-wrap">
-                        <label class="select whole">
-                            <select>
-                                <option value="">대여신청</option>
-                            </select>
-                        </label>
-                    </div>
-                </div>
-                <div class="th"><div class="th-wrap center">신청상태</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-            </div>
-            <div class="row con-3">
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -83,7 +67,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="th"><div class="th-wrap center"><p class="important">대여자</p></div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">대여자명</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
@@ -95,9 +79,31 @@
                 <div class="th"><div class="th-wrap center">대여 부서</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" placeholder="IT 운영">
-                            <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <label class="input">
+                            <input type="text" value="IT운영" readonly>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center"><p class="important">사용장소</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="select whole">
+                            <select>
+                                <option value="">선택</option>
+                                <option value="">선택</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center">상세위치</div></div>
+                <div class="td"><div class="td-wrap"></div></div>
+                <div class="th"><div class="th-wrap center">설치 요청일</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="date">
+                            <input type="text">
                         </label>
                     </div>
                 </div>
@@ -119,7 +125,7 @@
                 </div>
             </div>
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청사유</div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청구분</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="select whole">
@@ -132,63 +138,24 @@
                         </label>
                     </div>
                 </div>
-                <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청사유</p></div></div>
                 <div class="td medium"><div class="td-wrap"></div></div>
             </div>
         </div>
 
         <div class="title-box">
             <div class="title">
-                <h3>자산정보</h3>
+                <h3 class="important"><신청내역></신청내역></h3>
             </div>
             <div class="btn-wrap">
                 <button type="button" class="btn model" data-popup="model_pop">모델정보</button>
-                <button type="button" class="btn add-column" onclick="addRow()">행 추가</button>
-<!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>-->
+                <button type="button" class="btn add-column" onclick="addRow()">추가</button>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-small"></div>
 
-        <div class="title-box">
-            <div class="title">
-                <h3>첨부파일</h3>
-            </div>
-            <div class="btn-wrap">
-                <label class="file">
-                    <input type="file">
-                    <span  class="btn add-file">파일추가</span>
-                </label>
-                <button type="button" class="btn trash">선택 삭제</button>
-            </div>
-        </div>
-        <div class="table">
-            <table>
-                <colgroup>
-                    <col style="width:50px">
-                    <col style="width:calc(100% - 50px);">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>
-                        <div class="th-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th><p>자산분류</p></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-
         <div class="btn-wrap form">
-<!--            <button type="button" class="btn save">저장</button>-->
+            <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
@@ -218,7 +185,7 @@
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
-                    <span class="input-title">검색</span>
+                    <span class="input-title">사용자</span>
                     <label class="input search">
                         <input type="text">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -662,22 +629,14 @@ function createAUIGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
-        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-        /*editable: true,*/
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        /* autoGridHeight : true */
         fillColumnSizeMode:true,
         softRemoveRowMode: false,
     }

@@ -116,7 +116,7 @@
                 <h3>세부 관리 자산 내역</h3>
             </div>
             <div class="btn-wrap">
-                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+                <button type="button" class="btn excel" onclick="exportTo('xlsx')">엑셀다운로드</button>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box"></div>
@@ -391,6 +391,24 @@ window.onresize = function () {
         AUIGrid.resize(myGridID);
     }
 }
+
+/* 엑셀 다운로드 */
+// 엑셀 내보내기(Export);
+// 엑셀 내보내기(Export);
+function exportTo(type) {
+
+    // 내보내기 실행
+    switch (type) {
+        case "xlsx":
+            AUIGrid.exportToXlsx(myGridID, {
+                progressBar: true, // 진행바 표시
+                localControl:true,
+                // 스타일 상태 유지 여부(기본값:true)
+                exportWithStyle:false
+            });
+            break;
+    }
+};
 </script>
 </body>
 </html>
