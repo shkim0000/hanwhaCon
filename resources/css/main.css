@@ -513,6 +513,7 @@ tbody tr p{text-align:center;}
 .box .title-box{min-height:38px;margin-bottom:0;background-color:var(--tableBg1);border-bottom:1px solid var(--line1);}
 .box .title-box .title > *{padding-left:12px;}
 .box .title-box .title > *::before{display:none;width:180px;height:2px;bottom:-6px;top:auto;transform:translateY(0);}
+.box .title-box .btn{margin-right:4px;}
 .box-wrap{padding:8px;}
 
 /* 상신팝업 > .box.design-ver */
