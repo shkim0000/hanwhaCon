@@ -10,7 +10,12 @@
     "category_after_change":"",
     "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
-    "category_investigator":"고길동"
+    "category_investigator":"고길동",
+    "category_existence" : 5,
+    "category_non_existence" : 4,
+    "category_add" : 3,
+    "category_adjustment" :2 ,
+    "category_realtime_confirm" : "2023-06-19"
   },
   {
     "id": "#grid_id_2",
@@ -23,7 +28,12 @@
     "category_after_change":"",
     "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
-    "category_investigator":"신길동"
+    "category_investigator":"신길동",
+    "category_existence" : 5,
+    "category_non_existence" : 4,
+    "category_add" : 3,
+    "category_adjustment" :2 ,
+    "category_realtime_confirm" : "2023-06-19"
   },
   {
     "id": "#grid_id_3",
@@ -36,7 +46,12 @@
     "category_after_change":"",
     "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
-    "category_investigator":"윤길동"
+    "category_investigator":"윤길동",
+    "category_existence" : 5,
+    "category_non_existence" : 4,
+    "category_add" : 3,
+    "category_adjustment" :2 ,
+    "category_realtime_confirm" : "2023-06-19"
   },
   {
     "id": "#grid_id_4",
@@ -49,7 +64,12 @@
     "category_after_change":"존재",
     "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
-    "category_investigator":"고길동"
+    "category_investigator":"고길동",
+    "category_existence" : 5,
+    "category_non_existence" : 4,
+    "category_add" : 3,
+    "category_adjustment" :2 ,
+    "category_realtime_confirm" : "2023-06-19"
   },
   {
     "id": "#grid_id_5",
@@ -62,6 +82,11 @@
     "category_after_change":"미존재",
     "category_reason_non_existence":"",
     "category_investigate-date":"2023-06-20 16:23:32",
-    "category_investigator":"고길동"
+    "category_investigator":"고길동",
+    "category_existence" : 5,
+    "category_non_existence" : 4,
+    "category_add" : 3,
+    "category_adjustment" :2 ,
+    "category_realtime_confirm" : "2023-06-19"
   }
 ]

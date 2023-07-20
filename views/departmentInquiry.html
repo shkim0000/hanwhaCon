@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>부서조회</title>
+    <title>부서자산조회</title>
 
     <!-- jQuery -->
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
@@ -182,7 +182,8 @@ function createCurrentGrid() {
 
     /* 그리드 생성 */
     currentID = AUIGrid.create("current_wrap", columnLayout, gridPros);
-    // 푸터 레이아웃 세팅
+
+    /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(currentID, footerLayout);
 
     $('.menu-btn').on('click',function(){
