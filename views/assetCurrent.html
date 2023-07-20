@@ -127,7 +127,8 @@
                 <h3>신청현황</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn excel" onclick="exportToLocal()">엑셀다운로드</button>
+                <button type="button" class="btn excel">엑셀다운로드</button>
+                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
             </div>
         </div>
 
@@ -141,7 +142,6 @@
             <button type="button" class="btn" data-popup="returnEnroll_pop">반납신청</button>
             <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
             <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대연연장신청</button>
-            <button type="button" class="btn" data-popup="gridPop_history">처리이력(신청정보 팝업 내)</button>
         </div>
     </div>
 </div>
@@ -244,8 +244,14 @@
                 </div>
             </div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>처리이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_history" class="grid-box"></div>
+
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -337,8 +343,15 @@
                 </div>
             </div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>처리이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_change_history" class="grid-box"></div>
+
+
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -401,6 +414,10 @@
                     <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
                 </div>
                 <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>대여기간</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>2023-06-16 ~ 2023-07-16</p></div></div>
+                </div>
+                <div class="row">
                     <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
                     <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
                 </div>
@@ -429,8 +446,14 @@
                 </div>
             </div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>처리이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_rental_history" class="grid-box"></div>
+
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -521,8 +544,14 @@
                 </div>
             </div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>처리이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_return_history" class="grid-box"></div>
+
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -588,8 +617,14 @@
             </div>
             <div id="popup_grid_detail5" class="grid-box h-small"></div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>처리이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_takingOver_history" class="grid-box"></div>
+
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -668,28 +703,12 @@
             </div>
             <div id="popup_grid_detail6" class="grid-box h-small"></div>
 
-            <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 처리이력 -->
-<div id="gridPop_history" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>처리 이력</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box"></div>
+            <div id="popup_grid_rentalExtension_history" class="grid-box"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
@@ -699,6 +718,13 @@
 </div>
 
 <!-- // 팝업 -->
+
+<style>
+    /* 음영이 들어가야 하는 그리드 셀에 적용 */
+    .my-header-style{background: #cccccc;}
+    .my-column-style{background: #cccccc;}
+</style>
+
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -710,7 +736,12 @@ let popup_grid_detail3; // 대여신청
 let popup_grid_detail4; // 반납신청
 let popup_grid_detail5; // 인수인계신청
 let popup_grid_detail6; // 대여연장신청
-let popup_grid_history; // 처리이력
+let popup_grid_history; // 처리이력 (신규신청팝업)
+let popup_grid_change_history; // 처리이력 (교체신청팝업)
+let popup_grid_rental_history; // 처리이력 (대여신청팝업)
+let popup_grid_return_history; // 처리이력 (반납신청팝업)
+let popup_grid_rentalExtension_history; // 처리이력 (대여연장신청팝업)
+let popup_grid_takingOver_history; // 처리이력 (인수인계신청팝업)
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
@@ -724,7 +755,12 @@ function documentReady() {
     popupReturnEnroll(); // 반납신청
     popupTakeOverEnroll(); // 인수인계신청
     popupRentalExtensionEnroll(); // 대여연장신청
-    popupHistory(); // 처리이력
+    popupHistory(); // 처리이력 (신규신청팝업)
+    popupChangeHistory(); // 처리이력 (교체신청팝업)
+    popupRentalHistory(); // 처리이력 (대여신청팝업)
+    popupReturnHistory(); // 처리이력 (반납신청팝업)
+    popupRentalExtensionHistory(); // 처리이력 (대여연장신청팝업)
+    popupTakingOverHistory(); // 처리이력 (인수인계신청팝업)
 
     /* 그리드 삽입 */
     requestData();
@@ -736,6 +772,11 @@ function documentReady() {
     requestData7();
     requestData8();
     requestData9();
+    requestData10();
+    requestData11();
+    requestData12();
+    requestData13();
+    requestData14();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -745,20 +786,9 @@ function createAUIGrid() {
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "checkbox",
-            dataType: "boolean",
-            width: 80,
-            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-            headerRenderer: { // 헤더 렌더러
-                type: "CheckBoxHeaderRenderer",
-                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-            },
-            renderer: {
-                type: "CheckBoxEditRenderer",
-                editable: true
-            }
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
         }, {
             dataField: "category_application_num",
             headerText: "신청번호",
@@ -806,6 +836,9 @@ function createAUIGrid() {
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -918,20 +951,32 @@ function popupChangeEnroll() {
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "category_product",
-            headerText: "자산분류",
+            dataField: "category_product_name",
+            headerText: "교체자산",
+            headerStyle: "my-header-style",
+            style: "my-column-style",
         },{
-            dataField: "category_product",
-            headerText: "품목",
+            dataField: "category_model_name",
+            headerText: "모델명",
+            headerStyle: "my-header-style",
+            style: "my-column-style",
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            headerStyle: "my-header-style",
+            style: "my-column-style",
         }, {
-            dataField: "category_item_name",
-            headerText: "모델명",
+            dataField: "",
+            headerText: "교체 후 자산",
         }, {
-            dataField: "category_before_asset_num",
-            headerText: "구자산번호",
+            dataField:"category_note",
+            headerText: "자산분류"
+        }, {
+            dataField:"category_changeProduct_name",
+            headerText: "품목",
+        }, {
+            dataField: "category_changeAsset_num",
+            headerText: "자산번호",
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -1087,7 +1132,7 @@ function popupRentalExtensionEnroll() {
     /* 그리드 생성 */
     popup_grid_detail6 = AUIGrid.create("#popup_grid_detail6", columnLayout, gridPros);
 }
-/* [팝업] 처리 이력 */
+/* [팝업] 처리 이력 (신규신청팝업)*/
 function popupHistory(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -1116,10 +1161,186 @@ function popupHistory(){
         pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
     }
 
     /* 그리드 생성 */
     popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout3, gridPros3);
+}
+/* [팝업] 처리 이력 (교체신청팝업)*/
+function popupChangeHistory(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_state",
+            headerText: "상태",
+        },
+        {
+            dataField: "category_manager",
+            headerText: "담당자",
+        },
+        {
+            dataField: "category_time",
+            headerText: "시간",
+        },
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_change_history = AUIGrid.create("#popup_grid_change_history", columnLayout3, gridPros3);
+}
+/* [팝업] 처리 이력 (대여신청팝업)*/
+function popupRentalHistory(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_state",
+            headerText: "상태",
+        },
+        {
+            dataField: "category_manager",
+            headerText: "담당자",
+        },
+        {
+            dataField: "category_time",
+            headerText: "시간",
+        },
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_rental_history = AUIGrid.create("#popup_grid_rental_history", columnLayout3, gridPros3);
+}
+/* [팝업] 처리 이력 (반납신청팝업)*/
+function popupReturnHistory(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_state",
+            headerText: "상태",
+        },
+        {
+            dataField: "category_manager",
+            headerText: "담당자",
+        },
+        {
+            dataField: "category_time",
+            headerText: "시간",
+        },
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_return_history = AUIGrid.create("#popup_grid_return_history", columnLayout3, gridPros3);
+}
+/* [팝업] 처리 이력 (반납신청팝업)*/
+function popupRentalExtensionHistory(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_state",
+            headerText: "상태",
+        },
+        {
+            dataField: "category_manager",
+            headerText: "담당자",
+        },
+        {
+            dataField: "category_time",
+            headerText: "시간",
+        },
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_rentalExtension_history = AUIGrid.create("#popup_grid_rentalExtension_history", columnLayout3, gridPros3);
+}
+/* [팝업] 처리 이력 (반납신청팝업)*/
+function popupTakingOverHistory(){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout3 = [
+        {
+            dataField: "category_state",
+            headerText: "상태",
+        },
+        {
+            dataField: "category_manager",
+            headerText: "담당자",
+        },
+        {
+            dataField: "category_time",
+            headerText: "시간",
+        },
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros3 = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_takingOver_history = AUIGrid.create("#popup_grid_takingOver_history", columnLayout3, gridPros3);
 }
 
 /* 4. 데이터 불러오기 */
@@ -1139,7 +1360,7 @@ function requestData3() {
     });
 }
 function requestData4() {
-    $.get("../resources/lib/aui-grid/data/sample-datas17.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail2, data);
     });
 }
@@ -1169,6 +1390,34 @@ function requestData9() {
     });
 }
 
+function requestData10() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_change_history, data);
+    });
+}
+
+function requestData11() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_rental_history, data);
+    });
+}
+
+function requestData12() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_return_history, data);
+    });
+}
+function requestData13() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_rentalExtension_history, data);
+    });
+}
+function requestData14() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_takingOver_history, data);
+    });
+}
+
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
     if (typeof myGridID !== "undefined") {
@@ -1176,6 +1425,17 @@ window.onresize = function () {
     } else if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
     }
+}
+/* 6. 사용하는 함수 */
+/* 그리드 행 선택 삭제 */
+function deleteRowGrid(){
+    AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
+    let removedRows = AUIGrid.getRemovedItems(myGridID, true); // 삭제 처리된 아이템 있는지 보기
+    if (removedRows.length <= 0) {
+        alert("삭제 처리되어 마크된 행이 없습니다.")
+        return;
+    }
+    AUIGrid.removeSoftRows(myGridID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
 }
 </script>
 </body>

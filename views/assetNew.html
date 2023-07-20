@@ -143,44 +143,45 @@
         </div>
         <div id="grid_wrap" class="grid-box h-small" data-grid-name="myGridID"></div>
 
-        <div class="title-box">
-            <div class="title">
-                <h3>첨부파일</h3>
-            </div>
-            <div class="btn-wrap">
-                <label class="file">
-                    <input type="file">
-                    <span  class="btn add-file">파일추가</span>
-                </label>
-                <button type="button" class="btn trash">선택 삭제</button>
-            </div>
-        </div>
-        <div class="table">
-            <table>
-                <colgroup>
-                    <col style="width:50px">
-                    <col style="width:calc(100% - 50px);">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>
-                        <div class="th-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th><p>자산분류</p></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<!--        <div class="title-box">-->
+<!--            <div class="title">-->
+<!--                <h3>첨부파일</h3>-->
+<!--            </div>-->
+<!--            <div class="btn-wrap">-->
+<!--                <label class="file">-->
+<!--                    <input type="file">-->
+<!--                    <span  class="btn add-file">파일추가</span>-->
+<!--                </label>-->
+<!--                <button type="button" class="btn trash">선택 삭제</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="table">-->
+<!--            <table>-->
+<!--                <colgroup>-->
+<!--                    <col style="width:50px">-->
+<!--                    <col style="width:calc(100% - 50px);">-->
+<!--                </colgroup>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>-->
+<!--                        <div class="th-wrap center">-->
+<!--                            <label class="check no-text">-->
+<!--                                <input type="checkbox">-->
+<!--                                <span></span>-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </th>-->
+<!--                    <th><p>자산분류</p></th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
         <div class="btn-wrap form">
+            <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
@@ -529,8 +530,8 @@ let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
 let popup_subGrid_approvalChange; // 상신 > 결재선변경
 
 /* 1-2. dropdown menu 리스트 */
-let groupList1 = ["데스크탑", "모니터"];
-let groupList2 = ["데스크탑 모델", "모니터 모델"];
+let groupList1 = ["데스크탑", "모니터", "노트북", "프린터"];
+let groupList2 = ["표준PC", "노트북", "고용량PC", "기타1", "기타2"];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
