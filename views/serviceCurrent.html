@@ -83,7 +83,7 @@
             <button type="button" class="btn search">검색</button>
         </div>
 
-        <div class="list-box">
+        <div class="list-box only">
             <ul class="quantity-list">
                 <li>
                     <button type="button">
@@ -177,9 +177,9 @@
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
                     <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
                     <div class="td"><div class="td-wrap"><p>김종민</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용부서</p></div></div>
                     <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
                 </div>
                 <div class="row con-3">
@@ -206,13 +206,6 @@
                     <div class="td"><div class="td-wrap"><p>해당 사유로 PC부품을 요청합니다.</p></div></div>
                 </div>
             </div>
-
-            <div class="title-box">
-                <div class="title">
-                    <h3>자산정보</h3>
-                </div>
-            </div>
-            <div id="popup_grid_assetInfo" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -290,12 +283,10 @@ let popup_grid_history; // 처리이력
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    popupAssetInfo(); // 자산정보
     popupDetail(); // 처리이력
 
     /* 그리드 삽입 */
     requestData();
-    requestData2();
     requestData3();
 }
 
@@ -368,46 +359,6 @@ function createAUIGrid() {
     })
 }
 
-/* [팝업] 서비스데스크 신청 현황 > 자산정보 */
-function popupAssetInfo() {
-    /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
-        },{
-            dataField: "category_product",
-            headerText: "자산분류",
-        }, {
-            dataField: "category_product",
-            headerText: "품목",
-        }, {
-            dataField: "category_item_name",
-            headerText: "모델명",
-        }, {
-            dataField: "category_place",
-            headerText: "자산위치"
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
-    }
-
-    /* 그리드 생성 */
-    popup_grid_assetInfo = AUIGrid.create("#popup_grid_assetInfo", columnLayout, gridPros);
-}
 
 /* [팝업] 서비스데스크 신청 현황 > 처리이력 */
 function popupDetail() {
@@ -454,11 +405,6 @@ function requestData() {
     });
 }
 
-function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
-        AUIGrid.setGridData(popup_grid_assetInfo, data);
-    });
-}
 function requestData3() {
     $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
         AUIGrid.setGridData(popup_grid_history, data);
