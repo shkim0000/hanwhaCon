@@ -45,13 +45,12 @@
             </div>
         </div>
         <div class="custom-table">
-            <div class="row con-5">
-                <div class="th"><div class="th-wrap center">발생자</div></div>
+            <div class="row con-4">
+                <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="홍길동">
-                            <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="홍길동" disabled>
                         </label>
                     </div>
                 </div>
@@ -67,12 +66,23 @@
                         </label>
                     </div>
                 </div>
-                <div class="th"><div class="th-wrap center"><p class="important">등록자</p></div></div>
-                <div class="td">
-                    <div class="td-wrap">홍길동</div>
-                </div>
+<!--                <div class="th"><div class="th-wrap center"><p class="important">등록자</p></div></div>-->
+<!--                <div class="td">-->
+<!--                    <div class="td-wrap">홍길동</div>-->
+<!--                </div>-->
             </div>
         </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3>장애 대상 목록</h3>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn add-column" data-popup="gridPop_asset">추가</button>
+            </div>
+        </div>
+        <!-- 장애 대상 목록 그리드 -->
+        <div id="grid_wrap" class="grid-box h-small"></div>
 
         <div class="title-box">
             <div class="title">
@@ -85,85 +95,74 @@
             </label>
         </div>
 
-        <div class="title-box">
-            <div class="title">
-                <h3>장애발생기기</h3>
-            </div>
-        </div>
-        <div class="custom-table">
-            <div class="row con-2">
-                <div class="th"><div class="th-wrap center"><p>보유자산</p></div></div>
-                <div class="td">
-                    <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text">
-                            <button type="button" data-popup="gridPop_asset"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </label>
-                    </div>
-                </div>
-                <div class="th"><div class="th-wrap center"><p>자산번호</p></div></div>
-                <div class="td">
-                    <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </label>
-                    </div>
-                </div>
-            </div>
-        </div>
+<!--        <div class="title-box">-->
+<!--            <div class="title">-->
+<!--                <h3>장애발생기기</h3>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="custom-table">-->
+<!--            <div class="row con-2">-->
+<!--                <div class="th"><div class="th-wrap center"><p>보유자산</p></div></div>-->
+<!--                <div class="td">-->
+<!--                    <div class="td-wrap">-->
+<!--                        <label class="input search">-->
+<!--                            <input type="text">-->
+<!--                            <button type="button" data-popup="gridPop_asset"><i class="fa-solid fa-magnifying-glass"></i></button>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="th"><div class="th-wrap center"><p>자산번호</p></div></div>-->
+<!--                <div class="td">-->
+<!--                    <div class="td-wrap">-->
+<!--                        <label class="input search">-->
+<!--                            <input type="text">-->
+<!--                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>-->
+<!--                        </label>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
 
-        <div class="title-box">
-            <div class="title">
-                <h3>장애 대상 목록</h3>
-            </div>
-            <div class="btn-wrap">
-<!--                <button type="button" class="btn asset">자산추가</button>-->
-<!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>-->
-            </div>
-        </div>
-        <!-- 장애 대상 목록 그리드 -->
-        <div id="grid_wrap" class="grid-box h-small"></div>
-
-        <div class="title-box">
-            <div class="title">
-                <h3>첨부파일</h3>
-            </div>
-            <div class="btn-wrap">
-                <label class="file">
-                    <input type="file">
-                    <span  class="btn add-file">파일추가</span>
-                </label>
-                <button type="button" class="btn trash">선택 삭제</button>
-            </div>
-        </div>
-        <div class="table">
-            <table>
-                <colgroup>
-                    <col style="width:50px">
-                    <col style="width:calc(100% - 50px);">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>
-                        <div class="th-wrap center">
-                            <label class="check no-text">
-                                <input type="checkbox">
-                                <span></span>
-                            </label>
-                        </div>
-                    </th>
-                    <th><p>자산분류</p></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+<!--        <div class="title-box">-->
+<!--            <div class="title">-->
+<!--                <h3>첨부파일</h3>-->
+<!--            </div>-->
+<!--            <div class="btn-wrap">-->
+<!--                <label class="file">-->
+<!--                    <input type="file">-->
+<!--                    <span  class="btn add-file">파일추가</span>-->
+<!--                </label>-->
+<!--                <button type="button" class="btn trash">선택 삭제</button>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div class="table">-->
+<!--            <table>-->
+<!--                <colgroup>-->
+<!--                    <col style="width:50px">-->
+<!--                    <col style="width:calc(100% - 50px);">-->
+<!--                </colgroup>-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>-->
+<!--                        <div class="th-wrap center">-->
+<!--                            <label class="check no-text">-->
+<!--                                <input type="checkbox">-->
+<!--                                <span></span>-->
+<!--                            </label>-->
+<!--                        </div>-->
+<!--                    </th>-->
+<!--                    <th><p>자산분류</p></th>-->
+<!--                </tr>-->
+<!--                </thead>-->
+<!--                <tbody>-->
+<!--                <tr>-->
+<!--                </tr>-->
+<!--                </tbody>-->
+<!--            </table>-->
+<!--        </div>-->
 
         <div class="btn-wrap form">
+            <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
@@ -206,10 +205,27 @@
             <button type="button" class="close-btn"></button>
         </div>
         <div class="pop-body">
+            <div class="input-wrap search-ver">
+                <div class="input-lists">
+                    <div class="input-list small">
+                        <span class="input-title">발생자</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                    <div class="input-list small">
+                        <span class="input-title">자산번호</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div id="popup_grid_asset" class="grid-box"></div>
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
     </div>
@@ -533,11 +549,26 @@ function createAUIGrid() {
             dataField: "category_note",
             headerText: "비고",
             width: 160
-        }]
+        }, {
+            dataField: "category_del_btn", // 임의의 고유값
+            headerText: "",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
+                iconHeight:16,
+                iconPosition: "aisleCenter",
+                iconTableRef: { // icon 값 참조할 테이블 레퍼런스
+                    "default": "../resources/img/icon/icon_delete.svg" // default
+                },
+                onClick: function (event) {
+                    AUIGrid.removeRow(myGridID, "selectedIndex");
+                }
+            }
+        },]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
@@ -548,6 +579,7 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         autoGridHeight : true,
         fillColumnSizeMode:true,
+        softRemoveRowMode: false// 소프트 제거 모드 사용 안함
     }
 
     /* 그리드 생성 */
@@ -609,7 +641,7 @@ function popupAddAsset(){
         },
         {
             dataField: "category_product_name",
-            headerText: "물품종류",
+            headerText: "물품명",
             width: 180
         },
         {
@@ -618,13 +650,8 @@ function popupAddAsset(){
             width: 180
         },
         {
-            dataField: "category_model_name",
+            dataField: "category_item_name",
             headerText: "모델명",
-            width: 160
-        },
-        {
-            dataField: "category_department",
-            headerText: "부서",
             width: 160
         },
         {
@@ -633,26 +660,38 @@ function popupAddAsset(){
             width: 160
         },
         {
-            dataField: "category_classification_use",
-            headerText: "용도구분",
+            dataField: "category_use_type",
+            headerText: "용도1",
             width: 160
         },
         {
-            dataField: "category_asset_place",
-            headerText: "자산위치",
+            dataField: "category_use_type2",
+            headerText: "용도2",
             width: 160
         },
         {
-            dataField: "category_date",
-            headerText: "설치일",
+            dataField: "category_order",
+            headerText: "신청구분",
             width: 160
         },
         {
-            dataField: "category_asset_status",
+            dataField: "category_description",
+            headerText: "신청내용",
+            width: 160
+        },
+        {
+            dataField: "category_place",
+            headerText: "사용장소",
+            width: 160
+        },
+        {
+            dataField: "category_asset_state",
             headerText: "자산상태",
-            width: 160
+        },
+        {
+            dataField: "category_note",
+            headerText: "비고",
         }
-
         ]
     /* 2. 그리드 속성 설정 */
     let gridPros3 = {
@@ -972,7 +1011,7 @@ function requestData2() {
     });
 }
 function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas13.json", function (data) {
         AUIGrid.setGridData(popup_grid_asset, data);
     });
 }
@@ -1036,6 +1075,22 @@ function moveRowsToUp() {
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* 저장 클릭시 GRID1로 행 추가 */
+$("#gridPop_asset .btn.save").on("click", function(){
+    let rows = AUIGrid.getCheckedRowItems(popup_grid_asset);
+    if(rows.length < 1){
+        alert("체크된 데이터가 없습니다.");
+        return;
+    }
+
+    for(let i=0; i < rows.length; i++){
+        AUIGrid.addRow(myGridID, rows[i].item, "last");
+    }
+
+    $("#gridPop_asset").removeClass("open");
+})
+
 </script>
 </body>
 </html>
