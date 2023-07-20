@@ -80,8 +80,6 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .aui-grid-header-panel .aui-grid-table tr td{border-color:var(--line1);}
 .aui-grid-body-panel .aui-grid-table tr td:hover{background:#e2e2e2;}
 
-/* AUI GRID 버튼 커스텀 */
-
 /* footer */
 footer{width:calc(100% + 40px);margin:40px -20px 0;}
 footer .contact{background:#414141;display:flex;justify-content:center;align-items:center;color:var(--color10);padding:20px;}

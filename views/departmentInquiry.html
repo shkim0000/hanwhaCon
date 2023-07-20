@@ -41,7 +41,7 @@
         </div>
         <div class="title-box">
             <div class="title">
-                <h3>사용자</h3>
+                <h3>부서자산</h3>
             </div>
         </div>
         <div class="input-wrap">
@@ -61,54 +61,7 @@
                 <h3>부서 관리 자산 현황</h3>
             </div>
         </div>
-        <div class="table fixed-height">
-            <table>
-                <thead>
-                <tr>
-                    <th><div class="th-wrap center">물품명</div></th>
-                    <th><div class="th-wrap center">총 보유자산</div></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><div class="td-wrap center">데스크탑</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">2</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">모니터</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">3</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">노트북</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">1</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">데스크탑</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">2</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">모니터</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">3</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">노트북</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">1</button></div></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="table no-line">
-            <table>
-                <colgroup>
-                    <col style="width:50%"/>
-                    <col style="width:50%">
-                </colgroup>
-                <tr>
-                    <th><div class="th-wrap center">전체</div></th>
-                    <td><div class="td-wrap center">2</div></td>
-                </tr>
-            </table>
-        </div>
+        <div id="current_wrap" class="grid-box"></div>
 
         <div class="title-box">
             <div class="title">
@@ -152,22 +105,91 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
+let currentID;
 let myGridID;
-let popup_grid_department;
+let popup_grid_department; // 부서 검색
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
+    createCurrentGrid();
     createAUIGrid();
 
     popupDepartmentSearch(); // 부서 검색
 
     /* 그리드 삽입 */
+    requestData3();
     requestData();
     requestData2();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
+/* [현황] */
+function createCurrentGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_product_name",
+            headerText: "물품명",
+            width: 160,
+        }, {
+            dataField: "category_product_count",
+            headerText: "총 보유자산",
+            width: 180,
+            renderer: {
+                type: "ButtonRenderer",
+                onClick: function (event) {
+
+                },
+            }
+        }];
+
+    /* 1-2. 푸터 설정 */
+    let footerLayout = [{
+        labelText: "매출 합계",
+        positionField: "category_product_name"
+    }, {
+        dataField: "category_product_count",
+        positionField: "category_product_count",
+        operation: "SUM",
+        style: "aui-grid-my-column",
+        formatString: "#,##0"
+    }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        showFooter: true,
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        autoGridHeight : true
+    }
+
+    /* 그리드 생성 */
+    currentID = AUIGrid.create("current_wrap", columnLayout, gridPros);
+    // 푸터 레이아웃 세팅
+    AUIGrid.setFooter(currentID, footerLayout);
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#current_wrap');
+        setTimeout(function(){
+            AUIGrid.create("#current_wrap", columnLayout, gridPros);
+            requestData();
+        },200);
+    });
+}
 function createAUIGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -220,11 +242,6 @@ function createAUIGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode: "multipleCells",
-        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-        /*editable: true,*/
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
@@ -280,6 +297,11 @@ function popupDepartmentSearch(){
 }
 
 /* 4. 데이터 불러오기 */
+function requestData3() {
+    $.get("../resources/lib/aui-grid/data/sample-datas20.json", function (data) {
+        AUIGrid.setGridData(currentID, data);
+    });
+}
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
         AUIGrid.setGridData(myGridID, data);
