@@ -41,30 +41,30 @@
         </div>
         <div class="input-wrap a-end">
             <div class="input-lists">
-                <div class="input-list c-medium">
-                    <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-                <div class="input-list large">
+<!--                <div class="input-list c-medium">-->
+<!--                    <span class="input-title">사용자</span>-->
+<!--                    <label class="input search">-->
+<!--                        <input type="text">-->
+<!--                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>-->
+<!--                    </label>-->
+<!--                </div>-->
+                <div class="input-list">
                     <span class="input-title">부서</span>
                     <label class="input search">
                         <input type="text">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
-                <div class="input-list medium">
-                    <span class="input-title">제목</span>
-                    <label class="select">
-                        <select>
-                            <option value="">제목1</option>
-                            <option value="">제목2</option>
-                            <option value="">제목3</option>
-                        </select>
-                    </label>
-                </div>
+<!--                <div class="input-list medium">-->
+<!--                    <span class="input-title">제목</span>-->
+<!--                    <label class="select">-->
+<!--                        <select>-->
+<!--                            <option value="">제목1</option>-->
+<!--                            <option value="">제목2</option>-->
+<!--                            <option value="">제목3</option>-->
+<!--                        </select>-->
+<!--                    </label>-->
+<!--                </div>-->
                 <div class="input-list medium">
                     <span class="input-title">기간</span>
                     <div class="date-wrap">
@@ -139,7 +139,7 @@
         <div class="title-box end">
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
-                <button type="button" class="btn save">저장</button>
+                <!--                <button type="button" class="btn save">저장</button>-->
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-medium"></div>
@@ -152,26 +152,26 @@
 
 <!-- 팝업 -->
 <!-- 사용자 검색 -->
-<div id="gridPop_user" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
+<!--<div id="gridPop_user" class="popup grid no">-->
+<!--    <div class="pop-box">-->
+<!--        <div class="pop-head">-->
+<!--            <h3>사용자 검색</h3>-->
+<!--            <button type="button" class="close-btn"></button>-->
+<!--        </div>-->
+<!--        <div class="pop-body">-->
+<!--            <div class="input-wrap">-->
+<!--                <div class="input-list">-->
+<!--                    <span class="input-title">사용자</span>-->
+<!--                    <label class="input search">-->
+<!--                        <input type="text">-->
+<!--                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>-->
+<!--                    </label>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div id="popup_grid_user" class="grid-box"></div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
 <!-- // 팝업 -->
 
 <script>
@@ -189,11 +189,11 @@ let cleanList = [];
 function documentReady() {
     /* 그리드 생성 */
     createAUIGrid();
-    popupUserSearch(); // 사용자 검색
+    // popupUserSearch(); // 사용자 검색
 
     /* 그리드 삽입 */
     requestData();
-    requestData2();
+    // requestData2();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -202,20 +202,9 @@ function createAUIGrid() {
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "checkbox",
-            dataType: "boolean",
-            width: 80,
-            headerText: "", // 텍스트 표시 안하고 체크박스만 나오게 함.
-            headerStyle : "my-check-column", // 여기 주석 제거하면 큰 체크박스가 보임. 상단의 style 확인바람.
-            headerRenderer: { // 헤더 렌더러
-                type: "CheckBoxHeaderRenderer",
-                // renderer 의 체크박스에 상호 의존적인 모드로 설정 (기본값 : false)
-                dependentMode: true // dependentMode 는 renderer 의 type 으로 CheckBoxEditRenderer 를 정의할 때만 활성화됨.
-            },
-            renderer: {
-                type: "CheckBoxEditRenderer",
-                editable: true
-            }
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
@@ -273,6 +262,9 @@ function createAUIGrid() {
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -294,35 +286,35 @@ function createAUIGrid() {
         },200);
     });
 }
-function popupUserSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout2 = [
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros2 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
-
-    /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-}
+// function popupUserSearch(){
+//     /* 팝업 그리드(예시) */
+//     /* 1. AUIGrid 칼럼 설정 */
+//     let columnLayout2 = [
+//         {
+//             dataField: "category_user_name",
+//             headerText: "사용자명",
+//             width: 180
+//         }, {
+//             dataField: "category_department",
+//             headerText: "부서",
+//             width: 160
+//         }]
+//     /* 2. 그리드 속성 설정 */
+//     let gridPros2 = {
+//         selectionMode: "multipleCells",
+//         enableSorting: true, // 소팅
+//         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+//         headerHeight : 30, // 기본 헤더 높이 지정
+//         usePaging: true, // 페이징 사용
+//         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+//         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+//         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+//         fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+//     }
+//
+//     /* 그리드 생성 */
+//     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+// }
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas5.json", function (data) {
@@ -330,11 +322,11 @@ function requestData() {
     });
 }
 
-function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_grid_user, data);
-    });
-}
+// function requestData2() {
+//     $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+//         AUIGrid.setGridData(popup_grid_user, data);
+//     });
+// }
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {

@@ -39,19 +39,19 @@
                 <li>모델신청</li>
             </ul>
         </div>
-        <div class="title-box">
-            <div class="title">
-                <h3 class="important">신청자정보</h3>
-            </div>
-        </div>
+<!--        <div class="title-box">-->
+<!--            <div class="title">-->
+<!--                <h3 class="important">신청자정보</h3>-->
+<!--            </div>-->
+<!--        </div>-->
         <div class="custom-table">
-            <div class="row con-3">
-                <div class="th"><div class="th-wrap center">사용자</div></div>
-                <div class="td"><div class="td-wrap">홍길동</div></div>
+            <div class="row">
+<!--                <div class="th"><div class="th-wrap center">사용자</div></div>-->
+<!--                <div class="td"><div class="td-wrap">홍길동</div></div>-->
                 <div class="th"><div class="th-wrap center">부서</div></div>
                 <div class="td"><div class="td-wrap">IT운영</div></div>
-                <div class="th"><div class="th-wrap center">제목</div></div>
-                <div class="td"><div class="td-wrap">전반기 정기교체</div></div>
+<!--                <div class="th"><div class="th-wrap center">제목</div></div>-->
+<!--                <div class="td"><div class="td-wrap">전반기 정기교체</div></div>-->
             </div>
             <div class="row con-2">
                 <div class="th"><div class="th-wrap center">신청기간</div></div>
@@ -76,8 +76,8 @@
         <div id="grid_wrap2" class="grid-box h-small"></div>
 
         <div class="btn-wrap form">
-            <button type="button" class="btn">미신청</button>
             <button type="button" class="btn save">저장</button>
+            <button type="button" class="btn cancel">닫기</button>
 <!--            <button type="button" class="btn primary send">상신</button>-->
         </div>
 
@@ -165,9 +165,12 @@
             <div class="input-list">
                 <span class="input-title">미신청 사유를 입력해주세요.</span>
             </div>
-            <textarea rows="6"></textarea>
+            <div class="input textarea">
+                <textarea rows="6"></textarea>
+            </div>
 
             <div class="btn-wrap">
+                <button type="button" class="btn">미신청</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -276,7 +279,7 @@
                     type:"ButtonRenderer",
                     labelText: "미신청",
                     onClick: function(event){
-
+                        $("#reason_pop").addClass("open");
                     }
                 }
             }
@@ -285,7 +288,7 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
@@ -383,7 +386,7 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
