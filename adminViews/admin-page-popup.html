@@ -143,7 +143,7 @@
             <button type="button" class="btn" data-popup="returnEnroll_pop">반납신청</button>
             <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
             <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대연연장신청</button>
-            <button type="button" class="btn" data-popup="gridPop_history">처리이력(신청정보 팝업 내)</button>
+            <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력(신청정보 팝업 내)</button>
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" data-popup="submit_pop">상신 팝업</button>
@@ -317,7 +317,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -410,7 +410,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -502,7 +502,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -594,7 +594,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -740,7 +740,7 @@
             <div id="popup_grid_detail6" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-popup="gridPop_history">처리이력</button>
+                <button type="button" class="btn" data-popup="gridPop_historySub">처리이력</button>
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -748,7 +748,7 @@
 </div>
 
 <!-- 처리이력 -->
-<div id="gridPop_history" class="popup grid no">
+<div id="gridPop_processingHistory" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
             <h3>처리 이력</h3>
@@ -760,7 +760,7 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box"></div>
+            <div id="popup_grid_processingHistory" class="grid-box"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
@@ -1010,7 +1010,7 @@
     let popup_grid_detail4; // 반납신청
     let popup_grid_detail5; // 인수인계신청
     let popup_grid_detail6; // 대여연장신청
-    let popup_grid_history; // 처리이력
+    let popup_grid_processingHistory; // 처리이력
     let popup_grid_submitList; // 상신
     let popup_subGrid_searchExecutives;
     let popup_subGrid_addExecutives;
@@ -1450,7 +1450,7 @@
         }
 
         /* 그리드 생성 */
-        popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout3, gridPros3);
+        popup_grid_processingHistory = AUIGrid.create("#popup_grid_processingHistory", columnLayout3, gridPros3);
     }
     /* [팝업] 상신 */
     function popupSubmitList(){
@@ -1783,11 +1783,7 @@
             AUIGrid.setGridData(popup_grid_detail6, data);
         });
     }
-    function requestData10() {
-        $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
-            AUIGrid.setGridData(popup_grid_history, data);
-        });
-    }
+
     function requestData11() {
         $.get("../resources/lib/aui-grid/data/submitList-datas1.json", function (data) {
             AUIGrid.setGridData(popup_grid_submitList, data);

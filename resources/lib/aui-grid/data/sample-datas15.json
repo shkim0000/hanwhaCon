@@ -3,18 +3,48 @@
     "id": "#grid_id_1",
     "category_state":"신청",
     "category_manager":"홍길동",
-    "category_time":"2023-06-11 10:15:47"
+    "category_time":"2023-06-11 10:15:47",
+    "category_changeAsset_num":"1231545312",
+    "category_asset":"데스크탑",
+    "category_item" : "표준PC",
+    "category_model_name" : "모델명",
+    "category_manage" : "데스크탑",
+    "category_manager_name": "홍길동",
+    "category_phone" : "내선",
+    "category_asset_num" : "12132118",
+    "category_serial_key": "546512-12345-AAAAA",
+    "category_introduction_date": "2023-06-15"
   },
   {
     "id": "#grid_id_2",
     "category_state":"상신",
     "category_manager":"길동자",
-    "category_time":"2023-06-13 21:25:17"
+    "category_time":"2023-06-13 21:25:17",
+    "category_changeAsset_num":"1231545312",
+    "category_asset":"데스크탑",
+    "category_item" : "표준PC",
+    "category_model_name" : "모델명",
+    "category_manage" : "데스크탑",
+    "category_manager_name": "홍길동",
+    "category_phone" : "내선",
+    "category_asset_num" : "12132118",
+    "category_serial_key": "546512-12345-AAAAA",
+    "category_introduction_date": "2023-06-15"
   },
   {
     "id": "#grid_id_3",
     "category_state":"상신완료",
     "category_manager":"강강강",
-    "category_time":"2023-06-01 13:55:01"
+    "category_time":"2023-06-01 13:55:01",
+    "category_changeAsset_num":"1231545312",
+    "category_asset":"데스크탑",
+    "category_item" : "표준PC",
+    "category_model_name" : "모델명",
+    "category_manage" : "데스크탑",
+    "category_manager_name": "홍길동",
+    "category_phone" : "내선",
+    "category_asset_num" : "12132118",
+    "category_serial_key": "546512-12345-AAAAA",
+    "category_introduction_date": "2023-06-15"
   }
 ]

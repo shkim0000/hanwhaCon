@@ -1,6 +1,7 @@
 [
   {
     "id": "#grid_id_1",
+    "category_item": "데스크탑",
     "category_product_name": "모니터",
     "category_asset_num": "A-20-13040",
     "category_model_name": "SAMSUNG-Mointor",
@@ -13,10 +14,12 @@
     "category_note": "모니터",
     "category_changeProduct_name": "LG-G10402",
     "category_product_quantity": 1,
-    "category_changeAsset_num": "190492"
+    "category_changeAsset_num": "190492",
+    "category_asset_before": "21345646"
   },
   {
     "id": "#grid_id_2",
+    "category_item": "데스크탑",
     "category_product_name": "데스크탑",
     "category_asset_num": "A-10-1120",
     "category_model_name": "INTEL-TMv1",
@@ -29,6 +32,7 @@
     "category_note": "데스크탑",
     "category_changeProduct_name": "LG-G10402",
     "category_product_quantity": 1,
-    "category_changeAsset_num": "490129"
+    "category_changeAsset_num": "490129",
+    "category_asset_before": "21345646"
   }
 ]
