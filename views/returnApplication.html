@@ -65,8 +65,8 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="홍길동">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <input type="text" placeholder="홍길동" disabled>
+<!--                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>-->
                         </label>
                     </div>
                 </div>
@@ -75,7 +75,7 @@
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" placeholder="양현모">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -95,7 +95,7 @@
                     <div class="td-wrap">
                         <label class="select whole">
                             <select>
-                                <option value="">tjsxor</option>
+                                <option value="">신청사유1</option>
                                 <option value="">데스크탑2</option>
                             </select>
                         </label>
@@ -156,10 +156,11 @@
             </ul>
             <div class="title-box end">
                 <div class="btn-wrap">
-                    <label class="date btn">
-                        <span>선택</span>
-                        <input type="text">
-                    </label>
+                    <button type="button" class="btn primary check">선택</button>
+<!--                    <label class="date btn">-->
+<!--                        <span>선택</span>-->
+<!--                        <input type="text">-->
+<!--                    </label>-->
                 </div>
             </div>
             <div id="grid_wrap" class="grid-box h-small"></div>
@@ -1120,46 +1121,64 @@ function moveRowsToDown() {
 };
 
 /* 교체신청 > 선택한 날짜 그리드 삽입 */
-$(".date.btn input").datepicker( {
-    onSelect: function() {
-        let realDate = $(this).datepicker("getDate");
-        let date = $.datepicker.formatDate("yy-mm-dd", realDate);
+// $(".date.btn input").datepicker( {
+//     onSelect: function() {
+//         let realDate = $(this).datepicker("getDate");
+//         let date = $.datepicker.formatDate("yy-mm-dd", realDate);
+//
+//         /* 체크된 행의 id 값을 찾아 저장 */
+//         let checkedItems = AUIGrid.getCheckedRowItems(myGridID);
+//         if (checkedItems.length <= 0) {
+//             alert("체크한 행이 없습니다.");
+//             return;
+//         }
+//         let str = [];
+//         let rowItem;
+//         for (let i = 0, len = checkedItems.length; i < len; i++) {
+//             rowItem = checkedItems[i];
+//             let object ={
+//                 id : rowItem.item.id,
+//                 category_rental_finish : date
+//             }
+//             str.push(object);
+//         }
+//
+//         // 상단 그리드의 체크된 행들 얻기
+//         let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
+//         console.log(rows[0].id)
+//         if (rows.length <= 0) {
+//             alert('상단 그리드에서 체크된 행이 없습니다.');
+//             return;
+//         }
+//         /* 얻은 행을 하단 그리드에 추가하기 */
+//         AUIGrid.addRow(myGridID2, rows, "last");
+//
+//         /* 선택한 상단 그리드 행들 삭제 */
+//         AUIGrid.removeCheckedRows(myGridID);
+//
+//         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
+//         AUIGrid.updateRowsById(myGridID2, str)
+//
+//     }
+// });
 
-        /* 체크된 행의 id 값을 찾아 저장 */
-        let checkedItems = AUIGrid.getCheckedRowItems(myGridID);
-        if (checkedItems.length <= 0) {
-            alert("체크한 행이 없습니다.");
-            return;
-        }
-        let str = [];
-        let rowItem;
-        for (let i = 0, len = checkedItems.length; i < len; i++) {
-            rowItem = checkedItems[i];
-            let object ={
-                id : rowItem.item.id,
-                category_rental_finish : date
-            }
-            str.push(object);
-        }
-
-        // 상단 그리드의 체크된 행들 얻기
-        let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
-        console.log(rows[0].id)
-        if (rows.length <= 0) {
-            alert('상단 그리드에서 체크된 행이 없습니다.');
-            return;
-        }
-        /* 얻은 행을 하단 그리드에 추가하기 */
-        AUIGrid.addRow(myGridID2, rows, "last");
-
-        /* 선택한 상단 그리드 행들 삭제 */
-        AUIGrid.removeCheckedRows(myGridID);
-
-        /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(myGridID2, str)
-
+$(".btn.check").on("click",function(){
+    // 상단 그리드의 체크된 행들 얻기
+    let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
+    console.log(rows[0].id)
+    if (rows.length <= 0) {
+        alert('상단 그리드에서 체크된 행이 없습니다.');
+        return;
     }
-});
+    /* 얻은 행을 하단 그리드에 추가하기 */
+    AUIGrid.addRow(myGridID2, rows, "last");
+
+    /* 선택한 상단 그리드 행들 삭제 */
+    AUIGrid.removeCheckedRows(myGridID);
+
+    /* 다른 그리드의 해당 컬럼명의 값에 추가 */
+    AUIGrid.updateRowsById(myGridID2, str)
+})
 </script>
 </body>
 </html>

@@ -379,7 +379,7 @@ function createAUIGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
@@ -394,8 +394,7 @@ function createAUIGrid() {
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
-    AUIGrid.bind(myGridID, "cellClick",function(){
-        /* 선택한 행들 얻기 */
+    AUIGrid.bind(myGridID, "cellDoubleClick",function(){
         $("#gridPop_detail").addClass("open");
     });
 

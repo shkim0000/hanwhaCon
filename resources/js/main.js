@@ -40,6 +40,7 @@ $(function(){
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서자산조회</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>부서 사용자별 자산조회</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -108,6 +109,7 @@ $(function(){
         changeMonth:true,
         changeYear:true,
         maxDate: "+1m",
+        minDate: 0,
     });
 
     $(".date input").datepicker({

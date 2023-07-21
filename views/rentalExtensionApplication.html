@@ -75,7 +75,7 @@
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" placeholder="양현모">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -95,8 +95,11 @@
                     <div class="td-wrap">
                         <label class="select whole">
                             <select>
-                                <option value="">데스트탑1</option>
-                                <option value="">데스크탑2</option>
+                                <option value="">신규충원</option>
+                                <option value="">업무편의</option>
+                                <option value="">기타사유</option>
+                                <option value="">기타사유</option>
+                                <option value="">기타사유</option>
                             </select>
                         </label>
                     </div>
@@ -510,8 +513,8 @@ function documentReady() {
 
     /* 그리드 삽입 */
     requestData();
-    requestData4();
     requestData2();
+    requestData4();
     requestData3();
     requestData5();
     requestData6();
@@ -1126,9 +1129,20 @@ function moveRowsToDown() {
 
 /* 대여연장신청 > 선택한 날짜 그리드 삽입 */
 $(".date.btn input").datepicker( {
+    maxDate: "+1m",
+    minDate: 0,
     onSelect: function() {
         let realDate = $(this).datepicker("getDate");
         let date = $.datepicker.formatDate("yy-mm-dd", realDate);
+
+        const today = new Date();
+        // 날짜 정보 얻기
+        const year = today.getFullYear();
+        const month = String(today.getMonth() + 1).padStart(2, '0'); // 월은 0부터 시작하므로 +1을 해준 후 2자리로 만듦
+        const day = String(today.getDate()).padStart(2, '0'); // 일자가 10보다 작을 경우 앞에 0을 붙여 2자리로 만듦
+
+        // 'yyyy-mm-dd' 형식으로 오늘 날짜 문자열 생성
+        const currentDate = `${year}-${month}-${day}`;
 
         /* 체크된 행의 id 값을 찾아 저장 */
         let checkedItems = AUIGrid.getCheckedRowItems(myGridID);
@@ -1136,26 +1150,27 @@ $(".date.btn input").datepicker( {
             alert("체크한 행이 없습니다.");
             return;
         }
+
         let str = [];
         let rowItem;
         for (let i = 0, len = checkedItems.length; i < len; i++) {
             rowItem = checkedItems[i];
-            let object ={
-                id : rowItem.item.id,
+            let object ={...checkedItems[i].item,
+                category_rental_start: currentDate,
                 category_rental_finish : date
             }
             str.push(object);
         }
-
+        console.log(str);
         // 상단 그리드의 체크된 행들 얻기
-       let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
+        let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
         console.log(rows[0].id)
         if (rows.length <= 0) {
             alert('상단 그리드에서 체크된 행이 없습니다.');
             return;
         }
         /* 얻은 행을 하단 그리드에 추가하기 */
-        AUIGrid.addRow(myGridID2, rows, "last");
+        AUIGrid.addRow(myGridID2, str, "last");
 
         /* 선택한 상단 그리드 행들 삭제 */
         AUIGrid.removeCheckedRows(myGridID);

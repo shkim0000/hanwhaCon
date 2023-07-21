@@ -235,7 +235,7 @@
                                 </label>
                             </div>
                         </th>
-                        <th><p>자산분류</p></th>
+                        <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
@@ -317,7 +317,7 @@ function createAUIGrid() {
             width: 160
         }, {
             dataField: "category_application_date",
-            headerText: "신청일",
+            headerText: "신청일시",
             width: 160
         }, {
             dataField: "category_person_charge",
@@ -328,6 +328,10 @@ function createAUIGrid() {
             headerText: "서비스상태",
             width: 180
         }, {
+            dataField: "category_finish_date",
+            headerText: "완료일시",
+            width: 180
+        }, {
             dataField: "category_note",
             headerText: "비고",
             width: 200
@@ -335,7 +339,7 @@ function createAUIGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
@@ -349,6 +353,10 @@ function createAUIGrid() {
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+
+    AUIGrid.bind(myGridID, "cellDoubleClick",function(){
+        $("#gridPop_detail").addClass("open");
+    });
 
     $('.menu-btn').on('click',function(){
         AUIGrid.destroy('#grid_wrap');
