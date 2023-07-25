@@ -138,12 +138,12 @@ $(function(){
     });
 
     /* 딤처리 부분 닫기 */
-    $(document).on("click", function(e){
+/*    $(document).on("click", function(e){
         let i = e.target;
         if($(e.target).hasClass("popup open")){
             $(e.target).removeClass("open");
         }
-    });
+    });*/
 
     /* sidebar 설정 */
     $(document).ready(function(){

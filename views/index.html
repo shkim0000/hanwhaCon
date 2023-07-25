@@ -621,12 +621,12 @@
         <!-- 14. AUI Grid 삽입 팝업 -->
         <div class="guide-box">
             <h2>- AUI Grid 삽입 팝업</h2>
-            <div class="btn-wrap">
+<!--            <div class="btn-wrap">
                 <button type="button" class="btn" data-popup="gridPop_user">딤처리 없는 팝업 : AUI Grid</button>
                 <button type="button" class="btn" data-popup="gridPop_rental">AUI Grid big pop</button>
                 <button type="button" class="btn" data-popup="gridPop_detail">AUI Grid big detail pop</button>
                 <button type="button" class="btn" data-popup="model_pop">model pop</button>
-            </div>
+            </div>-->
         </div>
 
         <!-- 15. 요소 리스트 -->
@@ -732,6 +732,8 @@
 
         </div>
 
+
+
         <!-- // contents -->
 
         <!-- footer 푸터는 js에서 append -->
@@ -750,30 +752,12 @@
         <!-- footer -->
     </div>
 </div>
+<!--<div class="ui-widget-overlay ui-front" style="z-index: 100;"></div>-->
 <!-- // contents -->
 
 
 <!-- 팝업 -->
-<div id="gridPop_user" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">검색</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
+
 <div id="gridPop_rental" class="popup grid big no">
     <div class="pop-box">
         <div class="pop-head">
@@ -797,12 +781,96 @@
     </div>
 </div>
 
-<div id="gridPop_detail" class="popup grid big no">
+
+
+<!-- 레이어 팝업 : data-layerPop-small -->
+<button type="button" class="btn" data-layerPop-small="dialog" data-layerTitle="사용자 검색">레이어 팝업</button>
+<div id="dialog" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>신청 등록 정보</h3>
-            <button type="button" class="close-btn"></button>
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">검색</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
         </div>
+    </div>
+</div>
+
+<!-- 레이어 팝업 : data-layerPop-smallLong -->
+<button type="button" class="btn" data-layerPop-smallLong="model_pop" data-layerTitle="모델 검색">모델 검색</button>
+<div id="model_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="model-wrap">
+                <div class="tab-box">
+                    <div class="tab-title"><h4>데스크탑</h4></div>
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">표준 PC</button></li>
+                            <li><button type="button" class="popBtn">고성능 PC</button></li>
+                            <li><button type="button" class="popBtn">삼성 PC</button></li>
+                            <li><button type="button" class="popBtn">DESKI7</button></li>
+                            <li><button type="button" class="popBtn">DESK-XXX</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on"><img src="../resources/img/sample_desktop.png" alt=""></div>
+                    <div class="tabs"><img src="" alt="2"></div>
+                    <div class="tabs"><img src="" alt="3"></div>
+                    <div class="tabs"><img src="" alt="4"></div>
+                    <div class="tabs"><img src="" alt="5"></div>
+                </div>
+                <div class="tab-box">
+                    <div class="tab-title"><h4>노트북</h4></div>
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">표준 노트북</button></li>
+                            <li><button type="button" class="popBtn">LG 그램</button></li>
+                            <li><button type="button" class="popBtn">삼성 갤럭시</button></li>
+                            <li><button type="button" class="popBtn">HP 표준</button></li>
+                            <li><button type="button" class="popBtn">씽크패드</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on"><img src="../resources/img/sample_notebook.jpeg" alt=""></div>
+                    <div class="tabs"><img src="" alt="2"></div>
+                    <div class="tabs"><img src="" alt="3"></div>
+                    <div class="tabs"><img src="" alt="4"></div>
+                    <div class="tabs"><img src="" alt="5"></div>
+                </div>
+                <div class="tab-box">
+                    <div class="tab-title"><h4>프린터</h4></div>
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">잉크젯</button></li>
+                            <li><button type="button" class="popBtn">레이저</button></li>
+                            <li><button type="button" class="popBtn">칼라레이저</button></li>
+                            <li><button type="button" class="popBtn">복합기</button></li>
+                            <li><button type="button" class="popBtn">칼라복합기</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on"><img src="../resources/img/sample_printer.jpeg" alt=""></div>
+                    <div class="tabs"><img src="" alt="2"></div>
+                    <div class="tabs"><img src="" alt="3"></div>
+                    <div class="tabs"><img src="" alt="4"></div>
+                    <div class="tabs"><img src="" alt="5"></div>
+                </div>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-btn="cancel">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 레이어 팝업 : data-layerPop-big -->
+<button type="button" class="btn" data-layerPop-big="gridPop_detail" data-layerTitle="신청 등록 정보 검색">신청 등록 정보 검색</button>
+<div id="gridPop_detail" class="popup">
+    <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -814,8 +882,31 @@
                     <div class="td"><div class="td-wrap">상신완료</div></div>
                 </div>
                 <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search" data-layerPop-small="dialog" data-layerTitle="사용자 검색">
+                                <input type="text" placeholder="양현모" disabled>
+                                <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
                     <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
                     <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
                     <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
@@ -853,7 +944,8 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail" class="grid-box h-small"></div>
+
+            <div id="popup_grid_detail"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -878,75 +970,53 @@
         </div>
     </div>
 </div>
-
-<div id="model_pop" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>모델 정보</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="tab-box">
-                <div class="tab-title"><h4>데스크탑</h4></div>
-                <div class="tab-wrap">
-                    <ul>
-                        <li class="on"><button type="button" class="popBtn">표준 PC</button></li>
-                        <li><button type="button" class="popBtn">고성능 PC</button></li>
-                        <li><button type="button" class="popBtn">삼성 PC</button></li>
-                        <li><button type="button" class="popBtn">DESKI7</button></li>
-                        <li><button type="button" class="popBtn">DESK-XXX</button></li>
-                    </ul>
-                </div>
-                <div class="tabs on"><img src="../resources/img/sample_desktop.png" alt=""></div>
-                <div class="tabs"><img src="" alt="2"></div>
-                <div class="tabs"><img src="" alt="3"></div>
-                <div class="tabs"><img src="" alt="4"></div>
-                <div class="tabs"><img src="" alt="5"></div>
-            </div>
-            <div class="tab-box">
-                <div class="tab-title"><h4>노트북</h4></div>
-                <div class="tab-wrap">
-                    <ul>
-                        <li class="on"><button type="button" class="popBtn">표준 노트북</button></li>
-                        <li><button type="button" class="popBtn">LG 그램</button></li>
-                        <li><button type="button" class="popBtn">삼성 갤럭시</button></li>
-                        <li><button type="button" class="popBtn">HP 표준</button></li>
-                        <li><button type="button" class="popBtn">씽크패드</button></li>
-                    </ul>
-                </div>
-                <div class="tabs on"><img src="../resources/img/sample_notebook.jpeg" alt=""></div>
-                <div class="tabs"><img src="" alt="2"></div>
-                <div class="tabs"><img src="" alt="3"></div>
-                <div class="tabs"><img src="" alt="4"></div>
-                <div class="tabs"><img src="" alt="5"></div>
-            </div>
-            <div class="tab-box">
-                <div class="tab-title"><h4>프린터</h4></div>
-                <div class="tab-wrap">
-                    <ul>
-                        <li class="on"><button type="button" class="popBtn">잉크젯</button></li>
-                        <li><button type="button" class="popBtn">레이저</button></li>
-                        <li><button type="button" class="popBtn">칼라레이저</button></li>
-                        <li><button type="button" class="popBtn">복합기</button></li>
-                        <li><button type="button" class="popBtn">칼라복합기</button></li>
-                    </ul>
-                </div>
-                <div class="tabs on"><img src="../resources/img/sample_printer.jpeg" alt=""></div>
-                <div class="tabs"><img src="" alt="2"></div>
-                <div class="tabs"><img src="" alt="3"></div>
-                <div class="tabs"><img src="" alt="4"></div>
-                <div class="tabs"><img src="" alt="5"></div>
-            </div>
-
-            <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- // 팝업 -->
 
+
+<div id="testest"></div>
 <script>
+    /* 레이어 팝업 (사용자 팝업 크기 : data-layerPop-small) */
+    $("[data-layerPop-small]").on("click", function(){
+        let id = $(this).attr("data-layerPop-small");
+        let name = $(this).attr("data-layerTitle");
+        $("#"+id).addClass("open").dialog({
+            title: name,
+            height:515,
+            width: 510,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
+    });
+
+    /* 레이어 팝업 (모델정보 크기 : data-layerPop-smallLong) */
+    $("[data-layerPop-smallLong]").on("click", function(){
+        let id = $(this).attr("data-layerPop-smallLong");
+        let name = $(this).attr("data-layerTitle");
+        $("#"+id).addClass("open").dialog({
+            title: name,
+            height:766,
+            width: 540,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
+    });
+
+    /* 레이어 팝업 (모델정보 크기 : data-layerPop-big) */
+    $("[data-layerPop-big]").on("click", function(){
+        let id = $(this).attr("data-layerPop-big");
+        let name = $(this).attr("data-layerTitle");
+        $("#"+id).addClass("open").dialog({
+            title: name,
+            height:570,
+            width:1250,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
+    });
+
     Dropzone.autoDiscover = false;
     var dropzonePreviewNode = document.querySelector('#dropzone-preview-list');
     dropzonePreviewNode.id = '';
@@ -967,13 +1037,11 @@
         } else {
             $('.dz-message').text("");
         }
-    })
-
-
-
+    });
 </script>
 
 <script>
+
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
@@ -1077,6 +1145,7 @@ function createAUIGrid() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
         /* autoGridHeight : true */
     }
 
@@ -1272,7 +1341,6 @@ function createPopupAUIGrid4(){
     /* 그리드 생성 */
     popup_grid_rental = AUIGrid.create("#popup_grid_rental", columnLayout, gridPros);
 }
-
 function createPopupAUIGrid5() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -1280,20 +1348,25 @@ function createPopupAUIGrid5() {
         {
             dataField: "id",
             headerText: "아이디",
-            visible:false
+            visible:false,
+            width:"20%",
         },
         {
             dataField: "category_product",
             headerText: "자산분류",
+            width:"20%",
         },{
             dataField: "category_product",
             headerText: "품목",
+            width:"20%",
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            width:"20%",
         }, {
             dataField: "category_item_name",
             headerText: "모델명",
+            width:"20%",
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -1308,6 +1381,7 @@ function createPopupAUIGrid5() {
 
     /* 그리드 생성 */
     popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
+    popup_grid_detail = AUIGrid.create("#testest", columnLayout, gridPros);
 }
 
 

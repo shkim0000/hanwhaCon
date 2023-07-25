@@ -9,7 +9,7 @@
     "category_department": "IT운영",
     "category_user_name": "홍길동",
     "category_count": "1",
-    "category_status": "신청",
+    "category_status": "임시저장",
     "category_processing_date": "2023-06-12 12:34:12",
     "category_final_arbiter": "홍길순"
   },
@@ -93,7 +93,7 @@
     "category_department": "IT운영",
     "category_user_name": "홍길동",
     "category_count": "1",
-    "category_status": "신청",
+    "category_status": "임시저장",
     "category_processing_date": "2023-06-12 12:34:12",
     "category_final_arbiter": "홍길순"
   },
