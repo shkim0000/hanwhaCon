@@ -13,7 +13,8 @@
     "category_phone" : "내선",
     "category_asset_num" : "12132118",
     "category_serial_key": "546512-12345-AAAAA",
-    "category_introduction_date": "2023-06-15"
+    "category_introduction_date": "2023-06-15",
+    "category_admin_comment": "관리자의 메모가 적혀져 있습니다."
   },
   {
     "id": "#grid_id_2",
@@ -29,7 +30,8 @@
     "category_phone" : "내선",
     "category_asset_num" : "12132118",
     "category_serial_key": "546512-12345-AAAAA",
-    "category_introduction_date": "2023-06-15"
+    "category_introduction_date": "2023-06-15",
+    "category_admin_comment": "관리자의 메모가 적혀져 있습니다."
   },
   {
     "id": "#grid_id_3",
@@ -45,6 +47,7 @@
     "category_phone" : "내선",
     "category_asset_num" : "12132118",
     "category_serial_key": "546512-12345-AAAAA",
-    "category_introduction_date": "2023-06-15"
+    "category_introduction_date": "2023-06-15",
+    "category_admin_comment": "관리자의 메모가 적혀져 있습니다."
   }
 ]

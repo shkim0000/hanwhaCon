@@ -1,20 +1,35 @@
 [
   {
     "id": "#grid_id_1",
-    "category_product":"데스크탑",
+    "category_asset": "데스크탑",
+    "category_product":"표준형",
     "category_item":"데스크탑 모델",
-    "category_amount":"조치중"
+    "category_model_name": "SS-I7-32G-1TB",
+    "category_enroll_count" : 1,
+    "category_asset_num" : "test00001",
+    "category_amount":"1",
+    "category_serial_key":0
   },
   {
     "id": "#grid_id_2",
-    "category_product":"데스크탑",
+    "category_asset": "데스크탑",
+    "category_product":"표준형",
     "category_item":"데스크탑 모델",
-    "category_amount":"조치중"
+    "category_model_name": "SS-I7-32G-1TB",
+    "category_enroll_count" : 1,
+    "category_asset_num" : "test00001",
+    "category_amount":"1",
+    "category_serial_key":0
   },
   {
     "id": "#grid_id_3",
-    "category_product":"데스크탑",
+    "category_asset": "데스크탑",
+    "category_product":"표준형",
     "category_item":"데스크탑 모델",
-    "category_amount":"조치중"
+    "category_model_name": "SS-I7-32G-1TB",
+    "category_enroll_count" : 1,
+    "category_asset_num" : "test00001",
+    "category_amount":"1",
+    "category_serial_key":123
   }
 ]

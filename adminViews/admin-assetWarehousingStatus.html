@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>자산신규등록</title>
+    <title>자산입고현황</title>
 
     <link rel="stylesheet" href="../resources/css/main.css">
     <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
@@ -34,101 +34,65 @@
             <ul>
                 <li><i class="fa-solid fa-house"></i></li>
                 <li>자산등록</li>
-                <li>자산신규등록</li>
+                <li>자산입고현황</li>
             </ul>
         </div>
-        <div class="title-box column">
-            <div class="title">
-                <h3>신청자정보</h3>
-            </div>
-        </div>
-
-        <div class="custom-table">
-            <div class="row con-2">
-                <div class="th"><div class="th-wrap center">신청부서</div></div>
-                <div class="td"><div class="td-wrap">IT 운영</div></div>
-                <div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td"><div class="td-wrap">홍길동</div></div>
-            </div>
-        </div>
-
-        <div class="title-box">
-            <div class="title">
-                <h3>신청 정보</h3>
-            </div>
-        </div>
-        <div class="custom-table">
-            <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청번호</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-                <div class="th"><div class="th-wrap center">신청구분</div></div>
-                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
-                <div class="th"><div class="th-wrap center">신청상태</div></div>
-                <div class="td"><div class="td-wrap">상신</div></div>
-            </div>
-            <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td whole">
-                    <div class="td-wrap">
-                        <label class="input search medium">
-                            <input type="text" placeholder="홍길동">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">신청자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">진행 상태</span>
+                    <label class="select">
+                        <select>
+                            <option value="">완료</option>
+                            <option value="">상신</option>
+                            <option value="">반려</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list small">
+                    <span class="input-title">기간</span>
+                    <div class="date-wrap">
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                        <span>~</span>
+                        <label class="date">
+                            <input type="text">
                         </label>
                     </div>
                 </div>
-            </div>
-            <div class="row con-3">
-                <div class="th"><div class="th-wrap center"><p class="important">자신입고내용</p></div></div>
-                <div class="td">
-                    <div class="td-wrap whole"></div>
+                <div class="input-list">
+                    <span class="input-title">신청사유</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
                 </div>
             </div>
-        </div>
-        <div class="title-box">
-            <div class="title">
-                <h3 class="important">자산정보</h3>
-            </div>
-            <div class="btn-wrap">
-                <button type="button" class="btn excel" data-popup="excelImport_pop">엑셀 IMPORT</button>
-                <button type="button" class="btn add-column" onclick="addRow();">추가</button>
-                <button type="button" class="btn trash" onclick="deleteRowGrid();">선택 삭제</button>
-            </div>
-        </div>
-        <div class="list-box">
-            <div class="multiple-grid-wrap">
-                <div id="grid_wrap2" class="grid-box" data-grid-name="myGridID2"></div>
-                <div class="grid-sub-box">
-                    <div class="count-wrap">
-                        <ul class="count-list">
-                            <li>
-                                <div class="count-box">
-                                    <p>입력 수량 :</p>
-                                    <span>10</span>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="count-box">
-                                    <p>검증 수량 :</p>
-                                    <span>10</span>
-                                </div>
-                            </li>
-                        </ul>
-                        <div class="count-box">
-                            <p>총 입고 수량:</p>
-                            <span>10</span>
-                        </div>
-                    </div>
-                    <button type="button" class="btn">생성</button>
-                </div>
-            </div>
+            <button type="button" class="btn search">검색</button>
         </div>
 
-        <div class="btn-wrap form">
+
+        <div class="title-box">
+            <div class="title">
+                <h3>신청 현황</h3>
+            </div>
+        </div>
+        <div id="grid_wrap2" class="grid-box h-medium"></div>
+
+        <div class="btn-wrap center">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send">상신</button>
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
-            <button type="button" class="btn" data-popup="gridPop_user">사용자, 부서 검색버튼 눌렀을 때 팝업</button>
+            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
+            <button type="button" class="btn" data-popup="gridPop_enrollCurrent">신청현황</button>
         </div>
     </div>
 </div>
@@ -156,42 +120,45 @@
     </div>
 </div>
 
-<!-- 엑셀 IMPORT -->
-<div id="excelImport_pop" class="popup big no">
+<!-- 신청 현황 -->
+<div id="gridPop_enrollCurrent" class="popup big no">
     <div class="pop-box">
         <div class="pop-head">
-            <h3>엑셀 IMPORT</h3>
+            <h3>신청현황</h3>
             <button type="button" class="close-btn"></button>
         </div>
         <div class="pop-body">
-            <div class="input-wrap search-ver">
-                <div class="input-list medium">
-                    <span class="input-title">Import 파일</span>
-                    <div class="search-file-box">
-                        <label class="file">
-                            <input type="file" class="fileUpload" accept=".xlsx">
-                            <span>선택된 파일 없음</span>
-                        </label>
-                        <i class="fa-solid fa-magnifying-glass"></i>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="th"><div class="th-wrap center">신청구분</div></div>
+                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                    <div class="th"><div class="th-wrap center">신청상태</div></div>
+                    <div class="td"><div class="td-wrap">상신완료</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                    <div class="td medium">
+                        <div class="td-wrap">
+                           23년 후반기 노트북 입고
+                        </div>
                     </div>
                 </div>
-                <button type="button" class="btn suitability">적합성 조회</button>
             </div>
-            <div class="title-box end small">
+
+            <div class="title-box">
+                <p class="sum">총수량 : <span class="sum-count"></span></p>
                 <div class="btn-wrap">
-                    <button type="button" class="btn">양식 다운로드</button>
+                    <button type="button" class="btn excel">엑셀다운로드</button>
                 </div>
             </div>
-            <div id="popup_grid_excelImport" class="grid-box"></div>
-
-            <div class="btn-wrap">
-                <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
+            <div id="popup_grid_enrollCurrent" class="grid-box h-small2"></div>
         </div>
     </div>
 </div>
-
 <!-- // 팝업 -->
 <!-- // contents -->
 <script type="text/javascript">
@@ -210,7 +177,7 @@ function documentReady() {
     /* 그리드 생성 */
     createAUIGrid2();
     popupUserSearch(); // 사용자 검색
-    popupExcelImport(); // 엑셀 import
+    popupEnrollcurrent(); //신청현황
 
     /* 그리드 삽입 */
     requestData();
@@ -245,10 +212,6 @@ function createAUIGrid2() {
         }, {
             dataField: "category_model_name",
             headerText: "모델명",
-            editRenderer : {
-                type : "InputEditRenderer",
-                showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
-            }
 
         }, {
             dataField: "category_enroll_count",
@@ -273,25 +236,19 @@ function createAUIGrid2() {
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
-            editRenderer : {
-                type : "InputEditRenderer",
-                showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
-                onlyNumeric : true, // 0~9만 입력가능
-            }
         }, {
             dataField: "category_serial_key",
             headerText: "시리얼키",
             editRenderer : {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
-                // maxlength : 15, // 글자수 10으로 제한 (천단위 구분자 삽입(autoThousandSeparator=true)로 한 경우 구분자 포함해서 10자로 제한)
-                // regExp : "^[a-zA-Z]+$",
+                maxlength : 15, // 글자수 10으로 제한 (천단위 구분자 삽입(autoThousandSeparator=true)로 한 경우 구분자 포함해서 10자로 제한)
+                regExp : "^[a-zA-Z]+$",
             }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
@@ -301,19 +258,16 @@ function createAUIGrid2() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode:true,
-        editable: true,
     }
 
     /* 그리드 생성 */
     myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
 
-    $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap2');
-        setTimeout(function(){
-            AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
-            requestData();
-        },200);
-    })
+    /* 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여) */
+    AUIGrid.bind(myGridID2, "cellDoubleClick", function(event) {
+        /* 링크 이동 */
+        $(location).attr('href', 'admin-assetNewEnroll.html');
+    });
 }
 
 /* 사용자 검색 */
@@ -353,7 +307,7 @@ function popupUserSearch(){
 }
 
 /* 엑셀 Import */
-function popupExcelImport(){
+function popupEnrollcurrent(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout2 = [
@@ -378,14 +332,22 @@ function popupExcelImport(){
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
     }
 
     /* 그리드 생성 */
-    popup_grid_excelImport = AUIGrid.create("#popup_grid_excelImport", columnLayout2, gridPros2);
+    popup_grid_enrollCurrent = AUIGrid.create("#popup_grid_enrollCurrent", columnLayout2, gridPros2);
+
+    setTimeout(function(){
+        let rowsArray = $("#gridPop_enrollCurrent").find(".aui-grid-paging-info-text").text();
+        let rows = rowsArray.split(" ").reverse()[1];
+
+        $(".sum > span").text(rows);
+    },100)
+
+
 }
 /* 4. 데이터 불러오기 */
 function requestData() {
@@ -400,7 +362,7 @@ function requestData2() {
 }
 function requestData3() {
     $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_grid_excelImport, data);
+        AUIGrid.setGridData(popup_grid_enrollCurrent, data);
     });
 }
 
@@ -412,35 +374,11 @@ window.onresize = function () {
     }
 }
 
-/* 6. 함수 관련 모음 */
-/* 그리드 행 선택 삭제 */
+/* 6. 함수관련 모음 */
+/* row행 세기 */
+$(document).ready(function(){
 
-function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(myGridID2); // 체크된 행 삭제 처리
-    let removedRows = AUIGrid.getRemovedItems(myGridID2, true); // 삭제 처리된 아이템 있는지 보기
-    if (removedRows.length <= 0) {
-        alert("삭제 처리되어 마크된 행이 없습니다.")
-        return;
-    }
-    AUIGrid.removeSoftRows(myGridID2); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
-}
-
-/* 행 추가 */
-let cnt = 0;
-function addRow() {
-    var item = new Object();
-    item.id = "grid_ID_1" + (++cnt),
-        item.category_asset='데스크탑',
-        item.category_item = '데스크탑 모델',
-        item.category_model_name = '',
-        item.category_enroll_count = 1,
-        item.category_serial_key = '',
-
-        // parameter
-        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
-        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
-        AUIGrid.addRow(myGridID2, item, "first");
-};
+});
 </script>
 </body>
 </html>

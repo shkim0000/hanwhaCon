@@ -88,11 +88,12 @@
                         <select>
                             <option value="">선택</option>
                             <option value="">신청</option>
+                            <option value="">임시저장</option>
                             <option value="">접수</option>
                             <option value="">출고</option>
-                            <option value="">결제상신</option>
-                            <option value="">결제완료</option>
-                            <option value="">결제취소</option>
+                            <option value="">상신 중</option>
+                            <option value="">상신완료</option>
+                            <option value="">상신반려</option>
                         </select>
                     </label>
                 </div>
@@ -106,7 +107,8 @@
                 <div class="input-list">
                     <span class="input-title">부서</span>
                     <label class="input search">
-                        <input type="text" disabled>
+                        <input type="text">
+                        <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
@@ -138,13 +140,18 @@
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
+            <button type="button" class="btn" data-popup="gridPop_department">부서 검색</button>
+        </div>
+        <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" data-popup="newEnroll_pop">신규신청</button>
             <button type="button" class="btn" data-popup="changeEnroll_pop">교체신청</button>
             <button type="button" class="btn" data-popup="rentalEnroll_pop">대여신청</button>
             <button type="button" class="btn" data-popup="returnEnroll_pop">반납신청</button>
-            <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
             <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대연연장신청</button>
+            <!--
+            <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
             <button type="button" class="btn" data-popup="assetNewEnroll_pop">자산신규등록신청</button>
+            -->
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" data-popup="assetSearch_pop">자산검색</button>
@@ -177,6 +184,28 @@
     </div>
 </div>
 
+<!-- 부서 검색 -->
+<div id="gridPop_department" class="popup grid no">
+    <div class="pop-box">
+        <div class="pop-head">
+            <h3>부서 검색</h3>
+            <button type="button" class="close-btn"></button>
+        </div>
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
 <!-- 신규신청 -->
 <div id="newEnroll_pop" class="popup grid big no">
     <div class="pop-box">
@@ -198,7 +227,14 @@
                     <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
                     <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
                     <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
                     <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
                     <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
                 </div>
@@ -240,6 +276,9 @@
                 <div class="title">
                     <h3>업무배정</h3>
                 </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn">배정</button>
+                </div>
             </div>
             <div class="custom-table">
                 <div class="row con-3">
@@ -259,19 +298,20 @@
                 </div>
             </div>
 
-            <!-- 처리이력 :  사용자페이지에서는 보여짐)
+            <!-- 처리이력 -->
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box"></div>
-            -->
+            <div id="popup_grid_history" class="grid-box h-small"></div>
+
 
             <div class="title-box">
                 <div class="title">
-                    <h3 class="important">첨부파일</h3>
+                    <h3>첨부파일</h3>
                 </div>
+                <!--
                 <div class="btn-wrap">
                     <label class="file">
                         <input type="file">
@@ -279,45 +319,27 @@
                     </label>
                     <button type="button" class="btn trash">선택 삭제</button>
                 </div>
+                -->
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
+                            <div class="td-wrap">
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
+                    </tr>
+                    <tr>
                         <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -326,8 +348,10 @@
             </div>
 
             <div class="btn-wrap">
+                <!--
                 <button type="button" class="btn">배정</button>
                 <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
+                -->
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -391,8 +415,8 @@
                     <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
-                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">관리자 메모</p></div></div>
+                    <div class="td whole"><div class="td-wrap"></div></div>
                 </div>
             </div>
 
@@ -406,6 +430,9 @@
             <div class="title-box">
                 <div class="title">
                     <h3>업무배정</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn">배정</button>
                 </div>
             </div>
             <div class="custom-table">
@@ -426,65 +453,32 @@
                 </div>
             </div>
 
-            <!-- 처리이력 : 사용자 페이지
+            <!-- 처리이력 -->
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
             <div id="popup_grid_change_history" class="grid-box"></div>
-            -->
+
 
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
                 </div>
-                <div class="btn-wrap">
-                    <label class="file">
-                        <input type="file">
-                        <span class="btn add-file">파일추가</span>
-                    </label>
-                    <button type="button" class="btn trash">선택 삭제</button>
-                </div>
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -577,6 +571,9 @@
                 <div class="title">
                     <h3>업무배정</h3>
                 </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn">배정</button>
+                </div>
             </div>
             <div class="custom-table">
                 <div class="row con-3">
@@ -596,64 +593,31 @@
                 </div>
             </div>
 
-            <!-- 처리이력: 사용자 페이지
+            <!-- 처리이력 -->
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
             <div id="popup_grid_rental_history" class="grid-box"></div>
-            -->
+
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
                 </div>
-                <div class="btn-wrap">
-                    <label class="file">
-                        <input type="file">
-                        <span class="btn add-file">파일추가</span>
-                    </label>
-                    <button type="button" class="btn trash">선택 삭제</button>
-                </div>
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -662,8 +626,10 @@
             </div>
 
             <div class="btn-wrap">
+                <!--
                 <button type="button" class="btn">배정</button>
                 <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
+                -->
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -742,6 +708,9 @@
                 <div class="title">
                     <h3>업무배정</h3>
                 </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn">배정</button>
+                </div>
             </div>
             <div class="custom-table">
                 <div class="row con-3">
@@ -761,14 +730,14 @@
                 </div>
             </div>
 
-            <!--  처리이력 : 사용자 페이지
+            <!--  처리이력 -->
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
             <div id="popup_grid_return_history" class="grid-box"></div>
-            -->
+
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
@@ -783,42 +752,16 @@
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -827,15 +770,18 @@
             </div>
 
             <div class="btn-wrap">
+                <!--
                 <button type="button" class="btn">배정</button>
                 <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
+                -->
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
-<!-- 인수인계 신청 -->
+<!-- 인수인계 신청 (사용X) -->
+<!--
 <div id="takingOverEnroll_pop" class="popup grid big no">
     <div class="pop-box">
         <div class="pop-head">
@@ -894,14 +840,13 @@
             </div>
             <div id="popup_grid_detail5" class="grid-box h-small"></div>
 
-            <!--  처리이력 : 사용자 페이지
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
             <div id="popup_grid_takingOver_history" class="grid-box"></div>
-            -->
+
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
@@ -966,6 +911,7 @@
         </div>
     </div>
 </div>
+-->
 
 <!-- 대여연장 신청 -->
 <div id="rentalExtensionEnroll_pop" class="popup grid big no">
@@ -1039,65 +985,31 @@
             </div>
             <div id="popup_grid_detail6" class="grid-box h-small"></div>
 
-            <!-- 처리이력 : 사용자 페이지
+            <!-- 처리이력 -->
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
             <div id="popup_grid_rentalExtension_history" class="grid-box"></div>
-            -->
 
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
                 </div>
-                <div class="btn-wrap">
-                    <label class="file">
-                        <input type="file">
-                        <span class="btn add-file">파일추가</span>
-                    </label>
-                    <button type="button" class="btn trash">선택 삭제</button>
-                </div>
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -1106,8 +1018,10 @@
             </div>
 
             <div class="btn-wrap">
+                <!--
                 <button type="button" class="btn">배정</button>
                 <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
+                -->
                 <button type="button" class="btn" data-btn="cancel">닫기</button>
             </div>
         </div>
@@ -1172,7 +1086,8 @@
     </div>
 </div>
 
-<!-- 팝업내 > 처리이력 -->
+<!-- 팝업내 > 처리이력 (사용X)  -->
+<!--
 <div id="gridPop_processingHistory" class="popup grid no">
     <div class="pop-box">
         <div class="pop-head">
@@ -1193,8 +1108,10 @@
         </div>
     </div>
 </div>
+-->
 
-<!-- 자산신규등록신청 -->
+<!-- 자산신규등록신청 (사용X)  -->
+<!--
 <div id="assetNewEnroll_pop" class="popup grid big no">
     <div class="pop-box">
         <div class="pop-head">
@@ -1298,9 +1215,13 @@
         </div>
     </div>
 </div>
+-->
 <!-- // 팝업 -->
 
 <style>
+    .my-header-style{background: #f37321;color:white;border-color:#9d9d9d;}
+    .my-column-style{background: #fff3ec;}
+
     /* 그리드 내에 검색 팝업 박스 */
     .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;}
     .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
@@ -1313,22 +1234,23 @@
     /* 1. AUIGrid 생성 후 반환 ID */
     let myGridID;
     let popup_grid_user; // 사용자 검색
+    let popup_grid_department; // 부서 검색
     let popup_grid_detail1; // 신규신청
     let popup_grid_detail2; // 교체신청
     let popup_grid_detail3; // 대여신청
     let popup_grid_detail4; // 반납신청
     let popup_grid_detail5; // 인수인계신청
     let popup_grid_detail6; // 대여연장신청
-    // let popup_grid_history; // 처리이력 (신규신청팝업)
-    // let popup_grid_change_history; // 처리이력 (교체신청팝업)
-    // let popup_grid_rental_history; // 처리이력 (대여신청팝업)
-    // let popup_grid_return_history; // 처리이력 (반납신청팝업)
-    // let popup_grid_rentalExtension_history; // 처리이력 (대여연장신청팝업)
+    let popup_grid_history; // 처리이력 (신규신청팝업)
+    let popup_grid_change_history; // 처리이력 (교체신청팝업)
+    let popup_grid_rental_history; // 처리이력 (대여신청팝업)
+    let popup_grid_return_history; // 처리이력 (반납신청팝업)
+    let popup_grid_rentalExtension_history; // 처리이력 (대여연장신청팝업)
     // let popup_grid_takingOver_history; // 처리이력 (인수인계신청팝업)
     let popup_subGrid_assetSearch; // 자산검색
     let popup_subGrid_managerSelect // 담당자 선택
-    let popup_grid_processingHistory; // 처리이력
-    let popup_grid_newAssetEnroll; // 자산신규등록신청
+    // let popup_grid_processingHistory; // 처리이력
+    // let popup_grid_newAssetEnroll; // 자산신규등록신청
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     function documentReady() {
@@ -1336,22 +1258,24 @@
         createAUIGrid();
 
         popupUserSearch(); // 사용자검색
+        popupDepartmentSearch(); // 부서검색
+
         popupNewEnroll(); // 신규신청
         popupChangeEnroll(); // 교체신청
         popupRentalEnroll(); // 대여신청
         popupReturnEnroll(); // 반납신청
-        popupTakeOverEnroll(); // 인수인계신청
+        // popupTakeOverEnroll(); // 인수인계신청
         popupRentalExtensionEnroll(); // 대여연장신청
-        // popupHistory(); // 처리이력 (신규신청팝업)
-        // popupChangeHistory(); // 처리이력 (교체신청팝업)
-        // popupRentalHistory(); // 처리이력 (대여신청팝업)
-        // popupReturnHistory(); // 처리이력 (반납신청팝업)
-        // popupRentalExtensionHistory(); // 처리이력 (대여연장신청팝업)
+        popupHistory(); // 처리이력 (신규신청팝업)
+        popupChangeHistory(); // 처리이력 (교체신청팝업)
+        popupRentalHistory(); // 처리이력 (대여신청팝업)
+        popupReturnHistory(); // 처리이력 (반납신청팝업)
+        popupRentalExtensionHistory(); // 처리이력 (대여연장신청팝업)
         // popupTakingOverHistory(); // 처리이력 (인수인계신청팝업)
         subPopupAssetSearch(); // 자산검색
         subPopupManagerSelect(); // 담당자 선택
-        subPopupProcessingHistory(); // 처리 이력
-        popupNewAssetEnroll(); // 자산신규등록신청
+        // subPopupProcessingHistory(); // 처리 이력
+        // popupNewAssetEnroll(); // 자산신규등록신청
 
 
         /* 그리드 삽입 */
@@ -1363,16 +1287,17 @@
         requestData6();
         requestData7();
         requestData8();
-        // requestData9();
-        // requestData10();
-        // requestData11();
-        // requestData12();
-        // requestData13();
-        // requestData14();
+        requestData9();
+        requestData10();
+        requestData11();
+        requestData12();
+        requestData13();
+        requestData14();
         requestData15();
         requestData16();
         requestData17();
-        requestData18();
+        // requestData18();
+        // requestData19();
     }
 
     /* 3. AUIGrid 그리드 옵션 */
@@ -1509,6 +1434,39 @@
         popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
     }
 
+    /* [팝업] 부서 검색 */
+    function popupDepartmentSearch(){
+        /* 팝업 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout3 = [
+            {
+                dataField: "category_department",
+                headerText: "부서명",
+                width: 180
+            },
+            {
+                dataField: "category_depart_code",
+                headerText: "부서명",
+                width: 180
+            }
+        ]
+        /* 2. 그리드 속성 설정 */
+        let gridPros3 = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true, // 가로 스크롤 X
+        }
+
+        /* 그리드 생성 */
+        popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
+    }
+
     /* [팝업] 신규신청 */
     function popupNewEnroll() {
         /* 기본 그리드(예시) */
@@ -1554,13 +1512,32 @@
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
-                dataField: "category_product_name",
-                headerText: "자산분류",
+                dataField: "category_asset_change",
+                headerText: "교체자산",
+                headerStyle: "my-header-style",
+                style: "my-column-style",
             },{
-                dataField: "category_item",
-                headerText: "품목",
+                dataField: "category_model_name",
+                headerText: "모델명",
+                headerStyle: "my-header-style",
+                style: "my-column-style",
             }, {
                 dataField: "category_asset_num",
+                headerText: "자산번호",
+                headerStyle: "my-header-style",
+                style: "my-column-style",
+            }, {
+                dataField: "category_asset_after",
+                headerText: "교체 후 자산",
+            },{
+                dataField: "category_asset_classify",
+                headerText: "자산분류",
+            }, {
+                dataField: "category_item",
+                headerText: "품목",
+            },{
+                dataField: "category_asset_num",
+                style: "search_grid_style",
                 headerText: "자산번호",
                 renderer: {
                     type: "ButtonRenderer",
@@ -1569,12 +1546,6 @@
                     }
                 },
                 style: "search_grid_style"
-            }, {
-                dataField: "category_model_name",
-                headerText: "모델명",
-            },{
-                dataField: "category_asset_before",
-                headerText: "구자산번호",
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
@@ -1742,14 +1713,21 @@
             {
                 dataField: "category_state",
                 headerText: "상태",
+                width:140
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                width:140
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                width:280
+            },
+            {
+                dataField: "category_admin_comment",
+                headerText: "관리자 메모",
             },
         ]
         /* 2. 그리드 속성 설정 */
@@ -1777,14 +1755,21 @@
             {
                 dataField: "category_state",
                 headerText: "상태",
+                width:140
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                width:140
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                width:280
+            },
+            {
+                dataField: "category_admin_comment",
+                headerText: "관리자 메모",
             },
         ]
         /* 2. 그리드 속성 설정 */
@@ -1812,14 +1797,21 @@
             {
                 dataField: "category_state",
                 headerText: "상태",
+                width:140
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                width:140
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                width:280
+            },
+            {
+                dataField: "category_admin_comment",
+                headerText: "관리자 메모",
             },
         ]
         /* 2. 그리드 속성 설정 */
@@ -1847,14 +1839,21 @@
             {
                 dataField: "category_state",
                 headerText: "상태",
+                width:140
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                width:140
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                width:280
+            },
+            {
+                dataField: "category_admin_comment",
+                headerText: "관리자 메모",
             },
         ]
         /* 2. 그리드 속성 설정 */
@@ -1882,14 +1881,21 @@
             {
                 dataField: "category_state",
                 headerText: "상태",
+                width:140
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                width:140
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                width:280
+            },
+            {
+                dataField: "category_admin_comment",
+                headerText: "관리자 메모",
             },
         ]
         /* 2. 그리드 속성 설정 */
@@ -2123,6 +2129,13 @@
             AUIGrid.setGridData(popup_grid_user, data);
         });
     }
+
+    function requestData19() {
+        $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
+            AUIGrid.setGridData(popup_grid_department, data);
+        });
+    }
+
     function requestData3() {
         $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
             AUIGrid.setGridData(popup_grid_detail1, data);

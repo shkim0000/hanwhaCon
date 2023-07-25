@@ -307,6 +307,24 @@ $(function(){
         }
     });
 
+    /* file 탐색기 */
+    $(".search-file-box").click(function(){
+        let fileName;
+        if(fileName != ''){
+            fileName = "";
+        }
+        $(this).find("input[type='file']").queue(function(){
+            $(this).change(function(){
+                fileName = $(this).val();
+                let fileNameSlice = fileName.split("\\").reverse()[0];
+                $(this).next().text(fileNameSlice);
+                $(this).attr("value",fileName);
+            });
+        }).dequeue(function(){
+
+        });
+    });
+
     /* popup model-list 클릭 */
     $(".tab-wrap").each(function(){
         let length = $(this).find("li").length;

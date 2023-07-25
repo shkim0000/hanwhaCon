@@ -15,7 +15,10 @@
     "category_changeProduct_name": "LG-G10402",
     "category_product_quantity": 1,
     "category_changeAsset_num": "190492",
-    "category_asset_before": "21345646"
+    "category_asset_before": "21345646",
+    "category_asset_after" : "",
+    "category_asset_classify" : "데스크탑",
+    "category_asset_change"  : ""
   },
   {
     "id": "#grid_id_2",
@@ -33,6 +36,9 @@
     "category_changeProduct_name": "LG-G10402",
     "category_product_quantity": 1,
     "category_changeAsset_num": "490129",
-    "category_asset_before": "21345646"
+    "category_asset_before": "21345646",
+    "category_asset_after" : "",
+    "category_asset_classify" : "데스크탑",
+    "category_asset_change"  : ""
   }
 ]
