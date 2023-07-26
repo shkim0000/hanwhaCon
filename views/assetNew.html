@@ -144,52 +144,14 @@
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-small" data-grid-name="myGridID"></div>
-
-        <!--        <div class="title-box">-->
-        <!--            <div class="title">-->
-        <!--                <h3>첨부파일</h3>-->
-        <!--            </div>-->
-        <!--            <div class="btn-wrap">-->
-        <!--                <label class="file">-->
-        <!--                    <input type="file">-->
-        <!--                    <span  class="btn add-file">파일추가</span>-->
-        <!--                </label>-->
-        <!--                <button type="button" class="btn trash">선택 삭제</button>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="table">-->
-        <!--            <table>-->
-        <!--                <colgroup>-->
-        <!--                    <col style="width:50px">-->
-        <!--                    <col style="width:calc(100% - 50px);">-->
-        <!--                </colgroup>-->
-        <!--                <thead>-->
-        <!--                <tr>-->
-        <!--                    <th>-->
-        <!--                        <div class="th-wrap center">-->
-        <!--                            <label class="check no-text">-->
-        <!--                                <input type="checkbox">-->
-        <!--                                <span></span>-->
-        <!--                            </label>-->
-        <!--                        </div>-->
-        <!--                    </th>-->
-        <!--                    <th><p>자산분류</p></th>-->
-        <!--                </tr>-->
-        <!--                </thead>-->
-        <!--                <tbody>-->
-        <!--                <tr>-->
-        <!--                </tr>-->
-        <!--                </tbody>-->
-        <!--            </table>-->
-        <!--        </div>-->
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
-            <button type="button" class="btn" data-popup="model_pop">모델정보</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
+            <button type="button" class="btn" onclick="lp_open('model_pop','모델 검색',540,766);">모델정보</button>
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" data-popup="submit_pop">상신 팝업</button>
@@ -203,12 +165,8 @@
 
 <!-- 팝업 -->
 <!-- 사용자 검색 -->
-<div id="gridPop_user" class="popup grid no">
+<div id="gridPop_user" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
@@ -225,12 +183,8 @@
 </div>
 
 <!-- 모델 정보 -->
-<div id="model_pop" class="popup no">
+<div id="model_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>모델 정보</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="tab-box">
                 <div class="tab-title"><h4>데스크탑</h4></div>
@@ -285,7 +239,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('model_pop')">닫기</button>
             </div>
         </div>
     </div>
