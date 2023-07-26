@@ -39,19 +39,11 @@
                 <li>모델신청</li>
             </ul>
         </div>
-<!--        <div class="title-box">-->
-<!--            <div class="title">-->
-<!--                <h3 class="important">신청자정보</h3>-->
-<!--            </div>-->
-<!--        </div>-->
+
         <div class="custom-table">
             <div class="row">
-<!--                <div class="th"><div class="th-wrap center">사용자</div></div>-->
-<!--                <div class="td"><div class="td-wrap">홍길동</div></div>-->
                 <div class="th"><div class="th-wrap center">부서</div></div>
                 <div class="td"><div class="td-wrap">IT운영</div></div>
-<!--                <div class="th"><div class="th-wrap center">제목</div></div>-->
-<!--                <div class="td"><div class="td-wrap">전반기 정기교체</div></div>-->
             </div>
             <div class="row con-2">
                 <div class="th"><div class="th-wrap center">신청기간</div></div>
@@ -82,19 +74,15 @@
         </div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn model" data-popup="model_pop">모델 정보</button>
-            <button type="button" class="btn" data-popup="reason_pop">미신청 사유</button>
+            <button type="button" class="btn model" onclick="lp_open('model_pop','모델 검색',540,766);">모델 정보</button>
+            <button type="button" class="btn" onclick="lp_open('reason_pop','미신청 사유',505,350)">미신청 사유</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 <!-- 팝업 -->
-<div id="model_pop" class="popup no">
+<div id="model_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>모델 정보</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="tab-box">
                 <div class="tab-title"><h4>데스크탑</h4></div>
@@ -149,18 +137,14 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('model_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
-<div id="reason_pop" class="popup no">
+<div id="reason_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>미신청 입력</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="input-list">
                 <span class="input-title">미신청 사유를 입력해주세요.</span>
@@ -171,7 +155,7 @@
 
             <div class="btn-wrap">
                 <button type="button" class="btn">미신청</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('reason_pop')">닫기</button>
             </div>
         </div>
     </div>

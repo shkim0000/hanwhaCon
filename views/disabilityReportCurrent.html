@@ -159,15 +159,14 @@
             </div>
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
-<!--                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택 삭제</button>-->
             </div>
         </div>
         <!-- 장애신고목록 그리드 -->
         <div id="grid_wrap" class="grid-box h-medium"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
-            <button type="button" class="btn" data-popup="gridPop_detail">장애 신고 신청 현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_detail','장애신고 신청 현황',1250,590);">장애 신고 신청 현황</button>
         </div>
     </div>
 </div>
@@ -175,12 +174,8 @@
 
 <!-- 팝업 -->
 <!--사용자 검색-->
-<div id="gridPop_user" class="popup grid no">
+<div id="gridPop_user" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
@@ -197,12 +192,8 @@
 </div>
 
 <!--장애 신고 신청 현황-->
-<div id="gridPop_detail" class="popup grid big no">
+<div id="gridPop_detail" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>장애 신고 신청 현황</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -299,7 +290,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_detail')">닫기</button>
             </div>
         </div>
     </div>

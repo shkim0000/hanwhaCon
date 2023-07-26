@@ -63,54 +63,6 @@
             </div>
         </div>
         <div id="current_wrap" class="grid-box"></div>
-<!--        <div class="table fixed-height">
-            <table>
-                <thead>
-                <tr>
-                    <th><div class="th-wrap center">물품명</div></th>
-                    <th><div class="th-wrap center">총 보유자산</div></th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td><div class="td-wrap center">데스크탑</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">2</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">모니터</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">3</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">노트북</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">1</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">데스크탑</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">2</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">모니터</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">3</button></div></td>
-                </tr>
-                <tr>
-                    <td><div class="td-wrap center">노트북</div></td>
-                    <td><div class="td-wrap center inBtn"><button type="button">1</button></div></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-        <div class="table no-line">
-            <table>
-                <colgroup>
-                    <col style="width:50%"/>
-                    <col style="width:50%">
-                </colgroup>
-                <tr>
-                    <th><div class="th-wrap center">전체</div></th>
-                    <td><div class="td-wrap center">2</div></td>
-                </tr>
-            </table>
-        </div>-->
 
         <div class="title-box">
             <div class="title">
@@ -123,21 +75,17 @@
         <div id="grid_wrap" class="grid-box"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_detail">자산정보</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 
-<!-- popup -->
+<!-- 팝업 -->
 
 <!-- 자산 정보 -->
-<div id="gridPop_detail" class="popup grid big no">
+<div id="gridPop_detail" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>자산 상세정보</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -222,14 +170,12 @@
 
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_detail')">닫기</button>
             </div>
         </div>
     </div>
 </div>
-<!-- // 자산 정보 -->
-
-<!-- // popup -->
+<!-- // 팝업 -->
 
 <script>
 /* AUIGrid */
@@ -411,12 +357,12 @@ function requestData() {
 window.onresize = function () {
     if (typeof myGridID !== "undefined") {
         AUIGrid.resize(myGridID);
+    } else if (typeof currentID !== "undefined"){
+        AUIGrid.resize(currentID);
     }
 }
 
 /* 엑셀 다운로드 */
-// 엑셀 내보내기(Export);
-// 엑셀 내보내기(Export);
 function exportTo(type) {
 
     // 내보내기 실행

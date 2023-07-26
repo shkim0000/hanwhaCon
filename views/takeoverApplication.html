@@ -194,8 +194,7 @@
         </div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
-            <button type="button" class="btn" data-popup="gridPop_department">부서검색</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" data-popup="submit_pop">상신 팝업</button>
@@ -209,12 +208,8 @@
 
 <!-- 팝업 -->
 <!-- 사용자 검색 -->
-<div id="gridPop_user" class="popup grid no">
+<div id="gridPop_user" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
@@ -226,28 +221,6 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
-
-<!-- 부서 검색 -->
-<div id="gridPop_department" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>부서 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">부서</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_department" class="grid-box"></div>
         </div>
     </div>
 </div>
@@ -487,7 +460,6 @@
 let myGridID;
 let myGridID2;
 let popup_grid_user; // 사용자 검색
-let popup_grid_department; // 부서 검색
 let popup_grid_submitList; // 상신
 let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
 let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
@@ -503,7 +475,6 @@ function documentReady() {
     createAUIGrid2();
 
     popupUserSearch();
-    popupDepartmentSearch();
     popupSubmitList(); // 상신
     subPopupSearchExecutives(); // 상신 > 검색한 임직원
     subPopupAddExecutives(); // 상신 > 결재라인에 추가할 임직원
@@ -512,7 +483,6 @@ function documentReady() {
     /* 그리드 삽입 */
     requestData();
     requestData2();
-    requestData3();
     requestData5();
     requestData6();
     requestData7();
@@ -726,6 +696,7 @@ function createAUIGrid2() {
         },200);
     })
 }
+/* [팝업] 사용자 검색 */
 function popupUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -760,39 +731,6 @@ function popupUserSearch(){
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
 }
-
-function popupDepartmentSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout3 = [
-        {
-            dataField: "category_department",
-            headerText: "부서명",
-            width: 180
-        },
-        {
-            dataField: "category_depart_code",
-            headerText: "부서명",
-            width: 180
-        }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros3 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-    }
-
-    /* 그리드 생성 */
-    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout3, gridPros3);
-}
-
 /* [팝업] 상신 */
 function popupSubmitList(){
     /* 팝업 그리드(예시) */
@@ -1091,11 +1029,6 @@ function requestData() {
 function requestData2() {
     $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
         AUIGrid.setGridData(popup_grid_user, data);
-    });
-}
-function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
-        AUIGrid.setGridData(popup_grid_department, data);
     });
 }
 function requestData5() {

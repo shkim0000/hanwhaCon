@@ -151,19 +151,15 @@
         <div id="grid_wrap" class="grid-box"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_detail">서비스데스크 신청 현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_detail','서비스데스크 신청 현황',1250,500);">서비스데스크 신청 현황</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 <!-- 팝업 -->
 <!-- 서비스 신청 현황 -->
-<div id="gridPop_detail" class="popup grid big no">
+<div id="gridPop_detail" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>서비스데스크 신청 현황</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -212,7 +208,7 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box h-small"></div>
+            <div id="popup_grid_history" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -221,42 +217,16 @@
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -276,8 +246,7 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 
-let popup_grid_assetInfo; // 자산정보
-let popup_grid_history; // 처리이력
+let popup_grid_history; // 서비스데스크 신청현황
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
@@ -367,8 +336,7 @@ function createAUIGrid() {
     });
 }
 
-
-/* [팝업] 서비스데스크 신청 현황 > 처리이력 */
+/* [팝업] 서비스데스크 신청 현황 > 서비스데스크 신청현황 */
 function popupDetail() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
