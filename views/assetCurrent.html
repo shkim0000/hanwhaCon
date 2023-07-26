@@ -88,25 +88,26 @@
                         <select>
                             <option value="">선택</option>
                             <option value="">신청</option>
+                            <option value="">저장</option>
                             <option value="">접수</option>
                             <option value="">출고</option>
                             <option value="">결제상신</option>
                             <option value="">결제완료</option>
-                            <option value="">결제취소</option>
+                            <option value="">취소</option>
                         </select>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text">
+                    <label class="input search" onclick="lp_open('gridPop_user','사용자 검색',505,530);">
+                        <input type="text" readonly>
                         <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서</span>
-                    <label class="input search">
-                        <input type="text" disabled>
+                    <label class="input search" data-isActive="readonly">
+                        <input type="text" readonly>
                     </label>
                 </div>
                 <div class="input-list">
@@ -192,8 +193,8 @@
                     <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="select whole">
-                                <select disabled>
+                            <label class="select whole" data-isActive="readonly">
+                                <select readonly>
                                     <option value="" selected>행정동</option>
                                     <option value="">성수동</option>
                                 </select>
@@ -910,79 +911,46 @@ function createAUIGrid() {
             dataField: "category_application_num",
             headerText: "신청번호",
             width: 160,
-            filter: {
-                showIcon: true,
-            }
         }, {
             dataField: "category_application_division",
             headerText: "신청구분",
-            width: 180,
-            filter: {
-                showIcon: true,
-            }
+            width: 180
         }, {
             dataField: "category_application_date",
             headerText: "신청일자",
-            width: 280,
-            filter: {
-                showIcon: true,
-            }
+            width: 280
         }, {
             dataField: "category_content",
             headerText: "내용",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_application_reason",
             headerText: "신청사유",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_department",
             headerText: "부서명",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_user_name",
             headerText: "사용자",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_count",
             headerText: "수량",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_status",
             headerText: "상태",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_processing_date",
             headerText: "처리일자",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }, {
             dataField: "category_final_arbiter",
             headerText: "최종 결재자",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
+            width: 160
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -1002,10 +970,7 @@ function createAUIGrid() {
                 return false; // false 반환하면 disabled 처리됨
             }
             return true;
-        },
-        copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
-        enableFilter: true, // 필터 true 설정
+        }
     }
 
     /* 그리드 생성 */
