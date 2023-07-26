@@ -910,46 +910,79 @@ function createAUIGrid() {
             dataField: "category_application_num",
             headerText: "신청번호",
             width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_application_division",
             headerText: "신청구분",
-            width: 180
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_application_date",
             headerText: "신청일자",
-            width: 280
+            width: 280,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_content",
             headerText: "내용",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_application_reason",
             headerText: "신청사유",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_department",
             headerText: "부서명",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_user_name",
             headerText: "사용자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_count",
             headerText: "수량",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_status",
             headerText: "상태",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_processing_date",
             headerText: "처리일자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_final_arbiter",
             headerText: "최종 결재자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -969,7 +1002,10 @@ function createAUIGrid() {
                 return false; // false 반환하면 disabled 처리됨
             }
             return true;
-        }
+        },
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */

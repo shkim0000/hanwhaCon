@@ -646,39 +646,66 @@
             }, {
                 dataField: "category_product_name",
                 headerText: "물품종류",
-                width: 180
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
-                width: 280
+                width: 280,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_department",
                 headerText: "부서",
-                width: 160
+                width: 160,
+                filter: {
+                showIcon: true,
+            }
             }, {
                 dataField: "category_user_name",
                 headerText: "사용자",
-                width: 160
+                width: 160,
+                filter: {
+                showIcon: true,
+            }
             }, {
                 dataField: "category_classification_use",
                 headerText: "용도구분",
-                width: 160
+                width: 160,
+                filter: {
+                showIcon: true,
+            }
             }, {
                 dataField: "category_asset_place",
                 headerText: "설치장소",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                },
             }, {
                 dataField: "category_date",
                 headerText: "설치일",
-                width: 160
+                width: 160,
+                filter: {
+                showIcon: true,
+            }
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
-                width: 160
+                width: 160,
+                filter: {
+                showIcon: true,
+            }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
@@ -694,6 +721,9 @@
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             fillColumnSizeMode: true,
             softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -731,43 +761,70 @@
             }, {
                 dataField: "category_product_name",
                 headerText: "물품종류",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
-                width:200
+                width:200,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_classification_use",
                 headerText: "용도구분",
-                width: 140
+                width: 140,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_place",
                 headerText: "설치장소",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_note",
                 headerText: "교체물품종류",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                },
                 headerStyle: "my-header-style",
                 style: "my-column-style",
             }, {
                 dataField: "category_changeProduct_name",
                 headerText: "모델명",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                },
                 headerStyle: "my-header-style",
                 style: "my-column-style",
             }, {
                 dataField: "category_product_quantity",
                 headerText: "수량",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                },
                 headerStyle: "my-header-style",
                 style: "my-column-style",
             }, {
@@ -806,6 +863,9 @@
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             fillColumnSizeMode: true,
             softRemoveRowMode: false,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */

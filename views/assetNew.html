@@ -531,6 +531,9 @@
                 renderer: {
                     type: "DropDownListRenderer",
                     list: groupList1
+                },
+                filter: {
+                    showIcon: true,
                 }
             }, {
                 dataField: "category_item",
@@ -538,6 +541,9 @@
                 renderer: {
                     type: "DropDownListRenderer",
                     list: groupList2
+                },
+                filter: {
+                    showIcon: true,
                 }
             }, {
                 dataField: "category_amount",
@@ -549,6 +555,9 @@
                     step: 1,
                     inputHeight: 28, // input 높이 지정
                     textEditable: false
+                },
+                filter: {
+                    showIcon: true,
                 }
             }, {
                 dataField: "category_del_btn", //임의의 고유값
@@ -565,7 +574,7 @@
                     onClick: function(){
                         AUIGrid.removeRow(myGridID, "selectedIndex");
                     }
-                }
+                },
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
@@ -588,6 +597,9 @@
             /* autoGridHeight : true */
             fillColumnSizeMode:true,
             softRemoveRowMode:false,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */

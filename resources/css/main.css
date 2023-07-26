@@ -99,7 +99,7 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .aui-grid-paging-panel{background:var(--tableBg1);}
 .aui-grid-header-panel .aui-grid-table tr td{border-color:var(--line1);}
 .aui-grid-body-panel .aui-grid-table tr td:hover{background:#e2e2e2;}
-.aui-grid-button-renderer{width:120px;background:var(--color1);color:var(--color10);border-radius:4px;text-align:center;position:relative;font-weight:normal;}
+.aui-grid-button-renderer{width:80px;background:var(--color1);color:var(--color10);border-radius:4px;text-align:center;position:relative;font-weight:normal;border:none;}
 .aui-grid-button-renderer:hover{background:var(--color1);}
 .aui-grid-paging-info-text{display:none;}
 

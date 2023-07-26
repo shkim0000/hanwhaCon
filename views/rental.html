@@ -556,6 +556,9 @@ function createAUIGrid() {
             renderer: {
                 type: "DropDownListRenderer",
                 list: groupList1
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_item",
@@ -563,6 +566,9 @@ function createAUIGrid() {
             renderer: {
                 type: "DropDownListRenderer",
                 list: groupList2
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_amount",
@@ -574,6 +580,9 @@ function createAUIGrid() {
                 step: 1,
                 inputHeight: 28, // input 높이 지정
                 textEditable: false
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_del_btn", //임의의 고유값
@@ -605,6 +614,9 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode:true,
         softRemoveRowMode: false,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */

@@ -501,46 +501,79 @@ function createAUIGrid() {
             dataField: "category_product_name",
             headerText: "물품명",
             width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
-            width: 180
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_item_name",
             headerText: "모델명",
-            width: 280
+            width: 280,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_user_name",
             headerText: "사용자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_use_type",
             headerText: "용도1",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_use_type2",
             headerText: "용도2",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_order",
             headerText: "신청구분",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_description",
             headerText: "신청내용",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_place",
             headerText: "사용장소",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_state",
             headerText: "자산상태",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_note",
             headerText: "비고",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_del_btn", // 임의의 고유값
             headerText: "",
@@ -571,7 +604,10 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         autoGridHeight : true,
         fillColumnSizeMode:true,
-        softRemoveRowMode: false// 소프트 제거 모드 사용 안함
+        softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */

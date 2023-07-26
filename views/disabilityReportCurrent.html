@@ -333,39 +333,66 @@ function createAUIGrid() {
         }, {
             dataField: "category_disable_num",
             headerText: "장애접수번호",
-            width: 180
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_registration_date",
             headerText: "장애등록일시",
             width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_status",
             headerText: "상태",
-            width: 280
+            width: 280,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_item_name",
             headerText: "물품명",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_model_name",
             headerText: "모델명",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_registrant",
             headerText: "등록자",
             width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_publisher",
             headerText: "발행자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_person_charge",
             headerText: "조치자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -380,6 +407,9 @@ function createAUIGrid() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
