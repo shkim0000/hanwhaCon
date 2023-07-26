@@ -71,7 +71,7 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="양현모">
+                            <input type="text" placeholder="양현모" disabled id="userID">
                             <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -80,7 +80,7 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input">
-                            <input type="text" value="IT운영" readonly>
+                            <input type="text" value="IT운영" disabled id="userPart">
                         </label>
                     </div>
                 </div>
@@ -98,7 +98,13 @@
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center">상세위치</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
                 <div class="th"><div class="th-wrap center">설치 요청일</div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -139,7 +145,13 @@
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center"><p class="important">신청사유</p></div></div>
-                <div class="td medium"><div class="td-wrap"></div></div>
+                <div class="td medium">
+                    <div class="td-wrap">
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -687,6 +699,16 @@ function popupUserSearch(){
 
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+
+    /* 사용자 팝업에서 더블클릭 시, 사용자 input과 부서 input에 자동입력 */
+    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        $("#gridPop_user").removeClass("open");
+
+        let clickItem = AUIGrid.getSelectedRows(popup_grid_user)[0];
+        $("#userID").attr("value",clickItem.category_user_name);
+        $("#userPart").attr("value",clickItem.category_department);
+    });
+
 }
 
 /* [팝업] 부서 검색 */

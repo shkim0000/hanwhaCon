@@ -61,21 +61,13 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청번호</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-                <div class="th"><div class="th-wrap center">신청구분</div></div>
-                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
-                <div class="th"><div class="th-wrap center">신청상태</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-            </div>
-            <div class="row con-3">
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
                 <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="양현모">
+                            <input type="text" placeholder="양현모" id="userID">
                             <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -84,7 +76,7 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="IT 운영" disabled>
+                            <input type="text" placeholder="IT 운영" disabled id="userPart">
                         </label>
                     </div>
                 </div>
@@ -106,7 +98,13 @@
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center">상세위치</div></div>
-                <div class="td"><div class="td-wrap"> </div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
                 <div class="th"><div class="th-wrap center"><p>설치 요청일</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -117,7 +115,7 @@
                 </div>
             </div>
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center"><p class="important">신청사유</p></div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청구분</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="select whole">
@@ -130,8 +128,14 @@
                         </label>
                     </div>
                 </div>
-                <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
-                <div class="td"><div class="td-wrap"></div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청사유</p></div></div>
+                <div class="td medium">
+                    <div class="td-wrap">
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="title-box">
@@ -632,6 +636,16 @@
 
         /* 그리드 생성 */
         popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+
+        /* 사용자 팝업에서 더블클릭 시, 사용자 input과 부서 input에 자동입력 */
+        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+            $("#gridPop_user").removeClass("open");
+
+            let clickItem = AUIGrid.getSelectedRows(popup_grid_user)[0];
+            $("#userID").attr("value",clickItem.category_user_name);
+            $("#userPart").attr("value",clickItem.category_department);
+            lp_close('model_pop');
+        });
     }
 
     /* [팝업] 상신 */
