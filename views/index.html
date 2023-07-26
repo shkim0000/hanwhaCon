@@ -784,7 +784,7 @@
 
 
 <!-- 레이어 팝업 : data-layerPop-small -->
-<button type="button" class="btn" data-layerPop-small="dialog" data-layerTitle="사용자 검색">레이어 팝업</button>
+<button type="button" class="btn" onclick="lp_open('dialog','사용자 검색',510,460);">레이어 d팝업</button>
 <div id="dialog" class="popup">
     <div class="pop-box">
         <div class="pop-body">
@@ -803,7 +803,7 @@
 </div>
 
 <!-- 레이어 팝업 : data-layerPop-smallLong -->
-<button type="button" class="btn" data-layerPop-smallLong="model_pop" data-layerTitle="모델 검색">모델 검색</button>
+<button type="button" class="btn" onclick="lp_open('model_pop','모델 검색',540,766);">모델 검색</button>
 <div id="model_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
@@ -861,14 +861,14 @@
                 </div>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('model_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 레이어 팝업 : data-layerPop-big -->
-<button type="button" class="btn" data-layerPop-big="gridPop_detail" data-layerTitle="신청 등록 정보 검색">신청 등록 정보 검색</button>
+<button type="button" class="btn" onclick="lp_open('gridPop_detail','신청 등록 정보 검색',1250,570);">신청 등록 정보 검색</button>
 <div id="gridPop_detail" class="popup">
     <div class="pop-box">
         <div class="pop-body">
@@ -901,7 +901,7 @@
                     <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="input search" data-layerPop-small="dialog" data-layerTitle="사용자 검색">
+                            <label class="input search" onclick="lp_open('dialog','사용자 검색',510,460);">
                                 <input type="text" placeholder="양현모" disabled>
                                 <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </label>
@@ -945,7 +945,9 @@
                 </div>
             </div>
 
-            <div id="popup_grid_detail"></div>
+            <div class="grid-box">
+                <div id="popup_grid_detail"></div>
+            </div>
 
             <div class="title-box">
                 <div class="title">
@@ -965,57 +967,39 @@
 
             <div class="btn-wrap">
                 <button type="button" class="btn">처리이력</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" data-btn="cancel" onclick="lp_close('gridPop_detail')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 <!-- // 팝업 -->
-
-
-<div id="testest"></div>
 <script>
-    /* 레이어 팝업 (사용자 팝업 크기 : data-layerPop-small) */
-    $("[data-layerPop-small]").on("click", function(){
-        let id = $(this).attr("data-layerPop-small");
-        let name = $(this).attr("data-layerTitle");
-        $("#"+id).addClass("open").dialog({
-            title: name,
-            height:515,
-            width: 510,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
+/* 팝업창 열기 */
+function lp_open(id,title,width,height){
+    $("#"+id).addClass("open").dialog({
+        title: title,
+        width: width,
+        height:height,
+        modal: true,
+        resizable: false,
+        dialogClass: 'no-close success-dialog'
     });
+}
 
-    /* 레이어 팝업 (모델정보 크기 : data-layerPop-smallLong) */
-    $("[data-layerPop-smallLong]").on("click", function(){
-        let id = $(this).attr("data-layerPop-smallLong");
-        let name = $(this).attr("data-layerTitle");
-        $("#"+id).addClass("open").dialog({
-            title: name,
-            height:766,
-            width: 540,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
-    });
-
-    /* 레이어 팝업 (모델정보 크기 : data-layerPop-big) */
-    $("[data-layerPop-big]").on("click", function(){
-        let id = $(this).attr("data-layerPop-big");
-        let name = $(this).attr("data-layerTitle");
-        $("#"+id).addClass("open").dialog({
-            title: name,
-            height:570,
-            width:1250,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
-    });
+/* 팝업창 닫기 */
+function lp_close(target)
+{
+    if(target)
+    {
+        $("#"+target).dialog("close");
+    }
+    else
+    {
+/*        const _this = $(obj);
+        const lp_id = _this.closest(".lp-wrap").attr("id");
+        $("#"+lp_id).dialog("close");*/
+    }
+}
 
     Dropzone.autoDiscover = false;
     var dropzonePreviewNode = document.querySelector('#dropzone-preview-list');
@@ -1381,7 +1365,6 @@ function createPopupAUIGrid5() {
 
     /* 그리드 생성 */
     popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
-    popup_grid_detail = AUIGrid.create("#testest", columnLayout, gridPros);
 }
 
 
