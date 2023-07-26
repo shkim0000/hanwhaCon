@@ -974,33 +974,6 @@
 </div>
 <!-- // 팝업 -->
 <script>
-/* 팝업창 열기 */
-function lp_open(id,title,width,height){
-    $("#"+id).addClass("open").dialog({
-        title: title,
-        width: width,
-        height:height,
-        modal: true,
-        resizable: false,
-        dialogClass: 'no-close success-dialog'
-    });
-}
-
-/* 팝업창 닫기 */
-function lp_close(target)
-{
-    if(target)
-    {
-        $("#"+target).dialog("close");
-    }
-    else
-    {
-/*        const _this = $(obj);
-        const lp_id = _this.closest(".lp-wrap").attr("id");
-        $("#"+lp_id).dialog("close");*/
-    }
-}
-
     Dropzone.autoDiscover = false;
     var dropzonePreviewNode = document.querySelector('#dropzone-preview-list');
     dropzonePreviewNode.id = '';

@@ -137,25 +137,21 @@
         <div id="grid_wrap" class="grid-box"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" data-popup="gridPop_user">사용자 검색</button>
-            <button type="button" class="btn" data-popup="newEnroll_pop">신규신청</button>
-            <button type="button" class="btn" data-popup="changeEnroll_pop">교체신청</button>
-            <button type="button" class="btn" data-popup="rentalEnroll_pop">대여신청</button>
-            <button type="button" class="btn" data-popup="returnEnroll_pop">반납신청</button>
-            <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
-            <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대연연장신청</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530);">사용자 검색</button>
+            <button type="button" class="btn" onclick="lp_open('newEnroll_pop','신규 신청',1250,570);">신규신청</button>
+            <button type="button" class="btn" onclick="lp_open('changeEnroll_pop','교체신청',1250,570);">교체신청</button>
+            <button type="button" class="btn" onclick="lp_open('rentalEnroll_pop','대여신청',1250,570);">대여신청</button>
+            <button type="button" class="btn" onclick="lp_open('returnEnroll_pop','반납신청',1250,570);">반납신청</button>
+            <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop','인수인계신청',1250,570);">인수인계신청</button>
+            <button type="button" class="btn" onclick="lp_open('rentalExtensionEnroll_pop','대연연장신청',1250,570);">대연연장신청</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 <!-- 팝업 -->
 <!-- 사용자 검색 -->
-<div id="gridPop_user" class="popup grid no">
+<div id="gridPop_user" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
@@ -172,12 +168,8 @@
 </div>
 
 <!-- 신규신청 -->
-<div id="newEnroll_pop" class="popup grid big no">
+<div id="newEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>신규신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -201,9 +193,9 @@
                     <div class="td">
                         <div class="td-wrap">
                             <label class="select whole">
-                                <select>
-                                    <option value="">행정동</option>
-                                    <option value="">행정동</option>
+                                <select disabled>
+                                    <option value="" selected>행정동</option>
+                                    <option value="">성수동</option>
                                 </select>
                             </label>
                         </div>
@@ -228,7 +220,7 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail1" class="grid-box h-small"></div>
+            <div id="popup_grid_detail1" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -251,22 +243,18 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box"></div>
+            <div id="popup_grid_history" class="grid-box l-grid"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('newEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 교체신청 -->
-<div id="changeEnroll_pop" class="popup grid big no">
+<div id="changeEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>교체신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -327,7 +315,7 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail2" class="grid-box h-small"></div>
+            <div id="popup_grid_detail2" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -350,23 +338,19 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_change_history" class="grid-box"></div>
+            <div id="popup_grid_change_history" class="grid-box l-grid"></div>
 
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 대여신청 -->
-<div id="rentalEnroll_pop" class="popup grid big no">
+<div id="rentalEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>대여신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -430,7 +414,7 @@
                     <h3>대여자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail3" class="grid-box h-small"></div>
+            <div id="popup_grid_detail3" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -453,22 +437,18 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_rental_history" class="grid-box"></div>
+            <div id="popup_grid_rental_history" class="grid-box l-grid"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('rentalEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 반납신청 -->
-<div id="returnEnroll_pop" class="popup grid big no">
+<div id="returnEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>반납신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -528,7 +508,7 @@
                     <h3>반납자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail4" class="grid-box h-small"></div>
+            <div id="popup_grid_detail4" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -551,22 +531,18 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_return_history" class="grid-box"></div>
+            <div id="popup_grid_return_history" class="grid-box l-grid"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('returnEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 인수인계 신청 -->
-<div id="takingOverEnroll_pop" class="popup grid big no">
+<div id="takingOverEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>인수인계신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -617,29 +593,25 @@
                     <h3>인수인계자산</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail5" class="grid-box h-small"></div>
+            <div id="popup_grid_detail5" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_takingOver_history" class="grid-box"></div>
+            <div id="popup_grid_takingOver_history" class="grid-box l-grid"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('takingOverEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 대여연장 신청 -->
-<div id="rentalExtensionEnroll_pop" class="popup grid big no">
+<div id="rentalExtensionEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>대여연장신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -703,17 +675,17 @@
                     <h3>대여자산 연장신청정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail6" class="grid-box h-small"></div>
+            <div id="popup_grid_detail6" class="grid-box h-small l-grid"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_rentalExtension_history" class="grid-box"></div>
+            <div id="popup_grid_rentalExtension_history" class="grid-box l-grid"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('rentalExtensionEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>

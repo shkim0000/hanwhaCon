@@ -1,4 +1,5 @@
 $(function(){
+
     /* header 추가 */
     $('#guide').prepend(
 "<header>\n"+
@@ -126,16 +127,17 @@ $(function(){
         $(this).val("");
     });
 
+
     /* 팝업 열기 */
-    $("[data-popup]").on("click", function(){
+/*    $("[data-popup]").on("click", function(){
         let id = $(this).attr("data-popup");
         $("#"+id).addClass("open");
-    });
+    });*/
 
     /* 팝업 닫기 */
-    $(".popup .close-btn, [data-btn='cancel']").on("click", function(){
+/*    $(".popup .close-btn, [data-btn='cancel']").on("click", function(){
         $(this).closest(".popup").removeClass("open");
-    });
+    });*/
 
     /* 딤처리 부분 닫기 */
 /*    $(document).on("click", function(e){
@@ -144,6 +146,7 @@ $(function(){
             $(e.target).removeClass("open");
         }
     });*/
+
 
     /* sidebar 설정 */
     $(document).ready(function(){
@@ -341,3 +344,29 @@ $(function(){
         });
     });
 });
+
+/* 팝업창 열기 */
+function lp_open(id,title,width,height){
+    $("#"+id).addClass("open").dialog({
+        title: title,
+        width: width,
+        height:height,
+        modal: true,
+        resizable: false,
+        dialogClass: 'no-close success-dialog'
+    });
+}
+
+/* 팝업창 닫기 */
+function lp_close(target){
+    if(target)
+    {
+        $("#"+target).dialog("close");
+    }
+    else
+    {
+        /*        const _this = $(obj);
+                const lp_id = _this.closest(".lp-wrap").attr("id");
+                $("#"+lp_id).dialog("close");*/
+    }
+}

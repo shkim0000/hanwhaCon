@@ -73,6 +73,7 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .grid-box.h-small2{height:320px;}
 .grid-box.h-medium {height:550px;}
 #popup_grid_detail{width:1200px;}
+.l-grid{width:1200px;}
 
 /* AUI GRID 커스텀 */
 .aui-grid{border-color:var(--line1);}
