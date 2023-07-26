@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
 
     <!-- echarts  -->
-    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <script src="../resources/lib/echarts/echarts.min.js"></script>
 
 
     <!-- AUI grid -->
@@ -67,35 +67,62 @@
                 </ul>
             </div>
         </div>
-        <div id="echarts">
-
+        <div class="echarts-wrapper">
+            <div id="echarts" style="width: 1200px;height:450px;"></div>
         </div>
     </div>
 </div>
+
+<footer>
+    <div class="contact">
+        <ul>
+            <li>IT 자산관련 문의 : 555-XXXX</li>
+            <li>기타 자산관련 문의 : 555-XXXX</li>
+            <li>서비스데스크 : 555-XXXX</li>
+        </ul>
+    </div>
+    <div class="logos">
+        <img src="../resources/img/h_logo.png" alt="logo">
+    </div>
+</footer>
+
 <!-- // contents -->
-<script>
-    var myCharts = echarts.init(document.getElementById("echarts"));
-    // DOM을 준비하고 echart 객체를 만듭니다.
-    // 차트 속성과 데이터를 지정합니다.
+<script type="text/javascript">
+    // Initialize the echarts instance based on the prepared dom
+    var myChart = echarts.init(document.getElementById('echarts'));
+
+    // Specify the configuration items and data for the chart
     var option = {
         title: {
-            text: 'ECharts entry example'
+            text: '나의 IT 서비스'
         },
         tooltip: {},
         legend: {
-            data:['Sales']
+            data: ['신청','처리중','완료']
         },
         xAxis: {
-            data: ["shirt","cardign","chiffon shirt","pants","heels","socks"]
+            data: ['신규신청', '대여신청', '인수인계신청', '서비스요청']
         },
         yAxis: {},
-        series: [{
-            name: 'Sales',
-            type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
-        }]
+        series: [
+            {
+                name: '신청',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }, {
+                name: '처리중',
+                type: 'bar',
+                data: [10, 10, 6, 30, 40, 12]
+            }, {
+                name: '완료',
+                type: 'bar',
+                data: [48, 12, 31, 10, 10, 20]
+            }
+        ]
     };
-    myCharts.setOption(option);
+
+    // Display the chart using the configuration items and data just specified.
+    myChart.setOption(option);
 </script>
 </body>
 </html>
