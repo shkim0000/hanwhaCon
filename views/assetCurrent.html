@@ -956,6 +956,7 @@ function createAUIGrid() {
     let gridPros = {
         rowIdField: "id",
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        independentAllCheckBox : true,
         enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
@@ -966,11 +967,11 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         softRemoveRowMode:false,
         rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
-            if (item.category_status !== "임시저장") { // 제품이 LG G3 인 경우 체크박스 disabeld 처리함
-                return false; // false 반환하면 disabled 처리됨
+            if (item.category_status !== "임시저장") {
+                return false;
             }
             return true;
-        }
+        },
     }
 
     /* 그리드 생성 */
@@ -980,17 +981,72 @@ function createAUIGrid() {
     AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
         let result = AUIGrid.getCellValue(myGridID, event.rowIndex, "category_application_division");
         if(result === "신규신청"){
-            $("#newEnroll_pop").addClass("open");
+            $("#newEnroll_pop").addClass("open").dialog({
+                title: "신규신청",
+                width: 1250,
+                height:590,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });
         } else if(result === "교체신청"){
-            $("#changeEnroll_pop").addClass("open");
+            $("#changeEnroll_pop").addClass("open").dialog({
+                title: "교체신청",
+                width: 1250,
+                height:590,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });;
         } else if(result === "대여신청"){
-            $("#rentalEnroll_pop").addClass("open");
+            $("#rentalEnroll_pop").addClass("open").dialog({
+                title: "대여신청",
+                width: 1250,
+                height:590,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });;
         } else if(result === "반납신청"){
-            $("#returnEnroll_pop").addClass("open");
+            $("#returnEnroll_pop").addClass("open").dialog({
+                title: "반납신청",
+                width: 1250,
+                height:590,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });;
         } else if(result === "인수인계신청"){
-            $("#takingOverEnroll_pop").addClass("open");
+            $("#takingOverEnroll_pop").addClass("open").dialog({
+                title: "인수인계신청",
+                width: 1250,
+                height:590,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });
         } else if(result === "대여연장신청"){
-            $("#rentalExtensionEnroll_pop").addClass("open");
+            $("#rentalExtensionEnroll_pop").addClass("open").dialog({
+                title: "대여연장신청",
+                width: 1250,
+                height:590,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });
+        }
+    });
+
+    // 전체 체크박스 클릭 이벤트 바인딩
+    AUIGrid.bind(myGridID, "rowAllChkClick", function (event) {
+        if (event.checked) {
+            // name 의 값들 얻기
+            var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "category_status");
+            // Anna 제거하기
+            uniqueValues.splice(uniqueValues.indexOf("category_status"), 1);
+            AUIGrid.setCheckedRowsByValue(event.pid, "category_status", uniqueValues);
+        } else {
+            AUIGrid.setCheckedRowsByValue(event.pid, "category_status", []);
         }
     });
 
