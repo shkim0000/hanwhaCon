@@ -356,7 +356,7 @@ function lp_open(id,title,width,height,e){
         resizable: false,
         dialogClass: 'no-close success-dialog'
     });
-
+    /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
     if(id === "gridPop_user"){
         gridPopUser(id,title,width,height,e) ;
     } else if(id === "newEnroll_pop"){
