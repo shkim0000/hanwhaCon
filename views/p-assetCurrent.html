@@ -24,6 +24,7 @@
 
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/ssss.js"></script>
     <script src="../resources/js/main.js"></script>
 </head>
 <body id="guide">
@@ -138,7 +139,7 @@
         <div id="grid_wrap" class="grid-box"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530);">사용자 검색</button>
+            <button type="button" class="btn" data-layer="gridPop_user" onclick="lp_open('gridPop_user', '사용자 검색',505,530);">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('newEnroll_pop','신규 신청',1250,570);">신규신청</button>
             <button type="button" class="btn" onclick="lp_open('changeEnroll_pop','교체신청',1250,570);">교체신청</button>
             <button type="button" class="btn" onclick="lp_open('rentalEnroll_pop','대여신청',1250,570);">대여신청</button>
@@ -230,7 +231,7 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail1" class="grid-box h-small l-grid"></div>
+            <div id="popup_grid_detail1" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -846,7 +847,7 @@
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
-let popup_grid_user; // 사용자 검색
+/*let popup_grid_user;*/ // 사용자 검색
 let popup_grid_detail1; // 신규신청
 let popup_grid_detail2; // 교체신청
 let popup_grid_detail3; // 대여신청
@@ -881,8 +882,8 @@ function documentReady() {
 
     /* 그리드 삽입 */
     requestData();
-    requestData2();
-    requestData3();
+    // requestData2();
+    // requestData3();
     requestData4();
     requestData5();
     requestData6();
@@ -980,7 +981,8 @@ function createAUIGrid() {
     AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
         let result = AUIGrid.getCellValue(myGridID, event.rowIndex, "category_application_division");
         if(result === "신규신청"){
-            $("#newEnroll_pop").dialog({
+            $("#newEnroll_pop").addClass("open").dialog({
+                autoOpen: false,
                 title: "신규신청",
                 width: 1250,
                 height:590,
@@ -989,7 +991,8 @@ function createAUIGrid() {
                 dialogClass: 'no-close success-dialog'
             });
         } else if(result === "교체신청"){
-            $("#changeEnroll_pop").dialog({
+            $("#changeEnroll_pop").addClass("open").dialog({
+                autoOpen: false,
                 title: "교체신청",
                 width: 1250,
                 height:590,
@@ -998,7 +1001,8 @@ function createAUIGrid() {
                 dialogClass: 'no-close success-dialog'
             });;
         } else if(result === "대여신청"){
-            $("#rentalEnroll_pop").dialog({
+            $("#rentalEnroll_pop").addClass("open").dialog({
+                autoOpen: false,
                 title: "대여신청",
                 width: 1250,
                 height:590,
@@ -1007,7 +1011,8 @@ function createAUIGrid() {
                 dialogClass: 'no-close success-dialog'
             });;
         } else if(result === "반납신청"){
-            $("#returnEnroll_pop").dialog({
+            $("#returnEnroll_pop").addClass("open").dialog({
+                autoOpen: false,
                 title: "반납신청",
                 width: 1250,
                 height:590,
@@ -1016,7 +1021,8 @@ function createAUIGrid() {
                 dialogClass: 'no-close success-dialog'
             });;
         } else if(result === "인수인계신청"){
-            $("#takingOverEnroll_pop").dialog({
+            $("#takingOverEnroll_pop").addClass("open").dialog({
+                autoOpen: false,
                 title: "인수인계신청",
                 width: 1250,
                 height:590,
@@ -1025,7 +1031,8 @@ function createAUIGrid() {
                 dialogClass: 'no-close success-dialog'
             });
         } else if(result === "대여연장신청"){
-            $("#rentalExtensionEnroll_pop").dialog({
+            $("#rentalExtensionEnroll_pop").addClass("open").dialog({
+                autoOpen: false,
                 title: "대여연장신청",
                 width: 1250,
                 height:590,
@@ -1061,83 +1068,12 @@ function createAUIGrid() {
 function popupUserSearch(){
     /* 팝업 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout2 = [
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros2 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
 
-    /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-
-    /*  사용자 셀 더블클릭 시 반영되는 기능 */
-    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
-        let userName = event.item.category_user_name;
-        let userDepartment = event.item.category_department;
-
-        $("input[data-label='user']").val(userName);
-        $("input[data-label='department']").val(userDepartment);
-
-        /* 팝업창 닫기 */
-        $("#gridPop_user").dialog("close");
-    });
 
 }
 
 /* [팝업] 신규신청 */
-function popupNewEnroll() {
-    /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "category_product",
-            headerText: "자산분류",
-        },{
-            dataField: "category_product",
-            headerText: "품목",
-        }, {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
-        }, {
-            dataField: "category_item_name",
-            headerText: "모델명",
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
-    }
 
-    /* 그리드 생성 */
-    popup_grid_detail1 = AUIGrid.create("#popup_grid_detail1", columnLayout, gridPros);
-}
 /* [팝업] 교체신청 */
 function popupChangeEnroll() {
     /* 기본 그리드(예시) */
