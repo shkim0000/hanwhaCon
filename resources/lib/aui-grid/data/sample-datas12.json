@@ -7,7 +7,7 @@
     "category_applicant":"홍길동",
     "category_application_date":"2023-06-11 13:11:19",
     "category_person_charge": "홍길순",
-    "category_service_status": "상신",
+    "category_service_status": "신청",
     "category_note": "",
     "category_finish_date": "2023-04-20 15:37:19"
   },
@@ -19,7 +19,7 @@
     "category_applicant":"홍길동",
     "category_application_date":"2023-06-11 13:11:19",
     "category_person_charge": "홍길순",
-    "category_service_status": "상신",
+    "category_service_status": "접수",
     "category_note": "",
     "category_finish_date": "2023-06-14 11:22:31"
   },
@@ -31,7 +31,55 @@
     "category_applicant":"홍길동",
     "category_application_date":"2023-06-11 13:11:19",
     "category_person_charge": "홍길순",
-    "category_service_status": "상신",
+    "category_service_status": "조치중",
+    "category_note": "",
+    "category_finish_date": "2023-03-20 16:01:11"
+  },
+  {
+    "id": "#grid_id_4",
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍길순",
+    "category_service_status": "완료",
+    "category_note": "",
+    "category_finish_date": "2023-03-20 16:01:11"
+  },
+  {
+    "id": "#grid_id_5",
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍길순",
+    "category_service_status": "수리중",
+    "category_note": "",
+    "category_finish_date": "2023-03-20 16:01:11"
+  },
+  {
+    "id": "#grid_id_6",
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍홍홍",
+    "category_service_status": "접수",
+    "category_note": "",
+    "category_finish_date": "2023-03-20 16:01:11"
+  },
+  {
+    "id": "#grid_id_7",
+    "category_application_num":"202306111101",
+    "category_service_division":"네트워크 신청",
+    "category_request":"IP 신청합니다.",
+    "category_applicant":"홍길동",
+    "category_application_date":"2023-06-11 13:11:19",
+    "category_person_charge": "홍길순",
+    "category_service_status": "완료",
     "category_note": "",
     "category_finish_date": "2023-03-20 16:01:11"
   }

@@ -71,8 +71,8 @@
                 <div class="th"><div class="th-wrap center"><p class="important">사용자</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" placeholder="양현모">
+                        <label class="input search" onclick="lp_open('gridPop_user','사용자 검색',505,530);">
+                            <input type="text" data-label="user" readonly>
                             <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -455,6 +455,18 @@ function popupUserSearch(){
 
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+
+    /*  사용자 셀 더블클릭 시 반영되는 기능 */
+    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        let userName = event.item.category_user_name;
+        let userDepartment = event.item.category_department;
+
+        $("input[data-label='user']").val(userName);
+        $("input[data-label='department']").val(userDepartment);
+
+        /* 팝업창 닫기 */
+        $("#gridPop_user").dialog("close");
+    });
 }
 
 /* [팝업] 상신 */

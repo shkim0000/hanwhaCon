@@ -235,7 +235,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" data-btn="cancel" onclick="lp_close('gridPop_detail')">닫기</button>
             </div>
         </div>
     </div>
@@ -346,15 +346,23 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode:true,
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
-    AUIGrid.bind(myGridID, "cellDoubleClick",function(){
-        $("#gridPop_detail").addClass("open");
+    /* 더블 클릭시 팝업 */
+    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
+        $("#gridPop_detail").addClass("open").dialog({
+            title: "서비스데스크 신청 현황",
+            width: 1250,
+            height: 500,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
     });
 
     $('.menu-btn').on('click',function(){
@@ -423,6 +431,27 @@ window.onresize = function () {
         AUIGrid.resize(myGridID);
     }
 }
+
+/* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
+$(".quantity-list li button").each(function(){
+    $(this).on("click",function(){
+        let name = $(this).find('.name').text();
+
+        if(name === "신청"){
+            AUIGrid.setFilterByValues(myGridID, "category_service_status", "신청");
+        } else if (name === "접수"){
+            AUIGrid.setFilterByValues(myGridID, "category_service_status", "접수");
+        } else if (name === "조치중"){
+            AUIGrid.setFilterByValues(myGridID, "category_service_status", "조치중");
+        } else if (name === "완료"){
+            AUIGrid.setFilterByValues(myGridID, "category_service_status", "완료");
+        } else if (name === "수리중"){
+            AUIGrid.setFilterByValues(myGridID, "category_service_status", "수리중");
+        } else if (name === "전체"){
+            AUIGrid.setFilterByValues(myGridID, "category_service_status", ["신청","접수","조치중","완료","수리중"]);
+        }
+    })
+})
 </script>
 </body>
 </html>

@@ -76,6 +76,7 @@ $(function(){
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산실사현황</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -403,7 +404,7 @@ function lp_open(id,title,width,height) {
 function lp_close(target){
     if(target)
     {
-        $("#"+target).dialog("close");
+        $("#"+target).removeClass("open").dialog("close");
     }
     else
     {

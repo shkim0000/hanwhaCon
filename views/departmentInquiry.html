@@ -219,7 +219,13 @@ function createCurrentGrid() {
             renderer: {
                 type: "ButtonRenderer",
                 onClick: function (event) {
-
+                    if(event.item.category_product_name === "데스크탑"){
+                        AUIGrid.setFilterByValues(myGridID, "category_product_name", "데스크탑");
+                    } else if (event.item.category_product_name === "모니터"){
+                        AUIGrid.setFilterByValues(myGridID, "category_product_name", "모니터");
+                    } else if (event.item.category_product_name === "프린터"){
+                        AUIGrid.setFilterByValues(myGridID, "category_product_name", "프린터");
+                    }
                 },
             }
         }];
@@ -359,15 +365,23 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* autoGridHeight : true */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
-    AUIGrid.bind(myGridID, "cellDoubleClick",function(){
-        $("#gridPop_detail").addClass("open");
+    /* 더블 클릭시 팝업 */
+    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
+        $("#gridPop_detail").addClass("open").dialog({
+            title: "자산정보",
+            width: 1250,
+            height: 500,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
     });
 
     $('.menu-btn').on('click',function(){

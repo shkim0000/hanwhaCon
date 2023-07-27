@@ -48,15 +48,15 @@
             <div class="input-lists">
                 <div class="input-list">
                     <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text" placeholder="홍길동">
+                    <label class="input search" onclick="lp_open('gridPop_user','사용자 검색',505,530);">
+                        <input type="text" data-label="user" readonly>
                         <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서명</span>
                     <label class="input search">
-                        <input type="text" disabled>
+                        <input type="text" data-label="department" readonly>
                     </label>
                 </div>
                 <div class="input-list regular">
@@ -408,15 +408,23 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true,
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
 
-    AUIGrid.bind(myGridID, "cellDoubleClick",function(){
-        $("#gridPop_detail").addClass("open");
+    /* 더블 클릭시 팝업 */
+    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
+        $("#gridPop_detail").addClass("open").dialog({
+            title: "장애 신고 신청 현황",
+            width: 1250,
+            height: 500,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
     });
 
     $('.menu-btn').on('click',function(){
@@ -462,6 +470,18 @@ function popupUserSearch(){
 
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
+
+    /*  사용자 셀 더블클릭 시 반영되는 기능 */
+    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        let userName = event.item.category_user_name;
+        let userDepartment = event.item.category_department;
+
+        $("input[data-label='user']").val(userName);
+        $("input[data-label='department']").val(userDepartment);
+
+        /* 팝업창 닫기 */
+        $("#gridPop_user").dialog("close");
+    });
 }
 
 /* [팝업] 장애신고신청현황 팝업 중 자산정보 그리드 */
@@ -576,6 +596,30 @@ window.onresize = function () {
         AUIGrid.resize(popup_grid_user);
     }
 }
+
+/* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
+$(".quantity-list li button").each(function(){
+    $(this).on("click",function(){
+        let name = $(this).find('.name').text();
+
+        if(name === "신청"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", "신청");
+        } else if (name === "접수"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", "접수");
+        } else if (name === "조치중"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", "조치중");
+        } else if (name === "완료"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", "완료");
+        } else if (name === "보류"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", "보류");
+        } else if (name === "수리중"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", "수리중");
+        } else if (name === "전체"){
+            AUIGrid.setFilterByValues(myGridID, "category_status", ["신청","접수","조치중","완료","보류","수리중"]);
+        }
+    })
+})
+
 </script>
 </body>
 </html>

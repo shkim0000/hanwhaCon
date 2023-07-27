@@ -1,9 +1,9 @@
 [
   {
-    "category_product_name":"데스크탑1",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-1",
     "category_model_name":"DESK_SS_I7M31",
-    "category_user":"홍길동1",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -13,10 +13,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑2",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-2",
     "category_model_name":"DESK_SS_I7M32",
-    "category_user":"홍길동2",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -26,10 +26,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -39,10 +39,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑4",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-4",
     "category_model_name":"DESK_SS_I7M34",
-    "category_user":"홍길동4",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -52,10 +52,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -65,10 +65,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -78,10 +78,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -91,10 +91,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -104,10 +104,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -117,10 +117,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -130,10 +130,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -143,10 +143,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -156,10 +156,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -169,10 +169,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -182,10 +182,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -195,10 +195,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -208,10 +208,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -221,10 +221,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -234,10 +234,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -247,10 +247,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"모니터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"양현모",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -260,10 +260,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"김구라",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",
@@ -273,10 +273,10 @@
     "category_note":"비고"
   },
   {
-    "category_product_name":"데스크탑3",
+    "category_product_name":"데스크탑",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
-    "category_user":"홍길동3",
+    "category_user":"홍길동",
     "category_usage1":"대여용",
     "category_usage2":"개인",
     "category_application_type":"",

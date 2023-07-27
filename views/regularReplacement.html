@@ -69,7 +69,6 @@
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-            <button type="button" class="btn cancel">닫기</button>
 <!--            <button type="button" class="btn primary send">상신</button>-->
         </div>
 
@@ -273,8 +272,15 @@
                     type: "ButtonRenderer",
                     labelText: "모델정보",
                     onClick: function(event){
-                        $("#model_pop").addClass("open");
-
+                        // $("#model_pop").addClass("open");
+                        $("#model_pop").addClass("open").dialog({
+                            title: "모델정보",
+                            width: 540,
+                            height: 766,
+                            modal: true,
+                            resizable: false,
+                            dialogClass: "no-close success-dialog"
+                        });
                         //클릭한 row의 정보를 clickItem 변수에 저장
                         clickItem = AUIGrid.getSelectedRows(myGridID)[0];
 
@@ -290,7 +296,14 @@
                     type:"ButtonRenderer",
                     labelText: "미신청",
                     onClick: function(event){
-                        $("#reason_pop").addClass("open");
+                        $("#reason_pop").addClass("open").dialog({
+                            title: "미신청 사유",
+                            width: 505,
+                            height: 350,
+                            modal: true,
+                            resizable: false,
+                            dialogClass: "no-close success-dialog"
+                        });
                     }
                 }
             }
@@ -495,6 +508,7 @@
         AUIGrid.removeRow(myGridID, whatRow);
         AUIGrid.addRow(myGridID2, insertObj, "last");
         $(this).closest("#model_pop").removeClass("open");
+        lp_close("model_pop");
     })
 </script>
 </body>
