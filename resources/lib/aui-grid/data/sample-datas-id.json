@@ -18,7 +18,10 @@
     "category_asset_before": "21345646",
     "category_asset_after" : "",
     "category_asset_classify" : "데스크탑",
-    "category_asset_change"  : ""
+    "category_asset_change"  : "",
+    "category_state" : "가용",
+    "category_manager" : "윤미자",
+    "category_time" : "18:00:16"
   },
   {
     "id": "#grid_id_2",
@@ -39,6 +42,9 @@
     "category_asset_before": "21345646",
     "category_asset_after" : "",
     "category_asset_classify" : "데스크탑",
-    "category_asset_change"  : ""
+    "category_asset_change"  : "",
+    "category_state" : "가용",
+    "category_manager" : "윤미자",
+    "category_time" : "18:00:16"
   }
 ]

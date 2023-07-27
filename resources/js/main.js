@@ -346,17 +346,8 @@ $(function(){
     });
 });
 
-/*$(".popup").dialog({
-    title: "title",
-    width: 550,
-    height:300,
-    modal: true,
-    resizable: false,
-    dialogClass: 'no-close success-dialog'
-});
-
-/!* 팝업창 열기 *!/
-function lp_open(id,title,width,height){
+/* 팝업창 열기 */
+function lp_open(id,title,width,height,e){
     $("#"+id).dialog({
         title: title,
         width: width,
@@ -366,40 +357,28 @@ function lp_open(id,title,width,height){
         dialogClass: 'no-close success-dialog'
     });
 
-    /!* 1번 팝업 그리드 *!/
-    popup_grid_detail1 = AUIGrid.create("#popup_grid_detail1", popup_grid_detail1Col, popup_grid_detail1Del);
-    requestData3()
-    /!* // 1번 팝업 그리드 *!/
-
-    /!* 그리드 생성 *!/
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-    requestData2()
-    /!*  사용자 셀 더블클릭 시 반영되는 기능 *!/
-    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
-        console.log("ASdasd")
-        let userName = event.item.category_user_name;
-        let userDepartment = event.item.category_department;
-
-        $("input[data-label='user']").val(userName);
-        $("input[data-label='department']").val(userDepartment);
-
-        /!* 팝업창 닫기 *!/
-        $("#gridPop_user").dialog("close");
-    });
-}*/
-
-/!* 팝업창 열기 *!/
-function lp_open(id,title,width,height) {
-    $("#" + id).dialog({
-        title: title,
-        width: width,
-        height: height,
-        modal: true,
-        resizable: false,
-        dialogClass: 'no-close success-dialog'
-    });
+    if(id === "gridPop_user"){
+        gridPopUser(id,title,width,height,e) ;
+    } else if(id === "newEnroll_pop"){
+        gridPopNewEnrollDetail(id,title,width,height);
+        gridPopNewEnrollHistory(id,title,width,height);
+    } else if(id === "changeEnroll_pop"){
+        gridPopChangeEnrollDetail(id,title,width,height);
+        gridPopChangeEnrollHistory(id,title,width,height);
+    } else if (id === "rentalEnroll_pop"){
+        gridPopRentalEnrollDetail(id,title,width,height);
+        gridPopRentalEnrollHistory(id,title,width,height);
+    } else if (id === "returnEnroll_pop"){
+        gridPopReturnEnrollDetail(id,title,width,height);
+        gridPopReturnEnrollHistory(id,title,width,height);
+    } else if (id === "takingOverEnroll_pop"){
+        gridPopTakeoverEnrollDetail(id,title,width,height);
+        gridPopTakeoverEnrollHistory(id,title,width,height);
+    } else if (id === "rentalExtensionEnroll_pop"){
+        gridPopRentalExtensionEnrollDetail(id,title,width,height);
+        gridPopRentalExtensionEnrollHistory(id,title,width,height);
+    }
 }
-
 /* 팝업창 닫기 */
 function lp_close(target){
     if(target)

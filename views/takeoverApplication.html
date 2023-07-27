@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
 </head>
 <body id="guide">
 
@@ -64,8 +65,8 @@
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" placeholder="홍길동">
+                        <label class="input search" data-isActive="readonly">
+                            <input type="text" value="홍길동" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -73,8 +74,8 @@
                 <div class="th"><div class="th-wrap center">사용자명</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search" data-popup="gridPop_user">
-                            <input type="text" placeholder="양현모">
+                        <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530, this);">
+                            <input type="text" data-label="user" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -82,8 +83,8 @@
                 <div class="th"><div class="th-wrap center">사용 부서</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" value="IT운영" readonly>
+                        <label class="input search ">
+                            <input type="text"  data-label="department" readonly>
                         </label>
                     </div>
                 </div>
@@ -92,8 +93,8 @@
                 <div class="th"><div class="th-wrap center">변경 후 사용자</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search" data-popup="gridPop_user">
-                            <input type="text">
+                        <label class="input search" data-place="change_user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                            <input type="text" data-label="change_user" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -102,7 +103,7 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text">
+                            <input type="text" data-label="change_department" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
@@ -470,7 +471,8 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID;
 let myGridID2;
-let popup_grid_user; // 사용자 검색
+
+/* [수정예정] */
 let popup_grid_submitList; // 상신
 let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
 let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
@@ -485,7 +487,7 @@ function documentReady() {
     createAUIGrid();
     createAUIGrid2();
 
-    popupUserSearch();
+
     popupSubmitList(); // 상신
     subPopupSearchExecutives(); // 상신 > 검색한 임직원
     subPopupAddExecutives(); // 상신 > 결재라인에 추가할 임직원
@@ -493,7 +495,7 @@ function documentReady() {
 
     /* 그리드 삽입 */
     requestData();
-    requestData2();
+
     requestData5();
     requestData6();
     requestData7();
@@ -630,7 +632,6 @@ function createAUIGrid() {
         }
     });
 }
-
 function createAUIGrid2() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -767,41 +768,8 @@ function createAUIGrid2() {
         },200);
     })
 }
-/* [팝업] 사용자 검색 */
-function popupUserSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout2 = [
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros2 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
 
-    /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-}
+
 /* [팝업] 상신 */
 function popupSubmitList(){
     /* 팝업 그리드(예시) */
@@ -867,7 +835,6 @@ function popupSubmitList(){
     popup_grid_submitList = AUIGrid.create("#popup_grid_submitList", columnLayout, gridPros);
 
 }
-
 /* [팝업] 상신 > 검색한 임직원 */
 function subPopupSearchExecutives(){
     /* 팝업 그리드(예시) */
@@ -942,7 +909,6 @@ function subPopupSearchExecutives(){
         AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
     });
 }
-
 /* [팝업] 상신 > 결재라인에 추가할 임직원 */
 function subPopupAddExecutives(){
     /* 팝업 그리드(예시) */
@@ -1029,7 +995,6 @@ function subPopupAddExecutives(){
     /* 그리드 생성 */
     popup_subGrid_addExecutives = AUIGrid.create("#popup_subGrid_addExecutives", columnLayout, gridPros);
 }
-
 /* [팝업] 상신 > 결재선변경 */
 function subPopupApprovalChange(){
     /* 팝업 그리드(예시) */
@@ -1097,11 +1062,7 @@ function requestData() {
     });
 }
 
-function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
-        AUIGrid.setGridData(popup_grid_user, data);
-    });
-}
+
 function requestData5() {
     $.get("../resources/lib/aui-grid/data/submitList-datas1.json", function (data) {
         AUIGrid.setGridData(popup_grid_submitList, data);
