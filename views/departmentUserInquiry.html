@@ -64,7 +64,7 @@
                 <h3>부서 사용자별 자산 현황</h3>
             </div>
         </div>
-        <div id="current_wrap" class="grid-box"></div>
+        <div id="userAssetManagementStatusGrid_ID" class="grid-box"></div>
 
         <div class="title-box">
             <div class="title">
@@ -74,7 +74,7 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="grid_wrap" class="grid-box"></div>
+        <div id="assetDetailGrid_ID" class="grid-box"></div>
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
         </div>
@@ -180,26 +180,26 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let currentID;
-let myGridID;
+let userAssetManagementStatusGrid_ID;
+let assetDetailGrid_ID;
 
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createCurrentGrid();
-    createAUIGrid();
+    createUserAssetManagementStatusGrid();
+    createAssetDetailGrid();
 
 
     /* 그리드 삽입 */
-    requestData3();
-    requestData();
+    requestUserAssetManagementStatusGridData();
+    requestAssetDetailGridData();
 
 }
 
 /* 3. AUIGrid 그리드 옵션 */
 /* [현황] */
-function createCurrentGrid() {
+function createUserAssetManagementStatusGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [];
@@ -303,39 +303,42 @@ function createCurrentGrid() {
         renderer: {
             type: "ButtonRenderer",
             onClick: function (event) {
-                if(event.item.category_user_name === "양현모"){
-                    AUIGrid.setFilterByValues(myGridID, "category_user", "양현모");
-                } else if (event.item.category_user_name === "홍길동"){
-                    AUIGrid.setFilterByValues(myGridID, "category_user", "홍길동");
-                } else if (event.item.category_user_name === "김구라"){
-                    AUIGrid.setFilterByValues(myGridID, "category_user", "김구라");
-                }
+                let currentName = event.item.category_user_name;
+                let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+
+                AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                comparisonObj.forEach((i) => {
+                    if(currentName === i.category_user){
+                        AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user", i.category_user);
+                    }
+                })
             },
         }
 
     });
 
     /* 그리드 생성 */
-    currentID = AUIGrid.create("current_wrap", columnLayout, gridPros);
+    userAssetManagementStatusGrid_ID = AUIGrid.create("userAssetManagementStatusGrid_ID", columnLayout, gridPros);
     // 푸터 레이아웃 세팅
-    AUIGrid.setFooter(currentID, footerLayout);
+    AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
 
-    AUIGrid.bind(currentID, "footerClick", function (event) {
+    AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
         if(event.footerIndex === 6){
-            AUIGrid.setFilterByValues(myGridID, "category_user", ["김구라","양현모","홍길동"]);
+            AUIGrid.clearFilterAll(assetDetailGrid_ID);
         }
     });
 
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#current_wrap');
+        AUIGrid.destroy('#userAssetManagementStatusGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#current_wrap", columnLayout, gridPros);
-            requestData();
+            AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
+            requestUserAssetManagementStatusGridData()();
         },200);
     });
 }
-function createAUIGrid() {
+function createAssetDetailGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -434,34 +437,46 @@ function createAUIGrid() {
     }
 
     /* 그리드 생성 */
-    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    assetDetailGrid_ID = AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
+
+    /* 더블 클릭시 팝업 */
+    AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
+        $("#gridPop_detail").addClass("open").dialog({
+            title: "자산정보",
+            width: 1250,
+            height: 500,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
+    });
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#assetDetailGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-            requestData();
+            AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
+            requestAssetDetailGridData();
         },200);
     })
 }
 
 /* 4. 데이터 불러오기 */
-function requestData3() {
+function requestUserAssetManagementStatusGridData() {
     $.get("../resources/lib/aui-grid/data/sample-datas20.json", function (data) {
-        AUIGrid.setGridData(currentID, data);
+        AUIGrid.setGridData(userAssetManagementStatusGrid_ID, data);
     });
 }
-function requestData() {
+function requestAssetDetailGridData() {
     $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
-        AUIGrid.setGridData(myGridID, data);
+        AUIGrid.setGridData(assetDetailGrid_ID, data);
     });
 }
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
-    } else if (typeof currentID !== "undefined"){
-        AUIGrid.resize(currentID);
+    if (typeof assetDetailGrid_ID !== "undefined") {
+        AUIGrid.resize(assetDetailGrid_ID);
+    } else if (typeof userAssetManagementStatusGrid_ID !== "undefined"){
+        AUIGrid.resize(userAssetManagementStatusGrid_ID);
     }
 }
 </script>

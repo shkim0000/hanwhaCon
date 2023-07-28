@@ -480,7 +480,7 @@ let groupList1 = ["데스크탑", "모니터"];
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createHoldingAssetGrid;
+    createHoldingAssetGrid();
     createEnrollGrid();
 
 
@@ -498,7 +498,7 @@ function documentReady() {
 }
 
 /* 3. AUIGrid 그리드 옵션 */
-function createHoldingAssetGrid {
+function createHoldingAssetGrid(){
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [

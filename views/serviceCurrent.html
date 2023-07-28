@@ -148,7 +148,7 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="grid_wrap" class="grid-box"></div>
+        <div id="serviceStatusGrid_ID" class="grid-box"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_detail','서비스데스크 신청 현황',1250,500);">서비스데스크 신청 현황</button>
@@ -244,23 +244,23 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let myGridID;
+let serviceStatusGrid_ID;
 
 let popup_grid_history; // 서비스데스크 신청현황
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createAUIGrid();
+    createServiceStatusGrid(); // 서비스신청현황
     popupDetail(); // 처리이력
 
     /* 그리드 삽입 */
-    requestData();
+    requestServiceStatusGridData();
     requestData3();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
-function createAUIGrid() {
+function createServiceStatusGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -351,10 +351,10 @@ function createAUIGrid() {
     }
 
     /* 그리드 생성 */
-    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    serviceStatusGrid_ID = AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
 
     /* 더블 클릭시 팝업 */
-    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
+    AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
         $("#gridPop_detail").addClass("open").dialog({
             title: "서비스데스크 신청 현황",
             width: 1250,
@@ -366,10 +366,10 @@ function createAUIGrid() {
     });
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#serviceStatusGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-            requestData();
+            AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
+            requestServiceStatusGridData();
         },200);
     });
 }
@@ -413,9 +413,9 @@ function popupDetail() {
 }
 
 /* 4. 데이터 불러오기 */
-function requestData() {
+function requestServiceStatusGridData() {
     $.get("../resources/lib/aui-grid/data/sample-datas12.json", function (data) {
-        AUIGrid.setGridData(myGridID, data);
+        AUIGrid.setGridData(serviceStatusGrid_ID, data);
     });
 }
 
@@ -427,8 +427,8 @@ function requestData3() {
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
+    if (typeof serviceStatusGrid_ID !== "undefined") {
+        AUIGrid.resize(serviceStatusGrid_ID);
     }
 }
 
@@ -436,20 +436,15 @@ window.onresize = function () {
 $(".quantity-list li button").each(function(){
     $(this).on("click",function(){
         let name = $(this).find('.name').text();
+        let comparisonObj = AUIGrid.getOrgGridData(serviceStatusGrid_ID);
 
-        if(name === "신청"){
-            AUIGrid.setFilterByValues(myGridID, "category_service_status", "신청");
-        } else if (name === "접수"){
-            AUIGrid.setFilterByValues(myGridID, "category_service_status", "접수");
-        } else if (name === "조치중"){
-            AUIGrid.setFilterByValues(myGridID, "category_service_status", "조치중");
-        } else if (name === "완료"){
-            AUIGrid.setFilterByValues(myGridID, "category_service_status", "완료");
-        } else if (name === "수리중"){
-            AUIGrid.setFilterByValues(myGridID, "category_service_status", "수리중");
-        } else if (name === "전체"){
-            AUIGrid.setFilterByValues(myGridID, "category_service_status", ["신청","접수","조치중","완료","수리중"]);
-        }
+        AUIGrid.clearFilterAll(serviceStatusGrid_ID);
+
+        comparisonObj.forEach((i) => {
+            if(name === i.category_service_status){
+                AUIGrid.setFilterByValues(serviceStatusGrid_ID, "category_service_status", i.category_service_status);
+            }
+        })
     })
 })
 </script>
