@@ -343,6 +343,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .pop-body .title-box .title > *{font-size:16px;}
 .pop-body .title-box .title > *::before{height:12px;}
 .pop-body .title-box .btn-wrap{margin-top:0;}
+.pop-body .center{text-align:center;}
 
 /* popup > select */
 .popup select{min-width:auto;}

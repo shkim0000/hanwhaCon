@@ -101,6 +101,7 @@
             <button type="button" class="btn" data-popup="submitSearch_pop">상신 > 검색조건 팝업</button>
             <button type="button" class="btn" data-popup="submitApprovalChange_pop">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
+            <button type="button" class="btn" data-popup="not_complete_pop" onclick="lp_open('not_complete_pop','',550, 170)">조정완료안됨</button>
         </div>
     </div>
 </div>
@@ -108,6 +109,17 @@
 
 <!-- 팝업 -->
 <!-- 상신 -->
+<div id="not_complete_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <p class="center">조정이 완료되지 않았습니다.</p>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="lp_close('not_complete_pop')">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
 <div id="submit_pop" class="popup no regular">
     <div class="pop-box">
         <div class="pop-head">
@@ -478,6 +490,17 @@ function createCurrentUserGrid() {
     /* 그리드 생성 */
     current_user = AUIGrid.create("#current_user_wrap", columnLayout, gridPros);
 
+    AUIGrid.bind(current_user, "cellClick", function(event) {
+        let name = AUIGrid.getOrgGridData(myGridID);
+        AUIGrid.clearFilterAll(myGridID);
+        name.forEach((i) => {
+            if(event.item.category_user_name === i.category_user_name){
+                AUIGrid.setFilterByValues(myGridID, "category_user_name", i.category_user_name)
+            }
+        })
+    });
+
+
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(current_user, footerLayout);
 
@@ -501,8 +524,8 @@ function createCurrentAssetGrid() {
         visible:false
     }
     columnLayout[1] = {
-        dataField: "category_user_name",
-        headerText: "사용자명",
+        dataField: "category_item_name",
+        headerText: "품목명",
         width: 160,
         filter: {
             showIcon: true,
@@ -608,6 +631,17 @@ function createCurrentAssetGrid() {
     /* 그리드 생성 */
     current_asset = AUIGrid.create("#current_asset_wrap", columnLayout, gridPros);
 
+    /* 셀 클릭 이벤트 */
+    AUIGrid.bind(current_asset, "cellClick", function(event) {
+        let name = AUIGrid.getOrgGridData(myGridID);
+        AUIGrid.clearFilterAll(myGridID);
+        name.forEach((i) => {
+            if(event.item.category_item_name === i.category_item_name){
+                AUIGrid.setFilterByValues(myGridID, "category_item_name", i.category_item_name)
+            }
+        })
+    });
+
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(current_asset, footerLayout);
 
@@ -687,16 +721,6 @@ function createAUIGrid() {
             filter: {
                 showIcon: true,
             },
-            renderer:{
-                type: "DropDownListRenderer",
-                listFunction: function(rowIndex, columnIndex, item, dataField){
-                  if(item.category_after_change === "미존재"){
-                      return hideList;
-                  } else {
-                      return cleanList;
-                  }
-                },
-            },
         }, {
             dataField: "category_investigate-date",
             headerText: "조사일",
@@ -726,7 +750,7 @@ function createAUIGrid() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         simplifySelectionEvent: true,
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
@@ -1087,6 +1111,21 @@ function moveRowsToUp() {
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* 상신버튼 눌렀을떄 validation */
+$("[data-popup ='submit_pop']").on("click",function(){
+    let userTotalNum = AUIGrid.getFooterValueByDataField(current_user, "category_adjustment");
+    let userExistNum = AUIGrid.getFooterValueByDataField(current_user, "category_non_existence");
+    let assetTotalNum = AUIGrid.getFooterValueByDataField(current_asset, "category_adjustment");
+    let assetExistNum = AUIGrid.getFooterValueByDataField(current_asset, "category_non_existence");
+
+    if(userTotalNum === userExistNum && assetTotalNum === assetExistNum){
+        lp_open("submit_pop");
+    } else {
+        lp_open('not_complete_pop','',550, 170);
+    }
+})
+
 </script>
 </body>
 </html>

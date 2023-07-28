@@ -147,6 +147,19 @@
 </div>
 <!-- // contents -->
 
+<style>
+    .my-cell-style {
+        background: #fff;
+        font-weight: bold;
+        color: #FF007F;
+    }
+    .my-column-style {
+        background: #eeeeee;
+        color: #005500;
+        font-weight: bold;
+    }
+</style>
+
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -182,7 +195,7 @@ function createAUIGrid() {
             width: 180,
             filter: {
                 showIcon: true,
-            }
+            },
         }, {
             dataField: "category_product_name",
             headerText: "물품명",
@@ -227,24 +240,14 @@ function createAUIGrid() {
             },
             renderer: {
                 type: "DropDownListRenderer",
-                list: groupList
-            }
+                list: groupList,
+            },
         }, {
             dataField: "category_reason_non_existence",
             headerText: "미존재 사유",
             width: 160,
             filter: {
                 showIcon: true,
-            },
-            renderer:{
-                type: "DropDownListRenderer",
-                listFunction: function(rowIndex, columnIndex, item, dataField){
-                  if(item.category_after_change === "미존재"){
-                      return hideList;
-                  } else {
-                      return cleanList;
-                  }
-                },
             },
         }, {
             dataField: "category_investigate_date",
@@ -311,6 +314,22 @@ window.onresize = function () {
 let cnt = 0;
 function addRow() {
     var item = new Object();
+
+    function formatDate(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const seconds = String(date.getSeconds()).padStart(2, '0');
+
+        return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`;
+    }
+
+// 사용 예시:
+    const now = new Date();
+    const formattedDate = formatDate(now);
+
     item.id = "grid_ID_1" + (++cnt),
         item.category_asset_num = '',
         item.category_product_name = '',
@@ -320,7 +339,7 @@ function addRow() {
         item.category_before_change = '',
         item.category_after_change = '',
         item.category_reason_non_existence = '',
-        item.category_investigate_date = '',
+        item.category_investigate_date = formattedDate,
         item.category_investigator = '',
 
 
@@ -328,6 +347,21 @@ function addRow() {
         // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
         // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
         AUIGrid.addRow(myGridID, item, "last");
+};
+
+/* 필수 입력 값이 입력되었는지 검사 */
+// 필수로 설정해야 하는 필드들의 값이 모두 입력되었는지 검사
+function validateGridData() {
+
+    // name 과 country 는 필수로 입력되어야 하는 필드임. 이것을 검사
+    var isValid = AUIGrid.validateGridData(myGridID, "category_asset_num", "자산 번호는 반드시 입력해야 합니다.");
+
+    // 다른 JS 에서 제공하는 toast 나 alert 으로 경고문을 띄우고자 하는 경우 다음처럼 message 파라메터 생략.
+    // AUIGrid.validateGridData(myGridID, ["name", "country"]);
+
+    if (isValid) {
+        alert("저장되었습니다");
+    }
 };
 </script>
 </body>
