@@ -317,7 +317,8 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .pop-head h3{font-size:18px;font-weight:700;}
 .pop-body{padding:20px 14px;}
 .pop-body .btn-wrap{justify-content:center;margin-top:20px;}
-.pop-body .btn-wrap.only{margin-top:0;}
+.pop-body .btn-wrap.add-file-wrap{margin-top:0;}
+.pop-body .btn-wrap.add-file-wrap > *{width:auto;}
 
 /* 레이어 팝업 */
 .ui-dialog{background:var(--color10);border-radius:8px;padding:0;font-family:"Noto Sans", sans-serif;color:#414141;}
@@ -368,7 +369,8 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .popup .custom-table.design-ver .th .th-wrap{height:auto;}
 .popup .custom-table.design-ver .td{padding:8px;}
 .popup .custom-table.design-ver .table th > * , .popup .custom-table.design-ver  .table td > * {font-size:12px;padding:10px 8px;}
-.popup .table .file-box *{font-size:14px;}
+.popup .table td{border-right:1px solid var(--line1);}
+.popup .table .file-box *{font-size:12px;}
 .popup .table .file-box > span{width:100%;display:flex;align-items:center;justify-content:flex-start;}
 .popup .table .file-box > label{width:100px;}
 
@@ -586,6 +588,7 @@ tbody tr p{text-align:center;}
 .submit-list{display:flex;flex-wrap:wrap;gap:14px;padding:10px 15px;border:1px solid var(--line1);border-radius:4px;margin-bottom:10px;}
 .submit-list > li {display:flex;gap:2px;}
 .submit-list > li *{color:var(--color5);font-weight:var(--medium);}
+.submit-list + .btn-wrap .btn{height:30px;padding:7px;}
 .count-words{display:flex;justify-content:flex-end;margin-top:5px;color:var(--color9);}
 
 /* 상신팝업 > .box */

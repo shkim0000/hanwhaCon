@@ -198,7 +198,7 @@
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
+            <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
         </div>
 
         <div class="btn-wrap">
@@ -229,24 +229,6 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
-
-<!-- 부서 검색 -->
-<div id="gridPop_department" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">부서</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_department" class="grid-box"></div>
         </div>
     </div>
 </div>
@@ -297,7 +279,7 @@
                             <div class="btn-wrap end">
                                 <button type="button" class="btn" onclick="moveRowsToDown()";><i class="fa-solid fa-chevron-down"></i></button>
                                 <button type="button" class="btn" onclick="moveRowsToUp();"><i class="fa-solid fa-chevron-up"></i></button>
-                                <button type="button" class="btn" data-popup="addSubmitList">결재선추가</button>
+                                <button type="button" class="btn" onclick="lp_open('submitSearch_pop','Search Employee',800,860)">결재선추가</button>
                             </div>
                             <div id="popup_grid_submitList" class="grid-box"></div>
                         </div>
@@ -308,7 +290,7 @@
                     <div class="td">
                         <div class="td-wrap column">
                             <div class="title-box end ">
-                                <div class="btn-wrap only">
+                                <div class="btn-wrap add-file-wrap">
                                     <label class="file">
                                         <input type="file">
                                         <span class="btn add-file">파일추가</span>
@@ -471,8 +453,7 @@
                 </div>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn">미리보기</button>
-                <button type="button" class="btn primary send">상신</button>
+                <button type="button" class="btn">추가</button>
             </div>
         </div>
     </div>
@@ -520,9 +501,6 @@
                     <div id="popup_subGrid_approvalChange" class="grid-box h-small"></div>
                 </div>
             </div>
-            <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
         </div>
     </div>
 </div>
@@ -535,13 +513,13 @@ let rentalGrid_ID;
 let rentalAssetInfoGrid_ID;
 
 /* 1-2. dropdown menu 리스트 */
-let groupList1 = ["데스크탑", "모니터"];
+
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createRentalAssetGrid(); // 대여자산
 createRentalAssetInfoGrid(); // 대여자산정보
 
-requesRentalExtData();
+requestRentalExtData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createRentalAssetGrid() {
@@ -771,7 +749,7 @@ function createRentalAssetInfoGrid() {
 }
 
 /* 4. 데이터 불러오기 */
-function requesRentalExtData() {
+function requestRentalExtData() {
     $.get("../resources/lib/aui-grid/data/sample-datas20.json", function (data) {
         AUIGrid.setGridData(rentalGrid_ID, data);
     });
