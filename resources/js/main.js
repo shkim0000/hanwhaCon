@@ -386,6 +386,11 @@ function lp_open(id,title,width,height,e){
         subPopupAddExecutives(id,title,width,height);
     } else if (id === "submitApprovalChange_pop"){
         subPopupApprovalChange(id,title,width,height);
+    } else if (id === "gridPop_disabledAddRow"){
+        popupAddDisabled(id,title,width,height);
+    } else if (id ==="gridPop_disabledCurrent"){
+        gridPopDisabledDetail(id,title,width,height);
+        gridPopDisabledHistory(id,title,width,height);
     }
 }
 /* 팝업창 닫기 */

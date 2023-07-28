@@ -913,6 +913,135 @@ function subPopupApprovalChange(id,title,width,height){
     requestApprovalChange();
 }
 
+/* ------------------------------------------------------------------------ */
+/* [장애신고 - 장애신고 : 장애대상 추가 팝업 ]----------------------------------------------------------- */
+/* 장애대상 추가 */
+let popup_grid_disabledAddRow;
+function popupAddDisabled(id,title,width,height){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_product_name",
+            headerText: "물품명",
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_item_name",
+            headerText: "모델명",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "발생자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_use_type",
+            headerText: "용도1",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_use_type2",
+            headerText: "용도2",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_order",
+            headerText: "신청구분",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_description",
+            headerText: "신청내용",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_place",
+            headerText: "사용장소",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_asset_state",
+            headerText: "자산상태",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_note",
+            headerText: "비고",
+            filter: {
+                showIcon: true,
+            }
+        }
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode: false,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_disabledAddRow = AUIGrid.create("#popup_grid_disabledAddRow", columnLayout, gridPros);
+    requestDisabledAddRowData();
+}
+function requestDisabledAddRowData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas13.json", function (data) {
+        AUIGrid.setGridData(popup_grid_disabledAddRow, data);
+    });
+}
+/* // 장애대상 추가 */
 
 function requestSubmitListData() {
     $.get("../resources/lib/aui-grid/data/submitList-datas1.json", function (data) {
@@ -970,7 +1099,98 @@ function addingResult(){
 
 /* // 결재 상신 팝업 */
 
+/* 장애 신고 신청 현황 */
+    /* 자산정보 */
+    let popup_grid_disabledCurrent_detail;
+    function gridPopDisabledDetail(id,title,width,height) {
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            },
+            {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+            },{
+                dataField: "category_product",
+                headerText: "자산분류",
+            }, {
+                dataField: "category_product",
+                headerText: "품목",
+            }, {
+                dataField: "category_item_name",
+                headerText: "모델명",
+            }, {
+                dataField: "category_place",
+                headerText: "자산위치"
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            autoGridHeight : true,
+            fillColumnSizeMode:true,
+        }
+
+        /* 그리드 생성 */
+        popup_grid_disabledCurrent_detail = AUIGrid.create("#popup_grid_disabledCurrent_detail", columnLayout, gridPros);
+        requestDisabledDetail();
+    }
+    function requestDisabledDetail() {
+        $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+            AUIGrid.setGridData(popup_grid_disabledCurrent_detail, data);
+        });
+    }
 
 
+    /* 처리이력 */
+    let popup_grid_disabledCurrent_history;
+    function gridPopDisabledHistory(id,title,width,height) {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            },
+            {
+                dataField: "category_history_desc",
+                headerText: "처리내용",
+            },{
+                dataField: "category_manager",
+                headerText: "조치자",
+            }, {
+                dataField: "category_date",
+                headerText: "처리일시",
+            }, {
+                dataField: "category_state",
+                headerText: "상태",
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            autoGridHeight : true,
+            fillColumnSizeMode:true,
+        }
 
+        /* 그리드 생성 */
+        popup_grid_disabledCurrent_history = AUIGrid.create("#popup_grid_disabledCurrent_history", columnLayout, gridPros);
+        requestDisabledHistory();
+    }
+    function requestDisabledHistory() {
+        $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
+            AUIGrid.setGridData(popup_grid_disabledCurrent_history, data);
+        });
+    }
+/* // 장애 신고 신청 현황 */
 /* ------------------------------------------------------------------------ */

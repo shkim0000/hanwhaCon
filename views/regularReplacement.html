@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
 </head>
 <body id="guide">
 
@@ -55,21 +56,20 @@
 
         <div class="title-box">
             <div class="title">
-                <h3 class="important">보유자산(정기교체대상)</h3>
+                <h3>보유자산(정기교체대상)</h3>
             </div>
         </div>
         <div id="grid_wrap" class="grid-box h-small"></div>
 
         <div class="title-box">
             <div class="title">
-                <h3 class="important">신청자산정보</h3>
+                <h3>신청자산정보</h3>
             </div>
         </div>
-        <div id="grid_wrap2" class="grid-box h-small"></div>
+        <div id="enrollAssetInfoGrid_ID" class="grid-box h-small"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-<!--            <button type="button" class="btn primary send">상신</button>-->
         </div>
 
         <div class="btn-wrap">
@@ -164,7 +164,7 @@
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
     let myGridID;
-    let myGridID2;
+    let enrollAssetGrid_ID;
 
     /* 1-2. Grid 클릭이벤트 중 데이터를 담아놓을 변수 */
     let rowData;
@@ -430,8 +430,8 @@
                         "default":"../resources/img/icon/icon_delete.svg"
                     },
                     onClick: function(){
-                        clickItem = AUIGrid.getSelectedRows(myGridID2)[0];
-                        AUIGrid.removeRow(myGridID2, "selectedIndex");
+                        clickItem = AUIGrid.getSelectedRows(enrollAssetGrid_ID)[0];
+                        AUIGrid.removeRow(enrollAssetGrid_ID, "selectedIndex");
                         AUIGrid.addRow(myGridID, clickItem, "last");
                     }
                 },
@@ -457,12 +457,12 @@
         }
 
         /* 그리드 생성 */
-        myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+        enrollAssetGrid_ID = AUIGrid.create("#enrollAssetInfoGrid_ID", columnLayout, gridPros);
 
         $('.menu-btn').on('click',function(){
-            AUIGrid.destroy('#grid_wrap2');
+            AUIGrid.destroy('#enrollAssetInfoGrid_ID');
             setTimeout(function(){
-                AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+                AUIGrid.create("#enrollAssetInfoGrid_ID", columnLayout, gridPros);
                 requestData2();
             },200);
         })
@@ -475,7 +475,7 @@
     }
     function requestData2() {
         $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
-            AUIGrid.setGridData(myGridID2, data);
+            AUIGrid.setGridData(enrollAssetGrid_ID, data);
         });
     }
 
@@ -506,7 +506,7 @@
             category_product_quantity: 1,
         }
         AUIGrid.removeRow(myGridID, whatRow);
-        AUIGrid.addRow(myGridID2, insertObj, "last");
+        AUIGrid.addRow(enrollAssetGrid_ID, insertObj, "last");
         $(this).closest("#model_pop").removeClass("open");
         lp_close("model_pop");
     })

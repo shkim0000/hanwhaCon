@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
 </head>
 <body id="guide">
 
@@ -48,9 +49,9 @@
             <div class="input-lists">
                 <div class="input-list">
                     <span class="input-title">사용자</span>
-                    <label class="input search" onclick="lp_open('gridPop_user','사용자 검색',505,530);">
+                    <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
                         <input type="text" data-label="user" readonly>
-                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
@@ -151,8 +152,6 @@
             </ul>
         </div>
 
-
-
         <div class="title-box">
             <div class="title">
                 <h3>장애 신고 목록</h3>
@@ -162,11 +161,11 @@
             </div>
         </div>
         <!-- 장애신고목록 그리드 -->
-        <div id="grid_wrap" class="grid-box h-medium"></div>
+        <div id="disabledDC_ID" class="grid-box h-medium"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
-            <button type="button" class="btn" onclick="lp_open('gridPop_detail','장애신고 신청 현황',1250,590);">장애 신고 신청 현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,590);">장애 신고 신청 현황</button>
         </div>
     </div>
 </div>
@@ -192,7 +191,7 @@
 </div>
 
 <!--장애 신고 신청 현황-->
-<div id="gridPop_detail" class="popup">
+<div id="gridPop_disabledCurrent" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -215,14 +214,7 @@
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
                     <div class="td">
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">행정동</option>
-                                    <option value="">행정동</option>
-                                </select>
-                            </label>
-                        </div>
+                        <div class="td-wrap">행정동</div>
                     </div>
                     <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
                     <div class="td"><div class="td-wrap"><p>6층 604호</p></div></div>
@@ -238,14 +230,14 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail" class="grid-box h-small"></div>
+            <div id="popup_grid_disabledCurrent_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box h-small"></div>
+            <div id="popup_grid_disabledCurrent_history" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -254,34 +246,16 @@
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th colspan="2"><p>파일명</p></th>
+                        <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-<!--                                    <label class="file">-->
-<!--                                        <input type="file" class="fileUpload">-->
-<!--                                        <span  class="btn">파일추가</span>-->
-<!--                                    </label>-->
-                                    <span>aaa.png</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -290,7 +264,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_close('gridPop_detail')">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_disabledCurrent')">닫기</button>
             </div>
         </div>
     </div>
@@ -300,29 +274,15 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let myGridID;
-let popup_grid_user; // 사용자 검색
-let popup_grid_detail; // 장애신고신청현황 팝업 중 자산정보 그리드
-let popup_grid_history; // 장애신고신청현황 팝업 중 처리이력 그리드
+let disabledDC_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-function documentReady() {
-    /* 그리드 생성 */
-    createAUIGrid();
-
-    popupUserSearch(); // 사용자 검색
-    popupAssetDetail(); // 장애신고신청현황 팝업 중 자산정보 그리드
-    popupHistory(); // 장애신고신청현황 팝업 중 처리이력 그리드
-
-    /* 그리드 삽입 */
-    requestData();// 데이터 요청 후 상단 그리드 삽입
-    requestData2();
-    requestData3();
-    requestData4();
-}
+/* 그리드 생성 */
+createDisabledDCGrid();
+requestDisabledDCData();
 
 /* 3. AUIGrid 그리드 옵션 */
-function createAUIGrid() {
+function createDisabledDCGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -413,11 +373,11 @@ function createAUIGrid() {
     }
 
     /* 그리드 생성 */
-    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    disabledDC_ID = AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
 
     /* 더블 클릭시 팝업 */
-    AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
-        $("#gridPop_detail").addClass("open").dialog({
+    AUIGrid.bind(disabledDC_ID, "cellDoubleClick", function(event) {
+        $("#gridPop_disabledCurrent").addClass("open").dialog({
             title: "장애 신고 신청 현황",
             width: 1250,
             height: 500,
@@ -428,172 +388,25 @@ function createAUIGrid() {
     });
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#disabledDC_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-            requestData();
+            AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
+            requestDisabledDCData();
         },200);
     })
 }
 
-/* [팝업] 사용자 검색 */
-function popupUserSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout2 = [
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros2 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
-
-    /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-
-    /*  사용자 셀 더블클릭 시 반영되는 기능 */
-    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
-        let userName = event.item.category_user_name;
-        let userDepartment = event.item.category_department;
-
-        $("input[data-label='user']").val(userName);
-        $("input[data-label='department']").val(userDepartment);
-
-        /* 팝업창 닫기 */
-        $("#gridPop_user").dialog("close");
-    });
-}
-
-/* [팝업] 장애신고신청현황 팝업 중 자산정보 그리드 */
-function popupAssetDetail() {
-    /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
-        },{
-            dataField: "category_product",
-            headerText: "자산분류",
-        }, {
-            dataField: "category_product",
-            headerText: "품목",
-        }, {
-            dataField: "category_item_name",
-            headerText: "모델명",
-        }, {
-            dataField: "category_place",
-            headerText: "자산위치"
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
-    }
-
-    /* 그리드 생성 */
-    popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
-}
-
-/* [팝업] 장애신고신청현황 팝업 중 처리이력 그리드 */
-function popupHistory() {
-    /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_history_desc",
-            headerText: "처리내용",
-        },{
-            dataField: "category_manager",
-            headerText: "조치자",
-        }, {
-            dataField: "category_date",
-            headerText: "처리일시",
-        }, {
-            dataField: "category_state",
-            headerText: "상태",
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
-    }
-
-    /* 그리드 생성 */
-    popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout, gridPros);
-}
-
-/* 4. 데이터 불러오기 */
-function requestData() {
+/* 4.  */
+function requestDisabledDCData() {
     $.get("../resources/lib/aui-grid/data/sample-datas7.json", function (data) {
-        AUIGrid.setGridData(myGridID, data);
-    });
-}
-
-function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
-        AUIGrid.setGridData(popup_grid_user, data);
-    });
-}
-
-function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
-        AUIGrid.setGridData(popup_grid_detail, data);
-    });
-}
-
-function requestData4() {
-    $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
-        AUIGrid.setGridData(popup_grid_history, data);
+        AUIGrid.setGridData(disabledDC_ID, data);
     });
 }
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
-    } else if (typeof popup_grid_user !== "undefined"){
-        AUIGrid.resize(popup_grid_user);
+    if (typeof disabledDC_ID !== "undefined") {
+        AUIGrid.resize(disabledDC_ID);
     }
 }
 
@@ -603,19 +416,19 @@ $(".quantity-list li button").each(function(){
         let name = $(this).find('.name').text();
 
         if(name === "신청"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", "신청");
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "신청");
         } else if (name === "접수"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", "접수");
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "접수");
         } else if (name === "조치중"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", "조치중");
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "조치중");
         } else if (name === "완료"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", "완료");
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "완료");
         } else if (name === "보류"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", "보류");
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "보류");
         } else if (name === "수리중"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", "수리중");
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "수리중");
         } else if (name === "전체"){
-            AUIGrid.setFilterByValues(myGridID, "category_status", ["신청","접수","조치중","완료","보류","수리중"]);
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", ["신청","접수","조치중","완료","보류","수리중"]);
         }
     })
 })
