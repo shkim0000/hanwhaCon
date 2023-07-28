@@ -605,6 +605,9 @@ let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
 let popup_subGrid_approvalChange; // 상신 > 결재선변경
 let submitList1 = ["데스크탑", "모니터"];
 
+/* 클릭된 row에 대한 index 정보 */
+let whatRow;
+
 /* [팝업] 상신 */
 function popupSubmitList(id,title,width,height){
     /* 팝업 그리드(예시) */
@@ -638,6 +641,7 @@ function popupSubmitList(id,title,width,height){
                 onClick: function (event) {
                     lp_open('submitApprovalChange_pop','Search Employee',800,490);
                     subPopupApprovalChange(id,title,width,height);
+                    whatRow = event.rowIndex;
                 },
             }
         },
@@ -894,6 +898,18 @@ function subPopupApprovalChange(id,title,width,height){
     // gridPros.showHeader = false;
     /* 그리드 생성 */
     popup_subGrid_approvalChange = AUIGrid.create("#popup_subGrid_approvalChange", columnLayout, gridPros);
+
+    AUIGrid.bind(popup_subGrid_approvalChange, "cellClick", function(event){
+        let item = new Object();
+        item.id = "grid_ID_1" + (++cnt),
+            item.category_submit = '결재',
+            item.category_submit_person = event.item.category_department,
+            item.category_submit_change = '결재선변경',
+            item.category_submit_delete = '결재선 삭제',
+            AUIGrid.updateRow(popup_grid_submitList, item, whatRow)
+        lp_close("submitApprovalChange_pop");
+
+    })
     requestApprovalChange();
 }
 
@@ -930,6 +946,28 @@ function openWindowPop(url, name){
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
 };
+
+/* 결재선추가 팝업 에서 추가버튼 누르면, row 추가되는 기능 */
+function addingResult(){
+    let resultRows = AUIGrid.getAddedRowItems(popup_subGrid_addExecutives);
+
+    /* 상신팝업에 선택된 row 추가하고 */
+    resultRows.forEach((i) => {
+        let item = new Object();
+        item.id = "grid_ID_1" + (++cnt),
+            item.category_submit = '결재',
+            item.category_submit_person = i.category_department,
+            item.category_submit_change = '결재선변경',
+            item.category_submit_delete = '결재선 삭제',
+            AUIGrid.addRow(popup_grid_submitList, item, "last")
+    })
+    /* 추가된 데이터는 삭제하고 */
+    AUIGrid.clearGridData(popup_subGrid_addExecutives);
+
+    /* 팝업창을 닫는다 */
+    lp_close("submitSearch_pop");
+}
+
 /* // 결재 상신 팝업 */
 
 
