@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
 </head>
 <body id="guide">
 
@@ -65,26 +66,24 @@
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
-                            <input type="text" placeholder="홍길동" disabled>
-<!--                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>-->
+                            <input type="text" value="홍길동" readonly>
                         </label>
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center"><p class="important">사용자</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" placeholder="양현모">
-                            <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <label class="input search"  data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                            <input type="text" data-label="user" readonly>
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center">부서</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" placeholder="IT 운영">
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <label class="input search"  data-isActive="readonly">
+                            <input type="text" data-label="department" readonly>
                         </label>
                     </div>
                 </div>
@@ -169,7 +168,7 @@
 <!--                    </label>-->
                 </div>
             </div>
-            <div id="grid_wrap" class="grid-box h-small"></div>
+            <div id="holdingAssetGrid_ID" class="grid-box h-small"></div>
         </div>
 
         <div class="title-box">
@@ -177,7 +176,7 @@
                 <h3 class="important">반납자신청정보</h3>
             </div>
         </div>
-        <div id="grid_wrap2" class="grid-box h-small"></div>
+        <div id="returnAssetGrid_ID" class="grid-box h-small"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
@@ -448,9 +447,8 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let myGridID; // 보유자산
-let myGridID2; // 반납자신청정보
-let popup_grid_user; // 사용자 검색
+let holdingAssetGrid_ID; // 보유자산
+let returnAssetGrid_ID; // 반납자신청정보
 
 let popup_grid_submitList; // 상신
 let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
@@ -466,18 +464,18 @@ function documentReady() {
     createAUIGrid();
     createAUIGrid2();
 
-    popupUserSearch(); // 사용자 검색
+/*
     popupSubmitList(); // 상신
     subPopupSearchExecutives(); // 상신 > 검색한 임직원
     subPopupAddExecutives(); // 상신 > 결재라인에 추가할 임직원
-    subPopupApprovalChange(); // 상신 > 결재선변경
+    subPopupApprovalChange(); // 상신 > 결재선변경*/
 
     /* 그리드 삽입 */
     requestData();
-    requestData2();
-    requestData5();
+
+/*    requestData5();
     requestData6();
-    requestData7();
+    requestData7();*/
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -585,12 +583,12 @@ function createAUIGrid() {
     }
 
     /* 그리드 생성 */
-    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#holdingAssetGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
             requestData();
         },200);
     })
@@ -691,14 +689,14 @@ function createAUIGrid2() {
                 },
                 onClick: function(){
                     /* 선택한 행들 얻기 */
-                    let rows = AUIGrid.getSelectedRows(myGridID2);
+                    let rows = AUIGrid.getSelectedRows(returnAssetGrid_ID);
                     console.log(rows)
 
                     // 얻은 행을 상단 그리드에 추가하기
-                    AUIGrid.addRow( myGridID, rows, "last");
+                    AUIGrid.addRow( holdingAssetGrid_ID, rows, "last");
 
                     // 선택한 하단 그리드 행들 삭제
-                    AUIGrid.removeRow(myGridID2, "selectedIndex");
+                    AUIGrid.removeRow(returnAssetGrid_ID, "selectedIndex");
                 }
             }
         }
@@ -723,462 +721,52 @@ function createAUIGrid2() {
     }
 
     /* 그리드 생성 */
-    myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+    returnAssetGrid_ID = AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap2');
+        AUIGrid.destroy('#returnAssetGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+            AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
             requestData4();
         },200);
     })
 }
-/* [팝업] 사용자 검색 */
-function popupUserSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout2 = [
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros2 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
 
-    /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-}
-
-/* [팝업] 상신 */
-function popupSubmitList(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_submit",
-            headerText: "결재내용",
-            width: 180,
-            renderer: {
-                type: "DropDownListRenderer",
-                list: groupList1
-            }
-        },
-        {
-            dataField: "category_submit_person",
-            headerText: "결재자",
-            width: 180,
-        },
-        {
-            dataField: "category_submit_change",
-            headerText: "결재선 변경",
-            width: 160,
-            renderer: {
-                type: "ButtonRenderer",
-                onClick: function (event) {
-                    $("#submitApprovalChange_pop").addClass("open");
-                },
-            }
-        },
-        {
-            dataField: "category_submit_delete",
-            headerText: "결재선 삭제",
-            width: 120,
-            renderer: {
-                type: "ButtonRenderer",
-                onClick: function (event) {
-                    AUIGrid.removeRow(event.pid, event.rowIndex);
-                },
-            }
-        }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        showHeader : false,
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        softRemoveRowMode:false,
-    }
-
-    /* 그리드 생성 */
-    popup_grid_submitList = AUIGrid.create("#popup_grid_submitList", columnLayout, gridPros);
-
-}
-
-/* [팝업] 상신 > 검색한 임직원 */
-function subPopupSearchExecutives(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_kinds",
-            headerText: "유형",
-            width: 180,
-        },
-        {
-            dataField: "category_name",
-            headerText: "성명",
-            width: 180,
-        },
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180,
-        },
-        {
-            dataField: "category_ID",
-            headerText: "ID",
-            width: 180,
-        },
-        {
-            dataField: "category_status",
-            headerText: "직급",
-            width: 180,
-        },
-        {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 180,
-        }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        softRemoveRowMode: false // 소프트 제거 모드 사용 안함
-    }
-
-    // gridPros.showHeader = false;
-    /* 그리드 생성 */
-    popup_subGrid_searchExecutives = AUIGrid.create("#popup_subGrid_searchExecutives", columnLayout, gridPros);
-
-    // 셀클릭 이벤트 바인딩
-    AUIGrid.bind(popup_subGrid_searchExecutives, "cellClick",function(){
-        /* 선택한 행들 얻기 */
-        let rows = AUIGrid.getSelectedRows(popup_subGrid_searchExecutives);
-
-        if (rows.length <= 0) {
-            alert('상단 그리드에서 체크된 행이 없습니다.');
-            return;
-        }
-        // 얻은 행을 하단 그리드에 추가하기
-        AUIGrid.addRow( popup_subGrid_addExecutives, rows, "last");
-
-        // 선택한 상단 그리드 행들 삭제
-        AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
-    });
-}
-
-/* [팝업] 상신 > 결재라인에 추가할 임직원 */
-function subPopupAddExecutives(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_del_btn", // 임의의 고유값
-            headerText: "Del ",
-            renderer: {
-                type: "IconRenderer",
-                iconWidth:12, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
-                iconHeight:16,
-                iconPosition: "aisleCenter",
-                iconTableRef: { // icon 값 참조할 테이블 레퍼런스
-                    "default": "../resources/img/icon/icon_delete.svg" // default
-                },
-                onClick: function (event) {
-                    /* 선택한 행들 얻기 */
-                    let rows = AUIGrid.getSelectedRows(popup_subGrid_addExecutives);
-
-                    if (rows.length <= 0) {
-                        alert('상단 그리드에서 체크된 행이 없습니다.');
-                        return;
-                    }
-                    // 얻은 행을 하단 그리드에 추가하기
-                    AUIGrid.addRow( popup_subGrid_searchExecutives, rows, "last");
-
-                    // 선택한 상단 그리드 행들 삭제
-                    AUIGrid.removeRow(popup_subGrid_addExecutives, "selectedIndex");
-                }
-            }
-        },
-        {
-            dataField: "category_kinds",
-            headerText: "유형",
-            width: 180,
-        },
-        {
-            dataField: "category_name",
-            headerText: "성명",
-            width: 180,
-        },
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180,
-        },
-        {
-            dataField: "category_ID",
-            headerText: "ID",
-            width: 180,
-        },
-        {
-            dataField: "category_status",
-            headerText: "직급",
-            width: 180,
-        },
-        {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 180,
-        }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        softRemoveRowMode: false// 소프트 제거 모드 사용 안함
-
-    }
-    // 그리드 헤더를 표시하지 않습니다.
-    // gridPros.showHeader = false;
-    /* 그리드 생성 */
-    popup_subGrid_addExecutives = AUIGrid.create("#popup_subGrid_addExecutives", columnLayout, gridPros);
-}
-
-/* [팝업] 상신 > 결재선변경 */
-function subPopupApprovalChange(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_kinds",
-            headerText: "유형",
-            width: 180,
-        },
-        {
-            dataField: "category_name",
-            headerText: "성명",
-            width: 180,
-        },
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180,
-        },
-        {
-            dataField: "category_ID",
-            headerText: "ID",
-            width: 180,
-        },
-        {
-            dataField: "category_status",
-            headerText: "직급",
-            width: 180,
-        },
-        {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 180,
-        }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        softRemoveRowMode: false// 소프트 제거 모드 사용 안함
-
-    }
-    // 그리드 헤더를 표시하지 않습니다.
-    // gridPros.showHeader = false;
-    /* 그리드 생성 */
-    popup_subGrid_approvalChange = AUIGrid.create("#popup_subGrid_approvalChange", columnLayout, gridPros);
-}
 /* 4. 데이터 불러오기 */
 function requestData() {
     $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
-        AUIGrid.setGridData(myGridID, data);
+        AUIGrid.setGridData(holdingAssetGrid_ID, data);
     });
 }
 
-function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
-        AUIGrid.setGridData(popup_grid_user, data);
-    });
-}
-function requestData5() {
-    $.get("../resources/lib/aui-grid/data/submitList-datas1.json", function (data) {
-        AUIGrid.setGridData(popup_grid_submitList, data);
-    });
-}
-
-function requestData6() {
-    $.get("../resources/lib/aui-grid/data/submitList-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_subGrid_searchExecutives, data);
-    });
-}
-function requestData7() {
-    $.get("../resources/lib/aui-grid/data/submitList-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_subGrid_approvalChange, data);
-    });
-}
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
-    } else if (typeof popup_grid_user !== "undefined"){
-        AUIGrid.resize(popup_grid_user);
+    if (typeof holdingAssetGrid_ID !== "undefined") {
+        AUIGrid.resize(holdingAssetGrid_ID);
+    } else if (typeof rentalAssetInfoGrid_ID !== "undefined"){
+        AUIGrid.resize(rentalAssetInfoGrid_ID);
     }
 }
 /* 6. 함수 관련 */
-/* 행 삭제 */
-function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(myGridID2); // 체크된 행 삭제 처리
-    let removedRows = AUIGrid.getRemovedItems(myGridID2, true); // 삭제 처리된 아이템 있는지 보기
-    if (removedRows.length <= 0) {
-        alert("삭제 처리되어 마크된 행이 없습니다.")
-        return;
-    }
-    AUIGrid.removeSoftRows(myGridID2); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
-}
-/* [윈도우 팝업] 미리보기 */
-function openWindowPop(url, name){
-    var options = 'top=10, left=10, width=1000, height=600, status=no, menubar=no, toolbar=no, resizable=no';
-    window.open(url, name, options);
-}
-
-/* 선택 행들 위로 한 단계 올림 */
-function moveRowsToUp() {
-    AUIGrid.moveRowsToUp(popup_grid_submitList);
-};
-
-/* 선택 행들 아래로 한 단계 올림 */
-function moveRowsToDown() {
-    AUIGrid.moveRowsToDown(popup_grid_submitList);
-};
-
 /* 교체신청 > 선택한 날짜 그리드 삽입 */
-// $(".date.btn input").datepicker( {
-//     onSelect: function() {
-//         let realDate = $(this).datepicker("getDate");
-//         let date = $.datepicker.formatDate("yy-mm-dd", realDate);
-//
-//         /* 체크된 행의 id 값을 찾아 저장 */
-//         let checkedItems = AUIGrid.getCheckedRowItems(myGridID);
-//         if (checkedItems.length <= 0) {
-//             alert("체크한 행이 없습니다.");
-//             return;
-//         }
-//         let str = [];
-//         let rowItem;
-//         for (let i = 0, len = checkedItems.length; i < len; i++) {
-//             rowItem = checkedItems[i];
-//             let object ={
-//                 id : rowItem.item.id,
-//                 category_rental_finish : date
-//             }
-//             str.push(object);
-//         }
-//
-//         // 상단 그리드의 체크된 행들 얻기
-//         let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
-//         console.log(rows[0].id)
-//         if (rows.length <= 0) {
-//             alert('상단 그리드에서 체크된 행이 없습니다.');
-//             return;
-//         }
-//         /* 얻은 행을 하단 그리드에 추가하기 */
-//         AUIGrid.addRow(myGridID2, rows, "last");
-//
-//         /* 선택한 상단 그리드 행들 삭제 */
-//         AUIGrid.removeCheckedRows(myGridID);
-//
-//         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-//         AUIGrid.updateRowsById(myGridID2, str)
-//
-//     }
-// });
-
 $(".btn.check").on("click",function(){
     // 상단 그리드의 체크된 행들 얻기
-    let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
+    let rows = AUIGrid.getCheckedRowItemsAll(holdingAssetGrid_ID);
     console.log(rows[0].id)
     if (rows.length <= 0) {
         alert('상단 그리드에서 체크된 행이 없습니다.');
         return;
     }
     /* 얻은 행을 하단 그리드에 추가하기 */
-    AUIGrid.addRow(myGridID2, rows, "last");
+    AUIGrid.addRow(returnAssetGrid_ID, rows, "last");
 
     /* 선택한 상단 그리드 행들 삭제 */
-    AUIGrid.removeCheckedRows(myGridID);
+    AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
 
     /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-    AUIGrid.updateRowsById(myGridID2, str)
-})
+    AUIGrid.updateRowsById(returnAssetGrid_ID, str)
+});
 </script>
 </body>
 </html>

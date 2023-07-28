@@ -173,13 +173,9 @@
                 <div class="btn-wrap">
                     <button type="button" class="btn">부서전체검색</button>
                     <button type="button" class="btn primary check">선택</button>
-<!--                    <label class="date btn">-->
-<!--                        <span>선택</span>-->
-<!--                        <input type="text">-->
-<!--                    </label>-->
                 </div>
             </div>
-            <div id="grid_wrap" class="grid-box h-small"></div>
+            <div id="holdingAssetGrid_ID" class="grid-box h-small"></div>
         </div>
 
         <div class="title-box">
@@ -187,7 +183,7 @@
                 <h3 class="important">신청내역</h3>
             </div>
         </div>
-        <div id="grid_wrap2" class="grid-box h-small"></div>
+        <div id="enrollGrid_ID" class="grid-box h-small"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
@@ -469,8 +465,8 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let myGridID;
-let myGridID2;
+let holdingAssetGrid_ID;
+let enrollGrid_ID;
 
 /* [수정예정] */
 let popup_grid_submitList; // 상신
@@ -484,8 +480,8 @@ let groupList1 = ["데스크탑", "모니터"];
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createAUIGrid();
-    createAUIGrid2();
+    createHoldingAssetGrid;
+    createEnrollGrid();
 
 
     popupSubmitList(); // 상신
@@ -494,7 +490,7 @@ function documentReady() {
     subPopupApprovalChange(); // 상신 > 결재선변경
 
     /* 그리드 삽입 */
-    requestData();
+    requestHoldingAssetData();
 
     requestData5();
     requestData6();
@@ -502,7 +498,7 @@ function documentReady() {
 }
 
 /* 3. AUIGrid 그리드 옵션 */
-function createAUIGrid() {
+function createHoldingAssetGrid {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -601,23 +597,22 @@ function createAUIGrid() {
         fillColumnSizeMode:true,
         softRemoveRowMode:false,
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
-    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#holdingAssetGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-            requestData();
+            AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
+            requestHoldingAssetData();
         },200);
     });
 
     /* 키보드로 클릭하기 기능 구현중 */
-    AUIGrid.bind(myGridID, "cellClick,keyDown",	function(event) {
+    AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
         if(event.keyCode === 32){
             var item = event.item, rowIdField, rowId;
             rowIdField = AUIGrid.getProp(event.pid, "rowIdField"); // rowIdField 얻기
@@ -632,7 +627,7 @@ function createAUIGrid() {
         }
     });
 }
-function createAUIGrid2() {
+function createEnrollGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -727,14 +722,14 @@ function createAUIGrid2() {
                 },
                 onClick: function () {
                     /* 선택한 행들 얻기 */
-                    let rows = AUIGrid.getSelectedRows(myGridID2);
+                    let rows = AUIGrid.getSelectedRows(enrollGrid_ID);
                     console.log(rows)
 
                     // 얻은 행을 상단 그리드에 추가하기
-                    AUIGrid.addRow(myGridID, rows, "last");
+                    AUIGrid.addRow(holdingAssetGrid_ID, rows, "last");
 
                     // 선택한 하단 그리드 행들 삭제
-                    AUIGrid.removeRow(myGridID2, "selectedIndex");
+                    AUIGrid.removeRow(enrollGrid_ID, "selectedIndex");
                 }
             }
         }
@@ -753,17 +748,16 @@ function createAUIGrid2() {
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode:true,
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
-    myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+    enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
 
     $('.menu-btn').on("click",function(){
-        AUIGrid.destroy("#grid_wrap2");
+        AUIGrid.destroy("#enrollGrid_ID");
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
+            AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
             requestData4();
         },200);
     })
@@ -1056,9 +1050,9 @@ function subPopupApprovalChange(){
 }
 
 /* 4. 데이터 불러오기 */
-function requestData() {
+function requestHoldingAssetData() {
     $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
-        AUIGrid.setGridData(myGridID, data);
+        AUIGrid.setGridData(holdingAssetGrid_ID, data);
     });
 }
 
@@ -1082,22 +1076,22 @@ function requestData7() {
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
-    } else if (typeof popup_grid_user !== "undefined"){
-        AUIGrid.resize(popup_grid_user);
+    if (typeof holdingAssetGrid_ID !== "undefined") {
+        AUIGrid.resize(holdingAssetGrid_ID);
+    } else if (typeof enrollGrid_ID !== "undefined"){
+        AUIGrid.resize(enrollGrid_ID);
     }
 }
 /* 6. 함수 관련 */
 /* 행 삭제 */
 function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(myGridID2); // 체크된 행 삭제 처리
-    let removedRows = AUIGrid.getRemovedItems(myGridID2, true); // 삭제 처리된 아이템 있는지 보기
+    AUIGrid.removeCheckedRows(enrollGrid_ID); // 체크된 행 삭제 처리
+    let removedRows = AUIGrid.getRemovedItems(enrollGrid_ID, true); // 삭제 처리된 아이템 있는지 보기
     if (removedRows.length <= 0) {
         alert("삭제 처리되어 마크된 행이 없습니다.")
         return;
     }
-    AUIGrid.removeSoftRows(myGridID2); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
+    AUIGrid.removeSoftRows(enrollGrid_ID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
 }
 /* [윈도우 팝업] 미리보기 */
 function openWindowPop(url, name){
@@ -1116,62 +1110,22 @@ function moveRowsToDown() {
 };
 
 /* 인수인계신청 > 선택한 날짜 그리드 삽입 */
-// $(".date.btn input").datepicker( {
-//     onSelect: function() {
-//         let realDate = $(this).datepicker("getDate");
-//         let date = $.datepicker.formatDate("yy-mm-dd", realDate);
-//
-//         /* 체크된 행의 id 값을 찾아 저장 */
-//         let checkedItems = AUIGrid.getCheckedRowItems(myGridID);
-//         if (checkedItems.length <= 0) {
-//             alert("체크한 행이 없습니다.");
-//             return;
-//         }
-//         let str = [];
-//         let rowItem;
-//         for (let i = 0, len = checkedItems.length; i < len; i++) {
-//             rowItem = checkedItems[i];
-//             let object ={
-//                 id : rowItem.item.id,
-//                 category_rental_finish : date
-//             }
-//             str.push(object);
-//         }
-//
-//         // 상단 그리드의 체크된 행들 얻기
-//         let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
-//         console.log(rows[0].id)
-//         if (rows.length <= 0) {
-//             alert('상단 그리드에서 체크된 행이 없습니다.');
-//             return;
-//         }
-//         /* 얻은 행을 하단 그리드에 추가하기 */
-//         AUIGrid.addRow(myGridID2, rows, "last");
-//
-//         /* 선택한 상단 그리드 행들 삭제 */
-//         AUIGrid.removeCheckedRows(myGridID);
-//
-//         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-//         AUIGrid.updateRowsById(myGridID2, str)
-//
-//     }
-// });
 $(".btn.check").on("click",function(){
     // 상단 그리드의 체크된 행들 얻기
-    let rows = AUIGrid.getCheckedRowItemsAll(myGridID);
+    let rows = AUIGrid.getCheckedRowItemsAll(holdingAssetGrid_ID);
     console.log(rows[0].id)
     if (rows.length <= 0) {
         alert('상단 그리드에서 체크된 행이 없습니다.');
         return;
     }
     /* 얻은 행을 하단 그리드에 추가하기 */
-    AUIGrid.addRow(myGridID2, rows, "last");
+    AUIGrid.addRow(enrollGrid_ID, rows, "last");
 
     /* 선택한 상단 그리드 행들 삭제 */
-    AUIGrid.removeCheckedRows(myGridID);
+    AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
 
     /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-    AUIGrid.updateRowsById(myGridID2, str)
+    AUIGrid.updateRowsById(enrollGrid_ID, str)
 })
 </script>
 </body>

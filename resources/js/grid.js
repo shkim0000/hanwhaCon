@@ -1,5 +1,6 @@
 /* [팝업] 모음 */
-/* 사용자 검색 */
+/* [사용자 / 부서 검색 팝업]------------------------------------------------------------------- */
+/* 1. 사용자 검색 */
     let popup_grid_user;
     function gridPopUser(id,title,width,height,e){
         /* 1. AUIGrid 칼럼 설정 */
@@ -68,7 +69,12 @@
     }
 /* // 사용자 검색 */
 
-/* 신규신청 : 자산정보 , 처리이력 */
+/* 2. 부서 검색 */
+/* // 부서 검색 */
+/* ------------------------------------------------------------------------ */
+
+/* [신청 팝업 모음] ----------------------------------------------------------- */
+/* 1. 신규신청 */
     /* 자산정보 */
     let popup_grid_newEnroll_detail;
     function gridPopNewEnrollDetail(id,title,width,height){
@@ -151,7 +157,7 @@
     }
 /* // 신규신청 */
 
-/* 교체신청 : 자산정보 , 처리이력 */
+/* 2. 교체신청  */
     /* 자산 정보 */
     let popup_grid_changeEnroll_detail;
     function gridPopChangeEnrollDetail(id,title,width,height){
@@ -249,7 +255,7 @@
     }
 /* // 교체신청 */
 
-/* 대여신청 */
+/* 3. 대여신청 */
     /* 자산정보 */
     let popup_grid_rentalEnroll_detail;
     function gridPopRentalEnrollDetail(id,title,width,height){
@@ -332,7 +338,7 @@
     }
 /* // 대여신청 */
 
-/* 반납신청 */
+/* 4. 반납신청 */
     /* 자산정보 */
     let popup_grid_returnEnroll_detail;
     function gridPopReturnEnrollDetail(id,title,width,height){
@@ -416,7 +422,7 @@
     }
 /* // 반납신청 */
 
-/* 인수인계 신청 */
+/* 5. 인수인계 신청 */
     /* 자산정보 */
     let popup_grid_takeOverEnroll_detail;
     function gridPopTakeoverEnrollDetail(id,title,width,height){
@@ -503,7 +509,7 @@
     }
 /* // 인수인계 신청 */
 
-/* 대여연장신청 */
+/* 6. 대여연장신청 */
     /* 자산정보 */
     let popup_grid_rentalExtension_detail;
     function gridPopRentalExtensionEnrollDetail(id,title,width,height){
@@ -589,3 +595,8 @@
         });
     }
 /* // 대여연장신청 */
+/* ------------------------------------------------------------------------ */
+
+/* [상신 팝업 모음]-------------------------------------------------------------- */
+
+/* ------------------------------------------------------------------------ */

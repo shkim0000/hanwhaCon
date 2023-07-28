@@ -377,13 +377,15 @@ function lp_open(id,title,width,height,e){
     } else if (id === "rentalExtensionEnroll_pop"){
         gridPopRentalExtensionEnrollDetail(id,title,width,height);
         gridPopRentalExtensionEnrollHistory(id,title,width,height);
+    } else if (id === "gridPop_rental_info"){
+        popupChangeAssetInfo(id,title,width,height);
     }
 }
 /* 팝업창 닫기 */
 function lp_close(target){
     if(target)
     {
-        $("#"+target).removeClass("open").dialog("close");
+        $("#"+target).dialog("close");
     }
     else
     {
