@@ -53,7 +53,7 @@
                     <span class="input-title">부서명</span>
                     <label class="input search">
                         <input type="text">
-                        <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button" data-popup="gridPop_department" data-label="readonly" onclick="createAssetManagementStatusGrid();requestAssetManagementStatusGridData();"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
@@ -188,12 +188,12 @@ let assetDetailGrid_ID;
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createAssetManagementStatusGrid();
-    createAssetDetailGrid();
+    // createAssetManagementStatusGrid();
+    // createAssetDetailGrid();
 
     /* 그리드 삽입 */
-    requestAssetManagementStatusGridData();
-    requestAssetDetailGridData();
+    // requestAssetManagementStatusGridData();
+    // requestAssetDetailGridData();
 
 }
 
@@ -219,16 +219,20 @@ function createAssetManagementStatusGrid() {
             renderer: {
                 type: "ButtonRenderer",
                 onClick: function (event) {
-                    let currentName = event.item.category_product_name;
-                    let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
-
-                    AUIGrid.clearFilterAll(assetDetailGrid_ID);
-
-                    comparisonObj.forEach((i) => {
-                        if(currentName === i.category_product_name){
-                            AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
-                        }
-                    })
+                    createAssetDetailGrid();
+                    requestAssetDetailGridData();
+                    /* 클릭한 물품명에 맞는 requestData 실행 or 부서자산이 모두 request된 상태에서 filtering. 후자라면 아래 코드 활용 */
+                    // 필터링이 아닌 데이터 요청이 이루어져야 함
+                    // let currentName = event.item.category_product_name;
+                    // let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+                    //
+                    // AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                    //
+                    // comparisonObj.forEach((i) => {
+                    //     if(currentName === i.category_product_name){
+                    //         AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
+                    //     }
+                    // })
                 },
             }
         }];
@@ -411,6 +415,7 @@ function requestAssetDetailGridData() {
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
+    // console.log("움직이고있다.");
     if (typeof assetDetailGrid_ID !== "undefined") {
         AUIGrid.resize(assetDetailGrid_ID);
     } else if (typeof assetManagementStatusGrid_ID !== "undefined"){

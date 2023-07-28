@@ -59,14 +59,14 @@
                 <h3>보유자산(정기교체대상)</h3>
             </div>
         </div>
-        <div id="grid_wrap" class="grid-box h-small"></div>
+        <div id="holdingsGrid_ID" class="grid-box h-small"></div>
 
         <div class="title-box">
             <div class="title">
                 <h3>신청자산정보</h3>
             </div>
         </div>
-        <div id="enrollAssetInfoGrid_ID" class="grid-box h-small"></div>
+        <div id="enrollAssetGrid_ID" class="grid-box h-small"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
@@ -163,7 +163,7 @@
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let myGridID;
+    let holdingsGrid_ID;
     let enrollAssetGrid_ID;
 
     /* 1-2. Grid 클릭이벤트 중 데이터를 담아놓을 변수 */
@@ -184,16 +184,16 @@
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
     function documentReady() {
         /* 그리드 생성 */
-        createAUIGrid();
-        createAUIGrid2();
+        createHoldingsGrid();
+        createEnrollAssetGrid();
 
         /* 그리드 삽입 */
-        requestData();
-        requestData2();
+        requestHoldingsGridData();
+        requestEnrollAssetGridData();
     }
 
     /* 3. AUIGrid 그리드 옵션 */
-    function createAUIGrid() {
+    function createHoldingsGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -282,10 +282,9 @@
                             dialogClass: "no-close success-dialog"
                         });
                         //클릭한 row의 정보를 clickItem 변수에 저장
-                        clickItem = AUIGrid.getSelectedRows(myGridID)[0];
-
+                        clickItem = AUIGrid.getSelectedRows(holdingsGrid_ID)[0];
                         whatRow = event.rowIndex;
-                        rowData = AUIGrid.getSelectedRows(myGridID);
+                        rowData = AUIGrid.getSelectedRows(holdingsGrid_ID);
                     }
                 },
             },
@@ -331,23 +330,23 @@
         }
 
         /* 그리드 생성 */
-        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+        holdingsGrid_ID = AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
 
         /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
-        AUIGrid.bind(myGridID, "cellClick", function(event) {
+        AUIGrid.bind(holdingsGrid_ID, "cellClick", function(event) {
 
         });
 
         $('.menu-btn').on('click',function(){
-            AUIGrid.destroy('#grid_wrap');
+            AUIGrid.destroy('#holdingsGrid_ID');
             setTimeout(function(){
-                AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-                requestData();
+                AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
+                requestHoldingsGridData();
             },200);
         })
     }
 
-    function createAUIGrid2() {
+    function createEnrollAssetGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -432,7 +431,7 @@
                     onClick: function(){
                         clickItem = AUIGrid.getSelectedRows(enrollAssetGrid_ID)[0];
                         AUIGrid.removeRow(enrollAssetGrid_ID, "selectedIndex");
-                        AUIGrid.addRow(myGridID, clickItem, "last");
+                        AUIGrid.addRow(holdingsGrid_ID, clickItem, "last");
                     }
                 },
                 width:100,
@@ -457,23 +456,23 @@
         }
 
         /* 그리드 생성 */
-        enrollAssetGrid_ID = AUIGrid.create("#enrollAssetInfoGrid_ID", columnLayout, gridPros);
+        enrollAssetGrid_ID = AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
 
         $('.menu-btn').on('click',function(){
-            AUIGrid.destroy('#enrollAssetInfoGrid_ID');
+            AUIGrid.destroy('#enrollAssetGrid_ID');
             setTimeout(function(){
-                AUIGrid.create("#enrollAssetInfoGrid_ID", columnLayout, gridPros);
-                requestData2();
+                AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
+                requestEnrollAssetGridData();
             },200);
         })
     }
     /* 4. 데이터 불러오기 */
-    function requestData() {
+    function requestHoldingsGridData() {
         $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
-            AUIGrid.setGridData(myGridID, data);
+            AUIGrid.setGridData(holdingsGrid_ID, data);
         });
     }
-    function requestData2() {
+    function requestEnrollAssetGridData() {
         $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
             AUIGrid.setGridData(enrollAssetGrid_ID, data);
         });
@@ -481,8 +480,10 @@
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof popup_grid_user !== "undefined"){
-            AUIGrid.resize(popup_grid_user);
+        if (typeof holdingsGrid_ID !== "undefined"){
+            AUIGrid.resize(holdingsGrid_ID);
+        } else if(typeof enrollAssetGrid_ID !== "undefined"){
+            AUIGrid.resize(enrollAssetGrid_ID);
         }
     }
 
@@ -505,7 +506,7 @@
             category_changeProduct_name: itemName,
             category_product_quantity: 1,
         }
-        AUIGrid.removeRow(myGridID, whatRow);
+        AUIGrid.removeRow(holdingsGrid_ID, whatRow);
         AUIGrid.addRow(enrollAssetGrid_ID, insertObj, "last");
         $(this).closest("#model_pop").removeClass("open");
         lp_close("model_pop");

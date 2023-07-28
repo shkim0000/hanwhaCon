@@ -606,7 +606,7 @@ let popup_subGrid_approvalChange; // 상신 > 결재선변경
 let submitList1 = ["데스크탑", "모니터"];
 
 /* 클릭된 row에 대한 index 정보 */
-let whatRow;
+let rowNum;
 
 /* [팝업] 상신 */
 function popupSubmitList(id,title,width,height){
@@ -641,7 +641,7 @@ function popupSubmitList(id,title,width,height){
                 onClick: function (event) {
                     lp_open('submitApprovalChange_pop','Search Employee',800,490);
                     subPopupApprovalChange(id,title,width,height);
-                    whatRow = event.rowIndex;
+                    rowNum = event.rowIndex;
                 },
             }
         },
@@ -906,7 +906,7 @@ function subPopupApprovalChange(id,title,width,height){
             item.category_submit_person = event.item.category_department,
             item.category_submit_change = '결재선변경',
             item.category_submit_delete = '결재선 삭제',
-            AUIGrid.updateRow(popup_grid_submitList, item, whatRow)
+            AUIGrid.updateRow(popup_grid_submitList, item, rowNum)
         lp_close("submitApprovalChange_pop");
 
     })
