@@ -41,13 +41,6 @@
         </div>
         <div class="input-wrap a-end">
             <div class="input-lists">
-<!--                <div class="input-list c-medium">-->
-<!--                    <span class="input-title">사용자</span>-->
-<!--                    <label class="input search">-->
-<!--                        <input type="text">-->
-<!--                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>-->
-<!--                    </label>-->
-<!--                </div>-->
                 <div class="input-list">
                     <span class="input-title">부서</span>
                     <label class="input search">
@@ -55,16 +48,6 @@
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
-<!--                <div class="input-list medium">-->
-<!--                    <span class="input-title">제목</span>-->
-<!--                    <label class="select">-->
-<!--                        <select>-->
-<!--                            <option value="">제목1</option>-->
-<!--                            <option value="">제목2</option>-->
-<!--                            <option value="">제목3</option>-->
-<!--                        </select>-->
-<!--                    </label>-->
-<!--                </div>-->
                 <div class="input-list medium">
                     <span class="input-title">기간</span>
                     <div class="date-wrap">
@@ -105,7 +88,7 @@
                     <button type="button">
                         <span class="quantity blue">
                             <span class="num">2</span>
-                            <span class="name">데스크탑</span>
+                            <span class="name">PC</span>
                         </span>
                     </button>
                 </li>
@@ -121,7 +104,7 @@
                     <button type="button">
                         <span class="quantity purple">
                             <span class="num">1</span>
-                            <span class="name">공용</span>
+                            <span class="name">마우스</span>
                         </span>
                     </button>
                 </li>
@@ -129,7 +112,7 @@
                     <button type="button">
                         <span class="quantity gray">
                             <span class="num">3</span>
-                            <span class="name">개인</span>
+                            <span class="name">스피커</span>
                         </span>
                     </button>
                 </li>
@@ -142,7 +125,7 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="grid_wrap" class="grid-box h-medium"></div>
+        <div id="dueDiglienceGrid_ID" class="grid-box h-medium"></div>
     </div>
 </div>
 <!-- // contents -->
@@ -163,25 +146,23 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let myGridID;
+let dueDiglienceGrid_ID;
 
 /* 1-2. dropdown menu 리스트 */
 let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
-let hideList = ["분실", "수리", "기타등등"]; // -- 미존재일때 입력될 리스트
-let cleanList = [];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 function documentReady() {
     /* 그리드 생성 */
-    createAUIGrid();
+    createDueDiglienceGrid();
 
     /* 그리드 삽입 */
-    requestData();
+    requestDueDiglienceGridData();
 
 }
 
 /* 3. AUIGrid 그리드 옵션 */
-function createAUIGrid() {
+function createDueDiglienceGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -283,28 +264,28 @@ function createAUIGrid() {
     }
 
     /* 그리드 생성 */
-    myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#dueDiglienceGrid_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-            requestData();
+            AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
+            requestDueDiglienceGridData();
         },200);
     });
 }
 
 /* 4. 데이터 불러오기 */
-function requestData() {
+function requestDueDiglienceGridData() {
     $.get("../resources/lib/aui-grid/data/sample-datas5.json", function (data) {
-        AUIGrid.setGridData(myGridID, data);
+        AUIGrid.setGridData(dueDiglienceGrid_ID, data);
     });
 }
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
+    if (typeof dueDiglienceGrid_ID !== "undefined") {
+        AUIGrid.resize(dueDiglienceGrid_ID);
     }
 }
 
@@ -336,8 +317,8 @@ function addRow() {
         item.category_item_name = '',
         item.category_department = '',
         item.category_user_name = '',
-        item.category_before_change = '',
-        item.category_after_change = '',
+        item.category_before_change = '추가',
+        item.category_after_change = '존재',
         item.category_reason_non_existence = '',
         item.category_investigate_date = formattedDate,
         item.category_investigator = '',
@@ -346,7 +327,7 @@ function addRow() {
         // parameter
         // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
         // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
-        AUIGrid.addRow(myGridID, item, "last");
+        AUIGrid.addRow(dueDiglienceGrid_ID, item, "last");
 };
 
 /* 필수 입력 값이 입력되었는지 검사 */
@@ -354,7 +335,7 @@ function addRow() {
 function validateGridData() {
 
     // name 과 country 는 필수로 입력되어야 하는 필드임. 이것을 검사
-    var isValid = AUIGrid.validateGridData(myGridID, "category_asset_num", "자산 번호는 반드시 입력해야 합니다.");
+    var isValid = AUIGrid.validateGridData(dueDiglienceGrid_ID, "category_asset_num", "자산 번호는 반드시 입력해야 합니다.");
 
     // 다른 JS 에서 제공하는 toast 나 alert 으로 경고문을 띄우고자 하는 경우 다음처럼 message 파라메터 생략.
     // AUIGrid.validateGridData(myGridID, ["name", "country"]);
@@ -363,6 +344,23 @@ function validateGridData() {
         alert("저장되었습니다");
     }
 };
+
+/* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
+$(".quantity-list li button").each(function(){
+    $(this).on("click",function(){
+        let name = $(this).find('.name').text();
+        let comparisonObj = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+
+        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+
+        comparisonObj.forEach((i) => {
+            if(name === i.category_product_name){
+                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name", i.category_product_name);
+            }
+        })
+    })
+})
+
 </script>
 </body>
 </html>
