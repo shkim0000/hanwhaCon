@@ -353,7 +353,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .popup .input-wrap{margin-bottom:12px;}
 .popup .input-list{width:100%;}
 .popup .input-title{font-weight:var(--bold);min-width:60px;}
-.popup .input{width:calc(100% - 65px);height:30px;border-color:var(--line1);}
+.popup .input{width:calc(100% - 100px);height:30px;border-color:var(--line1);padding-right:10px;}
 .popup .input.textarea{height:auto;margin-top:30px;width:100%;}
 
 /* popup > customTable */

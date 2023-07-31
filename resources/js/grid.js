@@ -1,6 +1,6 @@
 /* [팝업] 모음 */
 /* [사용자 / 부서 검색 팝업]------------------------------------------------------------------- */
-/* 1. 사용자 검색 */
+    /* 1. 사용자 검색 */
     let popup_grid_user;
     function gridPopUser(id,title,width,height,e){
         /* 1. AUIGrid 칼럼 설정 */
@@ -67,62 +67,62 @@
             AUIGrid.setGridData(popup_grid_user, data);
         });
     }
-/* // 사용자 검색 */
+    /* // 사용자 검색 */
 
-/* 2. 부서 검색 */
-let popup_grid_department; // 부서 검색
-function popupDepartmentSearch(id,title,width,height,e){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "category_department",
-            headerText: "부서명",
-            width: 180
-        },
-        {
-            dataField: "category_depart_code",
-            headerText: "부서명",
-            width: 180
+    /* 2. 부서 검색 */
+    let popup_grid_department; // 부서 검색
+    function popupDepartmentSearch(id,title,width,height,e){
+        /* 팝업 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "category_department",
+                headerText: "부서명",
+                width: 180
+            },
+            {
+                dataField: "category_depart_code",
+                headerText: "부서명",
+                width: 180
+            }
+        ]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true, // 가로 스크롤 X
         }
-    ]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
+
+        /* 그리드 생성 */
+        popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout, gridPros);
+        requestGridPopDepartment();
+
+        /* 그리드 기능 */
+        let targetPlace = $(e).attr("data-place");
+        let userName;
+        let userDepartment;
+        if(targetPlace === 'department_search'){
+            AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+                userDepartment = event.item.category_department;
+                $("input[data-label='department']").val(userDepartment);
+
+                $("#gridPop_department").dialog("close");
+            });
+        }
     }
 
-    /* 그리드 생성 */
-    popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout, gridPros);
-    requestGridPopDepartment();
-
-    /* 그리드 기능 */
-    let targetPlace = $(e).attr("data-place");
-    let userName;
-    let userDepartment;
-    if(targetPlace === 'department_search'){
-        AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
-            userDepartment = event.item.category_department;
-            $("input[data-label='department']").val(userDepartment);
-
-            $("#gridPop_department").dialog("close");
+    function requestGridPopDepartment() {
+        $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
+            AUIGrid.setGridData(popup_grid_department, data);
         });
     }
-}
-
-function requestGridPopDepartment() {
-    $.get("../resources/lib/aui-grid/data/sample-datas3.json", function (data) {
-        AUIGrid.setGridData(popup_grid_department, data);
-    });
-}
-/* // 부서 검색 */
+    /* // 부서 검색 */
 /* ------------------------------------------------------------------------ */
 
 /* [신청 팝업 모음] ----------------------------------------------------------- */
@@ -1138,12 +1138,16 @@ function requestGridPopDepartment() {
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             softRemoveRowMode: false,
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            // editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
+            autoGridHeight: true,
         }
 
         /* 그리드 생성 */
         popup_grid_disabledAddRow = AUIGrid.create("#popup_grid_disabledAddRow", columnLayout, gridPros);
+
+        AUIGrid.bind(popup_grid_disabledAddRow, "notFound", searchNotFoundHandler);
+
         requestDisabledAddRowData();
     }
     function requestDisabledAddRowData() {
@@ -1237,19 +1241,65 @@ function requestGridPopDepartment() {
                 fillColumnSizeMode:true,
             }
 
-            /* 그리드 생성 */
-            popup_grid_disabledCurrent_history = AUIGrid.create("#popup_grid_disabledCurrent_history", columnLayout, gridPros);
-            requestDisabledHistory();
-        }
+        /* 그리드 생성 */
+        popup_grid_disabledCurrent_history = AUIGrid.create("#popup_grid_disabledCurrent_history", columnLayout, gridPros);
+        requestDisabledHistory();
+    }
         function requestDisabledHistory() {
             $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
                 AUIGrid.setGridData(popup_grid_disabledCurrent_history, data);
             });
         }
-    /* // 장애 신고 신청 현황 */
-/* // [장애신고 - 장애신고 : 장애대상 추가 팝업] ---------------------------------------------------------------------- */
 
-/* ------------------------------------------------------------------------------------------------ */
+/* [검색 기능 함수 모음] */
+/* 1. 검색 결과가 없을 때 실행될 함수*/
+function searchNotFoundHandler(event) {
+    var term = event.term; // 찾는 문자열
+    var wrapFound = event.wrapFound; // wrapSearch 한 경우 만족하는 term 이 그리드에 1개 있는 경우.
+    if (wrapFound) {
+        alert('그리드 마지막 행을 지나 다시 찾았지만 다음 문자열을 찾을 수 없습니다 - ' + term);
+    } else {
+        alert('해당 데이터를 찾을 수 없습니다 - "' + term + '"');
+    }
+};
+/* 2. 발생자 검색시 사용될 함수 */
+function searchClickGenerator() {
+    var term = document.getElementById("myInput").value;
+    if (term.trim() == "") {
+        alert("이름을 입력하십시오.");
+        return;
+    }
+
+    var options = {
+        direction : true, // 검색 방향  (true : 다음, false : 이전 검색)
+        caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
+        wholeWord : true, // 온전한 단어 여부
+        wrapSearch : true, // 끝에서 되돌리기 여부
+    };
+
+    AUIGrid.search(popup_grid_disabledAddRow, "category_user_name", term, options);
+
+};
+
+/* 3. 자산번호 검색시 사용될 함수 */
+function searchClickAssetNum() {
+    var term = document.getElementById("myAssetNum").value;
+    if (term.trim() == "") {
+        alert("자산번호를 입력하십시오.");
+        return;
+    }
+
+    var options = {
+        direction : true, // 검색 방향  (true : 다음, false : 이전 검색)
+        caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
+        wholeWord : true, // 온전한 단어 여부
+        wrapSearch : true, // 끝에서 되돌리기 여부
+    };
+
+    AUIGrid.search(popup_grid_disabledAddRow, "category_asset_num", term, options);
+};
+/* // 장애 신고 신청 현황 */
+/* ------------------------------------------------------------------------ */
 
 /* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
     /* 처리 이력  */

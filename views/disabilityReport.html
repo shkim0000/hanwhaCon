@@ -75,7 +75,7 @@
             </div>
         </div>
         <!-- 장애 대상 목록 그리드 -->
-        <div id="grid_wrap" class="grid-box h-small"></div>
+        <div id="disabledList_ID" class="grid-box h-small"></div>
 
         <div class="title-box">
             <div class="title">
@@ -113,6 +113,24 @@
 <!--[팝업] 장애대상 추가 -->
 <div id="gridPop_disabledAddRow" class="popup">
     <div class="pop-box">
+        <div class="pop-head">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">발생자</span>
+                    <label class="input">
+                        <input type="text" id="myInput">
+                        <button type="button" onclick="searchClickGenerator()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">자산번호</span>
+                    <label class="input">
+                        <input type="text" id="myAssetNum">
+                        <button type="button" onclick="searchClickAssetNum()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+        </div>
         <div class="pop-body">
             <div id="popup_grid_disabledAddRow" class="grid-box"></div>
             <div class="btn-wrap">
@@ -531,12 +549,12 @@ function createDisabledListGrid() {
     }
 
     /* 그리드 생성 */
-    disabledList_ID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+    disabledList_ID = AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
 
     $('.menu-btn').on('click',function(){
-        AUIGrid.destroy('#grid_wrap');
+        AUIGrid.destroy('#disabledList_ID');
         setTimeout(function(){
-            AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+            AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
             requestDisabledData();
         },200);
     })
@@ -558,10 +576,10 @@ window.onresize = function () {
 
 /* 6. 함수 관련 */
 /* 행 추가 */
-let cnt = 0;
+let cnt2 = 0;
 function addRow() {
     var item = new Object();
-    item.id = "grid_ID_1" + (++cnt),
+    item.id = "grid_ID_1" + (++cnt2),
         item.category_product = '',
         item.category_item = '',
         item.category_amount = '',
