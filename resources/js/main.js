@@ -359,6 +359,8 @@ function lp_open(id,title,width,height,e){
     /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
     if(id === "gridPop_user"){
         gridPopUser(id,title,width,height,e) ;
+    } else if(id === "gridPop_department"){
+        popupDepartmentSearch(id,title,width,height,e)
     } else if(id === "newEnroll_pop"){
         gridPopNewEnrollDetail(id,title,width,height);
         gridPopNewEnrollHistory(id,title,width,height);
@@ -391,6 +393,8 @@ function lp_open(id,title,width,height,e){
     } else if (id ==="gridPop_disabledCurrent"){
         gridPopDisabledDetail(id,title,width,height);
         gridPopDisabledHistory(id,title,width,height);
+    } else if ( id==="gridPop_detail"){
+        gridPopServiceStatusHistory(id,title,width,height);
     }
 }
 /* 팝업창 닫기 */

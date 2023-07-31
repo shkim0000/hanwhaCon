@@ -184,16 +184,11 @@ let assetManagementStatusGrid_ID; // 관리 자산 현황
 let assetDetailGrid_ID; // 세부 관리 자산 내역
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-function documentReady() {
-    /* 그리드 생성 */
-    createAssetManagementStatusGrid();
-    createAssetDetailGrid();
+createAssetManagementStatusGrid();
+createAssetDetailGrid();
 
-    /* 그리드 삽입 */
-    requestAssetManagementStatusGridData();
-    requestAssetDetailGridData();
-
-}
+requestAssetManagementStatusGridData();
+requestAssetDetailGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 /* [현황] */

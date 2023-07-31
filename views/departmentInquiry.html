@@ -53,7 +53,7 @@
                     <span class="input-title">부서명</span>
                     <label class="input search">
                         <input type="text">
-                        <button type="button" data-popup="gridPop_department" data-label="readonly" onclick="createAssetManagementStatusGrid();requestAssetManagementStatusGridData();"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button" data-label="readonly" onclick="createAssetManagementStatusGrid();requestAssetManagementStatusGridData();"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
@@ -185,17 +185,8 @@ let assetManagementStatusGrid_ID;
 let assetDetailGrid_ID;
 
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-function documentReady() {
-    /* 그리드 생성 */
-    // createAssetManagementStatusGrid();
-    // createAssetDetailGrid();
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : 순차적 실행 */
 
-    /* 그리드 삽입 */
-    // requestAssetManagementStatusGridData();
-    // requestAssetDetailGridData();
-
-}
 
 /* 3. AUIGrid 그리드 옵션 */
 /* [현황] */

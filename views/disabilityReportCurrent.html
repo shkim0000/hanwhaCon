@@ -277,7 +277,6 @@
 let disabledDC_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-/* 그리드 생성 */
 createDisabledDCGrid();
 requestDisabledDCData();
 
@@ -396,7 +395,7 @@ function createDisabledDCGrid() {
     })
 }
 
-/* 4.  */
+/* 4. 데이터 불러오기 */
 function requestDisabledDCData() {
     $.get("../resources/lib/aui-grid/data/sample-datas7.json", function (data) {
         AUIGrid.setGridData(disabledDC_ID, data);

@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
     <style>
         .aui-grid-button-renderer{width:95px;}
     </style>
@@ -51,9 +52,9 @@
             <div class="input-lists">
                 <div class="input-list">
                     <span class="input-title">부서명</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서 검색',505,530,this)">
+                        <input type="text" data-label="department">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
@@ -83,6 +84,23 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!-- 부서 검색 -->
+<div id="gridPop_department" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
+        </div>
+    </div>
+</div>
 <!-- 자산 정보 -->
 <div id="gridPop_detail" class="popup">
     <div class="pop-box">
@@ -183,19 +201,12 @@
 let userAssetManagementStatusGrid_ID;
 let assetDetailGrid_ID;
 
-
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-function documentReady() {
-    /* 그리드 생성 */
-    createUserAssetManagementStatusGrid();
-    createAssetDetailGrid();
+createUserAssetManagementStatusGrid();
+createAssetDetailGrid();
 
-
-    /* 그리드 삽입 */
-    requestUserAssetManagementStatusGridData();
-    requestAssetDetailGridData();
-
-}
+requestUserAssetManagementStatusGridData();
+requestAssetDetailGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 /* [현황] */

@@ -161,356 +161,356 @@
 </div>
 <!-- // 팝업 -->
 <script>
-    /* AUIGrid */
-    /* 1. AUIGrid 생성 후 반환 ID */
-    let holdingsGrid_ID;
-    let enrollAssetGrid_ID;
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let holdingsGrid_ID;
+let enrollAssetGrid_ID;
 
-    /* 1-2. Grid 클릭이벤트 중 데이터를 담아놓을 변수 */
-    let rowData;
-    let whatRow;
-    let clickItem = {
-        category_product_name : "", // 물품종류
-        category_asset_num: "", // 자산번호
-        category_model_name: "", //모델명
-        category_department: "", // 부서
-        category_user_name:"", // 사용자
-        category_classification_use: "", // 용도구분
-        category_asset_place:"", // 설치장소
-        category_date: "", // 설치일
-        category_asset_status: "", // 자산상태
-    };
+/* 1-2. Grid 클릭이벤트 중 데이터를 담아놓을 변수 */
+let rowData;
+let whatRow;
+let clickItem = {
+    category_product_name : "", // 물품종류
+    category_asset_num: "", // 자산번호
+    category_model_name: "", //모델명
+    category_department: "", // 부서
+    category_user_name:"", // 사용자
+    category_classification_use: "", // 용도구분
+    category_asset_place:"", // 설치장소
+    category_date: "", // 설치일
+    category_asset_status: "", // 자산상태
+};
 
-    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
-    function documentReady() {
-        /* 그리드 생성 */
-        createHoldingsGrid();
-        createEnrollAssetGrid();
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
+function documentReady() {
+    /* 그리드 생성 */
+    createHoldingsGrid();
+    createEnrollAssetGrid();
 
-        /* 그리드 삽입 */
-        requestHoldingsGridData();
-        requestEnrollAssetGridData();
-    }
+    /* 그리드 삽입 */
+    requestHoldingsGridData();
+    requestEnrollAssetGridData();
+}
 
-    /* 3. AUIGrid 그리드 옵션 */
-    function createHoldingsGrid() {
-        /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        let columnLayout = [
-            {
-                dataField: "id",
-                headerText: "아이디",
-                visible:false
-            },
-            {
-                dataField: "category_product_name",
-                headerText: "물품종류",
-                filter: {
-                    showIcon: true,
+/* 3. AUIGrid 그리드 옵션 */
+function createHoldingsGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_product_name",
+            headerText: "물품종류",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_model_name",
+            headerText: "모델명",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_department",
+            headerText: "부서",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_classification_use",
+            headerText: "용도구분",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_asset_place",
+            headerText: "자산위치",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_date",
+            headerText: "반납일",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_model_button",
+            headerText: "",
+            renderer: {
+                type: "ButtonRenderer",
+                labelText: "모델정보",
+                onClick: function(event){
+                    // $("#model_pop").addClass("open");
+                    $("#model_pop").addClass("open").dialog({
+                        title: "모델정보",
+                        width: 540,
+                        height: 766,
+                        modal: true,
+                        resizable: false,
+                        dialogClass: "no-close success-dialog"
+                    });
+                    //클릭한 row의 정보를 clickItem 변수에 저장
+                    clickItem = AUIGrid.getSelectedRows(holdingsGrid_ID)[0];
+                    whatRow = event.rowIndex;
+                    rowData = AUIGrid.getSelectedRows(holdingsGrid_ID);
                 }
             },
-            {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_model_name",
-                headerText: "모델명",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_department",
-                headerText: "부서",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_user_name",
-                headerText: "사용자",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_classification_use",
-                headerText: "용도구분",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_asset_place",
-                headerText: "자산위치",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_date",
-                headerText: "반납일",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_model_button",
-                headerText: "",
-                renderer: {
-                    type: "ButtonRenderer",
-                    labelText: "모델정보",
-                    onClick: function(event){
-                        // $("#model_pop").addClass("open");
-                        $("#model_pop").addClass("open").dialog({
-                            title: "모델정보",
-                            width: 540,
-                            height: 766,
-                            modal: true,
-                            resizable: false,
-                            dialogClass: "no-close success-dialog"
-                        });
-                        //클릭한 row의 정보를 clickItem 변수에 저장
-                        clickItem = AUIGrid.getSelectedRows(holdingsGrid_ID)[0];
-                        whatRow = event.rowIndex;
-                        rowData = AUIGrid.getSelectedRows(holdingsGrid_ID);
-                    }
-                },
-            },
-            {
-                dataField: "category_reason",
-                headerText:"",
-                renderer:{
-                    type:"ButtonRenderer",
-                    labelText: "미신청",
-                    onClick: function(event){
-                        $("#reason_pop").addClass("open").dialog({
-                            title: "미신청 사유",
-                            width: 505,
-                            height: 350,
-                            modal: true,
-                            resizable: false,
-                            dialogClass: "no-close success-dialog"
-                        });
-                    }
+        },
+        {
+            dataField: "category_reason",
+            headerText:"",
+            renderer:{
+                type:"ButtonRenderer",
+                labelText: "미신청",
+                onClick: function(event){
+                    $("#reason_pop").addClass("open").dialog({
+                        title: "미신청 사유",
+                        width: 505,
+                        height: 350,
+                        modal: true,
+                        resizable: false,
+                        dialogClass: "no-close success-dialog"
+                    });
                 }
             }
-
-        ]
-        /* 2. 그리드 속성 설정 */
-        let gridPros = {
-            rowIdField: "id",
-            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode:true,
-            softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
-            copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
-
         }
 
-        /* 그리드 생성 */
-        holdingsGrid_ID = AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
+    ]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode:true,
+        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
 
-        /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
-        AUIGrid.bind(holdingsGrid_ID, "cellClick", function(event) {
-
-        });
-
-        $('.menu-btn').on('click',function(){
-            AUIGrid.destroy('#holdingsGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
-                requestHoldingsGridData();
-            },200);
-        })
     }
 
-    function createEnrollAssetGrid() {
-        /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        let columnLayout = [
-            {
-                dataField: "id",
-                headerText: "아이디",
-                visible:false
-            }, {
-                dataField: "category_product_name",
-                headerText: "물품종류",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_model_name",
-                headerText: "모델명",
-                width:200,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_classification_use",
-                headerText: "용도구분",
-                width: 140,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_place",
-                headerText: "설치장소",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_note",
-                headerText: "교체물품종류",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_changeProduct_name",
-                headerText: "모델명",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_product_quantity",
-                headerText: "수량",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_del_btn", //임의의 고유값
-                headerText: "",
-                renderer: {
-                    type: "IconRenderer",
-                    iconWidth:12,
-                    iconHeight:16,
-                    iconPosition:"aisleCenter",
-                    iconTableRef:{
-                        "default":"../resources/img/icon/icon_delete.svg"
-                    },
-                    onClick: function(){
-                        clickItem = AUIGrid.getSelectedRows(enrollAssetGrid_ID)[0];
-                        AUIGrid.removeRow(enrollAssetGrid_ID, "selectedIndex");
-                        AUIGrid.addRow(holdingsGrid_ID, clickItem, "last");
-                    }
+    /* 그리드 생성 */
+    holdingsGrid_ID = AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
+
+    /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
+    AUIGrid.bind(holdingsGrid_ID, "cellClick", function(event) {
+
+    });
+
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#holdingsGrid_ID');
+        setTimeout(function(){
+            AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
+            requestHoldingsGridData();
+        },200);
+    });
+}
+
+function createEnrollAssetGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        }, {
+            dataField: "category_product_name",
+            headerText: "물품종류",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델명",
+            width:200,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_classification_use",
+            headerText: "용도구분",
+            width: 140,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_place",
+            headerText: "설치장소",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_note",
+            headerText: "교체물품종류",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_changeProduct_name",
+            headerText: "모델명",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_product_quantity",
+            headerText: "수량",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_del_btn", //임의의 고유값
+            headerText: "",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12,
+                iconHeight:16,
+                iconPosition:"aisleCenter",
+                iconTableRef:{
+                    "default":"../resources/img/icon/icon_delete.svg"
                 },
-                width:100,
-            }]
-        /* 2. 그리드 속성 설정 */
-        let gridPros = {
-            rowIdField: "id",
-            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
-            selectionMode: "multipleCells",
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true,
-            softRemoveRowMode: false,
-            copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
-        }
-
-        /* 그리드 생성 */
-        enrollAssetGrid_ID = AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
-
-        $('.menu-btn').on('click',function(){
-            AUIGrid.destroy('#enrollAssetGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
-                requestEnrollAssetGridData();
-            },200);
-        })
-    }
-    /* 4. 데이터 불러오기 */
-    function requestHoldingsGridData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
-            AUIGrid.setGridData(holdingsGrid_ID, data);
-        });
-    }
-    function requestEnrollAssetGridData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
-            AUIGrid.setGridData(enrollAssetGrid_ID, data);
-        });
+                onClick: function(){
+                    clickItem = AUIGrid.getSelectedRows(enrollAssetGrid_ID)[0];
+                    AUIGrid.removeRow(enrollAssetGrid_ID, "selectedIndex");
+                    AUIGrid.addRow(holdingsGrid_ID, clickItem, "last");
+                }
+            },
+            width:100,
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        softRemoveRowMode: false,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
 
-    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-    window.onresize = function () {
-        if (typeof holdingsGrid_ID !== "undefined"){
-            AUIGrid.resize(holdingsGrid_ID);
-        } else if(typeof enrollAssetGrid_ID !== "undefined"){
-            AUIGrid.resize(enrollAssetGrid_ID);
-        }
-    }
+    /* 그리드 생성 */
+    enrollAssetGrid_ID = AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
 
-    /* 모델정보에서 더블클릭하면, 신청내역으로 정보 이동 */
-    $(".popBtn").on("dblclick", function(){
-        let itemName = $(this).text();
-        let productName = $(this).closest(".tab-box").find(".tab-title").children("h4").text();
-
-        let insertObj = {
-            category_product_name: clickItem.category_product_name,
-            category_asset_num: clickItem.category_asset_num,
-            category_model_name: clickItem.category_model_name,
-            category_department: clickItem.category_department,
-            category_user_name: clickItem.category_user_name,
-            category_classification_use: clickItem.category_classification_use,
-            category_asset_place: clickItem.category_asset_place,
-            category_date: clickItem.category_date,
-            category_asset_status: clickItem.category_asset_status,
-            category_note: productName,
-            category_changeProduct_name: itemName,
-            category_product_quantity: 1,
-        }
-        AUIGrid.removeRow(holdingsGrid_ID, whatRow);
-        AUIGrid.addRow(enrollAssetGrid_ID, insertObj, "last");
-        $(this).closest("#model_pop").removeClass("open");
-        lp_close("model_pop");
+    $('.menu-btn').on('click',function(){
+        AUIGrid.destroy('#enrollAssetGrid_ID');
+        setTimeout(function(){
+            AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
+            requestEnrollAssetGridData();
+        },200);
     })
+}
+/* 4. 데이터 불러오기 */
+function requestHoldingsGridData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+        AUIGrid.setGridData(holdingsGrid_ID, data);
+    });
+}
+function requestEnrollAssetGridData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
+        AUIGrid.setGridData(enrollAssetGrid_ID, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof holdingsGrid_ID !== "undefined"){
+        AUIGrid.resize(holdingsGrid_ID);
+    } else if(typeof enrollAssetGrid_ID !== "undefined"){
+        AUIGrid.resize(enrollAssetGrid_ID);
+    }
+}
+
+/* 모델정보에서 더블클릭하면, 신청내역으로 정보 이동 */
+$(".popBtn").on("dblclick", function(){
+    let itemName = $(this).text();
+    let productName = $(this).closest(".tab-box").find(".tab-title").children("h4").text();
+
+    let insertObj = {
+        category_product_name: clickItem.category_product_name,
+        category_asset_num: clickItem.category_asset_num,
+        category_model_name: clickItem.category_model_name,
+        category_department: clickItem.category_department,
+        category_user_name: clickItem.category_user_name,
+        category_classification_use: clickItem.category_classification_use,
+        category_asset_place: clickItem.category_asset_place,
+        category_date: clickItem.category_date,
+        category_asset_status: clickItem.category_asset_status,
+        category_note: productName,
+        category_changeProduct_name: itemName,
+        category_product_quantity: 1,
+    }
+    AUIGrid.removeRow(holdingsGrid_ID, whatRow);
+    AUIGrid.addRow(enrollAssetGrid_ID, insertObj, "last");
+    $(this).closest("#model_pop").removeClass("open");
+    lp_close("model_pop");
+})
 </script>
 </body>
 </html>

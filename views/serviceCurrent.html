@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
 </head>
 <body id="guide">
 
@@ -208,7 +209,7 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box h-small l-grid"></div>
+            <div id="popup_grid_history" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -246,18 +247,10 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let serviceStatusGrid_ID;
 
-let popup_grid_history; // 서비스데스크 신청현황
-
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-function documentReady() {
-    /* 그리드 생성 */
-    createServiceStatusGrid(); // 서비스신청현황
-    popupDetail(); // 처리이력
+createServiceStatusGrid(); // 서비스신청현황
 
-    /* 그리드 삽입 */
-    requestServiceStatusGridData();
-    requestData3();
-}
+requestServiceStatusGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createServiceStatusGrid() {
@@ -374,54 +367,10 @@ function createServiceStatusGrid() {
     });
 }
 
-/* [팝업] 서비스데스크 신청 현황 > 서비스데스크 신청현황 */
-function popupDetail() {
-    /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        },
-        {
-            dataField: "category_history_desc",
-            headerText: "처리내용",
-        },{
-            dataField: "category_manager",
-            headerText: "조치자",
-        }, {
-            dataField: "category_date",
-            headerText: "처리일시",
-        }, {
-            dataField: "category_state",
-            headerText: "상태",
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
-    }
-
-    /* 그리드 생성 */
-    popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout, gridPros);
-}
-
 /* 4. 데이터 불러오기 */
 function requestServiceStatusGridData() {
     $.get("../resources/lib/aui-grid/data/sample-datas12.json", function (data) {
         AUIGrid.setGridData(serviceStatusGrid_ID, data);
-    });
-}
-
-function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
-        AUIGrid.setGridData(popup_grid_history, data);
     });
 }
 

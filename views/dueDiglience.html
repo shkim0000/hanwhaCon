@@ -152,14 +152,9 @@ let dueDiglienceGrid_ID;
 let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-function documentReady() {
-    /* 그리드 생성 */
-    createDueDiglienceGrid();
+createDueDiglienceGrid();
 
-    /* 그리드 삽입 */
-    requestDueDiglienceGridData();
-
-}
+requestDueDiglienceGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createDueDiglienceGrid() {
