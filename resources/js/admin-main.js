@@ -373,6 +373,8 @@ function lp_open(id,title,width,height,e){
     /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
     if(id === "gridPop_user"){
         gridPopUser(id,title,width,height,e) ;
+    } else if (id === "gridPop_manager"){
+        gridPopManager(id,title,width,height,e);
     } else if(id === "gridPop_department"){
         popupDepartmentSearch(id,title,width,height,e)
     } else if(id === "newEnroll_pop"){
@@ -411,6 +413,8 @@ function lp_open(id,title,width,height,e){
         gridPopServiceStatusHistory(id,title,width,height);
     } else if(id==="excelImport_pop"){
         popupExcelImport(id,title,width,height);
+    } else if (id === "assetSearch_pop"){
+        subPopupAssetSearch(id,title,width,height,e);
     }
 }
 /* 팝업창 닫기 */

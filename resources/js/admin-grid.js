@@ -40,6 +40,7 @@ function gridPopUser(id,title,width,height,e){
     let targetPlace = $(e).attr("data-place");
     let userName;
     let userDepartment;
+
     if(targetPlace === 'user_search'){
         AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
             userName = event.item.category_user_name;
@@ -55,8 +56,8 @@ function gridPopUser(id,title,width,height,e){
             userName = event.item.category_user_name;
             userDepartment = event.item.category_department;
 
-            $("input[data-label='change_user']").val(userName);
-            $("input[data-label='change_department']").val(userDepartment);
+            $("input[data-label='manage_user']").val(userName);
+            $("input[data-label='manage_department']").val(userDepartment);
 
             $("#gridPop_user").dialog("close");
         });
@@ -68,6 +69,65 @@ function requestGridPopUser() {
     });
 }
 /* // 사용자 검색 */
+
+/* 담당자 검색 */
+let popup_grid_manager;
+function gridPopManager(id,title,width,height,e){
+    /* 1. AUIGrid 칼럼 설정 */
+    let gridPop_user_column = [
+        {
+            dataField: "category_employeeID",
+            headerText: "사번",
+            width: 180
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "담당자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPop_user_pros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    }
+
+    /* 그리드 생성 */
+    popup_grid_manager = AUIGrid.create("#popup_grid_manager",  gridPop_user_column, gridPop_user_pros);
+    requestGridPopManager();
+
+    /* 그리드 기능 */
+    let targetPlace = $(e).attr("data-place");
+    let userName;
+    let userDepartment;
+
+    if(targetPlace === 'manager_search'){
+        AUIGrid.bind(popup_grid_manager, "cellDoubleClick", function(event) {
+            userName = event.item.category_user_name;
+            userDepartment = event.item.category_department;
+
+            $("input[data-label='manager']").val(userName);
+            $("input[data-label='manager_department']").val(userDepartment);
+
+            $("#gridPop_manager").dialog("close");
+        });
+    }
+}
+function requestGridPopManager() {
+    $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
+        AUIGrid.setGridData(popup_grid_manager, data);
+    });
+}
 
 /* 2. 부서 검색 */
 let popup_grid_department; // 부서 검색
@@ -136,11 +196,24 @@ function gridPopNewEnrollDetail(id,title,width,height){
             dataField: "category_product",
             headerText: "자산분류",
         },{
-            dataField: "category_product",
+            dataField: "category_item",
             headerText: "품목",
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            renderer:{
+                type: "IconRenderer",
+                iconPosition: "aisleRight",
+                iconWidth: 13,
+                iconHeight: 13,
+                iconTableRef: {
+                    "default": "../resources/img/icon/icon_search.svg"
+                },
+                onClick: function(event){
+                    let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
+                    lp_open("assetSearch_pop","자산검색",800,500, rowData);
+                }
+            }
         }, {
             dataField: "category_item_name",
             headerText: "모델명",
@@ -166,6 +239,60 @@ function requestGridPopNewEnrollDetail(){
     });
 }
 
+/* 자산검색 */
+let popup_subGrid_assetSearch;
+
+function subPopupAssetSearch(id,title,width,height, e){
+    let columnLayout = [
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        },{
+            dataField: "category_product",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+        }]
+
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+    }
+    popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);
+    requestSubPopupAssetSearch();
+
+    /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
+    $("#assetSearch_pop input[data-label='product']").val(e[0].category_product);
+    $("#assetSearch_pop input[data-label='item']").val(e[0].category_item);
+
+    AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+        let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+        /* 더블클릭 시 기존 팝업에 데이터 추가되어야 함 addRow 함수 추가 */
+
+    })
+}
+
+function requestSubPopupAssetSearch() {
+    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+        AUIGrid.setGridData(popup_subGrid_assetSearch, data);
+    });
+}
+
 /* 처리이력 */
 let popup_grid_newEnroll_history;
 function gridPopNewEnrollHistory(id,title,width,height){
@@ -184,6 +311,7 @@ function gridPopNewEnrollHistory(id,title,width,height){
             headerText: "시간",
         },
     ]
+
     /* 2. 그리드 속성 설정 */
     let gridPop_newEnroll_history_pros = {
         selectionMode: "multipleCells",
@@ -226,7 +354,7 @@ function gridPopChangeEnrollDetail(id,title,width,height){
             headerStyle: "my-header-style",
             style: "my-column-style",
         }, {
-            dataField: "category_asset_num",
+            dataField: "category_asset`_num",
             headerText: "자산번호",
             headerStyle: "my-header-style",
             style: "my-column-style",

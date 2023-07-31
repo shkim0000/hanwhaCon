@@ -649,4 +649,5 @@ tbody tr p{text-align:center;}
 /* hide-box */
 .title-box.hide-ver , .title-box.hide-ver + *{display:none;}
 .title-box.hide-ver.open , .title-box.hide-ver.open + *{display:flex;}
+::-webkit-scrollbar{display:none;}
 
