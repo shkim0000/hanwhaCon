@@ -6,25 +6,28 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>자산입고현황</title>
 
-    <link rel="stylesheet" href="../resources/css/main.css">
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
     <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
 
-    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
-
+    <!-- AUI grid -->
     <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
     <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
     <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
     <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
 
-    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
-    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
-    <script src="../resources/js/main.js"></script>
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
 
     <!--font-awesome -->
     <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
 
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
 </head>
-<body id="guide">
+<body>
 
 <!-- contents -->
 <div id="wrapper">
@@ -41,9 +44,9 @@
             <div class="input-lists">
                 <div class="input-list">
                     <span class="input-title">신청자</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <label class="input medium search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                        <input type="text" data-label="user" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
@@ -98,28 +101,6 @@
 </div>
 
 <!-- 팝업 -->
-<!-- 사용자 검색 -->
-<div id="gridPop_user" class="popup no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>사용자 검색</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">검색</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
-
 <!-- 신청 현황 -->
 <div id="gridPop_enrollCurrent" class="popup big no">
     <div class="pop-box">
@@ -165,25 +146,17 @@
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
 let myGridID2;
-let popup_grid_user;
-let popup_grid_excelImport; // 엑셀 import
 
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터"];
 let groupList2 = ["데스크탑 모델", "모니터 모델"];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
-function documentReady() {
-    /* 그리드 생성 */
-    createAUIGrid2();
-    popupUserSearch(); // 사용자 검색
-    popupEnrollcurrent(); //신청현황
+/* 그리드 생성 */
+createAUIGrid2();
 
-    /* 그리드 삽입 */
-    requestData();
-    requestData2();
-    requestData3();
-}
+/* 그리드 삽입 */
+requestData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createAUIGrid2() {
@@ -270,41 +243,6 @@ function createAUIGrid2() {
     });
 }
 
-/* 사용자 검색 */
-function popupUserSearch(){
-    /* 팝업 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout2 = [
-        {
-            dataField: "category_user_number",
-            headerText: "사번",
-            width: 180,
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }];
-    /* 2. 그리드 속성 설정 */
-    let gridPros2 = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
-
-    /* 그리드 생성 */
-    popup_grid_user = AUIGrid.create("#popup_grid_user", columnLayout2, gridPros2);
-}
 
 /* 엑셀 Import */
 function popupEnrollcurrent(){
@@ -355,24 +293,13 @@ function requestData() {
         AUIGrid.setGridData(myGridID2, data);
     });
 }
-function requestData2() {
-    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_grid_user, data);
-    });
-}
-function requestData3() {
-    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_grid_enrollCurrent, data);
-    });
-}
-
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-window.onresize = function () {
+/*window.onresize = function () {
     if (typeof popup_grid_user !== "undefined"){
         AUIGrid.resize(popup_grid_user);
     }
-}
+}*/
 
 /* 6. 함수관련 모음 */
 /* row행 세기 */

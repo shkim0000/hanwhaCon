@@ -183,7 +183,7 @@ textarea{width:100%;background:none;border:0;padding:8px 12px;resize:none;outlin
 
 /* search-wrap > 사이즈 */
 .input-wrap.search-ver .input-list.whole{width:100%;margin-top:4px;}
-.input-wrap.search-ver .input-list.medium{width:calc(100% - 112px);}
+.input-wrap.search-ver .input-list.medium{width:calc(100% - 186px);}
 .input-wrap.search-ver *{font-size:14px;}
 .input-wrap.search-ver .check input + span{padding-left:20px;position:relative;}
 .input-wrap.search-ver .check input + span:before{width:16px;height:16px;}
@@ -432,6 +432,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 }
 
 /* 간격 조정 */
+.grid-box + .hide-box,
 .grid-box + .title-box,
 .custom-table + .title-box,
 .custom-table + .list-box,
@@ -645,11 +646,7 @@ tbody tr p{text-align:center;}
 .count-box *{font-weight:var(--bold);}
 .grid-sub-box > .count-wrap >  .count-box{padding:12px;background-color:#f6dccc;}
 
-/* Dropzone css */
-#dropzone-preview{display:flex;flex-wrap:wrap;gap: 40px;}
-.dropzone-preview-card{display:flex;align-items:center;max-width:500px;gap:40px;}
-.dropzone-preview-card .dropzone-image-box{max-width:200px;}
-.dropzone-preview-card .dropzone-title-box h6{margin-bottom:0;max-width:150px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
-.dropzone-preview-card .dropzone-title-box p{margin-bottom:0;}
-.dropzone-preview-card .dropzone-button-box .btn{cursor:pointer;}
+/* hide-box */
+.title-box.hide-ver , .title-box.hide-ver + *{display:none;}
+.title-box.hide-ver.open , .title-box.hide-ver.open + *{display:flex;}
 

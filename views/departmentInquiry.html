@@ -29,7 +29,7 @@
         .aui-grid-button-renderer  {width:95px;}
     </style>
 </head>
-<body id="guide">
+<body>
 
 <!-- contents -->
 <div id="wrapper">
@@ -52,8 +52,8 @@
                 <div class="input-list">
                     <span class="input-title">부서명</span>
                     <label class="input search">
-                        <input type="text">
-                        <button type="button" data-label="readonly" onclick="createAssetManagementStatusGrid();requestAssetManagementStatusGridData();"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" value="IT운영">
+                        <button type="button" data-label="readonly" onclick="createAssetManagementStatusGrid();"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
@@ -66,7 +66,7 @@
         </div>
         <div id="assetManagementStatusGrid_ID" class="grid-box"></div>
 
-        <div class="title-box">
+        <div class="title-box hide-ver">
             <div class="title">
                 <h3>세부 관리 자산 내역</h3>
             </div>
@@ -190,6 +190,7 @@ let assetDetailGrid_ID;
 
 /* 3. AUIGrid 그리드 옵션 */
 /* [현황] */
+let count = 0;
 function createAssetManagementStatusGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -210,20 +211,35 @@ function createAssetManagementStatusGrid() {
             renderer: {
                 type: "ButtonRenderer",
                 onClick: function (event) {
-                    createAssetDetailGrid();
-                    requestAssetDetailGridData();
-                    /* 클릭한 물품명에 맞는 requestData 실행 or 부서자산이 모두 request된 상태에서 filtering. 후자라면 아래 코드 활용 */
-                    // 필터링이 아닌 데이터 요청이 이루어져야 함
-                    // let currentName = event.item.category_product_name;
-                    // let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
-                    //
-                    // AUIGrid.clearFilterAll(assetDetailGrid_ID);
-                    //
-                    // comparisonObj.forEach((i) => {
-                    //     if(currentName === i.category_product_name){
-                    //         AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
-                    //     }
-                    // })
+                    if (count === 0) {
+                        count++;
+                        $(".title-box.hide-ver").addClass("open");
+                        createAssetDetailGrid();
+                        requestAssetDetailGridData();
+                        setTimeout(function(){
+                            let currentName = event.item.category_product_name;
+                            let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+
+                            AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                            comparisonObj.forEach((i) => {
+                                if(currentName === i.category_product_name){
+                                    AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
+                                }
+                            });
+                        },100);
+                    }
+                    let currentName = event.item.category_product_name;
+                    let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+
+                    AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                    comparisonObj.forEach((i) => {
+                        if(currentName === i.category_product_name){
+                            AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
+                        }
+                    });
+
                 },
             }
         }];
@@ -257,7 +273,7 @@ function createAssetManagementStatusGrid() {
 
     /* 그리드 생성 */
     assetManagementStatusGrid_ID = AUIGrid.create("assetManagementStatusGrid_ID", columnLayout, gridPros);
-
+    requestAssetManagementStatusGridData();
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
 
@@ -406,7 +422,6 @@ function requestAssetDetailGridData() {
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    // console.log("움직이고있다.");
     if (typeof assetDetailGrid_ID !== "undefined") {
         AUIGrid.resize(assetDetailGrid_ID);
     } else if (typeof assetManagementStatusGrid_ID !== "undefined"){

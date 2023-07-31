@@ -127,27 +127,7 @@ $(function(){
     $(".date input").keyup(function(){
         $(this).val("");
     });
-
-
-    /* 팝업 열기 */
-/*    $("[data-popup]").on("click", function(){
-        let id = $(this).attr("data-popup");
-        $("#"+id).addClass("open");
-    });*/
-
-    /* 팝업 닫기 */
-/*    $(".popup .close-btn, [data-btn='cancel']").on("click", function(){
-        $(this).closest(".popup").removeClass("open");
-    });*/
-
-    /* 딤처리 부분 닫기 */
-/*    $(document).on("click", function(e){
-        let i = e.target;
-        if($(e.target).hasClass("popup open")){
-            $(e.target).removeClass("open");
-        }
-    });*/
-
+    -
 
     /* sidebar 설정 */
     $(document).ready(function(){

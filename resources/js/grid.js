@@ -105,7 +105,6 @@
 
         /* 그리드 기능 */
         let targetPlace = $(e).attr("data-place");
-        let userName;
         let userDepartment;
         if(targetPlace === 'department_search'){
             AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {

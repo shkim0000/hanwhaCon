@@ -30,7 +30,7 @@
         .aui-grid-button-renderer{width:95px;}
     </style>
 </head>
-<body id="guide">
+<body>
 
 <!-- contents -->
 <div id="wrapper">
@@ -52,9 +52,9 @@
             <div class="input-lists">
                 <div class="input-list">
                     <span class="input-title">부서명</span>
-                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서 검색',505,530,this)">
-                        <input type="text" data-label="department">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <label class="input search">
+                        <input type="text" value="IT운영">
+                        <button type="button" data-label="readonly" onclick="createUserAssetManagementStatusGrid();"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
@@ -67,7 +67,7 @@
         </div>
         <div id="userAssetManagementStatusGrid_ID" class="grid-box"></div>
 
-        <div class="title-box">
+        <div class="title-box hide-ver">
             <div class="title">
                 <h3>세부 관리 자산 내역</h3>
             </div>
@@ -202,14 +202,10 @@ let userAssetManagementStatusGrid_ID;
 let assetDetailGrid_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-createUserAssetManagementStatusGrid();
-createAssetDetailGrid();
-
-requestUserAssetManagementStatusGridData();
-requestAssetDetailGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 /* [현황] */
+let count = 0;
 function createUserAssetManagementStatusGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -314,6 +310,24 @@ function createUserAssetManagementStatusGrid() {
         renderer: {
             type: "ButtonRenderer",
             onClick: function (event) {
+                if(count === 0) {
+                    count++;
+                    $(".title-box.hide-ver").addClass("open");
+                    createAssetDetailGrid();
+                    requestAssetDetailGridData();
+                    setTimeout(function(){
+                        let currentName = event.item.category_user_name;
+                        let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+
+                        AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                        comparisonObj.forEach((i) => {
+                            if(currentName === i.category_user){
+                                AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user", i.category_user);
+                            }
+                        });
+                    },150);
+                }
                 let currentName = event.item.category_user_name;
                 let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
 
@@ -323,7 +337,8 @@ function createUserAssetManagementStatusGrid() {
                     if(currentName === i.category_user){
                         AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user", i.category_user);
                     }
-                })
+                });
+
             },
         }
 
@@ -333,6 +348,7 @@ function createUserAssetManagementStatusGrid() {
     userAssetManagementStatusGrid_ID = AUIGrid.create("userAssetManagementStatusGrid_ID", columnLayout, gridPros);
     // 푸터 레이아웃 세팅
     AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
+    requestUserAssetManagementStatusGridData();
 
     AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
         if(event.footerIndex === 6){

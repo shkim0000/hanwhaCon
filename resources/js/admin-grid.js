@@ -1347,3 +1347,46 @@ function requestServiceStatusHistory(){
 }
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
 
+/* [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */
+let popup_grid_excelImport; // 엑셀 import
+function popupExcelImport(id,title,width,height){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "category_user_number",
+            headerText: "사번",
+            width: 180,
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+            width: 180
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width: 160
+        }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    }
+
+    /* 그리드 생성 */
+    popup_grid_excelImport = AUIGrid.create("#popup_grid_excelImport", columnLayout, gridPros);
+    requestExcelImportData();
+}
+function requestExcelImportData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_excelImport, data);
+    });
+}
+/* // [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */
