@@ -2,6 +2,7 @@
   {
     "id": "#grid_id_1",
     "category_item": "데스크탑",
+    "category_product": "모니터",
     "category_product_name": "모니터",
     "category_asset_num": "A-20-13040",
     "category_model_name": "SAMSUNG-Mointor",
@@ -26,7 +27,8 @@
   {
     "id": "#grid_id_2",
     "category_item": "데스크탑",
-    "category_product_name": "데스크탑",
+    "category_product": "데스크탑",
+    "category_product_name": "모니터",
     "category_asset_num": "A-10-1120",
     "category_model_name": "INTEL-TMv1",
     "category_department": "IT운영",

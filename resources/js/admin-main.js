@@ -361,7 +361,7 @@ $(function(){
 });
 
 /* 팝업창 열기 */
-function lp_open(id,title,width,height,e){
+function lp_open(id,title,width,height,e,type){
     $("#"+id).dialog({
         title: title,
         width: width,
@@ -414,7 +414,7 @@ function lp_open(id,title,width,height,e){
     } else if(id==="excelImport_pop"){
         popupExcelImport(id,title,width,height);
     } else if (id === "assetSearch_pop"){
-        subPopupAssetSearch(id,title,width,height,e);
+        subPopupAssetSearch(id,title,width,height,e,type);
     }
 }
 /* 팝업창 닫기 */

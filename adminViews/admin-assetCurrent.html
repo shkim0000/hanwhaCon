@@ -27,7 +27,7 @@
     <script src="../resources/js/admin-main.js"></script>
     <script src="../resources/js/admin-grid.js"></script>
 </head>
-<body id="guide">
+<body>
 <!-- contents -->
 <div id="wrapper">
 
@@ -100,16 +100,15 @@
                 </div>
                 <div class="input-list">
                     <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
+                        <input type="text" data-label="user" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서</span>
                     <label class="input search">
-                        <input type="text">
-                        <button type="button" data-popup="gridPop_department"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" data-label="department" disabled>
                     </label>
                 </div>
                 <div class="input-list">
@@ -137,7 +136,7 @@
             </div>
         </div>
 
-        <div id="grid_wrap" class="grid-box"></div>
+        <div id="applicationGrid_ID" class="grid-box"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
@@ -146,19 +145,20 @@
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('newEnroll_pop','신규 신청',1250,570)">신규신청</button>
-            <button type="button" class="btn" data-popup="changeEnroll_pop">교체신청</button>
-            <button type="button" class="btn" data-popup="rentalEnroll_pop">대여신청</button>
-            <button type="button" class="btn" data-popup="returnEnroll_pop">반납신청</button>
-            <button type="button" class="btn" data-popup="rentalExtensionEnroll_pop">대연연장신청</button>
+            <button type="button" class="btn" onclick="lp_open('changeEnroll_pop','교체 신청',1250,570)">교체신청</button>
+            <button type="button" class="btn" onclick="lp_open('rentalEnroll_pop', '대여 신청',1250,570)">대여신청</button>
+            <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '반납신청',1250,570)">반납신청</button>
+            <button type="button" class="btn" onclick="lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,570)">대연연장신청</button>
+            <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop', '인수인계신청',1250,570)">인수인계신청</button>
             <!--
             <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
             <button type="button" class="btn" data-popup="assetNewEnroll_pop">자산신규등록신청</button>
             -->
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
-            <button type="button" class="btn" data-popup="assetSearch_pop">자산검색</button>
-            <button type="button" class="btn" data-popup="managerSelect_pop">담당자 선택</button>
-            <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
+            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,500)">자산검색</button>
+            <!--<button type="button" class="btn" data-popup="managerSelect_pop">담당자 선택</button>
+            <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>-->
         </div>
     </div>
 </div>
@@ -366,7 +366,7 @@
 </div>
 
 <!-- 교체신청 -->
-<div id="changeEnroll_pop" class="popup grid big no">
+<div id="changeEnroll_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -441,13 +441,19 @@
             <div class="custom-table">
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" data-label="manager_department" readonly>
+                            </label>
+                        </div>
+                    </div>
                     <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="input search" data-popup="managerSelect_pop">
-                                <input type="text"  disabled>
-                                <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                <input type="text" data-label="manager" readonly>
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </label>
                         </div>
                     </div>
@@ -491,20 +497,15 @@
 
             <div class="btn-wrap">
                 <button type="button" class="btn">배정</button>
-                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 대여신청 -->
-<div id="rentalEnroll_pop" class="popup grid big no">
+<div id="rentalEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>대여신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -568,7 +569,7 @@
                     <h3>대여자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail3" class="grid-box h-small"></div>
+            <div id="popup_grid_rentalEnroll_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -581,13 +582,19 @@
             <div class="custom-table">
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" data-label="manager_department" readonly>
+                            </label>
+                        </div>
+                    </div>
                     <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="input search" data-popup="managerSelect_pop">
-                                <input type="text"  disabled>
-                                <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                <input type="text" data-label="manager" readonly>
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </label>
                         </div>
                     </div>
@@ -629,23 +636,15 @@
             </div>
 
             <div class="btn-wrap">
-                <!--
-                <button type="button" class="btn">배정</button>
-                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
-                -->
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('rentalEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 반납신청 -->
-<div id="returnEnroll_pop" class="popup grid big no">
+<div id="returnEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>반납신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -705,7 +704,7 @@
                     <h3>반납자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail4" class="grid-box h-small"></div>
+            <div id="popup_grid_returnEnroll_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -718,13 +717,19 @@
             <div class="custom-table">
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>케이윈</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" data-label="manager_department" readonly>
+                            </label>
+                        </div>
+                    </div>
                     <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="input search" data-popup="managerSelect_pop">
-                                <input type="text"  disabled>
-                                <button type="button" data-popup="gridPop_user"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                <input type="text" data-label="manager" readonly>
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </label>
                         </div>
                     </div>
@@ -745,24 +750,24 @@
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
                 </div>
-                <div class="btn-wrap">
+                <!--<div class="btn-wrap">
                     <label class="file">
                         <input type="file">
                         <span class="btn add-file">파일추가</span>
                     </label>
                     <button type="button" class="btn trash">선택 삭제</button>
-                </div>
+                </div>-->
             </div>
             <div class="table">
                 <table>
                     <thead>
                     <tr>
-                        <th><p>파일명</p></th>
+                        <th colspan="2"><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
-                        <td>
+                        <td colspan="2">
                             <div class="td-wrap">
                                 <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
@@ -773,24 +778,15 @@
             </div>
 
             <div class="btn-wrap">
-                <!--
-                <button type="button" class="btn">배정</button>
-                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
-                -->
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('returnEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
 
 <!-- 인수인계 신청 (사용X) -->
-<!--
-<div id="takingOverEnroll_pop" class="popup grid big no">
+<div id="takingOverEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>인수인계신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -818,14 +814,7 @@
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
                     <div class="td">
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">인수인계</option>
-                                    <option value="">인수인계</option>
-                                </select>
-                            </label>
-                        </div>
+                        <div class="td-wrap">인수인계</div>
                     </div>
                     <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
                     <div class="td medium"><div class="td-wrap"><p>관련 내용이 작성됩니다.</p></div></div>
@@ -841,65 +830,32 @@
                     <h3>인수인계자산</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail5" class="grid-box h-small"></div>
+            <div id="popup_grid_takeOverEnroll_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_takingOver_history" class="grid-box"></div>
+            <div id="popup_grid_takeOverEnroll_history" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
                 </div>
-                <div class="btn-wrap">
-                    <label class="file">
-                        <input type="file">
-                        <span class="btn add-file">파일추가</span>
-                    </label>
-                    <button type="button" class="btn trash">선택 삭제</button>
-                </div>
             </div>
             <div class="table">
                 <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
                     <thead>
                     <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
                         <th><p>파일명</p></th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr>
                         <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
                             <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
+                                <a href="ddd.pdf" class="download" download="">TEST.exe</a>
                             </div>
                         </td>
                     </tr>
@@ -908,21 +864,15 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn">저장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('takingOverEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
 </div>
--->
 
 <!-- 대여연장 신청 -->
-<div id="rentalExtensionEnroll_pop" class="popup grid big no">
+<div id="rentalExtensionEnroll_pop" class="popup">
     <div class="pop-box">
-        <div class="pop-head">
-            <h3>대여연장신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
@@ -986,7 +936,7 @@
                     <h3>대여자산 연장신청정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_detail6" class="grid-box h-small"></div>
+            <div id="popup_grid_rentalExtension_detail" class="grid-box h-small"></div>
 
             <!-- 처리이력 -->
             <div class="title-box">
@@ -1021,11 +971,7 @@
             </div>
 
             <div class="btn-wrap">
-                <!--
-                <button type="button" class="btn">배정</button>
-                <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>
-                -->
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('rentalExtensionEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
@@ -1052,35 +998,13 @@
                     <div class="input-list">
                         <span class="input-title">자산번호</span>
                         <label class="input">
-                            <input type="text">
+                            <input type="text" data-label="assetNumber">
                         </label>
                     </div>
                 </div>
                 <button type="button" class="btn search">검색</button>
             </div>
             <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
-        </div>
-    </div>
-</div>
-
-<!-- 팝업내  > 담당자 선택 -->
-<div id="managerSelect_pop" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>담당자 선택</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">담당자</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_subGrid_managerSelect" class="grid-box h-small"></div>
         </div>
     </div>
 </div>
@@ -1231,20 +1155,17 @@
 <script type="text/javascript">
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let myGridID;
+    let applicationGrid_ID;
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     function documentReady() {
-        /* 그리드 생성 */
-        createAUIGrid();
-
-        /* 그리드 삽입 */
-        requestData();
+        createApplicationGrid();
+        requestApplicationStatusData();
     }
 
     /* 3. AUIGrid 그리드 옵션 */
     /* 신청정보 */
-    function createAUIGrid() {
+    function createApplicationGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -1309,63 +1230,117 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
+                if (item.category_status !== "임시저장") {
+                    return false;
+                }
+                return true;
+            },
         }
 
         /* 그리드 생성 */
-        myGridID = AUIGrid.create("#grid_wrap", columnLayout, gridPros);
+        applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
 
         // 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여)
-        AUIGrid.bind(myGridID, "cellDoubleClick", function(event) {
-            let result = AUIGrid.getCellValue(myGridID, event.rowIndex, "category_application_division");
+        AUIGrid.bind(applicationGrid_ID, "cellDoubleClick", function(event) {
+            let result = AUIGrid.getCellValue(applicationGrid_ID, event.rowIndex, "category_application_division");
+            let width = 1250;
+            let height = 590;
             if(result === "신규신청"){
-                $("#newEnroll_pop").addClass("open");
-            } else if(result === "교체신청"){
-                $("#changeEnroll_pop").addClass("open");
-            } else if(result === "대여신청"){
-                $("#rentalEnroll_pop").addClass("open");
-            } else if(result === "반납신청"){
-                $("#returnEnroll_pop").addClass("open");
+                $("#newEnroll_pop").dialog({
+                    title:"신규신청",
+                    width: width,
+                    height: height,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                })
+                gridPopNewEnrollDetail(width,height);
+                gridPopNewEnrollHistory(width,height);
+            } else if(result ==="교체신청"){
+                $("#changeEnroll_pop").dialog({
+                    title: "교체신청",
+                    width: width,
+                    height:height,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopChangeEnrollDetail(width,height);
+                gridPopChangeEnrollHistory(width,height);
+            } else if(result ==="대여신청"){
+                $("#rentalEnroll_pop").dialog({
+                    title: "대여신청",
+                    width: width,
+                    height:height,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopRentalEnrollDetail(width,height);
+                gridPopRentalEnrollHistory(width,height);
+            } else if (result === "반납신청"){
+                $("#returnEnroll_pop").dialog({
+                    title: "반납신청",
+                    width: width,
+                    height:height,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopReturnEnrollDetail(width,height);
+                gridPopReturnEnrollHistory(width,height);
+            } else if (result === "대여연장신청"){
+                $("#rentalExtensionEnroll_pop").dialog({
+                    title: "대여연장신청",
+                    width: width,
+                    height:height,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopRentalExtensionEnrollDetail(width,height);
+                gridPopRentalExtensionEnrollHistory(width,height);
             } else if(result === "인수인계신청"){
-                $("#takingOverEnroll_pop").addClass("open");
-            } else if(result === "대여연장신청"){
-                $("#rentalExtensionEnroll_pop").addClass("open");
+                $("#takingOverEnroll_pop").dialog({
+                    title: "인수인계신청",
+                    width: width,
+                    height:height,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopTakeoverEnrollDetail(width,height);
+                gridPopTakeoverEnrollHistory(width,height);
             }
         });
 
         $('.menu-btn').on('click',function(){
-            AUIGrid.destroy('#grid_wrap');
+            AUIGrid.destroy('#applicationGrid_ID');
             setTimeout(function(){
-                AUIGrid.create("#grid_wrap", columnLayout, gridPros);
-                requestData();
+                AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+                requestApplicationStatusData();
             },200);
         })
     }
 
     /* 4. 데이터 불러오기 */
-    function requestData() {
+    function requestApplicationStatusData() {
         $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
-            AUIGrid.setGridData(myGridID, data);
+            AUIGrid.setGridData(applicationGrid_ID, data);
         });
     }
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof myGridID !== "undefined") {
-            AUIGrid.resize(myGridID);
-        } else if (typeof popup_grid_user !== "undefined"){
-            AUIGrid.resize(popup_grid_user);
+        if (typeof applicationGrid_ID !== "undefined") {
+            AUIGrid.resize(applicationGrid_ID);
         }
     }
     /* 6. 사용하는 함수 */
     /* 그리드 행 선택 삭제 */
     function deleteRowGrid(){
-        AUIGrid.removeCheckedRows(myGridID); // 체크된 행 삭제 처리
-        let removedRows = AUIGrid.getRemovedItems(myGridID, true); // 삭제 처리된 아이템 있는지 보기
-        if (removedRows.length <= 0) {
-            alert("삭제 처리되어 마크된 행이 없습니다.")
-            return;
-        }
-        AUIGrid.removeSoftRows(myGridID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
+        AUIGrid.removeCheckedRows(applicationGrid_ID); // 체크된 행 삭제 처리
     }
 </script>
 </body>

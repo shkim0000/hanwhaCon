@@ -56,8 +56,8 @@ function gridPopUser(id,title,width,height,e){
             userName = event.item.category_user_name;
             userDepartment = event.item.category_department;
 
-            $("input[data-label='manage_user']").val(userName);
-            $("input[data-label='manage_department']").val(userDepartment);
+            $("input[data-label='change_user']").val(userName);
+            $("input[data-label='change_department']").val(userDepartment);
 
             $("#gridPop_user").dialog("close");
         });
@@ -201,17 +201,12 @@ function gridPopNewEnrollDetail(id,title,width,height){
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            style: "search_grid_style",
             renderer:{
-                type: "IconRenderer",
-                iconPosition: "aisleRight",
-                iconWidth: 13,
-                iconHeight: 13,
-                iconTableRef: {
-                    "default": "../resources/img/icon/icon_search.svg"
-                },
+                type: "ButtonRenderer",
                 onClick: function(event){
                     let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
-                    lp_open("assetSearch_pop","자산검색",800,500, rowData);
+                    lp_open("assetSearch_pop","자산검색",800,500, rowData, "newEnroll");
                 }
             }
         }, {
@@ -242,23 +237,39 @@ function requestGridPopNewEnrollDetail(){
 /* 자산검색 */
 let popup_subGrid_assetSearch;
 
-function subPopupAssetSearch(id,title,width,height, e){
+function subPopupAssetSearch(id,title,width,height, e, type){
+
     let columnLayout = [
         {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
         },{
             dataField: "category_product",
             headerText: "자산분류",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_item",
             headerText: "품목",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_item_name",
             headerText: "모델명",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_status",
             headerText: "상태",
+            filter: {
+                showIcon: true,
+            }
         }]
 
     let gridPros = {
@@ -272,20 +283,72 @@ function subPopupAssetSearch(id,title,width,height, e){
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 X
         autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
     popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);
     requestSubPopupAssetSearch();
 
-    /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
-    $("#assetSearch_pop input[data-label='product']").val(e[0].category_product);
-    $("#assetSearch_pop input[data-label='item']").val(e[0].category_item);
+    if(type === "newEnroll"){
+        /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
+        $("#assetSearch_pop input[data-label='product']").val(e[0].category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e[0].category_item);
 
-    AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
-        let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
-        /* 더블클릭 시 기존 팝업에 데이터 추가되어야 함 addRow 함수 추가 */
+        /* 더블클릭 시 자산 정보 그리드에 데이터 추가하는 이벤트  */
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            AUIGrid.addRow(popup_grid_newEnroll_detail, rowData, "last");
+            lp_close("assetSearch_pop");
+        })
+    } else if (type === "change"){
 
-    })
+        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
+
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            let changeItem = {
+                category_changeAsset_num: rowData.category_asset_num,
+                category_changeProduct_name: rowData.category_item_name,
+                category_product: rowData.category_product,
+            }
+            AUIGrid.updateRow(popup_grid_changeEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
+    } else if (type === "rental"){
+
+        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
+
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            console.log(rowData);
+            console.log(e);
+            let changeItem = {
+                category_asset_num: rowData.category_asset_num,
+                category_item_name: rowData.category_item_name,
+                category_product: rowData.category_product,
+                category_item: rowData.category_item,
+            }
+            AUIGrid.updateRow(popup_grid_rentalEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
+    }
 }
+
+/* 자산검색 팝업에서 자산번호 input 에 4자 이상 입력했을 때 자동 필터링 함수 */
+$(function(){
+    $("#assetSearch_pop input[data-label='assetNumber']").on("keydown",function(event){
+        if(event.target.value.length >= 3){
+            var inlineTexts = [{dataField: "category_asset_num", text: event.target.value}];
+            // 인라인 필터링 텍스트들 설정 시켜 필터링 실행하기.
+            AUIGrid.setFilterInlineTexts(popup_subGrid_assetSearch, inlineTexts);
+        } else{
+            AUIGrid.clearFilterAll(popup_subGrid_assetSearch);
+        }
+    })
+})
 
 function requestSubPopupAssetSearch() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
@@ -362,7 +425,7 @@ function gridPopChangeEnrollDetail(id,title,width,height){
             dataField: "",
             headerText: "교체 후 자산",
         }, {
-            dataField:"category_note",
+            dataField:"category_product",
             headerText: "자산분류"
         }, {
             dataField:"category_changeProduct_name",
@@ -370,6 +433,15 @@ function gridPopChangeEnrollDetail(id,title,width,height){
         }, {
             dataField: "category_changeAsset_num",
             headerText: "자산번호",
+            style: "search_grid_style",
+            renderer:{
+                type: "ButtonRenderer",
+                onClick: function(event){
+                    let rowData = AUIGrid.getSelectedRows(popup_grid_changeEnroll_detail)[0];
+                    let resultData = {...rowData, rowIndex: event.rowIndex};
+                    lp_open("assetSearch_pop","자산검색",800,500, resultData, "change");
+                }
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPop_changeEnroll_history_pros = {
@@ -450,6 +522,16 @@ function gridPopRentalEnrollDetail(id,title,width,height){
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            style: "search_grid_style",
+            renderer:{
+                type: "ButtonRenderer",
+                onClick: function(event){
+                    let rowData = AUIGrid.getSelectedRows(popup_grid_rentalEnroll_detail)[0];
+                    console.log(rowData);
+                    let resultData = {...rowData, rowIndex: event.rowIndex}
+                    lp_open("assetSearch_pop","자산검색",800,500, resultData, "rental");
+                }
+            }
         }, {
             dataField: "category_item_name",
             headerText: "모델명",
