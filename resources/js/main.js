@@ -1,7 +1,7 @@
 $(function(){
 
     /* header 추가 */
-    $('#guide').prepend(
+    $('body').prepend(
 "<header>\n"+
             "<div class='inner'>\n"+
                 "<button type='button' class='menu-btn'></button>\n"+
