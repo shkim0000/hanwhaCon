@@ -40,14 +40,17 @@ function gridPopUser(id,title,width,height,e){
     let targetPlace = $(e).attr("data-place");
     let userName;
     let userDepartment;
+    let userID;
 
     if(targetPlace === 'user_search'){
         AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
             userName = event.item.category_user_name;
             userDepartment = event.item.category_department;
+            userID = event.item.category_employeeID;
 
             $("input[data-label='user']").val(userName);
             $("input[data-label='department']").val(userDepartment);
+            $("input[data-label='userID']").val(userID);
 
             $("#gridPop_user").dialog("close");
         });

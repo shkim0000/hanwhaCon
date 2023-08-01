@@ -490,6 +490,7 @@ tbody tr p{text-align:center;}
 .row + .row{border-top:1px solid var(--line1);}
 .row .td > *{width:100%;}
 .th{width:120px;padding:10px 5px;font-size:15px;font-weight:var(--bold);background-color:var(--tableBg1);border-right:1px solid var(--line1);}
+.th.hidden{display:none;}
 .th .th-wrap{align-items:center;height:100%;}
 .td .td-wrap{height:100%;align-items:center;}
 .td + .th{border-left:1px solid var(--line1);}
