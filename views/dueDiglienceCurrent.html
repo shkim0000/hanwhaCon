@@ -546,7 +546,7 @@ function createUserStatusGrid() {
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(userStatusGrid_ID, footerLayout);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#userStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#userStatusGrid_ID", columnLayout, gridPros);
@@ -687,7 +687,7 @@ function createAssetStatusGrid() {
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(assetStatusGrid_ID, footerLayout);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#assetStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetStatusGrid_ID", columnLayout, gridPros);
@@ -799,7 +799,7 @@ function createDueDiglienceGrid() {
     /* 그리드 생성 */
     dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#dueDiglienceGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);

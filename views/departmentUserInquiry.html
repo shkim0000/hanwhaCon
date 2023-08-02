@@ -345,7 +345,7 @@ function createUserAssetManagementStatusGrid() {
     });
 
     /* 그리드 생성 */
-    userAssetManagementStatusGrid_ID = AUIGrid.create("userAssetManagementStatusGrid_ID", columnLayout, gridPros);
+    userAssetManagementStatusGrid_ID = AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
     // 푸터 레이아웃 세팅
     AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
     requestUserAssetManagementStatusGridData();
@@ -357,7 +357,7 @@ function createUserAssetManagementStatusGrid() {
     });
 
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#userAssetManagementStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
@@ -478,7 +478,7 @@ function createAssetDetailGrid() {
         });
     });
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#assetDetailGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);

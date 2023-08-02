@@ -718,11 +718,11 @@ function createHoldingAssetGrid() {
         rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
     });
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#holdingAssetGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-            requestData();
+            requestHoldingAssetData();
         },200);
     })
 }
@@ -848,7 +848,7 @@ function createEnrollAssetGrid() {
     /* 그리드 생성 */
     applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click','.menu-btn',function(){
         AUIGrid.destroy('#applicationGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);

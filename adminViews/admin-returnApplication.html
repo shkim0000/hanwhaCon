@@ -626,7 +626,7 @@
         /* 그리드 생성 */
         holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#holdingAssetGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
@@ -764,7 +764,7 @@
         /* 그리드 생성 */
         returnAssetGrid_ID = AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#returnAssetGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);

@@ -551,7 +551,7 @@ function createDisabledListGrid() {
     /* 그리드 생성 */
     disabledList_ID = AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#disabledList_ID');
         setTimeout(function(){
             AUIGrid.create("#disabledList_ID", columnLayout, gridPros);

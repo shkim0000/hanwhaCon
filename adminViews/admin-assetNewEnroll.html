@@ -296,7 +296,7 @@ function createAUIGrid2() {
     /* 그리드 생성 */
     myGridID2 = AUIGrid.create("#grid_wrap2", columnLayout, gridPros);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#grid_wrap2');
         setTimeout(function(){
             AUIGrid.create("#grid_wrap2", columnLayout, gridPros);

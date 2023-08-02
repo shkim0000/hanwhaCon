@@ -358,7 +358,7 @@ function createServiceStatusGrid() {
         });
     });
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#serviceStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);

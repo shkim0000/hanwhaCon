@@ -326,7 +326,7 @@
         // 푸터 레이아웃 세팅
         AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#assetManagementStatusGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
@@ -433,7 +433,7 @@
         /* 그리드 생성 */
         assetDetailGrid_ID = AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#assetDetailGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);

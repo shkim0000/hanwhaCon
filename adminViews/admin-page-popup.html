@@ -1136,7 +1136,7 @@
             }
         });
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#grid_wrap');
             setTimeout(function(){
                 AUIGrid.create("#grid_wrap", columnLayout, gridPros);

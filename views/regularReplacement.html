@@ -337,7 +337,7 @@ function createHoldingsGrid() {
 
     });
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#holdingsGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
@@ -458,7 +458,7 @@ function createEnrollAssetGrid() {
     /* 그리드 생성 */
     enrollAssetGrid_ID = AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#enrollAssetGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);

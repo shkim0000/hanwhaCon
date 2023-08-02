@@ -950,7 +950,7 @@ function createApplicationGrid() {
         }
     });
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#applicationGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);

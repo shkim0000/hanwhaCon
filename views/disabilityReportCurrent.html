@@ -386,7 +386,7 @@ function createDisabledDCGrid() {
         });
     });
 
-    $('.menu-btn').on('click',function(){
+    $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#disabledDC_ID');
         setTimeout(function(){
             AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);

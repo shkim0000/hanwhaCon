@@ -643,7 +643,7 @@
         rentalGrid_ID = AUIGrid.create("#rentalGrid_ID", columnLayout, gridPros);
         console.log(rentalGrid_ID)
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#rentalGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#rentalGrid_ID", columnLayout, gridPros);
@@ -754,7 +754,7 @@
         /* 그리드 생성 */
         rentalAssetInfoGrid_ID = AUIGrid.create("#rentalAssetInfoGrid_ID", columnLayout, gridPros);
 
-        $('.menu-btn').on('click',function(){
+        $(document).on('click', '.menu-btn', function(){
             AUIGrid.destroy('#rentalAssetInfoGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#rentalAssetInfoGrid_ID", columnLayout, gridPros);
