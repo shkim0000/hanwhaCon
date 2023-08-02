@@ -39,6 +39,7 @@ function gridPopUser(id,title,width,height,e){
     /* 그리드 기능 */
     let targetPlace = $(e).attr("data-place");
     let userName;
+    let applicantName;
     let userDepartment;
     let userID;
 
@@ -54,6 +55,14 @@ function gridPopUser(id,title,width,height,e){
 
             $("#gridPop_user").dialog("close");
         });
+    }else if(targetPlace === 'user_applicant'){
+        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+            applicantName = event.item.category_user_name;
+            $("input[data-label='applicant']").val(applicantName);
+
+            $("#gridPop_user").dialog("close");
+        });
+
     } else{
         AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
             userName = event.item.category_user_name;
@@ -289,12 +298,13 @@ function subPopupAssetSearch(id,title,width,height, e, type){
         fillColumnSizeMode: true, // 가로 스크롤 X
         autoGridHeight : true, // 게시되는 data에 맞게 height지정
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
     popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);
     requestSubPopupAssetSearch();
 
+    /* 그리드 사용 함수 */
     if(type === "newEnroll"){
         /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
         $("#assetSearch_pop input[data-label='product']").val(e.category_product);
@@ -1569,46 +1579,152 @@ function requestServiceStatusHistory(){
 }
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
 
-/* [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */
-let popup_grid_excelImport; // 엑셀 import
-function popupExcelImport(id,title,width,height){
-    /* 팝업 그리드(예시) */
+/* [ 자산등록 - 자산신규등록 : excel import팝업 , 자산입고현황 : 신청현황 팝업 ]----------------------------------------------------------- */
+let popup_grid_consistency; // 엑셀 import
+function popupConsistency(id,title,width,height){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "category_user_number",
-            headerText: "사번",
+            dataField: "category_consistency",
+            headerText: "정합성",
             width: 180,
+            renderer : {
+                type : "ImageRenderer",
+                imgHeight : 24, // 이미지 높이, 지정하지 않으면 rowHeight에 맞게 자동 조절되지만 빠른 렌더링을 위해 설정을 추천합니다.
+                altField : null, // alt(title) 속성에 삽입될 필드명, 툴팁으로 출력됨. 만약 null 을 설정하면 툴팁 표시 안함.
+                imgTableRef : { // 이미지 소스참조할 테이블 레퍼런스
+                    true : "./lib/aui-grid/images/accept-ok.png",
+                    false : "./lib/aui-grid/images/accept-not.png",
+                    "default" : "" // default
+                }
+            },
+            filter: {
+                showIcon: true,
+            }
         },
         {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_asset_classification",
+            headerText: "자산분류",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
+            dataField: "category_item",
+            headerText: "품목",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_place",
+            headerText: "자산위치",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_detail_place",
+            headerText: "상세위치",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_intro_date",
+            headerText: "도입일",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_expiration_date",
+            headerText: "사용연한",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_serial_num",
+            headerText: "시리얼",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_purchase",
+            headerText: "구매금액",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_purchase_place",
+            headerText: "구매처",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_purchasing_manager",
+            headerText: "구매담당자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }];
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        // 페이징 사용
+        rowIdField: "id",
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
+        showPageButtonCount: 5,
+        showPageRowSelect: true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    };
 
     /* 그리드 생성 */
-    popup_grid_excelImport = AUIGrid.create("#popup_grid_excelImport", columnLayout, gridPros);
-    requestExcelImportData();
+    popup_grid_consistency = AUIGrid.create("#popup_grid_consistency", columnLayout, gridPros);
+    requestConsistencyData();
+
+    /* 그리드 관련 함수 */
+    setTimeout(function(){
+        $(".aui-grid-paging-info-text").css({"background":"red"})
+        let rowsTotal = $(".aui-grid-paging-info-text").text().split(" ").reverse()[1];
+        $(".sum-count").text(rowsTotal)
+    },100);
 }
-function requestExcelImportData() {
-    $.get("../resources/lib/aui-grid/data/sample-datas2.json", function (data) {
-        AUIGrid.setGridData(popup_grid_excelImport, data);
+function requestConsistencyData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_consistency, data);
     });
 }
 /* // [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */

@@ -14,7 +14,18 @@
     "category_asset_num" : "12132118",
     "category_serial_key": "546512-12345-AAAAA",
     "category_introduction_date": "2023-06-15",
-    "category_admin_comment": "관리자의 메모가 적혀져 있습니다."
+    "category_admin_comment": "관리자의 메모가 적혀져 있습니다.",
+    "category_consistency" : true,
+    "category_asset_classification" : "노트북",
+    "category_asset_place": "행정동",
+    "category_detail_place": "3층",
+    "category_intro_date": "2023-07-14",
+    "category_expiration_date": 5,
+    "category_status" : "가용",
+    "category_serial_num" : "E-55A6684",
+    "category_purchase": 151200,
+    "category_purchase_place": "구매팀",
+    "category_purchasing_manager": "임꺽정"
   },
   {
     "id": "#grid_id_2",
@@ -31,7 +42,19 @@
     "category_asset_num" : "12132118",
     "category_serial_key": "546512-12345-AAAAA",
     "category_introduction_date": "2023-06-15",
-    "category_admin_comment": "관리자의 메모가 적혀져 있습니다."
+    "category_admin_comment": "관리자의 메모가 적혀져 있습니다.",
+    "category_consistency" : true,
+    "category_asset_classification" : "노트북",
+    "category_asset_place": "행정동",
+    "category_detail_place": "3층",
+    "category_intro_date": "2023-07-14",
+    "category_expiration_date": 5,
+    "category_status" : "가용",
+    "category_serial_num" : "E-55A6684",
+    "category_purchase": 151200,
+    "category_purchase_place": "구매팀",
+    "category_purchasing_manager": "임꺽정"
+
   },
   {
     "id": "#grid_id_3",
@@ -48,6 +71,17 @@
     "category_asset_num" : "12132118",
     "category_serial_key": "546512-12345-AAAAA",
     "category_introduction_date": "2023-06-15",
-    "category_admin_comment": "관리자의 메모가 적혀져 있습니다."
+    "category_admin_comment": "관리자의 메모가 적혀져 있습니다.",
+    "category_consistency" : true,
+    "category_asset_classification" : "노트북",
+    "category_asset_place": "행정동",
+    "category_detail_place": "3층",
+    "category_intro_date": "2023-07-14",
+    "category_expiration_date": 5,
+    "category_status" : "가용",
+    "category_serial_num" : "E-55A6684",
+    "category_purchase": 151200,
+    "category_purchase_place": "구매팀",
+    "category_purchasing_manager": "임꺽정"
   }
 ]

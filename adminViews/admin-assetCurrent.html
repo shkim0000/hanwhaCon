@@ -135,8 +135,8 @@
                 <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
             </div>
         </div>
-
         <div id="applicationGrid_ID" class="grid-box"></div>
+
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
@@ -156,7 +156,7 @@
             -->
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
-            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,500)">자산검색</button>
+            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>
             <!--<button type="button" class="btn" data-popup="managerSelect_pop">담당자 선택</button>
             <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>-->
         </div>
@@ -275,7 +275,13 @@
                 </div>
                 <div class="row">
                     <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
-                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                    <div class="td whole">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -784,7 +790,7 @@
     </div>
 </div>
 
-<!-- 인수인계 신청 (사용X) -->
+<!-- 인수인계 신청  -->
 <div id="takingOverEnroll_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
@@ -978,7 +984,7 @@
 </div>
 
 <!-- 팝업내 > 자산검색 -->
-<div id="assetSearch_pop" class="popup no regular">
+<div id="assetSearch_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="input-wrap search-ver con-3">
@@ -1146,7 +1152,7 @@
     .my-column-style{background: #fff3ec;}
 
     /* 그리드 내에 검색 팝업 박스 */
-    .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;}
+    .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;min-height:20px;}
     .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
     .search_grid_style > div::after{content:'';width:1px;height:100%;position:absolute;right:30px;top:50%;transform:translateY(-50%);background-color:#dbdbdb;}
     .search_grid_style .aui-grid-button-renderer{width:auto;display:flex;justify-content:center;background-color:transparent;color:#414141;border-radius:0;border:0;}

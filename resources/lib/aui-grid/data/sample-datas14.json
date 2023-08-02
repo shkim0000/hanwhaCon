@@ -22,5 +22,21 @@
     "category_asset_num":"11482244-5742",
     "category_item_name": "CANNON-O102401",
     "category_status": "가용"
+  },
+  {
+    "id": "#grid_id_4",
+    "category_product":"프린터",
+    "category_item":"표준형 프린터",
+    "category_asset_num":"41482244-5742",
+    "category_item_name": "CANNON-O102401",
+    "category_status": "가용"
+  },
+  {
+    "id": "#grid_id_5",
+    "category_product":"프린터",
+    "category_item":"표준형 프린터",
+    "category_asset_num":"5182244-5742",
+    "category_item_name": "CANNON-O102401",
+    "category_status": "가용"
   }
 ]
