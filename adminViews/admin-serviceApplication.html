@@ -48,9 +48,23 @@
         <div class="custom-table">
             <div class="row con-2">
                 <div class="th"><div class="th-wrap center">신청부서</div></div>
-                <div class="td"><div class="td-wrap">IT 운영</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search medium" data-place="department_search_only" onclick="lp_open('gridPop_department','부서 검색',505,530,this)">
+                            <input type="text" data-label="department-only">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
                 <div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td"><div class="td-wrap">홍길동</div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search medium"  data-place="user_applicant" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                            <input type="text" data-label="applicant" readonly>
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -64,15 +78,16 @@
                 <div class="th"><div class="th-wrap center"><p class="important">신청자</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" placeholder="홍길동" disabled>
+                        <label class="input search"  data-place="user_applicant" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                            <input type="text" data-label="applicant" readonly>
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
                 <div class="th"><div class="th-wrap center"><p class="important">사용자</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                        <label class="input search"  data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
                             <input type="text" data-label="user" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
@@ -80,19 +95,10 @@
                 </div>
             </div>
             <div class="row">
-                <div class="th"><div class="th-wrap center">서비스 구분</div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">서비스 구분</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <div class="select-wrap">
-                            <label class="select medium">
-                                <select>
-                                    <option value="">네트워크 신청</option>
-                                    <option value="">PC부품 신청</option>
-                                    <option value="">키보드 / 마우스 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                </select>
-                            </label>
                             <label class="select medium">
                                 <select>
                                     <option value="">네트워크 신청</option>
@@ -129,9 +135,37 @@
             </div>
         </div>
 
+        <div class="title-box">
+            <div class="title">
+                <h3>업무배정</h3>
+            </div>
+        </div>
+        <div class="custom-table">
+            <div class="row con-3">
+                <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search">
+                            <input type="text" value="캐이원" readonly>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                            <input type="text" data-label="manager" readonly>
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+            </div>
+        </div>
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
+            <button type="button" class="btn primary send"  onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
         </div>
 
         <div class="btn-wrap">
@@ -165,6 +199,41 @@
     </div>
 </div>
 
+<!-- 부서 검색 -->
+<div id="gridPop_department" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 담당자 검색 -->
+<div id="gridPop_manager" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">담당자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_manager" class="grid-box"></div>
+        </div>
+    </div>
+</div>
 <!-- 상신 -->
 <div id="submit_pop" class="popup">
     <div class="pop-box">

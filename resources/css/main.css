@@ -595,6 +595,7 @@ tbody tr p{text-align:center;}
 
 /* 리스트 색상 */
 .quantity.orange .num{background-color:#ffd557;}
+.quantity.yellow .num{background-color:#fff38c;}
 .quantity.lightOrange .num{background-color:#fbb584;}
 .quantity.lightPink .num{background-color:#f9c8fe;}
 .quantity.blue .num{background-color:#86bef7;}

@@ -184,17 +184,37 @@ function popupDepartmentSearch(id,title,width,height,e){
     popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout, gridPros);
     requestGridPopDepartment();
 
-    AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+    /* 그리드 기능 */
+    let targetPlace = $(e).attr("data-place");
+    let userName;
+    let userDepartment;
+    if(targetPlace === 'department_search'){
+        AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+            userDepartment = event.item.category_department;
+            $("input[data-label='department']").val(userDepartment);
+
+            $("#gridPop_department").dialog("close");
+        });
+    } else if(targetPlace === 'department_search_only'){
+        AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+            userDepartment = event.item.category_department;
+            $("input[data-label='department-only']").val(userDepartment);
+
+            $("#gridPop_department").dialog("close");
+        });
+    }
+    /* 논의가 필요한 부분 */
+/*    AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
         $("input[data-label='department']").val(event.item.category_department);
         $("#gridPop_department").dialog("close");
 
-        /* input 에 value 가 들어가면, 부서관리자산현황 그리드 호출*/
+        /!* input 에 value 가 들어가면, 부서관리자산현황 그리드 호출*!/
         if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서자산조회"){
             createAssetManagementStatusGrid();
         } else if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서 사용자별 조회"){
             createUserAssetManagementStatusGrid();
         }
-    });
+    });*/
 }
 
 function requestGridPopDepartment() {
