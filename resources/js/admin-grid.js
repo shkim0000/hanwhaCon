@@ -150,12 +150,18 @@ function popupDepartmentSearch(id,title,width,height,e){
         {
             dataField: "category_department",
             headerText: "부서명",
-            width: 180
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
         },
         {
             dataField: "category_depart_code",
-            headerText: "부서명",
-            width: 180
+            headerText: "부서코드",
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
         }
     ]
     /* 2. 그리드 속성 설정 */
@@ -169,24 +175,26 @@ function popupDepartmentSearch(id,title,width,height,e){
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 X
+        copyDisplayValue: false, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     popup_grid_department = AUIGrid.create("#popup_grid_department", columnLayout, gridPros);
     requestGridPopDepartment();
 
-    /* 그리드 기능 */
-    let targetPlace = $(e).attr("data-place");
-    let userName;
-    let userDepartment;
-    if(targetPlace === 'department_search'){
-        AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
-            userDepartment = event.item.category_department;
-            $("input[data-label='department']").val(userDepartment);
+    AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+        $("input[data-label='department']").val(event.item.category_department);
+        $("#gridPop_department").dialog("close");
 
-            $("#gridPop_department").dialog("close");
-        });
-    }
+        /* input 에 value 가 들어가면, 부서관리자산현황 그리드 호출*/
+        if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서자산조회"){
+            createAssetManagementStatusGrid();
+        } else if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서 사용자별 조회"){
+            createUserAssetManagementStatusGrid();
+        }
+    });
 }
 
 function requestGridPopDepartment() {
