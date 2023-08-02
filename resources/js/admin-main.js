@@ -1,7 +1,7 @@
 $(function(){
 
     /* header 추가 */
-    $('#guide').prepend(
+    $('body').prepend(
         "<header>\n"+
                     "<div class='inner'>\n"+
                         "<button type='button' class='menu-btn'></button>\n"+
@@ -411,10 +411,14 @@ function lp_open(id,title,width,height,e,type){
         gridPopDisabledHistory(id,title,width,height);
     } else if ( id==="gridPop_detail"){
         gridPopServiceStatusHistory(id,title,width,height);
+        gridPopChangeHistory(id,title,width,height);
     } else if(id==="excelImport_pop"){
         popupExcelImport(id,title,width,height);
     } else if (id === "assetSearch_pop"){
         subPopupAssetSearch(id,title,width,height,e,type);
+    } else if (id === "haveNetClient"){
+        popupSwInformation(id,title,width,height);
+        popupBoxInformation(id,title,width,height);
     }
 }
 /* 팝업창 닫기 */

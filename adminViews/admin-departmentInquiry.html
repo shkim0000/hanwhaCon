@@ -1,0 +1,452 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>부서자산조회</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
+    <style>
+        .aui-grid-button-renderer  {width:95px;}
+    </style>
+</head>
+<body>
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents active">
+        <div class="page-indicator">
+            <ul>
+                <li><i class="fa-solid fa-house"></i></li>
+                <li>자산현황</li>
+                <li>부서자산조회</li>
+            </ul>
+        </div>
+        <div class="title-box">
+            <div class="title">
+                <h3>부서자산</h3>
+            </div>
+        </div>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">부서명</span>
+                    <label class="input search" data-place="department_search">
+                        <input type="text" data-label="department">
+                        <button type="button" data-label="readonly" onclick="lp_open('gridPop_department','부서검색',505,530);"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3>부서 관리 자산 현황</h3>
+            </div>
+        </div>
+        <div id="assetManagementStatusGrid_ID" class="grid-box"></div>
+
+        <div class="title-box hide-ver">
+            <div class="title">
+                <h3>세부 관리 자산 내역</h3>
+            </div>
+            <div class="btn-wrap">
+                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+            </div>
+        </div>
+        <div id="assetDetailGrid_ID" class="grid-box"></div>
+        <div class="btn-wrap">
+            <button type="button" class="btn" onclick="lp_open('gridPop_department','부서검색',505,530);">부서검색</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+
+<!-- 팝업 -->
+
+<div id="gridPop_department" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 자산 정보 -->
+<div id="gridPop_detail" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">물품종류</div></div>
+                    <div class="td"><div class="td-wrap">모니터</div></div>
+                    <div class="th"><div class="th-wrap center">품목</div></div>
+                    <div class="td"><div class="td-wrap">27인치</div></div>
+                    <div class="th"><div class="th-wrap center">자산번호</div></div>
+                    <div class="td"><div class="td-wrap">4763728</div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>자산상태</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>운영</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>모델</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>LG-MO-27MD</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>규격#1</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>규격#2</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>규격#3</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>규격#4</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>규격#5</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>공용</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="check">
+                                <input type="checkbox">
+                                <span>(공용이라면 체크)</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>도입일</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>2022-06-17</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>자산위치</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select medium">
+                                <select>
+                                    <option value="">행정동</option>
+                                    <option value="">행정동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text" value="1층 IT 운영부">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>사용자정보</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>부서</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p>사번</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>756398</p></div></div>
+                </div>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn"onclick="lp_close('gridPop_detail')">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- // 팝업 -->
+<script>
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    let assetManagementStatusGrid_ID;
+    let assetDetailGrid_ID;
+
+
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 : 순차적 실행 */
+
+
+    /* 3. AUIGrid 그리드 옵션 */
+    /* [현황] */
+    let count = 0;
+    function createAssetManagementStatusGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            },
+            {
+                dataField: "category_product_name",
+                headerText: "물품명",
+                width: 160,
+            }, {
+                dataField: "category_product_count",
+                headerText: "총 보유자산",
+                width: 180,
+                renderer: {
+                    type: "ButtonRenderer",
+                    onClick: function (event) {
+                        if (count === 0) {
+                            count++;
+                            $(".title-box.hide-ver").addClass("open");
+                            createAssetDetailGrid();
+                            requestAssetDetailGridData();
+                            setTimeout(function(){
+                                let currentName = event.item.category_product_name;
+                                let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+
+                                AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                                comparisonObj.forEach((i) => {
+                                    if(currentName === i.category_product_name){
+                                        AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
+                                    }
+                                });
+                            },100);
+                        }
+                        let currentName = event.item.category_product_name;
+                        let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+
+                        AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                        comparisonObj.forEach((i) => {
+                            if(currentName === i.category_product_name){
+                                AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
+                            }
+                        });
+
+                    },
+                }
+            }];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText: "매출 합계",
+            positionField: "category_product_name"
+        }, {
+            dataField: "category_product_count",
+            positionField: "category_product_count",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }];
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            showFooter: true,
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true,
+            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+            autoGridHeight : true
+        }
+
+        /* 그리드 생성 */
+        assetManagementStatusGrid_ID = AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
+        requestAssetManagementStatusGridData();
+        /* 푸터 레이아웃 생성 */
+        AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
+
+        $(document).on('click', '.menu-btn', function(){
+            AUIGrid.destroy('#assetManagementStatusGrid_ID');
+            setTimeout(function(){
+                AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
+                requestAssetManagementStatusGridData();
+            },200);
+        });
+    }
+    function createAssetDetailGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "category_product_name",
+                headerText: "물품명",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                width: 280,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_user",
+                headerText: "사용자",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_usage1",
+                headerText: "용도1",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_usage2",
+                headerText: "용도2",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_application_type",
+                headerText: "신청구분",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_application_content",
+                headerText: "신청내용",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_place",
+                headerText: "사용장소",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_status",
+                headerText: "자산상태",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_note",
+                headerText: "비고",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* autoGridHeight : true */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+        }
+
+        /* 그리드 생성 */
+        assetDetailGrid_ID = AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
+
+        /* 더블 클릭시 팝업 */
+        AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
+            $("#gridPop_detail").addClass("open").dialog({
+                title: "자산정보",
+                width: 1250,
+                height: 500,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });
+        });
+
+        $(document).on('click', '.menu-btn', function(){
+            AUIGrid.destroy('#assetDetailGrid_ID');
+            setTimeout(function(){
+                AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
+                requestAssetDetailGridData();
+            },200);
+        })
+    }
+
+
+    /* 4. 데이터 불러오기 */
+    function requestAssetManagementStatusGridData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas20.json", function (data) {
+            AUIGrid.setGridData(assetManagementStatusGrid_ID, data);
+        });
+    }
+    function requestAssetDetailGridData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+            AUIGrid.setGridData(assetDetailGrid_ID, data);
+        });
+    }
+
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof assetDetailGrid_ID !== "undefined") {
+            AUIGrid.resize(assetDetailGrid_ID);
+        } else if (typeof assetManagementStatusGrid_ID !== "undefined"){
+            AUIGrid.resize(assetManagementStatusGrid_ID);
+        }
+    }
+</script>
+</body>
+</html>

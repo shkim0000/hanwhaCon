@@ -209,7 +209,9 @@ function gridPopNewEnrollDetail(id,title,width,height){
                 type: "ButtonRenderer",
                 onClick: function(event){
                     let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
-                    lp_open("assetSearch_pop","자산검색",800,500, rowData, "newEnroll");
+                    let rowIndex = event.rowIndex;
+                    let resultData = {...rowData[0], rowIndex: rowIndex};
+                    lp_open("assetSearch_pop","자산검색",800,500, resultData, "newEnroll");
                 }
             }
         }, {
@@ -232,7 +234,7 @@ function gridPopNewEnrollDetail(id,title,width,height){
     requestGridPopNewEnrollDetail();
 }
 function requestGridPopNewEnrollDetail(){
-    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas14-2.json", function (data) {
         AUIGrid.setGridData(popup_grid_newEnroll_detail, data);
     });
 }
@@ -295,13 +297,20 @@ function subPopupAssetSearch(id,title,width,height, e, type){
 
     if(type === "newEnroll"){
         /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
-        $("#assetSearch_pop input[data-label='product']").val(e[0].category_product);
-        $("#assetSearch_pop input[data-label='item']").val(e[0].category_item);
+        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
 
         /* 더블클릭 시 자산 정보 그리드에 데이터 추가하는 이벤트  */
         AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
             let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
-            AUIGrid.addRow(popup_grid_newEnroll_detail, rowData, "last");
+            let changeItem = {
+                category_item: rowData.category_item,
+                category_item_name: rowData.category_item_name,
+                category_asset_num: rowData.category_asset_num,
+                category_product: rowData.category_product,
+                category_status: rowData.category_status,
+            }
+            AUIGrid.updateRow(popup_grid_newEnroll_detail, changeItem, e.rowIndex);
             lp_close("assetSearch_pop");
         })
     } else if (type === "change"){
@@ -1603,3 +1612,176 @@ function requestExcelImportData() {
     });
 }
 /* // [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */
+
+/* 자산조회 탭메뉴 그리드 sw 정보 */
+let popup_grid_swInformation;
+
+function popupSwInformation(id,title,width,height){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_sw_name",
+            headerText: "S/W 이름",
+        },
+        {
+            dataField: "category_original_sw_name",
+            headerText: "원본 S/W 이름",
+        }, {
+            dataField: "category_search_date",
+            headerText: "검색일자",
+        },  {
+            dataField: "category_statistics",
+            headerText: "통계보기",
+        }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 40, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    }
+
+    /* 그리드 생성 */
+    popup_grid_swInformation = AUIGrid.create("#popup_grid_swInformation", columnLayout, gridPros);
+    requestSwInformationData();
+    $(document).on("click", "#swInformation", function(){
+        AUIGrid.destroy("#popup_grid_swInformation");
+        setTimeout(function(){
+            AUIGrid.create("#popup_grid_swInformation", columnLayout, gridPros);
+            requestSwInformationData();
+        }, 10)
+
+    })
+}
+
+function requestSwInformationData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas21.json", function (data) {
+        AUIGrid.setGridData(popup_grid_swInformation, data);
+    });
+}
+/* 자산조회 탭메뉴 그리드 box 정보 */
+let popup_grid_boxInformation;
+
+function popupBoxInformation(id,title,width,height){
+    /* 팝업 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_sw_name",
+            headerText: "S/W 이름",
+        },
+        {
+            dataField: "category_original_sw_name",
+            headerText: "원본 S/W 이름",
+        }, {
+            dataField: "category_search_date",
+            headerText: "검색일자",
+        },  {
+            dataField: "category_statistics",
+            headerText: "통계보기",
+        }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 40, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+    }
+
+    /* 그리드 생성 */
+    popup_grid_boxInformation = AUIGrid.create("#popup_grid_boxInformation", columnLayout, gridPros);
+    requestBoxInformationData();
+    $(document).on("click", "#boxInformation", function(){
+        AUIGrid.destroy("#popup_grid_boxInformation");
+        setTimeout(function(){
+            AUIGrid.create("#popup_grid_boxInformation", columnLayout, gridPros);
+            requestBoxInformationData();
+        }, 10)
+
+    })
+}
+
+function requestBoxInformationData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas21.json", function (data) {
+        AUIGrid.setGridData(popup_grid_boxInformation, data);
+    });
+}
+
+/* 자산조회 자산정보, 변경이력 그리드*/
+let popup_grid_changeHistory;
+function gridPopChangeHistory(id,title,width,height) {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_change_item",
+            headerText: "변경항목",
+            width: 160
+        }, {
+            dataField: "category_change_before",
+            headerText: "변경 전",
+            width: 120,
+        }, {
+            dataField: "category_change_after",
+            headerText: "변경 후",
+            width:120
+        }, {
+            dataField: "category_change_time",
+            headerText: "변경시간",
+            width: 160
+        }, {
+            dataField: "category_change_person",
+            headerText: "변경자",
+            width: 150
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_changeHistory = AUIGrid.create("#popup_grid_changeHistory", columnLayout, gridPros);
+    requestChangeHistoryData();
+}
+
+function requestChangeHistoryData() {
+    $.get("../resources/lib/aui-grid/data/admin-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_changeHistory, data);
+    });
+}

@@ -1,0 +1,72 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_sw_name" : "네이버 웨일",
+    "category_original_sw_name" : "네이버 웨일",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_sw_name" : "카카오톡",
+    "category_original_sw_name" : "카카오톡",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_sw_name" : "AnySign4PC 1.1.27",
+    "category_original_sw_name" : "AnySign4PC 1.1.27",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_4",
+    "category_sw_name" : "Azure Data Studio",
+    "category_original_sw_name" : "Azure Data Studio",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_5",
+    "category_sw_name" : "Chrome",
+    "category_original_sw_name" : "Chrome",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_6",
+    "category_sw_name" : "Microsoft OneDrive",
+    "category_original_sw_name" : "Microsoft OneDrive",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_7",
+    "category_sw_name" : "MySQL Examples and Sample",
+    "category_original_sw_name" : "MySQL Examples and Sample",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_8",
+    "category_sw_name" : "Npcap",
+    "category_original_sw_name" : "Npcap",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_9",
+    "category_sw_name" : "Lenovo Now",
+    "category_original_sw_name" : "Lenovo Now",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  },
+  {
+    "id" : "#grid_id_10",
+    "category_sw_name" : "Microsoft Edge",
+    "category_original_sw_name" : "Microsoft Edge",
+    "category_search_date":"2023-07-21 오후 2:35:11",
+    "category_statistics":"Y"
+  }
+]

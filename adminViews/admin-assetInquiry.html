@@ -97,6 +97,7 @@
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
             <button type="button" class="btn" onclick="lp_open('nonNetClient','정보없음',500,180);">NetClient없을때</button>
+            <button type="button" class="btn" onclick="lp_open('haveNetClient','사용자 장비 정보',1250,800);">NetClient정보</button>
         </div>
     </div>
 </div>
@@ -111,6 +112,220 @@
             <p class="center">사용자의 NetClient 정보가 없습니다.</p>
             <div class="btn-wrap">
                 <button type="button" class="btn" onclick="lp_close('nonNetClient')">확인</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--NetClient 정보가 있을 때 팝업-->
+<div id="haveNetClient" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="tab-box">
+                <div class="tab-wrap">
+                    <ul>
+                        <li class="on"><button type="button" class="popBtn">HW정보</button></li>
+                        <li><button type="button" class="popBtn" id="swInformation">SW정보</button></li>
+                        <li><button type="button" class="popBtn" id="boxInformation">BOX정보</button></li>
+                    </ul>
+                </div>
+                <div class="tabs on">
+                    <!--기본정보-->
+                    <div class="tabs-inner-wrap">
+                        <div class="table-title"><h4>기본 정보</h4></div>
+                        <div class="custom-table">
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">사용자명</div></div>
+                                <div class="td"><div class="td-wrap">최승창</div></div>
+                                <div class="th"><div class="th-wrap center">부서명</div></div>
+                                <div class="td"><div class="td-wrap">WORKGROUP</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">이메일</div></div>
+                                <div class="td"><div class="td-wrap">hongildong@gmail.com</div></div>
+                                <div class="th"><div class="th-wrap center">전화번호</div></div>
+                                <div class="td"><div class="td-wrap">010-2004-1949</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">IP 주소</div></div>
+                                <div class="td"><div class="td-wrap">192.168.99.77</div></div>
+                                <div class="th"><div class="th-wrap center">MAC Address</div></div>
+                                <div class="td"><div class="td-wrap">F89710C5F8A</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">서버명</div></div>
+                                <div class="td"><div class="td-wrap">TCO-Server</div></div>
+                                <div class="th"><div class="th-wrap center">서버 IP</div></div>
+                                <div class="td"><div class="td-wrap">192.168.99.71</div></div>
+                            </div>
+                        </div>
+                        <div class="table-title"><h4>H/W 정보</h4></div>
+                        <div class="custom-table">
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">제조회사</div></div>
+                                <div class="td"><div class="td-wrap">LENOVO</div></div>
+                                <div class="th"><div class="th-wrap center">모델</div></div>
+                                <div class="td"><div class="td-wrap">Lenovo ideapad 520S-14KB (80X2)</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">운영체제</div></div>
+                                <div class="td"><div class="td-wrap">Windows10 Professional, 64-bit(x64)</div></div>
+                                <div class="th"><div class="th-wrap center">운영체제 언어</div></div>
+                                <div class="td"><div class="td-wrap">한국어</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">운영체제 버전</div></div>
+                                <div class="td"><div class="td-wrap">6.3</div></div>
+                                <div class="th"><div class="th-wrap center">운영체제 서비스팩</div></div>
+                                <div class="td"><div class="td-wrap">0</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">IE 버전</div></div>
+                                <div class="td"><div class="td-wrap">11.789.19041.0</div></div>
+                                <div class="th"><div class="th-wrap center">IE 서비스팩</div></div>
+                                <div class="td"><div class="td-wrap">0</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">프로세서</div></div>
+                                <div class="td"><div class="td-wrap">Core(TM) i5-7200U CPU 2400Mhz</div></div>
+                                <div class="th"><div class="th-wrap center">메모리</div></div>
+                                <div class="td"><div class="td-wrap">8192 Mb</div></div>
+                            </div>
+                            <div class="row con-2">
+                                <div class="th"><div class="th-wrap center">바이오스 시리얼</div></div>
+                                <div class="td"><div class="td-wrap">MP18JEQD</div></div>
+                                <div class="th"><div class="th-wrap center">장비타입</div></div>
+                                <div class="td"><div class="td-wrap">Notebook</div></div>
+                            </div>
+                        </div>
+                        <div class="table-title"><h4>추가 정보</h4></div>
+                        <div class="custom-table">
+                            <div class="table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>드라이브</th>
+                                            <th>전체</th>
+                                            <th>여유공간</th>
+                                            <th>파일시스템</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>C:\</td>
+                                            <td>237.23 GB</td>
+                                            <td>123.04 GB</td>
+                                            <td>NTFS</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="left">
+                                    <tr>
+                                        <th rowspan="2">NIC #1</th>
+                                        <th>랜카드</th>
+                                        <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                    </tr>
+                                    <tr>
+                                        <th>IP 주소</th>
+                                        <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2">NIC #2</th>
+                                        <th>랜카드</th>
+                                        <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                    </tr>
+                                    <tr>
+                                        <th>IP 주소</th>
+                                        <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2">NIC #3</th>
+                                        <th>랜카드</th>
+                                        <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                    </tr>
+                                    <tr>
+                                        <th>IP 주소</th>
+                                        <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2">NIC #4</th>
+                                        <th>랜카드</th>
+                                        <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                    </tr>
+                                    <tr>
+                                        <th>IP 주소</th>
+                                        <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2">NIC #5</th>
+                                        <th>랜카드</th>
+                                        <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                    </tr>
+                                    <tr>
+                                        <th>IP 주소</th>
+                                        <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2" colspan="2">비디오카드</th>
+                                        <td>MirageDriver</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Intel(R) HD Graphics 620</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">사운드카드</th>
+                                        <td>Realtek High Definition Audio</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="2" colspan="2">모니터</th>
+                                        <td>H2775F [27 inch]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>일반 PnP 모니터 [14 inch]</td>
+                                    </tr>
+                                    <tr>
+                                        <th rowspan="5" colspan="2">프린터</th>
+                                        <td>MicroSoft XPS Document Writer v4 [PORTPROMPT]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Microsoft IPP Class Driver [wejfiwofje-wegw]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Microsoft IPP Class Driver [fwejfpwejfiwofje-wegw]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Microsoft Shared fjepwfwjfpwejf [10294]</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Microsoft Shared fjepwfwjefwejfiofpwejf [10294]</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">바이오스</th>
+                                        <td>4QNC1499VJEWP</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">바이오스 날짜</th>
+                                        <td>20191119</td>
+                                    </tr>
+                                    <tr>
+                                        <th colspan="2">DMI 서비스</th>
+                                        <td>Not Available</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <div class="tabs-inner-wrap">
+                        <div id="popup_grid_swInformation"></div>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <div class="tabs-inner-wrap">
+                        <div id="popup_grid_boxInformation"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -195,11 +410,20 @@
                     <div class="th"><div class="th-wrap center"><p>부서</p></div></div>
                     <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
                 </div>
-                <div class="row">
+                <div class="row con-2">
                     <div class="th"><div class="th-wrap center"><p>사번</p></div></div>
                     <div class="td"><div class="td-wrap"><p>756398</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>NC6 자산정보</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>H/W</p></div></div>
                 </div>
             </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>변경이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_changeHistory" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
@@ -322,7 +546,7 @@
         }
 
         /* 그리드 생성 */
-        assetManagementStatusGrid_ID = AUIGrid.create("assetManagementStatusGrid_ID", columnLayout, gridPros);
+        assetManagementStatusGrid_ID = AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
         // 푸터 레이아웃 세팅
         AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
 
@@ -451,6 +675,7 @@
                 resizable: false,
                 dialogClass: 'no-close success-dialog'
             });
+            gridPopChangeHistory();
         });
     }
 

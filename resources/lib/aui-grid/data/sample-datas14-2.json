@@ -1,0 +1,23 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_product":"데스크탑",
+    "category_item":"표준형 PC",
+    "category_item_name": "LG-O102401",
+    "category_status": "가용"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_product":"모니터",
+    "category_item":"표준형 모니터",
+    "category_item_name": "SAMSUNG-O102401",
+    "category_status": "가용"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_product":"프린터",
+    "category_item":"표준형 프린터",
+    "category_item_name": "CANNON-O102401",
+    "category_status": "가용"
+  }
+]
