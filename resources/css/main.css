@@ -83,6 +83,7 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .grid-box{height:380px;}
 .grid-box.h-small{height:200px;}
 .grid-box.h-small2{height:320px;}
+.grid-box.h-small3{height:480px;}
 .grid-box.h-medium {height:550px;}
 #popup_grid_detail{width:1200px;}
 .l-grid{width:1200px;}
@@ -389,22 +390,24 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .popup .tab-box .tabs.on{display:flex;justify-content:center;align-items:center;}
 
 /* 관리자 자산조회 NetClient 정보 탭메뉴 */
-#haveNetClient .tab-box{display:flex;flex-direction:column;align-items:flex-start;border:none;}
-#haveNetClient .tab-box .tab-wrap ul{display:flex;border:none;}
-#haveNetClient .tab-box .tab-wrap ul li{border:1px solid #000;padding:0 20px;border-bottom:none;}
-#haveNetClient .tab-box .tabs{width:100%;display:none;border:1px solid #000;height:auto;}
-#haveNetClient .tab-box .tabs.on{display:block;}
+.popup .tab-box.ver1{border:none;}
+.tab-box.ver1{display:flex;flex-direction:column;align-items:flex-start;}
+.tab-box.ver1 .tab-wrap{width:100%;}
+.tab-box.ver1 .tab-wrap ul{width:100%;display:flex;justify-content:flex-start;border:none;}
+.tab-box.ver1 .tab-wrap ul li{border:1px solid #000;padding:0 20px;border-bottom:none;}
+.tab-box.ver1 .tabs{width:100%;height:672px;display:none;border:1px solid #000;overflow-y:auto;}
+.tab-box.ver1 .tabs.on{display:block;}
 
-#haveNetClient .tab-box .tabs-inner-wrap{padding:10px 20px;}
-#haveNetClient .tab-box .tabs .table-title{text-align:center;padding:10px;background-color:var(--color1);color:var(--color7);}
+.tab-box.ver1 .tabs-inner-wrap{padding:10px 20px;}
+.tab-box.ver1 .tabs .table-title{text-align:center;padding:10px;background-color:var(--color1);color:var(--color7);}
 
-#haveNetClient .custom-table .table{border:none;}
-#haveNetClient .custom-table .table th{font-size:14px;font-weight:var(--bold);padding:10px 0;}
-#haveNetClient .custom-table .table td{font-size:13px;padding:10px 0;text-align:center;border:none;border-right:1px solid var(--line1);}
-#haveNetClient .custom-table .table thead tr th:first-child{width:258px;}
-#haveNetClient .custom-table .table td:last-child{border-right:none;}
-#haveNetClient .custom-table .table table.left tr td{text-align:left;padding-left:10px;}
-
+.tab-box.ver1 .custom-table + .grid-box{margin-top:12px;}
+.tab-box.ver1 .custom-table .table{border:none;}
+.tab-box.ver1 .custom-table .table th{font-size:14px;font-weight:var(--bold);padding:10px 0;}
+.tab-box.ver1 .custom-table .table td{font-size:13px;padding:10px 0;text-align:center;border:none;border-right:1px solid var(--line1);}
+.tab-box.ver1 .custom-table .table thead tr th:first-child{width:258px;}
+.tab-box.ver1 .custom-table .table td:last-child{border-right:none;}
+.tab-box.ver1 .custom-table .table table.left tr td{text-align:left;padding-left:10px;}
 
 /* popup 모델정보 */
 .popup .tab-box{display:flex;align-items:center;border:1px solid #000;}
@@ -531,7 +534,7 @@ tbody tr p{text-align:center;}
 .row.con-3 .td.whole .date-wrap{width:100%;}
 .row.con-3 .td.half{width:calc(50% - 120px);}
 .custom-table .td.whole .date{max-width:200px;}
-.row.con-3 .td.medium{width:calc(66.3% - 120px);max-width:none;}
+.row.con-3 .td.medium{width:calc(66.6% - 120px);max-width:none;}
 .row.con-3 .td.medium .select + .select{margin-left:8px;}
 .row.con-4 .td{width:calc(25% - 120px);}
 .row.con-5 .td{width:calc(20% - 120px);}

@@ -420,8 +420,16 @@ function lp_open(id,title,width,height,e,type){
     } else if (id === "gridPop_serviceDesk_detail"){
         gridPopServiceDeskDetail(id,title,width,height);
         gridPopServiceDeskHistory(id,title,width,height);
+    } else if(id === "userGroup_pop"){
+        gridPopGroupBasicInformation(id,title,width,height);
     }
 }
+
+/* 탭 메뉴 클릭시 그리드 실행 */
+function tg_open(){
+
+}
+
 /* 팝업창 닫기 */
 function lp_close(target){
     if(target)

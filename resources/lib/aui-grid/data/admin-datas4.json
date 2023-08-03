@@ -1,0 +1,44 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_mode":"관리자",
+    "category_module_name":"환경설정",
+    "category_program_name":"메일서버 설정",
+    "category_usage_status":true,
+    "children": [{
+      "id" : "#grid_id_11",
+      "category_mode":"관리자",
+      "category_module_name":"환경설정",
+      "category_program_name":"메일서버 설정",
+      "category_usage_status":true
+    }]
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_mode":"관리자",
+    "category_module_name":"환경설정",
+    "category_program_name":"메일서버 설정",
+    "category_usage_status":true,
+    "children": [{
+      "id" : "#grid_id_11",
+      "category_mode":"관리자",
+      "category_module_name":"환경설정",
+      "category_program_name":"메일서버 설정",
+      "category_usage_status":true
+    }]
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_mode":"관리자",
+    "category_module_name":"환경설정",
+    "category_program_name":"메일서버 설정",
+    "category_usage_status":true,
+    "children": [{
+      "id" : "#grid_id_11",
+      "category_mode":"관리자",
+      "category_module_name":"환경설정",
+      "category_program_name":"메일서버 설정",
+      "category_usage_status":true
+    }]
+  }
+]
