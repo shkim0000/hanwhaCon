@@ -1654,12 +1654,15 @@ function popupConsistency(id,title,width,height){
             width: 180,
             renderer : {
                 type : "ImageRenderer",
-                imgHeight : 24, // 이미지 높이, 지정하지 않으면 rowHeight에 맞게 자동 조절되지만 빠른 렌더링을 위해 설정을 추천합니다.
+                imgHeight : 16, // 이미지 높이, 지정하지 않으면 rowHeight에 맞게 자동 조절되지만 빠른 렌더링을 위해 설정을 추천합니다.
                 altField : null, // alt(title) 속성에 삽입될 필드명, 툴팁으로 출력됨. 만약 null 을 설정하면 툴팁 표시 안함.
-                imgTableRef : { // 이미지 소스참조할 테이블 레퍼런스
-                    true : "./lib/aui-grid/images/accept-ok.png",
-                    false : "./lib/aui-grid/images/accept-not.png",
-                    "default" : "" // default
+                srcFunction: function(rowIndex, columnIndex, value, item){
+                    switch(value){
+                        case true:
+                            return "../resources/img/accept-ok.png";
+                        case false:
+                            return "../resources/img/accept-not.png";
+                    }
                 }
             },
             filter: {
@@ -1768,7 +1771,7 @@ function popupConsistency(id,title,width,height){
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         usePaging: true, // 페이징 사용
-        showPageButtonCount: 5,
+        pagingMode: "simple",
         showPageRowSelect: true,
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능

@@ -43,7 +43,7 @@
     "category_serial_key": "546512-12345-AAAAA",
     "category_introduction_date": "2023-06-15",
     "category_admin_comment": "관리자의 메모가 적혀져 있습니다.",
-    "category_consistency" : true,
+    "category_consistency" : false,
     "category_asset_classification" : "노트북",
     "category_asset_place": "행정동",
     "category_detail_place": "3층",
