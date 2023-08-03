@@ -435,3 +435,10 @@ function lp_close(target){
                 $("#"+lp_id).dialog("close");*/
     }
 }
+
+/* grid-title 에 적용될 함수 */
+function getRowCount(gridname){
+    setTimeout(function(){
+        $(".title-box .grid-title h3 span").text(AUIGrid.getRowCount(gridname));
+    },100)
+}

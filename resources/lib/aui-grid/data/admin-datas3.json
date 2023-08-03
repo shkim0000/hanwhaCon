@@ -1,0 +1,53 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_asset_status": "운영",
+    "category_asset_num": "4919591",
+    "category_product_type": "노트북",
+    "category_item": "LG그램",
+    "category_model":"LG16i5",
+    "category_standard_1":"규격#1내용",
+    "category_standard_2":"규격#2내용",
+    "category_standard_3":"규격#3내용",
+    "category_standard_4":"규격#4내용",
+    "category_standard_5":"규격#5내용",
+    "category_user_name":"김정규",
+    "category_user_department":"기획부",
+    "category_place":"3층 309호",
+    "category_non_return_reason":"대여 반납일 만기"
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_asset_status": "운영",
+    "category_asset_num": "4919591",
+    "category_product_type": "데스크탑",
+    "category_item": "삼성표준PC",
+    "category_model":"SAMSUNG_DESKTOP",
+    "category_standard_1":"규격#1내용",
+    "category_standard_2":"규격#2내용",
+    "category_standard_3":"규격#3내용",
+    "category_standard_4":"규격#4내용",
+    "category_standard_5":"규격#5내용",
+    "category_user_name":"김삿갓",
+    "category_user_department":"기획부",
+    "category_place":"4층 401호",
+    "category_non_return_reason":"퇴사자"
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_asset_status": "미운영",
+    "category_asset_num": "44010591",
+    "category_product_type": "노트북",
+    "category_item": "ASUS노트북",
+    "category_model":"ASUS_NOTEBOOK",
+    "category_standard_1":"규격#1내용",
+    "category_standard_2":"규격#2내용",
+    "category_standard_3":"규격#3내용",
+    "category_standard_4":"규격#4내용",
+    "category_standard_5":"규격#5내용",
+    "category_user_name":"홍길동",
+    "category_user_department":"총무부",
+    "category_place":"2층 201호",
+    "category_non_return_reason":"개인사유"
+  }
+]

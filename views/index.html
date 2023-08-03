@@ -972,6 +972,8 @@
         </div>
     </div>
 </div>
+
+<div id="treeGridID" class="grid-box"></div>
 <!-- // 팝업 -->
 <script>
     Dropzone.autoDiscover = false;
@@ -1007,6 +1009,8 @@ let popup_grid_user;
 let popup_grid_rental;
 let popup_grid_detail;
 
+let treeGridID;
+
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터"];
 let groupList2 = ["데스크탑 모델", "모니터 모델"];
@@ -1020,6 +1024,7 @@ function documentReady() {
     createPopupAUIGrid2();
     createPopupAUIGrid4();
     createPopupAUIGrid5();
+    createTreeGrid();
 
     /* 그리드 삽입 */
     requestData();// 데이터 요청 후 상단 그리드 삽입
@@ -1027,6 +1032,7 @@ function documentReady() {
     requestData2();
     requestData5();
     requestData6();
+    requestTreeGridData();
 }
 
 /* 3. AUIGrid 그리드 옵션 */
@@ -1375,6 +1381,97 @@ function createPopupAUIGrid5() {
     popup_grid_detail = AUIGrid.create("#popup_grid_detail", columnLayout, gridPros);
 }
 
+function createTreeGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    var columnLayout = [{
+        dataField: "id",
+        headerText: "ID",
+        width: 140
+    }, {
+        dataField: "name",
+        headerText: "Task Name",
+        style: "left",
+        width: 360
+    }, {
+        dataField: "charge",
+        headerText: "Charge",
+        style: "left",
+        width: 140
+    }, {
+        dataField: "complete",
+        headerText: "Complete(%)",
+        postfix: "%",
+        width: 120
+    }, {
+        dataField: "start",
+        headerText: "Start Date"
+    }, {
+        dataField: "end",
+        headerText: "End Date"
+    },{
+        dataField: "isActive",
+        headerText: "사용여부",
+        width: 160,
+        style: "aui-grid-user-custom",
+        renderer: {
+            type: "CheckBoxEditRenderer",
+            showLabel: false, // 참, 거짓 텍스트 출력여부( 기본값 false )
+            editable: true, // 체크박스 편집 활성화 여부(기본값 : false)
+            /*checkValue: "Active", // true, false 인 경우가 기본
+            unCheckValue: "Inactive",*/
+        }
+    }
+    ];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
+        /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
+        /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
+        /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+        /* autoGridHeight : true */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+        displayTreeOpen: true,
+        rowCheckDependingTree: true, //자식이면 부모요소도 같이 체크됨
+    }
+
+    /* 그리드 생성 */
+    treeGridID = AUIGrid.create("#treeGridID", columnLayout, gridPros);
+
+    AUIGrid.bind(treeGridID, "cellClick", function(event) {
+        if(event.columnIndex === 6 && event.value){
+            let item = event.item;
+            if(item.hasOwnProperty("_$parent")){
+                let parentID = item._$parent;
+                console.log(event);
+                // 부모의 rowIndex를 구함..
+                var parentRows = AUIGrid.getRowIndexesByValue(treeGridID, "id", parentID)[0];
+            }
+        }
+    });
+
+    $(document).on('click', '.menu-btn', function(){
+        AUIGrid.destroy('#treeGridID');
+        setTimeout(function(){
+            AUIGrid.create("#treeGridID", columnLayout, gridPros);
+            requestData();
+        },200);
+    })
+}
 
 /* 4. 데이터 불러오기 */
 function requestData() {
@@ -1403,6 +1500,11 @@ function requestData5() {
 function requestData6() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
         AUIGrid.setGridData(popup_grid_detail, data);
+    });
+}
+function requestTreeGridData() {
+    $.get("../resources/lib/aui-grid/data/sample-tree1.json", function (data) {
+        AUIGrid.setGridData(treeGridID, data);
     });
 }
 
