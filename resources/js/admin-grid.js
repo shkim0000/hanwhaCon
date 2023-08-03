@@ -1784,9 +1784,8 @@ function popupConsistency(id,title,width,height){
 
     /* 그리드 관련 함수 */
     setTimeout(function(){
-        $(".aui-grid-paging-info-text").css({"background":"red"})
-        let rowsTotal = $(".aui-grid-paging-info-text").text().split(" ").reverse()[1];
-        $(".sum-count").text(rowsTotal)
+        let countRow = AUIGrid.getRowCount(popup_grid_consistency);
+        $(".sum-count").text(countRow)
     },100);
 }
 function requestConsistencyData() {
