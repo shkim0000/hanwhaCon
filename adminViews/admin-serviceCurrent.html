@@ -177,7 +177,7 @@
         <div id="serviceStatusGrid_ID" class="grid-box"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" onclick="lp_open('gridPop_detail','서비스데스크 신청 현황',1250,500);">서비스데스크 신청 현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_serviceDesk_detail','서비스데스크 신청 현황',1250,800);">서비스데스크 신청 현황</button>
         </div>
     </div>
 </div>
@@ -202,7 +202,7 @@
 </div>
 
 <!-- 서비스 신청 현황 -->
-<div id="gridPop_detail" class="popup">
+<div id="gridPop_serviceDesk_detail" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -252,23 +252,35 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_newEnroll_detail" class="grid-box h-small"></div>
+            <div id="popup_grid_serviceDesk_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>업무배정</h3>
                 </div>
-                <div class="btn-wrap">
-                    <button type="button" class="btn">배정</button>
-                </div>
             </div>
             <div class="custom-table">
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
-                    <div class="td">
+                    <div class="td medium">
                         <div class="td-wrap">
-                            <label class="input search">
-                                <input type="text" data-label="manager_department" readonly>
+                            <label class="select">
+                                <select>
+                                    <option>PC부품</option>
+                                    <option>모니터</option>
+                                </select>
+                            </label>
+                            <label class="select">
+                                <select>
+                                    <option>PC부품</option>
+                                    <option>모니터</option>
+                                </select>
+                            </label>
+                            <label class="select">
+                                <select>
+                                    <option>PC부품</option>
+                                    <option>모니터</option>
+                                </select>
                             </label>
                         </div>
                     </div>
@@ -281,9 +293,13 @@
                             </label>
                         </div>
                     </div>
-                    <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
                 </div>
+            </div>
+            <div class="text-box">
+                <label class="input">
+                    <input type="text" placeholder="처리내용">
+                </label>
+                <button type="button" class="btn">처리내용 추가</button>
             </div>
 
             <div class="title-box">
@@ -291,7 +307,7 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box h-small"></div>
+            <div id="popup_grid_serviceDesk_history" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -318,8 +334,28 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel" onclick="lp_close('gridPop_detail')">닫기</button>
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn">완료</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_serviceDesk_detail')">닫기</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- 담당자 검색 -->
+<div id="gridPop_manager" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">담당자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_manager" class="grid-box"></div>
         </div>
     </div>
 </div>

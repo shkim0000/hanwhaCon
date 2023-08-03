@@ -24,8 +24,8 @@
 
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
-    <script src="../resources/js/main.js"></script>
-    <script src="../resources/js/grid.js"></script>
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
 </head>
 <body>
 
@@ -40,13 +40,22 @@
                 <li>장애신고현황</li>
             </ul>
         </div>
-        <div class="title-box">
-            <div class="title">
-                <h3>신청자정보</h3>
-            </div>
-        </div>
+
         <div class="input-wrap">
             <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">서비스 구분</span>
+                    <label class="input">
+                        <input type="text" value="장애신고">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">신청자</span>
+                    <label class="input search" data-place="user_applicant" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
+                        <input type="text" data-label="applicant"  readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
                 <div class="input-list">
                     <span class="input-title">사용자</span>
                     <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
@@ -55,13 +64,53 @@
                     </label>
                 </div>
                 <div class="input-list">
-                    <span class="input-title">부서명</span>
-                    <label class="input search">
-                        <input type="text" data-label="department" readonly>
+                    <span class="input-title">요청내용</span>
+                    <label class="input">
+                        <input type="text">
                     </label>
                 </div>
-                <div class="input-list regular">
-                    <span class="input-title">조회기간</span>
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서 검색',505,530,this)">
+                        <input type="text" data-label="department">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">물품종류</span>
+                    <label class="select">
+                        <select>
+                            <option>데스크탑</option>
+                            <option>모니터</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">품목</span>
+                    <label class="select">
+                        <select>
+                            <option>데스크탑</option>
+                            <option>모니터</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">자산번호</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list medium">
+                    <span class="input-title">처리자</span>
+                    <label class="select">
+                        <select>
+                            <option>데스크탑</option>
+                            <option>모니터</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list medium">
+                    <span class="input-title">신청기간</span>
                     <div class="date-wrap">
                         <label class="date">
                             <input type="text">
@@ -70,15 +119,13 @@
                         <label class="date">
                             <input type="text">
                         </label>
-                        <label class="select">
-                            <select>
-                                <option value="">당일</option>
-                                <option value="">최근 1주일</option>
-                                <option value="">최근 1개월</option>
-                                <option value="">최근 3개월</option>
-                            </select>
-                        </label>
                     </div>
+                </div>
+                <div class="input-list medium">
+                    <span class="input-title">처리내용</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
                 </div>
             </div>
             <button type="button" class="btn search">검색</button>
@@ -179,6 +226,24 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 부서 검색 -->
+<div id="gridPop_department" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
         </div>
     </div>
 </div>

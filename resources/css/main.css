@@ -149,7 +149,7 @@ footer .logos > img{width:314px;}
 .input-wrap .btn.search{min-width:90px;}
 .input-lists{display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:calc(100% - 100px);}
 .input-list{display:flex;align-items:center;width:calc(25% - 8px);}
-.input-list .input-title{font-weight:var(--bold);padding-left:10px;position:relative;margin-right:10px;min-width:80px;}
+.input-list .input-title{font-weight:var(--bold);padding-left:10px;position:relative;margin-right:10px;min-width:90px;}
 .input-list.small .input-title{min-width:60px;}
 .input-list.large{width:calc(100% - 380px);}
 .input-list.large .input{max-width:258px;}
@@ -357,6 +357,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .popup .input-list{width:100%;}
 .popup .input-title{font-weight:var(--bold);min-width:60px;}
 .popup .input{width:calc(100% - 100px);height:30px;border-color:var(--line1);padding-right:10px;}
+.popup .input > input {font-size:14px;}
 .popup .input.textarea{height:auto;margin-top:30px;width:100%;}
 
 /* popup > customTable */
@@ -455,6 +456,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* 간격 조정 */
 .grid-box + .hide-box,
 .grid-box + .title-box,
+.text-box + .title-box,
 .custom-table + .title-box,
 .custom-table + .list-box,
 .desc-box + .title-box,
@@ -463,6 +465,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .table + .title-box,
 .table + .table,
 .table + .grid-box{margin-top:20px;}
+.custom-table + .text-box{margin-top:8px;}
 .custom-table + .custom-table,
 .input-wrap + .title-box {margin-top:24px;}
 
@@ -526,6 +529,7 @@ tbody tr p{text-align:center;}
 .row.con-3 .td.half{width:calc(50% - 120px);}
 .custom-table .td.whole .date{max-width:200px;}
 .row.con-3 .td.medium{width:calc(66.3% - 120px);max-width:none;}
+.row.con-3 .td.medium .select + .select{margin-left:8px;}
 .row.con-4 .td{width:calc(25% - 120px);}
 .row.con-5 .td{width:calc(20% - 120px);}
 
@@ -673,4 +677,8 @@ tbody tr p{text-align:center;}
 .title-box.hide-ver , .title-box.hide-ver + *{display:none;}
 .title-box.hide-ver.open , .title-box.hide-ver.open + *{display:flex;}
 /*::-webkit-scrollbar{display:none;}*/
-.dd{width:100%!important;}
+
+/* text-box */
+.text-box{display:flex;gap:8px;margin-top:8px;}
+.text-box .btn{justify-content:center;align-items:center;min-width:110px;font-size:14px;padding:5px 8px;}
+.popup .text-box .input{height:30px;}

@@ -410,16 +410,16 @@ function lp_open(id,title,width,height,e,type){
     } else if (id ==="gridPop_disabledCurrent"){
         gridPopDisabledDetail(id,title,width,height);
         gridPopDisabledHistory(id,title,width,height);
-    } else if ( id==="gridPop_detail"){
-        gridPopServiceStatusHistory(id,title,width,height);
-        gridPopChangeHistory(id,title,width,height);
-    } else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
+    }  else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
         popupConsistency(id,title,width,height);
     } else if (id === "assetSearch_pop"){
         subPopupAssetSearch(id,title,width,height,e,type);
     } else if (id === "haveNetClient"){
         popupSwInformation(id,title,width,height);
         popupBoxInformation(id,title,width,height);
+    } else if (id === "gridPop_serviceDesk_detail"){
+        gridPopServiceDeskDetail(id,title,width,height);
+        gridPopServiceDeskHistory(id,title,width,height);
     }
 }
 /* 팝업창 닫기 */

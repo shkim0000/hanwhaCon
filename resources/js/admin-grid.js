@@ -43,8 +43,8 @@ function gridPopUser(id,title,width,height,e){
     let userDepartment;
     let userID;
 
-    if(targetPlace === 'user_search'){
-        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        if(targetPlace === 'user_search'){
             userName = event.item.category_user_name;
             userDepartment = event.item.category_department;
             userID = event.item.category_employeeID;
@@ -54,17 +54,13 @@ function gridPopUser(id,title,width,height,e){
             $("input[data-label='userID']").val(userID);
 
             $("#gridPop_user").dialog("close");
-        });
-    }else if(targetPlace === 'user_applicant'){
-        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        }else if(targetPlace === 'user_applicant'){
             applicantName = event.item.category_user_name;
+            console.log("dmkdmfkdmk")
             $("input[data-label='applicant']").val(applicantName);
 
             $("#gridPop_user").dialog("close");
-        });
-
-    } else{
-        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        } else{
             userName = event.item.category_user_name;
             userDepartment = event.item.category_department;
 
@@ -72,8 +68,9 @@ function gridPopUser(id,title,width,height,e){
             $("input[data-label='change_department']").val(userDepartment);
 
             $("#gridPop_user").dialog("close");
-        });
-    }
+        }
+
+    });
 }
 function requestGridPopUser() {
     $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
@@ -186,35 +183,30 @@ function popupDepartmentSearch(id,title,width,height,e){
 
     /* 그리드 기능 */
     let targetPlace = $(e).attr("data-place");
-    let userName;
     let userDepartment;
-    if(targetPlace === 'department_search'){
-        AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+    AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+        if(targetPlace === 'department_search'){
             userDepartment = event.item.category_department;
             $("input[data-label='department']").val(userDepartment);
 
             $("#gridPop_department").dialog("close");
-        });
-    } else if(targetPlace === 'department_search_only'){
-        AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
+        } else if(targetPlace === 'department_search_only') {
             userDepartment = event.item.category_department;
             $("input[data-label='department-only']").val(userDepartment);
 
             $("#gridPop_department").dialog("close");
-        });
-    }
-    /* 논의가 필요한 부분 */
-/*    AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
-        $("input[data-label='department']").val(event.item.category_department);
-        $("#gridPop_department").dialog("close");
+        } else{
+            $("input[data-label='department']").val(event.item.category_department);
+            $("#gridPop_department").dialog("close");
 
-        /!* input 에 value 가 들어가면, 부서관리자산현황 그리드 호출*!/
-        if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서자산조회"){
-            createAssetManagementStatusGrid();
-        } else if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서 사용자별 조회"){
-            createUserAssetManagementStatusGrid();
+            /* input 에 value 가 들어가면, 부서관리자산현황 그리드 호출*/
+            if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서자산조회"){
+                createAssetManagementStatusGrid();
+            } else if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서 사용자별 조회"){
+                createUserAssetManagementStatusGrid();
+            }
         }
-    });*/
+    });
 }
 
 function requestGridPopDepartment() {
@@ -1561,10 +1553,54 @@ function searchClickAssetNum() {
 /* // 장애 신고 신청 현황 */
 /* ------------------------------------------------------------------------ */
 
-/* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
+/* [서비스 신청 현황 - 서비스데스크 신청현황 팝업 ]----------------------------------------------------------- */
+/* 자산정보 */
+let popup_grid_serviceDesk_detail;
+function gridPopServiceDeskDetail(id,title,width,height){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {   dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_product",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델명",
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+        }, {
+            dataField: "category_takeover_time",
+            headerText: "인수완료시간",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_serviceDesk_detail = AUIGrid.create("#popup_grid_serviceDesk_detail", columnLayout, gridPros);
+    requestGridServiceDeskDetail();
+}
+function requestGridServiceDeskDetail(){
+    $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
+        AUIGrid.setGridData(popup_grid_serviceDesk_detail, data);
+    });
+}
+
 /* 처리 이력  */
-let popup_grid_history; // 서비스데스크 신청현황
-function gridPopServiceStatusHistory(id,title,width,height){
+let popup_grid_serviceDesk_history; // 서비스데스크 신청현황
+function gridPopServiceDeskHistory(id,title,width,height){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
@@ -1597,12 +1633,12 @@ function gridPopServiceStatusHistory(id,title,width,height){
     }
 
     /* 그리드 생성 */
-    popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout, gridPros);
-    requestServiceStatusHistory()
+    popup_grid_serviceDesk_history = AUIGrid.create("#popup_grid_serviceDesk_history", columnLayout, gridPros);
+    requestServiceDeskHistory()
 }
-function requestServiceStatusHistory(){
+function requestServiceDeskHistory(){
     $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
-        AUIGrid.setGridData(popup_grid_history, data);
+        AUIGrid.setGridData(popup_grid_serviceDesk_history, data);
     });
 }
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
