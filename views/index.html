@@ -1455,11 +1455,28 @@ function createTreeGrid() {
     AUIGrid.bind(treeGridID, "cellClick", function(event) {
         if(event.columnIndex === 6 && event.value){
             let item = event.item;
+
+            /* depth가 2 이상일때에 조건 추가되어야 함. */
             if(item.hasOwnProperty("_$parent")){
                 let parentID = item._$parent;
                 console.log(event);
                 // 부모의 rowIndex를 구함..
-                var parentRows = AUIGrid.getRowIndexesByValue(treeGridID, "id", parentID)[0];
+                let parentRows = AUIGrid.getRowIndexesByValue(treeGridID, "id", parentID)[0];
+                let changeItem = {
+                    isActive: true,
+                }
+                /* 자식요소가 체크되면 (isActive: true값이면) 부모요소도 체크된다.(isActive:true 값을 가진다) */
+                AUIGrid.updateRow(treeGridID, changeItem, parentRows);
+            }
+        } else if(event.columnIndex === 6 && !event.value){
+            let item = event.item;
+            if(item.hasOwnProperty("_$parent")){
+                let parentID = item._$parent;
+                let parentRows = AUIGrid.getRowIndexesByValue(treeGridID, "id", parentID)[0];
+                let changeItem = {
+                    isActive: false,
+                }
+                AUIGrid.updateRow(treeGridID, changeItem, parentRows);
             }
         }
     });
@@ -1468,7 +1485,7 @@ function createTreeGrid() {
         AUIGrid.destroy('#treeGridID');
         setTimeout(function(){
             AUIGrid.create("#treeGridID", columnLayout, gridPros);
-            requestData();
+            requestTreeGridData();
         },200);
     })
 }

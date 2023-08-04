@@ -627,10 +627,11 @@
         holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getGridData(holdingAssetGrid_ID);
             AUIGrid.destroy('#holdingAssetGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-                requestHolidngAssetGridData();
+                AUIGrid.setGridData(holdingAssetGrid_ID, data);
             },200);
         })
     }
@@ -759,16 +760,18 @@
             copyDisplayValue: true, //그리드 데이터 복사 가능
             editable: true, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
+            softRemoveRowMode: false,
         }
 
         /* 그리드 생성 */
         returnAssetGrid_ID = AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getGridData(returnAssetGrid_ID);
             AUIGrid.destroy('#returnAssetGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
-                requestHolidngAssetGridData();
+                AUIGrid.setGridData(returnAssetGrid_ID,data);
             },200);
         })
     }

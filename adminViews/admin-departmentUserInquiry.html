@@ -352,6 +352,7 @@
         AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
         requestUserAssetManagementStatusGridData();
 
+        /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
         AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
             if(event.footerIndex === 6){
                 AUIGrid.clearFilterAll(assetDetailGrid_ID);
@@ -360,10 +361,20 @@
 
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getGridData(userAssetManagementStatusGrid_ID);
+            let footerData = AUIGrid.getFooterLayout(userAssetManagementStatusGrid_ID);
             AUIGrid.destroy('#userAssetManagementStatusGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
-                requestUserAssetManagementStatusGridData()();
+                AUIGrid.setGridData(userAssetManagementStatusGrid_ID,data);
+                AUIGrid.changeFooterLayout(userAssetManagementStatusGrid_ID,footerData);
+
+                /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
+                AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
+                    if(event.footerIndex === 6){
+                        AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                    }
+                });
             },200);
         });
     }
@@ -481,10 +492,24 @@
         });
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+            let filteringData = AUIGrid.getFilterCache(assetDetailGrid_ID);
             AUIGrid.destroy('#assetDetailGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-                requestAssetDetailGridData();
+                AUIGrid.setGridData(assetDetailGrid_ID,data);
+                AUIGrid.setFilterCache(assetDetailGrid_ID,filteringData);
+                /* 더블 클릭시 팝업 */
+                AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
+                    $("#gridPop_detail").addClass("open").dialog({
+                        title: "자산정보",
+                        width: 1250,
+                        height: 500,
+                        modal: true,
+                        resizable: false,
+                        dialogClass: 'no-close success-dialog'
+                    });
+                });
             },200);
         })
     }

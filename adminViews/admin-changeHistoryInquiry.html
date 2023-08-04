@@ -397,10 +397,23 @@
         });
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getGridData(changeHistoryGrid_ID);
             AUIGrid.destroy('#changeHistoryGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#changeHistoryGrid_ID", columnLayout, gridPros);
-                requestChangeHistoryGridData();
+                AUIGrid.setGridData(changeHistoryGrid_ID,data);
+                AUIGrid.bind(changeHistoryGrid_ID, "cellDoubleClick", function(event) {
+                    /* 자산정보 팝업에 대한 부분 추가되어야 함. */
+                    $("#gridPop_detail").addClass("open").dialog({
+                        title: "자산정보",
+                        width: 1250,
+                        height: 500,
+                        modal: true,
+                        resizable: false,
+                        dialogClass: 'no-close success-dialog'
+                    });
+                    gridPopChangeHistory();
+                });
             },200);
         })
     }

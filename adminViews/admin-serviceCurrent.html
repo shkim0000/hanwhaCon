@@ -478,10 +478,24 @@ function createServiceStatusGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getOrgGridData(serviceStatusGrid_ID);
+        let filteringData = AUIGrid.getFilterCache(serviceStatusGrid_ID);
         AUIGrid.destroy('#serviceStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
-            requestServiceStatusGridData();
+            AUIGrid.setGridData(serviceStatusGrid_ID,data);
+            AUIGrid.setFilterCache(serviceStatusGrid_ID,filteringData);
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
+                $("#gridPop_detail").addClass("open").dialog({
+                    title: "서비스데스크 신청 현황",
+                    width: 1250,
+                    height: 500,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+            });
         },200);
     });
 }

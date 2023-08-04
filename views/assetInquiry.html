@@ -277,11 +277,12 @@ function createAssetManagementStatusGrid() {
 
     $(document).on('click', '.menu-btn', function(){
         let data = AUIGrid.getGridData(assetManagementStatusGrid_ID);
+        let footerData = AUIGrid.getFooterLayout(assetManagementStatusGrid_ID);
         AUIGrid.destroy('#assetManagementStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
             AUIGrid.setGridData(assetManagementStatusGrid_ID,data);
-            AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
+            AUIGrid.changeFooterLayout(assetManagementStatusGrid_ID, footerData);
         },200);
     });
 }
@@ -397,11 +398,13 @@ function createAssetDetailGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(assetDetailGrid_ID);
+        let data = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+        let filteringData = AUIGrid.getFilterCache(assetDetailGrid_ID);
         AUIGrid.destroy('#assetDetailGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
             AUIGrid.setGridData(assetDetailGrid_ID,data);
+            AUIGrid.setFilterCache(assetDetailGrid_ID, filteringData);
 
             /* 더블 클릭시 팝업 */
             AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {

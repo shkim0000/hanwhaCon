@@ -605,13 +605,8 @@
     let groupList2 = ["표준PC", "노트북", "고용량PC", "기타1", "기타2"];
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-    function documentReady() {
-        /* 그리드 생성 */
-        createEnrollGrid();
-
-        /* 그리드 삽입 */
-        requestEnrollGridData();
-    }
+    createEnrollGrid();
+    requestEnrollGridData();
 
     /* 3. AUIGrid 그리드 옵션 */
 
@@ -682,19 +677,12 @@
             showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
-            /*enableDrag: true,*/ // 드래깅 행 이동 가능 여부 (기본값 : false)
-            /*enableMultipleDrag: true,*/ // 다수의 행을 한번에 이동 가능 여부(기본값 : true)
-            /*enableDragByCellDrag: true,*/ // 셀에서 바로  드래깅 해 이동 가능 여부 (기본값 : false) - enableDrag=true 설정이 선행
-            /*enableDrop: true,*/ // 드랍 가능 여부 (기본값 : true)
-            /*editable: true,*/
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             headerHeight : 30, // 기본 헤더 높이 지정
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            /* autoGridHeight : true */
             fillColumnSizeMode:true,
             softRemoveRowMode:false,
             copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -706,10 +694,11 @@
         enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getGridData(enrollGrid_ID);
             AUIGrid.destroy('#enrollGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
-                requestEnrollGridData();
+                AUIGrid.setGridData(enrollGrid_ID,data);
             },200);
         })
     }

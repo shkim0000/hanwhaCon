@@ -514,10 +514,13 @@ function createDisabledDCGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getOrgGridData(disabledDC_ID);
+        let filteringData = AUIGrid.getFilterCache(disabledDC_ID);
         AUIGrid.destroy('#disabledDC_ID');
         setTimeout(function(){
             AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
-            requestDisabledDCData();
+            AUIGrid.setGridData(disabledDC_ID,data);
+            AUIGrid.setFilterCache(disabledDC_ID,filteringData);
         },200);
     })
 }

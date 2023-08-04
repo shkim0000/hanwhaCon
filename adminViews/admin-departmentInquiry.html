@@ -299,10 +299,13 @@
         AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getGridData(assetManagementStatusGrid_ID);
+            let footerData = AUIGrid.getFooterLayout(assetManagementStatusGrid_ID);
             AUIGrid.destroy('#assetManagementStatusGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
-                requestAssetManagementStatusGridData();
+                AUIGrid.setGridData(assetManagementStatusGrid_ID,data);
+                AUIGrid.changeFooterLayout(assetManagementStatusGrid_ID, footerData);
             },200);
         });
     }
@@ -420,11 +423,26 @@
         });
 
         $(document).on('click', '.menu-btn', function(){
+            let data = AUIGrid.getOrgGirdData(assetDetailGrid_ID);
+            let filteringData = AUIGrid.getFilterCache(assetDetailGrid_ID);
             AUIGrid.destroy('#assetDetailGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-                requestAssetDetailGridData();
-            },200);
+                AUIGrid.setGridData(assetDetailGrid_ID,data);
+                AUIGrid.setFilterCache(assetDetailGrid_ID,filteringData);
+
+                /* 더블 클릭시 팝업 */
+                AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
+                    $("#gridPop_detail").addClass("open").dialog({
+                        title: "자산정보",
+                        width: 1250,
+                        height: 500,
+                        modal: true,
+                        resizable: false,
+                        dialogClass: 'no-close success-dialog'
+                    });
+                });
+            },400);
         })
     }
 
