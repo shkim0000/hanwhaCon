@@ -508,8 +508,6 @@
 let holdingAssetGrid_ID;
 let enrollGrid_ID;
 
-/* 1-2. dropdown menu 리스트 */
-let groupList1 = ["데스크탑", "모니터"];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createHoldingAssetGrid();
@@ -623,14 +621,6 @@ function createHoldingAssetGrid() {
     /* 그리드 생성 */
     holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
-    $(document).on('click', '.menu-btn', function(){
-        AUIGrid.destroy('#holdingAssetGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-            requestHoldingAssetData();
-        },200);
-    });
-
     /* 키보드로 클릭하기 기능 구현중 */
     AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
         if(event.keyCode === 32){
@@ -646,6 +636,32 @@ function createHoldingAssetGrid() {
             }
         }
     });
+
+    $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(holdingAssetGrid_ID);
+        AUIGrid.destroy('#holdingAssetGrid_ID');
+        setTimeout(function(){
+            AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
+            AUIGrid.setGridData(holdingAssetGrid_ID,data);
+
+            /* 키보드로 클릭하기 기능 구현중 */
+            AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
+                if(event.keyCode === 32){
+                    var item = event.item, rowIdField, rowId;
+                    rowIdField = AUIGrid.getProp(event.pid, "rowIdField"); // rowIdField 얻기
+                    rowId = item[rowIdField];
+                    // 이미 체크 선택되었는지 검사
+                    if(AUIGrid.isCheckedRowById(event.pid, rowId)) {
+
+                    }else{
+                        // 엑스트라 체크박스 체크 추가
+                        AUIGrid.addCheckedRowsByIds(event.pid, rowId);
+                    }
+                }
+            });
+        },200);
+    });
+
 }
 function createEnrollGrid() {
     /* 기본 그리드(예시) */
@@ -774,13 +790,14 @@ function createEnrollGrid() {
     /* 그리드 생성 */
     enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
 
-    $('.menu-btn').on("click",function(){
+    $(document).on("click",'.menu-btn',function(){
+        let data = AUIGrid.getGridData(enrollGrid_ID);
         AUIGrid.destroy("#enrollGrid_ID");
         setTimeout(function(){
             AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
-            requestData4();
+            AUIGrid.setGridData(enrollGrid_ID,data);
         },200);
-    })
+    });
 }
 
 /* 4. 데이터 불러오기 */
@@ -794,7 +811,8 @@ function requestHoldingAssetData() {
 window.onresize = function () {
     if (typeof holdingAssetGrid_ID !== "undefined") {
         AUIGrid.resize(holdingAssetGrid_ID);
-    } else if (typeof enrollGrid_ID !== "undefined"){
+    }
+    if (typeof enrollGrid_ID !== "undefined"){
         AUIGrid.resize(enrollGrid_ID);
     }
 }

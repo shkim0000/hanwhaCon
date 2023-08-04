@@ -718,7 +718,7 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true,
+            fillColumnSizeMode: false,
             softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
             copyDisplayValue: true, //그리드 데이터 복사 가능
             enableFilter: true, // 필터 true 설정
@@ -741,7 +741,18 @@
             AUIGrid.destroy('#holdingAssetGrid_ID');
             setTimeout(function(){
                 AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-                requestData();
+                requestHoldingAssetData();
+
+                /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
+                AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event) {
+                    alert("dfmkdmfkmk")
+                    /* 팝업창 열려야 함 */
+                    lp_open('model_pop','모델 검색',540,766);
+                    //클릭한 row의 정보를 clickItem 변수에 저장
+                    clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
+                    whatRow = event.rowIndex;
+                    rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
+                });
             },200);
         })
     }
@@ -858,7 +869,7 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true,
+            fillColumnSizeMode: false,
             softRemoveRowMode: false,
             copyDisplayValue: true, //그리드 데이터 복사 가능
             editable: true, // 수정가능여부, 그리드 데이터 수정 가능
@@ -891,9 +902,8 @@
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof holdingAssetGrid_ID !== "undefined") {
+        if ((typeof holdingAssetGrid_ID !== "undefined") || typeof applicationGrid_ID !== "undefined") {
             AUIGrid.resize(holdingAssetGrid_ID);
-        } else if (typeof applicationGrid_ID !== "undefined"){
             AUIGrid.resize(applicationGrid_ID);
         }
     }

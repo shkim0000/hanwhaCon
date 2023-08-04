@@ -1159,7 +1159,7 @@
     /* 장애 신고 신청 현황 */
         /* 자산정보 */
         let popup_grid_disabledCurrent_detail;
-        function gridPopDisabledDetail(id,title,width,height) {
+        function gridPopDisabledDetail() {
             /* 1. AUIGrid 칼럼 설정 */
             let columnLayout = [
                 {
@@ -1207,7 +1207,7 @@
 
         /* 처리이력 */
         let popup_grid_disabledCurrent_history;
-        function gridPopDisabledHistory(id,title,width,height) {
+        function gridPopDisabledHistory() {
             /* 기본 그리드(예시) */
             /* 1. AUIGrid 칼럼 설정 */
             let columnLayout = [
@@ -1302,8 +1302,8 @@ function searchClickAssetNum() {
 
 /* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
     /* 처리 이력  */
-    let popup_grid_history; // 서비스데스크 신청현황
-    function gridPopServiceStatusHistory(id,title,width,height){
+    let popup_grid_serviceDesk_history; // 서비스데스크 신청현황
+    function gridPopServiceDeskHistory(id,title,width,height){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
@@ -1336,12 +1336,12 @@ function searchClickAssetNum() {
         }
 
         /* 그리드 생성 */
-        popup_grid_history = AUIGrid.create("#popup_grid_history", columnLayout, gridPros);
-        requestServiceStatusHistory()
+        popup_grid_serviceDesk_history = AUIGrid.create("#popup_grid_serviceDesk_history", columnLayout, gridPros);
+        requestServiceDeskHistory();
     }
-    function requestServiceStatusHistory(){
+    function requestServiceDeskHistory(){
         $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
-            AUIGrid.setGridData(popup_grid_history, data);
+            AUIGrid.setGridData(popup_grid_serviceDesk_history, data);
         });
     }
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */

@@ -274,14 +274,17 @@ function createAssetManagementStatusGrid() {
     /* 그리드 생성 */
     assetManagementStatusGrid_ID = AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
     requestAssetManagementStatusGridData();
+
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(assetManagementStatusGrid_ID);
         AUIGrid.destroy('#assetManagementStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
-            requestAssetManagementStatusGridData();
+            AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
+            AUIGrid.setGridData(assetManagementStatusGrid_ID,data);
         },200);
     });
 }
@@ -399,10 +402,23 @@ function createAssetDetailGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(assetDetailGrid_ID);
         AUIGrid.destroy('#assetDetailGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-            requestAssetDetailGridData();
+            AUIGrid.setGridData(assetDetailGrid_ID,data);
+
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
+                $("#gridPop_detail").addClass("open").dialog({
+                    title: "자산정보",
+                    width: 1250,
+                    height: 500,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+            });
         },200);
     })
 }
@@ -424,7 +440,8 @@ function requestAssetDetailGridData() {
 window.onresize = function () {
     if (typeof assetDetailGrid_ID !== "undefined") {
         AUIGrid.resize(assetDetailGrid_ID);
-    } else if (typeof assetManagementStatusGrid_ID !== "undefined"){
+    }
+    if (typeof assetManagementStatusGrid_ID !== "undefined"){
         AUIGrid.resize(assetManagementStatusGrid_ID);
     }
 }

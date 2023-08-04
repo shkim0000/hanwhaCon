@@ -152,14 +152,14 @@
         <div id="serviceStatusGrid_ID" class="grid-box"></div>
 
         <div class="btn-wrap">
-            <button type="button" class="btn" onclick="lp_open('gridPop_detail','서비스데스크 신청 현황',1250,500);">서비스데스크 신청 현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_serviceDesk_detail','서비스데스크 신청 현황',1250,500);">서비스데스크 신청 현황</button>
         </div>
     </div>
 </div>
 <!-- // contents -->
 <!-- 팝업 -->
 <!-- 서비스 신청 현황 -->
-<div id="gridPop_detail" class="popup">
+<div id="gridPop_serviceDesk_detail" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -209,7 +209,7 @@
                     <h3>처리이력</h3>
                 </div>
             </div>
-            <div id="popup_grid_history" class="grid-box h-small"></div>
+            <div id="popup_grid_serviceDesk_history" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -348,7 +348,7 @@ function createServiceStatusGrid() {
 
     /* 더블 클릭시 팝업 */
     AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_detail").addClass("open").dialog({
+        $("#gridPop_serviceDesk_detail").addClass("open").dialog({
             title: "서비스데스크 신청 현황",
             width: 1250,
             height: 500,
@@ -359,10 +359,25 @@ function createServiceStatusGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(serviceStatusGrid_ID);
         AUIGrid.destroy('#serviceStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
-            requestServiceStatusGridData();
+            AUIGrid.setGridData(serviceStatusGrid_ID,data);
+
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
+                $("#gridPop_serviceDesk_detail").addClass("open").dialog({
+                    title: "서비스데스크 신청 현황",
+                    width: 1250,
+                    height: 500,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopServiceDeskHistory();
+            });
+
         },200);
     });
 }

@@ -619,10 +619,12 @@ function createEnrollGrid() {
     enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(enrollGrid_ID);
         AUIGrid.destroy('#enrollGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
-            requestEnrollGridData();
+            AUIGrid.setGridData(enrollGrid_ID,data);
+
         },200);
     })
 }

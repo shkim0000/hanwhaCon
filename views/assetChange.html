@@ -626,63 +626,72 @@ function createHoldingAssetGrid() {
         }, {
             dataField: "category_product_name",
             headerText: "물품종류",
-            width: 180,
+            minWidth: 180,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_model_name",
             headerText: "모델명",
-            width: 280,
+            minWidth: 280,
+            width:"20%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_department",
             headerText: "부서",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
             showIcon: true,
         }
         }, {
             dataField: "category_user_name",
             headerText: "사용자",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
             showIcon: true,
         }
         }, {
             dataField: "category_classification_use",
             headerText: "용도구분",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
             showIcon: true,
         }
         }, {
             dataField: "category_asset_place",
             headerText: "설치장소",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             },
         }, {
             dataField: "category_date",
             headerText: "설치일",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
             showIcon: true,
         }
         }, {
             dataField: "category_asset_status",
             headerText: "자산상태",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
             showIcon: true,
         }
@@ -699,7 +708,7 @@ function createHoldingAssetGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
+ /*       fillColumnSizeMode: false,*/
         softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
         copyDisplayValue: true, //그리드 데이터 복사 가능
         enableFilter: true, // 필터 true 설정
@@ -719,12 +728,24 @@ function createHoldingAssetGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(holdingAssetGrid_ID);
+
         AUIGrid.destroy('#holdingAssetGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-            requestHoldingAssetData();
+            AUIGrid.setGridData(holdingAssetGrid_ID,data);
+
+            /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
+            AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event) {
+                /* 팝업창 열려야 함 */
+                lp_open('model_pop','모델 검색',540,766);
+                //클릭한 row의 정보를 clickItem 변수에 저장
+                clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
+                whatRow = event.rowIndex;
+                rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
+            });
         },200);
-    })
+    });
 }
 
 /* 신청자산정보 그리드*/
@@ -739,49 +760,56 @@ function createEnrollAssetGrid() {
         }, {
             dataField: "category_product_name",
             headerText: "물품종류",
-            width: 160,
+            minWidth: 180,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_model_name",
             headerText: "모델명",
-            width:200,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_classification_use",
             headerText: "용도구분",
-            width: 140,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_asset_place",
             headerText: "설치장소",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_asset_status",
             headerText: "자산상태",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             }
         }, {
             dataField: "category_note",
             headerText: "교체물품종류",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             },
@@ -790,7 +818,8 @@ function createEnrollAssetGrid() {
         }, {
             dataField: "category_changeProduct_name",
             headerText: "모델명",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             },
@@ -799,7 +828,8 @@ function createEnrollAssetGrid() {
         }, {
             dataField: "category_product_quantity",
             headerText: "수량",
-            width: 160,
+            minWidth: 160,
+            width:"10%",
             filter: {
                 showIcon: true,
             },
@@ -839,7 +869,7 @@ function createEnrollAssetGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
+        // fillColumnSizeMode: false,
         softRemoveRowMode: false,
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: true, // 수정가능여부, 그리드 데이터 수정 가능
@@ -848,13 +878,16 @@ function createEnrollAssetGrid() {
     /* 그리드 생성 */
     applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
 
-    $(document).on('click','.menu-btn',function(){
+    $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(applicationGrid_ID);
         AUIGrid.destroy('#applicationGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
-            requestApplicationStatusData();
+            AUIGrid.setGridData(applicationGrid_ID,data);
         },200);
-    })
+    });
+
+
 }
 
 /* 4. 데이터 불러오기 */
@@ -874,7 +907,8 @@ function requestApplicationStatusData() {
 window.onresize = function () {
     if (typeof holdingAssetGrid_ID !== "undefined") {
         AUIGrid.resize(holdingAssetGrid_ID);
-    } else if (typeof applicationGrid_ID !== "undefined"){
+    }
+    if (typeof applicationGrid_ID !== "undefined"){
         AUIGrid.resize(applicationGrid_ID);
     }
 }
@@ -900,6 +934,7 @@ $(".popBtn").on("dblclick", function(){
     AUIGrid.addRow(applicationGrid_ID, insertObj, "last");
     $(this).closest("#model_pop").dialog("close");
 });
+
 </script>
 </body>
 </html>

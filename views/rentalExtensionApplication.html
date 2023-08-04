@@ -623,15 +623,15 @@ function createRentalAssetGrid() {
 
     /* 그리드 생성 */
     rentalGrid_ID = AUIGrid.create("#rentalGrid_ID", columnLayout, gridPros);
-    console.log(rentalGrid_ID)
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(rentalGrid_ID);
         AUIGrid.destroy('#rentalGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#rentalGrid_ID", columnLayout, gridPros);
-            requestRentalExtData();
+            AUIGrid.setGridData(rentalGrid_ID,data);
         },200);
-    })
+    });
 }
 function createRentalAssetInfoGrid() {
     /* 기본 그리드(예시) */
@@ -737,10 +737,11 @@ function createRentalAssetInfoGrid() {
     rentalAssetInfoGrid_ID = AUIGrid.create("#rentalAssetInfoGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(rentalAssetInfoGrid_ID);
         AUIGrid.destroy('#rentalAssetInfoGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#rentalAssetInfoGrid_ID", columnLayout, gridPros);
-            requestRentalExtData();
+            AUIGrid.setGridData(rentalAssetInfoGrid_ID,data);
         },200);
     })
 }
@@ -757,7 +758,8 @@ function requestRentalExtData() {
 window.onresize = function () {
     if (typeof rentalGrid_ID !== "undefined") {
         AUIGrid.resize(rentalGrid_ID);
-    } else if (typeof rentalAssetInfoGrid_ID !== "undefined"){
+    }
+    if (typeof rentalAssetInfoGrid_ID !== "undefined"){
         AUIGrid.resize(rentalAssetInfoGrid_ID);
     }
 }

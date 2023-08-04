@@ -371,10 +371,10 @@ function lp_open(id,title,width,height,e){
     } else if (id === "gridPop_disabledAddRow"){
         popupAddDisabled(id,title,width,height);
     } else if (id ==="gridPop_disabledCurrent"){
-        gridPopDisabledDetail(id,title,width,height);
-        gridPopDisabledHistory(id,title,width,height);
-    } else if ( id==="gridPop_detail"){
-        gridPopServiceStatusHistory(id,title,width,height);
+        gridPopDisabledDetail();
+        gridPopDisabledHistory();
+    } else if ( id==="gridPop_serviceDesk_detail"){
+        gridPopServiceDeskHistory();
     }
 }
 /* 팝업창 닫기 */

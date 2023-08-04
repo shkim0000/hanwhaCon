@@ -295,7 +295,6 @@ function createUserAssetManagementStatusGrid() {
         // autoGridHeight : true
     }
 
-
     /* 총 수량 */
     columnLayout.push({
         headerText: "총 보유자산",
@@ -343,7 +342,6 @@ function createUserAssetManagementStatusGrid() {
         }
 
     });
-
     /* 그리드 생성 */
     userAssetManagementStatusGrid_ID = AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
     // 푸터 레이아웃 세팅
@@ -358,10 +356,21 @@ function createUserAssetManagementStatusGrid() {
 
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(userAssetManagementStatusGrid_ID);
         AUIGrid.destroy('#userAssetManagementStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
-            requestUserAssetManagementStatusGridData()();
+            AUIGrid.setGridData(userAssetManagementStatusGrid_ID,data);
+
+            // 푸터 레이아웃 세팅
+            AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
+            requestUserAssetManagementStatusGridData();
+
+            AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
+                if(event.footerIndex === 6){
+                    AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                }
+            });
         },200);
     });
 }
@@ -479,10 +488,24 @@ function createAssetDetailGrid() {
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(assetDetailGrid_ID);
         AUIGrid.destroy('#assetDetailGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-            requestAssetDetailGridData();
+            AUIGrid.setGridData(assetDetailGrid_ID,data);
+
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
+                $("#gridPop_detail").addClass("open").dialog({
+                    title: "자산정보",
+                    width: 1250,
+                    height: 500,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+            });
+
         },200);
     })
 }
@@ -502,7 +525,8 @@ function requestAssetDetailGridData() {
 window.onresize = function () {
     if (typeof assetDetailGrid_ID !== "undefined") {
         AUIGrid.resize(assetDetailGrid_ID);
-    } else if (typeof userAssetManagementStatusGrid_ID !== "undefined"){
+    }
+    if (typeof userAssetManagementStatusGrid_ID !== "undefined"){
         AUIGrid.resize(userAssetManagementStatusGrid_ID);
     }
 }

@@ -384,13 +384,30 @@ function createDisabledDCGrid() {
             resizable: false,
             dialogClass: 'no-close success-dialog'
         });
+        gridPopDisabledDetail();
+        gridPopDisabledHistory();
     });
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(disabledDC_ID);
         AUIGrid.destroy('#disabledDC_ID');
         setTimeout(function(){
             AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
-            requestDisabledDCData();
+            AUIGrid.setGridData(disabledDC_ID,data);
+
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(disabledDC_ID, "cellDoubleClick", function(event) {
+                $("#gridPop_disabledCurrent").addClass("open").dialog({
+                    title: "장애 신고 신청 현황",
+                    width: 1250,
+                    height: 500,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopDisabledDetail();
+                gridPopDisabledHistory();
+            });
         },200);
     })
 }

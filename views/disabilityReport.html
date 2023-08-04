@@ -552,10 +552,11 @@ function createDisabledListGrid() {
     disabledList_ID = AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(disabledList_ID);
         AUIGrid.destroy('#disabledList_ID');
         setTimeout(function(){
             AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
-            requestDisabledData();
+            AUIGrid.setGridData(disabledList_ID,data);
         },200);
     })
 }

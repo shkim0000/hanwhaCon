@@ -332,16 +332,12 @@ function createHoldingsGrid() {
     /* 그리드 생성 */
     holdingsGrid_ID = AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
 
-    /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
-    AUIGrid.bind(holdingsGrid_ID, "cellClick", function(event) {
-
-    });
-
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(holdingsGrid_ID);
         AUIGrid.destroy('#holdingsGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
-            requestHoldingsGridData();
+            AUIGrid.setGridData(holdingsGrid_ID,data)
         },200);
     });
 }
@@ -459,10 +455,11 @@ function createEnrollAssetGrid() {
     enrollAssetGrid_ID = AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(enrollAssetGrid_ID);
         AUIGrid.destroy('#enrollAssetGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
-            requestEnrollAssetGridData();
+            AUIGrid.setGridData(enrollAssetGrid_ID,data)
         },200);
     })
 }
@@ -482,7 +479,8 @@ function requestEnrollAssetGridData() {
 window.onresize = function () {
     if (typeof holdingsGrid_ID !== "undefined"){
         AUIGrid.resize(holdingsGrid_ID);
-    } else if(typeof enrollAssetGrid_ID !== "undefined"){
+    }
+    if(typeof enrollAssetGrid_ID !== "undefined"){
         AUIGrid.resize(enrollAssetGrid_ID);
     }
 }

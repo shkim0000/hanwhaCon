@@ -547,10 +547,23 @@ function createUserStatusGrid() {
     AUIGrid.setFooter(userStatusGrid_ID, footerLayout);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(userStatusGrid_ID);
         AUIGrid.destroy('#userStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#userStatusGrid_ID", columnLayout, gridPros);
-            requestUserStatusGridData();
+            AUIGrid.setFooter(userStatusGrid_ID, footerLayout);
+            AUIGrid.setGridData(userStatusGrid_ID,data);
+            AUIGrid.bind(userStatusGrid_ID, "cellClick", function(event) {
+                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                name.forEach((i) => {
+                    if(event.item.category_user_name === i.category_user_name){
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", i.category_user_name)
+                    }
+                })
+            });
+
+
         },200);
     });
 }
@@ -688,10 +701,25 @@ function createAssetStatusGrid() {
     AUIGrid.setFooter(assetStatusGrid_ID, footerLayout);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(assetStatusGrid_ID);
         AUIGrid.destroy('#assetStatusGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#assetStatusGrid_ID", columnLayout, gridPros);
-            requestAssetStatusGridData();
+            AUIGrid.setFooter(assetStatusGrid_ID, footerLayout);
+            AUIGrid.setGridData(assetStatusGrid_ID,data);
+
+            /* 셀 클릭 이벤트 */
+            AUIGrid.bind(assetStatusGrid_ID, "cellClick", function(event) {
+                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                name.forEach((i) => {
+                    if(event.item.category_item_name === i.category_item_name){
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_item_name", i.category_item_name)
+                    }
+                })
+            });
+
+
         },200);
     });
 }
@@ -800,10 +828,11 @@ function createDueDiglienceGrid() {
     dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(dueDiglienceGrid_ID);
         AUIGrid.destroy('#dueDiglienceGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-            requestDueDiglienceGridData();
+            AUIGrid.setGridData(dueDiglienceGrid_ID,data);
         },200);
     });
 }
@@ -827,11 +856,17 @@ function requestDueDiglienceGridData() {
 
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-/*window.onresize = function () {
-    if (typeof myGridID !== "undefined") {
-        AUIGrid.resize(myGridID);
+window.onresize = function () {
+    if (typeof userStatusGrid_ID !== "undefined") {
+        AUIGrid.resize(userStatusGrid_ID);
     }
-}*/
+    if (typeof assetStatusGrid_ID !== "undefined") {
+        AUIGrid.resize(assetStatusGrid_ID);
+    }
+    if (typeof dueDiglienceGrid_ID !== "undefined") {
+        AUIGrid.resize(dueDiglienceGrid_ID);
+    }
+}
 
 /* 6. 함수관련 */
 /* 상신버튼 눌렀을떄 validation */

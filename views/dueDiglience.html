@@ -262,10 +262,11 @@ function createDueDiglienceGrid() {
     dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(dueDiglienceGrid_ID);
         AUIGrid.destroy('#dueDiglienceGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-            requestDueDiglienceGridData();
+            AUIGrid.setGridData(dueDiglienceGrid_ID,data);
         },200);
     });
 }
@@ -287,7 +288,7 @@ window.onresize = function () {
 /* 6. 함수 관련 */
 
 /* 행 추가 */
-let cnt = 0;
+let cnt2 = 0;
 function addRow() {
     var item = new Object();
 
@@ -306,7 +307,7 @@ function addRow() {
     const now = new Date();
     const formattedDate = formatDate(now);
 
-    item.id = "grid_ID_1" + (++cnt),
+    item.id = "grid_ID_1" + (++cnt2),
         item.category_asset_num = '',
         item.category_product_name = '',
         item.category_item_name = '',

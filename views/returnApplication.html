@@ -607,10 +607,11 @@ function createHoldingAssetGrid() {
     holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(holdingAssetGrid_ID);
         AUIGrid.destroy('#holdingAssetGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-            requestHolidngAssetGridData();
+            AUIGrid.setGridData(holdingAssetGrid_ID,data);
         },200);
     })
 }
@@ -736,6 +737,7 @@ function createReturnAssetGrid() {
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         fillColumnSizeMode: true, // 가로 스크롤 X
+        softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: true, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
@@ -745,10 +747,11 @@ function createReturnAssetGrid() {
     returnAssetGrid_ID = AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
 
     $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getGridData(returnAssetGrid_ID);
         AUIGrid.destroy('#returnAssetGrid_ID');
         setTimeout(function(){
             AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
-            requestHolidngAssetGridData();
+            AUIGrid.setGridData(returnAssetGrid_ID,data);
         },200);
     })
 }
@@ -765,7 +768,8 @@ function requestHolidngAssetGridData() {
 window.onresize = function () {
     if (typeof holdingAssetGrid_ID !== "undefined") {
         AUIGrid.resize(holdingAssetGrid_ID);
-    } else if (typeof rentalAssetInfoGrid_ID !== "undefined"){
+    }
+    if (typeof rentalAssetInfoGrid_ID !== "undefined"){
         AUIGrid.resize(rentalAssetInfoGrid_ID);
     }
 }
