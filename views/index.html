@@ -1452,11 +1452,11 @@ function createTreeGrid() {
     /* 그리드 생성 */
     treeGridID = AUIGrid.create("#treeGridID", columnLayout, gridPros);
 
-    AUIGrid.bind(treeGridID, "cellClick", function(event) {
+    /*AUIGrid.bind(treeGridID, "cellClick", function(event) {
         if(event.columnIndex === 6 && event.value){
             let item = event.item;
 
-            /* depth가 2 이상일때에 조건 추가되어야 함. */
+            /!* depth가 2 이상일때에 조건 추가되어야 함. *!/
             if(item.hasOwnProperty("_$parent")){
                 let parentID = item._$parent;
                 console.log(event);
@@ -1465,7 +1465,7 @@ function createTreeGrid() {
                 let changeItem = {
                     isActive: true,
                 }
-                /* 자식요소가 체크되면 (isActive: true값이면) 부모요소도 체크된다.(isActive:true 값을 가진다) */
+                /!* 자식요소가 체크되면 (isActive: true값이면) 부모요소도 체크된다.(isActive:true 값을 가진다) *!/
                 AUIGrid.updateRow(treeGridID, changeItem, parentRows);
             }
         } else if(event.columnIndex === 6 && !event.value){
@@ -1479,7 +1479,7 @@ function createTreeGrid() {
                 AUIGrid.updateRow(treeGridID, changeItem, parentRows);
             }
         }
-    });
+    });*/
 
     $(document).on('click', '.menu-btn', function(){
         AUIGrid.destroy('#treeGridID');

@@ -151,7 +151,7 @@ footer .logos > img{width:314px;}
 .input-wrap .btn.search{min-width:90px;}
 .input-lists{display:flex;align-items:center;flex-wrap:wrap;gap:10px;min-width:calc(100% - 100px);}
 .input-list{display:flex;align-items:center;width:calc(25% - 8px);}
-.input-list .input-title{font-weight:var(--bold);padding-left:10px;position:relative;margin-right:10px;min-width:90px;}
+.input-list .input-title{font-weight:var(--bold);padding-left:10px;position:relative;min-width:90px;}
 .input-list.small .input-title{min-width:60px;}
 .input-list.large{width:calc(100% - 380px);}
 .input-list.large .input{max-width:258px;}
