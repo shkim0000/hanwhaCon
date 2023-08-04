@@ -125,7 +125,7 @@
             </div>
         </div>
         <!--        <div id="applicationGrid_ID" class="grid-box"></div>-->
-        <div id="nonReturnAssetGrid_ID" class="grid-box"></div>
+        <div id="forcedRecallGrid_ID" class="grid-box"></div>
 
 
         <div class="btn-wrap">
@@ -374,17 +374,18 @@
 <script type="text/javascript">
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let nonReturnAssetGrid_ID;
+    let forcedRecallGrid_ID;
+
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     function documentReady() {
-        createNonReturnAssetGrid();
-        requestNonReturnAssetData();
+        createForcedRecallGrid();
+        requestForcedRecallData();
     }
 
     /* 3. AUIGrid 그리드 옵션 */
     /* 신청정보 */
-    function createNonReturnAssetGrid() {
+    function createForcedRecallGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -466,13 +467,13 @@
         }
 
         /* 그리드 생성 */
-        nonReturnAssetGrid_ID = AUIGrid.create("#nonReturnAssetGrid_ID", columnLayout, gridPros);
-        requestNonReturnAssetData();
+        forcedRecallGrid_ID = AUIGrid.create("#forcedRecallGrid_ID", columnLayout, gridPros);
+        requestForcedRecallData();
         /* grid-title에 row Count 가 추가되는 함수 */
-        getRowCount(nonReturnAssetGrid_ID);
+        getRowCount(forcedRecallGrid_ID);
 
 
-        AUIGrid.bind(nonReturnAssetGrid_ID, "cellDoubleClick", function(event) {
+        AUIGrid.bind(forcedRecallGrid_ID, "cellDoubleClick", function(event) {
 
             /* 자산정보 팝업에 대한 부분 추가되어야 함. */
             $("#returnEnroll_pop").addClass("open").dialog({
@@ -487,12 +488,12 @@
         });
 
         $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(nonReturnAssetGrid_ID);
-            AUIGrid.destroy('#nonReturnAssetGrid_ID');
+            let data = AUIGrid.getGridData(forcedRecallGrid_ID);
+            AUIGrid.destroy('#forcedRecallGrid_ID');
             setTimeout(function(){
-                AUIGrid.create("#nonReturnAssetGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(nonReturnAssetGrid_ID,data);
-                AUIGrid.bind(nonReturnAssetGrid_ID, "cellDoubleClick", function(event) {
+                AUIGrid.create("#forcedRecallGrid_ID", columnLayout, gridPros);
+                AUIGrid.setGridData(forcedRecallGrid_ID,data);
+                AUIGrid.bind(forcedRecallGrid_ID, "cellDoubleClick", function(event) {
                     /* 자산정보 팝업에 대한 부분 추가되어야 함. */
                     $("#returnEnroll_pop").addClass("open").dialog({
                         title: "강제회수",
@@ -509,16 +510,16 @@
     }
 
     /* 4. 데이터 불러오기 */
-    function requestNonReturnAssetData() {
+    function requestForcedRecallData() {
         $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
-            AUIGrid.setGridData(nonReturnAssetGrid_ID, data);
+            AUIGrid.setGridData(forcedRecallGrid_ID, data);
         });
     }
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof nonReturnAssetGrid_ID !== "undefined") {
-            AUIGrid.resize(nonReturnAssetGrid_ID);
+        if (typeof forcedRecallGrid_ID !== "undefined") {
+            AUIGrid.resize(forcedRecallGrid_ID);
         }
     }
 </script>
