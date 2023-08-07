@@ -643,15 +643,6 @@ function createEnrollGrid() {
 
     /* 그리드 생성 */
     enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(enrollGrid_ID);
-        AUIGrid.destroy('#enrollGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(enrollGrid_ID,data);
-        },200);
-    })
 }
 
 /* 4. 데이터 불러오기 */
@@ -722,7 +713,24 @@ $(".popBtn").on("dblclick", function(){
     }
     AUIGrid.addRow(enrollGrid_ID, insertObj, "last");
     $(this).closest("#model_pop").dialog("close");
-})
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(enrollGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(enrollGrid_ID, innerWidth);
+        },20)
+    }
+});
 
 </script>
 </body>

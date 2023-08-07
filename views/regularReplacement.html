@@ -331,15 +331,6 @@ function createHoldingsGrid() {
 
     /* 그리드 생성 */
     holdingsGrid_ID = AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(holdingsGrid_ID);
-        AUIGrid.destroy('#holdingsGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#holdingsGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(holdingsGrid_ID,data)
-        },200);
-    });
 }
 
 function createEnrollAssetGrid() {
@@ -453,15 +444,6 @@ function createEnrollAssetGrid() {
 
     /* 그리드 생성 */
     enrollAssetGrid_ID = AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(enrollAssetGrid_ID);
-        AUIGrid.destroy('#enrollAssetGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#enrollAssetGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(enrollAssetGrid_ID,data)
-        },200);
-    })
 }
 /* 4. 데이터 불러오기 */
 function requestHoldingsGridData() {
@@ -508,7 +490,26 @@ $(".popBtn").on("dblclick", function(){
     AUIGrid.addRow(enrollAssetGrid_ID, insertObj, "last");
     $(this).closest("#model_pop").removeClass("open");
     lp_close("model_pop");
-})
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(holdingsGrid_ID, innerWidth);
+            AUIGrid.resize(enrollAssetGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(holdingsGrid_ID, innerWidth);
+            AUIGrid.resize(enrollAssetGrid_ID, innerWidth);
+        },20)
+    }
+});
 </script>
 </body>
 </html>

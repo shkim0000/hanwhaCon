@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>사용자정보</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
+</head>
+<body>
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents active">
+        <div class="page-indicator">
+            <ul>
+                <li><i class="fa-solid fa-house"></i></li>
+                <li>기준정보</li>
+                <li>사용자정보</li>
+            </ul>
+        </div>
+        <div class="input-wrap a-end">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">사용자명</span>
+                    <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                        <input type="text" data-label="user" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">사번</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서 검색',505,530,this)">
+                        <input type="text" data-label="department">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="btn search">검색</button>
+        </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3>관리 자산 현황</h3>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn">등록</button>
+                <button type="button" class="btn excel" onclick="exportTo('xlsx')">엑셀다운로드</button>
+            </div>
+        </div>
+        <div id="userInfoGrid_ID" class="grid-box"></div>
+
+        <div class="btn-wrap">
+            <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530);">사용자 검색</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+
+<!-- 팝업 -->
+<!-- 사용자 검색 -->
+<div id="gridPop_user" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">사용자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+<!-- // 팝업 -->
+
+<script>
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let userInfoGrid_ID; // 세부 관리 자산 내역
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+createAssetDetailGrid();
+requestAssetDetailGridData();
+
+/* 3. AUIGrid 그리드 옵션 */
+function createAssetDetailGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "category_product_name",
+            headerText: "물품명",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델명",
+            width: 280,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_user",
+            headerText: "사용자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_usage1",
+            headerText: "용도1",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_usage2",
+            headerText: "용도2",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_application_type",
+            headerText: "신청구분",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_application_content",
+            headerText: "신청내용",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_place",
+            headerText: "사용장소",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_note",
+            headerText: "비고",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    userInfoGrid_ID = AUIGrid.create("#userInfoGrid_ID", columnLayout, gridPros);
+
+    $(document).on('click', '.menu-btn', function(){
+        let data = AUIGrid.getOrgGridData(userInfoGrid_ID);
+        let sortingData = AUIGrid.getSortingFields(userInfoGrid_ID);
+        let filteringData = AUIGrid.getFilterCache(userInfoGrid_ID);
+        AUIGrid.destroy('#userInfoGrid_ID');
+        setTimeout(function(){
+            AUIGrid.create("#userInfoGrid_ID", columnLayout, gridPros);
+            AUIGrid.setGridData(userInfoGrid_ID,data);
+            AUIGrid.setSorting(userInfoGrid_ID, sortingData);
+            AUIGrid.setFilterCache(userInfoGrid_ID, filteringData);
+
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(userInfoGrid_ID, "cellDoubleClick", function(event) {
+                $("#gridPop_detail").addClass("open").dialog({
+                    title: "자산정보",
+                    width: 1250,
+                    height: 500,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog'
+                });
+                gridPopChangeHistory();
+            });
+
+        },200);
+    });
+
+    /* 더블 클릭시 팝업 */
+    AUIGrid.bind(userInfoGrid_ID, "cellDoubleClick", function(event) {
+        $("#gridPop_detail").addClass("open").dialog({
+            title: "자산정보",
+            width: 1250,
+            height: 500,
+            modal: true,
+            resizable: false,
+            dialogClass: 'no-close success-dialog'
+        });
+        gridPopChangeHistory();
+    });
+}
+
+/* 4. 데이터 불러오기 */
+function requestAssetDetailGridData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+        AUIGrid.setGridData(userInfoGrid_ID, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof userInfoGrid_ID !== "undefined") {
+        AUIGrid.resize(userInfoGrid_ID);
+    }
+}
+
+/* 엑셀 다운로드 */
+function exportTo(type) {
+
+    // 내보내기 실행
+    switch (type) {
+        case "xlsx":
+            AUIGrid.exportToXlsx(userInfoGrid_ID, {
+                progressBar: true, // 진행바 표시
+                localControl:true,
+                // 스타일 상태 유지 여부(기본값:true)
+                exportWithStyle:false
+            });
+            break;
+    }
+};
+</script>
+</body>
+</html>

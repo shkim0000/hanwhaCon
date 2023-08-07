@@ -550,15 +550,6 @@ function createDisabledListGrid() {
 
     /* 그리드 생성 */
     disabledList_ID = AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(disabledList_ID);
-        AUIGrid.destroy('#disabledList_ID');
-        setTimeout(function(){
-            AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(disabledList_ID,data);
-        },200);
-    })
 }
 
 /* 4. 데이터 불러오기 */
@@ -605,7 +596,24 @@ $("#gridPop_disabledAddRow .btn.save").on("click", function(){
     }
 
     $("#gridPop_disabledAddRow").removeClass("open");
-})
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabledList_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabledList_ID, innerWidth);
+        },20)
+    }
+});
 
 </script>
 </body>

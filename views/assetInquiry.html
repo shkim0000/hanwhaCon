@@ -397,27 +397,21 @@ function createAssetDetailGrid() {
         });
     });
 
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getOrgGridData(assetDetailGrid_ID);
-        let filteringData = AUIGrid.getFilterCache(assetDetailGrid_ID);
-        AUIGrid.destroy('#assetDetailGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(assetDetailGrid_ID,data);
-            AUIGrid.setFilterCache(assetDetailGrid_ID, filteringData);
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 50;
+        console.log("너비 : " + innerWidth)
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(assetDetailGrid_ID, innerWidth)
+            },20)
 
-            /* 더블 클릭시 팝업 */
-            AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
-                $("#gridPop_detail").addClass("open").dialog({
-                    title: "자산정보",
-                    width: 1250,
-                    height: 500,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-            });
-        },200);
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(assetDetailGrid_ID, innerWidth)
+            },20)
+        }
     });
 
 

@@ -949,102 +949,6 @@ function createApplicationGrid() {
             AUIGrid.setCheckedRowsByValue(event.pid, "category_status", []);
         }
     });
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(applicationGrid_ID);
-        AUIGrid.destroy('#applicationGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(applicationGrid_ID,data);;
-
-            // 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여)
-            AUIGrid.bind(applicationGrid_ID, "cellDoubleClick", function(event) {
-                let result = AUIGrid.getCellValue(applicationGrid_ID, event.rowIndex, "category_application_division");
-                let width = 1250,
-                    height = 590;
-                if(result === "신규신청"){
-                    $("#newEnroll_pop").dialog({
-                        title: "신규신청",
-                        width: width,
-                        height:height,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopNewEnrollDetail(width,height);
-                    gridPopNewEnrollHistory(width,height);
-                } else if(result === "교체신청"){
-                    $("#changeEnroll_pop").dialog({
-                        title: "교체신청",
-                        width: width,
-                        height:height,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopChangeEnrollDetail(width,height);
-                    gridPopChangeEnrollHistory(width,height);
-                } else if(result === "대여신청"){
-                    $("#rentalEnroll_pop").dialog({
-                        title: "대여신청",
-                        width: width,
-                        height:height,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopRentalEnrollDetail(width,height);
-                    gridPopRentalEnrollHistory(width,height);
-                } else if(result === "반납신청"){
-                    $("#returnEnroll_pop").dialog({
-                        title: "반납신청",
-                        width: width,
-                        height:height,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopReturnEnrollDetail(width,height);
-                    gridPopReturnEnrollHistory(width,height);
-                } else if(result === "인수인계신청"){
-                    $("#takingOverEnroll_pop").dialog({
-                        title: "인수인계신청",
-                        width: width,
-                        height:height,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopTakeoverEnrollDetail(width,height);
-                    gridPopTakeoverEnrollHistory(width,height);
-                } else if(result === "대여연장신청"){
-                    $("#rentalExtensionEnroll_pop").dialog({
-                        title: "대여연장신청",
-                        width: width,
-                        height:height,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopRentalExtensionEnrollDetail(width,height);
-                    gridPopRentalExtensionEnrollHistory(width,height);
-                }
-            });
-
-            // 전체 체크박스 클릭 이벤트 바인딩
-            AUIGrid.bind(applicationGrid_ID, "rowAllChkClick", function (event) {
-                if (event.checked) {
-                    // name 의 값들 얻기
-                    var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "category_status");
-                    // Anna 제거하기
-                    uniqueValues.splice(uniqueValues.indexOf("category_status"), 1);
-                    AUIGrid.setCheckedRowsByValue(event.pid, "category_status", uniqueValues);
-                } else {
-                    AUIGrid.setCheckedRowsByValue(event.pid, "category_status", []);
-                }
-            });
-        },200);
-    });
 }
 
 /* 4. 데이터 불러오기 */
@@ -1067,6 +971,23 @@ window.onresize = function () {
 function deleteRowGrid(){
     AUIGrid.removeCheckedRows(applicationGrid_ID); // 체크된 행 삭제 처리
 }
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(applicationGrid_ID, innerWidth)
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(applicationGrid_ID, innerWidth)
+        },20)
+    }
+});
 </script>
 </body>
 </html>

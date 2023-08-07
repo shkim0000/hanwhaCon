@@ -260,15 +260,6 @@ function createDueDiglienceGrid() {
 
     /* 그리드 생성 */
     dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(dueDiglienceGrid_ID);
-        AUIGrid.destroy('#dueDiglienceGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(dueDiglienceGrid_ID,data);
-        },200);
-    });
 }
 
 /* 4. 데이터 불러오기 */
@@ -353,9 +344,26 @@ $(".quantity-list li button").each(function(){
             if(name === i.category_product_name){
                 AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name", i.category_product_name);
             }
-        })
-    })
-})
+        });
+    });
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+        },20)
+    }
+});
 
 </script>
 </body>

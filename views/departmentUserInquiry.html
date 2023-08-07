@@ -242,8 +242,6 @@ function createUserAssetManagementStatusGrid() {
         width: 160,
     }
 
-
-
     /* 1-2. 푸터 설정 */
     let footerLayout = [{
         labelText: "전체",
@@ -342,6 +340,7 @@ function createUserAssetManagementStatusGrid() {
         }
 
     });
+
     /* 그리드 생성 */
     userAssetManagementStatusGrid_ID = AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
     // 푸터 레이아웃 세팅
@@ -350,28 +349,8 @@ function createUserAssetManagementStatusGrid() {
 
     AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
         if(event.footerIndex === 6){
-            AUIGrid.clearFilterAll(assetDetailGrid_ID);
+            AUIGrid.clearFilterAll(userAssetManagementStatusGrid_ID);
         }
-    });
-
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(userAssetManagementStatusGrid_ID);
-        AUIGrid.destroy('#userAssetManagementStatusGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(userAssetManagementStatusGrid_ID,data);
-
-            // 푸터 레이아웃 세팅
-            AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
-            requestUserAssetManagementStatusGridData();
-
-            AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
-                if(event.footerIndex === 6){
-                    AUIGrid.clearFilterAll(assetDetailGrid_ID);
-                }
-            });
-        },200);
     });
 }
 function createAssetDetailGrid() {
@@ -487,27 +466,6 @@ function createAssetDetailGrid() {
         });
     });
 
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(assetDetailGrid_ID);
-        AUIGrid.destroy('#assetDetailGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(assetDetailGrid_ID,data);
-
-            /* 더블 클릭시 팝업 */
-            AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
-                $("#gridPop_detail").addClass("open").dialog({
-                    title: "자산정보",
-                    width: 1250,
-                    height: 500,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-            });
-
-        },200);
-    })
 }
 
 /* 4. 데이터 불러오기 */
@@ -530,6 +488,26 @@ window.onresize = function () {
         AUIGrid.resize(userAssetManagementStatusGrid_ID);
     }
 }
+
+/* 6. 함수 관련 모음 */
+/* 메뉴 버튼 클릭시 (반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 40;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(userAssetManagementStatusGrid_ID, innerWidth);
+            AUIGrid.resize(assetDetailGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(userAssetManagementStatusGrid_ID, innerWidth);
+            AUIGrid.resize(assetDetailGrid_ID, innerWidth);
+        },20)
+    }
+});
 </script>
 </body>
 </html>

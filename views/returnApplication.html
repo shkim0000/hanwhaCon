@@ -599,21 +599,12 @@ function createHoldingAssetGrid() {
         fillColumnSizeMode: true, // 가로 스크롤 X
         softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(holdingAssetGrid_ID);
-        AUIGrid.destroy('#holdingAssetGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(holdingAssetGrid_ID,data);
-        },200);
-    })
 }
 
 function createReturnAssetGrid() {
@@ -739,21 +730,12 @@ function createReturnAssetGrid() {
         fillColumnSizeMode: true, // 가로 스크롤 X
         softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     returnAssetGrid_ID = AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(returnAssetGrid_ID);
-        AUIGrid.destroy('#returnAssetGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(returnAssetGrid_ID,data);
-        },200);
-    })
 }
 
 /* 4. 데이터 불러오기 */
@@ -791,6 +773,25 @@ $(".btn.check").on("click",function(){
 
     /* 다른 그리드의 해당 컬럼명의 값에 추가 */
     AUIGrid.updateRowsById(returnAssetGrid_ID, str)
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+            AUIGrid.resize(returnAssetGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+            AUIGrid.resize(returnAssetGrid_ID, innerWidth);
+        },20)
+    }
 });
 </script>
 </body>

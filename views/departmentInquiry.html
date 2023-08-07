@@ -277,16 +277,6 @@ function createAssetManagementStatusGrid() {
 
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(assetManagementStatusGrid_ID);
-        AUIGrid.destroy('#assetManagementStatusGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
-            AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
-            AUIGrid.setGridData(assetManagementStatusGrid_ID,data);
-        },200);
-    });
 }
 function createAssetDetailGrid() {
     /* 기본 그리드(예시) */
@@ -400,27 +390,6 @@ function createAssetDetailGrid() {
             dialogClass: 'no-close success-dialog'
         });
     });
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(assetDetailGrid_ID);
-        AUIGrid.destroy('#assetDetailGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(assetDetailGrid_ID,data);
-
-            /* 더블 클릭시 팝업 */
-            AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
-                $("#gridPop_detail").addClass("open").dialog({
-                    title: "자산정보",
-                    width: 1250,
-                    height: 500,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-            });
-        },200);
-    })
 }
 
 
@@ -445,6 +414,26 @@ window.onresize = function () {
         AUIGrid.resize(assetManagementStatusGrid_ID);
     }
 }
+
+/* 6. 함수 관련 모음 */
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(assetDetailGrid_ID, innerWidth);
+            AUIGrid.resize(assetManagementStatusGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(assetDetailGrid_ID, innerWidth);
+            AUIGrid.resize(assetManagementStatusGrid_ID, innerWidth);
+        },20)
+    }
+});
 </script>
 </body>
 </html>

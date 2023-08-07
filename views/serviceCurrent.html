@@ -356,29 +356,7 @@ function createServiceStatusGrid() {
             resizable: false,
             dialogClass: 'no-close success-dialog'
         });
-    });
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(serviceStatusGrid_ID);
-        AUIGrid.destroy('#serviceStatusGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(serviceStatusGrid_ID,data);
-
-            /* 더블 클릭시 팝업 */
-            AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
-                $("#gridPop_serviceDesk_detail").addClass("open").dialog({
-                    title: "서비스데스크 신청 현황",
-                    width: 1250,
-                    height: 500,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopServiceDeskHistory();
-            });
-
-        },200);
+        gridPopServiceDeskHistory();
     });
 }
 
@@ -408,9 +386,26 @@ $(".quantity-list li button").each(function(){
             if(name === i.category_service_status){
                 AUIGrid.setFilterByValues(serviceStatusGrid_ID, "category_service_status", i.category_service_status);
             }
-        })
-    })
-})
+        });
+    });
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(serviceStatusGrid_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(serviceStatusGrid_ID, innerWidth);
+        },20)
+    }
+});
 </script>
 </body>
 </html>

@@ -387,29 +387,6 @@ function createDisabledDCGrid() {
         gridPopDisabledDetail();
         gridPopDisabledHistory();
     });
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getGridData(disabledDC_ID);
-        AUIGrid.destroy('#disabledDC_ID');
-        setTimeout(function(){
-            AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(disabledDC_ID,data);
-
-            /* 더블 클릭시 팝업 */
-            AUIGrid.bind(disabledDC_ID, "cellDoubleClick", function(event) {
-                $("#gridPop_disabledCurrent").addClass("open").dialog({
-                    title: "장애 신고 신청 현황",
-                    width: 1250,
-                    height: 500,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopDisabledDetail();
-                gridPopDisabledHistory();
-            });
-        },200);
-    })
 }
 
 /* 4. 데이터 불러오기 */
@@ -426,6 +403,7 @@ window.onresize = function () {
     }
 }
 
+/* 6. 함수 관련 모음 */
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
 $(".quantity-list li button").each(function(){
     $(this).on("click",function(){
@@ -446,8 +424,25 @@ $(".quantity-list li button").each(function(){
         } else if (name === "전체"){
             AUIGrid.setFilterByValues(disabledDC_ID, "category_status", ["신청","접수","조치중","완료","보류","수리중"]);
         }
-    })
-})
+    });
+});
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabledDC_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabledDC_ID, innerWidth);
+        },20)
+    }
+});
 
 </script>
 </body>
