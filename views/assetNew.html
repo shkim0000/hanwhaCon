@@ -551,9 +551,12 @@ function createEnrollGrid() {
         {
             dataField: "category_product",
             headerText: "자산분류",
+
             renderer: {
                 type: "DropDownListRenderer",
-                list: groupList1
+                descendants: ["category_item"],
+                descendantDefaultValues: [null],
+                list: groupList1,
             },
             filter: {
                 showIcon: true,
