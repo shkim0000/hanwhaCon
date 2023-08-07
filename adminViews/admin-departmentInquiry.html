@@ -298,16 +298,6 @@
         /* 푸터 레이아웃 생성 */
         AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
 
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(assetManagementStatusGrid_ID);
-            let footerData = AUIGrid.getFooterLayout(assetManagementStatusGrid_ID);
-            AUIGrid.destroy('#assetManagementStatusGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(assetManagementStatusGrid_ID,data);
-                AUIGrid.changeFooterLayout(assetManagementStatusGrid_ID, footerData);
-            },200);
-        });
     }
     function createAssetDetailGrid() {
         /* 기본 그리드(예시) */
@@ -421,29 +411,6 @@
                 dialogClass: 'no-close success-dialog'
             });
         });
-
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getOrgGirdData(assetDetailGrid_ID);
-            let filteringData = AUIGrid.getFilterCache(assetDetailGrid_ID);
-            AUIGrid.destroy('#assetDetailGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(assetDetailGrid_ID,data);
-                AUIGrid.setFilterCache(assetDetailGrid_ID,filteringData);
-
-                /* 더블 클릭시 팝업 */
-                AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
-                    $("#gridPop_detail").addClass("open").dialog({
-                        title: "자산정보",
-                        width: 1250,
-                        height: 500,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                });
-            },400);
-        })
     }
 
 
@@ -467,6 +434,24 @@
             AUIGrid.resize(assetManagementStatusGrid_ID);
         }
     }
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(assetManagementStatusGrid_ID, innerWidth);
+                AUIGrid.resize(assetDetailGrid_ID, innerWidth);
+            },20);
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(assetManagementStatusGrid_ID, innerWidth);
+                AUIGrid.resize(assetDetailGrid_ID, innerWidth);
+            },20);
+        }
+    });
+
 </script>
 </body>
 </html>

@@ -476,28 +476,6 @@ function createServiceStatusGrid() {
             dialogClass: 'no-close success-dialog'
         });
     });
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getOrgGridData(serviceStatusGrid_ID);
-        let filteringData = AUIGrid.getFilterCache(serviceStatusGrid_ID);
-        AUIGrid.destroy('#serviceStatusGrid_ID');
-        setTimeout(function(){
-            AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(serviceStatusGrid_ID,data);
-            AUIGrid.setFilterCache(serviceStatusGrid_ID,filteringData);
-            /* 더블 클릭시 팝업 */
-            AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
-                $("#gridPop_detail").addClass("open").dialog({
-                    title: "서비스데스크 신청 현황",
-                    width: 1250,
-                    height: 500,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-            });
-        },200);
-    });
 }
 
 /* 4. 데이터 불러오기 */
@@ -513,6 +491,22 @@ window.onresize = function () {
         AUIGrid.resize(serviceStatusGrid_ID);
     }
 }
+
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(serviceStatusGrid_ID, innerWidth);
+        },20);
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(serviceStatusGrid_ID, innerWidth);
+        },20);
+    }
+});
 
 /* 6. 관련  함수 모음 */
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */

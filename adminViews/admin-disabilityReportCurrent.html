@@ -512,17 +512,6 @@ function createDisabledDCGrid() {
         gridPopDisabledDetail(id,title,width,height);
         gridPopDisabledHistory(id,title,width,height);
     });
-
-    $(document).on('click', '.menu-btn', function(){
-        let data = AUIGrid.getOrgGridData(disabledDC_ID);
-        let filteringData = AUIGrid.getFilterCache(disabledDC_ID);
-        AUIGrid.destroy('#disabledDC_ID');
-        setTimeout(function(){
-            AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
-            AUIGrid.setGridData(disabledDC_ID,data);
-            AUIGrid.setFilterCache(disabledDC_ID,filteringData);
-        },200);
-    })
 }
 
 /* 4. 데이터 불러오기 */
@@ -540,6 +529,22 @@ window.onresize = function () {
         AUIGrid.resize(disabledDC_ID);
     }
 };
+
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabledDC_ID, innerWidth);
+        },20);
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabledDC_ID, innerWidth);
+        },20);
+    }
+});
 
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
 $(".quantity-list li button").each(function(){

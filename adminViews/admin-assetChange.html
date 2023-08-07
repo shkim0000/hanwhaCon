@@ -718,7 +718,7 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: false,
+            fillColumnSizeMode: true,
             softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
             copyDisplayValue: true, //그리드 데이터 복사 가능
             enableFilter: true, // 필터 true 설정
@@ -736,25 +736,6 @@
             whatRow = event.rowIndex;
             rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
         });
-
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(holdingAssetGrid_ID);
-            AUIGrid.destroy('#holdingAssetGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(holdingAssetGrid_ID, data);
-
-                /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
-                AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event) {
-                    /* 팝업창 열려야 함 */
-                    lp_open('model_pop','모델 검색',540,766);
-                    //클릭한 row의 정보를 clickItem 변수에 저장
-                    clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
-                    whatRow = event.rowIndex;
-                    rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
-                });
-            },200);
-        })
     }
 
     /* 신청자산정보 그리드*/
@@ -878,14 +859,6 @@
         /* 그리드 생성 */
         applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
 
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(applicationGrid_ID);
-            AUIGrid.destroy('#applicationGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(applicationGrid_ID, data);
-            },200);
-        })
     }
 
     /* 4. 데이터 불러오기 */
@@ -908,6 +881,26 @@
             AUIGrid.resize(applicationGrid_ID);
         }
     }
+
+    /* 메뉴버튼 클릭시(반응형) */
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+                AUIGrid.resize(applicationGrid_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+                AUIGrid.resize(applicationGrid_ID, innerWidth);
+            },20)
+        }
+    });
+
 
     /* 6. 관련 함수 */
     /* 행 삭제 */

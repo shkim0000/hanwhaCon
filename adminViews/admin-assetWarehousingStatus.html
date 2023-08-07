@@ -266,6 +266,27 @@ function requestEnrollCurrentData() {
 
 /* 6. 함수 모음 */
 
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof enrollCurrentGrid_ID !== "undefined"){
+        AUIGrid.resize(enrollCurrentGrid_ID);
+    }
+}
+
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 40;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(enrollCurrentGrid_ID, innerWidth);
+        },20)
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(enrollCurrentGrid_ID, innerWidth);
+        },20)
+    }
+});
 
 
 </script>

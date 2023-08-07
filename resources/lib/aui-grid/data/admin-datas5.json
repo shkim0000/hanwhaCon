@@ -1,0 +1,26 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_title": "전반기 자산실사",
+    "category_progress": "종료",
+    "category_start_date": "2023-05-01",
+    "category_finish_date": "2023-05-31",
+    "category_target_num":"11",
+    "category_existence_num":"5",
+    "category_unidentified_num":"3",
+    "category_non_existence_num":"3",
+    "category_progress_percent":"45"
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_title": "전반기 자산실사",
+    "category_progress": "종료",
+    "category_start_date": "2023-06-01",
+    "category_finish_date": "2023-06-30",
+    "category_target_num":"20",
+    "category_existence_num":"12",
+    "category_unidentified_num":"8",
+    "category_non_existence_num":"0",
+    "category_progress_percent":"60"
+  }
+]

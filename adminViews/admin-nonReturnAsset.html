@@ -583,27 +583,6 @@
             });
             gridPopChangeHistory();
         });
-
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(nonReturnAssetGrid_ID);
-            AUIGrid.destroy('#nonReturnAssetGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#nonReturnAssetGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(nonReturnAssetGrid_ID,data);
-                AUIGrid.bind(nonReturnAssetGrid_ID, "cellDoubleClick", function(event) {
-                    /* 자산정보 팝업에 대한 부분 추가되어야 함. */
-                    $("#gridPop_detail").addClass("open").dialog({
-                        title: "자산정보",
-                        width: 1250,
-                        height: 500,
-                        modal: true,
-                        resizable: false,
-                        dialogClass: 'no-close success-dialog'
-                    });
-                    gridPopChangeHistory();
-                });
-            },200);
-        })
     }
 
     /* 4. 데이터 불러오기 */
@@ -619,6 +598,21 @@
             AUIGrid.resize(nonReturnAssetGrid_ID);
         }
     }
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(nonReturnAssetGrid_ID, innerWidth);
+            },20);
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(nonReturnAssetGrid_ID, innerWidth);
+            },20);
+        }
+    });
 </script>
 </body>
 </html>

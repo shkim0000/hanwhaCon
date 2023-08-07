@@ -625,15 +625,6 @@
 
         /* 그리드 생성 */
         holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(holdingAssetGrid_ID);
-            AUIGrid.destroy('#holdingAssetGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(holdingAssetGrid_ID, data);
-            },200);
-        })
     }
 
     function createReturnAssetGrid() {
@@ -765,15 +756,6 @@
 
         /* 그리드 생성 */
         returnAssetGrid_ID = AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
-
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(returnAssetGrid_ID);
-            AUIGrid.destroy('#returnAssetGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#returnAssetGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(returnAssetGrid_ID,data);
-            },200);
-        })
     }
 
     /* 4. 데이터 불러오기 */
@@ -788,10 +770,28 @@
     window.onresize = function () {
         if (typeof holdingAssetGrid_ID !== "undefined") {
             AUIGrid.resize(holdingAssetGrid_ID);
-        } else if (typeof rentalAssetInfoGrid_ID !== "undefined"){
-            AUIGrid.resize(rentalAssetInfoGrid_ID);
+        } else if (typeof returnAssetGrid_ID !== "undefined"){
+            AUIGrid.resize(returnAssetGrid_ID);
         }
     }
+
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+                AUIGrid.resize(returnAssetGrid_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+                AUIGrid.resize(returnAssetGrid_ID, innerWidth);
+            },20)
+        }
+    });
     /* 6. 함수 관련 */
     /* 교체신청 > 선택한 날짜 그리드 삽입 */
     $(".btn.check").on("click",function(){

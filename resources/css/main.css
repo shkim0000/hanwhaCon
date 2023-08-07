@@ -524,6 +524,7 @@ tbody tr p{text-align:center;}
 .th.hidden{display:none;}
 .th .th-wrap{align-items:center;height:100%;}
 .td .td-wrap{height:100%;align-items:center;}
+.td .td-wrap .date{width:calc(100% / 4);}
 .td + .th{border-left:1px solid var(--line1);}
 .td{width:calc(100% - 120px);;padding:10px 15px;font-size:13px;background-color:var(--color10);}
 .td.line{border-right:1px solid var(--line1);}

@@ -471,7 +471,7 @@ let assetEnroll_ID;
 
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터"];
-let groupList2 = ["데스크탑 모델", "모니터 모델"];
+let groupList2 = [["데스크탑1", "데스크탑2", "데스크탑3"], ["모니터1", "모니터2", "모니터3"], ["노트북1", "노트북2", "노트북3"], ["프린터1", "프린터2", "프린터3"]];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 : document ready (jQuery 의 $(document).ready(function() {}); 과 같은 역할을 합니다. */
 createAssetEnrollGrid();
@@ -500,7 +500,14 @@ function createAssetEnrollGrid() {
             headerText: "품목",
             renderer: {
                 type: "DropDownListRenderer",
-                list: groupList2
+                list: groupList2,
+                listFunction: function(rowIndex, columnIndex, item, dataField){
+                    for(let i = 0; i < groupList1.length; i++){
+                        if(item.category_asset === groupList1[i]){
+                            return groupList2[i];
+                        }
+                    }
+                },
             }
         }, {
             dataField: "category_model_name",
@@ -567,14 +574,23 @@ function createAssetEnrollGrid() {
     /* 그리드 생성 */
     assetEnroll_ID = AUIGrid.create("#assetEnroll_ID", columnLayout, gridPros);
 
-    $(document).on('click', '.menu-btn', function(){
-        AUIGrid.destroy('#assetEnroll_ID');
-        setTimeout(function(){
-            AUIGrid.create("#assetEnroll_ID", columnLayout, gridPros);
-            requestAssetEnrollData();
-        },200);
-    })
 }
+$(document).on("click",".menu-btn",function(){
+    let gridInnerWidth = $('.grid-sub-box').innerWidth();
+    let innerWidth = $(".contents").innerWidth() - 40 - gridInnerWidth - 75;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(assetEnroll_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 180;
+        setTimeout(function(){
+            AUIGrid.resize(assetEnroll_ID, innerWidth);
+        },20)
+    }
+});
 
 
 /* 엑셀 Import */

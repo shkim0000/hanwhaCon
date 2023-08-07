@@ -573,7 +573,7 @@
 
     /* 1-2. dropdown menu 리스트 */
     let groupList1 = ["데스크탑", "모니터"];
-    let groupList2 = ["표준PC", "노트북", "고성능 PC", "프린터", "모니터"];
+    let groupList2 = [["데스크탑1", "데스크탑2", "데스크탑3"], ["모니터1", "모니터2", "모니터3"], ["노트북1", "노트북2", "노트북3"], ["프린터1", "프린터2", "프린터3"]];
 
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
@@ -606,7 +606,14 @@
                 headerText: "품목",
                 renderer: {
                     type: "DropDownListRenderer",
-                    list: groupList2
+                    list: groupList2,
+                    listFunction: function(rowIndex, columnIndex, item, dataField){
+                        for(let i = 0; i < groupList1.length; i++){
+                            if(item.category_product === groupList1[i]){
+                                return groupList2[i];
+                            }
+                        }
+                    },
                 },
                 filter: {
                     showIcon: true,
@@ -663,14 +670,6 @@
         /* 그리드 생성 */
         enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
 
-        $(document).on('click', '.menu-btn', function(){
-            let data = AUIGrid.getGridData(enrollGrid_ID);
-            AUIGrid.destroy('#enrollGrid_ID');
-            setTimeout(function(){
-                AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
-                AUIGrid.setGridData(enrollGrid_ID,data);
-            },200);
-        })
     }
 
     /* 4. 데이터 불러오기 */
@@ -686,6 +685,22 @@
             AUIGrid.resize(enrollGrid_ID);
         }
     }
+
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 40;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(enrollGrid_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(enrollGrid_ID, innerWidth);
+            },20)
+        }
+    });
 
     /* 6. 관련 함수 */
     /* 행 삭제 */

@@ -907,7 +907,6 @@ $(".popBtn").on("dblclick", function(){
 /* 메뉴버튼 클릭시(반응형) */
 $(document).on("click",".menu-btn",function(){
     let innerWidth = $(".contents").innerWidth() - 38;
-    console.log("너비 : " + innerWidth)
     if($(".contents").hasClass("active")){
         innerWidth = innerWidth + 260;
         setTimeout(function(){

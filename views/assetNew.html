@@ -530,7 +530,7 @@ let enrollGrid_ID;
 
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터", "노트북", "프린터"];
-let groupList2 = ["표준PC", "노트북", "고용량PC", "기타1", "기타2"];
+let groupList2 = [["데스크탑1", "데스크탑2", "데스크탑3"], ["모니터1", "모니터2", "모니터3"], ["노트북1", "노트북2", "노트북3"], ["프린터1", "프린터2", "프린터3"]];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createEnrollGrid();
@@ -563,7 +563,14 @@ function createEnrollGrid() {
             headerText: "품목",
             renderer: {
                 type: "DropDownListRenderer",
-                list: groupList2
+                list: groupList2,
+                listFunction: function(rowIndex, columnIndex, item, dataField){
+                  for(let i = 0; i < groupList1.length; i++){
+                      if(item.category_product === groupList1[i]){
+                          return groupList2[i];
+                      }
+                  }
+                },
             },
             filter: {
                 showIcon: true,
