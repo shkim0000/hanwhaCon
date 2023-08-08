@@ -1,0 +1,93 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_item":"모니터",
+    "category_asset_num":"1235489",
+    "category_model":"MOR-LG-32MS",
+    "category_user":"김종민",
+    "category_holding_asset_department":"IT운영부",
+    "category_asset_check":"추가",
+    "category_reason":"추가",
+    "category_reason_detail":"홍길동 전임에게 이관",
+    "category_adjustment":"",
+    "category_adjustment_reason":"자산 분실 기타 등 사유"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_item":"모니터",
+    "category_asset_num":"1214189",
+    "category_model":"MOR-LG-27AS",
+    "category_user":"임꺽정",
+    "category_holding_asset_department":"IT운영부",
+    "category_asset_check":"미존재",
+    "category_reason":"확인불가",
+    "category_reason_detail":"분실",
+    "category_adjustment":"",
+    "category_adjustment_reason":"사유2213"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_item":"데스크탑",
+    "category_asset_num":"1214189",
+    "category_model":"MOR-LG-27AS",
+    "category_user":"임꺽정",
+    "category_holding_asset_department":"총무부",
+    "category_asset_check":"미존재",
+    "category_reason":"확인불가",
+    "category_reason_detail":"분실",
+    "category_adjustment":"",
+    "category_adjustment_reason":"사유2213"
+  },
+  {
+    "id": "#grid_id_4",
+    "category_item":"데스크탑",
+    "category_asset_num":"1214189",
+    "category_model":"MOR-LG-27AS",
+    "category_user":"임꺽정",
+    "category_holding_asset_department":"총무부",
+    "category_asset_check":"미존재",
+    "category_reason":"확인불가",
+    "category_reason_detail":"분실",
+    "category_adjustment":"",
+    "category_adjustment_reason":"사유2213"
+  },
+  {
+    "id": "#grid_id_5",
+    "category_item":"데스크탑",
+    "category_asset_num":"1214189",
+    "category_model":"MOR-LG-27AS",
+    "category_user":"임꺽정",
+    "category_holding_asset_department":"인사부",
+    "category_asset_check":"미존재",
+    "category_reason":"확인불가",
+    "category_reason_detail":"분실",
+    "category_adjustment":"",
+    "category_adjustment_reason":"사유2213"
+  },
+  {
+    "id": "#grid_id_6",
+    "category_item":"데스크탑",
+    "category_asset_num":"1214189",
+    "category_model":"MOR-LG-27AS",
+    "category_user":"임꺽정",
+    "category_holding_asset_department":"인사부",
+    "category_asset_check":"미존재",
+    "category_reason":"확인불가",
+    "category_reason_detail":"분실",
+    "category_adjustment":"",
+    "category_adjustment_reason":"사유2213"
+  },
+  {
+    "id": "#grid_id_7",
+    "category_item":"프린터",
+    "category_asset_num":"1214189",
+    "category_model":"MOR-LG-27AS",
+    "category_user":"임꺽정",
+    "category_holding_asset_department":"재무팀",
+    "category_asset_check":"미존재",
+    "category_reason":"확인불가",
+    "category_reason_detail":"분실",
+    "category_adjustment":"",
+    "category_adjustment_reason":"사유2213"
+  }
+]

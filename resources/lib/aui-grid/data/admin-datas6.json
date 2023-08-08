@@ -1,0 +1,54 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_department":"총무부",
+    "category_dueDiglience_target":"13",
+    "category_existence":"12",
+    "category_non_existence":"1",
+    "category_addition":"0",
+    "category_adjustment":"2",
+    "category_department_checker":"김종민",
+    "category_dueDiglience_finish":"2023-06-15",
+    "category_adjustment_day":"2023-06-15",
+    "category_note":"비고내용"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_department":"인사부",
+    "category_dueDiglience_target":"14",
+    "category_existence":"14",
+    "category_non_existence":"0",
+    "category_addition":"0",
+    "category_adjustment":"0",
+    "category_department_checker":"임꺽정",
+    "category_dueDiglience_finish":"2023-06-17",
+    "category_adjustment_day":"2023-06-17",
+    "category_note":"비고내용"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_department":"IT운영부",
+    "category_dueDiglience_target":"21",
+    "category_existence":"19",
+    "category_non_existence":"1",
+    "category_addition":"1",
+    "category_adjustment":"2",
+    "category_department_checker":"차은우",
+    "category_dueDiglience_finish":"2023-06-13",
+    "category_adjustment_day":"2023-06-13",
+    "category_note":"비고내용"
+  },
+  {
+    "id": "#grid_id_4",
+    "category_department":"재무팀",
+    "category_dueDiglience_target":"10",
+    "category_existence":"10",
+    "category_non_existence":"0",
+    "category_addition":"1",
+    "category_adjustment":"1",
+    "category_department_checker":"김채원",
+    "category_dueDiglience_finish":"2023-06-19",
+    "category_adjustment_day":"2023-06-19",
+    "category_note":"비고내용"
+  }
+]

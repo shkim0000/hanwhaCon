@@ -82,6 +82,17 @@ $(function(){
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사현황</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산실사 결과조회</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산실사 부서별 결과조회</a></li>\n"+
+                            "</ul>\n"+
+                        "</div>\n"+
+                    "</li>\n"+
+                    "<li>\n"+
+                        "<button type='button' class='btn'>정기교체</button>\n"+
+                        "<div class='depth'>\n"+
+                            "<ul>\n"+
+                                "<li><a href='#' class='linkBtn'>정기교체 대상현황</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>정기교체 진행상황</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
