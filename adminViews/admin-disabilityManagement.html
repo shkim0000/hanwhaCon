@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>장애처리유형관리</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
+</head>
+<body>
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents active">
+        <div class="page-indicator">
+            <ul>
+                <li><i class="fa-solid fa-house"></i></li>
+                <li>기준정보</li>
+                <li>장애처리유형관리</li>
+            </ul>
+        </div>
+
+        <div class="title-box end">
+            <div class="btn-wrap">
+                <button type="button" class="btn"> 등록</button>
+            </div>
+        </div>
+        <div id="disabilityManagement_ID" class="grid-box"></div>
+
+        <div class="btn-wrap" style="margin-top:10px;">
+            <button type="button" class="btn" onclick="lp_open('gridPop_itemManagement','품목관리',800,280)">품목관리</button>
+        </div>
+    </div>
+</div>
+<!-- // contents -->
+<!-- 팝업 모음 -->
+<!-- 품목관리 -->
+<div id="gridPop_itemManagement" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p class="important">자산분류명</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p class="important">순번</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">사용유무</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select">
+                                <select>
+                                    <option value="">사용</option>
+                                    <option value="">미사용</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center">비고</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="lp_close('gridPop_itemManagement')">닫기</button>
+                <button type="button" class="btn save">저장</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- // 팝업 모음 -->
+<script type="text/javascript">
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let disabilityManagement_ID;
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+createDisabilityManagementGrid();
+
+requestDisabilityManagementData();
+
+/* 3. AUIGrid 그리드 옵션 */
+function createDisabilityManagementGrid() {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [{
+        dataField: "id",
+        headerText: "ID",
+        width: 140,
+        visible:false
+    }, {
+        dataField: "category_classification_name",
+        headerText: "분류명",
+        style: "left",
+        width: 360,
+        filter: {
+            showIcon: true,
+        }
+    }, {
+        dataField: "category_classification_code",
+        headerText: "분류코드",
+        style: "left",
+        width: 140,
+        filter: {
+            showIcon: true,
+        }
+    }, {
+        dataField: "category_note",
+        headerText: "비고",
+        width: 120,
+        filter: {
+            showIcon: true,
+        }
+    }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode : "singleRow",
+        rowIdField :"id",// 사용자가 정의한 데이터 필드 중 id 를 rowIdField 로 설정함
+        fillColumnSizeMode: true,
+        treeColumnIndex : 1,
+        displayTreeOpen : false,// 최초 보여질 때 모두 열린 상태로 출력 여부
+        showRowNumColumn : true,
+        enableFilter: true, // 필터 true 설정
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        /* context-menu */
+        // 컨텍스트 메뉴 사용
+        useContextMenu: true,
+        showRowCheckColumn: false,
+        // 컨텍스트 메뉴 아이템들
+        contextMenuItems: [{
+            label: "분류추가", callback: contextItemHandler // label 에 $value 를 설정하면 마우스가 있는 곳의 value 값으로 대체됩니다.
+        }, {
+            label: "하위분류 추가" , callback: contextItemHandler
+        }, {
+            label: "분류삭제", callback: contextItemHandler
+        }],
+        //  컨텍스트 메뉴를 보기 위해 오른쪽 클릭을 한 경우 클릭 지점이 왼쪽 클릭과 같이 셀 선택을 할지 여부
+        enableRightDownFocus: true
+    }
+
+    /* 그리드 생성 */
+    disabilityManagement_ID = AUIGrid.create("#disabilityManagement_ID", columnLayout, gridPros);
+}
+
+
+/* 엑셀 Import */
+
+/* 4. 데이터 불러오기 */
+function requestDisabilityManagementData() {
+    $.get("../resources/lib/aui-grid/data/admin-tree.json", function (data) {
+        AUIGrid.setGridData(disabilityManagement_ID, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof disabilityManagement_ID !== "undefined"){
+        AUIGrid.resize(disabilityManagement_ID);
+    }
+}
+
+/* 6. 함수 관련 모음 */
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabilityManagement_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(disabilityManagement_ID, innerWidth);
+        },20)
+    }
+});
+
+//컨텍스트 메뉴 아이템 핸들러
+let cnt2 = 0;
+function contextItemHandler(event) {
+    switch (event.contextIndex) {
+        case 0:
+            /* 0. 분류추가 */
+            var selectedItems = AUIGrid.getSelectedItems(disabilityManagement_ID);
+            var selItem;
+            var parentItem;
+            var parentRowId;
+
+            if (selectedItems.length > 0) {
+                selItem = selectedItems[0].item;
+
+                // 선택 행의 동급 레벨로 추가하기 위해 선택행의 부모 가져오기
+                parentItem = AUIGrid.getParentItemByRowId(disabilityManagement_ID, selItem.uid);
+                parentRowId;
+
+                if (parentItem) {
+                    parentRowId = parentItem.uid;
+                } else {
+                    parentRowId = null; // parentRowId 를 null 로 하면 최상위 행이 생깁니다.
+                }
+            } else {
+                // 선택행이 없으므로 최상단에 행 추가시킴.
+                parentRowId = null;
+            }
+
+            var newItem = new Object();
+            newItem.parentRowId = parentRowId; // 부모의 rowId 값을 보관해 놓음...나중에 개발자가 유용하게 쓰기 위함...실제 그리드는 사용하지 않음.
+
+            if (parentItem == null) {
+                newItem.id = "새 자식";
+            } else {
+                newItem.id = parentItem.id + "-자식";
+            }
+            newItem.category_classification_name = "";
+            newItem.category_classification_code = 0;
+            newItem.category_note = "";
+
+            // parameter
+            // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+            // rowId : 삽입되는 행의 부모 rowId 값 (null 인 경우 root 에 해당됨)
+            // rowPos : first : 상단, last : 하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+            AUIGrid.addTreeRow(disabilityManagement_ID, newItem, parentRowId, "last");
+            break;
+        case 1:
+            /* 1. 하위분류 추가 */
+            var selectedItems = AUIGrid.getSelectedItems(disabilityManagement_ID);
+            if (selectedItems.length <= 0)
+                return;
+
+            var selItem = selectedItems[0].item;
+            var parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
+
+            var newItem = new Object();
+            newItem.uid = parentRowId; // 부모의 rowId 값을 보관해 놓음...나중에 개발자가 유용하게 쓰기 위함...실제 그리드는 사용하지 않음.
+            newItem.id = selItem.id + "-자식";
+            newItem.category_classification_name = "";
+            newItem.category_classification_code = 0;
+            newItem.category_note = "";
+
+
+            // parameter
+            // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+            // rowId : 삽입되는 행의 부모 rowId 값
+            // rowPos : first : 상단, last : 하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+            AUIGrid.addTreeRow(disabilityManagement_ID, newItem, parentRowId, "last");
+            break;
+
+        case 2:
+            /* 2. 분류 삭제 */
+
+            break;
+    }
+};
+</script>
+</body>
+</html>

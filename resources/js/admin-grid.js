@@ -1970,112 +1970,310 @@ function requestChangeHistoryData() {
 /* // 자산조회 자산정보, 변경이력 그리드*/
 
 /* 사용자 그룹정보 */
-/* 사용자 그룹정보 추가 전 */
-let popup_grid_groupBasicInformation;
-function gridPopGroupBasicInformation(id,title,width,height){
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible : false
-        },
-        {
-            dataField: "category_mode",
-            headerText: "모드",
-            width: 160
-        }, {
-            dataField: "category_module_name",
-            headerText: "모듈명",
-            width: 120,
-        }, {
-            dataField: "category_program_name",
-            headerText: "프로그램명",
-            width:120,
-            // 최초 보여질 때 모두 열린 상태로 출력 여부
-            displayTreeOpen : true,
-
-            // 트리 컬럼(즉, 폴딩 아이콘 출력 칼럼) 을 인덱스1번으로 설정함(디폴트 0번임)
-            treeColumnIndex : 1,
-        }, {
-            dataField: "category_usage_status",
-            headerText: "사용여부",
-            width: 160,
-            dataType: "boolean",
-            headerRenderer: { // 헤더 렌더러
-                type: "CheckBoxHeaderRenderer",
-                dependentMode: true
+    /* 1. 그룹기본정보 */
+    let popup_grid_groupBasicInformation;
+    function gridPopGroupBasicInformation(id,title,width,height){
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible : false
             },
-            renderer: {
-                type: "CheckBoxEditRenderer",
-                editable: true,
+            {
+                dataField: "category_mode",
+                headerText: "모드",
+                width: 160
+            }, {
+                dataField: "category_module_name",
+                headerText: "모듈명",
+                width: 120,
+            }, {
+                dataField: "category_program_name",
+                headerText: "프로그램명",
+                width:120,
+                // 최초 보여질 때 모두 열린 상태로 출력 여부
+                displayTreeOpen : true,
+
+                // 트리 컬럼(즉, 폴딩 아이콘 출력 칼럼) 을 인덱스1번으로 설정함(디폴트 0번임)
+                treeColumnIndex : 1,
+            }, {
+                dataField: "category_usage_status",
+                headerText: "사용여부",
+                width: 160,
+                dataType: "boolean",
+                headerRenderer: { // 헤더 렌더러
+                    type: "CheckBoxHeaderRenderer",
+                    dependentMode: true
+                },
+                renderer: {
+                    type: "CheckBoxEditRenderer",
+                    editable: true,
+                }
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 50, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 4,
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true,
+            rowCheckDependingTree: true,
+            treeIdField: "tree_id",
+            treeIdRefField: "parent",
+            displayTreeOpen : false
+        }
+
+        /* 그리드 생성 */
+        popup_grid_groupBasicInformation = AUIGrid.create("#popup_grid_groupBasicInformation", columnLayout, gridPros);
+        requestGroupBasicInformationData();
+
+        /* 그리드 관련 함수 */
+    }
+    function requestGroupBasicInformationData(){
+        $.get("../resources/lib/aui-grid/data/admin-datas4.json", function (data) {
+            AUIGrid.setGridData(popup_grid_groupBasicInformation, data);
+        });
+    }
+    /* // 1. 그룹기본정보 */
+
+    /* 2. 그룹별 사용자 (기본) */
+    let popup_grid_userGroup;
+    function gridPopUserGroup(){
+        /* 1. AUIGrid 칼럼 설정 */
+        let gridPop_user_column = [
+            {
+                dataField: "category_user_name",
+                headerText: "사용자명",
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_employeeID",
+                headerText: "사번",
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_department_whole_name",
+                headerText: "전체부서명",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_department",
+                headerText: "부서",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPop_user_pros = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+            softRemoveRowMode: true // 소프트 제거 모드 사용 안함
+        }
+
+        /* 그리드 생성 */
+        popup_grid_userGroup = AUIGrid.create("#popup_grid_userGroup",  gridPop_user_column, gridPop_user_pros);
+    }
+    /* // 2. 그룹별 사용자 (기본) */
+
+    /* 2-1. 사용자 선택 ( 사용자 추가 클릭시) */
+    let popup_grid_selectUser;
+    function gridPopSelectUser(){
+        /* 1. AUIGrid 칼럼 설정 */
+        let gridPop_user_column = [
+            {
+                dataField: "category_employeeID",
+                headerText: "사번",
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_user_name",
+                headerText: "사용자명",
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_department",
+                headerText: "부서",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPop_user_pros = {
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+            softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+        }
+
+        /* 그리드 생성 */
+        popup_grid_selectUser = AUIGrid.create("#popup_grid_selectUser",  gridPop_user_column, gridPop_user_pros);
+        requestGridPopSelectUser();
+
+
+    }
+    function requestGridPopSelectUser() {
+        $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
+            AUIGrid.setGridData(popup_grid_selectUser, data);
+        });
+    }
+    /* // 2-1. 사용자 선택 ( 사용자 추가 클릭시) */
+
+    /* [관련함수 모음] 사용자 그룹정보 관련 함수 모음 */
+        /* a. 선택 행 삭제 */
+        function deleteSelectUserGrid(){
+            AUIGrid.removeCheckedRows(popup_grid_userGroup); // 체크된 행 삭제 처리
+            let removedRows = AUIGrid.getRemovedItems(popup_grid_userGroup, true); // 삭제 처리된 아이템 있는지 보기
+            if (removedRows.length <= 0) {
+                alert("삭제 처리되어 마크된 행이 없습니다.")
+                return;
             }
-        }]
+            AUIGrid.removeSoftRows(popup_grid_userGroup); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
+        }
+
+        /* b. 그룹변경 : 체크된 항목이 없을때 팝업창 안열림 */
+        function changeGroup(){
+            let checkRows = AUIGrid.getCheckedRowItemsAll(popup_grid_userGroup);
+            let checkLength = checkRows.length;
+            if(checkLength === 0){
+                alert("선택된 사용자가 없습니다.")
+                return false;
+            } else {
+                lp_open('gridPop_selectChangeGroup','변경할 그룹 선택',600,240);
+            }
+        }
+
+        /* c. 사용자 선택 > 선택 클릭시 */
+        function selectAddRow(){
+            let rows = AUIGrid.getCheckedRowItems(popup_grid_selectUser);
+            if(rows.length < 1){
+                alert("체크된 데이터가 없습니다.");
+                return;
+            }
+        
+            for(let i=0; i < rows.length; i++){
+                AUIGrid.addRow(popup_grid_userGroup, rows[i].item, "last");
+            }
+
+            /*  중복되는 정보가 존재할 시 */
+            lp_close("gridPop_selectUser");
+        }
+        
+        /* d. 저장 버튼 클릭시 삭제 버튼 보임*/
+        function save_Info(id){
+            if($("#" + id +"  .btn.trash").data('btn') === "hide"){
+                /* 값 저장하기 */
+                $("#" + id +"  .btn.trash").attr("data-btn","show");
+        
+                /* 그리드 구현하기 */
+                setTimeout(function(){
+                    gridPopGroupBasicInformation('userGroup_pop','사용자 그룹 정보',1250,800);
+                },20);
+            }
+        }
+    /* 사용자 그룹정보 관련 함수 모음 */
+/* // 사용자 그룹정보 */
+
+/* 자산분류 팝업 */
+let popup_grid_assetClassification;
+function gridPopAssetClassification(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [{
+        dataField: "id",
+        headerText: "ID",
+        width: 140,
+        visible:false
+    }, {
+        dataField: "category_classification_name",
+        headerText: "분류명",
+        style: "left",
+        width: 360,
+        filter: {
+            showIcon: true,
+        }
+    }, {
+        dataField: "category_classification_code",
+        headerText: "분류코드",
+        style: "left",
+        width: 140,
+        filter: {
+            showIcon: true,
+        }
+    }, {
+        dataField: "category_note",
+        headerText: "비고",
+        width: 120,
+        filter: {
+            showIcon: true,
+        }
+    }];
+
     /* 2. 그리드 속성 설정 */
     let gridPros = {
-        rowIdField: "id",
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 50, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 4,
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        selectionMode : "singleRow",
+        rowIdField :"id",// 사용자가 정의한 데이터 필드 중 id 를 rowIdField 로 설정함
         fillColumnSizeMode: true,
-        rowCheckDependingTree: true,
-        treeIdField: "tree_id",
-        treeIdRefField: "parent",
-        displayTreeOpen : false
+        treeColumnIndex : 1,
+        displayTreeOpen : false,// 최초 보여질 때 모두 열린 상태로 출력 여부
+        showRowNumColumn : true,
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
-    popup_grid_groupBasicInformation = AUIGrid.create("#popup_grid_groupBasicInformation", columnLayout, gridPros);
-    requestGroupBasicInformationData();
-
-    /* 그리드 관련 함수 */
+    popup_grid_assetClassification = AUIGrid.create("#popup_grid_assetClassification", columnLayout, gridPros);
+    requestAssetClassificationData();
 }
-function requestGroupBasicInformationData(){
-    $.get("../resources/lib/aui-grid/data/admin-datas4.json", function (data) {
-        AUIGrid.setGridData(popup_grid_groupBasicInformation, data);
+
+function requestAssetClassificationData(){
+    $.get("../resources/lib/aui-grid/data/admin-tree.json", function (data) {
+        AUIGrid.setGridData(popup_grid_assetClassification, data);
     });
 }
-/* 사용자 그룹정보 추가 그리드 */
-let popup_grid_userGroup;
-function gridPopUserGroup(id,title,width,height){
-    /* 1. AUIGrid 칼럼 설정 */
-    let gridPop_user_column = [
-        {
-            dataField: "category_employeeID",
-            headerText: "사번",
-            width: 180
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 180
-        }, {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPop_user_pros = {
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 없이 현재 그리드 영역에 채우기 모드
-    }
-
-    /* 그리드 생성 */
-    popup_grid_userGroup = AUIGrid.create("#popup_grid_userGroup",  gridPop_user_column, gridPop_user_pros);
-}
-/* // 사용자 그룹정보 */
+/* //자산분류 팝업 */
 
 /* 정기교체 작업등록 팝업에서 정기교체 대상 그리드 */
 let popup_grid_replacementTarget;

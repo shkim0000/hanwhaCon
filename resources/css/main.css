@@ -144,6 +144,8 @@ footer .logos > img{width:314px;}
 .btn.primary.check::before{content:'\f00c';font-family:"Font Awesome 6 Free";font-weight:var(--bold);position:absolute;left:16px;top:51%;transform:translateY(-50%);}
 .btn.primary.mail{position:relative;padding-left:40px;}
 .btn.primary.mail::before{content:'\f0e0';font-family:"Font Awesome 6 Free";font-weight:700;position:absolute;left:16px;top:51%;transform:translateY(-50%);}
+[data-btn=hide]{display:none;}
+[data-btn=show]{display:flex;}
 
 /* input */
 .input-wrap{display:flex;align-items:center;justify-content:space-between;background-color: #efefef;border-radius:4px;padding:10px;gap:10px;margin-bottom:40px;}
@@ -358,6 +360,8 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* popup >  grid */
 .popup .input-wrap{margin-bottom:12px;}
 .popup .input-list{width:100%;}
+.popup .input-list.only .input-title{margin-right:20px;}
+.popup .input-list.only .input-title + *{width:calc(100% - 120px);}
 .popup .input-title{font-weight:var(--bold);min-width:60px;}
 .popup .input{width:calc(100% - 100px);height:30px;border-color:var(--line1);padding-right:10px;}
 .popup .input > input {font-size:14px;}
@@ -391,37 +395,45 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .popup .tab-box .tabs img{width:100%;object-fit:contain;}
 .popup .tab-box .tabs.on{display:flex;justify-content:center;align-items:center;}
 
-/* 관리자 자산조회 NetClient 정보 탭메뉴 */
-.popup .tab-box.ver1{border:none;}
-.tab-box.ver1{display:flex;flex-direction:column;align-items:flex-start;}
-.tab-box.ver1 .tab-wrap{width:100%;}
-.tab-box.ver1 .tab-wrap ul{width:100%;display:flex;justify-content:flex-start;border:none;}
-.tab-box.ver1 .tab-wrap ul li{border:1px solid #000;padding:0 20px;border-bottom:none;}
-.tab-box.ver1 .tabs{width:100%;height:672px;display:none;border:1px solid #000;overflow-y:auto;}
-.tab-box.ver1 .tabs.on{display:block;}
-
-.tab-box.ver1 .tabs-inner-wrap{padding:10px 20px;}
-.tab-box.ver1 .tabs .table-title{text-align:center;padding:10px;background-color:var(--color1);color:var(--color7);}
-
-.tab-box.ver1 .custom-table + .grid-box{margin-top:12px;}
-.tab-box.ver1 .custom-table .table{border:none;}
-.tab-box.ver1 .custom-table .table th{font-size:14px;font-weight:var(--bold);padding:10px 0;}
-.tab-box.ver1 .custom-table .table td{font-size:13px;padding:10px 0;text-align:center;border:none;border-right:1px solid var(--line1);}
-.tab-box.ver1 .custom-table .table thead tr th:first-child{width:258px;}
-.tab-box.ver1 .custom-table .table td:last-child{border-right:none;}
-.tab-box.ver1 .custom-table .table table.left tr td{text-align:left;padding-left:10px;}
-
 /* popup 모델정보 */
 .popup .tab-box{display:flex;align-items:center;border:1px solid #000;height:200px;overflow:hidden;}
 .popup .tab-box + .tab-box{border-top:none;}
 .popup .tab-title{min-width:140px;}
 .popup .tab-title h4{display:flex;justify-content:center;align-items:center;font-size:20px;}
-.popup .tab-wrap{min-width:140px;border: 1px solid #000;border-bottom:none;overflow-y:scroll;height:200px;}
+.popup .tab-wrap{min-width:140px;border: 1px solid #000;border-bottom:none;overflow-y:auto;height:200px;}
 .popup .tab-wrap ul li{border-bottom:1px solid #000;}
+.popup .tab-wrap ul li button{padding:10px;font-family:inherit;color:inherit;}
 .popup .tab-wrap ul li.on button{text-decoration:underline;}
-.popup .tab-wrap ul li button{padding:10px;}
 .popup .tab-wrap ul li:last-child{border-bottom:none;}
 .model-wrap{margin-top:24px;}
+
+/* 관리자 자산조회 NetClient 정보 탭메뉴 */
+.popup .tab-box.ver1{border:none;}
+.popup .tab-box.ver1{display:flex;flex-direction:column;align-items:flex-start;height:auto;}
+.popup .tab-box.ver1 .tab-wrap{width:100%;height:auto;border:0;}
+.popup .tab-box.ver1 .tab-wrap ul{width:100%;display:flex;justify-content:flex-start;border:none;}
+.popup .tab-box.ver1 .tab-wrap ul li{border:1px solid var(--line1);border-bottom:none;}
+.popup .tab-box.ver1 .tab-wrap ul li + li{border-left:0;}
+.popup .tab-box.ver1 .tab-wrap ul li:first-child{border-top-left-radius:4px;}
+.popup .tab-box.ver1 .tab-wrap ul li:last-child{border-top-right-radius:4px;}
+.popup .tab-box.ver1 .tab-wrap ul li button{padding-left:20px;padding-right:20px;}
+.popup .tab-box.ver1 .tabs{width:100%;height:672px;display:none;border:1px solid var(--line1);overflow-y:auto;}
+.popup .tab-box.ver1 .tabs.on{display:block;}
+
+.popup .tab-box.ver1 .tabs-inner-wrap{padding:10px 20px;}
+.popup .tab-box.ver1 .tabs .table-title{text-align:center;padding:10px;background-color:var(--color1);color:var(--color7);}
+
+.popup .tab-box.ver1 .custom-table + .grid-box{margin-top:12px;}
+.popup .tab-box.ver1 .custom-table .table{border:none;}
+.popup .tab-box.ver1 .custom-table .table th{font-size:14px;font-weight:var(--bold);padding:10px 0;}
+.popup .tab-box.ver1 .custom-table .table td{font-size:13px;padding:10px 0;text-align:center;border:none;border-right:1px solid var(--line1);}
+.popup .tab-box.ver1 .custom-table .table thead tr th:first-child{width:258px;}
+.popup .tab-box.ver1 .custom-table .table td:last-child{border-right:none;}
+.popup .tab-box.ver1 .custom-table .table table.left tr td{text-align:left;padding-left:10px;}
+
+/* 관리자 사용자 그룹정보 */
+.popup .tab-box.ver2{height:auto;}
+.tab-box.ver2{}
 
 /* assetCurrent */
 [class*=container]{transition:padding .2s;}
@@ -442,6 +454,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .title-box .title > *::before{content:'';width:4px;height:16px;background-color:var(--color1);position:absolute;left:0;top:50%;transform:translateY(-50%);}
 .btn-wrap{gap:8px;}
 .btn-wrap.form{justify-content:center;margin-top:38px;}
+.btn-wrap.only{margin-top:55px;}
 .btn-wrap.center{justify-content:center;margin-top:40px;}
 .btn-wrap.end{justify-content:flex-end;margin-bottom:10px;}
 .btn-wrap.end .file{width:auto;}
@@ -475,6 +488,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .table + .table,
 .table + .grid-box{margin-top:20px;}
 .custom-table + .text-box{margin-top:8px;}
+.page-indicator + .title-box,
 .custom-table + .custom-table,
 .input-wrap + .title-box {margin-top:24px;}
 

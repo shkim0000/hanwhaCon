@@ -355,7 +355,7 @@ $(function(){
         });
     });
 
-    /* popup model-list 클릭 */
+    /* popup model-list 클릭 (작업중) */
     $(".tab-wrap").each(function(){
         let length = $(this).find("li").length;
         for(let i = 0; i <= length; i++){
@@ -363,11 +363,21 @@ $(function(){
             $(this).parent().find(".tabs").eq(i).attr("data-tabs", "tab" + (i + 1));
         }
         $(this).find(".popBtn").on("click", function(){
+            let id = $(this).attr('id');
             let i = $(this).parent().attr("data-tab");
             $(this).closest(".tab-wrap").find("li").removeClass("on");
             $(this).parent().addClass("on");
             $(this).closest(".tab-box").find(".tabs").removeClass("on");
             $(this).closest(".tab-box").find("[data-tabs="+i+"]").addClass("on");
+/*            if(id === "groupBasicInformation"){
+                console.log("으아ㅡ아ㅡ아ㅡ아")
+                if ($("#" + id +"  .btn.trash").data('btn') === "hide"){
+                    alert("기본 그룹정보가 등록되면 등록 가능합니다.");
+
+                }
+            }else{
+
+            }*/
         });
     });
 });
@@ -431,23 +441,25 @@ function lp_open(id,title,width,height,e,type){
     } else if (id === "gridPop_serviceDesk_detail"){
         gridPopServiceDeskDetail(id,title,width,height);
         gridPopServiceDeskHistory(id,title,width,height);
-    } else if(id === "userGroup_pop"){
-        gridPopGroupBasicInformation(id,title,width,height);
+    }else if(id === "gridPop_selectUser"){
+        gridPopSelectUser();
+    }else if(id === "gridPop_assetClassification"){
+        gridPopAssetClassification();
     }
 }
 
-/* 탭 메뉴 클릭시 그리드 실행 */
-function tg_open(){
-
-}
 
 /* 팝업창 닫기 */
 function lp_close(target){
-    if(target)
-    {
+    if(target === "userGroup_pop"){
+        /* 사용자 그룹정보 */
+        AUIGrid.destroy('#popup_grid_groupBasicInformation');
+        $("#" + target +"  .btn.trash").attr("data-btn","hide");
         $("#"+target).dialog("close");
-    }
-    else
+
+    } else if(target){
+        $("#"+target).dialog("close");
+    } else
     {
         /*        const _this = $(obj);
                 const lp_id = _this.closest(".lp-wrap").attr("id");
