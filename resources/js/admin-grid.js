@@ -2076,3 +2076,60 @@ function gridPopUserGroup(id,title,width,height){
     popup_grid_userGroup = AUIGrid.create("#popup_grid_userGroup",  gridPop_user_column, gridPop_user_pros);
 }
 /* // 사용자 그룹정보 */
+
+/* 정기교체 작업등록 팝업에서 정기교체 대상 그리드 */
+let popup_grid_replacementTarget;
+function gridPopReplacementTarget(id,title,width,height) {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_change_item",
+            headerText: "변경항목",
+            width: 160
+        }, {
+            dataField: "category_change_before",
+            headerText: "변경 전",
+            width: 120,
+        }, {
+            dataField: "category_change_after",
+            headerText: "변경 후",
+            width:120
+        }, {
+            dataField: "category_change_time",
+            headerText: "변경시간",
+            width: 160
+        }, {
+            dataField: "category_change_person",
+            headerText: "변경자",
+            width: 150
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_replacementTarget = AUIGrid.create("#popup_grid_replacementTarget", columnLayout, gridPros);
+    requestReplacementTargetData();
+}
+
+function requestReplacementTargetData() {
+    $.get("../resources/lib/aui-grid/data/admin-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_replacementTarget, data);
+    });
+}
