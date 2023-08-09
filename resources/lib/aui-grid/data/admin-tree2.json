@@ -1,0 +1,82 @@
+[
+  {
+    "uid": "T0",
+    "id": "T0",
+    "name": "Proposal of Project",
+    "category_classification_name": "데스크탑",
+    "category_usage": "Y",
+    "category_note": "",
+    "category_enroll": "admin",
+    "category_date_written": "2023-06-11 14:42:53",
+    "children": [{
+      "uid": "T1",
+      "id": "T1",
+      "name": "Proposal of Project",
+      "category_classification_name": "H/W 장애",
+      "category_usage": "Y",
+      "category_note": "",
+      "category_enroll": "admin",
+      "category_date_written": "2023-06-11 14:42:53",
+      "children": [{
+        "uid": "T2",
+        "id": "T2",
+        "name": "Proposal of Project",
+        "category_classification_name": "본채 부품",
+        "category_usage": "Y",
+        "category_note": "",
+        "category_enroll": "admin",
+        "category_date_written": "2023-06-11 14:42:53"
+      }]
+    }]
+  },
+  {
+    "uid": "T3",
+    "id": "T3",
+    "name": "Proposal of Project",
+    "category_classification_name": "데스크탑",
+    "category_usage": "Y",
+    "category_note": "",
+    "category_enroll": "admin",
+    "category_date_written": "2023-06-11 14:42:53",
+    "children": [{
+      "uid": "T4",
+      "id": "T4",
+      "name": "Proposal of Project",
+      "category_classification_name": "데스크탑",
+      "category_usage": "Y",
+      "category_note": "",
+      "category_enroll": "admin",
+      "category_date_written": "2023-06-11 14:42:53"
+    }]
+  },
+  {
+    "uid": "T5",
+    "id": "T5",
+    "name": "Proposal of Project",
+    "category_classification_name": "데스크탑",
+    "category_usage": "Y",
+    "category_note": "",
+    "category_enroll": "admin",
+    "category_date_written": "2023-06-11 14:42:53",
+    "children": [{
+      "uid": "T6",
+      "id": "T6",
+      "name": "Proposal of Project",
+      "category_classification_name": "데스크탑",
+      "category_usage": "Y",
+      "category_note": "",
+      "category_enroll": "admin",
+      "category_date_written": "2023-06-11 14:42:53"
+    }]
+  },
+  {
+    "uid": "T7",
+    "id": "T7",
+    "name": "Proposal of Project",
+    "category_classification_name": "데스크탑",
+    "category_usage": "Y",
+    "category_note": "",
+    "category_enroll": "admin",
+    "category_date_written": "2023-06-11 14:42:53"
+  }
+]

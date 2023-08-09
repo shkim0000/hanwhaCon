@@ -488,6 +488,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .table + .table,
 .table + .grid-box{margin-top:20px;}
 .custom-table + .text-box{margin-top:8px;}
+.page-indicator + .list-box,
 .page-indicator + .title-box,
 .custom-table + .custom-table,
 .input-wrap + .title-box {margin-top:24px;}

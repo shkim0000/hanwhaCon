@@ -37,7 +37,7 @@
             <ul>
                 <li><i class="fa-solid fa-house"></i></li>
                 <li>기준정보</li>
-                <li>장애처리유형관리</li>
+                <li>서비스데스크 처리유형 관리</li>
             </ul>
         </div>
 
@@ -46,17 +46,19 @@
                 <button type="button" class="btn"> 등록</button>
             </div>
         </div>
-        <div id="disabilityManagement_ID" class="grid-box h-medium"></div>
+        <div id="serviceDeskManagement_ID" class="grid-box h-medium"></div>
+
     </div>
 </div>
 <!-- // contents -->
 <script type="text/javascript">
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let disabilityManagement_ID;
+    let serviceDeskManagement_ID;
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createDisabilityManagementGrid();
+
     requestDisabilityManagementData();
 
     /* 3. AUIGrid 그리드 옵션 */
@@ -134,21 +136,21 @@
         }
 
         /* 그리드 생성 */
-        disabilityManagement_ID = AUIGrid.create("#disabilityManagement_ID", columnLayout, gridPros);
+        serviceDeskManagement_ID = AUIGrid.create("#serviceDeskManagement_ID", columnLayout, gridPros);
     }
 
 
     /* 4. 데이터 불러오기 */
     function requestDisabilityManagementData() {
         $.get("../resources/lib/aui-grid/data/admin-tree2.json", function (data) {
-            AUIGrid.setGridData(disabilityManagement_ID, data);
+            AUIGrid.setGridData(serviceDeskManagement_ID, data);
         });
     }
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof disabilityManagement_ID !== "undefined"){
-            AUIGrid.resize(disabilityManagement_ID);
+        if (typeof serviceDeskManagement_ID !== "undefined"){
+            AUIGrid.resize(serviceDeskManagement_ID);
         }
     }
 
@@ -159,13 +161,13 @@
         if($(".contents").hasClass("active")){
             innerWidth = innerWidth + 260;
             setTimeout(function(){
-                AUIGrid.resize(disabilityManagement_ID, innerWidth);
+                AUIGrid.resize(serviceDeskManagement_ID, innerWidth);
             },20)
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
-                AUIGrid.resize(disabilityManagement_ID, innerWidth);
+                AUIGrid.resize(serviceDeskManagement_ID, innerWidth);
             },20)
         }
     });
@@ -175,7 +177,7 @@
         switch (event.contextIndex) {
             case 0:
                 /* 0. 분류추가 */
-                var selectedItems = AUIGrid.getSelectedItems(disabilityManagement_ID);
+                var selectedItems = AUIGrid.getSelectedItems(serviceDeskManagement_ID);
                 var selItem;
                 var parentItem;
                 var parentRowId;
@@ -184,7 +186,7 @@
                     selItem = selectedItems[0].item;
 
                     // 선택 행의 동급 레벨로 추가하기 위해 선택행의 부모 가져오기
-                    parentItem = AUIGrid.getParentItemByRowId(disabilityManagement_ID, selItem.uid);
+                    parentItem = AUIGrid.getParentItemByRowId(serviceDeskManagement_ID, selItem.uid);
                     parentRowId;
 
                     if (parentItem) {
@@ -212,11 +214,11 @@
                 newItem.category_enroll = "";
                 newItem.category_date_written = ""
 
-                AUIGrid.addTreeRow(disabilityManagement_ID, newItem, parentRowId, "last");
+                AUIGrid.addTreeRow(serviceDeskManagement_ID, newItem, parentRowId, "last");
                 break;
             case 1:
                 /* 1. 하위분류 추가 */
-                var selectedItems = AUIGrid.getSelectedItems(disabilityManagement_ID);
+                var selectedItems = AUIGrid.getSelectedItems(serviceDeskManagement_ID);
                 if (selectedItems.length <= 0)
                     return;
 
@@ -233,12 +235,12 @@
                 newItem.category_enroll = "";
                 newItem.category_date_written = ""
 
-                AUIGrid.addTreeRow(disabilityManagement_ID, newItem, parentRowId, "last");
+                AUIGrid.addTreeRow(serviceDeskManagement_ID, newItem, parentRowId, "last");
                 break;
 
             case 2:
                 /* 2. 분류 삭제 */
-                AUIGrid.removeRow(disabilityManagement_ID, "selectedIndex");
+                AUIGrid.removeRow(serviceDeskManagement_ID, "selectedIndex");
                 break;
         }
     };
