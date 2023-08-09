@@ -111,115 +111,115 @@
 </div>
 <!-- // 팝업 모음 -->
 <script type="text/javascript">
-/* AUIGrid */
-/* 1. AUIGrid 생성 후 반환 ID */
-let assetClassification_ID;
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    let assetClassification_ID;
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-createAssetClassificationGrid();
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+    createAssetClassificationGrid();
 
-requestAssetClassificationData();
+    requestAssetClassificationData();
 
-/* 3. AUIGrid 그리드 옵션 */
-function createAssetClassificationGrid() {
-    /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
-    let columnLayout = [
-        {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false,
-            filter: {
-                showIcon: true,
-            }
-        },
-        {
-            dataField: "category_classification_name",
-            headerText: "분류명",
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_num",
-            headerText: "순번",
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_isUsage",
-            headerText: "사용여부",
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_enroll",
-            headerText: "등록자",
-            filter: {
-                showIcon: true,
-            }
+    /* 3. AUIGrid 그리드 옵션 */
+    function createAssetClassificationGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false,
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_classification_name",
+                headerText: "분류명",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_num",
+                headerText: "순번",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_isUsage",
+                headerText: "사용여부",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_enroll",
+                headerText: "등록자",
+                filter: {
+                    showIcon: true,
+                }
 
-        }, {
-            dataField: "category_date",
-            headerText: "작성일자",
-            filter: {
-                showIcon: true,
-            }
-        }]
-    /* 2. 그리드 속성 설정 */
-    let gridPros = {
-        rowIdField: "id",
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode:true,
-        editable: true,
-        copyDisplayValue: false, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-        enableFilter: true, // 필터 true 설정
+            }, {
+                dataField: "category_date",
+                headerText: "작성일자",
+                filter: {
+                    showIcon: true,
+                }
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            fillColumnSizeMode:true,
+            editable: true,
+            copyDisplayValue: false, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+        }
+
+        /* 그리드 생성 */
+        assetClassification_ID = AUIGrid.create("#assetClassification_ID", columnLayout, gridPros);
     }
 
-    /* 그리드 생성 */
-    assetClassification_ID = AUIGrid.create("#assetClassification_ID", columnLayout, gridPros);
-}
 
+    /* 엑셀 Import */
 
-/* 엑셀 Import */
+    /* 4. 데이터 불러오기 */
+    function requestAssetClassificationData() {
+        $.get("../resources/lib/aui-grid/data/admin-datas8.json", function (data) {
+            AUIGrid.setGridData(assetClassification_ID, data);
+        });
+    }
 
-/* 4. 데이터 불러오기 */
-function requestAssetClassificationData() {
-    $.get("../resources/lib/aui-grid/data/admin-datas8.json", function (data) {
-        AUIGrid.setGridData(assetClassification_ID, data);
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof assetClassification_ID !== "undefined"){
+            AUIGrid.resize(assetClassification_ID);
+        }
+    }
+
+    /* 6. 함수 관련 모음 */
+    /* 메뉴버튼 클릭시(반응형) */
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(assetClassification_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(assetClassification_ID, innerWidth);
+            },20)
+        }
     });
-}
-
-/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
-window.onresize = function () {
-    if (typeof assetClassification_ID !== "undefined"){
-        AUIGrid.resize(assetClassification_ID);
-    }
-}
-
-/* 6. 함수 관련 모음 */
-/* 메뉴버튼 클릭시(반응형) */
-$(document).on("click",".menu-btn",function(){
-    let innerWidth = $(".contents").innerWidth() - 38;
-    if($(".contents").hasClass("active")){
-        innerWidth = innerWidth + 260;
-        setTimeout(function(){
-            AUIGrid.resize(assetClassification_ID, innerWidth);
-        },20)
-
-    } else{
-        innerWidth = innerWidth - 260;
-        setTimeout(function(){
-            AUIGrid.resize(assetClassification_ID, innerWidth);
-        },20)
-    }
-});
 </script>
 </body>
 </html>
