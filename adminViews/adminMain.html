@@ -1,0 +1,373 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 메인 화면</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- echarts  -->
+    <script src="../resources/lib/echarts/echarts.min.js"></script>
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
+</head>
+<body class="main-page">
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents admin">
+        <div class="dashboard-wrap">
+            <div class="ds-wrap">
+                <div class="ds-box column">
+                    <div class="title-box">
+                        <div class="title">
+                            <h3>자산신청현황</h3>
+                        </div>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn">상세보기</a>
+                        </div>
+                    </div>
+
+                    <div id="applicationGrid_ID" class="grid-box h-small4"></div>
+                </div>
+                <div class="ds-box">
+                    <div class="echarts-wrapper">
+                        <div id="assetStatus_echart" style="width:880px;height:280px;"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="ds-wrap">
+                <div class="ds-box column">
+                    <div class="title-box">
+                        <div class="title">
+                            <h3>서비스 지원 현황</h3>
+                        </div>
+                        <div class="btn-wrap">
+                            <a href="#" class="btn">상세보기</a>
+                        </div>
+                    </div>
+
+                    <div id="service_ID" class="grid-box h-small4"></div>
+                </div>
+                <div class="ds-box column">
+                    <div class="title-box">
+                        <div class="title">
+                            <h3>서비스 요청 요약</h3>
+                        </div>
+                    </div>
+                    <div class="ds-content-box">
+                        <ul class="quantity-list">
+                            <li>
+                                <button type="button">
+                                <span class="quantity">
+                                    <span class="num">0</span>
+                                    <span class="name">Total</span>
+                                </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button">
+                                <span class="quantity lightPink">
+                                    <span class="num">0</span>
+                                    <span class="name">신청</span>
+                                </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button">
+                                <span class="quantity yellow">
+                                    <span class="num">0</span>
+                                    <span class="name">처리중</span>
+                                </span>
+                                </button>
+                            </li>
+                            <li>
+                                <button type="button">
+                                <span class="quantity green">
+                                    <span class="num">0</span>
+                                    <span class="name">완료</span>
+                                </span>
+                                </button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        <div class="contact">
+            <ul>
+                <li>IT 자산관련 문의 : 555-XXXX</li>
+                <li>기타 자산관련 문의 : 555-XXXX</li>
+                <li>서비스데스크 : 555-XXXX</li>
+            </ul>
+        </div>
+        <div class="logos">
+            <img src="../resources/img/h_logo.png" alt="logo">
+        </div>
+    </footer>
+</div>
+
+<!-- // contents -->
+<script type="text/javascript">
+/* 1. echarts */
+/* 차트 그리기 */
+let assetStatus_echart = echarts.init(document.getElementById('assetStatus_echart'));
+
+/* 차트 옵션 */
+let option = {
+    title: {
+        text: '나의 IT 서비스'
+    },
+    tooltip: {},
+    legend: {
+        data: ['신청','처리중','완료']
+    },
+    xAxis: {
+        data: ['신규신청', '대여신청', '인수인계신청', '서비스요청']
+    },
+    yAxis: {},
+    series: [
+        {
+            name: '신청',
+            type: 'bar',
+            data: [5, 20, 36, 10, 10, 20]
+        }, {
+            name: '처리중',
+            type: 'bar',
+            data: [10, 10, 6, 30, 40, 12]
+        }, {
+            name: '완료',
+            type: 'bar',
+            data: [48, 12, 31, 10, 10, 20]
+        }
+    ]
+};
+assetStatus_echart.setOption(option);
+
+/* 차트 리사이즈 */
+window.addEventListener('resize', assetStatus_echart.resize);
+
+
+/* AUIGrid */
+/* 1. AUIGrid 생성 후 반환 ID */
+let applicationGrid_ID;
+let service_ID;
+
+/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+createApplicationGrid();
+requestApplicationStatusData();
+
+createServiceGrid();
+requestServiceData()
+
+/* 3. AUIGrid 그리드 옵션 */
+/* 신청정보 */
+function createApplicationGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        }, {
+            dataField: "category_application_num",
+            headerText: "신청번호",
+            width: 160,
+        }, {
+            dataField: "category_application_division",
+            headerText: "신청구분",
+            width: 180
+        }, {
+            dataField: "category_application_date",
+            headerText: "신청일자",
+            width: 280
+        }, {
+            dataField: "category_content",
+            headerText: "내용",
+            width: 160
+        }, {
+            dataField: "category_application_reason",
+            headerText: "신청사유",
+            width: 160
+        }, {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 160
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 160
+        }, {
+            dataField: "category_count",
+            headerText: "수량",
+            width: 160
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+            width: 160
+        }, {
+            dataField: "category_processing_date",
+            headerText: "처리일자",
+            width: 160
+        }, {
+            dataField: "category_final_arbiter",
+            headerText: "최종 결재자",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode: false,
+    }
+
+    /* 그리드 생성 */
+    applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+}
+
+function createServiceGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        }, {
+            dataField: "category_application_num",
+            headerText: "신청번호",
+            width: 160,
+        }, {
+            dataField: "category_application_division",
+            headerText: "신청구분",
+            width: 180
+        }, {
+            dataField: "category_application_date",
+            headerText: "신청일자",
+            width: 280
+        }, {
+            dataField: "category_content",
+            headerText: "내용",
+            width: 160
+        }, {
+            dataField: "category_application_reason",
+            headerText: "신청사유",
+            width: 160
+        }, {
+            dataField: "category_department",
+            headerText: "부서명",
+            width: 160
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 160
+        }, {
+            dataField: "category_count",
+            headerText: "수량",
+            width: 160
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+            width: 160
+        }, {
+            dataField: "category_processing_date",
+            headerText: "처리일자",
+            width: 160
+        }, {
+            dataField: "category_final_arbiter",
+            headerText: "최종 결재자",
+            width: 160
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        softRemoveRowMode: false,
+    }
+
+    /* 그리드 생성 */
+    service_ID = AUIGrid.create("#service_ID", columnLayout, gridPros);
+}
+
+/* 4. 데이터 불러오기 */
+function requestApplicationStatusData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+        AUIGrid.setGridData(applicationGrid_ID, data);
+    });
+}
+
+function requestServiceData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+        AUIGrid.setGridData(service_ID, data);
+    });
+}
+
+/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+window.onresize = function () {
+    if (typeof applicationGrid_ID !== "undefined") {
+        AUIGrid.resize(applicationGrid_ID);
+    }
+    if (typeof service_ID !== "undefined") {
+        AUIGrid.resize(service_ID);
+    }
+}
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let halfWidth = ($(".contents").innerWidth() - 140)/2;
+    console.log(halfWidth + "ㅇㅇㅇ")
+    if($(".contents").hasClass("active")){
+        halfWidth = halfWidth + 130;
+        setTimeout(function(){
+            assetStatus_echart.resize({width: halfWidth, height:280});
+            AUIGrid.resize(applicationGrid_ID, halfWidth + 20);
+        },20);
+
+    } else{
+        halfWidth = halfWidth - 130;
+        setTimeout(function(){
+            assetStatus_echart.resize({width: halfWidth, height:280});
+            AUIGrid.resize(applicationGrid_ID, halfWidth + 20);
+        },20)
+    }
+
+});
+</script>
+</body>
+</html>
