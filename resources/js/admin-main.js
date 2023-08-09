@@ -133,11 +133,23 @@ $(function(){
         }
     });
     /* datepicker */
-    $(".date.limit input").datepicker({
+    $(".date.limit.prev input").datepicker({
         changeMonth:true,
         changeYear:true,
         maxDate: "+1m",
         minDate: 0,
+        onSelect: function(date){
+            let prevDate = date
+            let cal = new Date(prevDate);
+            cal.setMonth(cal.getMonth() + 1);
+            let year = cal.getFullYear();
+            let month = cal.getMonth() + 1;
+            let day = cal.getDate();
+            let maxDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+            $(".date.limit.next input").datepicker('option','minDate', prevDate);
+            $(".date.limit.next input").datepicker('option','maxDate', maxDate);
+        }
     });
 
     $(".date input").datepicker({

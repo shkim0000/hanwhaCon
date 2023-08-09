@@ -907,7 +907,7 @@ let popup_grid_submitList; // 상신
 let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
 let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
 let popup_subGrid_approvalChange; // 상신 > 결재선변경
-let submitList1 = ["데스크탑", "모니터"];
+let submitList1 = ["결재", "협조결재","결재참조","병렬결재","병렬협조결재","참조","수신"];
 
 /* 클릭된 row에 대한 index 정보 */
 let rowNum;
@@ -958,6 +958,12 @@ function popupSubmitList(id,title,width,height){
                 type: "ButtonRenderer",
                 onClick: function (event) {
                     AUIGrid.removeRow(event.pid, event.rowIndex);
+                },
+                visibleFunction: function(item){
+                    if(item.category_submit_delete !== "결재선 삭제"){
+                        return false
+                    }
+                    return true
                 },
             }
         }
@@ -1041,19 +1047,25 @@ function subPopupSearchExecutives(id,title,width,height){
     requestSearchExecutivesData();
 
     // 셀클릭 이벤트 바인딩
-    AUIGrid.bind(popup_subGrid_searchExecutives, "cellClick",function(){
+    AUIGrid.bind(popup_subGrid_searchExecutives, "cellClick",function(event){
         /* 선택한 행들 얻기 */
-        let rows = AUIGrid.getSelectedRows(popup_subGrid_searchExecutives);
+        let rows = event.item;
+        let value = $("#submitSearch_pop").find("input[type='radio']:checked").siblings('span').text();
+        let changeItem = {...rows, category_kinds: value};
 
         if (rows.length <= 0) {
             alert('상단 그리드에서 체크된 행이 없습니다.');
             return;
         }
         // 얻은 행을 하단 그리드에 추가하기
-        AUIGrid.addRow( popup_subGrid_addExecutives, rows, "last");
+        if(value === ""){
+            alert("결재종류를 선택하세요")
+        } else {
+            AUIGrid.addRow( popup_subGrid_addExecutives, changeItem, "last");
 
-        // 선택한 상단 그리드 행들 삭제
-        AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
+            // 선택한 상단 그리드 행들 삭제
+            AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
+        }
     });
 }
 
@@ -2286,24 +2298,36 @@ function gridPopReplacementTarget(id,title,width,height) {
             visible : false
         },
         {
-            dataField: "category_change_item",
-            headerText: "변경항목",
+            dataField: "category_asset_num",
+            headerText: "자산번호",
             width: 160
         }, {
-            dataField: "category_change_before",
-            headerText: "변경 전",
+            dataField: "category_product_type",
+            headerText: "자산분류",
             width: 120,
         }, {
-            dataField: "category_change_after",
-            headerText: "변경 후",
+            dataField: "category_item",
+            headerText: "품목",
             width:120
         }, {
-            dataField: "category_change_time",
-            headerText: "변경시간",
+            dataField: "category_model",
+            headerText: "모델",
             width: 160
         }, {
-            dataField: "category_change_person",
-            headerText: "변경자",
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 150
+        }, {
+            dataField: "category_user_department",
+            headerText: "부서",
+            width: 150
+        }, {
+            dataField: "category_place",
+            headerText: "자산위치",
+            width: 150
+        }, {
+            dataField: "category_introduction_day",
+            headerText: "도입일",
             width: 150
         }]
     /* 2. 그리드 속성 설정 */
@@ -2327,7 +2351,7 @@ function gridPopReplacementTarget(id,title,width,height) {
 }
 
 function requestReplacementTargetData() {
-    $.get("../resources/lib/aui-grid/data/admin-datas2.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
         AUIGrid.setGridData(popup_grid_replacementTarget, data);
     });
 }

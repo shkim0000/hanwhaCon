@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>정기교체 진행상황</title>
+    <title>정기교체 대상현황</title>
 
     <!-- jQuery -->
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
@@ -37,42 +37,75 @@
             <ul>
                 <li><i class="fa-solid fa-house"></i></li>
                 <li>정기교체</li>
-                <li>정기교체 진행상황</li>
+                <li>정기교체 대상현황</li>
             </ul>
         </div>
         <div class="input-wrap a-end">
             <div class="input-lists">
                 <div class="input-list">
-                    <span class="input-title">제목</span>
+                    <span class="input-title">자산번호</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">물품종류</span>
                     <label class="select">
                         <select>
-                            <option value="">재물조사1</option>
-                            <option value="">재물조사2</option>
-                            <option value="">재물조사3</option>
-                            <option value="">재물조사4</option>
+                            <option value="">물품종류1</option>
+                            <option value="">물품종류2</option>
+                            <option value="">물품종류3</option>
+                            <option value="">물품종류4</option>
+                            <option value="">물품종류5</option>
                         </select>
                     </label>
                 </div>
-                <div class="input-list medium">
-                    <span class="input-title">기간</span>
-                    <div class="date-wrap">
-                        <label class="date">
-                            <input type="text">
-                        </label>
-                        <span>~</span>
-                        <label class="date">
-                            <input type="text">
-                        </label>
-                    </div>
-                </div>
                 <div class="input-list">
-                    <span class="input-title">조회구분</span>
+                    <span class="input-title">품목</span>
                     <label class="select">
                         <select>
-                            <option value="">선택</option>
-                            <option value="">진행중</option>
-                            <option value="">완료</option>
+                            <option value="">품목1</option>
+                            <option value="">품목2</option>
+                            <option value="">품목3</option>
+                            <option value="">품목4</option>
+                            <option value="">품목5</option>
                         </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">모델명</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">사용자</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">자산위치</span>
+                    <label class="select">
+                        <select>
+                            <option value="">행정동1</option>
+                            <option value="">행정동2</option>
+                            <option value="">행정동3</option>
+                            <option value="">행정동4</option>
+                            <option value="">행정동5</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">도입일</span>
+                    <label class="date">
+                        <input type="text">
                     </label>
                 </div>
             </div>
@@ -80,18 +113,23 @@
         </div>
 
         <div class="title-box">
-            <div class="title"><h3>정기교체</h3></div>
-        </div>
-        <div id="replacement_ID" class="grid-box h-small"></div>
-
-        <div class="title-box hide-ver">
-            <div class="title"><h3>정기교체 상세 내역</h3></div>
+            <div class="title"><h3>자산내역</h3></div>
             <div class="btn-wrap">
-                <button type="button" class="btn">정기교체 진행</button>
                 <button type="button" class="btn excel">엑셀다운로드</button>
+                <button type="button" class="btn" onclick="addRow()">선택</button>
             </div>
         </div>
-        <div id="replacementDetail_ID" class="grid-box h-small"></div>
+        <div id="assetList_ID" class="grid-box"></div>
+
+        <div class="title-box">
+            <div class="title"><h3>교체대상 내역</h3></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn excel">엑셀다운로드</button>
+                <button type="button" class="btn">정기교체 진행</button>
+                <button type="button" class="btn trash" onclick="deleteRow()">선택삭제</button>
+            </div>
+        </div>
+        <div id="replacementTargetList_ID" class="grid-box"></div>
     </div>
 </div>
 
@@ -172,6 +210,7 @@
     </div>
 </div>
 <!--//정기교체 작업 등록 팝업-->
+
 <!--수정 확인 팝업-->
 <div id="checkEdit" class="popup">
     <div class="pop-box">
@@ -327,7 +366,6 @@
 </div>
 <!--// 교체신청 -->
 
-
 <!--담당자 검색 팝업-->
 <div id="gridPop_manager" class="popup">
     <div class="pop-box">
@@ -364,21 +402,21 @@
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let replacement_ID;
-    let replacementDetail_ID;
+    let assetList_ID;
+    let replacementTargetList_ID;
 
     /* 1-2. dropdown menu 리스트 */
     let adjustmentList = ["선택","신규","반납","타부서변경","기타"];
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-    createReplacementGrid();
-    createReplacementDetailGrid();
+    createAssetListGrid();
+    createReplacementTargetListGrid();
 
-    requestReplacementData();
-    requestReplacementDetailData();
+    requestAssetListData();
+    requestReplacementTargetListData();
 
     /* 3. AUIGrid 그리드 옵션 */
-    function createReplacementGrid() {
+    function createAssetListGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -387,38 +425,68 @@
                 headerText: "아이디",
                 visible:false
             }, {
-                dataField: "category_replacement_title",
-                headerText: "정기교체 제목",
+                dataField: "category_asset_status",
+                headerText: "자산상태",
                 filter: {
                     showIcon: true,
                 },
             }, {
-                dataField: "category_application_period",
-                headerText: "신청기간",
+                dataField: "category_asset_num",
+                headerText: "자산번호",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_replacement_period",
-                headerText: "교체기간",
+                dataField: "category_product_type",
+                headerText: "물품종류",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_replacement_reason",
-                headerText: "정기교체 사유",
+                dataField: "category_product_name",
+                headerText: "품목",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_manager",
-                headerText: "관리자",
+                dataField: "category_model_name",
+                headerText: "모델",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_note",
-                headerText: "비고",
+                dataField: "category_introduction_date",
+                headerText: "도입일",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_user",
+                headerText: "사용자명",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_department",
+                headerText: "부서명",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_place",
+                headerText: "자산위치",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_place_detail",
+                headerText: "상세위치",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_application_date",
+                headerText: "설치일",
                 filter: {
                     showIcon: true,
                 }
@@ -426,7 +494,7 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
@@ -441,35 +509,14 @@
             enableFilter: true, // 필터 true 설정
             autoGridHeight:false,
             fillColumnSizeMode: true,
+            softRemoveRowMode: false,
         }
 
         /* 그리드 생성 */
-        replacement_ID = AUIGrid.create("#replacement_ID", columnLayout, gridPros);
+        assetList_ID = AUIGrid.create("#assetList_ID", columnLayout, gridPros);
 
-        /* 클릭시 팝업 상세 내역 그리드 호출 */
-        AUIGrid.bind(replacement_ID, "cellClick", function(event, item) {
-            console.log(event);
-            createReplacementDetailGrid();
-            requestReplacementDetailData();
-            AUIGrid.resize(replacementDetail_ID);
-            $(".title-box.hide-ver").addClass("open");
-            $(".btn-wrap.end.hide").addClass("open");
-        });
-
-        /* 더블클릭시 정기교체 작업등록 팝업 */
-        AUIGrid.bind(replacement_ID, "cellDoubleClick", function(event,item){
-            $("#gridPop_replacement").addClass("open").dialog({
-                title: "정기교체작업등록",
-                width: 1250,
-                height: 500,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopReplacementTarget();
-        })
     }
-    function createReplacementDetailGrid() {
+    function createReplacementTargetListGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -478,107 +525,68 @@
                 headerText: "아이디",
                 visible:false
             }, {
-                dataField: "category_application_option",
-                headerText: "신청구분",
-                width: 180,
+                dataField: "category_asset_status",
+                headerText: "자산상태",
                 filter: {
                     showIcon: true,
                 },
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
-                width: 180,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_item",
+                dataField: "category_product_type",
                 headerText: "물품종류",
-                width: 220,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_model",
+                dataField: "category_product_name",
+                headerText: "품목",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_model_name",
                 headerText: "모델",
-                width: 180,
                 filter: {
                     showIcon: true,
                 }
-            }, {
-                dataField: "category_application_model",
-                headerText: "신청모델",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_application_date",
-                headerText: "신청일",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_reason",
-                headerText: "사유",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                },
             }, {
                 dataField: "category_introduction_date",
                 headerText: "도입일",
-                width: 220,
                 filter: {
                     showIcon: true,
-                },
+                }
             }, {
                 dataField: "category_user",
-                headerText: "사용자",
-                width: 200,
+                headerText: "사용자명",
                 filter: {
                     showIcon: true,
                 }
             }, {
                 dataField: "category_department",
                 headerText: "부서명",
-                width: 220,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_applicant",
-                headerText: "신청자",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_place",
+                dataField: "category_place",
                 headerText: "자산위치",
-                width: 220,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_application_num",
-                headerText: "신청번호",
-                width: 220,
+                dataField: "category_place_detail",
+                headerText: "상세위치",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_return_num",
-                headerText: "반납번호",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_note",
-                headerText: "비고",
-                width: 220,
+                dataField: "category_application_date",
+                headerText: "설치일",
                 filter: {
                     showIcon: true,
                 }
@@ -601,65 +609,92 @@
             enableFilter: true, // 필터 true 설정
             autoGridHeight:false,
             fillColumnSizeMode: false,
+            softRemoveRowMode: false,
         }
 
         /* 그리드 생성 */
-        replacementDetail_ID = AUIGrid.create("#replacementDetail_ID", columnLayout, gridPros);
+        replacementTargetList_ID = AUIGrid.create("#replacementTargetList_ID", columnLayout, gridPros);
 
-        /* 더블 클릭시 팝업 */
-        AUIGrid.bind(replacementDetail_ID, "cellDoubleClick", function(event) {
-            let width = 1250;
-            let height = 590;
-            $("#changeEnroll_pop").dialog({
-                title: "교체신청_정기교체",
-                width: width,
-                height:height,
+        /* 더블클릭시 정기교체 작업등록 팝업 */
+        AUIGrid.bind(replacementTargetList_ID, "cellDoubleClick", function(event,item){
+            $("#gridPop_replacement").addClass("open").dialog({
+                title: "정기교체작업등록",료
+                width: 1250,
+                height: 500,
                 modal: true,
                 resizable: false,
                 dialogClass: 'no-close success-dialog'
             });
-            gridPopChangeEnrollDetail(width,height);
-            gridPopChangeEnrollHistory(width,height);
-        });
+            gridPopReplacementTarget();
+        })
     }
     /* 4. 데이터 불러오기 */
-    function requestReplacementData() {
-        $.get("../resources/lib/aui-grid/data/admin-datas8.json", function (data) {
-            AUIGrid.setGridData(replacement_ID, data);
+    function requestAssetListData() {
+        $.get("../resources/lib/aui-grid/data/admin-datas10.json", function (data) {
+            AUIGrid.setGridData(assetList_ID, data);
         });
     }
 
-    function requestReplacementDetailData() {
-        $.get("../resources/lib/aui-grid/data/admin-datas9.json", function (data) {
-            AUIGrid.setGridData(replacementDetail_ID, data);
+    function requestReplacementTargetListData() {
+        $.get("../resources/lib/aui-grid/data/admin-datas10.json", function (data) {
+            AUIGrid.setGridData(replacementTargetList_ID, data);
         });
     }
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof replacement_ID !== "undefined") {
-            AUIGrid.resize(replacement_ID);
-        } else if(typeof replacementDetail_ID !== "undefined"){
-            AUIGrid.resize(replacementDetail_ID);
+        if (typeof assetList_ID !== "undefined") {
+            AUIGrid.resize(assetList_ID);
+        } else if(typeof replacementTargetList_ID !== "undefined"){
+            AUIGrid.resize(replacementTargetList_ID);
         }
     }
 
     /* 6. 함수 관련 */
+    /* 선택 눌렀을 때 추가 */
+    let cnt2 = 0;
+    function addRow() {
+        let addingList = AUIGrid.getCheckedRowItems(assetList_ID);
+
+        if(addingList.length > 0){
+            AUIGrid.removeCheckedRows(assetList_ID); // 체크된 행 삭제 처리
+            addingList.forEach((i) => {
+                AUIGrid.addRow(replacementTargetList_ID, i.item, "last");
+            })
+        } else{
+            alert("체크된 항목이 없습니다")
+        }
+    };
+
+    /* 선택삭제 눌렀을때 */
+    function deleteRow(){
+        let deleteList = AUIGrid.getCheckedRowItems(replacementTargetList_ID);
+
+        if(deleteList.length > 0){
+            AUIGrid.removeCheckedRows(replacementTargetList_ID);
+            deleteList.forEach((i)=>{
+                AUIGrid.addRow(assetList_ID, i.item, "last");
+            })
+        } else {
+            alert("체크된 항목이 없습니다")
+        }
+    }
+
     /* 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
         let innerWidth = $(".contents").innerWidth() - 38;
         if($(".contents").hasClass("active")){
             innerWidth = innerWidth + 260;
             setTimeout(function(){
-                AUIGrid.resize(replacement_ID, innerWidth);
-                AUIGrid.resize(replacementDetail_ID, innerWidth);
+                AUIGrid.resize(assetList_ID, innerWidth);
+                AUIGrid.resize(replacementTargetList_ID, innerWidth);
             },20)
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
-                AUIGrid.resize(replacement_ID, innerWidth);
-                AUIGrid.resize(replacementDetail_ID, innerWidth);
+                AUIGrid.resize(assetList_ID, innerWidth);
+                AUIGrid.resize(replacementTargetList_ID, innerWidth);
             },20)
         }
     });

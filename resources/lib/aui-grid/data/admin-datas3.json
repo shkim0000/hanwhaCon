@@ -15,7 +15,8 @@
     "category_user_department":"기획부",
     "category_place":"3층 309호",
     "category_non_return_reason":"대여 반납일 만기",
-    "category_status": "상신"
+    "category_status": "상신",
+    "category_introduction_day": "2018-05-02"
   },
   {
     "id" : "#grid_id_2",
@@ -33,7 +34,8 @@
     "category_user_department":"기획부",
     "category_place":"4층 401호",
     "category_non_return_reason":"퇴사자",
-    "category_status": "상신완료"
+    "category_status": "상신완료",
+    "category_introduction_day": "2017-10-24"
   },
   {
     "id" : "#grid_id_3",
@@ -51,6 +53,7 @@
     "category_user_department":"총무부",
     "category_place":"2층 201호",
     "category_non_return_reason":"개인사유",
-    "category_status": "완료"
+    "category_status": "완료",
+    "category_introduction_day": "2020-11-02"
   }
 ]

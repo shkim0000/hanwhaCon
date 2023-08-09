@@ -654,7 +654,8 @@
     let popup_subGrid_searchExecutives; // 상신 > 검색한 임직원
     let popup_subGrid_addExecutives; // 상신 > 결재라인에 추가할 임직원
     let popup_subGrid_approvalChange; // 상신 > 결재선변경
-    let submitList1 = ["데스크탑", "모니터"];
+    let submitList1 = ["결재", "협조결재","결재참조","병렬결재","병렬협조결재","참조","수신"];
+    //
 
     /* 클릭된 row에 대한 index 정보 */
     let rowNum;
@@ -705,6 +706,12 @@
                     type: "ButtonRenderer",
                     onClick: function (event) {
                         AUIGrid.removeRow(event.pid, event.rowIndex);
+                    },
+                    visibleFunction: function(item){
+                        if(item.category_submit_delete !== "결재선 삭제"){
+                            return false
+                        }
+                        return true
                     },
                 }
             }
@@ -788,19 +795,25 @@
         requestSearchExecutivesData();
 
         // 셀클릭 이벤트 바인딩
-        AUIGrid.bind(popup_subGrid_searchExecutives, "cellClick",function(){
+        AUIGrid.bind(popup_subGrid_searchExecutives, "cellClick",function(event){
             /* 선택한 행들 얻기 */
-            let rows = AUIGrid.getSelectedRows(popup_subGrid_searchExecutives);
+            let rows = event.item;
+            let value = $("#submitSearch_pop").find("input[type='radio']:checked").siblings('span').text();
+            let changeItem = {...rows, category_kinds: value};
 
             if (rows.length <= 0) {
                 alert('상단 그리드에서 체크된 행이 없습니다.');
                 return;
             }
             // 얻은 행을 하단 그리드에 추가하기
-            AUIGrid.addRow( popup_subGrid_addExecutives, rows, "last");
+            if(value === ""){
+                alert("결재종류를 선택하세요")
+            } else {
+                AUIGrid.addRow( popup_subGrid_addExecutives, changeItem, "last");
 
-            // 선택한 상단 그리드 행들 삭제
-            AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
+                // 선택한 상단 그리드 행들 삭제
+                AUIGrid.removeRow(popup_subGrid_searchExecutives, "selectedIndex");
+            }
         });
     }
 
@@ -1006,7 +1019,7 @@
         resultRows.forEach((i) => {
             let item = new Object();
             item.id = "grid_ID_1" + (++cnt),
-                item.category_submit = '결재',
+                item.category_submit = i.category_kinds,
                 item.category_submit_person = i.category_department,
                 item.category_submit_change = '결재선변경',
                 item.category_submit_delete = '결재선 삭제',

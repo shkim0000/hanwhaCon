@@ -1,0 +1,44 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_asset_status":"운영",
+    "category_asset_num":"2234580-1",
+    "category_product_type":"데스크탑",
+    "category_product_name":"표준PC",
+    "category_model_name":"DESK_SS_I7M31",
+    "category_introduction_date":"2018-05-02",
+    "category_user":"김정규",
+    "category_department":"채무부",
+    "category_place":"행정동",
+    "category_place_detail":"3층 309호",
+    "category_application_date":"2018-05-06"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_asset_status":"운영",
+    "category_asset_num":"2234580-1",
+    "category_product_type":"데스크탑",
+    "category_product_name":"표준PC",
+    "category_model_name":"DESK_SS_I7M31",
+    "category_introduction_date":"2018-05-02",
+    "category_user":"김종민",
+    "category_department":"생산부",
+    "category_place":"공장1",
+    "category_place_detail":"109호",
+    "category_application_date":"2018-05-06"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_asset_status":"운영",
+    "category_asset_num":"2234580-1",
+    "category_product_type":"노트북",
+    "category_product_name":"표준노트북",
+    "category_model_name":"LG-EIFJWP",
+    "category_introduction_date":"2018-05-02",
+    "category_user":"김민정",
+    "category_department":"생산1팀",
+    "category_place":"공장1",
+    "category_place_detail":"202호",
+    "category_application_date":"2018-05-06"
+  }
+]

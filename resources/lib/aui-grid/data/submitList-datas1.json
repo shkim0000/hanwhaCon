@@ -4,20 +4,20 @@
     "category_submit" : "결재",
     "category_submit_person":"이기선 / 팀장 / IT기획팀",
     "category_submit_change":"결재선변경",
-    "category_submit_delete":"결재선 삭제"
+    "category_submit_delete":""
   },
   {
     "id" : "#grid_id_2",
     "category_submit" : "협조결재",
     "category_submit_person":"이기선 / 팀장 / IT기획팀",
     "category_submit_change":"결재선변경",
-    "category_submit_delete":"결재선 삭제"
+    "category_submit_delete":""
   },
   {
     "id" : "#grid_id_3",
     "category_submit" : "수신",
     "category_submit_person":"이기선 / 팀장 / IT기획팀",
     "category_submit_change":"결재선변경",
-    "category_submit_delete":"결재선 삭제"
+    "category_submit_delete":""
   }
 ]
