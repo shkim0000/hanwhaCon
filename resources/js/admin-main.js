@@ -109,8 +109,14 @@ $(function(){
                         "<button type='button' class='btn'>기준정보</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'></a></li>\n"+
-                                "<li><a href='#' class='linkBtn'></a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>사용자정보</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>사용자그룹 권한관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산분류관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산품목관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>장애처리유형관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>서비스데스크 처리유형 관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산위치</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>모델정보</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
