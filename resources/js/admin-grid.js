@@ -1271,7 +1271,7 @@ function addingResult(){
     resultRows.forEach((i) => {
         let item = new Object();
         item.id = "grid_ID_1" + (++cnt),
-            item.category_submit = '결재',
+            item.category_submit = i.category_kinds,
             item.category_submit_person = i.category_department,
             item.category_submit_change = '결재선변경',
             item.category_submit_delete = '결재선 삭제',
