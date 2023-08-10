@@ -959,7 +959,7 @@ function popupSubmitList(id,title,width,height){
                 onClick: function (event) {
                     AUIGrid.removeRow(event.pid, event.rowIndex);
                 },
-                visibleFunction: function(item){
+                visibleFunction: function(rowIndex, columnIndex, value, item, dataField){
                     if(item.category_submit_delete !== "결재선 삭제"){
                         return false
                     }

@@ -237,41 +237,41 @@ $(function(){
     $(".btn.add-column").on("click",function(){
         $(this).closest(".title-box").next(".table").find("tbody").append(
             "<tr>\n"+
-            "<td>\n"+
-            "<div class='td-wrap center'>\n"+
-            "<label class='check no-text'>\n"+
-            "<input type='checkbox'>\n"+
-            "<span></span>\n"+
-            "</label>\n"+
-            "</div>\n"+
-            "</td>\n"+
-            "<td>\n"+
-            "<div class='td-wrap'>\n"+
-            "<label class='select whole'>\n"+
-            "<select>\n"+
-            "<option value=''>데스트탑1</option>\n"+
-            "<option value=''>데스크탑2</option>\n"+
-            "</select>\n"+
-            "</label>\n"+
-            "</div>\n"+
-            "</td>\n"+
-            "<td>\n"+
-            "<div class='td-wrap'>\n"+
-            "<label class='select whole'>\n"+
-            "<select>\n"+
-            "<option value=''>데스트탑 모델1</option>\n"+
-            "<option value=''>데스크탑 모델2</option>\n"+
-            "</select>\n"+
-            "</label>\n"+
-            "</div>\n"+
-            "</td>\n"+
-            "<td>\n"+
-            "<div class='td-wrap'>\n"+
-            "<label class='input whole'>\n"+
-            "<input type='number'>\n"+
-            "</label>\n"+
-            "</div>\n"+
-            "</td>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap center'>\n"+
+                        "<label class='check no-text'>\n"+
+                            "<input type='checkbox'>\n"+
+                            "<span></span>\n"+
+                        "</label>\n"+
+                    "</div>\n"+
+                "</td>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap'>\n"+
+                        "<label class='select whole'>\n"+
+                            "<select>\n"+
+                                "<option value=''>데스트탑1</option>\n"+
+                                "<option value=''>데스크탑2</option>\n"+
+                            "</select>\n"+
+                        "</label>\n"+
+                    "</div>\n"+
+                "</td>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap'>\n"+
+                        "<label class='select whole'>\n"+
+                            "<select>\n"+
+                                "<option value=''>데스트탑 모델1</option>\n"+
+                                "<option value=''>데스크탑 모델2</option>\n"+
+                            "</select>\n"+
+                        "</label>\n"+
+                    "</div>\n"+
+                "</td>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap'>\n"+
+                        "<label class='input whole'>\n"+
+                            "<input type='number'>\n"+
+                        "</label>\n"+
+                    "</div>\n"+
+                "</td>\n"+
             "</tr>\n"
         );
     });
@@ -280,25 +280,25 @@ $(function(){
     $(".btn.add-file").on("click",function(){
         $(this).closest(".title-box").next(".table").find("tbody").append(
             "<tr>\n"+
-            "<td>\n"+
-            "<div class='td-wrap center'>\n" +
-            "<label class='check no-text'>\n"+
-            "<input type='checkbox'>\n"+
-            "<span></span>\n"+
-            "</label>\n"+
-            "</div>\n"+
-            "</td>\n"+
-            "<td>\n"+
-            "<div class='td-wrap'>\n"+
-            "<div class='file-box long'>\n"+
-            "<label class='file'>\n" +
-            "<input type='file' class='fileUpload'>\n"+
-            "<span class='btn'>파일선택</span>\n"+
-            "</label>\n"+
-            "<span></span>\n"+
-            "</div>\n"+
-            "</div>\n"+
-            "</td>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap center'>\n" +
+                        "<label class='check no-text'>\n"+
+                            "<input type='checkbox'>\n"+
+                            "<span></span>\n"+
+                        "</label>\n"+
+                    "</div>\n"+
+                "</td>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap'>\n"+
+                        "<div class='file-box long'>\n"+
+                            "<label class='file'>\n" +
+                                "<input type='file' class='fileUpload'>\n"+
+                                "<span class='btn'>파일선택</span>\n"+
+                            "</label>\n"+
+                            "<span></span>\n"+
+                        "</div>\n"+
+                    "</div>\n"+
+                "</td>\n"+
             "</tr>\n"
         );
     });
