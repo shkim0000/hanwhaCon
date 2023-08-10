@@ -63,7 +63,7 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .sidebar .depth .btn{font-size:16px;}
 
 /* main (사용자) */
-.preview-list{display:flex;width:100%;padding-top:30px;}
+.preview-list{display:flex;width:100%;padding:15px 0;background-color:white;border-radius:20px;}
 .preview-list .preview-card{width:calc(100% / 3); border-right:1px solid var(--line1);padding:20px 50px 20px 80px;}
 .preview-list .preview-card:last-child{border-right: none;}
 .preview-list .preview-card .card-title{font-size:20px; font-weight:bold;}
