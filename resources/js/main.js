@@ -225,7 +225,7 @@ $(function(){
     });
 
     /* 첨부파일 */
-    $(".btn.add-file").on("click",function(){
+/*    $(".btn.add-file").on("click",function(){
         let fileName;
        $(this).prev().queue(function(){
            $(this).change(function(){
@@ -258,7 +258,36 @@ $(function(){
        }).dequeue(function(){
            fileName = "";
        });
+    });*/
+
+    /* 첨부파일 */
+    $(".btn.add-file").on("click",function(){
+        $(this).closest(".title-box").next(".table").find("tbody").append(
+            "<tr>\n"+
+            "<td>\n"+
+            "<div class='td-wrap center'>\n" +
+            "<label class='check no-text'>\n"+
+            "<input type='checkbox'>\n"+
+            "<span></span>\n"+
+            "</label>\n"+
+            "</div>\n"+
+            "</td>\n"+
+            "<td>\n"+
+            "<div class='td-wrap'>\n"+
+            "<div class='file-box long'>\n"+
+            "<label class='file'>\n" +
+            "<input type='file' class='fileUpload'>\n"+
+            "<span class='btn'>파일선택</span>\n"+
+            "</label>\n"+
+            "<span></span>\n"+
+            "</div>\n"+
+            "</div>\n"+
+            "</td>\n"+
+            "</tr>\n"
+        );
     });
+
+
 
     /* 테이블 내 첨부파일 */
     $(document).on("click",".file-box .btn",function(){
