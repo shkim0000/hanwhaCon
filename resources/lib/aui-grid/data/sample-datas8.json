@@ -16,7 +16,8 @@
     "category_item_count" : 10,
     "category_status": "상신중",
     "category_processing_date": "2023-06-11 14:32:56",
-    "category_final_arbiter": "박선욱"
+    "category_final_arbiter": "박선욱",
+    "category_usage": "교대"
   },
   {
     "id": "#grid_id_2",
@@ -35,7 +36,8 @@
     "category_item_count" : 10,
     "category_status": "상신중",
     "category_processing_date": "2023-06-11 14:32:56",
-    "category_final_arbiter": "박선욱"
+    "category_final_arbiter": "박선욱",
+    "category_usage": "공용"
   },
   {
     "id": "#grid_id_3",
@@ -54,6 +56,7 @@
     "category_item_count" : 10,
     "category_status": "상신중",
     "category_processing_date": "2023-06-11 14:32:56",
-    "category_final_arbiter": "박선욱"
+    "category_final_arbiter": "박선욱",
+    "category_usage": "개인"
   }
 ]

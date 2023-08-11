@@ -62,8 +62,8 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                <!--<div class="th"><div class="th-wrap center">신청자</div></div>
+                <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>-->
                 <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">사용장소</div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">사용장소</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="select whole">
@@ -109,7 +109,7 @@
                 <div class="th"><div class="th-wrap center"><p>설치 요청일</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="date">
+                        <label class="date single">
                             <input type="text">
                         </label>
                     </div>
@@ -443,7 +443,7 @@
                             </label>
                             <label class="check">
                                 <input type="radio" name="a">
-                                <span>결재참조</span>
+                                <span>병렬결재</span>
                             </label>
                             <label class="check">
                                 <input type="radio" name="a">
@@ -540,6 +540,7 @@ let enrollGrid_ID;
 /* 1-2. dropdown menu 리스트 */
 let groupList1 = ["데스크탑", "모니터", "노트북", "프린터"];
 let groupList2 = [["데스크탑1", "데스크탑2", "데스크탑3"], ["모니터1", "모니터2", "모니터3"], ["노트북1", "노트북2", "노트북3"], ["프린터1", "프린터2", "프린터3"]];
+let groupList3 = ["개인","공용","교대"];
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createEnrollGrid();
@@ -560,7 +561,7 @@ function createEnrollGrid() {
         {
             dataField: "category_product",
             headerText: "자산분류",
-
+            headerStyle: "aui-grid-important-header",
             renderer: {
                 type: "DropDownListRenderer",
                 descendants: ["category_item"],
@@ -573,6 +574,7 @@ function createEnrollGrid() {
         }, {
             dataField: "category_item",
             headerText: "품목",
+            headerStyle: "aui-grid-important-header",
             renderer: {
                 type: "DropDownListRenderer",
                 list: groupList2,
@@ -588,8 +590,20 @@ function createEnrollGrid() {
                 showIcon: true,
             }
         }, {
+            dataField: "category_usage",
+            headerText: "용도",
+            headerStyle: "aui-grid-important-header",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList3,
+            },
+            filter: {
+                showIcon: true,
+            }
+        },{
             dataField: "category_amount",
             headerText: "신청수량",
+            headerStyle: "aui-grid-important-header",
             renderer: {
                 type: "NumberStepRenderer",
                 min: 0,

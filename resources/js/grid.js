@@ -45,6 +45,7 @@
                 userName = event.item.category_user_name;
                 userDepartment = event.item.category_department;
 
+                $(".list-box .title-box .list-title span").text(userName);
                 $("input[data-label='user']").val(userName);
                 $("input[data-label='department']").val(userDepartment);
 

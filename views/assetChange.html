@@ -60,18 +60,18 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청자</div></div>
+                <!--<div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" value="홍길동" readonly>
                         </label>
                     </div>
-                </div>
+                </div>-->
                 <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search"  data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                        <label class="input search"  data-place="user_search" onclick="lp_open('resetAlert','',520,190);">
                             <input type="text" data-label="user" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
@@ -80,7 +80,7 @@
                 <div class="th"><div class="th-wrap center">사용자 부서</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search"  data-isActive="readonly">
+                        <label class="input search">
                             <input type="text" data-label="department" readonly>
                         </label>
                     </div>
@@ -113,7 +113,7 @@
                 <div class="th"><div class="th-wrap center"><p class="important">설치 요청일</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="date">
+                        <label class="date single">
                             <input type="text">
                         </label>
                     </div>
@@ -134,7 +134,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="th"><div class="th-wrap center"><p class="important">신청내용</p></div></div>
+                <div class="th"><div class="th-wrap center"><p class="important">신청사유</p></div></div>
                 <div class="td medium">
                     <div class="td-wrap">
                         <label class="input">
@@ -172,7 +172,7 @@
                     <button type="button">
                         <span class="quantity purple">
                             <span class="num">2</span>
-                            <span class="name">모니터</span>
+                            <span class="name">노트북</span>
                         </span>
                     </button>
                 </li>
@@ -180,7 +180,7 @@
                     <button type="button">
                         <span class="quantity lightOrange">
                             <span class="num">1</span>
-                            <span class="name">공용</span>
+                            <span class="name">프린터</span>
                         </span>
                     </button>
                 </li>
@@ -212,6 +212,7 @@
         </div>
 
         <div class="btn-wrap">
+            <button type="button" class="btn" onclick="lp_open('resetAlert','',520,190)">초기화alert</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn model" onclick="lp_open('model_pop','모델 검색',540,766);">모델 정보</button>
         </div>
@@ -226,6 +227,20 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+
+<!--사용자 검색 시 알림 팝업 -->
+<div id="resetAlert" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <p class="center">사용자 변경 시 입력정보는 초기화됩니다.<br>진행하시겠습니까?</p>
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530,$('.input.search')); lp_close('resetAlert')">확인</button>
+                <button type="button" class="btn" onclick="lp_close('resetAlert')">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 사용자 검색 -->
 <div id="gridPop_user" class="popup">
     <div class="pop-box">
@@ -488,7 +503,7 @@
                             </label>
                             <label class="check">
                                 <input type="radio" name="a">
-                                <span>결재참조</span>
+                                <span>병렬결재</span>
                             </label>
                             <label class="check">
                                 <input type="radio" name="a">
@@ -829,6 +844,19 @@ function createEnrollAssetGrid() {
                     clickItem = AUIGrid.getSelectedRows(applicationGrid_ID)[0];
                     AUIGrid.removeRow(applicationGrid_ID, "selectedIndex");
                     AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
+
+                    /* 삭제버튼을 눌렀을 때 보유자산 숫자 +1 */
+                    let haveName = clickItem.category_product_name;
+                    $(".quantity-list li").each(function(){
+                        if($(this).find(".name").text() === haveName){
+                            let num = parseInt($(this).find(".num").text());
+                            $(this).find(".num").text(num + 1);
+                        }
+                        if($(this).find(".name").text() === "총수량"){
+                            let num = parseInt($(this).find(".num").text());
+                            $(this).find(".num").text(num + 1);
+                        }
+                    })
                 },
                 width:100,
 
@@ -889,6 +917,20 @@ function deleteRowGrid(){
 $(".popBtn").on("dblclick", function(){
     let itemName = $(this).text();
     let productName = $(this).closest(".tab-box").find(".tab-title").children("h4").text();
+    let haveName = clickItem.category_product_name;
+
+    /* 보유자산의 숫자도 줄어들게 */
+    $(".quantity-list li").each(function(){
+        if($(this).find(".name").text() === haveName){
+            let num = parseInt($(this).find(".num").text());
+            $(this).find(".num").text(num - 1);
+        }
+        if($(this).find(".name").text() === "총수량"){
+            let num = parseInt($(this).find(".num").text());
+            $(this).find(".num").text(num - 1);
+        }
+    })
+
 
     let insertObj = {
         ...clickItem,
