@@ -240,13 +240,13 @@
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createUserStatusGrid(); // 사용자별 현황
     createAssetStatusGrid(); // 자산별 현황
-    createDueDiglienceGrid();
 
     requestUserStatusGridData();
     requestAssetStatusGridData();
-    requestDueDiglienceGridData();
+
 
     /* 3. AUIGrid 그리드 옵션 */
+    let count = 0;
     /* [현황] : 자산별 현황 */
     function createAssetStatusGrid() {
         /* 1. AUIGrid 칼럼 설정 */
@@ -368,21 +368,44 @@
 
         AUIGrid.clearFilterAll(userStatusGrid_ID);
         AUIGrid.bind(assetStatusGrid_ID, "selectionChange", function(event) {
-            let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
-            let primeCell = event.primeCell;
-            let headerText = primeCell.headerText;
-            let dataField = primeCell.dataField;
-            let cellText = primeCell.item.category_product_name;
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
 
-            AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
-            name.forEach((i) => {
-                if(i.category_user_name === headerText && dataField !== "category_row_sum"){
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", headerText);
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText);
-                }else{
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText)
-                }
-            });
+                setTimeout(function(){
+                    let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                    let primeCell = event.primeCell;
+                    let headerText = primeCell.headerText;
+                    let dataField = primeCell.dataField;
+                    let cellText = primeCell.item.category_product_name;
+
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    name.forEach((i) => {
+                        if(i.category_user_name === headerText && dataField !== "category_row_sum"){
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", headerText);
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText);
+                        }else{
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText)
+                        }
+                    });
+                },20);
+            } else{
+                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                let primeCell = event.primeCell;
+                let headerText = primeCell.headerText;
+                let dataField = primeCell.dataField;
+                let cellText = primeCell.item.category_product_name;
+
+                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                name.forEach((i) => {
+                    if(i.category_user_name === headerText && dataField !== "category_row_sum"){
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", headerText);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText);
+                    }else{
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText)
+                    }
+                });
+            }
         });
 
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
@@ -512,24 +535,48 @@
         AUIGrid.setFooter(userStatusGrid_ID, footerLayout);
 
         AUIGrid.bind(userStatusGrid_ID, "selectionChange", function(event) {
-            let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
-            let primeCell = event.primeCell;
-            let headerText = primeCell.headerText;
-            let dataField = primeCell.dataField;
-            let cellText = primeCell.item.category_user_name;
-            console.log(headerText)
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
+                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                let primeCell = event.primeCell;
+                let headerText = primeCell.headerText;
+                let dataField = primeCell.dataField;
+                let cellText = primeCell.item.category_user_name;
+                console.log(headerText)
 
-            AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
 
-            name.forEach((i) => {
-                if(i.category_product_name === headerText && dataField !== "category_row_sum"){
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
-                    console.log("아니야")
-                }else{
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                }
-            });
+                name.forEach((i) => {
+                    if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
+                        console.log("아니야")
+                    }else{
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                    }
+                });
+            }else{
+                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                let primeCell = event.primeCell;
+                let headerText = primeCell.headerText;
+                let dataField = primeCell.dataField;
+                let cellText = primeCell.item.category_user_name;
+                console.log(headerText)
+
+                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+
+                name.forEach((i) => {
+                    if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
+                        console.log("아니야")
+                    }else{
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                    }
+                });
+            }
+
         });
 
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
@@ -653,7 +700,7 @@
 
         /* 그리드 생성 */
         dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-
+        requestDueDiglienceGridData();
     }
 
     /* 4. 데이터 불러오기 */
