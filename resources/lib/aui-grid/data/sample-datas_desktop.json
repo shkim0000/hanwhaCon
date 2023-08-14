@@ -1,0 +1,34 @@
+[
+  {
+    "category_user_name": "김종민",
+    "category_product_desktop_num" : 7,
+    "category_product_laptop_num" : 2,
+    "category_product_monitor_num" : 7,
+    "category_product_printer_num": 4,
+    "_isMySum": true
+  },
+  {
+    "category_user_name": "임꺽정",
+    "category_product_desktop_num" : 3,
+    "category_product_laptop_num" : 9,
+    "category_product_monitor_num" : 1,
+    "category_product_printer_num": 5,
+    "_isMySum": true
+  },
+  {
+    "category_user_name": "홍길동",
+    "category_product_desktop_num" : 3,
+    "category_product_laptop_num" : 8,
+    "category_product_monitor_num" : 6,
+    "category_product_printer_num": 1,
+    "_isMySum": true
+  },
+  {
+    "category_user_name": "김두한",
+    "category_product_desktop_num" : 2,
+    "category_product_laptop_num" : 12,
+    "category_product_monitor_num" : 5,
+    "category_product_printer_num": 7,
+    "_isMySum": true
+  }
+]

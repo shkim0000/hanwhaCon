@@ -401,7 +401,7 @@ function lp_open(id,title,width,height,e){
         gridPopRentalExtensionEnrollDetail(id,title,width,height);
         gridPopRentalExtensionEnrollHistory(id,title,width,height);
     } else if (id === "gridPop_rental_info"){
-        popupChangeAssetInfo(id,title,width,height);
+        // popupChangeAssetInfo(id,title,width,height);
     } else if (id==="submit_pop"){
         popupSubmitList(id,title,width,height);
     } else if (id === "submitSearch_pop"){
@@ -416,6 +416,8 @@ function lp_open(id,title,width,height,e){
         gridPopDisabledHistory();
     } else if ( id==="gridPop_serviceDesk_detail"){
         gridPopServiceDeskHistory();
+    }else if(id === "gridPop_assetDetail"){
+        gridPopAssetDetail();
     }
 }
 /* 팝업창 닫기 */

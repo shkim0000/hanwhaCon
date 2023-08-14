@@ -1361,3 +1361,103 @@ function searchClickAssetNum() {
     }
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
 
+
+/* [추가] 자산정보 */
+let popup_grid_assetDetail;
+function gridPopAssetDetail(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_due_diligence_title",
+            headerText: "실사제목",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 120,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width:120,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_charge_person",
+            headerText: "모델",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+            width: 150,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_user_department",
+            headerText: "부서",
+            width: 150,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_investigate_date",
+            headerText: "조사일",
+            width: 150,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_note",
+            headerText: "비고",
+            width: 150,
+            filter: {
+                showIcon: true,
+            }
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+    }
+
+    /* 그리드 생성 */
+    popup_grid_assetDetail = AUIGrid.create("#popup_grid_assetDetail", columnLayout, gridPros);
+    requestAssetDetailData();
+}
+
+function requestAssetDetailData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas25.json", function (data) {
+        AUIGrid.setGridData(popup_grid_assetDetail, data);
+    });
+}
+/* // 자산정보 */
