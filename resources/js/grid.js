@@ -216,32 +216,40 @@
         /* 1. AUIGrid 칼럼 설정 */
         let gridPop_changeEnroll_history_column = [
             {
-                dataField: "category_product_name",
+                dataField: "first-depth-title", //임의의 값
                 headerText: "교체자산",
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-            },{
-                dataField: "category_model_name",
-                headerText: "모델명",
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-            }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-            }, {
-                dataField: "",
+                children:[
+                    {
+                        dataField: "category_asset_num",
+                        headerText: "자산번호",
+                        headerStyle: "my-header-style",
+                        style: "my-column-style",
+                    },{
+                        dataField: "category_model_name",
+                        headerText: "모델명",
+                        headerStyle: "my-header-style",
+                        style: "my-column-style",
+                    }
+                ]
+            },
+            {
+                dataField: "first-depth-title2", //임의의 값
                 headerText: "교체 후 자산",
-            }, {
-                dataField:"category_note",
-                headerText: "자산분류"
-            }, {
-                dataField:"category_changeProduct_name",
-                headerText: "품목",
-            }, {
-                dataField: "category_changeAsset_num",
-                headerText: "자산번호",
+                children:[
+                    {
+                        dataField:"category_note",
+                        headerText: "자산분류"
+                    }, {
+                        dataField:"category_changeProduct_name",
+                        headerText: "모델명",
+                    }, {
+                        dataField: "category_changeAsset_num",
+                        headerText: "자산번호",
+                    }, {
+                        dataField: "category_user_name",
+                        headerText: "사용자"
+                    }
+                ]
             }]
         /* 2. 그리드 속성 설정 */
         let gridPop_changeEnroll_history_pros = {
@@ -281,6 +289,10 @@
                 dataField: "category_time",
                 headerText: "시간",
             },
+            {
+                dataField: "category_opinion",
+                headerText: "결재의견"
+            }
         ]
         /* 2. 그리드 속성 설정 */
         let gridPop_changeEnroll_history_pros = {
@@ -364,6 +376,10 @@
                 dataField: "category_time",
                 headerText: "시간",
             },
+            {
+                dataField: "category_opinion",
+                headerText: "결재의견"
+            }
         ]
         /* 2. 그리드 속성 설정 */
         let gridPros3 = {
@@ -406,7 +422,7 @@
                 headerText: "품목",
             }, {
                 dataField: "category_model_name",
-                headerText: "자산번호",
+                headerText: "모델명",
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
@@ -448,6 +464,10 @@
                 dataField: "category_time",
                 headerText: "시간",
             },
+            {
+                dataField: "category_opinion",
+                headerText: "결재의견"
+            }
         ]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
@@ -535,6 +555,10 @@
                 dataField: "category_time",
                 headerText: "시간",
             },
+            {
+                dataField: "category_opinion",
+                headerText: "결재의견"
+            }
         ]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
@@ -579,9 +603,6 @@
                 dataField: "category_model_name",
                 headerText: "모델명",
             }, {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-            }, {
                 dataField: "category_rental_extension_time",
                 headerText: "대여연장기간",
             }]
@@ -622,6 +643,10 @@
                 dataField: "category_time",
                 headerText: "시간",
             },
+            {
+                dataField: "category_opinion",
+                headerText: "결재의견"
+            }
         ]
         /* 2. 그리드 속성 설정 */
         let gridPros = {

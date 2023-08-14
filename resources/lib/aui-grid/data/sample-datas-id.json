@@ -22,7 +22,8 @@
     "category_asset_change"  : "",
     "category_state" : "가용",
     "category_manager" : "윤미자",
-    "category_time" : "18:00:16"
+    "category_time" : "18:00:16",
+    "category_opinion": "자산 교체 신청 승인입니다"
   },
   {
     "id": "#grid_id_2",
@@ -47,6 +48,7 @@
     "category_asset_change"  : "",
     "category_state" : "가용",
     "category_manager" : "윤미자",
-    "category_time" : "18:00:16"
+    "category_time" : "18:00:16",
+    "category_opinion": "19491/ 김종민"
   }
 ]

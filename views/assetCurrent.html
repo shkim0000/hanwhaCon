@@ -45,6 +45,21 @@
         <div class="input-wrap">
             <div class="input-lists">
                 <div class="input-list">
+                    <span class="input-title">메뉴</span>
+                    <label class="select">
+                        <select>
+                            <option value="">선택</option>
+                            <option value="">신규신청</option>
+                            <option value="">교체신청</option>
+                            <option value="">대여신청</option>
+                            <option value="">대여연장신청</option>
+                            <option value="">반납신청</option>
+                            <option value="">이동신청</option>
+                            <option value="">인수인계신청</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
                     <span class="input-title">신청구분</span>
                     <label class="select">
                         <select>
@@ -117,7 +132,7 @@
                         <input type="text">
                     </label>
                 </div>
-                <div class="input-list">
+                <div class="input-list regular">
                     <span class="input-title">신청내용</span>
                     <label class="input">
                         <input type="text">
@@ -131,8 +146,8 @@
                 <h3>신청현황</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn excel">엑셀다운로드</button>
                 <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
+                <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
 
@@ -237,7 +252,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_newEnroll_history" class="grid-box"></div>
@@ -339,7 +354,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_change_history" class="grid-box"></div>
@@ -447,7 +462,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_rental_history" class="grid-box"></div>
@@ -552,7 +567,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_return_history" class="grid-box"></div>
@@ -638,7 +653,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_takeOverEnroll_history" class="grid-box"></div>
@@ -730,7 +745,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_rentalExtension_history" class="grid-box"></div>
