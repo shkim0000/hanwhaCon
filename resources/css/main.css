@@ -133,6 +133,8 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 .aui-grid-important-header .aui-grid-header-renderer span:first-child{position:relative;}
 .aui-grid-important-header .aui-grid-header-renderer span:first-child::after{content:'*';position:absolute;color:red;right:-10px;top:50%;transform:translateY(-50%);}
 .aui-grid-default-column.aui-grid-selection-bg{color:var(--color1);}
+.aui-grid-renderer-base.aui-grid-footer-renderer{color:#010101;}
+.aui-grid-renderer-base.aui-grid-footer-renderer.on{color:red;}
 
 /* footer */
 footer{transition:margin-left 200ms ease-in-out;}

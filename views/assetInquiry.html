@@ -409,9 +409,49 @@
         });
 
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
+        /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
         AUIGrid.bind(assetStatusGrid_ID, "footerClick", function (event) {
-            if(event.footerIndex === 5){
-                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+            /* 컬럼 이름 저장하기 */
+            const columnArr = [];
+            for (let ele of columnLayout) {
+                columnArr.push(ele.headerText);
+            }
+            let columnLength = columnArr.length;
+            let footerIndex = event.footerIndex;
+
+            /* 색상 변환 */
+            if(footerIndex === 0){
+                return false;
+            }else{
+                $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                $(this).addClass("on");
+            }
+
+
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
+                setTimeout(function(){
+                    if(footerIndex === 0){
+                        return false;
+                    }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+                    }else if(footerIndex === columnLength - 1){
+
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    }
+                },20);
+
+            }else{
+                if(footerIndex === 0){
+                    return false;
+                }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+                }else if(footerIndex === columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                }
             }
         });
 
@@ -581,9 +621,48 @@
 
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
         AUIGrid.bind(userStatusGrid_ID, "footerClick", function (event) {
-            if(event.footerIndex === 5){
-                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+            /* 컬럼 이름 저장하기 */
+            const columnArr = [];
+            for (let ele of columnLayout) {
+                columnArr.push(ele.headerText);
             }
+            let columnLength = columnArr.length;
+            let footerIndex = event.footerIndex;
+
+            /* 색상 변환 */
+            if(footerIndex === 0){
+                return false;
+            }else{
+                $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                $(this).addClass("on");
+            }
+
+            console.log(this)
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
+                setTimeout(function(){
+                    if(footerIndex === 0){
+                        return false;
+                    }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_product_name",columnArr[footerIndex]);
+                    }else if(footerIndex === columnLength - 1){
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    }
+                },20);
+
+            }else{
+                if(footerIndex === 0){
+                    return false;
+                }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_product_name",columnArr[footerIndex]);
+                }else if(footerIndex === columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                }
+            }
+
         });
     }
 
@@ -694,13 +773,26 @@
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             simplifySelectionEvent: true,
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
         dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
         requestDueDiglienceGridData();
+
+        /* 더블 클릭시 팝업 */
+        AUIGrid.bind(dueDiglienceGrid_ID, "cellDoubleClick", function(event) {
+            $("#gridPop_assetDetail").dialog({
+                title: "자산정보",
+                width: 1250,
+                height:860,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });
+            gridPopAssetDetail();
+        });
     }
 
     /* 4. 데이터 불러오기 */

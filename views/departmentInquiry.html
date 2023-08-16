@@ -358,6 +358,7 @@
         requestAssetStatusGridData();
 
         AUIGrid.bind(assetStatusGrid_ID, "selectionChange", function(event) {
+            $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
             if(count === 0){
                 count++;
                 createDueDiglienceGrid();
@@ -400,8 +401,47 @@
 
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
         AUIGrid.bind(assetStatusGrid_ID, "footerClick", function (event) {
-            if(event.footerIndex === 5){
-                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+            /* 컬럼 이름 저장하기 */
+            const columnArr = [];
+            for (let ele of columnLayout) {
+                columnArr.push(ele.headerText);
+            }
+            let columnLength = columnArr.length;
+            let footerIndex = event.footerIndex;
+
+            /* 색상 변환 */
+            if(footerIndex === 0){
+                return false;
+            }else{
+                $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                $(this).addClass("on");
+            }
+
+
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
+                setTimeout(function(){
+                    if(footerIndex === 0){
+                        return false;
+                    }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+                    }else if(footerIndex === columnLength - 1){
+
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    }
+                },20);
+
+            }else{
+                if(footerIndex === 0){
+                    return false;
+                }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+                }else if(footerIndex === columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                }
             }
         });
 
@@ -409,13 +449,12 @@
 
 
     /* [현황] : 사용자별 현황 */
-
     function createUserStatusGrid() {
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout =[
             {
                 dataField: "category_user_name",
-                headerText: "물품명",
+                headerText: "사용자명",
                 headerStyle: "myField3",
                 style: "my-custom-style3",
                 filter: {
@@ -520,6 +559,7 @@
 
         }
 
+
         // 실제로 #grid_wrap 에 그리드 생성
         userStatusGrid_ID = AUIGrid.create("#userStatusGrid_ID", columnLayout, gridPros);
 
@@ -528,27 +568,30 @@
         requestUserStatusGridData();
 
         AUIGrid.bind(userStatusGrid_ID, "selectionChange", function(event) {
+            $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
             if(count === 0){
                 count++;
                 createDueDiglienceGrid();
-                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
-                let primeCell = event.primeCell;
-                let headerText = primeCell.headerText;
-                let dataField = primeCell.dataField;
-                let cellText = primeCell.item.category_user_name;
-                console.log(headerText)
+                setTimeout(function(){
+                    let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                    let primeCell = event.primeCell;
+                    let headerText = primeCell.headerText;
+                    let dataField = primeCell.dataField;
+                    let cellText = primeCell.item.category_user_name;
+                    console.log(headerText)
 
-                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
 
-                name.forEach((i) => {
-                    if(i.category_product_name === headerText && dataField !== "category_row_sum"){
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
-                        console.log("아니야")
-                    }else{
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                    }
-                });
+                    name.forEach((i) => {
+                        if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
+                        }else{
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                        }
+                    });
+                },20);
+
             }else{
                 let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
                 let primeCell = event.primeCell;
@@ -563,7 +606,6 @@
                     if(i.category_product_name === headerText && dataField !== "category_row_sum"){
                         AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
                         AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
-                        console.log("아니야")
                     }else{
                         AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
                     }
@@ -572,11 +614,51 @@
 
         });
 
+
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
         AUIGrid.bind(userStatusGrid_ID, "footerClick", function (event) {
-            if(event.footerIndex === 5){
-                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+            /* 컬럼 이름 저장하기 */
+            const columnArr = [];
+            for (let ele of columnLayout) {
+                columnArr.push(ele.headerText);
             }
+            let columnLength = columnArr.length;
+            let footerIndex = event.footerIndex;
+
+            /* 색상 변환 */
+            if(footerIndex === 0){
+                return false;
+            }else{
+                $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                $(this).addClass("on");
+            }
+
+            console.log(this)
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
+                setTimeout(function(){
+                    if(footerIndex === 0){
+                        return false;
+                    }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_product_name",columnArr[footerIndex]);
+                    }else if(footerIndex === columnLength - 1){
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    }
+                },20);
+
+            }else{
+                if(footerIndex === 0){
+                    return false;
+                }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_product_name",columnArr[footerIndex]);
+                }else if(footerIndex === columnLength - 1){
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                }
+            }
+
         });
     }
 
@@ -687,13 +769,26 @@
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             simplifySelectionEvent: true,
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
         dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
         requestDueDiglienceGridData();
+
+        /* 더블 클릭시 팝업 */
+        AUIGrid.bind(dueDiglienceGrid_ID, "cellDoubleClick", function(event) {
+            $("#gridPop_assetDetail").dialog({
+                title: "자산정보",
+                width: 1250,
+                height:860,
+                modal: true,
+                resizable: false,
+                dialogClass: 'no-close success-dialog'
+            });
+            gridPopAssetDetail();
+        });
 
     }
 
