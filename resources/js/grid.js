@@ -40,14 +40,18 @@
         let targetPlace = $(e).attr("data-place");
         let userName;
         let userDepartment;
+        let userID;
         if(targetPlace === 'user_search'){
             AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
                 userName = event.item.category_user_name;
                 userDepartment = event.item.category_department;
+                userID = event.item.category_employeeID;
+
 
                 $(".list-box .title-box .list-title span").text(userName);
                 $("input[data-label='user']").val(userName);
                 $("input[data-label='department']").val(userDepartment);
+                $("input[data-label='employee']").val(userID);
 
                 $("#gridPop_user").dialog("close");
             });
@@ -111,7 +115,8 @@
             AUIGrid.bind(popup_grid_department, "cellDoubleClick", function(event) {
                 userDepartment = event.item.category_department;
                 $("input[data-label='department']").val(userDepartment);
-
+                $("input[data-label='user']").val("");
+                $("input[data-label='employee']").val("");
                 $("#gridPop_department").dialog("close");
             });
         }
@@ -1341,7 +1346,68 @@ function searchClickAssetNum() {
 /* ------------------------------------------------------------------------ */
 
 /* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
-    /* 처리 이력  */
+/* 결재 이력  */
+let popup_grid_serviceDesk_current; // 서비스데스크 신청현황
+function gridPopServiceDeskCurrent(id,title,width,height){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+        },{
+            dataField: "category_department",
+            headerText: "부서",
+        }, {
+            dataField: "category_usage",
+            headerText: "용도",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_asset_type",
+            headerText: "자산종류",
+        }, {
+            dataField: "category_product_type",
+            headerText: "물품종류",
+        }, {
+            dataField: "category_quantity",
+            headerText: "수량",
+        }, {
+            dataField: "category_cost",
+            headerText: "소요비용",
+        }, {
+            dataField: "category_order_text",
+            headerText: "요청내용",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_serviceDesk_current = AUIGrid.create("#popup_grid_serviceDesk_current", columnLayout, gridPros);
+    requestServiceDeskCurrent();
+}
+function requestServiceDeskCurrent(){
+    $.get("../resources/lib/aui-grid/data/sample-datas27.json", function (data) {
+        AUIGrid.setGridData(popup_grid_serviceDesk_current, data);
+    });
+}
+/* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
+
+/* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
+    /* 결재 이력  */
     let popup_grid_serviceDesk_history; // 서비스데스크 신청현황
     function gridPopServiceDeskHistory(id,title,width,height){
         /* 1. AUIGrid 칼럼 설정 */
@@ -1486,3 +1552,147 @@ function requestAssetDetailData() {
     });
 }
 /* // 자산정보 */
+
+/* 자산검색 팝업 */
+/* 자산검색 */
+let popup_subGrid_assetSearch;
+
+function subPopupAssetSearch(id,title,width,height, e){
+
+    let columnLayout = [
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_product",
+            headerText: "자산분류",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_item_name",
+            headerText: "모델명",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+            filter: {
+                showIcon: true,
+            }
+        }]
+
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    }
+    popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);
+    requestSubPopupAssetSearch();
+
+    let targetPlace = $(e).attr("data-place");
+    let assetNum;
+    if(targetPlace === "asset_search"){
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            assetNum = event.item.category_asset_num;
+
+            $("input[data-label='asset_num']").val(assetNum);
+
+            $("#assetSearch_pop").dialog("close");
+        })
+    }
+
+
+    /* 그리드 사용 함수 */
+    if(type === "newEnroll"){
+        /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
+        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
+
+        /* 더블클릭 시 자산 정보 그리드에 데이터 추가하는 이벤트  */
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            let changeItem = {
+                category_item: rowData.category_item,
+                category_item_name: rowData.category_item_name,
+                category_asset_num: rowData.category_asset_num,
+                category_product: rowData.category_product,
+                category_status: rowData.category_status,
+            }
+            AUIGrid.updateRow(popup_grid_newEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
+    } else if (type === "change"){
+
+        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
+
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            let changeItem = {
+                category_changeAsset_num: rowData.category_asset_num,
+                category_changeProduct_name: rowData.category_item_name,
+                category_product: rowData.category_product,
+            }
+            AUIGrid.updateRow(popup_grid_changeEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
+    } else if (type === "rental"){
+
+        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
+        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
+
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            console.log(rowData);
+            console.log(e);
+            let changeItem = {
+                category_asset_num: rowData.category_asset_num,
+                category_item_name: rowData.category_item_name,
+                category_product: rowData.category_product,
+                category_item: rowData.category_item,
+            }
+            AUIGrid.updateRow(popup_grid_rentalEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
+    }
+}
+
+/* 자산검색 팝업에서 자산번호 input 에 4자 이상 입력했을 때 자동 필터링 함수 */
+$(function(){
+    $("#assetSearch_pop input[data-label='assetNumber']").on("keydown",function(event){
+        if(event.target.value.length >= 3){
+            var inlineTexts = [{dataField: "category_asset_num", text: event.target.value}];
+            // 인라인 필터링 텍스트들 설정 시켜 필터링 실행하기.
+            AUIGrid.setFilterInlineTexts(popup_subGrid_assetSearch, inlineTexts);
+        } else{
+            AUIGrid.clearFilterAll(popup_subGrid_assetSearch);
+        }
+    })
+})
+
+function requestSubPopupAssetSearch() {
+    $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
+        AUIGrid.setGridData(popup_subGrid_assetSearch, data);
+    });
+}

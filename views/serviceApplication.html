@@ -79,55 +79,79 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
+            <div class="row con-3">
                 <div class="th"><div class="th-wrap center">서비스 구분</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <div class="select-wrap">
-                            <label class="select medium">
-                                <select>
-                                    <option value="">네트워크 신청</option>
-                                    <option value="">PC부품 신청</option>
-                                    <option value="">키보드 / 마우스 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                </select>
-                            </label>
-                            <label class="select medium">
-                                <select>
-                                    <option value="">네트워크 신청</option>
-                                    <option value="">PC부품 신청</option>
-                                    <option value="">키보드 / 마우스 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                </select>
-                            </label>
-                            <label class="select medium">
-                                <select>
-                                    <option value="">네트워크 신청</option>
-                                    <option value="">PC부품 신청</option>
-                                    <option value="">키보드 / 마우스 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                    <option value="">기타 물품 신청</option>
-                                </select>
-                            </label>
-                        </div>
+                        <label class="select">
+                            <select>
+                                <option value="">S/W 사용 신청</option>
+                            </select>
+                        </label>
+                        <label class="select">
+                            <select id="software_value">
+                                <option value="정의된값1">정의된값1</option>
+                                <option value="정의된값2">정의된값2</option>
+                                <option value="정의된값3">정의된값3</option>
+                                <option value="정의된값4">정의된값4</option>
+                                <option value="정의된값5">정의된값5</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p class="important">수량</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input">
+                            <input type="text" id="quantity">
+                        </label>
+                    </div>
+                </div>
+                <div class="th"><div class="th-wrap center"><p class="important">자산번호</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="input search" data-place="asset_search" onclick="lp_open('assetSearch_pop', '자산검색', 800,350,this)">
+                            <input type="text" data-label="asset_num" readonly>
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="custom-table">
+            <div class="row">
+                <div class="th"><div class="th-wrap center"><p class="important">사용기간</p></div></div>
+                <div class="td">
+                    <div class="td-wrap">
+                        <label class="date">
+                            <input type="text" id="date-prev">
+                        </label>
+                        <span>~</span>
+                        <label class="date">
+                            <input type="text" id="date-next">
+                        </label>
+                    </div>
+                </div>
+            </div>
             <div class="row">
                 <div class="th"><div class="th-wrap center"><p class="important">요청내용</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input">
-                            <textarea rows="6"></textarea>
+                            <input type="text" id="order_text">
                         </label>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="title-box">
+            <div class="title">
+                <h3 class="important">신청내역</h3>
+            </div>
+            <div class="btn-wrap">
+                <button type="button" class="btn add-column" onclick="addRow()">추가</button>
+            </div>
+        </div>
+        <div id="serviceApplication_ID" class="grid-box"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
@@ -136,6 +160,7 @@
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
+            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('submit_pop','결재상신 화면',900,860)">결재상신 화면</button>
@@ -161,6 +186,38 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
+
+<!-- 팝업내 > 자산검색 -->
+<div id="assetSearch_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap search-ver con-3">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">자산분류</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="product">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">품목</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="item">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">자산번호</span>
+                        <label class="input">
+                            <input type="text" data-label="assetNumber">
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
+            </div>
+            <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
         </div>
     </div>
 </div>
@@ -436,13 +493,128 @@
 <!-- // 팝업 -->
 <script>
 /* AUIGrid */
+let serviceApplication_ID;
+
+createServiceApplicationGrid();
+
+
+function createServiceApplicationGrid() {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_user_name",
+            headerText: "사용자명",
+        },{
+            dataField: "category_department",
+            headerText: "부서",
+        }, {
+            dataField: "category_usage",
+            headerText: "용도",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_use_date",
+            headerText: "사용기간",
+        }, {
+            dataField: "category_software_name",
+            headerText: "소프트웨어명",
+        }, {
+            dataField: "category_quantity",
+            headerText: "수량",
+        }, {
+            dataField: "category_cost",
+            headerText: "소요비용",
+        }, {
+            dataField: "category_order_text",
+            headerText: "요청내용",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode:true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    serviceApplication_ID = AUIGrid.create("#serviceApplication_ID", columnLayout, gridPros);
+    requestServiceApplicationData();
+}
+
+function requestServiceApplicationData(){
+    $.get("../resources/lib/aui-grid/data/sample-datas27.json", function (data) {
+        AUIGrid.setGridData(serviceApplication_ID, data);
+    });
+}
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof popup_grid_user !== "undefined"){
-        AUIGrid.resize(popup_grid_user);
+    if (typeof serviceApplication_ID !== "undefined"){
+        AUIGrid.resize(serviceApplication_ID);
     }
 }
+
+/* 메뉴버튼 클릭시(반응형) */
+$(document).on("click",".menu-btn",function(){
+    let innerWidth = $(".contents").innerWidth() - 38;
+    if($(".contents").hasClass("active")){
+        innerWidth = innerWidth + 260;
+        setTimeout(function(){
+            AUIGrid.resize(serviceApplication_ID, innerWidth);
+        },20)
+
+    } else{
+        innerWidth = innerWidth - 260;
+        setTimeout(function(){
+            AUIGrid.resize(serviceApplication_ID, innerWidth);
+        },20)
+    }
+});
+
+/* 행 추가 */
+let cnt2 = 0;
+function addRow() {
+    var item = new Object();
+    let user = $("input[data-label='user']").val();
+    let swVal = $("#software_value").val();
+    let quantity = $("#quantity").val();
+    let assetNum = $("input[data-label='asset_num']").val();
+    let date = $("#date-prev").val() + "~" + $("#date-next").val();
+    let orderText = $("#order_text").val();
+
+
+
+    item.id = "grid_ID_1" + (++cnt2),
+        item.category_user_name = user,
+        item.category_software_name = swVal,
+        item.category_quantity = quantity,
+        item.category_asset_num = assetNum,
+        item.category_use_date = date,
+        item.category_order_text = orderText,
+
+        // parameter
+        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+        AUIGrid.addRow(serviceApplication_ID, item, "last");
+};
+
 </script>
 </body>
 </html>

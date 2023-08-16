@@ -1,0 +1,30 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_software_name": "[CPL]반디캠",
+    "category_software_version": "V10",
+    "category_usage": "무슨업무에",
+    "category_installed_quantity": "10",
+    "category_approved_quantity": "3",
+    "category_unauthorized_quantity": "0",
+    "category_department": "IT운영",
+    "category_user_name": "홍길동",
+    "category_asset_num": "203041",
+    "category_approved_check": "1",
+    "category_installed_date": "2022-05-15"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_software_name": "[CPL]MS OFFICE 2016",
+    "category_software_version": "V1",
+    "category_usage": "엑셀업무",
+    "category_installed_quantity": "4",
+    "category_approved_quantity": "2",
+    "category_unauthorized_quantity": "0",
+    "category_department": "IT운영",
+    "category_user_name": "홍길동",
+    "category_asset_num": "203041",
+    "category_approved_check": "1",
+    "category_installed_date": "2022-05-15"
+  }
+]

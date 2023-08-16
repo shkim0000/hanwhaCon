@@ -42,6 +42,7 @@ $(function(){
                                 "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서 사용자별 자산조회</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>S/W 조회</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -415,9 +416,12 @@ function lp_open(id,title,width,height,e){
         gridPopDisabledDetail();
         gridPopDisabledHistory();
     } else if ( id==="gridPop_serviceDesk_detail"){
+        gridPopServiceDeskCurrent();
         gridPopServiceDeskHistory();
     }else if(id === "gridPop_assetDetail"){
         gridPopAssetDetail();
+    }else if(id === "assetSearch_pop"){
+        subPopupAssetSearch(id,title,width,height,e);
     }
 }
 /* 팝업창 닫기 */

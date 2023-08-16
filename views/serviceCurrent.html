@@ -46,9 +46,11 @@
                     <span class="input-title">서비스 구분</span>
                     <label class="select">
                         <select>
+                            <option value="">선택</option>
                             <option value="">네트워크 신청</option>
                             <option value="">PC 부품신청</option>
                             <option value="">키보드/마우스 신청</option>
+                            <option value="">HDD 복구 신청</option>
                         </select>
                     </label>
                 </div>
@@ -56,9 +58,13 @@
                     <span class="input-title">서비스 상태</span>
                     <label class="select">
                         <select>
-                            <option value="">완료</option>
+                            <option value="">선택</option>
                             <option value="">상신</option>
-                            <option value="">반려</option>
+                            <option value="">상신완료</option>
+                            <option value="">상신반려</option>
+                            <option value="">진행중</option>
+                            <option value="">지급완료</option>
+                            <option value="">수령완료</option>
                         </select>
                     </label>
                 </div>
@@ -165,48 +171,40 @@
             <div class="custom-table">
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center">신청번호</div></div>
-                    <div class="td"><div class="td-wrap">122141</div></div>
+                    <div class="td"><div class="td-wrap center"><p>122141</p></div></div>
                     <div class="th"><div class="th-wrap center">신청구분</div></div>
-                    <div class="td"><div class="td-wrap">PC부품</div></div>
+                    <div class="td"><div class="td-wrap center"><p>PC부품</p></div></div>
                     <div class="th"><div class="th-wrap center">상태</div></div>
-                    <div class="td"><div class="td-wrap">조치중</div></div>
+                    <div class="td"><div class="td-wrap center"><p>조치중</p></div></div>
                 </div>
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="td"><div class="td-wrap center"><p>홍길동</p></div></div>
                     <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>김종민</p></div></div>
+                    <div class="td"><div class="td-wrap center"><p>김종민</p></div></div>
                     <div class="th"><div class="th-wrap center"><p>사용부서</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    <div class="td"><div class="td-wrap center"><p>IT운영</p></div></div>
                 </div>
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="select whole">
-                                <select>
-                                    <option value="">행정동</option>
-                                    <option value="">행정동</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
+                    <div class="td"><div class="td-wrap center"><p>행정동</p></div></div>
                     <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>6층 604호</p></div></div>
-                </div>
-                <div class="row">
+                    <div class="td"><div class="td-wrap center"><p>6층 604호</p></div></div>
                     <div class="th"><div class="th-wrap center"><p>등록시간</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>2023-07-05 15:54:12</p></div></div>
-                </div>
-                <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>요청내용</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>해당 사유로 PC부품을 요청합니다.</p></div></div>
+                    <div class="td"><div class="td-wrap center"><p>2023-07-05 15:54:12</p></div></div>
                 </div>
             </div>
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>서비스데스크 신청현황</h3>
+                </div>
+            </div>
+            <div id="popup_grid_serviceDesk_current" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_serviceDesk_history" class="grid-box h-small"></div>
