@@ -608,22 +608,31 @@ function createHoldingAssetGrid() {
     /* 그리드 생성 */
     holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
-    /* 키보드로 클릭하기 기능 구현중 */
-    /*AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
-        if(event.keyCode === 32){
-            var item = event.item, rowIdField, rowId;
-            rowIdField = AUIGrid.getProp(event.pid, "rowIdField"); // rowIdField 얻기
-            rowId = item[rowIdField];
-            // 이미 체크 선택되었는지 검사
-            if(AUIGrid.isCheckedRowById(event.pid, rowId)) {
+    AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event){
+        console.log(event);
 
-            }else{
-                // 엑스트라 체크박스 체크 추가
-                AUIGrid.addCheckedRowsByIds(event.pid, rowId);
+        AUIGrid.removeRow(holdingAssetGrid_ID, "selectedIndex");
+        let clickData = event.item;
+        let changeDepartment = $("input[data-label='change_department']").val();
+        let changeName = $("input[data-label='change_user']").val();
+        /* 변경후 사용자, 변경후 부서 input에 있는 값 갖고와서 obj에 넣고 addRow 실행 */
+        let obj = {...clickData, category_change_department: changeDepartment, category_change_user_name: changeName};
+
+        AUIGrid.addRow(enrollGrid_ID, obj, "last");
+
+        /* 보유자산의 숫자도 줄어들게 */
+        let haveName = clickData.category_product_name;
+        $(".quantity-list li").each(function(){
+            if($(this).find(".name").text() === haveName){
+                let num = parseInt($(this).find(".num").text());
+                $(this).find(".num").text(num - 1);
             }
-        }
-    });*/
-    /* 더블클릭 시 추가 */
+            if($(this).find(".name").text() === "대여총수량"){
+                let num = parseInt($(this).find(".num").text());
+                $(this).find(".num").text(num - 1);
+            }
+        })
+    })
 
 }
 function createEnrollGrid() {
@@ -726,6 +735,20 @@ function createEnrollGrid() {
 
                     // 선택한 하단 그리드 행들 삭제
                     AUIGrid.removeRow(enrollGrid_ID, "selectedIndex");
+
+                    /* 삭제버튼을 눌렀을 때 보유자산 숫자 +1 */
+                    let haveName = rows[0].category_product_name;
+                    $(".quantity-list li").each(function(){
+                        if($(this).find(".name").text() === haveName){
+                            let num = parseInt($(this).find(".num").text());
+                            $(this).find(".num").text(num + 1);
+                        }
+                        if($(this).find(".name").text() === "대여총수량"){
+                            let num = parseInt($(this).find(".num").text());
+                            $(this).find(".num").text(num + 1);
+                        }
+                    })
+
                 }
             }
         }

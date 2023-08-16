@@ -781,38 +781,34 @@ $(".date.btn input").datepicker( {
         // 'yyyy-mm-dd' 형식으로 오늘 날짜 문자열 생성
         const currentDate = `${year}-${month}-${day}`;
 
-        /* 체크된 행의 id 값을 찾아 저장 */
+        /* 체크된 항목인지, 더블클릭된 항목인지 체크하여 변수에 담기 */
         let checkedItems = AUIGrid.getCheckedRowItems(rentalGrid_ID);
         let doubleClickItems = AUIGrid.getSelectedItems(rentalGrid_ID);
-        console.log(doubleClickItems);
-        console.log(checkedItems);
 
         let str = [];
         let rowItem;
-
-        for (let i = 0, len = checkedItems.length; i < len; i++) {
-            rowItem = checkedItems[i];
-            let object ={...checkedItems[i].item,
-                category_rental_start: currentDate,
-                category_rental_finish : date
+        if(checkedItems.length > 0){
+            for (let i = 0, len = checkedItems.length; i < len; i++) {
+                rowItem = checkedItems[i];
+                let object ={...checkedItems[i].item,
+                    category_rental_start: currentDate,
+                    category_rental_finish : date
+                }
+                str.push(object);
             }
+            /* 얻은 행을 하단 그리드에 추가하기 */
+            AUIGrid.addRow(rentalAssetInfoGrid_ID, str, "last");
+            /* 선택한 상단 그리드 행들 삭제 */
+            AUIGrid.removeCheckedRows(rentalGrid_ID);
+        } else if(doubleClickItems.length > 0){
+            let object = {...doubleClickItems[0].item, category_rental_start: currentDate, category_rental_finish: date}
             str.push(object);
-        }
-        // 상단 그리드의 체크된 행들 얻기
-        let rows = AUIGrid.getCheckedRowItemsAll(rentalGrid_ID);
-        console.log(rows[0].id)
-        if (rows.length <= 0) {
-            alert('상단 그리드에서 체크된 행이 없습니다.');
-            return;
-        }
-        /* 얻은 행을 하단 그리드에 추가하기 */
-        AUIGrid.addRow(rentalAssetInfoGrid_ID, str, "last");
 
-        /* 선택한 상단 그리드 행들 삭제 */
-        AUIGrid.removeCheckedRows(rentalGrid_ID);
-
-        /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(rentalAssetInfoGrid_ID, str)
+            AUIGrid.addRow(rentalAssetInfoGrid_ID, str, "last");
+            AUIGrid.removeRow(rentalGrid_ID, "selectedIndex");
+        } else {
+            alert("체크된 행이 없습니다");
+        }
 
     }
 });

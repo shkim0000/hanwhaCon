@@ -606,6 +606,15 @@ function createHoldingAssetGrid() {
 
     /* 그리드 생성 */
     holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
+
+    AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event){
+
+        /* 얻은 행을 하단 그리드에 추가하기 */
+        AUIGrid.addRow(returnAssetGrid_ID, event.item, "last");
+
+        /* 선택한 그리드 row 삭제 */
+        AUIGrid.removeRow(holdingAssetGrid_ID, "selectedIndex"); // 클릭한 row 삭제
+    })
 }
 
 function createReturnAssetGrid() {
@@ -704,7 +713,6 @@ function createReturnAssetGrid() {
                 onClick: function(){
                     /* 선택한 행들 얻기 */
                     let rows = AUIGrid.getSelectedRows(returnAssetGrid_ID);
-                    console.log(rows)
 
                     // 얻은 행을 상단 그리드에 추가하기
                     AUIGrid.addRow( holdingAssetGrid_ID, rows, "last");
@@ -773,7 +781,7 @@ $(".btn.check").on("click",function(){
     AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
 
     /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-    AUIGrid.updateRowsById(returnAssetGrid_ID, str)
+    // AUIGrid.updateRowsById(returnAssetGrid_ID, str)
 });
 
 /* 메뉴버튼 클릭시(반응형) */
