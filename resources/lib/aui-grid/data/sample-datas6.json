@@ -12,7 +12,10 @@
     "category_asset_status":"운영",
     "category_note": "데스크탑",
     "category_changeProduct_name": "LG-G10402",
-    "category_product_quantity": 1
+    "category_product_quantity": 1,
+    "category_change_department": "인사부",
+    "category_change_user_name": "김종민",
+    "category_takeover_date": "2022-09-09"
   },
   {
     "id": "#grid_id_2",
@@ -27,7 +30,11 @@
     "category_asset_status":"운영",
     "category_note": "데스크탑",
     "category_changeProduct_name": "LG-G10402",
-    "category_product_quantity": 1
+    "category_product_quantity": 1,
+    "category_change_department": "인사부",
+    "category_change_user_name": "김종민",
+    "category_takeover_date": "2022-09-09"
+
   },
   {
     "id": "#grid_id_3",
@@ -42,6 +49,9 @@
     "category_asset_status":"운영",
     "category_note": "데스크탑",
     "category_changeProduct_name": "LG-G10402",
-    "category_product_quantity": 1
+    "category_product_quantity": 1,
+    "category_change_department": "인사부",
+    "category_change_user_name": "김종민",
+    "category_takeover_date": "2022-09-09"
   }
 ]

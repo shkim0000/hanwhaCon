@@ -60,18 +60,12 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <!--<div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td">
-                    <div class="td-wrap">
-                        <label class="input search">
-                            <input type="text" value="홍길동" readonly>
-                        </label>
-                    </div>
-                </div>-->
+                <div class="th"><div class="th-wrap center">신청자</div></div>
+                <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
                 <div class="th"><div class="th-wrap center"><p class="important">사용자명</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search"  data-place="user_search" onclick="lp_open('resetAlert','',520,190);">
+                        <label class="input search"  data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
                             <input type="text" data-label="user" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
@@ -227,19 +221,6 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
-
-<!--사용자 검색 시 알림 팝업 -->
-<div id="resetAlert" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <p class="center">사용자 변경 시 입력정보는 초기화됩니다.<br>진행하시겠습니까?</p>
-            <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530,$('.input.search')); lp_close('resetAlert')">확인</button>
-                <button type="button" class="btn" onclick="lp_close('resetAlert')">취소</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <!-- 사용자 검색 -->
 <div id="gridPop_user" class="popup">
@@ -721,7 +702,7 @@ function createHoldingAssetGrid() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
  /*       fillColumnSizeMode: false,*/
-        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+        softRemoveRowMode: true, // 소프트 제거 모드 사용 안함
         copyDisplayValue: true, //그리드 데이터 복사 가능
         enableFilter: true, // 필터 true 설정
     }
@@ -731,12 +712,18 @@ function createHoldingAssetGrid() {
 
     /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
     AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event) {
-        /* 팝업창 열려야 함 */
-        lp_open('model_pop','모델 검색',540,766);
-        //클릭한 row의 정보를 clickItem 변수에 저장
-        clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
-        whatRow = event.rowIndex;
-        rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
+
+        /* 클릭한 row 가 삭제된 data 인지 확인합니다. */
+        let isDel = AUIGrid.isRemovedByRowIndex(holdingAssetGrid_ID, event.rowIndex);
+
+        if(!isDel){
+            /* 팝업창 열려야 함 */
+            lp_open('model_pop','모델 검색',540,766);
+            //클릭한 row의 정보를 clickItem 변수에 저장
+            clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
+            whatRow = event.rowIndex;
+            rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
+        }
     });
 }
 
@@ -842,8 +829,23 @@ function createEnrollAssetGrid() {
                 },
                 onClick: function(){
                     clickItem = AUIGrid.getSelectedRows(applicationGrid_ID)[0];
-                    AUIGrid.removeRow(applicationGrid_ID, "selectedIndex");
-                    AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
+
+                    let removedItem = AUIGrid.getRemovedItems(holdingAssetGrid_ID);
+                    console.log(removedItem); // removed된 Item이 잘 나오는지 체크
+
+                    if(removedItem.length > 0){
+                        let result = AUIGrid.getRowIndexesByValue(holdingAssetGrid_ID, "category_asset_num", clickItem.category_asset_num);
+                        console.log(result);
+                        removedItem.forEach((i) => {
+                            if(i.category_asset_num === clickItem.category_asset_num){
+                                AUIGrid.restoreSoftRows(holdingAssetGrid_ID, result[0]);
+                                AUIGrid.removeRow(applicationGrid_ID,"selectedIndex");
+                            }
+                        })
+                    } else{
+                        AUIGrid.removeRow(applicationGrid_ID, "selectedIndex");
+                        AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
+                    }
 
                     /* 삭제버튼을 눌렀을 때 보유자산 숫자 +1 */
                     let haveName = clickItem.category_product_name;
@@ -936,6 +938,7 @@ $(".popBtn").on("dblclick", function(){
         category_note: productName,
         category_changeProduct_name: itemName,
         category_product_quantity: 1,
+        status:"r",
     }
     AUIGrid.removeRow(holdingAssetGrid_ID, whatRow);
     AUIGrid.addRow(applicationGrid_ID, insertObj, "last");

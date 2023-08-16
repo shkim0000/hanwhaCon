@@ -83,7 +83,7 @@
                 <div class="th"><div class="th-wrap center">대여 부서</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search"  data-isActive="readonly">
+                        <label class="input search">
                             <input type="text" data-label="department" readonly>
                         </label>
                     </div>
@@ -624,6 +624,11 @@ function createRentalAssetGrid() {
 
     /* 그리드 생성 */
     rentalGrid_ID = AUIGrid.create("#rentalGrid_ID", columnLayout, gridPros);
+
+    AUIGrid.bind(rentalGrid_ID, "cellDoubleClick", function(){
+        $(".date.btn").click();
+    })
+
 }
 function createRentalAssetInfoGrid() {
     /* 기본 그리드(예시) */
@@ -778,13 +783,13 @@ $(".date.btn input").datepicker( {
 
         /* 체크된 행의 id 값을 찾아 저장 */
         let checkedItems = AUIGrid.getCheckedRowItems(rentalGrid_ID);
-        if (checkedItems.length <= 0) {
-            alert("체크한 행이 없습니다.");
-            return;
-        }
+        let doubleClickItems = AUIGrid.getSelectedItems(rentalGrid_ID);
+        console.log(doubleClickItems);
+        console.log(checkedItems);
 
         let str = [];
         let rowItem;
+
         for (let i = 0, len = checkedItems.length; i < len; i++) {
             rowItem = checkedItems[i];
             let object ={...checkedItems[i].item,
@@ -793,7 +798,6 @@ $(".date.btn input").datepicker( {
             }
             str.push(object);
         }
-        console.log(str);
         // 상단 그리드의 체크된 행들 얻기
         let rows = AUIGrid.getCheckedRowItemsAll(rentalGrid_ID);
         console.log(rows[0].id)

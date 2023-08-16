@@ -65,15 +65,6 @@
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="input search" data-isActive="readonly">
-                            <input type="text" value="홍길동" readonly>
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </label>
-                    </div>
-                </div>
-                <div class="th"><div class="th-wrap center">사용자명</div></div>
-                <div class="td">
-                    <div class="td-wrap">
                         <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530, this);">
                             <input type="text" data-label="user" readonly>
                             <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
@@ -99,12 +90,11 @@
                         </label>
                     </div>
                 </div>
-                <div class="th"><div class="th-wrap center">부서</div></div>
+                <div class="th"><div class="th-wrap center">변경 후 부서</div></div>
                 <div class="td">
                     <div class="td-wrap">
                         <label class="input search">
                             <input type="text" data-label="change_department" readonly>
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                         </label>
                     </div>
                 </div>
@@ -171,7 +161,7 @@
             </ul>
             <div class="title-box end">
                 <div class="btn-wrap">
-                    <button type="button" class="btn">부서전체검색</button>
+<!--                    <button type="button" class="btn">부서전체검색</button>-->
                     <button type="button" class="btn primary check">선택</button>
                 </div>
             </div>
@@ -619,7 +609,7 @@ function createHoldingAssetGrid() {
     holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
 
     /* 키보드로 클릭하기 기능 구현중 */
-    AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
+    /*AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
         if(event.keyCode === 32){
             var item = event.item, rowIdField, rowId;
             rowIdField = AUIGrid.getProp(event.pid, "rowIdField"); // rowIdField 얻기
@@ -632,7 +622,9 @@ function createHoldingAssetGrid() {
                 AUIGrid.addCheckedRowsByIds(event.pid, rowId);
             }
         }
-    });
+    });*/
+    /* 더블클릭 시 추가 */
+
 }
 function createEnrollGrid() {
     /* 기본 그리드(예시) */
@@ -668,22 +660,6 @@ function createEnrollGrid() {
             }
         },
         {
-            dataField: "category_department",
-            headerText: "부서",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        },
-        {
-            dataField: "category_user_name",
-            headerText: "사용자",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        },
-        {
             dataField: "category_classification_use",
             headerText: "용도구분",
             width: 160,
@@ -692,25 +668,38 @@ function createEnrollGrid() {
             }
         },
         {
-            dataField: "category_asset_place",
-            headerText: "자산위치",
+            dataField: "category_user_name",
+            headerText: "변경 전 사용자",
             width: 160,
             filter: {
                 showIcon: true,
             }
         },
         {
-            dataField: "category_date",
-            headerText: "반납일",
+            dataField: "category_department",
+            headerText: "변경 전 부서",
             width: 160,
             filter: {
                 showIcon: true,
             }
         },
         {
-            dataField: "category_asset_status",
-            headerText: "자산상태",
-            width: 160,
+            dataField: "category_change_department",
+            headerText: "변경 후 부서",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_change_user_name",
+            headerText: "변경 후 사용자",
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_takeover_date",
+            headerText: "인수인계날짜",
             filter: {
                 showIcon: true,
             }
@@ -826,6 +815,22 @@ $(document).on("click",".menu-btn",function(){
             AUIGrid.resize(enrollGrid_ID, innerWidth);
         },20)
     }
+});
+
+/* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
+$(".quantity-list li button").each(function(){
+    $(this).on("click",function(){
+        let name = $(this).find('.name').text();
+        let comparisonObj = AUIGrid.getOrgGridData(holdingAssetGrid_ID);
+
+        AUIGrid.clearFilterAll(holdingAssetGrid_ID);
+
+        comparisonObj.forEach((i) => {
+            if(name === i.category_product_name){
+                AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_product_name", i.category_product_name);
+            }
+        });
+    });
 });
 </script>
 </body>
