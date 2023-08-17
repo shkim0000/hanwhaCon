@@ -388,20 +388,19 @@ function validateGridData() {
 };*/
 
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
-$(".quantity-list li button").each(function(){
-    $(this).on("click",function(){
-        let name = $(this).find('.name').text();
-        let comparisonObj = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+$(document).on("click", ".quantity-list li button", function(){
+    let name = $(this).find('.name').text();
+    let comparisonObj = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
 
-        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
 
-        comparisonObj.forEach((i) => {
-            if(name === i.category_product_name){
-                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name", i.category_product_name);
-            }
-        });
+    comparisonObj.forEach((i) => {
+        if(name === i.category_product_name){
+            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name", i.category_product_name);
+        }
     });
-});
+})
+
 
 /* 메뉴버튼 클릭시(반응형) */
 $(document).on("click",".menu-btn",function(){

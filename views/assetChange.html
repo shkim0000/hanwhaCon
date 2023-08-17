@@ -970,23 +970,21 @@ $(document).on("click",".menu-btn",function(){
 });
 
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
-$(".quantity-list li button").each(function(){
-    $(this).on("click",function(){
-        let name = $(this).find('.name').text();
-        let comparisonObj = AUIGrid.getOrgGridData(holdingAssetGrid_ID);
+$(document).on("click", ".quantity-list li button", function(){
+    let name = $(this).find('.name').text();
+    let comparisonObj = AUIGrid.getOrgGridData(holdingAssetGrid_ID);
 
-        AUIGrid.clearFilterAll(holdingAssetGrid_ID);
+    AUIGrid.clearFilterAll(holdingAssetGrid_ID);
 
-        comparisonObj.forEach((i) => {
-            if(name === i.category_product_name){
-                AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_product_name", i.category_product_name);
-            }
-            if(name === i.category_classification_use){
-                AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_classification_use", i.category_classification_use);
-            }
-        });
+    comparisonObj.forEach((i) => {
+        if(name === i.category_product_name){
+            AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_product_name", i.category_product_name);
+        }
+        if(name === i.category_classification_use){
+            AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_classification_use", i.category_classification_use);
+        }
     });
-});
+})
 
 </script>
 </body>

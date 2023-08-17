@@ -1,3 +1,6 @@
+/* 요약정보에서 사용될 color class 배열입니다. */
+let color = ["orange","yellow","lightOrange","lightPink","blue","green","purple","gray"];
+
 $(function(){
 
     /* header 추가 */

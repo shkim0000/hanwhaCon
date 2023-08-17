@@ -93,11 +93,9 @@
         <div class="list-box only">
             <ul class="quantity-list">
                 <li>
-                    <button type="button">
-                        <span class="quantity yellow">
+                    <span class="quantity yellow">
                             <span class="title">서비스상태</span>
                         </span>
-                    </button>
                 </li>
                 <li>
                     <button type="button">
@@ -373,20 +371,18 @@ window.onresize = function () {
 }
 
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
-$(".quantity-list li button").each(function(){
-    $(this).on("click",function(){
-        let name = $(this).find('.name').text();
-        let comparisonObj = AUIGrid.getOrgGridData(serviceStatusGrid_ID);
+$(document).on("click", ".quantity-list li button", function(){
+    let name = $(this).find('.name').text();
+    let comparisonObj = AUIGrid.getOrgGridData(serviceStatusGrid_ID);
 
-        AUIGrid.clearFilterAll(serviceStatusGrid_ID);
+    AUIGrid.clearFilterAll(serviceStatusGrid_ID);
 
-        comparisonObj.forEach((i) => {
-            if(name === i.category_service_status){
-                AUIGrid.setFilterByValues(serviceStatusGrid_ID, "category_service_status", i.category_service_status);
-            }
-        });
+    comparisonObj.forEach((i) => {
+        if(name === i.category_service_status){
+            AUIGrid.setFilterByValues(serviceStatusGrid_ID, "category_service_status", i.category_service_status);
+        }
     });
-});
+})
 
 /* 메뉴버튼 클릭시(반응형) */
 $(document).on("click",".menu-btn",function(){
