@@ -15,7 +15,11 @@
     "category_non_existence" : 4,
     "category_add" : 3,
     "category_adjustment" :2 ,
-    "category_realtime_confirm" : "2023-06-19"
+    "category_realtime_confirm" : "2023-06-19",
+    "category_detail_place": "",
+    "category_note": "",
+    "category_use_place": "행정동",
+    "category_have_asset": "3"
   },
   {
     "id": "#grid_id_2",
@@ -33,7 +37,11 @@
     "category_non_existence" : 4,
     "category_add" : 3,
     "category_adjustment" :2 ,
-    "category_realtime_confirm" : "2023-06-19"
+    "category_realtime_confirm" : "2023-06-19",
+    "category_detail_place": "",
+    "category_note": "",
+    "category_use_place": "행정동",
+    "category_have_asset": "3"
   },
   {
     "id": "#grid_id_3",
@@ -51,7 +59,11 @@
     "category_non_existence" : 4,
     "category_add" : 3,
     "category_adjustment" :2 ,
-    "category_realtime_confirm" : "2023-06-19"
+    "category_realtime_confirm" : "2023-06-19",
+    "category_detail_place": "",
+    "category_note": "",
+    "category_use_place": "행정동",
+    "category_have_asset": "3"
   },
   {
     "id": "#grid_id_4",
@@ -69,7 +81,11 @@
     "category_non_existence" : 4,
     "category_add" : 3,
     "category_adjustment" :2 ,
-    "category_realtime_confirm" : "2023-06-19"
+    "category_realtime_confirm" : "2023-06-19",
+    "category_detail_place": "",
+    "category_note": "",
+    "category_use_place": "행정동",
+    "category_have_asset": "3"
   },
   {
     "id": "#grid_id_5",
@@ -87,6 +103,10 @@
     "category_non_existence" : 4,
     "category_add" : 3,
     "category_adjustment" :2 ,
-    "category_realtime_confirm" : "2023-06-19"
+    "category_realtime_confirm" : "2023-06-19",
+    "category_detail_place": "",
+    "category_note": "",
+    "category_use_place": "행정동",
+    "category_have_asset": "3"
   }
 ]

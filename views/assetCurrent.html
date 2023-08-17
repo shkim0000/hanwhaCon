@@ -122,8 +122,9 @@
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서</span>
-                    <label class="input search">
+                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서 검색',505,530,this)">
                         <input type="text" data-label="department" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
@@ -777,6 +778,24 @@
             <div class="btn-wrap">
                 <button type="button" class="btn" onclick="lp_close('rentalExtensionEnroll_pop')">닫기</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- 부서 검색 -->
+<div id="gridPop_department" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department" class="grid-box"></div>
         </div>
     </div>
 </div>

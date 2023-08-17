@@ -827,25 +827,30 @@ function createEnrollAssetGrid() {
                 iconTableRef:{
                     "default":"../resources/img/icon/icon_delete.svg"
                 },
-                onClick: function(){
-                    clickItem = AUIGrid.getSelectedRows(applicationGrid_ID)[0];
+                onClick: function(event){
+                    clickItem = event.item;
 
                     let removedItem = AUIGrid.getRemovedItems(holdingAssetGrid_ID);
-                    console.log(removedItem); // removed된 Item이 잘 나오는지 체크
 
                     if(removedItem.length > 0){
                         let result = AUIGrid.getRowIndexesByValue(holdingAssetGrid_ID, "category_asset_num", clickItem.category_asset_num);
-                        console.log(result);
-                        removedItem.forEach((i) => {
-                            if(i.category_asset_num === clickItem.category_asset_num){
+
+                        for(let i = 0; i < removedItem.length; i++){
+                            if(removedItem[i].category_asset_num === clickItem.category_asset_num){
                                 AUIGrid.restoreSoftRows(holdingAssetGrid_ID, result[0]);
-                                AUIGrid.removeRow(applicationGrid_ID,"selectedIndex");
+                                AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
+                                return;
+                            } else if(removedItem[i].category_asset_num !== clickItem.category_asset_num){
+                                AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
+                                AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
+                                return;
                             }
-                        })
+                        }
                     } else{
-                        AUIGrid.removeRow(applicationGrid_ID, "selectedIndex");
+                        AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
                         AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
                     }
+
 
                     /* 삭제버튼을 눌렀을 때 보유자산 숫자 +1 */
                     let haveName = clickItem.category_product_name;
@@ -962,6 +967,25 @@ $(document).on("click",".menu-btn",function(){
             AUIGrid.resize(applicationGrid_ID, innerWidth);
         },20)
     }
+});
+
+/* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
+$(".quantity-list li button").each(function(){
+    $(this).on("click",function(){
+        let name = $(this).find('.name').text();
+        let comparisonObj = AUIGrid.getOrgGridData(holdingAssetGrid_ID);
+
+        AUIGrid.clearFilterAll(holdingAssetGrid_ID);
+
+        comparisonObj.forEach((i) => {
+            if(name === i.category_product_name){
+                AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_product_name", i.category_product_name);
+            }
+            if(name === i.category_classification_use){
+                AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_classification_use", i.category_classification_use);
+            }
+        });
+    });
 });
 
 </script>

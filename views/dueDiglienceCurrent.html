@@ -81,7 +81,7 @@
                             <h3 class="list-title"><span>자산별 현황</span></h3>
                         </div>
                         <div class="btn-wrap">
-                            <button type="button" class="btn primary send" data-popup="submit_pop" onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
+                            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
                         </div>
                     </div>
                     <div id="assetStatusGrid_ID" class="grid-box h-small2"></div>
@@ -469,6 +469,12 @@ function createUserStatusGrid() {
                 showIcon: true,
             }
         }, {
+            dataField: "category_have_asset",
+            headerText: "보유자산",
+            filter: {
+                showIcon: true,
+            }
+        }, {
             dataField: "category_realtime_confirm",
             headerText: "실시확인 일자",
             filter: {
@@ -501,6 +507,12 @@ function createUserStatusGrid() {
     }, {
         dataField: "category_adjustment",
         positionField: "category_adjustment",
+        operation: "SUM",
+        style: "aui-grid-my-column",
+        formatString: "#,##0"
+    },{
+        dataField: "category_have_asset",
+        positionField: "category_have_asset",
         operation: "SUM",
         style: "aui-grid-my-column",
         formatString: "#,##0"

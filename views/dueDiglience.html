@@ -25,6 +25,7 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+    <script src="../resources/js/grid.js"></script>
 </head>
 <body>
 
@@ -121,7 +122,8 @@
 
         <div class="title-box end">
             <div class="btn-wrap">
-                <button type="button" class="btn add-column" onclick="addRow()">추가</button>
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn add-column" onclick="lp_open('assetSearch_pop', '자산검색', 800,350,'due')">추가</button>
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
@@ -129,6 +131,38 @@
     </div>
 </div>
 <!-- // contents -->
+
+<!-- 팝업 -->
+<div id="assetSearch_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap search-ver con-3">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">자산분류</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="product">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">품목</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="item">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">자산번호</span>
+                        <label class="input">
+                            <input type="text" data-label="assetNumber">
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
+            </div>
+            <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
+        </div>
+    </div>
+</div>
 
 <style>
     .my-cell-style {
@@ -150,7 +184,7 @@ let dueDiglienceGrid_ID;
 
 /* 1-2. dropdown menu 리스트 */
 let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
-
+let groupList2 = ["행정동","사무실","공장"]
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createDueDiglienceGrid();
 
@@ -235,10 +269,29 @@ function createDueDiglienceGrid() {
         }, {
             dataField: "category_investigator",
             headerText: "조사자",
+            headerStyle: "aui-grid-important-header",
             width: 160,
             filter: {
                 showIcon: true,
             }
+        }, {
+            dataField: "category_use_place",
+            headerText: "사용장소",
+            headerStyle: "aui-grid-important-header",
+            width: 160,
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList2,
+            },
+        }, {
+            dataField: "category_detail_place",
+            headerText: "상세위치",
+            headerStyle: "aui-grid-important-header",
+            width: 160,
+        }, {
+            dataField: "category_note",
+            headerText: "비고",
+            width: 200,
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -280,7 +333,7 @@ window.onresize = function () {
 
 /* 행 추가 */
 let cnt2 = 0;
-function addRow() {
+function addRow(asset_num, category_product, category_item_name) {
     var item = new Object();
 
     function formatDate(date) {
@@ -299,11 +352,11 @@ function addRow() {
     const formattedDate = formatDate(now);
 
     item.id = "grid_ID_1" + (++cnt2),
-        item.category_asset_num = '',
-        item.category_product_name = '',
-        item.category_item_name = '',
+        item.category_asset_num = asset_num,
+        item.category_product_name = category_product,
+        item.category_item_name = category_item_name,
         item.category_department = '',
-        item.category_user_name = '',
+        item.category_user_name = '', // 조사자 이름 들어가면 됩니다.
         item.category_before_change = '추가',
         item.category_after_change = '존재',
         item.category_reason_non_existence = '',
@@ -317,11 +370,11 @@ function addRow() {
         AUIGrid.addRow(dueDiglienceGrid_ID, item, "last");
 };
 
-/* 필수 입력 값이 입력되었는지 검사 */
+/*/!* 필수 입력 값이 입력되었는지 검사 *!/
 // 필수로 설정해야 하는 필드들의 값이 모두 입력되었는지 검사
 function validateGridData() {
 
-    // name 과 country 는 필수로 입력되어야 하는 필드임. 이것을 검사
+    // category_asset_num 은 필수로 입력되어야 하는 필드임. 이것을 검사
     var isValid = AUIGrid.validateGridData(dueDiglienceGrid_ID, "category_asset_num", "자산 번호는 반드시 입력해야 합니다.");
 
     // 다른 JS 에서 제공하는 toast 나 alert 으로 경고문을 띄우고자 하는 경우 다음처럼 message 파라메터 생략.
@@ -329,8 +382,10 @@ function validateGridData() {
 
     if (isValid) {
         alert("저장되었습니다");
+    } else{
+        alert("모든 사항이 입력되지 않았습니다.")
     }
-};
+};*/
 
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
 $(".quantity-list li button").each(function(){

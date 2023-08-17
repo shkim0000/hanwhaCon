@@ -1621,59 +1621,11 @@ function subPopupAssetSearch(id,title,width,height, e){
             $("#assetSearch_pop").dialog("close");
         })
     }
-
-
-    /* 그리드 사용 함수 */
-    if(type === "newEnroll"){
-        /* popup_grid_newEnroll_detail 에서 클릭한 rowData가 input val로 삽입됨*/
-        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
-        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
-
-        /* 더블클릭 시 자산 정보 그리드에 데이터 추가하는 이벤트  */
+    if(e === 'due'){
         AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
-            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
-            let changeItem = {
-                category_item: rowData.category_item,
-                category_item_name: rowData.category_item_name,
-                category_asset_num: rowData.category_asset_num,
-                category_product: rowData.category_product,
-                category_status: rowData.category_status,
-            }
-            AUIGrid.updateRow(popup_grid_newEnroll_detail, changeItem, e.rowIndex);
-            lp_close("assetSearch_pop");
-        })
-    } else if (type === "change"){
-
-        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
-        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
-
-        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
-            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
-            let changeItem = {
-                category_changeAsset_num: rowData.category_asset_num,
-                category_changeProduct_name: rowData.category_item_name,
-                category_product: rowData.category_product,
-            }
-            AUIGrid.updateRow(popup_grid_changeEnroll_detail, changeItem, e.rowIndex);
-            lp_close("assetSearch_pop");
-        })
-    } else if (type === "rental"){
-
-        $("#assetSearch_pop input[data-label='product']").val(e.category_product);
-        $("#assetSearch_pop input[data-label='item']").val(e.category_item);
-
-        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
-            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
-            console.log(rowData);
-            console.log(e);
-            let changeItem = {
-                category_asset_num: rowData.category_asset_num,
-                category_item_name: rowData.category_item_name,
-                category_product: rowData.category_product,
-                category_item: rowData.category_item,
-            }
-            AUIGrid.updateRow(popup_grid_rentalEnroll_detail, changeItem, e.rowIndex);
-            lp_close("assetSearch_pop");
+            console.log(event.item.category_asset_num);
+            addRow(event.item.category_asset_num, event.item.category_product, event.item.category_item_name);
+            $("#assetSearch_pop").dialog("close");
         })
     }
 }

@@ -400,6 +400,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 
 /* popup > customTable */
 .popup .custom-table .th {padding:2px;height:42px;}
+.popup .custom-table .th.textarea{height:auto;border-radius:0;border:none;}
 .popup .custom-table .td {padding:2px 10px;}
 .popup .custom-table .th * , .popup .custom-table .td .td-wrap *{font-size:14px;}
 .popup .custom-table .td .aui-grid * {font-size:12px;}
@@ -588,6 +589,7 @@ tbody tr p{text-align:center;}
 .td.line{border-right:1px solid var(--line1);}
 
 /* custom-table > td 길이 */
+.row .td.whole .td-wrap{gap:10px;}
 .row.con-2 .td{width:calc(50% - 120px);}
 .row.con-3 .td{width:calc(33.3% - 120px);}
 .row.con-3 .td.whole{width:calc(100% - 120px);}
@@ -597,6 +599,8 @@ tbody tr p{text-align:center;}
 .row.con-3 .td.medium{width:calc(66.6% - 120px);max-width:none;}
 .row.con-3 .td.medium .select + .select{margin-left:8px;}
 .row.con-4 .td{width:calc(25% - 120px);}
+.row.con-4 .td.medium{width:calc(50% - 120px);max-width:none;}
+.row.con-4 .td.medium .select + .select{margin-left:8px;}
 .row.con-5 .td{width:calc(20% - 120px);}
 
 /* custom-table > design-ver */

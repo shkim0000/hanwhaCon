@@ -88,13 +88,6 @@
             <ul class="quantity-list">
                 <li>
                     <button type="button">
-                        <span class="quantity yellow">
-                            <span class="title">서비스상태</span>
-                        </span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button">
                         <span class="quantity blue">
                             <span class="num">2</span>
                             <span class="name">신청</span>
@@ -113,7 +106,7 @@
                     <button type="button">
                         <span class="quantity purple">
                             <span class="num">1</span>
-                            <span class="name">조치중</span>
+                            <span class="name">수리중</span>
                         </span>
                     </button>
                 </li>
@@ -121,7 +114,7 @@
                     <button type="button">
                         <span class="quantity lightOrange">
                             <span class="num">3</span>
-                            <span class="name">완료</span>
+                            <span class="name">조치완료</span>
                         </span>
                     </button>
                 </li>
@@ -129,15 +122,7 @@
                     <button type="button">
                         <span class="quantity lightPink">
                             <span class="num">1</span>
-                            <span class="name">보류</span>
-                        </span>
-                    </button>
-                </li>
-                <li>
-                    <button type="button">
-                        <span class="quantity gray">
-                            <span class="num">3</span>
-                            <span class="name">수리중</span>
+                            <span class="name">취소</span>
                         </span>
                     </button>
                 </li>
@@ -219,9 +204,18 @@
                     <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
                     <div class="td"><div class="td-wrap"><p>6층 604호</p></div></div>
                 </div>
+            </div>
+
+            <div class="custom-table">
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>요청내용</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>이런 문제가 생겨서 신고합니다.</p></div></div>
+                    <div class="th textarea"><div class="th-wrap center">요청내용</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="textarea">
+                                <textarea rows="6"></textarea>
+                            </label>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -234,7 +228,7 @@
 
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_disabledCurrent_history" class="grid-box h-small"></div>
@@ -408,22 +402,15 @@ window.onresize = function () {
 $(".quantity-list li button").each(function(){
     $(this).on("click",function(){
         let name = $(this).find('.name').text();
+        let comparisonObj = AUIGrid.getOrgGridData(disabledDC_ID);
 
-        if(name === "신청"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "신청");
-        } else if (name === "접수"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "접수");
-        } else if (name === "조치중"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "조치중");
-        } else if (name === "완료"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "완료");
-        } else if (name === "보류"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "보류");
-        } else if (name === "수리중"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "수리중");
-        } else if (name === "전체"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", ["신청","접수","조치중","완료","보류","수리중"]);
-        }
+        AUIGrid.clearFilterAll(disabledDC_ID);
+
+        comparisonObj.forEach((i) => {
+            if(name === i.category_status){
+                AUIGrid.setFilterByValues(disabledDC_ID, "category_status", i.category_status);
+            }
+        });
     });
 });
 

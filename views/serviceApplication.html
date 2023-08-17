@@ -79,9 +79,9 @@
                     </div>
                 </div>
             </div>
-            <div class="row con-3">
+            <div class="row con-4">
                 <div class="th"><div class="th-wrap center">서비스 구분</div></div>
-                <div class="td">
+                <div class="td medium">
                     <div class="td-wrap">
                         <label class="select">
                             <select>
@@ -119,7 +119,7 @@
             </div>
             <div class="row">
                 <div class="th"><div class="th-wrap center"><p class="important">사용기간</p></div></div>
-                <div class="td">
+                <div class="td whole">
                     <div class="td-wrap">
                         <label class="date">
                             <input type="text" id="date-prev">
@@ -596,7 +596,7 @@ function addRow() {
     let swVal = $("#software_value").val();
     let quantity = $("#quantity").val();
     let assetNum = $("input[data-label='asset_num']").val();
-    let date = $("#date-prev").val() + "~" + $("#date-next").val();
+    let date = $("#date-prev").val() + " ~ " + $("#date-next").val();
     let orderText = $("#order_text").val();
 
 
