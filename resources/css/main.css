@@ -99,6 +99,7 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 
 /* AUI Grid */
 .multiple-grid-wrap{display:flex;gap:20px;}
+.multiple-grid-wrap.center{display:flex;justify-content:center;gap:20px;}
 .multiple-grid-wrap > .grid-box{width:calc(80% - 10px);}
 .grid-sub-box{width:calc(20% - 10px);height:380px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px;background-color:#fff3ec;border:1px solid #f6dccc;}
 .multiple-grid-box{width:50%;}
@@ -106,6 +107,7 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 .multiple-grid-box .title-box .list-title{margin-bottom:0;}
 .grid-box{height:380px;}
 .grid-box > *{width:100%!important;}
+.grid-box.input-grid{height:70px;}
 .grid-box.h-small{height:200px;}
 .grid-box.h-small2{height:320px;}
 .grid-box.h-small3{height:480px;}

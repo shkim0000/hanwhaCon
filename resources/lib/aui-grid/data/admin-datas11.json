@@ -1,0 +1,56 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_menu":"신규신청",
+    "category_application":"1",
+    "category_manager_check":"3",
+    "category_output":"0",
+    "category_finish":"2",
+    "category_companion": "2"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_menu":"교체신청",
+    "category_application":"2",
+    "category_manager_check":"1",
+    "category_output":"3",
+    "category_finish":"4",
+    "category_companion": "1"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_menu":"대여신청",
+    "category_application":"2",
+    "category_manager_check":"0",
+    "category_output":"1",
+    "category_finish":"2",
+    "category_companion": "5"
+  },
+  {
+    "id": "#grid_id_4",
+    "category_menu":"반납신청",
+    "category_application":"5",
+    "category_manager_check":"2",
+    "category_output":"1",
+    "category_finish":"3",
+    "category_companion": "5"
+  },
+  {
+    "id": "#grid_id_5",
+    "category_menu":"이동신청",
+    "category_application":"1",
+    "category_manager_check":"0",
+    "category_output":"0",
+    "category_finish":"0",
+    "category_companion": "0"
+  },
+  {
+    "id": "#grid_id_6",
+    "category_menu":"인수인계신청",
+    "category_application":"6",
+    "category_manager_check":"2",
+    "category_output":"4",
+    "category_finish":"0",
+    "category_companion": "3"
+  }
+]

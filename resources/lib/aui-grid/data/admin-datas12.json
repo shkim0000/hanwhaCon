@@ -1,0 +1,23 @@
+[
+  {
+    "id": "#grid_id_1",
+    "category_menu":"신고",
+    "category_total":"1",
+    "category_disability_report":"3",
+    "category_service_order":"0"
+  },
+  {
+    "id": "#grid_id_2",
+    "category_menu":"처리중",
+    "category_total":"0",
+    "category_disability_report":"0",
+    "category_service_order":"0"
+  },
+  {
+    "id": "#grid_id_3",
+    "category_menu":"완료",
+    "category_total":"3",
+    "category_disability_report":"3",
+    "category_service_order":"0"
+  }
+]

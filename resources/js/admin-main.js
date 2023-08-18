@@ -9,7 +9,7 @@ $(function(){
                     "</div>\n"+
                     "<div class='inner'>\n"+
                         "<div class='account'>\n"+
-                            "[<span>홍길동</span> / <span>IT운영</span>]\n"+
+                            "<span>관리자</span>[<span>홍길동</span> / <span>IT운영</span>]\n"+
                         "</div>\n"+
                         "<button type='button' class='logout-btn'>Logout</button>\n"+
                     "</div>\n"+
@@ -403,7 +403,7 @@ function lp_open(id,title,width,height,e,type){
     });
     /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
     if(id === "gridPop_user"){
-        gridPopUser(id,title,width,height,e) ;
+        gridPopUser(id,title,width,height,e, type) ;
     } else if (id === "gridPop_manager"){
         gridPopManager(id,title,width,height,e);
     } else if(id === "gridPop_department"){
@@ -454,6 +454,8 @@ function lp_open(id,title,width,height,e,type){
         gridPopSelectUser();
     }else if(id === "gridPop_assetClassification"){
         gridPopAssetClassification();
+    } else if(id === "gridPop_applicationStatus") {
+        popupApplicationStatus();
     }
 }
 

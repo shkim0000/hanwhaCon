@@ -99,6 +99,13 @@
                     </label>
                 </div>
                 <div class="input-list">
+                    <span class="input-title">자산번호</span>
+                    <label class="input search" onclick="lp_open('assetSearch_pop','자산검색',800,500,this,'normal');">
+                        <input type="text" data-label="assetNumber" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
                     <span class="input-title">사용자</span>
                     <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
                         <input type="text" data-label="user" readonly>
@@ -107,14 +114,9 @@
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서</span>
-                    <label class="input search">
-                        <input type="text" data-label="department" disabled>
-                    </label>
-                </div>
-                <div class="input-list">
-                    <span class="input-title">자산번호</span>
-                    <label class="input">
-                        <input type="text">
+                    <label class="input search" data-place="normal" onclick="lp_open('gridPop_department','부서검색',505,530,this);">
+                        <input type="text" data-label="department" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
@@ -218,13 +220,26 @@
     </div>
 </div>
 
+<!--자산미출고 확인 팝업-->
+<div id="gridPop_assetCheck" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <p class="center">자산을 미출고 하시겠습니까?</p>
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="unreleasedCheck(e)">확인</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_assetCheck')">취소</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 신규신청 -->
 <div id="newEnroll_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="th"><div class="th-wrap center">신청번호<중/div></div>
                     <div class="td"><div class="td-wrap">122141</div></div>
                     <div class="th"><div class="th-wrap center">신청구분</div></div>
                     <div class="td"><div class="td-wrap">자산 신규 신청</div></div>
@@ -238,7 +253,7 @@
                     <div class="td">
                         <div class="td-wrap">
                             <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
-                                <input type="text" data-label="user">
+                                <input type="text" data-label="user" readonly>
                                 <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </label>
                         </div>
@@ -289,6 +304,10 @@
                 <div class="title">
                     <h3>자산정보</h3>
                 </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn primary">출고</button>
+                    <button type="button" class="btn">취소</button>
+                </div>
             </div>
             <div id="popup_grid_newEnroll_detail" class="grid-box h-small"></div>
 
@@ -324,10 +343,10 @@
                 </div>
             </div>
 
-            <!-- 처리이력 -->
+            <!-- 결재이력 -->
             <div class="title-box">
                 <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_newEnroll_history" class="grid-box h-small"></div>
@@ -1254,7 +1273,7 @@
             if(result === "신규신청"){
                 $("#newEnroll_pop").dialog({
                     title:"신규신청",
-                    width: width,
+                    width: 1400,
                     height: height,
                     modal: true,
                     resizable: false,

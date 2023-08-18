@@ -25,7 +25,8 @@
     "category_serial_num" : "E-55A6684",
     "category_purchase": 151200,
     "category_purchase_place": "구매팀",
-    "category_purchasing_manager": "임꺽정"
+    "category_purchasing_manager": "임꺽정",
+    "category_use_1": "사무용"
   },
   {
     "id": "#grid_id_2",
@@ -53,7 +54,8 @@
     "category_serial_num" : "E-55A6684",
     "category_purchase": 151200,
     "category_purchase_place": "구매팀",
-    "category_purchasing_manager": "임꺽정"
+    "category_purchasing_manager": "임꺽정",
+    "category_use_1": "사무용"
 
   },
   {
@@ -82,6 +84,7 @@
     "category_serial_num" : "E-55A6684",
     "category_purchase": 151200,
     "category_purchase_place": "구매팀",
-    "category_purchasing_manager": "임꺽정"
+    "category_purchasing_manager": "임꺽정",
+    "category_use_1": "사무용"
   }
 ]

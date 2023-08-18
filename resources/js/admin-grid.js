@@ -2,7 +2,7 @@
 /* [사용자 / 부서 검색 팝업]------------------------------------------------------------------- */
 /* 1. 사용자 검색 */
 let popup_grid_user;
-function gridPopUser(id,title,width,height,e){
+function gridPopUser(id,title,width,height,e,type){
     /* 1. AUIGrid 칼럼 설정 */
     let gridPop_user_column = [
         {
@@ -35,42 +35,56 @@ function gridPopUser(id,title,width,height,e){
     /* 그리드 생성 */
     popup_grid_user = AUIGrid.create("#popup_grid_user",  gridPop_user_column, gridPop_user_pros);
     requestGridPopUser();
-
-    /* 그리드 기능 */
-    let targetPlace = $(e).attr("data-place");
-    let userName;
-    let applicantName;
-    let userDepartment;
-    let userID;
-
-    AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
-        if(targetPlace === 'user_search'){
-            userName = event.item.category_user_name;
-            userDepartment = event.item.category_department;
-            userID = event.item.category_employeeID;
-
-            $("input[data-label='user']").val(userName);
-            $("input[data-label='department']").val(userDepartment);
-            $("input[data-label='userID']").val(userID);
-
+    if(type === "newEnroll"){
+        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event){
+            console.log(event);
+            console.log(e);
+            let changeItem = {
+                ...e,
+                category_admin_select_user: event.item.category_user_name,
+            }
+            AUIGrid.updateRow(popup_grid_newEnroll_detail, changeItem, e.rowIndex);
             $("#gridPop_user").dialog("close");
-        }else if(targetPlace === 'user_applicant'){
-            applicantName = event.item.category_user_name;
-            console.log("dmkdmfkdmk")
-            $("input[data-label='applicant']").val(applicantName);
+        })
+    } else if(type === "popTable"){
 
-            $("#gridPop_user").dialog("close");
-        } else{
-            userName = event.item.category_user_name;
-            userDepartment = event.item.category_department;
+    } else {
+        /* 그리드 기능 */
+        let targetPlace = $(e).attr("data-place");
+        let userName;
+        let applicantName;
+        let userDepartment;
+        let userID;
 
-            $("input[data-label='change_user']").val(userName);
-            $("input[data-label='change_department']").val(userDepartment);
+        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+            if(targetPlace === 'user_search'){
+                userName = event.item.category_user_name;
+                userDepartment = event.item.category_department;
+                userID = event.item.category_employeeID;
 
-            $("#gridPop_user").dialog("close");
-        }
+                $("input[data-label='user']").val(userName);
+                $("input[data-label='department']").val(userDepartment);
+                $("input[data-label='userID']").val(userID);
 
-    });
+                $("#gridPop_user").dialog("close");
+            }else if(targetPlace === 'user_applicant'){
+                applicantName = event.item.category_user_name;
+                $("input[data-label='applicant']").val(applicantName);
+
+                $("#gridPop_user").dialog("close");
+            } else{
+                userName = event.item.category_user_name;
+                userDepartment = event.item.category_department;
+
+                $("input[data-label='change_user']").val(userName);
+                $("input[data-label='change_department']").val(userDepartment);
+
+                $("#gridPop_user").dialog("close");
+            }
+
+        });
+    }
+
 }
 function requestGridPopUser() {
     $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
@@ -188,12 +202,15 @@ function popupDepartmentSearch(id,title,width,height,e){
         if(targetPlace === 'department_search'){
             userDepartment = event.item.category_department;
             $("input[data-label='department']").val(userDepartment);
-
             $("#gridPop_department").dialog("close");
         } else if(targetPlace === 'department_search_only') {
             userDepartment = event.item.category_department;
             $("input[data-label='department-only']").val(userDepartment);
-
+            $("#gridPop_department").dialog("close");
+        } else if(targetPlace === "normal"){
+            userDepartment = event.item.category_department;
+            $("input[data-label='department']").val(userDepartment);
+            $("input[data-label='user']").val("");
             $("#gridPop_department").dialog("close");
         } else{
             $("input[data-label='department']").val(event.item.category_department);
@@ -221,34 +238,98 @@ function requestGridPopDepartment() {
 /* 1. 신규신청 */
 /* 자산정보 */
 let popup_grid_newEnroll_detail;
+let essentialPartsList = ["지급","미지급"];
 function gridPopNewEnrollDetail(id,title,width,height){
     /* 1. AUIGrid 칼럼 설정 */
     let gridPop_newEnroll_detail_column = [
         {
-            dataField: "category_product",
-            headerText: "자산분류",
-        },{
-            dataField: "category_item",
-            headerText: "품목",
-        }, {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
-            style: "search_grid_style",
-            renderer:{
-                type: "ButtonRenderer",
-                onClick: function(event){
-                    let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
-                    let rowIndex = event.rowIndex;
-                    let resultData = {...rowData[0], rowIndex: rowIndex};
-                    lp_open("assetSearch_pop","자산검색",800,500, resultData, "newEnroll");
+            dataField: "application_parent", // 임의의 값
+            headerText: "신청",
+            children: [
+                {
+                    dataField: "category_user_product",
+                    headerText: "자산분류",
+                },{
+                    dataField: "category_user_name",
+                    headerText: "사용자",
+                },{
+                    dataField: "category_quantity",
+                    headerText: "수량",
+                },{
+                    dataField: "category_usage",
+                    headerText: "용도"
                 }
-            }
-        }, {
-            dataField: "category_item_name",
-            headerText: "모델명",
-        }]
+            ]
+        },
+        {
+            dataField:"payment_parent", // 임의의 값
+            headerText:"지급",
+            children: [
+                {
+                    dataField: "category_asset_num",
+                    headerText: "자산번호",
+                    style: "search_grid_style",
+                    renderer:{
+                        type: "ButtonRenderer",
+                        onClick: function(event){
+                            let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
+                            let rowIndex = event.rowIndex;
+                            let resultData = {...rowData[0], rowIndex: rowIndex};
+                            lp_open("assetSearch_pop","자산검색",800,500, resultData, "newEnroll");
+                        }
+                    },
+                    width:200,
+                },{
+                    dataField: "category_admin_quantity",
+                    headerText: "수량",
+                    renderer: {
+                        type: "NumberStepRenderer",
+                        min: 0,
+                        max: 1,
+                    }
+                }, {
+                    dataField: "category_product",
+                    headerText: "자산분류",
+                }, {
+                    dataField: "category_usage",
+                    headerText: "용도",
+                }, {
+                    dataField: "category_item_name",
+                    headerText: "모델명",
+                    width:150,
+                }, {
+                    dataField: "category_essential_parts",
+                    headerText: "필수부품",
+                    renderer: {
+                        type: "DropDownListRenderer",
+                        list: essentialPartsList
+                    }
+                }, {
+                    dataField: "category_admin_select_user",
+                    headerText: "사용자",
+                    style: "search_grid_style",
+                    renderer:{
+                        type: "ButtonRenderer",
+                        onClick: function(event){
+                            let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
+                            let rowIndex = event.rowIndex;
+                            let resultData = {...rowData[0], rowIndex: rowIndex};
+                            lp_open('gridPop_user','사용자 검색',505,530,resultData,"newEnroll")
+                        }
+                    },
+                    width: 150,
+                },{
+                    dataField: "category_release_date",
+                    headerText: "출고일자"
+                }
+            ]
+        },
+    ]
     /* 2. 그리드 속성 설정 */
     let gridPop_newEnroll_detail_pros = {
+        rowIdField: "id",
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -256,11 +337,25 @@ function gridPopNewEnrollDetail(id,title,width,height){
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         autoGridHeight : true,
         fillColumnSizeMode:true,
+        editable: true,
     }
 
     /* 그리드 생성 */
     popup_grid_newEnroll_detail = AUIGrid.create("#popup_grid_newEnroll_detail", gridPop_newEnroll_detail_column, gridPop_newEnroll_detail_pros);
     requestGridPopNewEnrollDetail();
+
+    $(".aui-grid-number-step-down-btn").on("click", function(){
+        let number = $(this).closest("tr").find(".aui-grid-number-step-input");
+
+        let result = confirm("자산을 미출고 하시겠습니까?");
+        if(result){
+            $(this).closest("tr").find("td:last-child > div").text("미출고");
+        }else{
+            if(number.val() === "0"){
+                number.val("1")
+            }
+        }
+    });
 }
 function requestGridPopNewEnrollDetail(){
     $.get("../resources/lib/aui-grid/data/sample-datas14-2.json", function (data) {
@@ -333,6 +428,7 @@ function subPopupAssetSearch(id,title,width,height, e, type){
         /* 더블클릭 시 자산 정보 그리드에 데이터 추가하는 이벤트  */
         AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
             let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            console.log(rowData);
             let changeItem = {
                 category_item: rowData.category_item,
                 category_item_name: rowData.category_item_name,
@@ -365,8 +461,6 @@ function subPopupAssetSearch(id,title,width,height, e, type){
 
         AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
             let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
-            console.log(rowData);
-            console.log(e);
             let changeItem = {
                 category_asset_num: rowData.category_asset_num,
                 category_item_name: rowData.category_item_name,
@@ -374,6 +468,12 @@ function subPopupAssetSearch(id,title,width,height, e, type){
                 category_item: rowData.category_item,
             }
             AUIGrid.updateRow(popup_grid_rentalEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
+    } else if (type === "normal"){
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            $("input[data-label='assetNumber']").val(rowData.category_asset_num);
             lp_close("assetSearch_pop");
         })
     }
@@ -415,6 +515,10 @@ function gridPopNewEnrollHistory(id,title,width,height){
             dataField: "category_time",
             headerText: "시간",
         },
+        {
+            dataField: "category_opinion",
+            headerText: "결재의견"
+        }
     ]
 
     /* 2. 그리드 속성 설정 */
@@ -569,7 +673,6 @@ function gridPopRentalEnrollDetail(id,title,width,height){
                 type: "ButtonRenderer",
                 onClick: function(event){
                     let rowData = AUIGrid.getSelectedRows(popup_grid_rentalEnroll_detail)[0];
-                    console.log(rowData);
                     let resultData = {...rowData, rowIndex: event.rowIndex}
                     lp_open("assetSearch_pop","자산검색",800,500, resultData, "rental");
                 }
@@ -1657,8 +1760,8 @@ function requestServiceDeskHistory(){
 
 /* [ 자산등록 - 자산신규등록 : excel import팝업 , 자산입고현황 : 신청현황 팝업 ]----------------------------------------------------------- */
 let popup_grid_consistency; // 엑셀 import
-function popupConsistency(id,title,width,height){
-    /* 1. AUIGrid 칼럼 설정 */
+/*function popupConsistency(id,title,width,height){
+    /!* 1. AUIGrid 칼럼 설정 *!/
     let columnLayout = [
         {
             dataField: "category_consistency",
@@ -1731,8 +1834,301 @@ function popupConsistency(id,title,width,height){
                 showIcon: true,
             }
         }, {
-            dataField: "category_expiration_date",
-            headerText: "사용연한",
+            dataField: "category_status",
+            headerText: "상태",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_serial_num",
+            headerText: "시리얼",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_purchase",
+            headerText: "구매금액",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_purchase_place",
+            headerText: "구매처",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_purchasing_manager",
+            headerText: "구매담당자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }];
+    /!* 2. 그리드 속성 설정 *!/
+    let gridPros = {
+        // 페이징 사용
+        rowIdField: "id",
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple",
+        showPageRowSelect: true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    };
+
+    /!* 그리드 생성 *!/
+    popup_grid_consistency = AUIGrid.create("#popup_grid_consistency", columnLayout, gridPros);
+    requestConsistencyData();
+
+}
+function requestConsistencyData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
+        AUIGrid.setGridData(popup_grid_consistency, data);
+    });
+}*/
+
+
+// IE10, 11는 바이너리스트링 못읽기 때문에 ArrayBuffer 처리 하기 위함.
+function fixdata(data) {
+    var o = "", l = 0, w = 10240;
+    for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
+    o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
+    return o;
+};
+
+// 파싱된 시트의 CDATA 제거 후 반환.
+function process_wb(wb) {
+    var output = "";
+    output = JSON.stringify(to_json(wb));
+    output = output.replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1');
+    return JSON.parse(output);
+};
+
+// 엑셀 시트를 파싱하여 반환
+function to_json(workbook) {
+    var result = {};
+    workbook.SheetNames.forEach(function (sheetName) {
+        // JSON 으로 파싱
+        // var roa = XLSX.utils.sheet_to_row_object_array(workbook.Sheets[sheetName]);
+
+        // CSV 로 파싱
+        var roa = XLSX.utils.sheet_to_csv(workbook.Sheets[sheetName]);
+
+        if (roa.length > 0) {
+            result[sheetName] = roa;
+        }
+    });
+    return result;
+}
+
+// 엑셀 파일 시트에서 파싱한 JSON 데이터 기반으로 그리드 동적 생성
+function createAUIGrid(csvStr) {
+    if (AUIGrid.isCreated(popup_grid_consistency)) {
+        AUIGrid.destroy(popup_grid_consistency);
+        popup_grid_consistency = null;
+    }
+    var jsonData = parseCsv(csvStr);
+    var columnLayout = [
+        {
+            /* 적합성 여부는 "category_consistency : true 면 ok 이미지, false면 not 이미지가 출력됩니다. 적합성 조회시, boolean값을 넣어주면 됩니다. */
+            dataField: "category_consistency",
+            headerText: "적합성 여부",
+            width: 180,
+            renderer : {
+                type : "ImageRenderer",
+                imgHeight : 16, // 이미지 높이, 지정하지 않으면 rowHeight에 맞게 자동 조절되지만 빠른 렌더링을 위해 설정을 추천합니다.
+                altField : null, // alt(title) 속성에 삽입될 필드명, 툴팁으로 출력됨. 만약 null 을 설정하면 툴팁 표시 안함.
+                srcFunction: function(rowIndex, columnIndex, value, item){
+                    switch(value){
+                        case true:
+                            return "../resources/img/accept-ok.png";
+                        case false:
+                            return "../resources/img/accept-not.png";
+                    }
+                }
+            },
+            filter: {
+                showIcon: true,
+            }
+        },
+    ];
+    var gridProps = {
+        rowIdField: "id",
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple",
+        showPageRowSelect: true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+        fillColumnSizeMode: true,
+    };
+
+    // 현재 엑셀 파일의 0번째 행을 기준으로 컬럼을 작성함.
+    // 만약 상단에 문서 제목과 같이 있는 경우
+    // 조정 필요.
+    var firstRow = jsonData[0];
+
+    if (typeof firstRow == "undefined") {
+        alert("AUIGrid 로 변환할 수 없는 엑셀 파일입니다.");
+        return;
+    }
+
+    const name = ["자산종류","모델명","수량","자산번호","시리얼키"]
+    $.each(firstRow, function (n, v) {
+        columnLayout.push({
+            dataField: n,
+            headerText: name[n],
+            width: 180
+        });
+    });
+
+    // 그리드 생성
+    popup_grid_consistency = AUIGrid.create("#popup_grid_consistency", columnLayout, gridProps);
+
+    // 그리드에 CSV 데이터 삽입
+    AUIGrid.setCsvGridData(popup_grid_consistency, csvStr, false);
+
+};
+
+
+//최초 그리드 생성..
+function popupConsistency() {
+
+    var columnLayout = [];
+
+    for (var i = 0; i < 20; i++) {
+        columnLayout.push({
+            dataField: "f" + i,
+            headerText: String.fromCharCode(65 + i),
+            width: 80
+        });
+    }
+
+    // 그리드 속성 설정
+    var gridPros = {
+        noDataMessage: "로컬 PC의 엑셀 파일을 선택하십시오.",
+        rowIdField: "id",
+        enableRowCheckShiftKey: true,
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple",
+        showPageRowSelect: true,
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        enableFilter: true, // 필터 true 설정
+    };
+
+    // 실제로 #grid_wrap 에 그리드 생성
+    popup_grid_consistency = AUIGrid.create("#popup_grid_consistency", columnLayout, gridPros);
+
+    // 그리드 최초에 빈 데이터 넣음.
+    AUIGrid.setGridData(popup_grid_consistency, []);
+}
+
+function parseCsv(value) {
+    var rows = value.split("\n");
+    var pData = [];
+    for (var i = 0, len = rows.length; i < len; i++) {
+        pData[i] = rows[i].split(",");
+    }
+    return pData;
+}
+
+
+
+
+
+/* // [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */
+
+/* [ 자산등록 - 자산입고현황 팝업 */
+let popup_grid_application_status;
+
+function popupApplicationStatus(){
+
+    let columnLayout = [
+        {
+            dataField: "category_consistency",
+            headerText: "정합성",
+            width: 180,
+            renderer : {
+                type : "ImageRenderer",
+                imgHeight : 16, // 이미지 높이, 지정하지 않으면 rowHeight에 맞게 자동 조절되지만 빠른 렌더링을 위해 설정을 추천합니다.
+                altField : null, // alt(title) 속성에 삽입될 필드명, 툴팁으로 출력됨. 만약 null 을 설정하면 툴팁 표시 안함.
+                srcFunction: function(rowIndex, columnIndex, value, item){
+                    switch(value){
+                        case true:
+                            return "../resources/img/accept-ok.png";
+                        case false:
+                            return "../resources/img/accept-not.png";
+                    }
+                }
+            },
+            filter: {
+                showIcon: true,
+            }
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_asset_classification",
+            headerText: "자산분류",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_model_name",
+            headerText: "모델",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_asset_place",
+            headerText: "자산위치",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_detail_place",
+            headerText: "상세위치",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_intro_date",
+            headerText: "도입일",
             width: 160,
             filter: {
                 showIcon: true,
@@ -1772,8 +2168,8 @@ function popupConsistency(id,title,width,height){
             filter: {
                 showIcon: true,
             }
-        }];
-    /* 2. 그리드 속성 설정 */
+        }
+        ]
     let gridPros = {
         // 페이징 사용
         rowIdField: "id",
@@ -1790,22 +2186,16 @@ function popupConsistency(id,title,width,height){
         enableFilter: true, // 필터 true 설정
     };
 
-    /* 그리드 생성 */
-    popup_grid_consistency = AUIGrid.create("#popup_grid_consistency", columnLayout, gridPros);
-    requestConsistencyData();
-
-    /* 그리드 관련 함수 */
-    setTimeout(function(){
-        let countRow = AUIGrid.getRowCount(popup_grid_consistency);
-        $(".sum-count").text(countRow);
-    },100);
+    popup_grid_application_status = AUIGrid.create("#popup_grid_application_status", columnLayout, gridPros);
+    requestPopupApplicationStatusData();
 }
-function requestConsistencyData() {
+
+function requestPopupApplicationStatusData() {
     $.get("../resources/lib/aui-grid/data/sample-datas15.json", function (data) {
-        AUIGrid.setGridData(popup_grid_consistency, data);
+        AUIGrid.setGridData(popup_grid_application_status, data);
     });
 }
-/* // [ 자산등록 - 자산신규등록 : excel import팝업 ]----------------------------------------------------------- */
+
 
 /* 자산조회 탭메뉴 그리드 sw 정보 */
 let popup_grid_swInformation;

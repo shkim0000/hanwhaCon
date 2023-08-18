@@ -74,6 +74,7 @@
                         <div class="title">
                             <h3>서비스 요청 요약</h3>
                         </div>
+                        <p>2023년 8월</p>
                     </div>
                     <div class="ds-content-box">
                         <ul class="quantity-list">
@@ -139,30 +140,38 @@ let assetStatus_echart = echarts.init(document.getElementById('assetStatus_echar
 /* 차트 옵션 */
 let option = {
     title: {
-        text: '나의 IT 서비스'
+        text: '자산상태별 현황'
     },
     tooltip: {},
     legend: {
-        data: ['신청','처리중','완료']
+        data: ['계','가용','사용','불용','대여']
     },
     xAxis: {
-        data: ['신규신청', '대여신청', '인수인계신청', '서비스요청']
+        data: ['PC', '모니터', '프린터', '노트북']
     },
     yAxis: {},
     series: [
         {
-            name: '신청',
+            name: '계',
             type: 'bar',
-            data: [5, 20, 36, 10, 10, 20]
+            data: [50, 40, 30, 20, 10]
         }, {
-            name: '처리중',
+            name: '가용',
             type: 'bar',
-            data: [10, 10, 6, 30, 40, 12]
+            data: [20, 10, 16, 5, 5]
         }, {
-            name: '완료',
+            name: '사용',
             type: 'bar',
-            data: [48, 12, 31, 10, 10, 20]
-        }
+            data: [30, 25, 10, 5, 2]
+        }, {
+            name: '불용',
+            type: 'bar',
+            data: [0, 5, 6, 0, 3]
+        },, {
+            name: '대여',
+            type: 'bar',
+            data: [0, 0, 4, 10, 0]
+        },
     ]
 };
 assetStatus_echart.setOption(option);
@@ -194,50 +203,31 @@ function createApplicationGrid() {
             headerText: "아이디",
             visible : false
         }, {
-            dataField: "category_application_num",
-            headerText: "신청번호",
+            dataField: "category_menu",
+            headerText: "구분",
             width: 160,
         }, {
-            dataField: "category_application_division",
-            headerText: "신청구분",
+            dataField: "category_application",
+            headerText: "신청",
             width: 180
         }, {
-            dataField: "category_application_date",
-            headerText: "신청일자",
+            dataField: "category_manager_check",
+            headerText: "담당자 지정",
             width: 280
         }, {
-            dataField: "category_content",
-            headerText: "내용",
+            dataField: "category_output",
+            headerText: "출고",
             width: 160
         }, {
-            dataField: "category_application_reason",
-            headerText: "신청사유",
+            dataField: "category_finish",
+            headerText: "완료",
             width: 160
         }, {
-            dataField: "category_department",
-            headerText: "부서명",
-            width: 160
-        }, {
-            dataField: "category_user_name",
-            headerText: "사용자",
-            width: 160
-        }, {
-            dataField: "category_count",
-            headerText: "수량",
-            width: 160
-        }, {
-            dataField: "category_status",
-            headerText: "상태",
-            width: 160
-        }, {
-            dataField: "category_processing_date",
-            headerText: "처리일자",
-            width: 160
-        }, {
-            dataField: "category_final_arbiter",
-            headerText: "최종 결재자",
-            width: 160
-        }]
+            dataField: "category_companion",
+            headerText: "반려",
+            width: 160,
+        }
+    ]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
@@ -245,10 +235,12 @@ function createApplicationGrid() {
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        usePaging: false, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         softRemoveRowMode: false,
+        fillColumnSizeMode: true,
+        rowHeight: 35,
     }
 
     /* 그리드 생성 */
@@ -264,50 +256,23 @@ function createServiceGrid() {
             headerText: "아이디",
             visible : false
         }, {
-            dataField: "category_application_num",
-            headerText: "신청번호",
+            dataField: "category_menu",
+            headerText: "구분",
             width: 160,
         }, {
-            dataField: "category_application_division",
-            headerText: "신청구분",
+            dataField: "category_total",
+            headerText: "계",
             width: 180
         }, {
-            dataField: "category_application_date",
-            headerText: "신청일자",
+            dataField: "category_disability_report",
+            headerText: "장애신고",
             width: 280
         }, {
-            dataField: "category_content",
-            headerText: "내용",
+            dataField: "category_service_order",
+            headerText: "서비스 요청",
             width: 160
-        }, {
-            dataField: "category_application_reason",
-            headerText: "신청사유",
-            width: 160
-        }, {
-            dataField: "category_department",
-            headerText: "부서명",
-            width: 160
-        }, {
-            dataField: "category_user_name",
-            headerText: "사용자",
-            width: 160
-        }, {
-            dataField: "category_count",
-            headerText: "수량",
-            width: 160
-        }, {
-            dataField: "category_status",
-            headerText: "상태",
-            width: 160
-        }, {
-            dataField: "category_processing_date",
-            headerText: "처리일자",
-            width: 160
-        }, {
-            dataField: "category_final_arbiter",
-            headerText: "최종 결재자",
-            width: 160
-        }]
+        }
+    ]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
@@ -315,10 +280,12 @@ function createServiceGrid() {
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        usePaging: false, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         softRemoveRowMode: false,
+        fillColumnSizeMode: true,
+        rowHeight: 35,
     }
 
     /* 그리드 생성 */
@@ -327,13 +294,13 @@ function createServiceGrid() {
 
 /* 4. 데이터 불러오기 */
 function requestApplicationStatusData() {
-    $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/admin-datas11.json", function (data) {
         AUIGrid.setGridData(applicationGrid_ID, data);
     });
 }
 
 function requestServiceData() {
-    $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/admin-datas12.json", function (data) {
         AUIGrid.setGridData(service_ID, data);
     });
 }

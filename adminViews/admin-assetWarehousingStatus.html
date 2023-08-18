@@ -90,7 +90,7 @@
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">사용자 검색</button>
-            <button type="button" class="btn" onclick="lp_open('gridPop_enrollCurrent','신청현황',1250,570)">신청현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_applicationStatus','신청현황',1250,570)">신청현황</button>
         </div>
     </div>
 </div>
@@ -115,7 +115,7 @@
 </div>
 
 <!-- 신청 현황 -->
-<div id="gridPop_enrollCurrent" class="popup big no">
+<div id="gridPop_applicationStatus" class="popup big no">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -140,12 +140,14 @@
             </div>
 
             <div class="title-box">
-                <p class="sum">총수량 : <span class="sum-count"></span></p>
+                <div class="grid-title">
+                    <h3>총 수량: <span></span></h3>
+                </div>
                 <div class="btn-wrap">
                     <button type="button" class="btn excel">엑셀다운로드</button>
                 </div>
             </div>
-            <div id="popup_grid_consistency" class="grid-box h-small2"></div>
+            <div id="popup_grid_application_status" class="grid-box h-small2"></div>
         </div>
     </div>
 </div>
@@ -181,13 +183,6 @@ function createEnrollCurrentGrid() {
             filter: {
                 showIcon: true,
             }
-        }, {
-            dataField: "category_model_name",
-            headerText: "모델명",
-            filter: {
-                showIcon: true,
-            }
-
         }, {
             dataField: "category_enroll_date",
             headerText: "신청일자",
@@ -226,7 +221,7 @@ function createEnrollCurrentGrid() {
             }
         }, {
             dataField: "category_final_arbiter",
-            headerText: "최종 결정자",
+            headerText: "최종 결재자",
             filter: {
                 showIcon: true,
             }
@@ -250,10 +245,10 @@ function createEnrollCurrentGrid() {
     /* 그리드 생성 */
     enrollCurrentGrid_ID = AUIGrid.create("#enrollCurrent_ID", columnLayout, gridPros);
 
-    /* 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여) */
+    /* 셀 더블클릭 이벤트 바인딩 */
     AUIGrid.bind(enrollCurrentGrid_ID, "cellDoubleClick", function(event) {
-        /* 링크 이동 */
-        $(location).attr('href', 'admin-assetNewEnroll.html');
+        lp_open('gridPop_applicationStatus','신청현황',1250,570);
+        getRowCount(popup_grid_application_status);
     });
 }
 
