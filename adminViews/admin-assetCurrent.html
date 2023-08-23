@@ -220,14 +220,13 @@
     </div>
 </div>
 
-<!--자산미출고 확인 팝업-->
-<div id="gridPop_assetCheck" class="popup">
+<!-- 저장 시 미출고 자산 알림 팝업 -->
+<div id="saveCheck_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
-            <p class="center">자산을 미출고 하시겠습니까?</p>
+            <p class="center">미출고 자산이 있습니다</p>
             <div class="btn-wrap">
-                <button type="button" class="btn" onclick="unreleasedCheck(e)">확인</button>
-                <button type="button" class="btn" onclick="lp_close('gridPop_assetCheck')">취소</button>
+                <button type="button" class="btn" onclick="lp_close('saveCheck_pop')">닫기</button>
             </div>
         </div>
     </div>
@@ -239,7 +238,7 @@
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">신청번호<중/div></div>
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
                     <div class="td"><div class="td-wrap">122141</div></div>
                     <div class="th"><div class="th-wrap center">신청구분</div></div>
                     <div class="td"><div class="td-wrap">자산 신규 신청</div></div>
@@ -384,6 +383,7 @@
             </div>
 
             <div class="btn-wrap">
+                <button type="button" class="btn">저장</button>
                 <button type="button" class="btn" onclick="lp_close('newEnroll_pop')">닫기</button>
             </div>
         </div>
@@ -1383,6 +1383,11 @@
     /* 그리드 행 선택 삭제 */
     function deleteRowGrid(){
         AUIGrid.removeCheckedRows(applicationGrid_ID); // 체크된 행 삭제 처리
+    }
+
+    /* 신규신청 팝업에서 저장 클릭 시, 열릴 팝업 설정 */
+    function newEnrollValidation(){
+        var isValid = AUIGrid.validateGridData(popup_grid_newEnroll_detail, ["name", "country"], "필수 필드는 반드시 값을 직접 입력해야 합니다.");
     }
 </script>
 </body>

@@ -239,6 +239,7 @@ function requestGridPopDepartment() {
 /* 자산정보 */
 let popup_grid_newEnroll_detail;
 let essentialPartsList = ["지급","미지급"];
+let usageList = ["개인","공용","기타등등"]
 function gridPopNewEnrollDetail(id,title,width,height){
     /* 1. AUIGrid 칼럼 설정 */
     let gridPop_newEnroll_detail_column = [
@@ -293,6 +294,10 @@ function gridPopNewEnrollDetail(id,title,width,height){
                 }, {
                     dataField: "category_usage",
                     headerText: "용도",
+                    renderer: {
+                        type: "DropDownListRenderer",
+                        list: usageList
+                    }
                 }, {
                     dataField: "category_item_name",
                     headerText: "모델명",
@@ -344,6 +349,7 @@ function gridPopNewEnrollDetail(id,title,width,height){
     popup_grid_newEnroll_detail = AUIGrid.create("#popup_grid_newEnroll_detail", gridPop_newEnroll_detail_column, gridPop_newEnroll_detail_pros);
     requestGridPopNewEnrollDetail();
 
+    /* 지급 수량이 0이될때 alert, 출고일자 변경 함수 */
     $(".aui-grid-number-step-down-btn").on("click", function(){
         let number = $(this).closest("tr").find(".aui-grid-number-step-input");
 

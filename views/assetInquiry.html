@@ -259,36 +259,57 @@
                 filter: {
                     showIcon: true,
                 }
-            },{
-                dataField: "category_user1",
-                headerText: "김종민",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
-            },{
-                dataField: "category_user2",
-                headerText: "홍길동",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
-            },{
-                dataField: "category_user3",
-                headerText: "임꺽정",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
-            },{
-                dataField: "category_user4",
-                headerText: "김두한",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
             }
         ];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText: "전체",
+            positionField: "category_product_name"
+        }
+        ];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            enableFilter: true,
+            useContextMenu: true,
+            fixedColumnCount: 1,
+            // fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
+            displayTreeOpen: true,
+            // 체크박스 사용 안함
+            showRowCheckColumn: false,
+            showRowNumColumn: false,
+            showFooter: true,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+            simplifySelectionEvent: true
+
+        }
+
+
+        let dummy = [1,2,3,4,5,6,7,8,9,10];
+
+        /* dummy 에 해당하는게 DB 에서 받아온 data 여야 합니다. */
+        dummy.forEach((i, index) => {
+            columnLayout.push(
+                {
+                    dataField: "category_user"+index, // dataField는 DB에 맞게 작성해주셔도 됩니다.
+                    headerText: "김종민 i.name",
+                    headerStyle: "myField3",
+                    filter: {
+                        showIcon: true,
+                    }
+                },
+            )
+            footerLayout.push({
+                dataField: "category_user"+index,
+                positionField: "category_user"+index,
+                operation: "SUM",
+                formatString: "#,##0",
+            });
+        })
 
         columnLayout.push({
             headerText: "전체",
@@ -302,63 +323,21 @@
             }
         });
 
-        /* 1-2. 푸터 설정 */
-        let footerLayout = [{
-            labelText: "전체",
-            positionField: "category_product_name"
-        }, {
-            dataField: "category_user1",
-            positionField: "category_user1",
-            operation: "SUM",
-            formatString: "#,##0",
-        }, {
-            dataField: "category_user2",
-            positionField: "category_user2",
-            operation: "SUM",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_user3",
-            positionField: "category_user3",
-            operation: "SUM",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_user4",
-            positionField: "category_user4",
-            operation: "SUM",
-            formatString: "#,##0"
-        },{
-            dataField: "category_row_sum",
-            positionField: "category_row_sum",
-            operation: "SUM",
-            formatString: "#,##0", //#,##0 : 천단위 마다 컴마 구분자 정수 표현
-            renderer: {
-                type: "ButtonRenderer",
-                labelText: "상세 보기",
-                onClick: function (event) {
-                    alert("( " + event.rowIndex + ", " + event.columnIndex + " ) " + event.item.name + " 상세보기 클릭");
-                },
+        footerLayout.push(
+            {
+                dataField: "category_row_sum",
+                positionField: "category_row_sum",
+                operation: "SUM",
+                formatString: "#,##0", //#,##0 : 천단위 마다 컴마 구분자 정수 표현
+                renderer: {
+                    type: "ButtonRenderer",
+                    labelText: "상세 보기",
+                    onClick: function (event) {
+                        alert("( " + event.rowIndex + ", " + event.columnIndex + " ) " + event.item.name + " 상세보기 클릭");
+                    },
+                }
             }
-        }
-        ];
-
-
-        /* 2. 그리드 속성 설정 */
-        let gridPros = {
-            enableFilter: true,
-            useContextMenu: true,
-            fixedColumnCount: 1,
-            fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
-            displayTreeOpen: true,
-            // 체크박스 사용 안함
-            showRowCheckColumn: false,
-            showRowNumColumn: false,
-            showFooter: true,
-            copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
-            simplifySelectionEvent: true
-
-        }
+        )
 
         // 실제로 #grid_wrap 에 그리드 생성
         assetStatusGrid_ID = AUIGrid.create("#assetStatusGrid_ID", columnLayout, gridPros);
@@ -367,7 +346,7 @@
         AUIGrid.setFooter(assetStatusGrid_ID, footerLayout);
 
         AUIGrid.clearFilterAll(userStatusGrid_ID);
-        AUIGrid.bind(assetStatusGrid_ID, "selectionChange", function(event) {
+        /*AUIGrid.bind(assetStatusGrid_ID, "selectionChange", function(event) {
             if(count === 0){
                 count++;
                 createDueDiglienceGrid();
@@ -406,12 +385,21 @@
                     }
                 });
             }
-        });
+        });*/
 
-        /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
-        /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
+        AUIGrid.bind(assetStatusGrid_ID, "cellClick", function(event){
+            console.log(event.rowIndex, event.columnIndex);
+            console.log(event);
+
+            /* 파라미터 mydata에는 event.rowIndex, event.columnIndex의 값에 따라 들어갑니다.*/
+            let mydata = {...event.item};
+            createDueDiglienceGrid();
+            AUIGrid.setGridData(dueDiglienceGrid_ID, mydata);
+        })
+
+/*        /!* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 *!/
         AUIGrid.bind(assetStatusGrid_ID, "footerClick", function (event) {
-            /* 컬럼 이름 저장하기 */
+            /!* 컬럼 이름 저장하기 *!/
             const columnArr = [];
             for (let ele of columnLayout) {
                 columnArr.push(ele.headerText);
@@ -419,7 +407,7 @@
             let columnLength = columnArr.length;
             let footerIndex = event.footerIndex;
 
-            /* 색상 변환 */
+            /!* 색상 변환 *!/
             if(footerIndex === 0){
                 return false;
             }else{
@@ -453,7 +441,7 @@
                     AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
                 }
             }
-        });
+        });*/
 
     }
 
@@ -469,37 +457,55 @@
                 filter: {
                     showIcon: true,
                 }
-            },{
-                dataField: "category_product_desktop_num",
-                headerText: "데스크탑",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
-            },{
-                dataField: "category_product_laptop_num",
-                headerText: "노트북",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
-            },{
-                dataField: "category_product_monitor_num",
-                headerText: "모니터",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_product_printer_num",
-                headerText: "프린터",
-                headerStyle: "myField3",
-                filter: {
-                    showIcon: true,
-                }
             }
         ];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText: "전체",
+            positionField: "category_user_name"
+        }
+        ];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            enableFilter: true,
+            useContextMenu: true,
+            fixedColumnCount: 1,
+            // fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
+            displayTreeOpen: true,
+            // 체크박스 사용 안함
+            showRowCheckColumn: false,
+            showRowNumColumn: false,
+            showFooter: true,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+
+        }
+
+        let dummy = ["데스크탑", "노트북", "모니터", "프린터"];
+        /* columnLayout, footerLayout 에 추가되는 항목들은 forEach에서 작업해주시면 됩니다. */
+        dummy.forEach((i,index) => {
+            columnLayout.push({
+                dataField: "category_product_desktop_num", // i.dataField + index
+                headerText: "데스크탑", // i.name
+                headerStyle: "myField3",
+                filter: {
+                    showIcon: true,
+                }
+            })
+
+            footerLayout.push({
+                dataField: "category_product_desktop_num", // i.dataField + index
+                positionField: "category_product_desktop_num", // i.name
+                operation: "SUM",
+                style: "aui-grid-my-column",
+                formatString: "#,##0",
+            })
+        })
+
 
         columnLayout.push({
             headerText: "전체",
@@ -513,60 +519,13 @@
             }
         });
 
-        /* 1-2. 푸터 설정 */
-        let footerLayout = [{
-            labelText: "전체",
-            positionField: "category_user_name"
-        }, {
-            dataField: "category_product_desktop_num",
-            positionField: "category_product_desktop_num",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0",
-        }, {
-            dataField: "category_product_laptop_num",
-            positionField: "category_product_laptop_num",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_product_monitor_num",
-            positionField: "category_product_monitor_num",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_product_printer_num",
-            positionField: "category_product_printer_num",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        },{
+        footerLayout.push({
             dataField: "category_row_sum",
             positionField: "category_row_sum",
             operation: "SUM",
             style: "aui-grid-my-column",
             formatString: "#,##0"
-        }
-        ];
-
-
-        /* 2. 그리드 속성 설정 */
-        let gridPros = {
-            enableFilter: true,
-            useContextMenu: true,
-            fixedColumnCount: 1,
-            fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
-            displayTreeOpen: true,
-            // 체크박스 사용 안함
-            showRowCheckColumn: false,
-            showRowNumColumn: false,
-            showFooter: true,
-            copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
-
-        }
+        });
 
         // 실제로 #grid_wrap 에 그리드 생성
         userStatusGrid_ID = AUIGrid.create("#userStatusGrid_ID", columnLayout, gridPros);
@@ -574,7 +533,7 @@
         /* 푸터 레이아웃 생성 */
         AUIGrid.setFooter(userStatusGrid_ID, footerLayout);
 
-        AUIGrid.bind(userStatusGrid_ID, "selectionChange", function(event) {
+/*        AUIGrid.bind(userStatusGrid_ID, "selectionChange", function(event) {
             if(count === 0){
                 count++;
                 createDueDiglienceGrid();
@@ -619,9 +578,9 @@
 
         });
 
-        /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
+        /!* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 *!/
         AUIGrid.bind(userStatusGrid_ID, "footerClick", function (event) {
-            /* 컬럼 이름 저장하기 */
+            /!* 컬럼 이름 저장하기 *!/
             const columnArr = [];
             for (let ele of columnLayout) {
                 columnArr.push(ele.headerText);
@@ -629,7 +588,7 @@
             let columnLength = columnArr.length;
             let footerIndex = event.footerIndex;
 
-            /* 색상 변환 */
+            /!* 색상 변환 *!/
             if(footerIndex === 0){
                 return false;
             }else{
@@ -663,7 +622,17 @@
                 }
             }
 
-        });
+        });*/
+
+        AUIGrid.bind(userStatusGrid_ID, "cellClick", function(event){
+            console.log(event.rowIndex, event.columnIndex);
+
+            /* 파라미터 mydata에는 event.rowIndex, event.columnIndex의 값에 따라 들어갑니다.*/
+            let mydata = {...event.item};
+            createDueDiglienceGrid();
+            AUIGrid.setGridData(dueDiglienceGrid_ID, mydata);
+        })
+
     }
 
     function createDueDiglienceGrid() {
@@ -779,7 +748,7 @@
 
         /* 그리드 생성 */
         dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-        requestDueDiglienceGridData();
+        // requestDueDiglienceGridData();
 
         /* 더블 클릭시 팝업 */
         AUIGrid.bind(dueDiglienceGrid_ID, "cellDoubleClick", function(event) {
