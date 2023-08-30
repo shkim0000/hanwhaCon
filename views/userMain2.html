@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>사용자 메인 화면</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- echarts  -->
+    <script src="../resources/lib/echarts/echarts.min.js"></script>
+
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/main.js"></script>
+</head>
+<body class="main-page">
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents">
+        <div class="preview-list">
+            <div class="preview-card">
+                <div class="card-title">자산 신청현황</div>
+                <ul>
+                    <li><a href="#">신규신청</a></li>
+                    <li><a href="#">대여신청</a></li>
+                    <li><a href="#">교체신청</a></li>
+                    <li><a href="#">대여연장</a></li>
+                    <li><a href="#">반납신청</a></li>
+                    <li><a href="#">인수인계</a></li>
+                </ul>
+            </div>
+            <div class="preview-card">
+                <div class="card-title">자산 현황</div>
+                <ul>
+                    <li><a href="#">내 자산조회</a></li>
+                    <li><a href="#">부서자산조회</a></li>
+                </ul>
+            </div>
+            <div class="preview-card">
+                <div class="card-title">서비스 데스크</div>
+                <ul>
+                    <li><a href="#">네트워크 신청</a></li>
+                    <li><a href="#">PC부품 신청</a></li>
+                    <li><a href="#">키보드, 마우스 신청</a></li>
+                    <li><a href="#">기타 신청 하나</a></li>
+                    <li><a href="#">기타 신청 둘</a></li>
+                    <li><a href="#">기타 신청 셋</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="echarts-wrapper">
+            <div id="echarts" style="width: 1200px;height:450px;"></div>
+        </div>
+    </div>
+    <footer>
+        <div class="contact">
+            <ul>
+                <li>IT 자산관련 문의 : 555-XXXX</li>
+                <li>기타 자산관련 문의 : 555-XXXX</li>
+                <li>서비스데스크 : 555-XXXX</li>
+            </ul>
+        </div>
+        <div class="logos">
+            <img src="../resources/img/h_logo.png" alt="logo">
+        </div>
+    </footer>
+</div>
+
+<!-- // contents -->
+<script type="text/javascript">
+    // Initialize the echarts instance based on the prepared dom
+    var myChart = echarts.init(document.getElementById('echarts'));
+
+    // Specify the configuration items and data for the chart
+    var option = {
+        title: {
+            text: '나의 IT 서비스'
+        },
+        tooltip: {},
+        legend: {
+            data: ['신청','처리중','완료']
+        },
+        xAxis: {
+            data: ['신규신청', '대여신청', '인수인계신청', '서비스요청']
+        },
+        yAxis: {},
+        series: [
+            {
+                name: '신청',
+                type: 'bar',
+                data: [5, 20, 36, 10, 10, 20]
+            }, {
+                name: '처리중',
+                type: 'bar',
+                data: [10, 10, 6, 30, 40, 12]
+            }, {
+                name: '완료',
+                type: 'bar',
+                data: [48, 12, 31, 10, 10, 20]
+            }
+        ]
+    };
+
+    // Display the chart using the configuration items and data just specified.
+    myChart.setOption(option);
+</script>
+</body>
+</html>
