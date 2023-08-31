@@ -37,8 +37,14 @@
 
     <div class="contents">
         <div class="dashboard-wrap us">
-            <div class="main-image-box">
-
+            <div class="main-image-wrap">
+                <div class="image-box">
+                    <img src="../resources/img/user-main-img.jpg" alt="메인">
+                </div>
+                <div class="main-title-box">
+                    <span>I</span>T <span>A</span>SSET <span>M</span>ANAGEMENT<br>
+                    <span>S</span>YSTEM
+                </div>
             </div>
             <div class="main-con-box">
                 <div class="preview-list">
@@ -93,9 +99,10 @@
     <footer>
         <div class="contact">
             <ul>
-                <li>IT 자산관련 문의 : 555-XXXX</li>
-                <li>기타 자산관련 문의 : 555-XXXX</li>
-                <li>서비스데스크 : 555-XXXX</li>
+                <li>네트워크 T.</li>
+                <li>그룹웨어 T.</li>
+                <li>IT 헬프데스크 6293(공장)9289(서울 등)</li>
+                <li><a href="#" class="btn">자체 해결 가이드</a></li>
             </ul>
         </div>
         <div class="logos">
@@ -136,7 +143,32 @@
             }, {
                 dataField: "category_public",
                 headerText: "공용",
-            }]
+            }];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText : "합계",
+            positionField : "#base"
+        },{
+            dataField: "category_item",
+            positionField: "category_item",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_individual",
+            positionField: "category_individual",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_public",
+            positionField: "category_public",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }];
+
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
@@ -149,10 +181,12 @@
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             softRemoveRowMode:false,
+            showFooter : true,
         }
 
         /* 그리드 생성 */
         assetGrid_ID = AUIGrid.create("#assetGrid_ID", columnLayout, gridPros);
+        AUIGrid.setFooter(assetGrid_ID, footerLayout);
     }
 
     function createApplicationGrid() {
@@ -165,14 +199,39 @@
                 visible:false,
             }, {
                 dataField: "category_item",
-                headerText: "물품종류",
+                headerText: "신청구분",
             }, {
                 dataField: "category_individual",
-                headerText: "개인",
+                headerText: "처리건수",
             }, {
                 dataField: "category_public",
-                headerText: "공용",
-            }]
+                headerText: "완료건수",
+            }];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText : "합계",
+            positionField : "#base"
+        },{
+            dataField: "category_item",
+            positionField: "category_item",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_individual",
+            positionField: "category_individual",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_public",
+            positionField: "category_public",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }];
+
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
@@ -185,10 +244,13 @@
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             softRemoveRowMode:false,
+            showFooter : true
         }
+
 
         /* 그리드 생성 */
         applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+        AUIGrid.setFooter(applicationGrid_ID, footerLayout);
     }
 
     /* 4. 데이터 불러오기 */
@@ -223,23 +285,43 @@
 
     /* 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
+        let windowWidth = $(window).innerWidth();
         let innerWidth = $(".preview-list.grid-ver").innerWidth() ;
 
-        if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 40;
-            setTimeout(function(){
-                console.log(innerWidth)
-                AUIGrid.resize(assetGrid_ID, innerWidth);
-                AUIGrid.resize(applicationGrid_ID, innerWidth);
-            },20)
+        if($(".contents").hasClass("active")) {
+            if (windowWidth >= 1240) {
+                innerWidth = innerWidth + 40;
+                setTimeout(function () {
+                    console.log("3")
+                    AUIGrid.resize(assetGrid_ID, innerWidth);
+                    AUIGrid.resize(applicationGrid_ID, innerWidth);
+                }, 20);
+            } else {
+                windowWidth = windowWidth - 80;
+                setTimeout(function () {
+                    console.log("3")
+                    AUIGrid.resize(assetGrid_ID, windowWidth);
+                    AUIGrid.resize(applicationGrid_ID, windowWidth);
+                }, 20)
 
-        } else{
-            innerWidth = innerWidth - 117;
-            setTimeout(function(){
-                console.log(innerWidth)
-                AUIGrid.resize(assetGrid_ID, innerWidth)
-                AUIGrid.resize(applicationGrid_ID, innerWidth);
-            },20)
+            }
+        }else{
+            if (windowWidth >= 1240) {
+                innerWidth = innerWidth - 117;
+                setTimeout(function(){
+                    console.log("5")
+                    AUIGrid.resize(assetGrid_ID, innerWidth)
+                    AUIGrid.resize(applicationGrid_ID, innerWidth);
+                },20)
+            } else {
+                windowWidth = windowWidth - 340;
+                setTimeout(function () {
+                    console.log("3")
+                    AUIGrid.resize(assetGrid_ID, windowWidth);
+                    AUIGrid.resize(applicationGrid_ID, windowWidth);
+                }, 20)
+
+            }
         }
     });
 </script>
