@@ -86,6 +86,40 @@ header .inner{display:flex;align-items:center;gap:10px;}
 .preview-list-wrap{display:flex;gap:20px;}
 .preview-list-wrap .grid-box{margin-top:12px;height:300px;background-color:yellow;}
 
+/* main (관리자) */
+body.main-page #wrapper{flex-direction:column;}
+body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:#fff3ec;overflow:hidden;}
+.dashboard-wrap{height:100%;display:flex;flex-wrap:wrap;}
+.dashboard-wrap.am .preview-list-wrap .grid-box{height:220px;}
+.dashboard-wrap.am .preview-list .preview-card{padding:10px 20px 0;}
+.ds-wrap{width:100%;height:calc(50% - 10px);display:flex;gap:10px;}
+.ds-box{width:calc(50% - 5px);height:100%;min-height:340px;display:flex;justify-content:center;align-items:center;padding:10px;overflow:hidden;border:1px solid var(--line1);border-radius:8px;background-color:var(--color10);}
+.ds-box.column{flex-direction:column;align-items:flex-start;justify-content:flex-start;}
+.ds-box.column > *{width:100%;}
+.ds-box:nth-child(2n){margin-left:10px;}
+.ds-content-box{height:280px;overflow-y:auto;display:flex;justify-content:center;align-items:center;border:1px solid var(--line1);border-radius:8px;}
+.ds-wrap + .ds-wrap{margin-top:20px;}
+.ds-box .quantity-list{width:100%;gap:12px;padding:0 10px;}
+.ds-box .quantity-list > li{width:calc(25% - 9px);min-width:120px;}
+.ds-box .quantity-list button{width:100%;}
+.ds-box .quantity{width:100%;}
+.ds-box .quantity .num{height:70px;}
+.echarts-wrapper{margin-top:20px;padding:10px 20px;width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
+.card-title-box{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;}
+.date-search-box{display:flex;gap:8px;align-items:center;}
+.date-search-box .date{width:130px;}
+.date-search-box .date input{height:30px;font-size: 12px;}
+
+.process-count-list{display:flex;flex-direction:column;gap:12px;}
+.preview-card .process-count-list > li {display:flex;justify-content:space-between;align-items:center;width:100%;}
+.process-count-list > li::before{display:none;}
+.process-count-list > li > p{z-index:1;width:50%;font-weight:700;font-size:16px;}
+.process-count-list > li > .cons{display:inline-flex;justify-content:flex-end;padding:4px 10px;font-size:16px;font-weight:700;color:#fff;position:relative; width:76%;}
+.process-count-list > li > .cons::after{z-index:0;content:'';width:93%;height:100%;position:absolute;right:0;top:0;;background-color:#3045b5;}
+.process-count-list > li > .cons::before{z-index:1;content:'';width:13%;height:100%;position:absolute;left:0;top:0;background-color:#004772;transform: skewX(-45deg);}
+.process-count-list > li > .cons > span{z-index: 10;}
+.process-count-list > li .count{color:#dc2525;z-index:3;}
+
 @media (max-width: 1240px) {
     .dashboard-wrap.us{flex-direction:column;}
     .dashboard-wrap.us > *:first-child,
@@ -101,24 +135,6 @@ header .inner{display:flex;align-items:center;gap:10px;}
 @media (max-width: 590px) {
     .main-title-box{font-size:30px;}
 }
-
-/* main (관리자) */
-body.main-page #wrapper{flex-direction:column;}
-body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:#fff3ec;overflow:hidden;}
-.dashboard-wrap{height:100%;display:flex;flex-wrap:wrap;}
-.ds-wrap{width:100%;height:calc(50% - 10px);display:flex;gap:10px;}
-.ds-box{width:calc(50% - 5px);height:100%;min-height:340px;display:flex;justify-content:center;align-items:center;padding:10px;overflow:hidden;border:1px solid var(--line1);border-radius:8px;background-color:var(--color10);}
-.ds-box.column{flex-direction:column;align-items:flex-start;justify-content:flex-start;}
-.ds-box.column > *{width:100%;}
-.ds-box:nth-child(2n){margin-left:10px;}
-.ds-content-box{height:280px;overflow-y:auto;display:flex;justify-content:center;align-items:center;border:1px solid var(--line1);border-radius:8px;}
-.ds-wrap + .ds-wrap{margin-top:20px;}
-.ds-box .quantity-list{width:100%;gap:12px;padding:0 10px;}
-.ds-box .quantity-list > li{width:calc(25% - 9px);min-width:120px;}
-.ds-box .quantity-list button{width:100%;}
-.ds-box .quantity{width:100%;}
-.ds-box .quantity .num{height:70px;}
-.echarts-wrapper{margin-top:20px;padding:10px 20px;width:100%;height:100%;display:flex;justify-content:center;align-items:center;}
 
 @media(max-width:700px){
     .ds-wrap{flex-direction:column;}
@@ -301,6 +317,7 @@ textarea{width:100%;background:none;border:0;padding:8px 12px;resize:none;outlin
     .input-list{width:calc(50% - 8px);}
     .input-wrap.search-ver .input-list{width:100%;}
     .check-wrap > *{width:30%;}
+    .card-title-box .check-wrap > *{width:auto;}
     .input-list.medium2{width:100%;}
 }
 

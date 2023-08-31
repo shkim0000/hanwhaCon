@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 메인 화면(수정)</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- echarts  -->
+    <script src="../resources/lib/echarts/echarts.min.js"></script>
+
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/main.js"></script>
+</head>
+<body class="main-page">
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents">
+        <div class="dashboard-wrap us am">
+            <div class="main-image-wrap">
+                <div class="image-box">
+                    <img src="../resources/img/user-main-img.jpg" alt="메인">
+                </div>
+                <div class="main-title-box">
+                    <span>I</span>T <span>A</span>SSET <span>M</span>ANAGEMENT<br>
+                    <span>S</span>YSTEM
+                </div>
+            </div>
+            <div class="main-con-box">
+                <div class="preview-list-wrap">
+                    <div class="preview-list grid-ver">
+                        <div class="preview-card only">
+                            <div class="card-title">자산운영현황</div>
+                            <div id="assetManagementGrid_ID" class="grid-box"></div>
+                        </div>
+                    </div>
+                    <div class="preview-list grid-ver">
+                        <div class="preview-card only">
+                            <div class="card-title-box">
+                                <div class="card-title">업무처리현황</div>
+                                <div class="date-search-box">
+                                    <div class="date-wrap">
+                                        <label class="date">
+                                            <input type="text">
+                                        </label>
+                                        <span>~</span>
+                                        <label class="date">
+                                            <input type="text">
+                                        </label>
+                                    </div>
+                                    <button type="button" class="btn">적용</button>
+                                </div>
+
+                            </div>
+                            <div id="applicationProcessGrid_ID" class="grid-box"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-list-wrap">
+                    <div class="preview-list grid-ver">
+                        <div class="preview-card only">
+                            <div class="card-title-box">
+                                <div class="card-title">자산 특이사항</div>
+                                <div class="check-wrap">
+                                    <label class="check">
+                                        <input type="radio" name="a">
+                                        <span>수리중</span>
+                                    </label>
+                                    <label class="check">
+                                        <input type="radio" name="a">
+                                        <span>이동</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div id="sigAssetGrid_ID" class="grid-box"></div>
+                        </div>
+                    </div>
+                    <div class="preview-list grid-ver">
+                        <div class="preview-card only">
+                            <div class="card-title-box">
+                                <div class="card-title">장애처리현황</div>
+                                <div class="date-search-box">
+                                    <div class="date-wrap">
+                                        <label class="date">
+                                            <input type="text">
+                                        </label>
+                                        <span>~</span>
+                                        <label class="date">
+                                            <input type="text">
+                                        </label>
+                                    </div>
+                                    <button type="button" class="btn">적용</button>
+                                </div>
+                            </div>
+                            <div id="disabledGrid_ID"  class="grid-box"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="preview-list-wrap">
+                    <div class="preview-list grid-ver">
+                        <div class="preview-card only">
+                            <div class="card-title">주요 SW 현황</div>
+                            <div id="swGrid_ID" class="grid-box"></div>
+                        </div>
+                    </div>
+                    <div class="preview-list grid-ver">
+                        <div class="preview-card only">
+                            <div class="card-title">미처리 업무</div>
+                            <ul class="process-count-list">
+                                <li>
+                                    <p>정보자산 미반납</p>
+                                    <p class="cons"><span><span class="count">1</span>건</span></p>
+                                </li>
+                                <li>
+                                    <p>공용자산 인수인계</p>
+                                    <p class="cons"><span><span class="count">1</span>건</span></p>
+                                </li>
+                                <li>
+                                    <p>장애신고 미처리</p>
+                                    <p class="cons"><span><span class="count">1</span>건</span></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <footer>
+        <div class="contact">
+            <ul>
+                <li>네트워크 T.</li>
+                <li>그룹웨어 T.</li>
+                <li>IT 헬프데스크 6293(공장)9289(서울 등)</li>
+                <li><a href="#" class="btn">자체 해결 가이드</a></li>
+            </ul>
+        </div>
+        <div class="logos">
+            <img src="../resources/img/h_logo.png" alt="logo">
+        </div>
+    </footer>
+</div>
+<!-- // contents -->
+<style>
+    .myField3{background-color:#ebaf88;}
+    .my-custom-style3{background-color:#ebaf88;font-weight:700}
+
+</style>
+<script type="text/javascript">
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    let assetManagementGrid_ID;
+    let applicationProcessGrid_ID;
+    let sigAssetGrid_ID;
+    let disabledGrid_ID;
+    let swGrid_ID;
+
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+    createAssetManagementGrid(); // 자산운영현황
+    createApplicationProcessGrid(); // 업무처리현황
+    createSigAssetGrid_ID(); // 자산특이사항
+    createDisabledGrid_ID(); // 장애처리현황
+    createSWGrid_ID() // 주요 SW 현황
+
+    requestAssetManagementData();
+    requestApplicationProcessData();
+    requestSigAssetData();
+    requestDisabledData();
+    requestSWData();
+
+    /* 3. AUIGrid 그리드 옵션 */
+    /* 자산운영현황 */
+    function createAssetManagementGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false,
+            }, {
+                dataField: "category_item",
+                headerStyle: "myField3",
+                headerText: "물품종류",
+                style: "my-custom-style3",
+            }, {
+                dataField: "category_available",
+                headerStyle: "myField3",
+                headerText: "가용",
+            }, {
+                dataField: "category_fixed",
+                headerStyle: "myField3",
+                headerText: "수리중",
+            }, {
+                dataField: "category_trash",
+                headerStyle: "myField3",
+                headerText: "폐기",
+            }, {
+                dataField: "category_move",
+                headerStyle: "myField3",
+                headerText: "이동",
+            }];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            showRowNumColumn: false, /* 앞에 표시되는 숫자 삭제*/
+            rowIdField: "id",
+            showRowCheckColumn:false,// 엑스트라 체크박스 표시 설정
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount: 10,
+            softRemoveRowMode:false,
+            fillColumnSizeMode: true, // 가로 스크롤 X
+        }
+
+        columnLayout.push({
+            headerText: "계",
+            headerStyle: "myField3",
+            dataField: "category_row_sum",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
+            dataType: "numeric",
+            formatString: "#,##0",
+            width: 120,
+            expFunction: function (rowIndex, columnIndex, item) {
+                return (item.category_item + item.category_available + item.category_fixed + item.category_trash + item.category_move);
+            }
+        });
+
+        /* 그리드 생성 */
+        assetManagementGrid_ID = AUIGrid.create("#assetManagementGrid_ID", columnLayout, gridPros);
+    }
+
+    /* 업무처리현황 */
+    function createApplicationProcessGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                headerStyle: "myField3",
+                visible:false,
+            }, {
+                dataField: "category_division",
+                headerText: "구분",
+                headerStyle: "myField3",
+                style: "my-custom-style3",
+            }, {
+                dataField: "category_check",
+                headerText: "담당자확인",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_release",
+                headerText: "출고",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_complete",
+                headerText: "완료",
+                headerStyle: "myField3",
+            }];
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            showRowNumColumn: false,
+            rowIdField: "id",
+            showRowCheckColumn:false,// 엑스트라 체크박스 표시 설정
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            softRemoveRowMode:false,
+        }
+
+
+        /* 그리드 생성 */
+        applicationProcessGrid_ID = AUIGrid.create("#applicationProcessGrid_ID", columnLayout, gridPros);
+    }
+
+    /* 자산특이사항 */
+    function createSigAssetGrid_ID(){
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false,
+            }, {
+                dataField: "category_item",
+                headerText: "물품종류",
+                headerStyle: "myField3",
+                style: "my-custom-style3",
+            }, {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_serial",
+                headerText: "시리얼키",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_start_date",
+                headerText: "도입일",
+                headerStyle: "myField3",
+            }];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            showRowNumColumn: false, /* 앞에 표시되는 숫자 삭제*/
+            rowIdField: "id",
+            showRowCheckColumn:false,// 엑스트라 체크박스 표시 설정
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount: 10,
+            softRemoveRowMode:false,
+            fillColumnSizeMode: true, // 가로 스크롤 X
+        }
+
+
+        /* 그리드 생성 */
+        sigAssetGrid_ID = AUIGrid.create("#sigAssetGrid_ID", columnLayout, gridPros);
+    }
+
+    /* 장애처리현황 */
+    function createDisabledGrid_ID(){
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false,
+            }, {
+                dataField: "category_division",
+                headerText: "구분",
+                headerStyle: "myField3",
+                style: "my-custom-style3",
+            }, {
+                dataField: "category_declaration",
+                headerText: "신고건",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_untreated",
+                headerText: "미처리",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_treat",
+                headerText: "처리율",
+                headerStyle: "myField3",
+            }, {
+                dataField: "category_average_treat_time",
+                headerText: "평균조치시간",
+                headerStyle: "myField3",
+            }];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            showRowNumColumn: false, /* 앞에 표시되는 숫자 삭제*/
+            rowIdField: "id",
+            showRowCheckColumn:false,// 엑스트라 체크박스 표시 설정
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount: 10,
+            softRemoveRowMode:false,
+            fillColumnSizeMode: true, // 가로 스크롤 X
+        }
+
+
+        /* 그리드 생성 */
+        disabledGrid_ID = AUIGrid.create("#disabledGrid_ID", columnLayout, gridPros);
+    }
+
+    /* 주요 SW 현황 */
+    function createSWGrid_ID(){
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false,
+            }, {
+                dataField: "category_item",
+                headerStyle: "myField3",
+                headerText: "물품종류",
+                style: "my-custom-style3",
+            }, {
+                dataField: "category_usage",
+                headerStyle: "myField3",
+                headerText: "사용",
+            }, {
+                dataField: "category_rental",
+                headerStyle: "myField3",
+                headerText: "대여",
+            }, {
+                dataField: "category_available",
+                headerStyle: "myField3",
+                headerText: "가용",
+            }];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            showRowNumColumn: false, /* 앞에 표시되는 숫자 삭제*/
+            rowIdField: "id",
+            showRowCheckColumn:false,// 엑스트라 체크박스 표시 설정
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            headerHeight : 30, // 기본 헤더 높이 지정
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount: 10,
+            softRemoveRowMode:false,
+            fillColumnSizeMode: true, // 가로 스크롤 X
+        }
+
+        columnLayout.push({
+            headerText: "계",
+            headerStyle: "myField3",
+            dataField: "category_row_sum",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
+            dataType: "numeric",
+            formatString: "#,##0",
+            width: 120,
+            expFunction: function (rowIndex, columnIndex, item) {
+                return (item.category_item + item.category_available + item.category_fixed + item.category_trash + item.category_move);
+            }
+        });
+
+        /* 그리드 생성 */
+        swGrid_ID = AUIGrid.create("#swGrid_ID", columnLayout, gridPros);
+
+    }
+
+
+    /* 4. 데이터 불러오기 */
+    function requestAssetManagementData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+            AUIGrid.setGridData(assetManagementGrid_ID, data);
+        });
+    }
+
+    function requestApplicationProcessData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+            AUIGrid.setGridData(applicationProcessGrid_ID, data);
+        });
+    }
+
+    function requestSigAssetData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+            AUIGrid.setGridData(sigAssetGrid_ID, data);
+        });
+    }
+
+    function requestDisabledData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+            AUIGrid.setGridData(disabledGrid_ID, data);
+        });
+    }
+
+    function requestSWData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas11.json", function (data) {
+            AUIGrid.setGridData(swGrid_ID, data);
+        });
+    }
+
+
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof assetManagementGrid_ID !== "undefined") {
+            AUIGrid.resize(assetManagementGrid_ID);
+        }
+        if (typeof applicationProcessGrid_ID !== "undefined") {
+            AUIGrid.resize(applicationProcessGrid_ID);
+        }
+        if (typeof sigAssetGrid_ID !== "undefined") {
+            AUIGrid.resize(sigAssetGrid_ID);
+        }
+        if (typeof disabledGrid_ID !== "undefined") {
+            AUIGrid.resize(disabledGrid_ID);
+        }
+        if (typeof swGrid_ID !== "undefined") {
+            AUIGrid.resize(swGrid_ID);
+        }
+    }
+
+    /* 6. 사용하는 함수 */
+    /* 그리드 행 선택 삭제 */
+    function deleteRowGrid(){
+        AUIGrid.removeCheckedRows(applicationProcessGrid_ID); // 체크된 행 삭제 처리
+    }
+
+    /* 메뉴버튼 클릭시(반응형) */
+    $(document).on("click",".menu-btn",function(){
+        let windowWidth = $(window).innerWidth();
+        let innerWidth = $(".preview-list.grid-ver").innerWidth() ;
+
+        if($(".contents").hasClass("active")) {
+            if (windowWidth >= 1240) {
+                innerWidth = innerWidth + 40;
+                setTimeout(function () {
+                    AUIGrid.resize(assetManagementGrid_ID, innerWidth);
+                    AUIGrid.resize(applicationProcessGrid_ID, innerWidth);
+                    AUIGrid.resize(sigAssetGrid_ID, innerWidth);
+                    AUIGrid.resize(disabledGrid_ID, innerWidth);
+                    AUIGrid.resize(swGrid_ID, innerWidth);
+                }, 20);
+            } else {
+                windowWidth = windowWidth - 80;
+                setTimeout(function () {
+                    AUIGrid.resize(assetManagementGrid_ID, windowWidth);
+                    AUIGrid.resize(applicationProcessGrid_ID, windowWidth);
+                    AUIGrid.resize(sigAssetGrid_ID, windowWidth);
+                    AUIGrid.resize(disabledGrid_ID, windowWidth);
+                    AUIGrid.resize(swGrid_ID, windowWidth);
+                }, 20)
+
+            }
+        }else{
+            if (windowWidth >= 1240) {
+                innerWidth = innerWidth - 117;
+                setTimeout(function(){
+                    AUIGrid.resize(assetManagementGrid_ID, innerWidth);
+                    AUIGrid.resize(applicationProcessGrid_ID, innerWidth);
+                    AUIGrid.resize(sigAssetGrid_ID, innerWidth);
+                    AUIGrid.resize(disabledGrid_ID, innerWidth);
+                    AUIGrid.resize(swGrid_ID, innerWidth);
+                },20)
+            } else {
+                windowWidth = windowWidth - 340;
+                setTimeout(function () {
+                    AUIGrid.resize(assetManagementGrid_ID, windowWidth);
+                    AUIGrid.resize(applicationProcessGrid_ID, windowWidth);
+                    AUIGrid.resize(sigAssetGrid_ID, windowWidth);
+                    AUIGrid.resize(disabledGrid_ID, windowWidth);
+                    AUIGrid.resize(swGrid_ID, windowWidth);
+                }, 20)
+
+            }
+        }
+    });
+</script>
+</body>
+</html>
