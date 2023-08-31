@@ -774,6 +774,8 @@ function gridPopReturnEnrollDetail(id,title,width,height){
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -943,8 +945,47 @@ function gridPopRentalExtensionEnrollDetail(id,title,width,height){
             dataField: "category_asset_status",
             headerText: "자산상태",
         }, {
-            dataField: "category_rental_extension_time",
+            dataField: "category_start_date",
             headerText: "대여연장기간",
+            colSpan: 2, // 자신을 포함하여 3개의 헤더를 가로 병합함.
+        },{
+            dataField: "category_finish_date",
+            headerText: "",
+            dataType: "date",
+            dateInputFormat: "yyyymmdd", // 실제 데이터의 형식 지정
+            formatString: "yyyy년 mm월 dd일", // 실제 데이터 형식을 어떻게 표시할지 지정
+            renderer: {
+                type: "IconRenderer",
+                iconWidth: 16, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
+                iconHeight: 16,
+                iconPosition: "aisleRight",
+                iconTableRef: { // icon 값 참조할 테이블 레퍼런스
+                    "default": "../resources/img/icon/icon_delete.svg" // default
+                },
+                onClick: function (event) {
+                    // 달력 아이콘 클릭하면 실제로 달력을 띄움.
+                    // 즉, 수정으로 진입함.
+                    AUIGrid.openInputer(event.pid);
+                }
+            },
+            editRenderer: {
+                type: "JQCalendarRenderer", // jquery-datepicker 달력 렌더러 사용
+                defaultFormat: "yyyymmdd", // 달력 선택 시 데이터에 적용되는 날짜 형식
+                uncheckDateValue: "-", // Clear 버턴 클릭 시 적용될 값.
+                showEditorBtn: false,
+                showEditorBtnOver: false,
+                // jquery-datepicker 속성을 여기에 설정하십시오.
+                // API : https://api.jqueryui.com/datepicker/#option-appendText
+                jqOpts: {
+                    changeMonth: true,
+                    changeYear: true,
+                    selectOtherMonths: true,
+                    showOtherMonths: true,
+                    dayNamesMin: ["일", "월", "화", "수", "목", "금", "토"],
+                    monthNamesShort: ["1월", "2월", "3월", "4월", "5월", "6월", "7월", "8월", "9월", "10월", "11월", "12월"]
+                } // end of jqOpts
+            }
+
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {

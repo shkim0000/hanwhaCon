@@ -30,7 +30,7 @@
     <script src="../resources/js/admin-main.js"></script>
     <script src="../resources/js/admin-grid.js"></script>
 </head>
-<body id="guide">
+<body>
 
 <!-- contents -->
 <div id="wrapper">
@@ -444,9 +444,13 @@
         </div>
     </div>
 </div>
-
 <!-- // 팝업 -->
-
+<style>
+    .input-design{position:relative;}
+    .input-design2{position:relative;}
+    .input-design2::after{content:'';width:calc(100% - 10px);height:calc(100% - 14px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}
+    .input-design::after{content:'';width:calc(100% - 10px);height:calc(100% - 6px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}
+</style>
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -501,8 +505,11 @@ function createNewAssetEnrollGrid() {
             }
         }, {
             dataField: "category_enroll_count",
-            headerText: "신청수량",
+            headerText: "수량",
             headerStyle: "aui-grid-important-header",
+            /* -----------추가------------- */
+            style:"input-design2",
+            /* -----------추가------------- */
             editRenderer: {
                 type: "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
@@ -516,6 +523,9 @@ function createNewAssetEnrollGrid() {
             dataField: "category_asset_num",
             headerText: "자산번호",
             headerStyle: "aui-grid-important-header",
+            /* -----------추가------------- */
+            style:"input-design2",
+            /* -----------추가------------- */
             editRenderer : {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
@@ -599,6 +609,9 @@ function createAssetEnrollGrid() {
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            /* -----------추가------------- */
+            style:"input-design",
+            /* -----------추가------------- */
             editRenderer : {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
@@ -607,6 +620,9 @@ function createAssetEnrollGrid() {
         }, {
             dataField: "category_serial_key",
             headerText: "시리얼키",
+            /* -----------추가------------- */
+            style:"input-design",
+            /* -----------추가------------- */
             editRenderer : {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
