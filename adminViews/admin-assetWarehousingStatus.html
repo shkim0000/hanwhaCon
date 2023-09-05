@@ -40,6 +40,11 @@
                 <li>자산입고현황</li>
             </ul>
         </div>
+        <div class="title-box">
+            <div class="title">
+                <h3>검색조건</h3>
+            </div>
+        </div>
         <div class="input-wrap">
             <div class="input-lists">
                 <div class="input-list">
@@ -93,7 +98,7 @@
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">사용자 검색</button>
-            <button type="button" class="btn" onclick="lp_open('gridPop_applicationStatus','신청현황',1250,570)">신청현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_applicationStatus','신청현황',1250,615)">신청현황</button>
         </div>
     </div>
 </div>
@@ -118,7 +123,7 @@
 </div>
 
 <!-- 신청 현황 -->
-<div id="gridPop_applicationStatus" class="popup big no">
+<div id="gridPop_applicationStatus" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -151,6 +156,9 @@
                 </div>
             </div>
             <div id="popup_grid_application_status" class="grid-box h-small2"></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="lp_close('gridPop_applicationStatus')">닫기</button>
+            </div>
         </div>
     </div>
 </div>
@@ -250,7 +258,7 @@ function createEnrollCurrentGrid() {
 
     /* 셀 더블클릭 이벤트 바인딩 */
     AUIGrid.bind(enrollCurrentGrid_ID, "cellDoubleClick", function(event) {
-        lp_open('gridPop_applicationStatus','신청현황',1250,570);
+        lp_open('gridPop_applicationStatus','신청현황',1250,615);
         getRowCount(popup_grid_application_status);
     });
 }

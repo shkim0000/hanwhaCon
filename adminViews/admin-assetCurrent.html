@@ -1246,7 +1246,6 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
@@ -1338,18 +1337,6 @@
                 });
                 gridPopTakeoverEnrollDetail(width,height);
                 gridPopTakeoverEnrollHistory(width,height);
-            }
-        });
-        // 전체 체크박스 클릭 이벤트 바인딩
-        AUIGrid.bind(applicationGrid_ID, "rowAllChkClick", function (event) {
-            if (event.checked) {
-                // name 의 값들 얻기
-                var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "category_status");
-                // Anna 제거하기
-                uniqueValues.splice(uniqueValues.indexOf("category_status"), 1);
-                AUIGrid.setCheckedRowsByValue(event.pid, "category_status", uniqueValues);
-            } else {
-                AUIGrid.setCheckedRowsByValue(event.pid, "category_status", []);
             }
         });
     }
