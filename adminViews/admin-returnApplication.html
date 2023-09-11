@@ -62,15 +62,6 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td">
-                    <div class="td-wrap">
-                        <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530, this)">
-                            <input type="text" data-label="manager" readonly>
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </label>
-                    </div>
-                </div>
                 <div class="th"><div class="th-wrap center"><p class="important">사용자</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -160,13 +151,10 @@
                     </button>
                 </li>
             </ul>
-            <div class="title-box end">
+            <div class="title-box">
+                <p>반납할 자산을 더블클릭해주세요.</p>
                 <div class="btn-wrap">
                     <button type="button" class="btn primary check">선택</button>
-                    <!--                    <label class="date btn">-->
-                    <!--                        <span>선택</span>-->
-                    <!--                        <input type="text">-->
-                    <!--                    </label>-->
                 </div>
             </div>
             <div id="holdingAssetGrid_ID" class="grid-box h-small"></div>
@@ -181,7 +169,7 @@
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
-            <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
+            <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">결재</button>
         </div>
 
         <div class="btn-wrap">

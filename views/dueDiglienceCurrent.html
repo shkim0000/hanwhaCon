@@ -81,7 +81,7 @@
                             <h3 class="list-title"><span>자산별 현황</span></h3>
                         </div>
                         <div class="btn-wrap">
-                            <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
+                            <button type="button" class="btn primary send" data-popup="submit_pop">결재</button>
                         </div>
                     </div>
                     <div id="assetStatusGrid_ID" class="grid-box h-small2"></div>
@@ -91,6 +91,8 @@
 
         <div class="title-box end">
             <div class="btn-wrap">
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn add-column" onclick="addRow();">추가</button>
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
@@ -408,7 +410,16 @@
     </div>
 </div>
 <!-- // 팝업 -->
+<!--------추가----------------->
+<style>
+    .myField3{background-color:#ebaf88;}
+    .my-custom-style *{color:red;}
+    .my-custom-style3{background-color:#ebaf88;font-weight:700}
+    .input-design{position:relative;}
+    .input-design::after{content:'';width:calc(100% - 10px);height:calc(100% - 6px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}
 
+</style>
+<!--------추가----------------->
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -417,7 +428,10 @@ let assetStatusGrid_ID; // 자산별 현황
 let dueDiglienceGrid_ID;
 
 /* 1-2. dropdown menu 리스트 */
-let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
+let groupList = ["선택","존재", "미존재"]; //-- 드랍다운리스트에 출력할 리스트들...서버 사이드(PHP, JSP, ASP 등)에서 해당 리스트를 매핑하십시오.
+/*---------------추가----------------*/
+let groupList2 = ["행정동","성수동","한남동"]
+/*---------------추가----------------*/
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createUserStatusGrid(); // 사용자별 현황
@@ -443,43 +457,65 @@ function createUserStatusGrid() {
             headerText: "사용자",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            style: "my-custom-style3",
+            /* -----------추가------------*/
         }, {
             dataField: "category_existence",
             headerText: "존재",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            /* -----------추가------------*/
         }, {
             dataField: "category_non_existence",
             headerText: "미존재",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            /* -----------추가------------*/
         }, {
             dataField: "category_add",
             headerText: "추가",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            /* -----------추가------------*/
         }, {
             dataField: "category_adjustment",
             headerText: "조정",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            /* -----------추가------------*/
         }, {
             dataField: "category_have_asset",
             headerText: "보유자산",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            /* -----------추가------------*/
         }, {
             dataField: "category_realtime_confirm",
             headerText: "실시확인 일자",
             filter: {
                 showIcon: true,
-            }
+            },
+            /* -----------추가------------*/
+            headerStyle: "myField3",
+            /* -----------추가------------*/
         }];
 
     /* 1-2. 푸터 설정 */
@@ -520,6 +556,9 @@ function createUserStatusGrid() {
 
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        /*---------추가 ------------*/
+        showRowNumColumn: false, /* 앞에 표시되는 숫자 삭제*/
+        /*---------추가 ------------*/
         rowIdField: "id",
         showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
@@ -572,41 +611,58 @@ function createAssetStatusGrid() {
         width: 160,
         filter: {
             showIcon: true,
-        }
+        },
+        /* -----------추가------------*/
+        headerStyle: "myField3",
+        style: "my-custom-style3",
+        /* -----------추가------------*/
     }
     columnLayout[2] = {
         dataField: "category_existence",
         headerText: "존재",
         filter: {
             showIcon: true,
-        }
+        },
+        /* -----------추가------------*/
+        headerStyle: "myField3",
+        /* -----------추가------------*/
     }
     columnLayout[3] = {
         dataField: "category_non_existence",
         headerText: "미존재",
         filter: {
             showIcon: true,
-        }
+        },
+        /* -----------추가------------*/
+        headerStyle: "myField3",
+        /* -----------추가------------*/
     }
     columnLayout[4] = {
         dataField: "category_add",
         headerText: "추가",
         filter: {
             showIcon: true,
-        }
+        },
+        /* -----------추가------------*/
+        headerStyle: "myField3",
+        /* -----------추가------------*/
     }
     columnLayout[5] = {
         dataField: "category_adjustment",
         headerText: "조정",
         filter: {
             showIcon: true,
-        }
+        },
+        /* -----------추가------------*/
+        headerStyle: "myField3",
+        /* -----------추가------------*/
+
     }
 
     /* 1-2. 푸터 설정 */
     let footerLayout = [{
         labelText: "전체",
-        positionField: "category_user_name"
+        positionField: "category_item_name"
     }, {
         dataField: "category_existence",
         positionField: "category_existence",
@@ -641,6 +697,9 @@ function createAssetStatusGrid() {
 
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        /*---------추가 ------------*/
+        showRowNumColumn: false, /* 앞에 표시되는 숫자 삭제*/
+        /*---------추가 ------------*/
         rowIdField: "id",
         showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
@@ -669,6 +728,9 @@ function createAssetStatusGrid() {
             // expFunction 의 리턴형은 항상 Number 여야 합니다.(즉, 수식만 가능)
             return (item.category_existence + item.category_non_existence + item.category_add + item.category_adjustment);
         },
+        /* -----------추가------------*/
+        headerStyle: "myField3",
+        /* -----------추가------------*/
     });
 
     /* 그리드 생성 */
@@ -688,6 +750,7 @@ function createAssetStatusGrid() {
     /* 푸터 레이아웃 생성 */
     AUIGrid.setFooter(assetStatusGrid_ID, footerLayout);
 }
+
 function createDueDiglienceGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -702,7 +765,10 @@ function createDueDiglienceGrid() {
             width: 180,
             filter: {
                 showIcon: true,
-            }
+            },
+            /*----------추가------------*/
+
+            /*----------추가------------*/
         }, {
             dataField: "category_product_name",
             headerText: "물품명",
@@ -747,8 +813,9 @@ function createDueDiglienceGrid() {
             },
             renderer: {
                 type: "DropDownListRenderer",
-                list: groupList
-            }
+                list: groupList,
+
+            },
         }, {
             dataField: "category_reason_non_existence",
             headerText: "미존재 사유",
@@ -756,6 +823,9 @@ function createDueDiglienceGrid() {
             filter: {
                 showIcon: true,
             },
+            /*------------추가------------- */
+            style:"input-design",
+            /*------------추가------------- */
         }, {
             dataField: "category_investigate-date",
             headerText: "조사일",
@@ -770,13 +840,52 @@ function createDueDiglienceGrid() {
             filter: {
                 showIcon: true,
             }
-        }]
+        },
+        /*---------------추가---------------------*/
+        {
+            dataField: "category_use_place",
+            headerText: "사용장소",
+            width: 160,
+            filter: {
+                showIcon: true,
+            },
+            headerStyle: "aui-grid-important-header",
+            renderer: {
+                type: "DropDownListRenderer",
+                list: groupList2
+            }
+
+        },
+        {
+            dataField: "category_detail_place",
+            headerText: "상세위치",
+            width: 160,
+            filter: {
+                showIcon: true,
+            },
+            headerStyle: "aui-grid-important-header",
+            style:"input-design"
+        },
+        {
+            dataField: "category_note",
+            headerText: "비고",
+            width: 160,
+            filter: {
+                showIcon: true,
+            },
+            style:"input-design"
+        }
+        /*---------------추가---------------------*/
+    ]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
         showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
-        selectionMode: "multipleCells",
+        /*-----------추가(주석처리)-------------*/
+        /* selectionMode: "multipleCells",*/
+        /*-----------추가(주석처리)-------------*/
+
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
@@ -786,7 +895,13 @@ function createDueDiglienceGrid() {
         simplifySelectionEvent: true,
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: true, // 수정가능여부, 그리드 데이터 수정 가능
-        enableFilter: true, // 필터 true 설정
+        enableFilter: true, // 필터 true 설정,
+        rowStyleFunction: function (rowIndex, item) {
+            if (item.category_after_change == "미존재") {
+                return "my-custom-style";
+            }
+            return "";
+        }
     }
 
     /* 그리드 생성 */
@@ -825,6 +940,29 @@ window.onresize = function () {
 }
 
 /* 6. 함수관련 */
+/* 행 추가 */
+let cnt2 = 0;
+function addRow() {
+    var item = new Object();
+    item.id = "grid_ID_1" + (++cnt2),
+        item.category_asset_num = '',
+        item.category_product_name = '',
+        item.category_item_name = '',
+        item.category_department = '',
+        item.category_user_name = '',
+        item.category_before_change = '',
+        item.category_after_change = '선택',
+        item.category_reason_non_existence = '',
+        item.category_investigate = '',
+        item.category_use_place = '',
+        item.category_detail_place = '',
+        item.category_note = '',
+
+        // parameter
+        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+        AUIGrid.addRow(dueDiglienceGrid_ID, item, "first");
+};
 /* 상신버튼 눌렀을떄 validation */
 $("[data-popup ='submit_pop']").on("click",function(){
     let userTotalNum = AUIGrid.getFooterValueByDataField(userStatusGrid_ID, "category_adjustment");

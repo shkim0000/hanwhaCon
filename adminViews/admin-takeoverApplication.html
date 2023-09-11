@@ -62,15 +62,6 @@
         </div>
         <div class="custom-table">
             <div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청자</div></div>
-                <div class="td">
-                    <div class="td-wrap">
-                        <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530, this)">
-                            <input type="text" data-label="manager" readonly>
-                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                        </label>
-                    </div>
-                </div>
                 <div class="th"><div class="th-wrap center">사용자명</div></div>
                 <div class="td">
                     <div class="td-wrap">
@@ -171,7 +162,7 @@
             </ul>
             <div class="title-box end">
                 <div class="btn-wrap">
-                    <button type="button" class="btn">부서전체검색</button>
+                    <!--<button type="button" class="btn">부서전체검색</button>-->
                     <button type="button" class="btn primary check">선택</button>
                 </div>
             </div>
@@ -520,7 +511,10 @@
     </div>
 </div>
 <!-- // 팝업 -->
-
+<style>
+    .my-header-style{background: #9d9d9d;color:white;border-color:#9d9d9d;}
+    .my-column-style{background: #cccccc;color:white;}
+</style>
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
@@ -657,6 +651,16 @@
                 }
             }
         });
+
+
+        AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event){
+
+            /* 얻은 행을 하단 그리드에 추가하기 */
+            AUIGrid.addRow(enrollGrid_ID, event.item, "last");
+
+            /* 선택한 그리드 row 삭제 */
+            AUIGrid.removeRow(holdingAssetGrid_ID, "selectedIndex"); // 클릭한 row 삭제
+        })
     }
     function createEnrollGrid() {
         /* 기본 그리드(예시) */
@@ -700,14 +704,6 @@
                 }
             },
             {
-                dataField: "category_user_name",
-                headerText: "사용자",
-                width: 160,
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
                 dataField: "category_classification_use",
                 headerText: "용도구분",
                 width: 160,
@@ -716,24 +712,36 @@
                 }
             },
             {
-                dataField: "category_asset_place",
-                headerText: "자산위치",
+                dataField: "category_user_before",
+                headerText: "변경 전 사용자",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_date",
-                headerText: "반납일",
+                dataField: "category_department_before",
+                headerText: "변경 전 부서",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
+                dataField: "category_user_after",
+                headerText: "변경 후 사용자",
+                headerStyle: "my-header-style",
+                style: "my-column-style",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_department_after",
+                headerText: "변경 후 부서",
+                headerStyle: "my-header-style",
+                style: "my-column-style",
                 width: 160,
                 filter: {
                     showIcon: true,
@@ -785,6 +793,7 @@
 
         /* 그리드 생성 */
         enrollGrid_ID = AUIGrid.create("#enrollGrid_ID", columnLayout, gridPros);
+
     }
 
     /* 4. 데이터 불러오기 */
