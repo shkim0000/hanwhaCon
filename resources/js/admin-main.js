@@ -40,6 +40,7 @@ $(function(){
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산상태변경</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서 사용자별 조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>변경이력조회</a></li>\n"+
@@ -456,6 +457,8 @@ function lp_open(id,title,width,height,e,type){
         gridPopAssetClassification();
     } else if(id === "gridPop_applicationStatus") {
         popupApplicationStatus();
+    }else if(id === "gridPop_assetDetail"){
+        gridPopAssetDetail();
     }
 }
 

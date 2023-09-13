@@ -82,17 +82,37 @@
                 <h3>관리 자산 현황</h3>
             </div>
         </div>
-        <div id="assetManagementStatusGrid_ID" class="grid-box"></div>
 
-        <div class="title-box hide-ver">
+        <div class="list-box">
+            <div class="multiple-grid-wrap">
+                <div class="multiple-grid-box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h3 class="list-title"><span>자산별 현황</span></h3>
+                        </div>
+                    </div>
+                    <div id="assetStatusGrid_ID" class="grid-box h-small2"></div>
+                </div>
+                <div class="multiple-grid-box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h3 class="list-title"><span>사용자별 현황</span></h3>
+                        </div>
+                    </div>
+                    <div id="userStatusGrid_ID" class="grid-box h-small2"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="title-box">
             <div class="title">
                 <h3>세부 관리 자산 내역</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn excel" onclick="exportTo('xlsx')">엑셀다운로드</button>
+                <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="assetDetailGrid_ID" class="grid-box"></div>
+        <div id="dueDiglienceGrid_ID" class="grid-box h-medium"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
@@ -332,106 +352,151 @@
 </div>
 
 <!-- 자산 정보 -->
-<div id="gridPop_detail" class="popup">
+<div id="gridPop_assetDetail" class="popup">
     <div class="pop-box">
         <div class="pop-body">
+            <div class="title-box">
+                <div class="title">
+                    <h4>자산상세정보</h4>
+                </div>
+            </div>
             <div class="custom-table">
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center">물품종류</div></div>
                     <div class="td"><div class="td-wrap">모니터</div></div>
                     <div class="th"><div class="th-wrap center">품목</div></div>
-                    <div class="td"><div class="td-wrap">27인치</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input search">
+                                <input type="text" placeholder="27인치 노트북">
+                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                            </label>
+                        </div>
+                    </div>
                     <div class="th"><div class="th-wrap center">자산번호</div></div>
                     <div class="td"><div class="td-wrap">4763728</div></div>
                 </div>
                 <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>자산상태</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>운영</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>모델</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>LG-MO-27MD</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>규격#1</p></div></div>
-                    <div class="td"><div class="td-wrap"><p></p></div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>규격#2</p></div></div>
-                    <div class="td"><div class="td-wrap"><p></p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>규격#3</p></div></div>
-                    <div class="td"><div class="td-wrap"><p></p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>규격#4</p></div></div>
-                    <div class="td"><div class="td-wrap"><p></p></div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>규격#5</p></div></div>
-                    <div class="td"><div class="td-wrap"><p></p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>공용</p></div></div>
+                    <div class="th"><div class="th-wrap center">자산상태</div></div>
+                    <div class="td"><div class="td-wrap">운영</div></div>
+                    <div class="th"><div class="th-wrap center">모델명</div></div>
                     <div class="td">
-                        <div class="td-wrap">
-                            <label class="check">
-                                <input type="checkbox">
-                                <span>(공용이라면 체크)</span>
-                            </label>
-                        </div>
+                        <div class="td-wrap">LG-MO-27MD</div>
                     </div>
-                    <div class="th"><div class="th-wrap center"><p>도입일</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>2022-06-17</p></div></div>
+                    <div class="th"><div class="th-wrap center">규격#1</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
                 </div>
-                <div class="row con-2">
-                    <div class="th"><div class="th-wrap center"><p>자산위치</p></div></div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">규격#2</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
+                    <div class="th"><div class="th-wrap center">규격#3</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
+                    <div class="th"><div class="th-wrap center">규격#4</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">규격#5</div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
+                    <div class="th"><div class="th-wrap center">설치일</div></div>
+                    <div class="td"><div class="td-wrap">2023-01-17</div></div>
+                    <div class="th"><div class="th-wrap center"></div></div>
+                    <div class="td"><div class="td-wrap"></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p class="important">용도1</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="select medium">
+                            <label class="select">
                                 <select>
-                                    <option value="">행정동</option>
-                                    <option value="">행정동</option>
+                                    <option value="">사무용</option>
                                 </select>
                             </label>
                         </div>
                     </div>
-                    <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">용도2</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="input">
-                                <input type="text" value="1층 IT 운영부">
+                            <label class="select">
+                                <select>
+                                    <option value="">개인용</option>
+                                </select>
                             </label>
                         </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p class="important">필수부품</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="select">
+                                <select>
+                                    <option value="">미지급</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">자산위치</div></div>
+                    <div class="td half">
+                        <div class="td-wrap">
+                            <label class="select whole">
+                                <select>
+                                    <option value="">선택</option>
+                                    <option value="">행정동</option>
+                                    <option value="">성수동</option>
+                                </select>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td half">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">메모</div></div>
+                    <div class="td whole">
+                        <div class="td-wrap">자리 1번 모니터</div>
                     </div>
                 </div>
             </div>
 
             <div class="title-box">
                 <div class="title">
-                    <h3>사용자정보</h3>
+                    <h4>사용자 정보</h4>
                 </div>
             </div>
             <div class="custom-table">
                 <div class="row con-2">
-                    <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>부서</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    <div class="th"><div class="th-wrap center">사용자</div></div>
+                    <div class="td"><div class="td-wrap">홍길동</div></div>
+                    <div class="th"><div class="th-wrap center">부서</div></div>
+                    <div class="td"><div class="td-wrap">IT운영</div></div>
                 </div>
                 <div class="row con-2">
-                    <div class="th"><div class="th-wrap center"><p>사번</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>756398</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>NC6 자산정보</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>H/W</p></div></div>
+                    <div class="th"><div class="th-wrap center">사번</div></div>
+                    <div class="td"><div class="td-wrap">756598</div></div>
                 </div>
             </div>
 
             <div class="title-box">
                 <div class="title">
-                    <h3>변경이력</h3>
+                    <h4>실사이력</h4>
                 </div>
             </div>
-            <div id="popup_grid_changeHistory" class="grid-box h-small"></div>
+            <div id="popup_grid_assetDetail" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" onclick="lp_close('gridPop_detail')">닫기</button>
+                <button type="button" class="btn cancel" onclick="lp_close('gridPop_assetDetail')">닫기</button>
             </div>
         </div>
     </div>
 </div>
+<!-- // 팝업 -->
 
 <!-- 사용자 검색 -->
 <div id="gridPop_user" class="popup">
@@ -452,20 +517,417 @@
 </div>
 <!-- // 팝업 -->
 
+<style>
+    .myField3{background-color:#ebaf88;}
+    .my-custom-style3{background-color:#ebaf88;font-weight:700}
+
+</style>
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let assetManagementStatusGrid_ID; // 관리 자산 현황
-    let assetDetailGrid_ID; // 세부 관리 자산 내역
+    let userStatusGrid_ID; // 사용자별 현황
+    let assetStatusGrid_ID; // 자산별 현황
+    let dueDiglienceGrid_ID;
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-    createAssetManagementStatusGrid();
-    requestAssetManagementStatusGridData();
+    createUserStatusGrid(); // 사용자별 현황
+    createAssetStatusGrid(); // 자산별 현황
+
+    requestUserStatusGridData();
+    requestAssetStatusGridData();
+
 
     /* 3. AUIGrid 그리드 옵션 */
-    /* [현황] */
     let count = 0;
-    function createAssetManagementStatusGrid() {
+    /* [현황] : 자산별 현황 */
+    function createAssetStatusGrid() {
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout =[
+            {
+                dataField: "category_product_name",
+                headerText: "물품명",
+                headerStyle: "myField3",
+                style: "my-custom-style3",
+                filter: {
+                    showIcon: true,
+                }
+            }
+        ];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText: "전체",
+            positionField: "category_product_name"
+        }
+        ];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            enableFilter: true,
+            useContextMenu: true,
+            fixedColumnCount: 1,
+            // fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
+            displayTreeOpen: true,
+            // 체크박스 사용 안함
+            showRowCheckColumn: false,
+            showRowNumColumn: false,
+            showFooter: true,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+            simplifySelectionEvent: true
+
+        }
+
+
+        let dummy = [1,2,3,4,5,6,7,8,9,10];
+
+        /* dummy 에 해당하는게 DB 에서 받아온 data 여야 합니다. */
+        dummy.forEach((i, index) => {
+            columnLayout.push(
+                {
+                    dataField: "category_user"+index, // dataField는 DB에 맞게 작성해주셔도 됩니다.
+                    headerText: "김종민" + index + 1,
+                    headerStyle: "myField3",
+                    filter: {
+                        showIcon: true,
+                    }
+                },
+            )
+            footerLayout.push({
+                dataField: "category_user"+index,
+                positionField: "category_user"+index,
+                operation: "SUM",
+                formatString: "#,##0",
+            });
+        })
+
+        columnLayout.push({
+            headerText: "전체",
+            headerStyle: "myField3",
+            dataField: "category_row_sum",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
+            dataType: "numeric",
+            formatString: "#,##0",
+            width: 120,
+            expFunction: function (rowIndex, columnIndex, item, dataField) {
+                return (item.category_user1 + item.category_user2 + item.category_user3 + item.category_user4);
+            }
+        });
+
+        footerLayout.push(
+            {
+                dataField: "category_row_sum",
+                positionField: "category_row_sum",
+                operation: "SUM",
+                formatString: "#,##0", //#,##0 : 천단위 마다 컴마 구분자 정수 표현
+                renderer: {
+                    type: "ButtonRenderer",
+                    labelText: "상세 보기",
+                    onClick: function (event) {
+                        alert("( " + event.rowIndex + ", " + event.columnIndex + " ) " + event.item.name + " 상세보기 클릭");
+                    },
+                }
+            }
+        )
+
+        // 실제로 #grid_wrap 에 그리드 생성
+        assetStatusGrid_ID = AUIGrid.create("#assetStatusGrid_ID", columnLayout, gridPros);
+
+        /* 푸터 레이아웃 생성 */
+        AUIGrid.setFooter(assetStatusGrid_ID, footerLayout);
+
+        AUIGrid.clearFilterAll(userStatusGrid_ID);
+        /*AUIGrid.bind(assetStatusGrid_ID, "selectionChange", function(event) {
+            if(count === 0){
+                count++;
+                createDueDiglienceGrid();
+
+                setTimeout(function(){
+                    let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                    let primeCell = event.primeCell;
+                    let headerText = primeCell.headerText;
+                    let dataField = primeCell.dataField;
+                    let cellText = primeCell.item.category_product_name;
+
+                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                    name.forEach((i) => {
+                        if(i.category_user_name === headerText && dataField !== "category_row_sum"){
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", headerText);
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText);
+                        }else{
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText)
+                        }
+                    });
+                },20);
+            } else{
+                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                let primeCell = event.primeCell;
+                let headerText = primeCell.headerText;
+                let dataField = primeCell.dataField;
+                let cellText = primeCell.item.category_product_name;
+
+                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                name.forEach((i) => {
+                    if(i.category_user_name === headerText && dataField !== "category_row_sum"){
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", headerText);
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText);
+                    }else{
+                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",cellText)
+                    }
+                });
+            }
+        });*/
+
+        AUIGrid.bind(assetStatusGrid_ID, "cellClick", function(event){
+            console.log(event.rowIndex, event.columnIndex);
+            console.log(event);
+
+            /* 파라미터 mydata에는 event.rowIndex, event.columnIndex의 값에 따라 들어갑니다.*/
+            let mydata = {...event.item};
+            createDueDiglienceGrid();
+            AUIGrid.setGridData(dueDiglienceGrid_ID, mydata);
+        })
+
+        /*        /!* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 *!/
+                AUIGrid.bind(assetStatusGrid_ID, "footerClick", function (event) {
+                    /!* 컬럼 이름 저장하기 *!/
+                    const columnArr = [];
+                    for (let ele of columnLayout) {
+                        columnArr.push(ele.headerText);
+                    }
+                    let columnLength = columnArr.length;
+                    let footerIndex = event.footerIndex;
+
+                    /!* 색상 변환 *!/
+                    if(footerIndex === 0){
+                        return false;
+                    }else{
+                        $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                        $(this).addClass("on");
+                    }
+
+
+                    if(count === 0){
+                        count++;
+                        createDueDiglienceGrid();
+                        setTimeout(function(){
+                            if(footerIndex === 0){
+                                return false;
+                            }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+                            }else if(footerIndex === columnLength - 1){
+
+                                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                            }
+                        },20);
+
+                    }else{
+                        if(footerIndex === 0){
+                            return false;
+                        }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                            AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+                        }else if(footerIndex === columnLength - 1){
+                            AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                        }
+                    }
+                });*/
+
+    }
+
+    /* [현황] : 사용자별 현황 */
+    function createUserStatusGrid() {
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout =[
+            {
+                dataField: "category_user_name",
+                headerText: "물품명",
+                headerStyle: "myField3",
+                style: "my-custom-style3",
+                filter: {
+                    showIcon: true,
+                }
+            }
+        ];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText: "전체",
+            positionField: "category_user_name"
+        }
+        ];
+
+
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            enableFilter: true,
+            useContextMenu: true,
+            fixedColumnCount: 1,
+            // fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
+            displayTreeOpen: true,
+            // 체크박스 사용 안함
+            showRowCheckColumn: false,
+            showRowNumColumn: false,
+            showFooter: true,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            enableFilter: true, // 필터 true 설정
+
+        }
+
+        let dummy = ["데스크탑", "노트북", "모니터", "프린터"];
+        /* columnLayout, footerLayout 에 추가되는 항목들은 forEach에서 작업해주시면 됩니다. */
+        dummy.forEach((i,index) => {
+            columnLayout.push({
+                dataField: "category_product_desktop_num", // i.dataField + index
+                headerText: "데스크탑", // i.name
+                headerStyle: "myField3",
+                filter: {
+                    showIcon: true,
+                }
+            })
+
+            footerLayout.push({
+                dataField: "category_product_desktop_num", // i.dataField + index
+                positionField: "category_product_desktop_num", // i.name
+                operation: "SUM",
+                style: "aui-grid-my-column",
+                formatString: "#,##0",
+            })
+        })
+
+
+        columnLayout.push({
+            headerText: "전체",
+            headerStyle: "myField3",
+            dataField: "category_row_sum",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
+            dataType: "numeric",
+            formatString: "#,##0",
+            width: 120,
+            expFunction: function (rowIndex, columnIndex, item, dataField) {
+                return (item.category_product_desktop_num + item.category_product_laptop_num + item.category_product_monitor_num + item.category_product_printer_num);
+            }
+        });
+
+        footerLayout.push({
+            dataField: "category_row_sum",
+            positionField: "category_row_sum",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        });
+
+        // 실제로 #grid_wrap 에 그리드 생성
+        userStatusGrid_ID = AUIGrid.create("#userStatusGrid_ID", columnLayout, gridPros);
+
+        /* 푸터 레이아웃 생성 */
+        AUIGrid.setFooter(userStatusGrid_ID, footerLayout);
+
+        /*        AUIGrid.bind(userStatusGrid_ID, "selectionChange", function(event) {
+                    if(count === 0){
+                        count++;
+                        createDueDiglienceGrid();
+                        let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                        let primeCell = event.primeCell;
+                        let headerText = primeCell.headerText;
+                        let dataField = primeCell.dataField;
+                        let cellText = primeCell.item.category_user_name;
+                        console.log(headerText)
+
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+
+                        name.forEach((i) => {
+                            if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
+                                console.log("아니야")
+                            }else{
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                            }
+                        });
+                    }else{
+                        let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
+                        let primeCell = event.primeCell;
+                        let headerText = primeCell.headerText;
+                        let dataField = primeCell.dataField;
+                        let cellText = primeCell.item.category_user_name;
+                        console.log(headerText)
+
+                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+
+                        name.forEach((i) => {
+                            if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
+                                console.log("아니야")
+                            }else{
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
+                            }
+                        });
+                    }
+
+                });
+
+                /!* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 *!/
+                AUIGrid.bind(userStatusGrid_ID, "footerClick", function (event) {
+                    /!* 컬럼 이름 저장하기 *!/
+                    const columnArr = [];
+                    for (let ele of columnLayout) {
+                        columnArr.push(ele.headerText);
+                    }
+                    let columnLength = columnArr.length;
+                    let footerIndex = event.footerIndex;
+
+                    /!* 색상 변환 *!/
+                    if(footerIndex === 0){
+                        return false;
+                    }else{
+                        $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                        $(this).addClass("on");
+                    }
+
+                    console.log(this)
+                    if(count === 0){
+                        count++;
+                        createDueDiglienceGrid();
+                        setTimeout(function(){
+                            if(footerIndex === 0){
+                                return false;
+                            }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                                AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_product_name",columnArr[footerIndex]);
+                            }else if(footerIndex === columnLength - 1){
+                                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                            }
+                        },20);
+
+                    }else{
+                        if(footerIndex === 0){
+                            return false;
+                        }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                            AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_product_name",columnArr[footerIndex]);
+                        }else if(footerIndex === columnLength - 1){
+                            AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+                        }
+                    }
+
+                });*/
+
+        AUIGrid.bind(userStatusGrid_ID, "cellClick", function(event){
+            console.log(event.rowIndex, event.columnIndex);
+
+            /* 파라미터 mydata에는 event.rowIndex, event.columnIndex의 값에 따라 들어갑니다.*/
+            let mydata = {...event.item};
+            createDueDiglienceGrid();
+            AUIGrid.setGridData(dueDiglienceGrid_ID, mydata);
+        })
+
+    }
+
+    function createDueDiglienceGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -473,88 +935,7 @@
                 dataField: "id",
                 headerText: "아이디",
                 visible:false
-            },
-            {
-                dataField: "category_product_name",
-                headerText: "물품명",
-                width: 160,
             }, {
-                dataField: "category_product_count",
-                headerText: "총 보유자산",
-                width: 180,
-                renderer: {
-                    type: "ButtonRenderer",
-                    onClick: function (event) {
-                        if (count === 0) {
-                            count++;
-                            $(".title-box.hide-ver").addClass("open");
-                            createAssetDetailGrid();
-                            requestAssetDetailGridData();
-                            setTimeout(function(){
-                                let currentName = event.item.category_product_name;
-                                let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
-
-                                AUIGrid.clearFilterAll(assetDetailGrid_ID);
-
-                                comparisonObj.forEach((i) => {
-                                    if(currentName === i.category_product_name){
-                                        AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
-                                    }
-                                });
-                            },100);
-                        }
-                        let currentName = event.item.category_product_name;
-                        let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
-
-                        AUIGrid.clearFilterAll(assetDetailGrid_ID);
-
-                        comparisonObj.forEach((i) => {
-                            if(currentName === i.category_product_name){
-                                AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name", i.category_product_name);
-                            }
-                        });
-
-                    },
-                }
-            }];
-
-        /* 1-2. 푸터 설정 */
-        let footerLayout = [{
-            labelText: "매출 합계",
-            positionField: "category_product_name"
-        }, {
-            dataField: "category_product_count",
-            positionField: "category_product_count",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }];
-        /* 2. 그리드 속성 설정 */
-        let gridPros = {
-            rowIdField: "id",
-            selectionMode: "multipleCells",
-            showFooter: true,
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true,
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            autoGridHeight : true
-        }
-
-        /* 그리드 생성 */
-        assetManagementStatusGrid_ID = AUIGrid.create("#assetManagementStatusGrid_ID", columnLayout, gridPros);
-        // 푸터 레이아웃 세팅
-        AUIGrid.setFooter(assetManagementStatusGrid_ID, footerLayout);
-    }
-    function createAssetDetailGrid() {
-        /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
-        let columnLayout = [
-            {
                 dataField: "category_product_name",
                 headerText: "물품명",
                 width: 160,
@@ -564,54 +945,54 @@
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
-                width: 180,
+                width: 120,
                 filter: {
                     showIcon: true,
                 }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
-                width: 280,
+                width: 200,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_user",
+                dataField: "category_user_name",
                 headerText: "사용자",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_usage1",
+                dataField: "category_case1",
                 headerText: "용도1",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_usage2",
+                dataField: "category_case2",
                 headerText: "용도2",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_application_type",
+                dataField: "category_application_case",
                 headerText: "신청구분",
                 width: 160,
                 filter: {
                     showIcon: true,
-                }
+                },
             }, {
                 dataField: "category_application_content",
                 headerText: "신청내용",
                 width: 160,
                 filter: {
                     showIcon: true,
-                }
+                },
             }, {
-                dataField: "category_place",
+                dataField: "category_use_place-date",
                 headerText: "사용장소",
                 width: 160,
                 filter: {
@@ -620,6 +1001,13 @@
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_payment_date",
+                headerText: "지급일자",
                 width: 160,
                 filter: {
                     showIcon: true,
@@ -634,6 +1022,9 @@
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
+            rowIdField: "id",
+            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
@@ -641,82 +1032,102 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            simplifySelectionEvent: true,
             copyDisplayValue: true, //그리드 데이터 복사 가능
             editable: false, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
-        assetDetailGrid_ID = AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
+        dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
+        // requestDueDiglienceGridData();
 
         /* 더블 클릭시 팝업 */
-        AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
-            $("#gridPop_detail").addClass("open").dialog({
+        AUIGrid.bind(dueDiglienceGrid_ID, "cellDoubleClick", function(event) {
+            $("#gridPop_assetDetail").dialog({
                 title: "자산정보",
                 width: 1250,
-                height: 500,
+                height:860,
                 modal: true,
                 resizable: false,
                 dialogClass: 'no-close success-dialog'
             });
-            gridPopChangeHistory();
+            gridPopAssetDetail();
         });
     }
 
     /* 4. 데이터 불러오기 */
-    function requestAssetManagementStatusGridData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas20.json", function (data) {
-            AUIGrid.setGridData(assetManagementStatusGrid_ID, data);
+    function requestAssetStatusGridData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas22.json", function (data) {
+            AUIGrid.setGridData(assetStatusGrid_ID, data);
         });
     }
-    function requestAssetDetailGridData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
-            AUIGrid.setGridData(assetDetailGrid_ID, data);
+    function requestUserStatusGridData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas24.json", function (data) {
+            AUIGrid.setGridData(userStatusGrid_ID, data);
         });
     }
+    function requestDueDiglienceGridData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas23.json", function (data) {
+            AUIGrid.setGridData(dueDiglienceGrid_ID, data);
+        });
+    }
+
+
+
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof assetDetailGrid_ID !== "undefined") {
-            AUIGrid.resize(assetDetailGrid_ID);
-        } else if (typeof assetManagementStatusGrid_ID !== "undefined"){
-            AUIGrid.resize(assetManagementStatusGrid_ID);
+        if (typeof userStatusGrid_ID !== "undefined") {
+            AUIGrid.resize(userStatusGrid_ID);
+        }
+        if (typeof assetStatusGrid_ID !== "undefined") {
+            AUIGrid.resize(assetStatusGrid_ID);
+        }
+        if (typeof dueDiglienceGrid_ID !== "undefined") {
+            AUIGrid.resize(dueDiglienceGrid_ID);
         }
     }
 
-    $(document).on("click",".menu-btn",function(){
-        let innerWidth = $(".contents").innerWidth() - 38;
-        if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
-            setTimeout(function(){
-                AUIGrid.resize(assetManagementStatusGrid_ID, innerWidth);
-                AUIGrid.resize(assetDetailGrid_ID, innerWidth);
-            },20);
+    /* 6. 함수관련 */
+    /* 상신버튼 눌렀을떄 validation */
+    $("[data-popup ='submit_pop']").on("click",function(){
+        let userTotalNum = AUIGrid.getFooterValueByDataField(userStatusGrid_ID, "category_adjustment");
+        let userExistNum = AUIGrid.getFooterValueByDataField(userStatusGrid_ID, "category_non_existence");
+        let assetTotalNum = AUIGrid.getFooterValueByDataField(userStatusGrid_ID, "category_adjustment");
+        let assetExistNum = AUIGrid.getFooterValueByDataField(userStatusGrid_ID, "category_non_existence");
 
-        } else{
-            innerWidth = innerWidth - 260;
-            setTimeout(function(){
-                AUIGrid.resize(assetManagementStatusGrid_ID, innerWidth);
-                AUIGrid.resize(assetDetailGrid_ID, innerWidth);
-            },20);
+        if(userTotalNum === userExistNum && assetTotalNum === assetExistNum){
+            lp_open("submit_pop");
+        } else {
+            lp_open('not_complete_pop','',550, 170);
         }
     });
 
-    /* 엑셀 다운로드 */
-    function exportTo(type) {
+    /* 메뉴버튼 클릭시(반응형) */
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        let halfWidth = ($(".contents").innerWidth() - 82)/2;
 
-        // 내보내기 실행
-        switch (type) {
-            case "xlsx":
-                AUIGrid.exportToXlsx(assetDetailGrid_ID, {
-                    progressBar: true, // 진행바 표시
-                    localControl:true,
-                    // 스타일 상태 유지 여부(기본값:true)
-                    exportWithStyle:false
-                });
-                break;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            halfWidth = halfWidth + 130;
+            setTimeout(function(){
+                AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            halfWidth = halfWidth - 130;
+            setTimeout(function(){
+                AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+            },20)
         }
-    };
+    });
 </script>
 </body>
 </html>
