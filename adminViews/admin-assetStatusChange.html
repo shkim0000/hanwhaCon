@@ -216,6 +216,7 @@
 
         /* 2. 그리드 속성 설정 */
         let gridPros = {
+            rowIdField: "id",
             showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
@@ -289,6 +290,7 @@
 
         /* 2. 그리드 속성 설정 */
         let gridPros = {
+            rowIdField: "id",
             showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
@@ -333,42 +335,32 @@
     $(".btn.check").on("click",function(event){
         /* 상단 그리드의 체크된 행들 얻기 */
         let rows = AUIGrid.getCheckedRowItemsAll(possessGrid_ID);
-        let rows2 = AUIGrid.getItemByRowId(changeGrid_ID);
-        console.log(rows2)
-        var notHave = AUIGrid.isUniqueValue(rows, "id", rows.id); // 이미 존재하는지 검사
-        console.log(notHave);
+        let rows2 = AUIGrid.getAddedRowItems(changeGrid_ID);
+
+        /* 체크된 아이템의 정보 */
+        for(i=0;i<rows.length; i++){
+            console.log(rows[i].id)
+        }
+
+
+
+
+
 
         if (rows.length <= 0) {
             alert('상단 그리드에서 체크된 행이 없습니다.');
             return;
         }
-
-        // if (!notHave) {
-        //     if (confirm("지금 드랍되는 행은 이미 이전에 드랍된 행입니다. 또 드랍하시겠습니까?")) {
-        //         return true;
-        //     } else {
-        //         return false; // 기본 행위 안함.
-        //     }
-        // }
-
         AUIGrid.addRow(changeGrid_ID, rows, "last");
-        /*        let rows2 = AUIGrid.getCheckedRowItemsAll(changeGrid_ID);
+        setTimeout(function)
+        console.log(rows2)
 
-
-                /!* 얻은 행을 하단 그리드에 추가하기 *!/
-
-
-
-
-                var pidToDrop = event.pidToDrop;
-                var item = event.items[0]; // 드래깅 되고 있는 첫번째 행
-                var notHave = AUIGrid.isUniqueValue(pidToDrop, "id", item.id); // 이미 존재하는지 검사
-
-                return true; // 만약 return false 를 하게 되면 드랍 행위를 하지 않습니다.(즉, 기본 행위를 안함)*/
 
         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(changeGrid_ID)
+        AUIGrid.updateRowsById(changeGrid_ID);
+
     });
+
 
     /* 그리드 행 선택 삭제 */
     function deleteRowGrid(){

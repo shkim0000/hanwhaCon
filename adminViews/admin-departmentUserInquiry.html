@@ -67,7 +67,7 @@
         </div>
         <div id="userAssetManagementStatusGrid_ID" class="grid-box"></div>
 
-        <div class="title-box hide-ver">
+        <div class="title-box">
             <div class="title">
                 <h3>세부 관리 자산 내역</h3>
             </div>
@@ -195,7 +195,10 @@
         </div>
     </div>
 </div>
-
+<style>
+    .myField3{background-color:#ebaf88;}
+    .my-custom-style3{background-color:#ebaf88;font-weight:700}
+</style>
 <!-- // 팝업 -->
 <script>
     /* AUIGrid */
@@ -209,154 +212,212 @@
     /* [현황] */
     let count = 0;
     function createUserAssetManagementStatusGrid() {
-        /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
-        let columnLayout = [];
+        let columnLayout =[
+            {
+                dataField: "category_user_name",
+                headerText: "사용자명",
+                headerStyle: "myField3",
+                style: "my-custom-style3",
+                filter: {
+                    showIcon: true,
+                }
+            },{
+                dataField: "category_product_desktop_num",
+                headerText: "데스크탑",
+                headerStyle: "myField3",
+                filter: {
+                    showIcon: true,
+                }
+            },{
+                dataField: "category_product_laptop_num",
+                headerText: "노트북",
+                headerStyle: "myField3",
+                filter: {
+                    showIcon: true,
+                }
+            },{
+                dataField: "category_product_monitor_num",
+                headerText: "모니터",
+                headerStyle: "myField3",
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_product_printer_num",
+                headerText: "프린터",
+                headerStyle: "myField3",
+                filter: {
+                    showIcon: true,
+                }
+            }
+        ];
 
-        columnLayout[0] = {
-            dataField: "id",
-            headerText: "아이디",
-            visible:false
-        }
-        columnLayout[1] = {
-            dataField: "category_user_name",
-            headerText: "사용자명",
-            width: 160,
-        }
-        columnLayout[2] = {
-            dataField: "category_product_desktop",
-            headerText: "데스크탑",
-            width: 160,
-        }
-        columnLayout[3] = {
-            dataField: "category_product_laptop",
-            headerText: "노트북",
-            width: 160,
-        }
-        columnLayout[4] = {
-            dataField: "category_product_monitor",
-            headerText: "모니터",
-            width: 160,
-        }
-        columnLayout[5] = {
-            dataField: "category_product_printer",
-            headerText: "프린터",
-            width: 160,
-        }
-
-
+        columnLayout.push({
+            headerText: "전체",
+            headerStyle: "myField3",
+            dataField: "category_row_sum",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
+            dataType: "numeric",
+            formatString: "#,##0",
+            width: 120,
+            expFunction: function (rowIndex, columnIndex, item, dataField) {
+                return (item.category_product_desktop_num + item.category_product_laptop_num + item.category_product_monitor_num + item.category_product_printer_num);
+            }
+        });
 
         /* 1-2. 푸터 설정 */
         let footerLayout = [{
             labelText: "전체",
             positionField: "category_user_name"
         }, {
-            dataField: "category_product_desktop",
-            positionField: "category_product_desktop",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_product_laptop",
-            positionField: "category_product_laptop",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_product_monitor",
-            positionField: "category_product_monitor",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_product_printer",
-            positionField: "category_product_printer",
-            operation: "SUM",
-            style: "aui-grid-my-column",
-            formatString: "#,##0"
-        }, {
-            dataField: "category_product_count",
-            positionField: "category_product_count",
+            dataField: "category_product_desktop_num",
+            positionField: "category_product_desktop_num",
             operation: "SUM",
             style: "aui-grid-my-column",
             formatString: "#,##0",
-        }];
+        }, {
+            dataField: "category_product_laptop_num",
+            positionField: "category_product_laptop_num",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_product_monitor_num",
+            positionField: "category_product_monitor_num",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_product_printer_num",
+            positionField: "category_product_printer_num",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        },{
+            dataField: "category_row_sum",
+            positionField: "category_row_sum",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }
+        ];
+
+
         /* 2. 그리드 속성 설정 */
         let gridPros = {
-            rowIdField: "id",
-            selectionMode: "multipleCells",
+            enableFilter: true,
+            useContextMenu: true,
+            fixedColumnCount: 1,
+            fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
+            displayTreeOpen: true,
+            // 체크박스 사용 안함
+            showRowCheckColumn: false,
+            showRowNumColumn: false,
             showFooter: true,
-            enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true,
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            autoGridHeight : true,
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         }
 
 
-        /* 총 수량 */
-        columnLayout.push({
-            headerText: "총 보유자산",
-            dataField: "category_product_count",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
-            formatString: "#,##0",
-            width: 120,
-            expFunction: function (rowIndex, columnIndex, item) { // 여기서 실제로 출력할 값을 계산해서 리턴시킴.
-                // 1~4 분기 합을 계산하여 반환
-                // expFunction 의 리턴형은 항상 Number 여야 합니다.(즉, 수식만 가능)
-                return (item.category_product_desktop + item.category_product_laptop + item.category_product_monitor + item.category_product_printer);
-            },
-            renderer: {
-                type: "ButtonRenderer",
-                onClick: function (event) {
-                    if(count === 0) {
-                        count++;
-                        $(".title-box.hide-ver").addClass("open");
-                        createAssetDetailGrid();
-                        requestAssetDetailGridData();
-                        setTimeout(function(){
-                            let currentName = event.item.category_user_name;
-                            let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+        // 실제로 #grid_wrap 에 그리드 생성
+        userAssetManagementStatusGrid_ID = AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
 
-                            AUIGrid.clearFilterAll(assetDetailGrid_ID);
+        /* 푸터 레이아웃 생성 */
+        AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
+        requestUserAssetManagementStatusGridData();
 
-                            comparisonObj.forEach((i) => {
-                                if(currentName === i.category_user){
-                                    AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user", i.category_user);
-                                }
-                            });
-                        },150);
-                    }
-                    let currentName = event.item.category_user_name;
-                    let comparisonObj = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+        AUIGrid.bind(userAssetManagementStatusGrid_ID, "selectionChange", function(event) {
+            $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+            if(count === 0){
+                count++;
+                createAssetDetailGrid();
+                setTimeout(function(){
+                    let name = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+                    let primeCell = event.primeCell;
+                    let headerText = primeCell.headerText;
+                    let dataField = primeCell.dataField;
+                    let cellText = primeCell.item.category_user_name;
+                    console.log(headerText)
 
                     AUIGrid.clearFilterAll(assetDetailGrid_ID);
 
-                    comparisonObj.forEach((i) => {
-                        if(currentName === i.category_user){
-                            AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user", i.category_user);
+                    name.forEach((i) => {
+                        if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                            AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user_name", cellText);
+                            AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name",headerText);
+                        }else{
+                            AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user_name", cellText);
                         }
                     });
+                },20);
 
-                },
+            }else{
+                let name = AUIGrid.getOrgGridData(assetDetailGrid_ID);
+                let primeCell = event.primeCell;
+                let headerText = primeCell.headerText;
+                let dataField = primeCell.dataField;
+                let cellText = primeCell.item.category_user_name;
+                console.log(headerText)
+
+                AUIGrid.clearFilterAll(assetDetailGrid_ID);
+
+                name.forEach((i) => {
+                    if(i.category_product_name === headerText && dataField !== "category_row_sum"){
+                        AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user_name", cellText);
+                        AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_product_name",headerText);
+                    }else{
+                        AUIGrid.setFilterByValues(assetDetailGrid_ID, "category_user_name", cellText);
+                    }
+                });
             }
 
         });
 
-        /* 그리드 생성 */
-        userAssetManagementStatusGrid_ID = AUIGrid.create("#userAssetManagementStatusGrid_ID", columnLayout, gridPros);
-        // 푸터 레이아웃 세팅
-        AUIGrid.setFooter(userAssetManagementStatusGrid_ID, footerLayout);
-        requestUserAssetManagementStatusGridData();
 
         /* footer에 있는 총 보유자산 눌렀을 때 filter 초기화 */
         AUIGrid.bind(userAssetManagementStatusGrid_ID, "footerClick", function (event) {
-            if(event.footerIndex === 6){
-                AUIGrid.clearFilterAll(assetDetailGrid_ID);
+            /* 컬럼 이름 저장하기 */
+            const columnArr = [];
+            for (let ele of columnLayout) {
+                columnArr.push(ele.headerText);
             }
+            let columnLength = columnArr.length;
+            let footerIndex = event.footerIndex;
+
+            /* 색상 변환 */
+            if(footerIndex === 0){
+                return false;
+            }else{
+                $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
+                $(this).addClass("on");
+            }
+
+            if(count === 0){
+                count++;
+                createAssetDetailGrid();
+                setTimeout(function(){
+                    if(footerIndex === 0){
+                        return false;
+                    }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
+                        AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                        AUIGrid.setFilterByValues(assetDetailGrid_ID,"category_product_name",columnArr[footerIndex]);
+                    }else if(footerIndex === columnLength - 1){
+                        AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                    }
+                },20);
+
+            }else{
+                if(footerIndex === 0){
+                    return false;
+                }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
+                    AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                    AUIGrid.setFilterByValues(assetDetailGrid_ID,"category_product_name",columnArr[footerIndex]);
+                }else if(footerIndex === columnLength - 1){
+                    AUIGrid.clearFilterAll(assetDetailGrid_ID);
+                }
+            }
+
         });
     }
     function createAssetDetailGrid() {
@@ -364,6 +425,10 @@
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            }, {
                 dataField: "category_product_name",
                 headerText: "물품명",
                 width: 160,
@@ -373,54 +438,54 @@
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
-                width: 180,
+                width: 120,
                 filter: {
                     showIcon: true,
                 }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
-                width: 280,
+                width: 200,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_user",
+                dataField: "category_user_name",
                 headerText: "사용자",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_usage1",
+                dataField: "category_case1",
                 headerText: "용도1",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_usage2",
+                dataField: "category_case2",
                 headerText: "용도2",
                 width: 160,
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_application_type",
+                dataField: "category_application_case",
                 headerText: "신청구분",
                 width: 160,
                 filter: {
                     showIcon: true,
-                }
+                },
             }, {
                 dataField: "category_application_content",
                 headerText: "신청내용",
                 width: 160,
                 filter: {
                     showIcon: true,
-                }
+                },
             }, {
-                dataField: "category_place",
+                dataField: "category_use_place-date",
                 headerText: "사용장소",
                 width: 160,
                 filter: {
@@ -429,6 +494,13 @@
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_payment_date",
+                headerText: "지급일자",
                 width: 160,
                 filter: {
                     showIcon: true,
@@ -443,15 +515,17 @@
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
+            rowIdField: "id",
+            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             headerHeight : 30, // 기본 헤더 높이 지정
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            /* autoGridHeight : true */
+            simplifySelectionEvent: true,
             copyDisplayValue: true, //그리드 데이터 복사 가능
             editable: false, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
@@ -459,6 +533,7 @@
 
         /* 그리드 생성 */
         assetDetailGrid_ID = AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
+        requestAssetDetailGridData();
 
         /* 더블 클릭시 팝업 */
         AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
@@ -475,12 +550,12 @@
 
     /* 4. 데이터 불러오기 */
     function requestUserAssetManagementStatusGridData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas20.json", function (data) {
+        $.get("../resources/lib/aui-grid/data/sample-datas24.json", function (data) {
             AUIGrid.setGridData(userAssetManagementStatusGrid_ID, data);
         });
     }
     function requestAssetDetailGridData() {
-        $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
+        $.get("../resources/lib/aui-grid/data/sample-datas23.json", function (data) {
             AUIGrid.setGridData(assetDetailGrid_ID, data);
         });
     }

@@ -217,7 +217,7 @@ function popupDepartmentSearch(id,title,width,height,e){
             $("#gridPop_department").dialog("close");
 
             /* input 에 value 가 들어가면, 부서관리자산현황 그리드 호출*/
-            if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서자산조회"){
+            if($("input[data-label='department']").val().length > 1 && $('title').text() === "전부서자산조회"){
                 createAssetManagementStatusGrid();
             } else if($("input[data-label='department']").val().length > 1 && $('title').text() === "부서 사용자별 조회"){
                 createUserAssetManagementStatusGrid();
