@@ -1,0 +1,35 @@
+[
+  {
+    "category_user": "김종민",
+    "category_department":"IT운영",
+    "category_usage":"개인",
+    "category_asset_num":"2155558",
+    "category_use_date": "2023-06-25 ~ 2023-06-28",
+    "category_software_name": " Adobe Acrobat",
+    "category_count" : 1,
+    "category_cost": "약 20만원",
+    "category_request_content": "Acrobat 사용 신청합니다."
+  },
+  {
+    "category_user": "김종민",
+    "category_department":"IT운영",
+    "category_usage":"개인",
+    "category_asset_num":"2155558",
+    "category_use_date": "2023-06-25 ~ 2023-06-28",
+    "category_software_name": " Adobe Acrobat",
+    "category_count" : 1,
+    "category_cost": "약 20만원",
+    "category_request_content": "Acrobat 사용 신청합니다."
+  },
+  {
+    "category_user": "김종민",
+    "category_department":"IT운영",
+    "category_usage":"개인",
+    "category_asset_num":"2155558",
+    "category_use_date": "2023-06-25 ~ 2023-06-28",
+    "category_software_name": " Adobe Acrobat",
+    "category_count" : 1,
+    "category_cost": "약 20만원",
+    "category_request_content": "Acrobat 사용 신청합니다."
+  }
+]

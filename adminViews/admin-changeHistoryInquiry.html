@@ -284,6 +284,13 @@
             </div>
             <div id="popup_grid_changeHistory" class="grid-box h-small"></div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>실사이력</h3>
+                </div>
+            </div>
+            <div id="popup_grid_duediligenceHistory" class="grid-box h-small"></div>
+
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
                 <button type="button" class="btn" onclick="lp_close('gridPop_detail')">닫기</button>
@@ -388,12 +395,13 @@
             $("#gridPop_detail").addClass("open").dialog({
                 title: "자산정보",
                 width: 1250,
-                height: 500,
+                height: 750,
                 modal: true,
                 resizable: false,
                 dialogClass: 'no-close success-dialog'
             });
             gridPopChangeHistory();
+            gridPopDueDiligenceHistory();
         });
 
     }

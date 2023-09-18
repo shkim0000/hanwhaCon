@@ -53,20 +53,13 @@
                     </label>
                 </div>
                 <div class="input-list">
-                    <span class="input-title">신청자</span>
-                    <label class="input search" data-place="user_applicant" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
-                        <input type="text" data-label="applicant"  readonly>
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-                <div class="input-list">
                     <span class="input-title">사용자</span>
                     <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
                         <input type="text" data-label="user"  readonly>
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
-                <div class="input-list">
+                <div class="input-list regular">
                     <span class="input-title">요청내용</span>
                     <label class="input">
                         <input type="text">
@@ -169,9 +162,10 @@
 
         <div class="title-box end">
             <div class="btn-wrap">
+                <button type="button" class="btn">처리완료</button>
                 <button type="button" class="btn mail">SW 안내</button>
-                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
+                <button type="button" class="btn">취소</button>
             </div>
         </div>
         <div id="serviceStatusGrid_ID" class="grid-box"></div>
@@ -236,75 +230,21 @@
                     </div>
                     <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
                     <div class="td"><div class="td-wrap"><p>6층 604호</p></div></div>
-                </div>
-                <div class="row">
                     <div class="th"><div class="th-wrap center"><p>등록시간</p></div></div>
                     <div class="td"><div class="td-wrap"><p>2023-07-05 15:54:12</p></div></div>
-                </div>
-                <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>요청내용</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>해당 사유로 PC부품을 요청합니다.</p></div></div>
                 </div>
             </div>
 
             <div class="title-box">
                 <div class="title">
-                    <h3>자산정보</h3>
+                    <h3>서비스데스크 신청현황</h3>
                 </div>
             </div>
             <div id="popup_grid_serviceDesk_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
-                    <h3>업무배정</h3>
-                </div>
-            </div>
-            <div class="custom-table">
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
-                    <div class="td medium">
-                        <div class="td-wrap">
-                            <label class="select">
-                                <select>
-                                    <option>PC부품</option>
-                                    <option>모니터</option>
-                                </select>
-                            </label>
-                            <label class="select">
-                                <select>
-                                    <option>PC부품</option>
-                                    <option>모니터</option>
-                                </select>
-                            </label>
-                            <label class="select">
-                                <select>
-                                    <option>PC부품</option>
-                                    <option>모니터</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
-                                <input type="text" data-label="manager" readonly>
-                                <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                            </label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="text-box">
-                <label class="input">
-                    <input type="text" placeholder="처리내용">
-                </label>
-                <button type="button" class="btn">처리내용 추가</button>
-            </div>
-
-            <div class="title-box">
-                <div class="title">
-                    <h3>처리이력</h3>
+                    <h3>결재이력</h3>
                 </div>
             </div>
             <div id="popup_grid_serviceDesk_history" class="grid-box h-small"></div>
@@ -415,8 +355,22 @@ function createServiceStatusGrid() {
                 showIcon: true,
             }
         }, {
+            dataField: "category_user",
+            headerText: "사용자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_users_department",
+            headerText: "사용부서",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },{
             dataField: "category_person_charge",
-            headerText: "조치자",
+            headerText: "처리자",
             width: 160,
             filter: {
                 showIcon: true,
@@ -432,13 +386,6 @@ function createServiceStatusGrid() {
             dataField: "category_finish_date",
             headerText: "완료일시",
             width: 180,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_note",
-            headerText: "비고",
-            width: 200,
             filter: {
                 showIcon: true,
             }
@@ -521,14 +468,10 @@ $(".quantity-list li button").each(function(){
             if(name === i.category_service_status){
                 AUIGrid.setFilterByValues(serviceStatusGrid_ID, "category_service_status", i.category_service_status);
             }
-        })
-    })
+        });
+    });
 });
 
-/* 행 삭제 */
-function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(serviceStatusGrid_ID); // 체크된 행 삭제 처리
-}
 </script>
 </body>
 </html>

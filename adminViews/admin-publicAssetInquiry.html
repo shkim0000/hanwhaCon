@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>자산상태변경</title>
+    <title>변경이력조회 - 공용자산조회</title>
 
     <!-- jQuery -->
     <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
@@ -38,7 +38,7 @@
                 <li><i class="fa-solid fa-house"></i></li>
                 <li>자산현황</li>
                 <li>자산조회</li>
-                <li>자산상태변경</li>
+                <li>변경이력조회 - 공용자산조회</li>
             </ul>
         </div>
         <div class="title-box">
@@ -59,84 +59,41 @@
             </div>
         </div>
 
-        <div class="input-wrap">
-            <div class="input-lists">
-                <div class="input-list medium3">
-                    <span class="input-title">자산 상태  변경</span>
-                    <label class="select">
-                        <select>
-                            <option value="">선택</option>
-                            <option value="">가용 > 폐기대상</option>
-                            <option value="">폐기대상 > 가용</option>
-                            <option value="">폐기대상 > 폐기</option>
-                            <option value="">가용 > 수리 중</option>
-                            <option value="">수리 중 > 가용</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="input-list medium">
-                    <span class="input-title">부서</span>
-                    <label class="input">
-                        <input type="text" value="본사 참고">
-                    </label>
-                </div>
-                <div class="input-list medium3">
-                    <span class="input-title">상태변경일</span>
-                    <label class="input">
-                        <input type="text" value="2023-08-17">
-                    </label>
-                </div>
-                <div class="input-list whole">
-                    <span class="input-title">신청내용</span>
-                    <label class="input">
-                        <input type="text">
-                    </label>
-                </div>
-            </div>
-            <button type="button" class="btn search">검색</button>
-        </div>
-
-
         <div class="title-box">
             <div class="title">
-                <h3>보유내역</h3>
+                <h3>대상 리스트</h3>
             </div>
-            <div class="btn-wrap long-ver">
-                <button type="button" class="btn excel">엑셀다운로드</button>
+            <div class="btn-wrap end long-ver">
+                <button type="button" class="btn primary mail">자산이동 안내 메일 발송</button>
                 <div class="input-list">
-                    <span class="input-title">자산번호</span>
+                    <span class="input-title">사용자</span>
                     <label class="input search">
                         <input type="text">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
-                <button type="button" class="btn primary check">선택</button>
             </div>
         </div>
         <div class="list-box">
-            <div id="possessGrid_ID" class="grid-box h-small2"></div>
+            <div id="itemListGrid_ID" class="grid-box h-small2"></div>
         </div>
 
         <div class="title-box">
             <div class="title">
-                <h3>변경 내역</h3>
-            </div>
-            <div class="btn-wrap">
-                <button type="button" class="btn">대상 확정</button>
-                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
+                <h3>상세내역</h3>
             </div>
         </div>
         <div class="list-box">
-            <div id="changeGrid_ID" class="grid-box h-small2"></div>
+            <div id="detailGrid_ID" class="grid-box h-small2"></div>
         </div>
 
         <div class="title-box">
             <div class="title">
-                <h3>장비 현황</h3>
+                <h3>메일 발송 이력 리스트</h3>
             </div>
         </div>
         <div class="list-box">
-            <div id="itemCurrent_ID" class="grid-box h-small2"></div>
+            <div id="mailListGrid_ID" class="grid-box h-small2"></div>
         </div>
 
     </div>
@@ -146,22 +103,22 @@
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let possessGrid_ID; // 보유 현황
-    let changeGrid_ID; // 변경 현황
-    let itemCurrent_ID; // 장비 현황
+    let itemListGrid_ID; // 보유 현황
+    let detailGrid_ID; // 변경 현황
+    let mailListGrid_ID; // 장비 현황
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-    createPossessGrid(); // 보유 현황
-    requestPossessGridData();
+    createItemListGrid(); // 대상 리스트
+    requestItemListGridData();
 
-    createChangeGrid(); // 보유 현황
+    createDetailGrid(); // 상세내역
 
-    createItemGrid(); // 장비현황
+    createMailListGrid(); // 메일발송이력리스트
 
     /* 3. AUIGrid 그리드 옵션 */
 
     /* [현황] : 보유 현황 */
-    function createPossessGrid() {
+    function createItemListGrid() {
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout =[
             {
@@ -171,47 +128,33 @@
                 visible:false
             },
             {
-                dataField: "category_product",
-                headerText: "물품종류",
+                dataField: "category_user",
+                headerText: "사용자",
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
+                dataField: "category_users_department",
+                headerText: "사용자 소속부서",
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_model_name",
-                headerText: "모델명",
+                dataField: "category_asset_department",
+                headerText: "자산보유부서",
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_start_date",
-                headerText: "도입일",
+                dataField: "category_count",
+                headerText: "수량",
                 filter: {
                     showIcon: true,
                 }
             },
-            {
-                dataField: "category_department_name",
-                headerText: "부서명",
-                filter: {
-                    showIcon: true,
-                }
-            },
-            {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                filter: {
-                    showIcon: true,
-                }
-            }
         ];
 
         /* 2. 그리드 속성 설정 */
@@ -230,12 +173,10 @@
 
 
         // 실제로 #grid_wrap 에 그리드 생성
-        possessGrid_ID = AUIGrid.create("#possessGrid_ID", columnLayout, gridPros);
-
-
+        itemListGrid_ID = AUIGrid.create("#itemListGrid_ID", columnLayout, gridPros);
     }
 
-    function createChangeGrid() {
+    function createDetailGrid() {
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout =[
             {
@@ -245,8 +186,8 @@
                 visible:false
             },
             {
-                dataField: "category_product",
-                headerText: "물품종류",
+                dataField: "category_asset_ct",
+                headerText: "자산종류",
                 filter: {
                     showIcon: true,
                 }
@@ -266,15 +207,22 @@
                 }
             },
             {
-                dataField: "category_start_date",
-                headerText: "도입일",
+                dataField: "category_assets_department",
+                headerText: "자산보유부서",
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_department_name",
-                headerText: "부서명",
+                dataField: "category_user_name",
+                headerText: "사용자병",
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_move_in_date",
+                headerText: "전입일",
                 filter: {
                     showIcon: true,
                 }
@@ -285,13 +233,26 @@
                 filter: {
                     showIcon: true,
                 }
+            },
+            {
+                dataField: "category_usage",
+                headerText: "용도",
+                filter: {
+                    showIcon: true,
+                }
+            },
+            {
+                dataField: "category_transfer_department_name",
+                headerText: "이관부서명",
+                filter: {
+                    showIcon: true,
+                }
             }
         ];
 
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
@@ -303,10 +264,11 @@
         }
 
         // 실제로 #grid_wrap 에 그리드 생성
-        changeGrid_ID = AUIGrid.create("#changeGrid_ID", columnLayout, gridPros);
+        detailGrid_ID = AUIGrid.create("#detailGrid_ID", columnLayout, gridPros);
+        requestDetailGridData();
     }
 
-    function createItemGrid() {
+    function createMailListGrid() {
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout =[
             {
@@ -316,22 +278,22 @@
                 visible:false
             },
             {
-                dataField: "category_product",
-                headerText: "물품종류",
+                dataField: "category_user",
+                headerText: "사용자",
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_count",
-                headerText: "신청수령",
+                dataField: "category_users_department",
+                headerText: "사용자 소속부서",
                 filter: {
                     showIcon: true,
                 }
             },
             {
-                dataField: "category_application_ctg",
-                headerText: "신청구분",
+                dataField: "category_send_email_date",
+                headerText: "메일발송 일시",
                 filter: {
                     showIcon: true,
                 }
@@ -352,13 +314,27 @@
         }
 
         // 실제로 #grid_wrap 에 그리드 생성
-        itemCurrent_ID = AUIGrid.create("#itemCurrent_ID", columnLayout, gridPros);
+        mailListGrid_ID = AUIGrid.create("#mailListGrid_ID", columnLayout, gridPros);
+        requestMailListGridData();
     }
 
     /* 4. 데이터 불러오기 */
-    function requestPossessGridData() {
-        $.get("../resources/lib/aui-grid/data/admin-datas14.json", function (data) {
-            AUIGrid.setGridData(possessGrid_ID, data);
+    function requestItemListGridData() {
+        $.get("../resources/lib/aui-grid/data/admin-datas16.json", function (data) {
+            AUIGrid.setGridData(itemListGrid_ID, data);
+        });
+    }
+
+
+    function requestDetailGridData() {
+        $.get("../resources/lib/aui-grid/data/admin-datas17.json", function (data) {
+            AUIGrid.setGridData(detailGrid_ID, data);
+        });
+    }
+
+    function requestMailListGridData() {
+        $.get("../resources/lib/aui-grid/data/admin-datas18.json", function (data) {
+            AUIGrid.setGridData(mailListGrid_ID, data);
         });
     }
 
@@ -367,54 +343,18 @@
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof possessGrid_ID !== "undefined") {
-            AUIGrid.resize(possessGrid_ID);
+        if (typeof itemListGrid_ID !== "undefined") {
+            AUIGrid.resize(itemListGrid_ID);
         }
-        if (typeof changeGrid_ID !== "undefined") {
-            AUIGrid.resize(changeGrid_ID);
+        if (typeof detailGrid_ID !== "undefined") {
+            AUIGrid.resize(detailGrid_ID);
         }
-        if (typeof itemCurrent_ID !== "undefined") {
-            AUIGrid.resize(itemCurrent_ID);
+        if (typeof mailListGrid_ID !== "undefined") {
+            AUIGrid.resize(mailListGrid_ID);
         }
     }
 
     /* 6. 함수관련 */
-
-    /* 보유 내역 >  선택 시  */
-    $(".btn.check").on("click",function(event){
-        /* 상단 그리드의 체크된 행들 얻기 */
-        let rows = AUIGrid.getCheckedRowItemsAll(possessGrid_ID);
-        let rows2 = AUIGrid.getAddedRowItems(changeGrid_ID);
-
-        /* 체크된 아이템의 정보 */
-        for(i=0;i<rows.length; i++){
-            console.log(rows[i].id)
-        }
-
-        if (rows.length <= 0) {
-            alert('상단 그리드에서 체크된 행이 없습니다.');
-            return;
-        }
-        AUIGrid.addRow(changeGrid_ID, rows, "last");
-        console.log(rows2)
-
-
-        /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(changeGrid_ID);
-
-    });
-
-
-    /* 그리드 행 선택 삭제 */
-    function deleteRowGrid(){
-        AUIGrid.removeCheckedRows(changeGrid_ID); // 체크된 행 삭제 처리
-        let removedRows = AUIGrid.getRemovedItems(changeGrid_ID, true); // 삭제 처리된 아이템 있는지 보기
-        if (removedRows.length <= 0) {
-            alert("삭제 처리되어 마크된 행이 없습니다.")
-            return;
-        }
-        AUIGrid.removeSoftRows(changeGrid_ID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
-    }
 
     /* 상신버튼 눌렀을떄 validation */
     $("[data-popup ='submit_pop']").on("click",function(){
@@ -437,17 +377,17 @@
         if($(".contents").hasClass("active")){
             innerWidth = innerWidth + 260;
             setTimeout(function(){
-                AUIGrid.resize(possessGrid_ID, innerWidth);
-                AUIGrid.resize(changeGrid_ID, innerWidth);
-                AUIGrid.resize(itemCurrent_ID, innerWidth);
+                AUIGrid.resize(itemListGrid_ID, innerWidth);
+                AUIGrid.resize(detailGrid_ID, innerWidth);
+                AUIGrid.resize(mailListGrid_ID, innerWidth);
             },20)
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
-                AUIGrid.resize(possessGrid_ID, innerWidth);
-                AUIGrid.resize(changeGrid_ID, innerWidth);
-                AUIGrid.resize(itemCurrent_ID, innerWidth);
+                AUIGrid.resize(itemListGrid_ID, innerWidth);
+                AUIGrid.resize(detailGrid_ID, innerWidth);
+                AUIGrid.resize(mailListGrid_ID, innerWidth);
             },20)
         }
     });

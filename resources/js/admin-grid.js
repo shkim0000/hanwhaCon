@@ -1721,24 +1721,34 @@ let popup_grid_serviceDesk_detail;
 function gridPopServiceDeskDetail(id,title,width,height){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
-        {   dataField: "category_asset_num",
+        {
+            dataField: "category_user",
+            headerText: "사용자",
+        },{
+            dataField: "category_department",
+            headerText: "부서",
+        },{
+            dataField: "category_usage",
+            headerText: "용도",
+        },{
+            dataField: "category_asset_num",
             headerText: "자산번호",
-        }, {
-            dataField: "category_product",
-            headerText: "자산분류",
-        }, {
-            dataField: "category_item",
-            headerText: "품목",
-        }, {
-            dataField: "category_model_name",
-            headerText: "모델명",
-        }, {
-            dataField: "category_asset_status",
-            headerText: "자산상태",
-        }, {
-            dataField: "category_takeover_time",
-            headerText: "인수완료시간",
-        }]
+        },{
+            dataField: "category_use_date",
+            headerText: "사용기한",
+        },{
+            dataField: "category_software_name",
+            headerText: "소프트웨어명",
+        },{
+            dataField: "category_count",
+            headerText: "수량",
+        },{
+            dataField: "category_cost",
+            headerText: "소요비용",
+        },{
+            dataField: "category_request_content",
+            headerText: "요청내용",
+        },]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode: "multipleCells",
@@ -1746,7 +1756,6 @@ function gridPopServiceDeskDetail(id,title,width,height){
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
         fillColumnSizeMode:true,
     }
 
@@ -1755,7 +1764,7 @@ function gridPopServiceDeskDetail(id,title,width,height){
     requestGridServiceDeskDetail();
 }
 function requestGridServiceDeskDetail(){
-    $.get("../resources/lib/aui-grid/data/sample-datas18.json", function (data) {
+    $.get("../resources/lib/aui-grid/data/sample-datas29.json", function (data) {
         AUIGrid.setGridData(popup_grid_serviceDesk_detail, data);
     });
 }
@@ -1790,7 +1799,6 @@ function gridPopServiceDeskHistory(id,title,width,height){
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         headerHeight : 30, // 기본 헤더 높이 지정
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
         fillColumnSizeMode:true,
     }
 
@@ -2897,3 +2905,62 @@ function requestAssetDetailData() {
 
 
 /* ---- 2023-09-12 ----------------------------------------------------------- */
+
+/* ---- 2023-09-18 ----------------------------------------------------------- */
+/* 자산조회 자산정보, 변경이력 그리드*/
+let popup_grid_duediligenceHistory;
+function gridPopDueDiligenceHistory(id,title,width,height) {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_title",
+            headerText: "실사제목",
+            width: 160
+        }, {
+            dataField: "category_user",
+            headerText: "사용자",
+            width: 120,
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+            width:120
+        }, {
+            dataField: "category_investigator",
+            headerText: "조사자",
+            width: 160
+        }, {
+            dataField: "category_note",
+            headerText: "비고",
+            width: 150
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_duediligenceHistory = AUIGrid.create("#popup_grid_duediligenceHistory", columnLayout, gridPros);
+    requestDueDiligenceHistoryData();
+}
+
+function requestDueDiligenceHistoryData() {
+    $.get("../resources/lib/aui-grid/data/admin-datas2.json", function (data) {
+        AUIGrid.setGridData(popup_grid_duediligenceHistory, data);
+    });
+}
+/* ---- 2023-09-18 ----------------------------------------------------------- */

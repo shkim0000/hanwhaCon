@@ -44,6 +44,7 @@ $(function(){
                                 "<li><a href='#' class='linkBtn'>전부서자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서 사용자별 조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>변경이력조회</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>변경이력조회 - 공용자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>미반납 자산현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>강제회수</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>강제회수현황</a></li>\n"+
