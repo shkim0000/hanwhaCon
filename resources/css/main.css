@@ -684,10 +684,12 @@ tbody tr p{text-align:center;}
 .custom-table.design-ver .td{border:1px solid var(--line1);border-radius:4px;}
 
 @media(max-width:1485px){
-    .popup .row.con-3 .th , .popup .row.con-3 .th{border-bottom:1px solid var(--line1);}
-    .popup .row.con-3 .td.medium,
-    .popup .row.con-3 .td {width:calc(100% - 120px);border-bottom:1px solid var(--line1);}
-    .popup .row.con-3 .td.medium, .popup .row > .th:nth-last-child(2) , .popup .row > .td:nth-last-child(1) {border-bottom:0}
+    .popup .row.con-3 .td{width:calc(33.3% - 120px);}
+    .popup .row.con-3 .td.whole{width:calc(100% - 120px);}
+    .popup .row.con-3 .td.whole .date-wrap{width:100%;}
+    .popup .row.con-3 .td.half{width:calc(50% - 120px);}
+    .popup .row.con-3 .td.medium{width:calc(66.6% - 120px);max-width:none;}
+    .popup .row.con-3 .td.medium .select + .select{margin-left:8px;}
 }
 
 @media(max-width:1220px) {
