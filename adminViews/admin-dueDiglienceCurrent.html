@@ -338,7 +338,7 @@
         <div class="pop-body">
             <div class="custom-table">
                 <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">등록자</div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">등록자</p></div></div>
                     <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
                     <div class="th"><div class="th-wrap center">작성일자</div></div>
                     <div class="td"><div class="td-wrap"><p>2023-04-20</p></div></div>
@@ -346,11 +346,11 @@
                     <div class="td"><div class="td-wrap"><p>상신완료</p></div></div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>제목</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>전반기 자산실사</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">제목</p></div></div>
+                    <div class="td"><div class="td-wrap">전반기 자산실사</div></div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>기간</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">기간</p></div></div>
                     <div class="td">
                         <div class="td-wrap date-style">
                             <label class="date">
@@ -364,15 +364,16 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>비고</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>비고내용</p></div></div>
+                    <div class="th"><div class="th-wrap center">비고</div></div>
+                    <div class="td"><div class="td-wrap">비고내용</div></div>
                 </div>
             </div>
 
-            <div class="tab-box ver1">
+            <div class="tab-box ver1 s-size">
                 <div class="tab-wrap">
                     <ul>
-                        <li class="on"><button type="button" class="popBtn">조사범위</button></li>
+                        <li class="on"><button type="button" class="popBtn">자산종류</button></li>
+                        <li><button type="button" class="popBtn">자산상태</button></li>
                         <li><button type="button" class="popBtn">부서</button></li>
                     </ul>
                 </div>
@@ -380,7 +381,7 @@
                     <div class="tabs-inner-wrap">
                         <div class="title-box">
                             <div class="title">
-                                <h3>조사범위</h3>
+                                <h3>자산분류</h3>
                             </div>
                         </div>
                         <div class="table">
@@ -426,9 +427,79 @@
                     <div class="tabs-inner-wrap">
                         <div class="title-box">
                             <div class="title">
+                                <h3>자산분류</h3>
+                            </div>
+                        </div>
+                        <div class="table">
+                            <table>
+                                <thead>
+                                <tr>
+                                    <th colspan="8"><p>자산상태</p></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>가용</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>운영</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>수리중</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>폐기대상</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>폐기</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>유휴</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>미확인</span>
+                                        </label>
+                                    </td>
+                                    <td>
+                                        <label class="check">
+                                            <input type="checkbox">
+                                            <span>이동</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="tabs">
+                    <div class="tabs-inner-wrap">
+                        <div class="title-box">
+                            <div class="title">
                                 <h3>부서</h3>
                             </div>
-                            <button type="button" class="btn" onclick="lp_open('gridPop_department','부서검색',550,500)">추가</button>
+                            <button type="button" class="btn"  onclick="lp_open('gridPop_department_checkbox','부서 검색',505,530,this)">추가</button>
                         </div>
                     </div>
                 </div>
@@ -439,6 +510,24 @@
                 <button type="button" class="btn save">저장</button>
                 <button type="button" class="btn" onclick="lp_close('dueDiglienceCurrentAdd_pop')">닫기</button>
             </div>
+        </div>
+    </div>
+</div>
+
+<!-- 부서검색 checkbox-ver -->
+<div id="gridPop_department_checkbox" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_department_checkbox" class="grid-box"></div>
         </div>
     </div>
 </div>

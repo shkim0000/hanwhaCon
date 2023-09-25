@@ -57,6 +57,7 @@ $(function(){
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>서비스 신청현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>서비스 신청</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>서비스신청 - SW 사용 신청</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -64,8 +65,9 @@ $(function(){
                         "<button type='button' class='btn'>장애신고</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>장애신고</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>장애신고현황</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>장애신고현황 - 만족도 통계</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>장애신고</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -442,6 +444,7 @@ function lp_open(id,title,width,height,e,type){
     } else if (id ==="gridPop_disabledCurrent"){
         gridPopDisabledDetail(id,title,width,height);
         gridPopDisabledHistory(id,title,width,height);
+        gridPopDisabledListHistory(id,title,width,height);
     }  else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
         popupConsistency(id,title,width,height);
     } else if (id === "assetSearch_pop"){
@@ -456,10 +459,12 @@ function lp_open(id,title,width,height,e,type){
         gridPopSelectUser();
     }else if(id === "gridPop_assetClassification"){
         gridPopAssetClassification();
-    } else if(id === "gridPop_applicationStatus") {
+    }else if(id === "gridPop_applicationStatus") {
         popupApplicationStatus();
     }else if(id === "gridPop_assetDetail"){
         gridPopAssetDetail();
+    }else if(id === "gridPop_department_checkbox"){
+        popupDepartmentCheckboxSearch(id,title,width,height,e);
     }
 }
 

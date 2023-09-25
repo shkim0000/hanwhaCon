@@ -1571,6 +1571,7 @@ function requestDisabledAddRowData() {
 }
 /* // 장애대상 추가 */
 
+/* [수정 + 추가] 2023-09-19 */
 /* 장애 신고 신청 현황 */
 /* 자산정보 */
 let popup_grid_disabledCurrent_detail;
@@ -1588,9 +1589,6 @@ function gridPopDisabledDetail(id,title,width,height) {
         },{
             dataField: "category_product",
             headerText: "자산분류",
-        }, {
-            dataField: "category_product",
-            headerText: "품목",
         }, {
             dataField: "category_item_name",
             headerText: "모델명",
@@ -1636,10 +1634,10 @@ function gridPopDisabledHistory(id,title,width,height) {
             headerText: "처리내용",
         },{
             dataField: "category_manager",
-            headerText: "조치자",
+            headerText: "담당자",
         }, {
             dataField: "category_date",
-            headerText: "처리일시",
+            headerText: "조치일시",
         }, {
             dataField: "category_state",
             headerText: "상태",
@@ -1664,6 +1662,61 @@ function requestDisabledHistory() {
         AUIGrid.setGridData(popup_grid_disabledCurrent_history, data);
     });
 }
+
+/* 장애이력 */
+let popup_grid_disabledList_history;
+function gridPopDisabledListHistory(id,title,width,height) {
+    /* 기본 그리드(예시) */
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible:false
+        },
+        {
+            dataField: "category_application_num",
+            headerText: "신청번호",
+        },{
+            dataField: "category_request",
+            headerText: "요청내용",
+        }, {
+            dataField: "category_occur_date",
+            headerText: "발생일시",
+        }, {
+            dataField: "category_take_action_person",
+            headerText: "조치자",
+        }, {
+            dataField: "category_processing_detail",
+            headerText: "처리내용",
+        }, {
+            dataField: "category_processing_date",
+            headerText: "처리일시",
+        }, {
+            dataField: "category_status",
+            headerText: "상태",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        autoGridHeight : true,
+        fillColumnSizeMode:true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_disabledList_history = AUIGrid.create("#popup_grid_disabledList_history", columnLayout, gridPros);
+    requestDisabledListHistory();
+}
+function requestDisabledListHistory() {
+    $.get("../resources/lib/aui-grid/data/sample-datas16.json", function (data) {
+        AUIGrid.setGridData(popup_grid_disabledList_history, data);
+    });
+}
+/* // [수정 + 추가] 2023-09-19 */
 
 /* [검색 기능 함수 모음] */
 /* 1. 검색 결과가 없을 때 실행될 함수*/
@@ -2964,3 +3017,60 @@ function requestDueDiligenceHistoryData() {
     });
 }
 /* ---- 2023-09-18 ----------------------------------------------------------- */
+/* ---- 2023-09-21----------------------------------------------------------- */
+let  popup_grid_department_checkbox;
+function popupDepartmentCheckboxSearch(id,title,width,height,e) {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [{
+        dataField: "id",
+        headerText: "ID",
+        width: 140,
+        visible:false,
+    }, {
+        dataField: "first-depth",
+        headerText: "",
+        style: "left",
+        width: 340
+    }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "singleRow",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        headerHeight : 30, // 기본 헤더 높이 지정
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        fillColumnSizeMode: true,
+        displayTreeOpen: true,
+        treeColumnIndex: 1,
+        softRemoveRowMode: false,
+        showRowCheckColumn: true,
+        // rowCheckDependingTree: true
+    }
+
+
+    // 실제로 #grid_wrap 에 그리드 생성
+    popup_grid_department_checkbox = AUIGrid.create("#popup_grid_department_checkbox", columnLayout, gridPros);
+    requestGridPopDepartmentCheckbox();
+
+    // 체크박스 클린 이벤트 바인딩
+    AUIGrid.bind(popup_grid_department_checkbox, "rowCheckClick", function (event) {
+        //	alert("rowIndex : " + event.rowIndex + ", id : " + event.item.id + ", name : " + event.item.name + ", checked : " + event.checked	+ ", isBranch : " + event.item._$isBranch + ", depth : " + event.item._$depth);
+    });
+
+    // 전체 체크박스 클릭 이벤트 바인딩
+/*    AUIGrid.bind(popup_grid_department_checkbox, "rowAllChkClick", function (event) {
+        //	alert("전체 선택  checked : " + event.checked);
+    });*/
+}
+
+function requestGridPopDepartmentCheckbox() {
+    $.get("../resources/lib/aui-grid/data/admin-datas3-tree.json", function (data) {
+        AUIGrid.setGridData(popup_grid_department_checkbox, data);
+    });
+}
+
+/* ---- //2023-09-18 ----------------------------------------------------------- */
