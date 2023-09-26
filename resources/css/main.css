@@ -159,6 +159,10 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 .grid-box.h-small3{height:480px;}
 .grid-box.h-small4{height:260px;}
 .grid-box.h-medium {height:550px;}
+/* [추가]20230925 */
+.grid-box.h-medium2 {height:400px;}
+.grid-box.h-large {height:700px;}
+/* //[추가]2023-09-25 */
 #popup_grid_detail{width:1200px;}
 .l-grid{width:1200px;}
 
@@ -603,9 +607,13 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .custom-table + .custom-table,
 .input-wrap + .title-box {margin-top:24px;}
 
-/* 20230912 */
+/* [추가]20230912 */
 .custom-table + .input-wrap{margin-top:30px;}
 /* //20230912 */
+
+/* [추가]20230925 */
+.grid-box + .custom-table{margin-top:20px;}
+/* //[추가]20230925 */
 
 
 
@@ -723,6 +731,10 @@ tbody tr p{text-align:center;}
     /*.popup .row.con-3 .td.medium,*/
     /*.popup .row > .th,*/
     /*.popup .row > .td {border-bottom:0;}*/
+
+    /* [추가] 20230925 */
+    .row.con-3 .td.no-th{width:100%;}
+    /* //[추가] 20230925 */
 
 
 }

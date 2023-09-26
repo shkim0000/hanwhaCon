@@ -66,7 +66,7 @@
             <button type="button" class="btn search">검색</button>
         </div>
 
-        <div class="title-box">
+        <div class="title-box" data-sequence="first">
             <div class="grid-title">
                 <h3>Row: <span></span></h3>
             </div>
@@ -76,7 +76,7 @@
         </div>
         <div id="disabilitySatisfaction_ID" class="grid-box h-small2"></div>
 
-        <div class="title-box">
+        <div class="title-box" data-sequence="second">
             <div class="grid-title">
                 <h3>Row: <span></span></h3>
             </div>
@@ -657,7 +657,7 @@ function createDisabilitySatisfactionDetailGrid() {
     /* 그리드 생성 */
     disabilitySatisfactionDetail_ID = AUIGrid.create("#disabilitySatisfactionDetail_ID", columnLayout, gridPros);
     requestDisabilitySatisfactionDetailData();
-    getRowCount(disabilitySatisfactionDetail_ID);
+    getRowCount2(disabilitySatisfactionDetail_ID);
 
     /* 더블 클릭시 팝업 */
     AUIGrid.bind(disabilitySatisfactionDetail_ID, "cellDoubleClick", function(event) {
@@ -718,7 +718,13 @@ $(document).on("click",".menu-btn",function(){
 /* row 수 세기 */
 function getRowCount(gridname){
     setTimeout(function(){
-        $(".title-box .grid-title h3 span").text(AUIGrid.getRowCount(gridname));
+        $(".title-box[data-sequence=first] .grid-title h3 span").text(AUIGrid.getRowCount(gridname));
+    },100);
+}
+
+function getRowCount2(gridname){
+    setTimeout(function(){
+        $(".title-box[data-sequence=second] .grid-title h3 span").text(AUIGrid.getRowCount(gridname));
     },100);
 }
 

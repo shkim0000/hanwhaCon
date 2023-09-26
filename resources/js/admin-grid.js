@@ -2765,10 +2765,11 @@ function gridPopAssetClassification(){
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode : "singleRow",
-        rowIdField :"id",// 사용자가 정의한 데이터 필드 중 id 를 rowIdField 로 설정함
+        rowIdField :"uid",// 사용자가 정의한 데이터 필드 중 id 를 rowIdField 로 설정함
         fillColumnSizeMode: true,
-        treeColumnIndex : 1,
-        displayTreeOpen : false,// 최초 보여질 때 모두 열린 상태로 출력 여부
+
+        treeColumnIndex : 2,
+        displayTreeOpen : true,// 최초 보여질 때 모두 열린 상태로 출력 여부
         showRowNumColumn : true,
         enableFilter: true, // 필터 true 설정
     }
@@ -3073,4 +3074,4 @@ function requestGridPopDepartmentCheckbox() {
     });
 }
 
-/* ---- //2023-09-18 ----------------------------------------------------------- */
+/* ---- //2023-09-21 ----------------------------------------------------------- */

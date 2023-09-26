@@ -115,8 +115,11 @@ $(function(){
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>사용자정보</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>사용자그룹 권한관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>사용자정보 - 권한대행</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산분류관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산품목관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>자산모델관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>신청구분</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>장애처리유형관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>서비스데스크 처리유형 관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산위치</a></li>\n"+
