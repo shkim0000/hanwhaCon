@@ -121,9 +121,9 @@ $(function(){
                                 "<li><a href='#' class='linkBtn'>자산모델관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>신청구분</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>장애처리유형관리</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>서비스데스크 처리유형 관리</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>자산위치</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>모델정보</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>사용장소관리</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>품목정보</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>업무 구분 코드</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+

@@ -161,7 +161,8 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 .grid-box.h-medium {height:550px;}
 /* [추가]20230925 */
 .grid-box.h-medium2 {height:400px;}
-.grid-box.h-large {height:700px;}
+.grid-box.h-large {height:650px;}
+.grid-box.h-large2 {height:800px;}
 /* //[추가]2023-09-25 */
 #popup_grid_detail{width:1200px;}
 .l-grid{width:1200px;}
