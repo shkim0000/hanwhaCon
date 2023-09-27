@@ -47,7 +47,7 @@
                 <h3>Row: <span></span></h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn">등록</button>
+                <button type="button" class="btn" onclick="lp_open('userGroup_pop','사용자 그룹 정보',1250,800);">등록</button>
             </div>
         </div>
         <div id="userInfoGrid_ID" class="grid-box h-medium"></div>
@@ -80,54 +80,6 @@
                 </div>
             </div>
             <div id="popup_grid_user" class="grid-box"></div>
-        </div>
-    </div>
-</div>
-
-<!-- 사용자 정보 팝업 -->
-<div id="gridPop_userInfo" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <div class="custom-table">
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">회사</div></div>
-                    <div class="td"><div class="td-wrap">한화포탈</div></div>
-                    <div class="th"><div class="th-wrap center">부서</div></div>
-                    <div class="td"><div class="td-wrap">IT운영팀</div></div>
-                    <div class="th"><div class="th-wrap center">사번</div></div>
-                    <div class="td"><div class="td-wrap">4763728</div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">사용자명</div></div>
-                    <div class="td"><div class="td-wrap">홍길동</div></div>
-                    <div class="th"><div class="th-wrap center">권한그룹</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="select">
-                                <select>
-                                    <option value="">선택1</option>
-                                    <option value="">선택2</option>
-                                    <option value="">선택3</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center">직책</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">내션</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                    <div class="th"><div class="th-wrap center">이메일</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                    <div class="th"><div class="th-wrap center">기타</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                </div>
-            </div>
-            <div class="btn-wrap">
-                <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" onclick="lp_close('gridPop_userInfo')">닫기</button>
-            </div>
         </div>
     </div>
 </div>
@@ -390,19 +342,6 @@ function createAssetDetailGrid() {
 
     /* grid-title에 row Count 가 추가되는 함수 */
     getRowCount(userInfoGrid_ID);
-
-    /* 더블 클릭시 팝업 */
-    AUIGrid.bind(userInfoGrid_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_detail").addClass("open").dialog({
-            title: "자산정보",
-            width: 1250,
-            height: 500,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
-        gridPopChangeHistory();
-    });
 }
 
 /* 4. 데이터 불러오기 */

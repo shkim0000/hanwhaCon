@@ -213,8 +213,14 @@
                 }
             },
             {
+                dataField: "category_application_reason",
+                headerText: "신청사유",
+                filter: {
+                    showIcon: true,
+                }
+            },  {
                 dataField: "category_classification_name",
-                headerText: "분류명",
+                headerText: "분류코드",
                 filter: {
                     showIcon: true,
                 }
@@ -255,9 +261,7 @@
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             fillColumnSizeMode:true,
-            editable: true,
             copyDisplayValue: false, //그리드 데이터 복사 가능
-            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
         }
 
@@ -267,7 +271,7 @@
         /* 더블클릭 시 팝업 이벤트  */
         AUIGrid.bind(assetClassification_ID, "cellDoubleClick", function(event) {
             $("#gridPop_applicationReason").addClass("open").dialog({
-                title: "강제회수",
+                title: "신청사유관리",
                 width: 800,
                 height: 265,
                 modal: true,

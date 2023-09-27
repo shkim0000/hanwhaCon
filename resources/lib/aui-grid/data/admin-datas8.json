@@ -2,6 +2,7 @@
   {
     "id": "#grid_id_1",
     "category_replacement_title":"2019년 전반기 정기교체",
+    "category_application_reason":"신규충원",
     "category_application_period":"2019-03-03 ~ 2019-03-31",
     "category_replacement_period":"2019-04-15 ~ 2019-05-30",
     "category_replacement_reason":"2015년 도입자산 정기교체",
@@ -16,6 +17,7 @@
   {
     "id": "#grid_id_2",
     "category_replacement_title":"2020년 전반기 정기교체",
+    "category_application_reason":"신규충원",
     "category_application_period":"2020-05-01 ~ 2020-05-31",
     "category_replacement_period":"2020-06-14 ~ 2020-06-28",
     "category_replacement_reason":"2016년 도입자산 정기교체",
@@ -30,6 +32,7 @@
   {
     "id": "#grid_id_3",
     "category_replacement_title":"2021년 전반기 정기교체",
+    "category_application_reason":"신규충원",
     "category_application_period":"2021-02-03 ~ 2021-02-28",
     "category_replacement_period":"2021-03-15 ~ 2021-03-30",
     "category_replacement_reason":"2017년 도입자산 정기교체",
@@ -44,6 +47,7 @@
   {
     "id": "#grid_id_4",
     "category_replacement_title":"2022년 전반기 정기교체",
+    "category_application_reason":"신규충원",
     "category_application_period":"2022-03-04 ~ 2022-03-30",
     "category_replacement_period":"2022-04-15 ~ 2022-04-30",
     "category_replacement_reason":"2018년 도입자산 정기교체",
@@ -58,6 +62,7 @@
   {
     "id": "#grid_id_5",
     "category_replacement_title":"2023년 전반기 정기교체",
+    "category_application_reason":"신규충원",
     "category_application_period":"2023-02-18 ~ 2023-03-11",
     "category_replacement_period":"2023-03-21 ~ 2023-04-18",
     "category_replacement_reason":"2019년 도입자산 정기교체",

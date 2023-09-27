@@ -434,7 +434,7 @@ function lp_open(id,title,width,height,e,type){
         gridPopRentalExtensionEnrollDetail(id,title,width,height);
         gridPopRentalExtensionEnrollHistory(id,title,width,height);
     } else if (id === "gridPop_rental_info"){
-        popupChangeAssetInfo(id,title,width,height);
+        // popupChangeAssetInfo(id,title,width,height);
     } else if (id==="submit_pop"){
         popupSubmitList(id,title,width,height);
     } else if (id === "submitSearch_pop"){
@@ -461,7 +461,7 @@ function lp_open(id,title,width,height,e,type){
     }else if(id === "gridPop_selectUser"){
         gridPopSelectUser();
     }else if(id === "gridPop_assetClassification"){
-        gridPopAssetClassification();
+        gridPopAssetClassification(id,title,width,height,e);
     }else if(id === "gridPop_applicationStatus") {
         popupApplicationStatus();
     }else if(id === "gridPop_assetDetail"){

@@ -27,7 +27,7 @@
     <script src="../resources/js/admin-main.js"></script>
     <script src="../resources/js/admin-grid.js"></script>
 </head>
-<body id="guide">
+<body>
 
 <!-- contents -->
 <div id="wrapper">
@@ -68,14 +68,14 @@
 
         <div class="title-box end">
             <div class="btn-wrap">
-                <button type="button" class="btn"> 등록</button>
+                <button type="button" class="btn" onclick="lp_open('gridPop_modelManagement','모델관리',800,305)"> 등록</button>
             </div>
         </div>
         <div id="assetClassification_ID" class="grid-box h-large"></div>
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_modelManagement','모델관리',800,305)">모델관리</button>
-            <button type="button" class="btn" onclick="lp_open('gridPop_assetClassification','자산분류팝업',505,470)">자산분류팝업</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_assetClassification','자산분류팝업',505,470,this)">자산분류팝업</button>
         </div>
     </div>
 </div>
@@ -90,7 +90,7 @@
                     <div class="th"><div class="th-wrap center"><p class="important">자산분류명</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
-                            <label class="input search"  data-place="asset" onclick="lp_open('gridPop_assetClassification','자산분류팝업',505,470);">
+                            <label class="input search"  data-place="asset" onclick="lp_open('gridPop_assetClassification','자산분류팝업',505,470,this);">
                                 <input type="text" data-label="asset_classify" readonly>
                                 <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                             </label>
@@ -149,7 +149,7 @@
             </div>
             <div class="btn-wrap">
                 <button type="button" class="btn" onclick="lp_close('gridPop_modelManagement')">닫기</button>
-                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn save" onclick="requestAssetClassificationData();">저장</button>
             </div>
         </div>
     </div>
@@ -168,7 +168,6 @@
     </div>
 </div>
 <!-- // 팝업 -->
-
 <!-- // 팝업 모음 -->
 <script type="text/javascript">
     /* AUIGrid */
@@ -176,12 +175,12 @@
     let assetClassification_ID;
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-    createAssetClassificationGrid();
+    createAssetClassicationDetailGrid();
 
-    requestAssetClassificationData();
+    requestAssetClassificationDetailData();
 
     /* 3. AUIGrid 그리드 옵션 */
-    function createAssetClassificationGrid() {
+    function createAssetClassicationDetailGrid() {
         /* 기본 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -263,7 +262,7 @@
     /* 엑셀 Import */
 
     /* 4. 데이터 불러오기 */
-    function requestAssetClassificationData() {
+    function requestAssetClassificationDetailData() {
         $.get("../resources/lib/aui-grid/data/admin-datas8.json", function (data) {
             AUIGrid.setGridData(assetClassification_ID, data);
         });

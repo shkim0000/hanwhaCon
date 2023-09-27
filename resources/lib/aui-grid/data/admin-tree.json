@@ -1,23 +1,6 @@
-[
-  {
-    "uid" : "T0",
-    "id": "T0",
-    "category_classification_name": "데스크탑",
-    "category_classification_code": 1,
-    "category_note": "",
-    "children": [{
-        "uid" : "T1",
-        "id": "T1",
-        "category_classification_name": "데스크탑",
-        "category_classification_code": 1,
-        "category_note": "",
-        "children": [{
-          "uid" : "T2",
-          "id": "T2",
-          "category_classification_name": "데스크탑",
-          "category_classification_code": 1,
-          "category_note": ""
-        }]
-    }]
-    }
+[{"rowId": "r1", "id": "1", "category_classification_name": "데스크탑", "category_classification_code":1},
+  {"rowId": "r2", "id": "2", "category_classification_name": "OA기기", "category_classification_code":1,"parent":"1"},
+  {"rowId": "r3", "id": "3", "category_classification_name": "PC", "category_classification_code":1,"parent":"2"},
+  {"rowId": "r4", "id": "4", "category_classification_name": "모니터", "category_classification_code":1,"parent":"2"},
+  {"rowId": "r5", "id": "5", "category_classification_name": "프린터", "category_classification_code":1,"parent":"2"}
 ]

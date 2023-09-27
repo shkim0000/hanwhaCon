@@ -57,6 +57,7 @@ function gridPopUser(id,title,width,height,e,type){
         let userID;
 
         AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+            console.log(targetPlace)
             if(targetPlace === 'user_search'){
                 userName = event.item.category_user_name;
                 userDepartment = event.item.category_department;
@@ -275,7 +276,7 @@ function gridPopNewEnrollDetail(id,title,width,height){
                         onClick: function(event){
                             let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
                             let rowIndex = event.rowIndex;
-                            let resultData = {...rowData[0], rowIndex: rowIndex};
+                            let resultData = {...rowData[0], rowIndex: rowIndex}
                             lp_open("assetSearch_pop","자산검색",800,500, resultData, "newEnroll");
                         }
                     },
@@ -318,7 +319,7 @@ function gridPopNewEnrollDetail(id,title,width,height){
                         onClick: function(event){
                             let rowData = AUIGrid.getSelectedRows(popup_grid_newEnroll_detail);
                             let rowIndex = event.rowIndex;
-                            let resultData = {...rowData[0], rowIndex: rowIndex};
+                            let resultData = {...rowData[0], rowIndex: rowIndex}
                             lp_open('gridPop_user','사용자 검색',505,530,resultData,"newEnroll")
                         }
                     },
@@ -590,7 +591,7 @@ function gridPopChangeEnrollDetail(id,title,width,height){
                 type: "ButtonRenderer",
                 onClick: function(event){
                     let rowData = AUIGrid.getSelectedRows(popup_grid_changeEnroll_detail)[0];
-                    let resultData = {...rowData, rowIndex: event.rowIndex};
+                    let resultData = {...rowData, rowIndex: event.rowIndex}
                     lp_open("assetSearch_pop","자산검색",800,500, resultData, "change");
                 }
             }
@@ -1201,7 +1202,7 @@ function subPopupSearchExecutives(id,title,width,height){
         /* 선택한 행들 얻기 */
         let rows = event.item;
         let value = $("#submitSearch_pop").find("input[type='radio']:checked").siblings('span').text();
-        let changeItem = {...rows, category_kinds: value};
+        let changeItem = {...rows, category_kinds: value}
 
         if (rows.length <= 0) {
             alert('상단 그리드에서 체크된 행이 없습니다.');
@@ -1400,7 +1401,7 @@ function requestApprovalChange() {
 /* 선택 행들 위로 한 단계 올림 */
 function moveRowsToUp() {
     AUIGrid.moveRowsToUp(popup_grid_submitList);
-};
+}
 
 /* [윈도우 팝업] 미리보기 */
 function openWindowPop(url, name){
@@ -1411,7 +1412,7 @@ function openWindowPop(url, name){
 /* 선택 행들 아래로 한 단계 올림 */
 function moveRowsToDown() {
     AUIGrid.moveRowsToDown(popup_grid_submitList);
-};
+}
 
 /* 결재선추가 팝업 에서 추가버튼 누르면, row 추가되는 기능 */
 function addingResult(){
@@ -1728,7 +1729,7 @@ function searchNotFoundHandler(event) {
     } else {
         alert('해당 데이터를 찾을 수 없습니다 - "' + term + '"');
     }
-};
+}
 /* 2. 발생자 검색시 사용될 함수 */
 function searchClickGenerator() {
     var term = document.getElementById("myInput").value;
@@ -1742,11 +1743,11 @@ function searchClickGenerator() {
         caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
         wholeWord : true, // 온전한 단어 여부
         wrapSearch : true, // 끝에서 되돌리기 여부
-    };
+    }
 
     AUIGrid.search(popup_grid_disabledAddRow, "category_user_name", term, options);
 
-};
+}
 
 /* 3. 자산번호 검색시 사용될 함수 */
 function searchClickAssetNum() {
@@ -1761,10 +1762,10 @@ function searchClickAssetNum() {
         caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
         wholeWord : true, // 온전한 단어 여부
         wrapSearch : true, // 끝에서 되돌리기 여부
-    };
+    }
 
     AUIGrid.search(popup_grid_disabledAddRow, "category_asset_num", term, options);
-};
+}
 /* // 장애 신고 신청 현황 */
 /* ------------------------------------------------------------------------ */
 
@@ -2012,7 +2013,7 @@ function fixdata(data) {
     for (; l < data.byteLength / w; ++l) o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w, l * w + w)));
     o += String.fromCharCode.apply(null, new Uint8Array(data.slice(l * w)));
     return o;
-};
+}
 
 // 파싱된 시트의 CDATA 제거 후 반환.
 function process_wb(wb) {
@@ -2020,7 +2021,7 @@ function process_wb(wb) {
     output = JSON.stringify(to_json(wb));
     output = output.replace(/<!\[CDATA\[(.*?)\]\]>/g, '$1');
     return JSON.parse(output);
-};
+}
 
 // 엑셀 시트를 파싱하여 반환
 function to_json(workbook) {
@@ -2084,7 +2085,7 @@ function createAUIGrid(csvStr) {
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
         fillColumnSizeMode: true,
-    };
+    }
 
     // 현재 엑셀 파일의 0번째 행을 기준으로 컬럼을 작성함.
     // 만약 상단에 문서 제목과 같이 있는 경우
@@ -2111,7 +2112,7 @@ function createAUIGrid(csvStr) {
     // 그리드에 CSV 데이터 삽입
     AUIGrid.setCsvGridData(popup_grid_consistency, csvStr, false);
 
-};
+}
 
 
 //최초 그리드 생성..
@@ -2141,7 +2142,7 @@ function popupConsistency() {
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
-    };
+    }
 
     // 실제로 #grid_wrap 에 그리드 생성
     popup_grid_consistency = AUIGrid.create("#popup_grid_consistency", columnLayout, gridPros);
@@ -2292,7 +2293,7 @@ function popupApplicationStatus(){
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         enableFilter: true, // 필터 true 설정
-    };
+    }
 
     popup_grid_application_status = AUIGrid.create("#popup_grid_application_status", columnLayout, gridPros);
     requestPopupApplicationStatusData();
@@ -2728,35 +2729,47 @@ function requestChangeHistoryData() {
     /* 사용자 그룹정보 관련 함수 모음 */
 /* // 사용자 그룹정보 */
 
+/* [수정]2023-09-26 */
 /* 자산분류 팝업 */
 let popup_grid_assetClassification;
-function gridPopAssetClassification(){
+function gridPopAssetClassification(id,title,width,height,e){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [{
         dataField: "id",
         headerText: "ID",
-        width: 140,
-        visible:false
+        visible:false,
+        editRenderer: {
+            type: "InputEditRenderer",
+
+            // ID는 고유값만 가능하도록 에디팅 유효성 검사
+            validator: function (oldValue, newValue, rowItem, dataField) {
+                if (oldValue != newValue) {
+                    // dataField 에서 newValue 값이 유일한 값인지 조사
+                    var isValid = AUIGrid.isUniqueValue(popup_grid_assetClassification, dataField, newValue);
+
+                    // 리턴값은 Object 이며 validate 의 값이 true 라면 패스, false 라면 message 를 띄움
+                    return { "validate": isValid, "message": newValue + " 값은 고유값이 아닙니다. 다른 값을 입력해 주십시오." };
+                }
+            }
+        }
     }, {
         dataField: "category_classification_name",
         headerText: "분류명",
         style: "left",
-        width: 360,
         filter: {
             showIcon: true,
-        }
+        },
+        width: "50%"
     }, {
         dataField: "category_classification_code",
         headerText: "분류코드",
         style: "left",
-        width: 140,
         filter: {
             showIcon: true,
         }
     }, {
         dataField: "category_note",
         headerText: "비고",
-        width: 120,
         filter: {
             showIcon: true,
         }
@@ -2765,18 +2778,35 @@ function gridPopAssetClassification(){
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode : "singleRow",
-        rowIdField :"uid",// 사용자가 정의한 데이터 필드 중 id 를 rowIdField 로 설정함
         fillColumnSizeMode: true,
+        flat2tree: true,
+        rowIdField: "rowId",// 행의 고유 필드명
+        treeIdField: "id",// 트리의 고유 필드명
 
-        treeColumnIndex : 2,
+        // 계층 구조에서 내 부모 행의 treeIdField 참고 필드명
+        treeIdRefField: "parent",
+        treeColumnIndex : 1,
         displayTreeOpen : true,// 최초 보여질 때 모두 열린 상태로 출력 여부
         showRowNumColumn : true,
-        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     popup_grid_assetClassification = AUIGrid.create("#popup_grid_assetClassification", columnLayout, gridPros);
     requestAssetClassificationData();
+
+    /* 그리드 기능 */
+    let targetPlace = $(e).attr("data-place");
+    console.log(targetPlace)
+
+    AUIGrid.bind(popup_grid_assetClassification, "cellDoubleClick", function(event) {
+        if(targetPlace === 'asset') {
+            let itemName = event.item.category_classification_name;
+
+            $("input[data-label='asset_classify']").val(itemName);
+
+            $("#gridPop_assetClassification").dialog("close");
+        }
+    });
 }
 
 function requestAssetClassificationData(){
@@ -2784,7 +2814,8 @@ function requestAssetClassificationData(){
         AUIGrid.setGridData(popup_grid_assetClassification, data);
     });
 }
-/* //자산분류 팝업 */
+ //자산분류 팝업
+/* //[수정]2023-09-26 */
 
 /* 정기교체 작업등록 팝업에서 정기교체 대상 그리드 */
 let popup_grid_replacementTarget;
@@ -2854,6 +2885,8 @@ function requestReplacementTargetData() {
         AUIGrid.setGridData(popup_grid_replacementTarget, data);
     });
 }
+
+
 
 
 /* ---- 2023-09-12 ----------------------------------------------------------- */
@@ -3018,7 +3051,7 @@ function requestDueDiligenceHistoryData() {
     });
 }
 /* ---- 2023-09-18 ----------------------------------------------------------- */
-/* ---- 2023-09-21----------------------------------------------------------- */
+/* ---- 20230925----------------------------------------------------------- */
 let  popup_grid_department_checkbox;
 function popupDepartmentCheckboxSearch(id,title,width,height,e) {
     /* 1. AUIGrid 칼럼 설정 */
@@ -3074,4 +3107,4 @@ function requestGridPopDepartmentCheckbox() {
     });
 }
 
-/* ---- //2023-09-21 ----------------------------------------------------------- */
+/* ---- //20230925 ----------------------------------------------------------- */
