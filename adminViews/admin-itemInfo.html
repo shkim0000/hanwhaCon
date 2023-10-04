@@ -32,9 +32,13 @@
 </head>
 <body>
 
+<!-- 파일 input , 감춰놓기 -->
+<input type="file" id="file_basic" class="ir-hidden" accept="image/*">
+<input type="file" id="file_regular" class="ir-hidden" accept="image/*">
+<input type="file" id="file_rental" class="ir-hidden" accept="image/*">
+
 <!-- contents -->
 <div id="wrapper">
-
     <div class="contents active">
         <div class="page-indicator">
             <ul>
@@ -89,13 +93,12 @@
 <script type="text/javascript">
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let basicItemInfo_ID; // 품목정보
+    let basicItemInfo_ID = null; // 품목정보
     let regularItemInfo_ID; // 정기교체 품목정보
     let rentalItemInfo_ID; // 대여품목 모델정보
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createItemInfoGrid();
-    requestItemInfoData();
 
     createRegularItemInfoGrid();
     requestRegularItemInfoData();
@@ -106,7 +109,8 @@
     /* 품목정보 */
     function createItemInfoGrid() {
         /* 1. AUIGrid 칼럼 설정 */
-        let columnLayout = [{
+        let columnLayout = [
+            {
             dataField: "id",
             headerText: "ID",
             width: 140,
@@ -137,7 +141,7 @@
                 type: "ButtonRenderer",
                 labelText: "파일 선택",
                 onclick: function (rowIndex, columnIndex, value, item) {
-                    myButtonClick(item);
+                    basicButtonClick(item);
                 },
                 visibleFunction :  function(rowIndex, columnIndex, value, item, dataField ) {
                     if(item._$depth ===1) {
@@ -161,9 +165,7 @@
                 return "my-file-selected";
             },
             labelFunction: function (rowIndex, columnIndex, value, headerText, item) {
-
                 if(item._$depth === 1){
-                    console.log()
                     return null;
                 } else{
                     if (typeof value == "undefined" || value == "") {
@@ -184,10 +186,9 @@
             editable:false
         }];
 
-
         /* 2. 그리드 속성 설정 */
         let gridPros = {
-            rowIdField: "uid",  // 행 구별 필드명 지정
+            rowIdField: "id",  // 행 구별 필드명 지정
             editable: true,
             fillColumnSizeMode: true,
             /* 필터 + 복사 */
@@ -210,6 +211,7 @@
 
         /* 그리드 생성 */
         basicItemInfo_ID = AUIGrid.create("#basicItemInfo_ID", columnLayout, gridPros);
+        requestItemInfoData();
 
         // 컨텍스트 메뉴 이벤트 바인딩
         AUIGrid.bind(basicItemInfo_ID, "contextMenu", function (event) {
@@ -289,7 +291,7 @@
                 type: "ButtonRenderer",
                 labelText: "파일 선택",
                 onclick: function (rowIndex, columnIndex, value, item) {
-                    myButtonClick(item);
+                    regularButtonClick(item);
                 },
                 visibleFunction :  function(rowIndex, columnIndex, value, item, dataField ) {
                     if(item._$depth ===1) {
@@ -339,7 +341,7 @@
 
         /* 2. 그리드 속성 설정 */
         let gridPros = {
-            rowIdField: "uid",  // 행 구별 필드명 지정
+            rowIdField: "id",  // 행 구별 필드명 지정
             editable: true,
             fillColumnSizeMode: true,
             /* 필터 + 복사 */
@@ -441,7 +443,7 @@
                 type: "ButtonRenderer",
                 labelText: "파일 선택",
                 onclick: function (rowIndex, columnIndex, value, item) {
-                    myButtonClick(item);
+                    rentalButtonClick(item);
                 },
                 visibleFunction :  function(rowIndex, columnIndex, value, item, dataField ) {
                     if(item._$depth ===1) {
@@ -491,7 +493,7 @@
 
         /* 2. 그리드 속성 설정 */
         let gridPros = {
-            rowIdField: "uid",  // 행 구별 필드명 지정
+            rowIdField: "id",  // 행 구별 필드명 지정
             editable: true,
             fillColumnSizeMode: true,
             /* 필터 + 복사 */
@@ -561,7 +563,6 @@
         });
     }
 
-
     /* 4. 데이터 불러오기 */
     function requestItemInfoData() {
         $.get("../resources/lib/aui-grid/data/admin-tree3.json", function (data) {
@@ -585,6 +586,12 @@
     window.onresize = function () {
         if (typeof basicItemInfo_ID !== "undefined"){
             AUIGrid.resize(basicItemInfo_ID);
+        }
+        if (typeof regularItemInfo_ID !== "undefined"){
+            AUIGrid.resize(regularItemInfo_ID);
+        }
+        if (typeof rentalItemInfo_ID !== "undefined"){
+            AUIGrid.resize(rentalItemInfo_ID);
         }
     }
 
@@ -775,121 +782,140 @@
     // 최근 그리드 파일 선택 행 아이템 보관 변수
     var recentGridItem = null;
 
-    $(document).ready(function () {
-        // 파일 선택하기
-        $('#file').on('change', function (evt) {
-            var data = null;
-            var file = evt.target.files[0];
-            if (typeof file == "undefined") {
-                alert("파일 선택 시 취소!!");
+    //그리드의 셀 버턴 클릭 처리
+    // 파일 선택하기
+    $('#file_basic').on('change', function (evt) {
+        var data = null;
+        var file = evt.target.files[0];
+        if (typeof file == "undefined") {
+            alert("파일 선택 시 취소!!");
 
-                delete myFileCaches[recentGridItem.id];
+            delete myFileCaches[recentGridItem.id];
 
-                AUIGrid.updateRowsById(basicItemInfo_ID, {
-                    id: recentGridItem.id,
-                    selectedFile: ""
-                });
-                return;
-            }
-
-            if (file.size > 2048000) {
-                alert("개별 파일은 2MB 를 초과해선 안됩니다.");
-                return;
-            }
-
-            // 서버로 보낼 파일 캐시에 보관
-            myFileCaches[recentGridItem.id] = {
-                name: recentGridItem.name,
-                country: recentGridItem.country,
-                file: file
-            };
-
-            alert("업로드 할 파일 선택 : \r\n" + file.name + "\r\n" + recentGridItem.name + ", " + recentGridItem.country + ", " + recentGridItem.product + ", " + recentGridItem.color + ", " + recentGridItem.price);
-
-            // 선택 파일명 그리드에 출력 시킴
             AUIGrid.updateRowsById(basicItemInfo_ID, {
                 id: recentGridItem.id,
-                selectedFile: file.name
+                category_file_name: ""
             });
-
-            $(this).val("");
-        });
-
-        // AUIGrid 그리드를 생성합니다.
-
-    });
-
-    //그리드의 셀 버턴 클릭 처리
-    function myButtonClick(item) {
-        recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
-        var input = $("#file");
-        input.trigger('click'); // 파일 브라우저 열기
-    };
-
-    //선택한 파일 서버로 전송
-    function submitFiles() {
-
-        var noFile = true;
-
-        // jQuery Ajax Form 사용
-        var formData = new FormData();
-
-        $.each(myFileCaches, function (n, v) {
-            //	formData.append("ids[]", n); // 추가 정보들
-            //	formData.append("names[]", v.name); // 추가 정보들
-            //	formData.append("countries[]", v.country); // 추가 정보들
-            formData.append("uploadfiles[]", v.file);
-            noFile = false;
-        });
-
-        if (noFile) {
-            alert("서버로 전송할 파일이 없습니다. 먼저 선택하십시오.!!");
             return;
         }
 
-        var bar = $('.bar');
-        var percent = $('.percent');
-        var status = $('#status');
+        if (file.size > 2048000) {
+            alert("개별 파일은 2MB 를 초과해선 안됩니다.");
+            return;
+        }
 
-        $.ajax({
-            url: './data/admin-tree3.json',
-            processData: false,
-            contentType: false,
-            data: formData,
-            cache: false,
-            dataType: 'json',
-            type: 'POST',
-            beforeSend: function () {
-                status.empty();
-                var percentVal = '0%';
-                bar.width(percentVal)
-                percent.html(percentVal);
-            },
-            xhr: function () {
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) {
-                    myXhr.upload.addEventListener('progress', function (evt) {
-                        if (evt.lengthComputable) {
-                            var percentComplete = (evt.loaded / evt.total) * 100;
-                            var percentVal = percentComplete + '%';
-                            bar.width(percentVal)
-                            percent.html(percentVal);
-                        }
-                    }, false);
-                } else {
-                    console.log("Upload progress is not supported.");
-                }
-                return myXhr;
-            },
-            success: function () {
-                var percentVal = '100%';
-                bar.width(percentVal)
-                percent.html(percentVal);
-            },
-            complete: function (xhr) {
-                status.html('전송 완료!!<br/>' + xhr.responseText);
-            }
-        });
+        // 서버로 보낼 파일 캐시에 보관
+        myFileCaches[recentGridItem.id] = {
+            category_classification_name: recentGridItem.category_classification_name,
+            category_item: recentGridItem.category_item,
+            category_file_name:recentGridItem.category_file_name,
+            file: file
+        };
+
+        // 선택 파일명 그리드에 출력 시킴
+        AUIGrid.updateRowsById(basicItemInfo_ID, {
+            id: recentGridItem.id,
+            category_file_name: file.name
+        },1);
+        console.log(file.name)
+
+        $(this).val("");
+    });
+
+    $('#file_regular').on('change', function (evt) {
+        var data = null;
+        var file = evt.target.files[0];
+        if (typeof file == "undefined") {
+            alert("파일 선택 시 취소!!");
+
+            delete myFileCaches[recentGridItem.id];
+
+            AUIGrid.updateRowsById(regularItemInfo_ID, {
+                id: recentGridItem.id,
+                category_file_name: ""
+            });
+            return;
+        }
+
+        if (file.size > 2048000) {
+            alert("개별 파일은 2MB 를 초과해선 안됩니다.");
+            return;
+        }
+
+        // 서버로 보낼 파일 캐시에 보관
+        myFileCaches[recentGridItem.id] = {
+            category_classification_name: recentGridItem.category_classification_name,
+            category_item: recentGridItem.category_item,
+            category_file_name:recentGridItem.category_file_name,
+            file: file
+        };
+
+        // 선택 파일명 그리드에 출력 시킴
+        AUIGrid.updateRowsById(regularItemInfo_ID, {
+            id: recentGridItem.id,
+            category_file_name: file.name
+        },1);
+        console.log(file.name)
+
+        $(this).val("");
+    });
+
+    $('#file_rental').on('change', function (evt) {
+        var data = null;
+        var file = evt.target.files[0];
+        if (typeof file == "undefined") {
+            alert("파일 선택 시 취소!!");
+
+            delete myFileCaches[recentGridItem.id];
+
+            AUIGrid.updateRowsById(rentalItemInfo_ID, {
+                id: recentGridItem.id,
+                category_file_name: ""
+            });
+            return;
+        }
+
+        if (file.size > 2048000) {
+            alert("개별 파일은 2MB 를 초과해선 안됩니다.");
+            return;
+        }
+
+        // 서버로 보낼 파일 캐시에 보관
+        myFileCaches[recentGridItem.id] = {
+            category_classification_name: recentGridItem.category_classification_name,
+            category_item: recentGridItem.category_item,
+            category_file_name:recentGridItem.category_file_name,
+            file: file
+        };
+
+        // 선택 파일명 그리드에 출력 시킴
+        AUIGrid.updateRowsById(rentalItemInfo_ID, {
+            id: recentGridItem.id,
+            category_file_name: file.name
+        },1);
+        console.log(file.name)
+
+        $(this).val("");
+    });
+
+
+/* input */
+    function basicButtonClick(item) {
+        recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
+        var input = $("#file_basic");
+        input.trigger('click'); // 파일 브라우저 열기
+    };
+
+    function regularButtonClick(item) {
+        recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
+        var input = $("#file_regular");
+        input.trigger('click'); // 파일 브라우저 열기
+    };
+
+    function rentalButtonClick(item) {
+        recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
+        var input = $("#file_rental");
+        input.trigger('click'); // 파일 브라우저 열기
     };
 </script>
 </body>

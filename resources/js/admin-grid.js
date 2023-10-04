@@ -236,6 +236,7 @@ function requestGridPopDepartment() {
 /* ------------------------------------------------------------------------ */
 
 /* [신청 팝업 모음] ----------------------------------------------------------- */
+/* [수정] 2023-10-03 */
 /* 1. 신규신청 */
 /* 자산정보 */
 let popup_grid_newEnroll_detail;
@@ -334,16 +335,21 @@ function gridPopNewEnrollDetail(id,title,width,height){
     /* 2. 그리드 속성 설정 */
     let gridPop_newEnroll_detail_pros = {
         rowIdField: "id",
+        selectionMode: "multipleCells",
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
-        selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
         editable: true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        // autoGridHeight : true,
+        fillColumnSizeMode:true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
     /* 그리드 생성 */
@@ -533,13 +539,15 @@ function gridPopNewEnrollHistory(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode: true, // 가로 스크롤 X
         autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
     /* 그리드 생성 */
@@ -552,6 +560,7 @@ function requestGridPopNewEnrollHistory() {
     });
 }
 /* // 신규신청 */
+/* //[수정] 2023-10-03 */
 
 /* 2. 교체신청  */
 /* 자산 정보 */
@@ -601,10 +610,15 @@ function gridPopChangeEnrollDetail(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -640,13 +654,15 @@ function gridPopChangeEnrollHistory(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -693,10 +709,15 @@ function gridPopRentalEnrollDetail(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -732,13 +753,15 @@ function gridPopRentalEnrollHistory(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -780,10 +803,15 @@ function gridPopReturnEnrollDetail(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -818,13 +846,15 @@ function gridPopReturnEnrollHistory(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -867,10 +897,15 @@ function gridPopTakeoverEnrollDetail(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -905,13 +940,15 @@ function gridPopTakeoverEnrollHistory(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -957,8 +994,8 @@ function gridPopRentalExtensionEnrollDetail(id,title,width,height){
             formatString: "yyyy년 mm월 dd일", // 실제 데이터 형식을 어떻게 표시할지 지정
             renderer: {
                 type: "IconRenderer",
-                iconWidth: 16, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
-                iconHeight: 16,
+                iconWidth: 15, // icon 사이즈, 지정하지 않으면 rowHeight에 맞게 기본값 적용됨
+                iconHeight: 13,
                 iconPosition: "aisleRight",
                 iconTableRef: { // icon 값 참조할 테이블 레퍼런스
                     "default": "../resources/img/icon/icon_delete.svg" // default
@@ -993,10 +1030,15 @@ function gridPopRentalExtensionEnrollDetail(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -1031,13 +1073,15 @@ function gridPopRentalExtensionEnrollHistory(id,title,width,height){
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        usePaging: true, // 페이징 사용
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        pageRowCount: 3,
+        showPageRowSelect: true,
     }
 
     /* 그리드 생성 */
@@ -1064,6 +1108,7 @@ let submitList1 = ["결재", "협조결재","결재참조","병렬결재","병�
 let rowNum;
 let cnt = 0; // 임의로 찍어주는 번호이나 변경해야 함.
 
+/* [수정] 2023-10-03 : 가로 스크롤 없앰 */
 /* [팝업] 상신 */
 function popupSubmitList(id,title,width,height){
     /* 팝업 그리드(예시) */
@@ -1131,6 +1176,7 @@ function popupSubmitList(id,title,width,height){
         pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         softRemoveRowMode:false,
+        fillColumnSizeMode: true,
     }
 
     /* 그리드 생성 */
@@ -3051,7 +3097,7 @@ function requestDueDiligenceHistoryData() {
     });
 }
 /* ---- 2023-09-18 ----------------------------------------------------------- */
-/* ---- 20230925----------------------------------------------------------- */
+/* ---- 20231003----------------------------------------------------------- */
 let  popup_grid_department_checkbox;
 function popupDepartmentCheckboxSearch(id,title,width,height,e) {
     /* 1. AUIGrid 칼럼 설정 */
@@ -3069,20 +3115,22 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        selectionMode: "singleRow",
+        selectionMode: "multiRow",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 4,
+        pageRowCount: 20,
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
+        /* 트리 */
         displayTreeOpen: true,
         treeColumnIndex: 1,
-        softRemoveRowMode: false,
         showRowCheckColumn: true,
-        // rowCheckDependingTree: true
+        rowCheckDependingTree: true
     }
 
 
@@ -3107,4 +3155,73 @@ function requestGridPopDepartmentCheckbox() {
     });
 }
 
-/* ---- //20230925 ----------------------------------------------------------- */
+let popup_grid_department_detail;
+function popupDepartmentDetail() {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [{
+        dataField: "id",
+        headerText: "ID",
+        visible:false,
+    }, {
+        dataField: "category_department",
+        headerText: "부서명",
+        style: "left",
+        width: "90%"
+    },{
+        dataField: "category_del_btn", //임의의 고유값
+        headerText: "",
+        renderer: {
+            type: "IconRenderer",
+            iconWidth:12,
+            iconHeight:16,
+            iconPosition:"aisleCenter",
+            iconTableRef:{
+                "default":"../resources/img/icon/icon_delete.svg"
+            },
+            onClick: function(){
+                clickItem = AUIGrid.getSelectedRows(popup_grid_department_detail)[0];
+                AUIGrid.removeRow(popup_grid_department_detail, "selectedIndex");
+            },
+            width: "10%"
+        }
+    }];
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multiRow",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 20,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    }
+
+
+    // 실제로 #grid_wrap 에 그리드 생성
+    popup_grid_department_detail = AUIGrid.create("#popup_grid_department_detail", columnLayout, gridPros);
+    requestGridPopDepartmentDetail();
+
+    // 체크박스 클린 이벤트 바인딩
+    AUIGrid.bind(popup_grid_department_checkbox, "rowCheckClick", function (event) {
+        //	alert("rowIndex : " + event.rowIndex + ", id : " + event.item.id + ", name : " + event.item.name + ", checked : " + event.checked	+ ", isBranch : " + event.item._$isBranch + ", depth : " + event.item._$depth);
+    });
+
+    // 전체 체크박스 클릭 이벤트 바인딩
+    /*    AUIGrid.bind(popup_grid_department_checkbox, "rowAllChkClick", function (event) {
+            //	alert("전체 선택  checked : " + event.checked);
+        });*/
+}
+
+function requestGridPopDepartmentDetail() {
+    $.get("../resources/lib/aui-grid/data/admin-datas6.json", function (data) {
+        AUIGrid.setGridData(popup_grid_department_detail, data);
+    });
+}
+
+/* ---- //20231003 ----------------------------------------------------------- */

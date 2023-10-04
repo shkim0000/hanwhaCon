@@ -101,30 +101,11 @@
         <div id="dueDiglienceCurrentGrid_ID" class="grid-box"></div>
 
 
-        <div class="btn-wrap">
+        <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '강제회수',1250,570)">강제회수</button>
             <button type="button" class="btn" onclick="lp_open('dueDiglienceCurrentAdd_pop', '자산실사계획 등록',1250,570)">자산실사계획 등록</button>
-            <!--            <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>-->
-            <!--            <button type="button" class="btn" data-popup="gridPop_department" onclick="lp_open('gridPop_department','부서검색',505,530)">부서 검색</button>-->
-            <!--            <button type="button" class="btn" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530)">담당자 검색</button>-->
         </div>
-        <div class="btn-wrap" style="margin-top:10px;">
-            <!--            <button type="button" class="btn" onclick="lp_open('newEnroll_pop','신규 신청',1250,570)">신규신청</button>-->
-            <!--            <button type="button" class="btn" onclick="lp_open('changeEnroll_pop','교체 신청',1250,570)">교체신청</button>-->
-            <!--            <button type="button" class="btn" onclick="lp_open('rentalEnroll_pop', '대여 신청',1250,570)">대여신청</button>-->
-            <!--            <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '반납신청',1250,570)">반납신청</button>-->
-            <!--            <button type="button" class="btn" onclick="lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,570)">대연연장신청</button>-->
-            <!--            <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop', '인수인계신청',1250,570)">인수인계신청</button>-->
-            <!--
-            <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
-            <button type="button" class="btn" data-popup="assetNewEnroll_pop">자산신규등록신청</button>
-            -->
-        </div>
-        <div class="btn-wrap" style="margin-top:10px;">
-            <!--            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>-->
-            <!--<button type="button" class="btn" data-popup="managerSelect_pop">담당자 선택</button>
-            <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>-->
-        </div>
+
     </div>
 </div>
 <!-- // contents -->
@@ -374,7 +355,7 @@
                     <ul>
                         <li class="on"><button type="button" class="popBtn">자산종류</button></li>
                         <li><button type="button" class="popBtn">자산상태</button></li>
-                        <li><button type="button" class="popBtn">부서</button></li>
+                        <li><button type="button" class="popBtn" onclick="openDepartmentDetail();">부서</button></li>
                     </ul>
                 </div>
                 <div class="tabs on">
@@ -499,8 +480,9 @@
                             <div class="title">
                                 <h3>부서</h3>
                             </div>
-                            <button type="button" class="btn"  onclick="lp_open('gridPop_department_checkbox','부서 검색',505,530,this)">추가</button>
+                            <button type="button" class="btn"  onclick="lp_open('gridPop_department_checkbox','부서 검색',505,560,this)">추가</button>
                         </div>
+                        <div  id="popup_grid_department_detail" class="grid-box h-small"></div>
                     </div>
                 </div>
             </div>
@@ -528,6 +510,9 @@
                 </div>
             </div>
             <div id="popup_grid_department_checkbox" class="grid-box"></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="selectDepartment();">선택</button>
+            </div>
         </div>
     </div>
 </div>
@@ -668,6 +653,59 @@
             },20)
         }
     });
+
+    /* 자산실사계획 등록 > 부서 > 선택 클릭시 */
+    let cnt2 =0;
+    function selectDepartment(){
+
+        /* 체크된 행 찾기 */
+        let checkedRows = AUIGrid.getCheckedRowItemsAll(popup_grid_department_checkbox);
+
+        /* 조상 행 얻기 */
+        let ascendants;
+        let rowId = getSelectedRowId(); // 현재 선택된 행의 rowId 값 얻기
+        if (rowId != null) {
+            ascendants = AUIGrid.getAscendantsByRowId(popup_grid_department_checkbox, rowId); // 조상행들
+            console.log(ascendants)
+            if (ascendants && ascendants.length) {
+                for (var i = 0, len = ascendants.length; i < len; i++) {
+                    msg += "ID : " + ascendants[i]["id"] + ", Task Name : " + ascendants[i]["name"] + "\r\n";
+                }
+                alert(msg);
+            } else {
+                alert("Root에 해당되는 행으로 조상행(들)은 없습니다.");
+            }
+        } else{
+            console.log("응")
+        }
+
+
+        var item = new Object();
+
+/*        item.id = "grid_ID_1" + (++cnt2),
+            item.category_department = item.category_department
+
+        // parameter
+        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+        AUIGrid.addRow(popup_grid_department_detail, item, "last");*/
+    }
+
+    /*  부서 관련 그리드 열기 */
+    function openDepartmentDetail(){
+        setTimeout(function(){
+            popupDepartmentDetail();
+        },20);
+    }
+
+    // 현재 선택된 행의 rowId 값 반환
+    function getSelectedRowId() {
+        let selectedItems = AUIGrid.getCheckedRowItemsAll(popup_grid_department_checkbox);
+        console.log(selectedItems[0].rowIdValue)
+        if (selectedItems.length <= 0)
+            return null;
+        return selectedItems[0].rowIdValue;
+    };
 </script>
 </body>
 </html>
