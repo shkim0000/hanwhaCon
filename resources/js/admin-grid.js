@@ -2863,6 +2863,7 @@ function requestAssetClassificationData(){
  //자산분류 팝업
 /* //[수정]2023-09-26 */
 
+/* [수정]202361003 */
 /* 정기교체 작업등록 팝업에서 정기교체 대상 그리드 */
 let popup_grid_replacementTarget;
 function gridPopReplacementTarget(id,title,width,height) {
@@ -2876,35 +2877,27 @@ function gridPopReplacementTarget(id,title,width,height) {
         {
             dataField: "category_asset_num",
             headerText: "자산번호",
-            width: 160
         }, {
             dataField: "category_product_type",
             headerText: "자산분류",
-            width: 120,
         }, {
             dataField: "category_item",
             headerText: "품목",
-            width:120
         }, {
             dataField: "category_model",
             headerText: "모델",
-            width: 160
         }, {
             dataField: "category_user_name",
             headerText: "사용자",
-            width: 150
         }, {
             dataField: "category_user_department",
             headerText: "부서",
-            width: 150
         }, {
             dataField: "category_place",
             headerText: "자산위치",
-            width: 150
         }, {
             dataField: "category_introduction_day",
             headerText: "도입일",
-            width: 150
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -2912,27 +2905,217 @@ function gridPopReplacementTarget(id,title,width,height) {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 4,
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
-        autoGridHeight : true,
+        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
     /* 그리드 생성 */
     popup_grid_replacementTarget = AUIGrid.create("#popup_grid_replacementTarget", columnLayout, gridPros);
     requestReplacementTargetData();
 }
-
 function requestReplacementTargetData() {
     $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
         AUIGrid.setGridData(popup_grid_replacementTarget, data);
     });
 }
 
+/* 정기교체 작업등록 팝업에서 정기교체작업등록현황 */
+let popup_grid_replacementTarget_current;
+function gridPopReplacementTargetCurrent() {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_product_type",
+            headerText: "자산분류",
+        }, {
+            dataField: "category_item",
+            headerText: "품목",
+        }, {
+            dataField: "category_model",
+            headerText: "모델",
+        }, {
+            dataField: "category_user_name",
+            headerText: "사용자",
+        }, {
+            dataField: "category_user_department",
+            headerText: "부서",
+        }, {
+            dataField: "category_place",
+            headerText: "자산위치",
+        }, {
+            dataField: "category_introduction_day",
+            headerText: "도입일",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    }
 
+    /* 그리드 생성 */
+    popup_grid_replacementTarget_current = AUIGrid.create("#popup_grid_replacementTarget_current", columnLayout, gridPros);
+    requestReplacementTargetCurrentData();
+}
+function requestReplacementTargetCurrentData() {
+    $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_replacementTarget_current, data);
+    });
+}
+
+/* 정기교체대상 팝업  > 자산내역 */
+let popup_grid_replacementTarget_list1;
+function gridPopReplacementTargetList1() {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_item",
+            headerText: "물품종류",
+        }, {
+            dataField: "category_model",
+            headerText: "모델",
+        }, {
+            dataField: "category_start_date",
+            headerText: "도입일",
+        }, {
+            dataField: "category_user",
+            headerText: "사용자",
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+        }, {
+            dataField: "category_installation_day",
+            headerText: "설치일",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 체크박스 */
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    }
+
+    /* 그리드 생성 */
+    popup_grid_replacementTarget_list1 = AUIGrid.create("#popup_grid_replacementTarget_list1", columnLayout, gridPros);
+    requestReplacementTargetList1Data();
+}
+function requestReplacementTargetList1Data() {
+    $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_replacementTarget_list1, data);
+    });
+}
+
+/* 정기교체대상 팝업  > 자산내역 */
+let popup_grid_replacementTarget_list2;
+function gridPopReplacementTargetList2() {
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_status",
+            headerText: "자산상태",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+        }, {
+            dataField: "category_item",
+            headerText: "물품종류",
+        }, {
+            dataField: "category_model",
+            headerText: "모델",
+        }, {
+            dataField: "category_start_date",
+            headerText: "도입일",
+        }, {
+            dataField: "category_user",
+            headerText: "사용자",
+        }, {
+            dataField: "category_department",
+            headerText: "부서",
+        }, {
+            dataField: "category_installation_day",
+            headerText: "설치일",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 체크박스 */
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+    }
+
+
+    /* 그리드 생성 */
+    popup_grid_replacementTarget_list2 = AUIGrid.create("#popup_grid_replacementTarget_list2", columnLayout, gridPros);
+    requestReplacementTargetList2Data();
+}
+function requestReplacementTargetList2Data() {
+    $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
+        AUIGrid.setGridData(popup_grid_replacementTarget_list2, data);
+    });
+}
+
+/* // [수정 + 추가]202361003 */
 
 
 /* ---- 2023-09-12 ----------------------------------------------------------- */

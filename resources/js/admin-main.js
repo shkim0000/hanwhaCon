@@ -162,13 +162,15 @@ $(function(){
 
             $(".date.limit.next input").datepicker('option','minDate', prevDate);
             $(".date.limit.next input").datepicker('option','maxDate', maxDate);
-        }
+        },
+
     });
 
     $(".date input").datepicker({
         changeMonth:true,
         changeYear:true,
     });
+
 
 
     $(".date input").keydown(function(){
@@ -398,8 +400,28 @@ $(function(){
     });
 });
 
+
+/* [수정] 202301003 */
 /* 팝업창 열기 */
+let countDatepicker = 0;
 function lp_open(id,title,width,height,e,type){
+    countDatepicker++;
+    if(countDatepicker === 1){
+        $('.date input').datepicker('destroy');
+        setTimeout(function(){
+            $(".date input").datepicker({
+                changeMonth:true,
+                changeYear:true,
+            });
+
+        },20);
+    } else{
+        $(".date input").datepicker({
+            changeMonth:true,
+            changeYear:true,
+        });
+    }
+
     $("#"+id).dialog({
         title: title,
         width: width,
@@ -468,12 +490,23 @@ function lp_open(id,title,width,height,e,type){
         gridPopAssetDetail();
     }else if(id === "gridPop_department_checkbox"){
         popupDepartmentCheckboxSearch(id,title,width,height,e);
+    }else if(id==="gridPop_replacement_current"){
+        gridPopReplacementTargetCurrent();
+    }else if(id==="gridPop_replacement"){
+        gridPopReplacementTarget();
+    }else if(id==="gridPop_replacementTarget"){
+        gridPopReplacementTargetList1();
+        gridPopReplacementTargetList2();
     }
+
 }
+
+
 
 
 /* 팝업창 닫기 */
 function lp_close(target){
+    countDatepicker = 0;
     if(target === "userGroup_pop"){
         /* 사용자 그룹정보 */
         AUIGrid.destroy('#popup_grid_groupBasicInformation');

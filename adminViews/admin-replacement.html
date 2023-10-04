@@ -94,6 +94,12 @@
             </div>
         </div>
         <div id="replacementDetail_ID" class="grid-box h-small"></div>
+
+        <div class="btn-wrap" style="margin-top:10px;">
+            <button type="button" class="btn" onclick="lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530)">정기교체작업등록현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,570)">정기교체작업 등록</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_replacementTarget', '정기교체대상',1250,720)">정기교체대상</button>
+        </div>
     </div>
 </div>
 
@@ -112,7 +118,70 @@
     </div>
 </div>
 
-<!--정기교체 작업 등록 팝업-->
+<!-- 정기교체작업등록현황 팝업-->
+<div id="gridPop_replacement_current" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap"><p>1</p></div></div>
+                    <div class="th"><div class="th-wrap center">등록자</div></div>
+                    <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                    <div class="th"><div class="th-wrap center">작성일자</div></div>
+                    <div class="td"><div class="td-wrap"><p>2019-03-02</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p class="important">제목</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>2019년 전반기 교체</p></div></div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p class="important">신청기간</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                            <span>~</span>
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="th"><div class="th-wrap center"><p class="important">교체기간</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                            <span>~</span>
+                            <label class="date">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>정기교체대상</h3>
+                </div>
+            </div>
+            <div id="popup_grid_replacementTarget_current" class="grid-box h-small"></div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">수정</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_replacement_current')">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--// 정기교체작업등록현황 팝업-->
+
+<!-- 정기교체작업등록 팝업-->
 <div id="gridPop_replacement" class="popup">
     <div class="pop-box">
         <div class="pop-body">
@@ -163,31 +232,100 @@
                 <div class="title">
                     <h3>정기교체대상</h3>
                 </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn add-column" onclick="addRow();">추가</button>
+                </div>
             </div>
             <div id="popup_grid_replacementTarget" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_open('checkEdit','',520,180);">수정</button>
+                <button type="button" class="btn">등록</button>
                 <button type="button" class="btn" onclick="lp_close('gridPop_replacement')">닫기</button>
             </div>
         </div>
     </div>
 </div>
-<!--//정기교체 작업 등록 팝업-->
+<!--// 정기교체작업등록 팝업-->
 
-<!--수정 확인 팝업-->
-<div id="checkEdit" class="popup">
+<!-- 정기교체대상 팝업 -->
+<div id="gridPop_replacementTarget" class="popup">
     <div class="pop-box">
         <div class="pop-body">
-            <p class="center">수정을 하시겠습니까?</p>
+            <div class="input-wrap search-ver con-3">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">자산번호</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">물품종류</span>
+                        <label class="select">
+                            <select>
+                                <option value="">선택</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">모델명</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">사용자</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">부서</span>
+                        <label class="input">
+                            <input type="text">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">도입일</span>
+                        <label class="date">
+                            <input type="text">
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>자산내역</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn excel">엑셀다운로드</button>
+                    <button type="button" class="btn primary check">선택</button>
+                </div>
+            </div>
+            <div id="popup_grid_replacementTarget_list1" class="grid-box h-small"></div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>교체대상내역</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn excel">엑셀다운로드</button>
+                    <button type="button" class="btn">정기교체대상</button>
+                    <button type="button" class="btn delete">선택삭제</button>
+                </div>
+            </div>
+            <div id="popup_grid_replacementTarget_list2" class="grid-box h-small"></div>
+
             <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_close('checkEdit')">확인</button>
-                <button type="button" class="btn" onclick="lp_close('checkEdit')">취소</button>
+                <button type="button" class="btn">등록</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_replacement')">닫기</button>
             </div>
         </div>
     </div>
 </div>
-<!--//수정 확인 팝업-->
+<!-- //정기교체대상 팝업 -->
 
 <!-- 교체신청 -->
 <div id="changeEnroll_pop" class="popup">
@@ -352,16 +490,10 @@
 <!-- //팝업 -->
 
 <style>
-    .my-cell-style {
-        background: #fff;
-        font-weight: bold;
-        color: #FF007F;
-    }
-    .my-column-style {
-        background: #eeeeee;
-        color: #005500;
-        font-weight: bold;
-    }
+    .my-header-style{background: #9d9d9d;color:white;border-color:#9d9d9d;}
+    .my-header-style:hover{background: #e2e2e2;color:#444;border-color:#9d9d9d;}
+    .my-cell-style {background: #fff;font-weight: bold;color: #FF007F;}
+    .my-column-style {background: #eeeeee;color: #005500;font-weight: bold;}
 </style>
 
 <script>
@@ -477,115 +609,79 @@
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
-                dataField: "id",
-                headerText: "아이디",
-                visible:false
-            }, {
-                dataField: "category_application_option",
-                headerText: "신청구분",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                },
-            }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_item",
-                headerText: "물품종류",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_model",
-                headerText: "모델",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_application_model",
-                headerText: "신청모델",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_application_date",
-                headerText: "신청일",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_reason",
-                headerText: "사유",
-                width: 180,
-                filter: {
-                    showIcon: true,
-                },
-            }, {
-                dataField: "category_introduction_date",
-                headerText: "도입일",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                },
-            }, {
-                dataField: "category_user",
-                headerText: "사용자",
-                width: 200,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_department",
-                headerText: "부서명",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_applicant",
-                headerText: "신청자",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_place",
-                headerText: "자산위치",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_application_num",
-                headerText: "신청번호",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_return_num",
-                headerText: "반납번호",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_note",
-                headerText: "비고",
-                width: 220,
-                filter: {
-                    showIcon: true,
-                }
-            }]
+                dataField: "old_asset", // 임의의 값
+                headerText: "구자산",
+                children: [
+                    {
+                        dataField: "category_user_product",
+                        headerText: "상태",
+                    },{
+                        dataField: "category_use_department",
+                        headerText: "사용부서",
+                    },{
+                        dataField: "category_user_name",
+                        headerText: "사용자",
+                    },{
+                        dataField: "category_asset_num",
+                        headerText: "자산번호",
+                    },{
+                        dataField: "category_item",
+                        headerText: "물품종류"
+                    },{
+                        dataField: "category_model",
+                        headerText: "모델"
+                    }
+                ]
+            },
+            {
+                dataField: "application_current", // 임의의 값
+                headerText: "신청현황",
+                headerStyle:"my-header-style",
+                children: [
+                    {
+                        dataField: "category_division",
+                        headerText: "구분",
+                        headerStyle:"my-header-style",
+                    },{
+                        dataField: "category_item_current",
+                        headerText: "물품종류",
+                        headerStyle:"my-header-style",
+                    },{
+                        dataField: "category_model_current",
+                        headerText: "모델",
+                        headerStyle:"my-header-style",
+                    },{
+                        dataField: "category_nonapplication_reason",
+                        headerText: "미신청사유",
+                        headerStyle:"my-header-style",
+                    },{
+                        dataField: "category_application_date",
+                        headerText: "신청일자",
+                        headerStyle:"my-header-style",
+                    },{
+                        dataField: "category_applicant",
+                        headerText: "신청자",
+                        headerStyle:"my-header-style",
+                    }
+                ]
+            },
+            {
+                dataField: "new_asset", // 임의의 값
+                headerText: "신자산",
+                children: [
+                    {
+                        dataField: "category_asset_num_newasset",
+                        headerText: "구분",
+                    },{
+                        dataField: "category_item_newasset",
+                        headerText: "물품종류",
+                    },{
+                        dataField: "category_model_newmodel",
+                        headerText: "모델",
+                    }
+                ]
+            },
+        ]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",

@@ -294,10 +294,15 @@ textarea{width:100%;background:none;border:0;padding:8px 12px;resize:none;outlin
 .input-wrap.search-ver .check input + span:before{width:16px;height:16px;}
 .input-wrap.search-ver > .input-lists{width:calc(100% - 100px);}
 .input-wrap.search-ver .btn{height:30px;padding-top:7px;padding-bottom:7px;font-size:14px;}
-.input-wrap.search-ver.con-3 .input-title{width:80px;}
-.input-wrap.search-ver.con-3 .input{width:calc(100% - 80px);}
-.input-wrap.search-ver.con-3 .input-list{width:calc(33.3% - 8px);}
-
+/* [수정] 20231003 */
+.popup .input-wrap.search-ver.con-3 select,
+.popup .input-wrap.search-ver.con-3 input{height:30px;}
+.popup .input-wrap.search-ver.con-3 .input-title{width:80px;}
+.popup .input-wrap.search-ver.con-3 .select,
+.popup .input-wrap.search-ver.con-3 .date{max-width:none;width:calc(100% - 80px);border-color:var(--line1);}
+.popup .input-wrap.search-ver.con-3 .input{width:calc(100% - 80px);}
+.popup .input-wrap.search-ver.con-3 .input-list{width:calc(33.3% - 8px);}
+/* // [수정] 20231003 */
 .check-wrap{display:flex;gap:8px;flex-wrap:wrap;}
 .popup .input-wrap.search-ver{flex-wrap:wrap;}
 
@@ -465,8 +470,14 @@ label[data-isActive="readonly"]{background:#cacaca;}
 
 /*  [수정] 20231003 : popup > buttons */
 .popup  .title-box .btn{height:24px;padding:5px 11px;font-size:13px;}
+.popup  .title-box .btn.excel,
+.popup  .title-box .btn.primary.check,
+.popup  .title-box .btn.add-column,
 .popup  .title-box .btn.search,
 .popup  .title-box .btn.trash{padding:5px 8px 5px 22px;}
+.popup  .title-box .btn.excel::before,
+.popup  .title-box .btn.primary.check::before,
+.popup  .title-box .btn.add-column::before,
 .popup  .title-box .btn.search::before,
 .popup  .title-box .btn.trash::before{left:6px;}
 
@@ -480,9 +491,9 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* 수정 20231003 */
 .popup .aui-grid-default-header *{font-size: 12px;}
 .popup .aui-grid-renderer-base {font-size:12px;}
-.popup .select{height:24px;}
-.popup .input{width:calc(100% - 100px);height:24px;border-color:var(--line1);padding-right:10px;}
-.popup .input > input {font-size:14px;}
+.popup .select > select{height:24px;}
+.popup .input{width:calc(100% - 100px);border-color:var(--line1);padding-right:10px;}
+.popup .input > input {font-size:14px;height:24px;}
 .popup .input.textarea{height:auto;margin-top:30px;width:100%;}
 /* //수정 20231003 */
 
