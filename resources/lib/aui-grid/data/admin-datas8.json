@@ -12,7 +12,8 @@
     "category_num": 1,
     "category_isUsage" : "Y",
     "category_enroll": "admin",
-    "category_date" : "2023-06-11 14:42:53"
+    "category_date" : "2023-06-11 14:42:53",
+    "category_status" : "임시저장"
   },
   {
     "id": "#grid_id_2",
@@ -27,7 +28,8 @@
     "category_num": 1,
     "category_isUsage" : "Y",
     "category_enroll": "admin",
-    "category_date" : "2023-06-11 14:42:53"
+    "category_date" : "2023-06-11 14:42:53",
+    "category_status" : "완료"
   },
   {
     "id": "#grid_id_3",
@@ -42,7 +44,8 @@
     "category_num": 1,
     "category_isUsage" : "Y",
     "category_enroll": "admin",
-    "category_date" : "2023-06-11 14:42:53"
+    "category_date" : "2023-06-11 14:42:53",
+    "category_status" : "완료"
   },
   {
     "id": "#grid_id_4",
@@ -57,7 +60,8 @@
     "category_num": 1,
     "category_isUsage" : "Y",
     "category_enroll": "admin",
-    "category_date" : "2023-06-11 14:42:53"
+    "category_date" : "2023-06-11 14:42:53",
+    "category_status" : "완료"
   },
   {
     "id": "#grid_id_5",
@@ -72,6 +76,7 @@
     "category_num": 1,
     "category_isUsage" : "Y",
     "category_enroll": "admin",
-    "category_date" : "2023-06-11 14:42:53"
+    "category_date" : "2023-06-11 14:42:53",
+    "category_status" : "완료"
   }
 ]

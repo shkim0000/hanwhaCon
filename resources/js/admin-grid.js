@@ -376,6 +376,7 @@ function requestGridPopNewEnrollDetail(){
     });
 }
 
+/* [수정] 20231005*/
 /* 자산검색 */
 let popup_subGrid_assetSearch;
 
@@ -489,6 +490,18 @@ function subPopupAssetSearch(id,title,width,height, e, type){
             $("input[data-label='assetNumber']").val(rowData.category_asset_num);
             lp_close("assetSearch_pop");
         })
+    } else if(type === "regularChangeEnroll"){
+        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+            let rowData = AUIGrid.getSelectedRows(popup_subGrid_assetSearch)[0];
+            let changeItem = {
+                category_asset_num: rowData.category_asset_num,
+                category_item_name: rowData.category_item_name,
+                category_product: rowData.category_product,
+                category_item: rowData.category_item,
+            }
+            AUIGrid.updateRow(popup_grid_regularChangeEnroll_detail, changeItem, e.rowIndex);
+            lp_close("assetSearch_pop");
+        })
     }
 }
 
@@ -565,7 +578,7 @@ function requestGridPopNewEnrollHistory() {
 /* 2. 교체신청  */
 /* 자산 정보 */
 let popup_grid_changeEnroll_detail;
-function gridPopChangeEnrollDetail(id,title,width,height){
+function gridPopChangeEnrollDetail(){
     /* 1. AUIGrid 칼럼 설정 */
     let gridPop_changeEnroll_history_column = [
         {
@@ -2863,7 +2876,7 @@ function requestAssetClassificationData(){
  //자산분류 팝업
 /* //[수정]2023-09-26 */
 
-/* [수정]202361003 */
+/* [수정]202361004 */
 /* 정기교체 작업등록 팝업에서 정기교체 대상 그리드 */
 let popup_grid_replacementTarget;
 function gridPopReplacementTarget(id,title,width,height) {
@@ -2986,8 +2999,10 @@ function requestReplacementTargetCurrentData() {
     });
 }
 
+
 /* 정기교체대상 팝업  > 자산내역 */
 let popup_grid_replacementTarget_list1;
+
 function gridPopReplacementTargetList1() {
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -3022,11 +3037,13 @@ function gridPopReplacementTargetList1() {
             headerText: "설치일",
         }]
     /* 2. 그리드 속성 설정 */
+
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        softRemoveRowMode: true,
         /* 체크박스 */
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
@@ -3036,7 +3053,7 @@ function gridPopReplacementTargetList1() {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount:30, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
@@ -3100,22 +3117,82 @@ function gridPopReplacementTargetList2() {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 30, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
 
     /* 그리드 생성 */
     popup_grid_replacementTarget_list2 = AUIGrid.create("#popup_grid_replacementTarget_list2", columnLayout, gridPros);
-    requestReplacementTargetList2Data();
 }
-function requestReplacementTargetList2Data() {
-    $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
-        AUIGrid.setGridData(popup_grid_replacementTarget_list2, data);
+
+/* 정기교체 상세내역 > 교체신청_정기교체  */
+/* 자산 정보 */
+let popup_grid_regularChangeEnroll_detail;
+function gridPopRegularChangeEnrollDetail(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let gridPop_changeEnroll_history_column = [
+        {
+            dataField: "category_asset",
+            headerText: "자산분류",
+        },{
+            dataField: "category_item",
+            headerText: "품목",
+        },{
+            dataField: "category_model_name",
+            headerText: "모델",
+        }, {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            style: "search_grid_style",
+            renderer:{
+                type: "ButtonRenderer",
+                onClick: function(event){
+                    let rowData = AUIGrid.getSelectedRows(popup_grid_regularChangeEnroll_detail);
+                    let rowIndex = event.rowIndex;
+                    let resultData = {...rowData[0], rowIndex: rowIndex}
+                    lp_open("assetSearch_pop","자산검색",800,350, resultData, "regularChangeEnroll");
+                }
+            },
+            width:200,
+        },{
+            dataField:"category_old_model",
+            headerText: "구 모델"
+        }, {
+            dataField:"category_old_asset_num",
+            headerText: "구자산번호",
+        }]
+    /* 2. 그리드 속성 설정 */
+    let gridPop_changeEnroll_history_pros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        autoGridHeight: true,
+        /* 페이지네이션 */
+        usePaging: true,
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3,
+        showPageRowSelect: true,
+    }
+
+    /* 그리드 생성 */
+    popup_grid_regularChangeEnroll_detail = AUIGrid.create("#popup_grid_regularChangeEnroll_detail", gridPop_changeEnroll_history_column, gridPop_changeEnroll_history_pros);
+    requestGridRegularChangeEnrollDetail();
+}
+function requestGridRegularChangeEnrollDetail(){
+    $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
+        AUIGrid.setGridData(popup_grid_regularChangeEnroll_detail, data);
     });
 }
 
-/* // [수정 + 추가]202361003 */
+/* // 교체신청 */
+
+
+
+/* // [수정 + 추가]202361004 */
 
 
 /* ---- 2023-09-12 ----------------------------------------------------------- */

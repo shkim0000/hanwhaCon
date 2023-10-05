@@ -52,19 +52,25 @@
             <div class="multiple-grid-wrap">
                 <div class="multiple-grid-box">
                     <div class="title-box">
-                        <div class="title">
+                        <div class="title flex">
                             <h3 class="list-title"><span>품목정보</span></h3>
+                            <p class="write-date">작성일  :<span>2023-01-23</span></p>
                         </div>
-                        <p class="write-date">작성일  :<span>2023-01-23</span></p>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn save">저장</button>
+                        </div>
                     </div>
                     <div id="basicItemInfo_ID" class="grid-box h-small2"></div>
                 </div>
                 <div class="multiple-grid-box">
                     <div class="title-box">
-                        <div class="title">
+                        <div class="title flex">
                             <h3 class="list-title"><span>정기교체 품목정보</span></h3>
+                            <p class="write-date">작성일  :<span>2023-01-23</span></p>
                         </div>
-                        <p class="write-date">작성일  :<span>2023-01-23</span></p>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn save">저장</button>
+                        </div>
                     </div>
                     <div id="regularItemInfo_ID" class="grid-box h-small2"></div>
                 </div>
@@ -73,12 +79,15 @@
 
         <div class="list-box">
             <div class="multiple-grid-wrap">
-                <div class="multiple-grid-box">
+                <div class="multiple-grid-box only">
                     <div class="title-box">
-                        <div class="title">
+                        <div class="title flex">
                             <h3 class="list-title"><span>대여품목 모델정보</span></h3>
+                            <p class="write-date">작성일  :<span>2023-01-23</span></p>
                         </div>
-                        <p class="write-date">작성일  :<span>2023-01-23</span></p>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn save">저장</button>
+                        </div>
                     </div>
                     <div id="rentalItemInfo_ID" class="grid-box h-small2"></div>
                 </div>
@@ -605,7 +614,7 @@
             setTimeout(function(){
                 AUIGrid.resize(basicItemInfo_ID, halfWidth);
                 AUIGrid.resize(regularItemInfo_ID, halfWidth);
-                AUIGrid.resize(rentalItemInfo_ID, halfWidth + 10);
+                AUIGrid.resize(rentalItemInfo_ID, halfWidth);
             },20)
 
         } else{
@@ -613,7 +622,7 @@
             setTimeout(function(){
                 AUIGrid.resize(basicItemInfo_ID, halfWidth);
                 AUIGrid.resize(regularItemInfo_ID, halfWidth);
-                AUIGrid.resize(rentalItemInfo_ID, halfWidth + 10);
+                AUIGrid.resize(rentalItemInfo_ID, halfWidth);
             },20)
         }
     });

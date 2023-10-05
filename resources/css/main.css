@@ -151,6 +151,11 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 .multiple-grid-wrap > .grid-box{width:calc(80% - 10px);}
 .grid-sub-box{width:calc(20% - 10px);height:380px;display:flex;flex-direction:column;align-items:center;justify-content:space-between;padding:12px;background-color:#fff3ec;border:1px solid #f6dccc;}
 .multiple-grid-box{width:50%;}
+/* [추가] 20231005 */
+.multiple-grid-box.only{width:calc(50% - 10px);}
+.multiple-grid-box .title-box .title.flex{display:flex;align-items:center;gap:16px;}
+.multiple-grid-box .title-box .title.flex .write-date{font-size:16px;padding-bottom:0;border:0;}
+/* // [추가] 20231005 */
 .multiple-grid-box .title-box {min-height:40px;margin-bottom:8px;}
 .multiple-grid-box .title-box .list-title{margin-bottom:0;}
 .grid-box{height:380px;}
@@ -160,6 +165,9 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 .grid-box.h-small2{height:320px;}
 .grid-box.h-small3{height:480px;}
 .grid-box.h-small4{height:260px;}
+/* [추가] 2031005 */
+.grid-box.h-small5{height:300px;}
+/* // [추가] 2031005 */
 .grid-box.h-medium {height:550px;}
 /* [추가]20230925 */
 .grid-box.h-medium2 {height:400px;}
@@ -605,9 +613,16 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* 2023912 */
 .title-box .grid-title{font-size:20px;font-weight:var(--bold);}
 .title-box .grid-title h3 span{color:var(--color1);}
+/* 20231005 */
+.title-box .title > .row-count{padding-left:0;font-size:16px;}
+.title-box .title > .row-count::before{display:none;}
+/* //20231005 */
 .title-box.end{justify-content:flex-end;}
 .title-box.column{flex-direction:column;align-items:flex-start;}
 .title-box p{font-weight:var(--bold);}
+/* 20231005 */
+.title-box .title.flex{display:flex;gap:12px;align-items:flex-end;}
+/* //20231005 */
 .title-box .title > *{position:relative;padding-left:14px;font-size:20px;font-weight:var(--bold);}
 .title-box .title > *::before{content:'';width:4px;height:16px;background-color:var(--color1);position:absolute;left:0;top:50%;transform:translateY(-50%);}
 .btn-wrap{gap:8px;}

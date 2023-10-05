@@ -81,19 +81,24 @@
 
         <div class="title-box">
             <div class="title"><h3>정기교체</h3></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,530)">등록</button>
+            </div>
         </div>
-        <div id="replacement_ID" class="grid-box h-small"></div>
+        <div id="replacement_ID" class="grid-box h-small5"></div>
 
         <div class="title-box hide-ver">
-            <div class="title"><h3>정기교체 상세 내역</h3></div>
+            <div class="title flex">
+                <h3>정기교체 상세 내역</h3>
+                <p class="row-count">Row : <span></span></p>
+            </div>
             <div class="btn-wrap">
-                <button type="button" class="btn">운영 → 이동</button>
-                <button type="button" class="btn">이동 → 운영</button>
+                <button type="button" class="btn" onclick="moveBtn();">운영 → 이동</button>
                 <button type="button" class="btn">정기교체 진행</button>
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="replacementDetail_ID" class="grid-box h-small"></div>
+        <div id="replacementDetail_ID" class="grid-box h-small5"></div>
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530)">정기교체작업등록현황</button>
@@ -195,11 +200,11 @@
                     <div class="td"><div class="td-wrap"><p>2019-03-02</p></div></div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>제목</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">제목</p></div></div>
                     <div class="td"><div class="td-wrap"><p>2019년 전반기 교체</p></div></div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>신청기간</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">신청기간</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
                             <label class="date">
@@ -213,7 +218,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>교체기간</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p class="important">교체기간</p></div></div>
                     <div class="td">
                         <div class="td-wrap">
                             <label class="date">
@@ -233,12 +238,13 @@
                     <h3>정기교체대상</h3>
                 </div>
                 <div class="btn-wrap">
-                    <button type="button" class="btn add-column" onclick="addRow();">추가</button>
+                    <button type="button" class="btn add-column" onclick="lp_open('gridPop_replacementTarget', '정기교체대상',1250,720)">추가</button>
                 </div>
             </div>
             <div id="popup_grid_replacementTarget" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
+                <button type="button" class="btn save">저장</button>
                 <button type="button" class="btn">등록</button>
                 <button type="button" class="btn" onclick="lp_close('gridPop_replacement')">닫기</button>
             </div>
@@ -301,7 +307,7 @@
                 </div>
                 <div class="btn-wrap">
                     <button type="button" class="btn excel">엑셀다운로드</button>
-                    <button type="button" class="btn primary check">선택</button>
+                    <button type="button" class="btn primary check" onclick="downBtnClick();">선택</button>
                 </div>
             </div>
             <div id="popup_grid_replacementTarget_list1" class="grid-box h-small"></div>
@@ -313,7 +319,7 @@
                 <div class="btn-wrap">
                     <button type="button" class="btn excel">엑셀다운로드</button>
                     <button type="button" class="btn">정기교체대상</button>
-                    <button type="button" class="btn delete">선택삭제</button>
+                    <button type="button" class="btn delete" onclick="upBtnClick();">선택삭제</button>
                 </div>
             </div>
             <div id="popup_grid_replacementTarget_list2" class="grid-box h-small"></div>
@@ -327,8 +333,8 @@
 </div>
 <!-- //정기교체대상 팝업 -->
 
-<!-- 교체신청 -->
-<div id="changeEnroll_pop" class="popup">
+<!-- 교체신청_정기교체 -->
+<div id="regularChangeEnroll_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
@@ -390,14 +396,11 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_changeEnroll_detail" class="grid-box h-small"></div>
+            <div id="popup_grid_regularChangeEnroll_detail" class="grid-box h-small"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>업무배정</h3>
-                </div>
-                <div class="btn-wrap">
-                    <button type="button" class="btn">배정</button>
                 </div>
             </div>
             <div class="custom-table">
@@ -424,15 +427,6 @@
                 </div>
             </div>
 
-            <!-- 처리이력 -->
-            <!--<div class="title-box">
-                <div class="title">
-                    <h3>처리이력</h3>
-                </div>
-            </div>
-            <div id="popup_grid_change_history" class="grid-box"></div>-->
-
-
             <div class="title-box">
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
@@ -458,10 +452,10 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">배정</button>
-                <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">처리이력</button>
-                <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">완료</button>
-                <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('regularChangeEnroll_pop')">배정</button>
+                <button type="button" class="btn" onclick="lp_close('regularChangeEnroll_pop')">처리이력</button>
+                <button type="button" class="btn" onclick="lp_close('regularChangeEnroll_pop')">완료</button>
+                <button type="button" class="btn" onclick="lp_close('regularChangeEnroll_pop')">닫기</button>
             </div>
         </div>
     </div>
@@ -487,6 +481,38 @@
     </div>
 </div>
 <!--//담당자 검색 팝업-->
+
+<!-- 팝업내 > 자산검색 -->
+<div id="assetSearch_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap search-ver con-3">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">자산분류</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="product">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">품목</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="item">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">자산번호</span>
+                        <label class="input">
+                            <input type="text" data-label="assetNumber">
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
+            </div>
+            <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
+        </div>
+    </div>
+</div>
 <!-- //팝업 -->
 
 <style>
@@ -494,6 +520,11 @@
     .my-header-style:hover{background: #e2e2e2;color:#444;border-color:#9d9d9d;}
     .my-cell-style {background: #fff;font-weight: bold;color: #FF007F;}
     .my-column-style {background: #eeeeee;color: #005500;font-weight: bold;}
+
+    .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;min-height:20px;}
+    .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
+    .search_grid_style > div::after{content:'';width:1px;height:calc(100% - 4px);position:absolute;right:30px;top:50%;transform:translateY(-50%);background-color:#dbdbdb;}
+    .search_grid_style .aui-grid-button-renderer{width:auto;display:flex;justify-content:center;background-color:transparent;color:#414141;border-radius:0;border:0;}
 </style>
 
 <script>
@@ -540,20 +571,14 @@
                     showIcon: true,
                 }
             }, {
-                dataField: "category_replacement_reason",
-                headerText: "정기교체 사유",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
                 dataField: "category_manager",
                 headerText: "관리자",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_note",
-                headerText: "비고",
+                dataField: "category_status",
+                headerText: "상태",
                 filter: {
                     showIcon: true,
                 }
@@ -564,26 +589,28 @@
             showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
             enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
+            simplifySelectionEvent: true,
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            editable: false,
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            autoGridHeight:false,
+            fillColumnSizeMode: true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            simplifySelectionEvent: true,
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
-            autoGridHeight:false,
-            fillColumnSizeMode: true,
         }
 
         /* 그리드 생성 */
         replacement_ID = AUIGrid.create("#replacement_ID", columnLayout, gridPros);
 
         /* 클릭시 팝업 상세 내역 그리드 호출 */
-        AUIGrid.bind(replacement_ID, "cellClick", function(event, item) {
-            console.log(event);
+        AUIGrid.bind(replacement_ID, "cellClick", function(event, item) {``
             createReplacementDetailGrid();
             requestReplacementDetailData();
             AUIGrid.resize(replacementDetail_ID);
@@ -593,16 +620,37 @@
 
         /* 더블클릭시 정기교체 작업등록 팝업 */
         AUIGrid.bind(replacement_ID, "cellDoubleClick", function(event,item){
-            $("#gridPop_replacement").addClass("open").dialog({
-                title: "정기교체작업등록",
-                width: 1250,
-                height: 500,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopReplacementTarget();
-        })
+            if(event.item.category_status === "임시저장"){
+                countDate();
+                $("#gridPop_replacement").addClass("open").dialog({
+                    title: "정기교체작업 등록",
+                    width: 1250,
+                    height: 530,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog',
+                    close: function( event, ui ) {
+                        countDatepicker = 0;
+                    },
+                });
+                gridPopReplacementTarget();
+            }else if(event.item.category_status ==="완료"){
+                countDate();
+                $("#gridPop_replacement_current").addClass("open").dialog({
+                    title: "정기교체작업등록현황",
+                    width: 1250,
+                    height: 530,
+                    modal: true,
+                    resizable: false,
+                    dialogClass: 'no-close success-dialog',
+                    close: function( event, ui ) {
+                        countDatepicker = 0;
+                    },
+                });
+                gridPopReplacementTargetCurrent();
+            }
+
+        });
     }
     function createReplacementDetailGrid() {
         /* 기본 그리드(예시) */
@@ -613,7 +661,7 @@
                 headerText: "구자산",
                 children: [
                     {
-                        dataField: "category_user_product",
+                        dataField: "category_user_status",
                         headerText: "상태",
                     },{
                         dataField: "category_use_department",
@@ -690,16 +738,18 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            autoGridHeight:false,
+            fillColumnSizeMode: false,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* 그리드복사 + 필터 */
             simplifySelectionEvent: true,
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
             enableFilter: true, // 필터 true 설정
-            autoGridHeight:false,
-            fillColumnSizeMode: false,
         }
 
         /* 그리드 생성 */
@@ -707,19 +757,25 @@
 
         /* 더블 클릭시 팝업 */
         AUIGrid.bind(replacementDetail_ID, "cellDoubleClick", function(event) {
+            countDate();
             let width = 1250;
-            let height = 590;
-            $("#changeEnroll_pop").dialog({
+            let height = 670;
+            $("#regularChangeEnroll_pop").dialog({
                 title: "교체신청_정기교체",
                 width: width,
                 height:height,
                 modal: true,
                 resizable: false,
-                dialogClass: 'no-close success-dialog'
+                dialogClass: 'no-close success-dialog',
+                close: function( event, ui ) {
+                    countDatepicker = 0;
+                },
             });
-            gridPopChangeEnrollDetail(width,height);
-            gridPopChangeEnrollHistory(width,height);
+            gridPopRegularChangeEnrollDetail();
         });
+
+        /* row 수 세기 */
+        getRowCount2(replacementDetail_ID);
     }
     /* 4. 데이터 불러오기 */
     function requestReplacementData() {
@@ -738,7 +794,8 @@
     window.onresize = function () {
         if (typeof replacement_ID !== "undefined") {
             AUIGrid.resize(replacement_ID);
-        } else if(typeof replacementDetail_ID !== "undefined"){
+        }
+        if(typeof replacementDetail_ID !== "undefined"){
             AUIGrid.resize(replacementDetail_ID);
         }
     }
@@ -762,6 +819,79 @@
             },20)
         }
     });
+
+    /* 정기교체대상 > 자산내역 > 선택 클릭시 */
+    function downBtnClick() {
+        /* 상단 그리드의 체크된 행들 얻기 */
+        let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list1);
+        if (rows.length <= 0) {
+            alert('상단 그리드에서 체크된 행이 없습니다.');
+            return;
+        }
+
+        /* 얻은 행을 하단 그리드에 추가하기 */
+        AUIGrid.addRow(popup_grid_replacementTarget_list2, rows, "last");
+
+        /* 선택 클릭시 해당 row 색상변경 */
+        let checkedItems = AUIGrid.getCheckedRowItems(popup_grid_replacementTarget_list1);
+
+        AUIGrid.setProp(popup_grid_replacementTarget_list1, "rowStyleFunction", function (rowIndex, item) {
+            if (checkedItems) {
+                return "my-cell-style";
+            }
+            return "";
+        });
+        /* 선택한 상단 그리드 행들 삭제: 삭제하면  "이동" 이고, 삭제하지 않으면 "복사" 를 구현할 수 있음. */
+        AUIGrid.removeCheckedRows(popup_grid_replacementTarget_list1);
+
+        /* 변경된 rowStyleFunction 이 적용되도록 그리드 업데이트 */
+        AUIGrid.update(popup_grid_replacementTarget_list1);
+
+        /* 삭제 처리된 아이템 있는지 보기  > 삭제 처리되었다면 선택불가 */
+        let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
+        console.log(removedRows)
+        for(let i = 0; i < removedRows.length; i++){
+            console.log();
+
+        }
+
+        /* 체크박스 */
+
+        // 전체 체크박스 클릭 이벤트 바인딩
+        AUIGrid.bind(popup_grid_replacementTarget_list1, "rowAllChkClick", function (event) {
+
+
+        });
+    };
+
+    /* 정기교체대상 > 교체대상 내역 > 신청 클릭시 */
+    function upBtnClick() {
+        /* 하단 그리드의 체크된 행들 얻기 */
+        let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
+        var rowId = rows.rowIdValue;
+        if (rows.length <= 0) {
+            alert('하단 그리드에서 체크된 행이 없습니다.');
+            return;
+        }
+        /* 얻은 행을 상단 그리드에 추가하기 */
+        AUIGrid.addRow(popup_grid_replacementTarget_list1, rows, "last");
+
+        /* 선택한 하단 그리드 행들 삭제 */
+        AUIGrid.resetUpdatedItemById(popup_grid_replacementTarget_list1, rowId, "a");
+        AUIGrid.removeCheckedRows(popup_grid_replacementTarget_list2);
+    }
+
+    /* 정기교체 상세내역 > 운영->이동 버튼 */
+    function moveBtn(){
+        let rows = AUIGrid.getCheckedRowItemsAll(replacementDetail_ID);
+        for(let i =0; i < rows.length; i++){
+            if(rows[i].category_user_status === "이동"){
+                alert("이동중인 자산이 있습니다. 담당자에게 확인해주세요.");
+            }
+        }
+    }
+
+
 
 </script>
 </body>

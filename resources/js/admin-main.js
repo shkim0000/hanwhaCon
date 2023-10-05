@@ -16,6 +16,7 @@ $(function(){
         "</header>"
     );
 
+    /* [수정] 20231005 */
     /* sidebar 추가 */
     $('#wrapper').prepend(
         "<div class='sidebar'>\n"+
@@ -95,7 +96,6 @@ $(function(){
                         "<button type='button' class='btn'>정기교체</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>정기교체 대상현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>정기교체 진행상황</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
@@ -404,8 +404,9 @@ $(function(){
 /* [수정] 202301003 */
 /* 팝업창 열기 */
 let countDatepicker = 0;
-function lp_open(id,title,width,height,e,type){
+function countDate(){
     countDatepicker++;
+    console.log(countDatepicker)
     if(countDatepicker === 1){
         $('.date input').datepicker('destroy');
         setTimeout(function(){
@@ -421,14 +422,20 @@ function lp_open(id,title,width,height,e,type){
             changeYear:true,
         });
     }
-
+}
+function lp_open(id,title,width,height,e,type){
+    console.log(countDatepicker)
+    countDate();
     $("#"+id).dialog({
         title: title,
         width: width,
         height:height,
         modal: true,
         resizable: false,
-        dialogClass: 'no-close success-dialog'
+        dialogClass: 'no-close success-dialog',
+        close: function( event, ui ) {
+            countDatepicker = 0;
+        },
     });
     /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
     if(id === "gridPop_user"){
@@ -527,5 +534,11 @@ function lp_close(target){
 function getRowCount(gridname){
     setTimeout(function(){
         $(".title-box .grid-title h3 span").text(AUIGrid.getRowCount(gridname));
+    },100)
+}
+
+function getRowCount2(gridname){
+    setTimeout(function(){
+        $(".title-box .row-count > span").text(AUIGrid.getRowCount(gridname));
     },100)
 }

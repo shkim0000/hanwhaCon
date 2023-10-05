@@ -1,5 +1,6 @@
 [
   {
+    "uid": "uid1",
     "id" : "#grid_id_1",
     "category_asset_status": "운영",
     "category_asset_num": "4919591",
@@ -19,6 +20,7 @@
     "category_introduction_day": "2018-05-02"
   },
   {
+    "uid": "uid2",
     "id" : "#grid_id_2",
     "category_asset_status": "운영",
     "category_asset_num": "4919591",
@@ -38,6 +40,7 @@
     "category_introduction_day": "2017-10-24"
   },
   {
+    "uid": "uid3",
     "id" : "#grid_id_3",
     "category_asset_status": "미운영",
     "category_asset_num": "44010591",
