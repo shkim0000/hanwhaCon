@@ -821,12 +821,32 @@
     });
 
     /* 정기교체대상 > 자산내역 > 선택 클릭시 */
+    let rowData;
+    let whatRow;
+    let whatRowArr = [];
+    let whatRowArr2=[];
+    let clickItem = {
+        category_asset_status : "",
+        category_asset_num: "",
+        category_item: "",
+        category_model: "",
+        category_start_date:"",
+        category_user: "",
+        category_department:"",
+        category_installation_day: "",
+    };
     function downBtnClick() {
         /* 상단 그리드의 체크된 행들 얻기 */
         let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list1);
         if (rows.length <= 0) {
             alert('상단 그리드에서 체크된 행이 없습니다.');
             return;
+        }
+
+        whatRow = AUIGrid.getCheckedRowItems(popup_grid_replacementTarget_list1);
+
+        for(let i=0; i < rows.length; i++){
+            whatRowArr.push({rowIndex :whatRow[i].rowIndex, uid : whatRow[i].item.uid});
         }
 
         /* 얻은 행을 하단 그리드에 추가하기 */
@@ -849,13 +869,9 @@
 
         /* 삭제 처리된 아이템 있는지 보기  > 삭제 처리되었다면 선택불가 */
         let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
-        console.log(removedRows)
         for(let i = 0; i < removedRows.length; i++){
-            console.log();
 
         }
-
-        /* 체크박스 */
 
         // 전체 체크박스 클릭 이벤트 바인딩
         AUIGrid.bind(popup_grid_replacementTarget_list1, "rowAllChkClick", function (event) {
@@ -866,19 +882,42 @@
 
     /* 정기교체대상 > 교체대상 내역 > 신청 클릭시 */
     function upBtnClick() {
+
         /* 하단 그리드의 체크된 행들 얻기 */
+        let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
         let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
-        var rowId = rows.rowIdValue;
+        let rowsArr1 =[];
+        let rowsArr2 = []; // uid 저장
         if (rows.length <= 0) {
             alert('하단 그리드에서 체크된 행이 없습니다.');
             return;
         }
-        /* 얻은 행을 상단 그리드에 추가하기 */
-        AUIGrid.addRow(popup_grid_replacementTarget_list1, rows, "last");
 
+        /* 클릭한 친구들의  */
         /* 선택한 하단 그리드 행들 삭제 */
-        AUIGrid.resetUpdatedItemById(popup_grid_replacementTarget_list1, rowId, "a");
+        for(let i=0; i<rows.length; i++){
+            rowsArr2.push(rows[i].uid); // 선택한 행의 uid
+        }
+        for(let i=0; i<removedRows.length; i++){
+            rowsArr1.push(removedRows[i].uid); // 삭제된 행의 uid
+
+            for(let j=0; j < rows.length; j++){
+                if(rowsArr2[j] === whatRowArr[i].uid){
+                    whatRowArr2.push(whatRowArr[i].rowIndex);
+                }
+            }
+        }
+
+
+        for(let i=0; i<rows.length; i++){
+            AUIGrid.restoreSoftRows(popup_grid_replacementTarget_list1, whatRowArr2[i]);
+        }
+
         AUIGrid.removeCheckedRows(popup_grid_replacementTarget_list2);
+
+
+        console.log(whatRowArr2)
+        console.log(whatRowArr)
     }
 
     /* 정기교체 상세내역 > 운영->이동 버튼 */
@@ -890,9 +929,6 @@
             }
         }
     }
-
-
-
 </script>
 </body>
 </html>

@@ -3055,6 +3055,8 @@ function gridPopReplacementTargetList1() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount:30, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 수정 */
+        enableRestore: true,
     }
 
     /* 그리드 생성 */
