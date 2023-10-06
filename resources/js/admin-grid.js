@@ -3089,8 +3089,9 @@ function gridPopReplacementTargetList1() {
     AUIGrid.bind(popup_grid_replacementTarget_list1, "rowCheckClick", function (event) {
         let rowCount = AUIGrid.getRowCount(popup_grid_replacementTarget_list1)
         let checkedItemsLength = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list1).length;
+        let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true).length;
 
-        if(checkedItemsLength === rowCount){
+        if(checkedItemsLength === (rowCount - removedRows)){
             AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, true);
         }else{
             AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
