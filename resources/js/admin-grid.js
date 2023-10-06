@@ -2924,7 +2924,7 @@ function gridPopReplacementTarget(id,title,width,height) {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 100, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
