@@ -3071,30 +3071,32 @@ function gridPopReplacementTargetList1() {
         let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
 
         if(event.checked){
-            var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "id");
+            let uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "id");
+            removeRowsArr =[];
             for(let i=0; i<removedRows.length; i++){
                 removeRowsArr.push(removedRows[i].id);
-                uniqueValues.splice(uniqueValues.indexOf(removeRowsArr[i]), 1);
+                uniqueValues = uniqueValues.filter(item => !removeRowsArr.includes(item));
             }
             AUIGrid.setCheckedRowsByValue(event.pid, "id", uniqueValues);
         } else {
-            setTimeout(function(){
-                AUIGrid.setCheckedRowsByValue(event.pid, "id", []);
-                removeRowsArr =[];
-            },20);
+            AUIGrid.setCheckedRowsByValue(event.pid, "id", []);
+            removeRowsArr =[];
         }
     });
 
-/*    /!* 개별선택 *!/
+
+    /* 개별선택 */
     AUIGrid.bind(popup_grid_replacementTarget_list1, "rowCheckClick", function (event) {
-        let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
-        var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "id");
-        for(let i=0; i<removedRows.length; i++){
-            removeRowsArr.push(removedRows[i].id);
-            uniqueValues.splice(uniqueValues.indexOf(removeRowsArr[i]), 1);
+        let rowCount = AUIGrid.getRowCount(popup_grid_replacementTarget_list1)
+        let checkedItemsLength = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list1).length;
+
+        if(checkedItemsLength === rowCount){
+            AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, true);
+        }else{
+            AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
         }
 
-    });*/
+    });
 
 
 

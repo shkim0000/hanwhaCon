@@ -435,6 +435,12 @@ function lp_open(id,title,width,height,e,type){
         dialogClass: 'no-close success-dialog',
         close: function( event, ui ) {
             countDatepicker = 0;
+
+            if(event.target.id === "gridPop_replacementTarget"){
+                $(".aui-grid-table tr input").prop("disabled",false);
+                AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
+                AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
+            }
         },
     });
     /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
@@ -519,8 +525,12 @@ function lp_close(target){
         AUIGrid.destroy('#popup_grid_groupBasicInformation');
         $("#" + target +"  .btn.trash").attr("data-btn","hide");
         $("#"+target).dialog("close");
-
-    }else if(target){
+    } else if(target === "gridPop_replacementTarget"){
+        $(".aui-grid-table tr input").prop("disabled",false);
+        AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
+        AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
+        $("#"+target).dialog("close");
+    } else if(target){
         $("#"+target).dialog("close");
     } else
     {
