@@ -307,7 +307,7 @@
                 </div>
                 <div class="btn-wrap">
                     <button type="button" class="btn excel">엑셀다운로드</button>
-                    <button type="button" class="btn primary check" onclick="downBtnClick();">선택</button>
+                    <button type="button" class="btn primary check" onclick="downBtnClick(this);">선택</button>
                 </div>
             </div>
             <div id="popup_grid_replacementTarget_list1" class="grid-box h-small"></div>
@@ -318,7 +318,7 @@
                 </div>
                 <div class="btn-wrap">
                     <button type="button" class="btn excel">엑셀다운로드</button>
-                    <button type="button" class="btn">정기교체대상</button>
+                    <button type="button" class="btn" onclick="regularReplacementProgress();">정기교체대상</button>
                     <button type="button" class="btn delete" onclick="upBtnClick();">선택삭제</button>
                 </div>
             </div>
@@ -326,7 +326,7 @@
 
             <div class="btn-wrap">
                 <button type="button" class="btn">등록</button>
-                <button type="button" class="btn" onclick="lp_close('gridPop_replacement')">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_replacementTarget')">닫기</button>
             </div>
         </div>
     </div>
@@ -518,8 +518,8 @@
 <style>
     .my-header-style{background: #9d9d9d;color:white;border-color:#9d9d9d;}
     .my-header-style:hover{background: #e2e2e2;color:#444;border-color:#9d9d9d;}
-    .my-cell-style {background: #fff;font-weight: bold;color: #FF007F;}
     .my-column-style {background: #eeeeee;color: #005500;font-weight: bold;}
+    tr.aui-grid-row-soft-removed-marker *{font-weight: bold;color:#FF007F!important;}
 
     .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;min-height:20px;}
     .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
@@ -840,27 +840,26 @@
         /* 얻은 행을 하단 그리드에 추가하기 */
         AUIGrid.addRow(popup_grid_replacementTarget_list2, rows, "last");
 
-        /* 선택 클릭시 해당 row 색상변경 */
-        let checkedItems = AUIGrid.getCheckedRowItems(popup_grid_replacementTarget_list1);
-        AUIGrid.setProp(popup_grid_replacementTarget_list1, "rowStyleFunction", function (rowIndex, item) {
-            if (checkedItems) {
-                return "my-cell-style";
-            }
-            return "";
-        });
         /* 선택한 상단 그리드 행들 삭제: 삭제하면  "이동" 이고, 삭제하지 않으면 "복사" 를 구현할 수 있음. */
         AUIGrid.removeCheckedRows(popup_grid_replacementTarget_list1);
 
         /* 변경된 rowStyleFunction 이 적용되도록 그리드 업데이트 */
         AUIGrid.update(popup_grid_replacementTarget_list1);
 
-        /* 체크박스  : */
+        /* 체크 풀기 */
+        AUIGrid.setCheckedRowsByValue(popup_grid_replacementTarget_list1, "id", []);
 
+        if($(".aui-grid-table tr").hasClass("aui-grid-row-soft-removed-marker")){
+            $(".aui-grid-table tr.aui-grid-row-soft-removed-marker input").prop("disabled",true);
+        }else{
+            $(".aui-grid-table tr.aui-grid-row-soft-removed-marker input").prop("disabled",false);
+        }
     };
 
     /* 정기교체대상 > 교체대상 내역 > 신청 클릭시 */
     function upBtnClick() {
         const removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
+
         const rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
         const rowsArr2 = new Set(rows.map(row => row.uid)); // Set을 사용하여 중복 제거
         const whatRowArr2 = new Set();
@@ -884,6 +883,9 @@
         AUIGrid.removeCheckedRows(popup_grid_replacementTarget_list2);
 
         whatRowArr = whatRowArr.filter(row => !whatRowArr2.has(row.rowIndex));
+        $(".grid-box tr input").prop("disabled",false)
+        $(".grid-box tr.aui-grid-row-soft-removed-marker input").prop("disabled",true);
+        removeRowsArr =[];
     }
 
     /* 정기교체 상세내역 > 운영->이동 버튼 */
@@ -894,6 +896,22 @@
                 alert("이동중인 자산이 있습니다. 담당자에게 확인해주세요.");
             }
         }
+    }
+
+    function regularReplacementProgress(){
+        let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
+
+        if($(".aui-grid-table tr input").is(":checked")){
+            $(".aui-grid-table tr input").prop("disabled",false);
+        }
+        if(rows.length >= 1){
+            AUIGrid.clearGridData(popup_grid_replacementTarget);
+            setTimeout(function(){
+                AUIGrid.addRow(popup_grid_replacementTarget, rows, "last");
+                AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
+            },20)
+        }
+        lp_close("gridPop_replacementTarget");
     }
 </script>
 </body>

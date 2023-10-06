@@ -520,7 +520,7 @@ function lp_close(target){
         $("#" + target +"  .btn.trash").attr("data-btn","hide");
         $("#"+target).dialog("close");
 
-    } else if(target){
+    }else if(target){
         $("#"+target).dialog("close");
     } else
     {

@@ -2930,7 +2930,7 @@ function gridPopReplacementTarget(id,title,width,height) {
 
     /* 그리드 생성 */
     popup_grid_replacementTarget = AUIGrid.create("#popup_grid_replacementTarget", columnLayout, gridPros);
-    requestReplacementTargetData();
+    // requestReplacementTargetData();
 }
 function requestReplacementTargetData() {
     $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
@@ -2985,7 +2985,7 @@ function gridPopReplacementTargetCurrent() {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 100, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
     }
 
@@ -3056,12 +3056,48 @@ function gridPopReplacementTargetList1() {
         pageRowCount:30, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 수정 */
+        independentAllCheckBox : true,
         enableRestore: true,
     }
 
     /* 그리드 생성 */
     popup_grid_replacementTarget_list1 = AUIGrid.create("#popup_grid_replacementTarget_list1", columnLayout, gridPros);
     requestReplacementTargetList1Data();
+
+    let removeRowsArr =[];
+
+    /* 전체선택 */
+    AUIGrid.bind(popup_grid_replacementTarget_list1, "rowAllChkClick", function (event) {
+        let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
+
+        if(event.checked){
+            var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "id");
+            for(let i=0; i<removedRows.length; i++){
+                removeRowsArr.push(removedRows[i].id);
+                uniqueValues.splice(uniqueValues.indexOf(removeRowsArr[i]), 1);
+            }
+            AUIGrid.setCheckedRowsByValue(event.pid, "id", uniqueValues);
+        } else {
+            setTimeout(function(){
+                AUIGrid.setCheckedRowsByValue(event.pid, "id", []);
+                removeRowsArr =[];
+            },20);
+        }
+    });
+
+/*    /!* 개별선택 *!/
+    AUIGrid.bind(popup_grid_replacementTarget_list1, "rowCheckClick", function (event) {
+        let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
+        var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "id");
+        for(let i=0; i<removedRows.length; i++){
+            removeRowsArr.push(removedRows[i].id);
+            uniqueValues.splice(uniqueValues.indexOf(removeRowsArr[i]), 1);
+        }
+
+    });*/
+
+
+
 }
 function requestReplacementTargetList1Data() {
     $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
