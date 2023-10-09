@@ -848,13 +848,9 @@
 
         /* 체크 풀기 */
         AUIGrid.setCheckedRowsByValue(popup_grid_replacementTarget_list1, "id", []);
-
-        if($(".aui-grid-table tr").hasClass("aui-grid-row-soft-removed-marker")){
-            $(".aui-grid-table tr.aui-grid-row-soft-removed-marker input").prop("disabled",true);
-        }else{
-            $(".aui-grid-table tr.aui-grid-row-soft-removed-marker input").prop("disabled",false);
-        }
+        AUIGrid.setProp(popup_grid_replacementTarget_list1, { "enableSorting" : false} );
     };
+
 
     /* 정기교체대상 > 교체대상 내역 > 신청 클릭시 */
     function upBtnClick() {
@@ -876,6 +872,7 @@
             }
         }
 
+        console.log(whatRowArr2)
         whatRowArr2.forEach(rowIndex => {
             AUIGrid.restoreSoftRows(popup_grid_replacementTarget_list1, rowIndex);
         });
@@ -887,10 +884,9 @@
         if(!rows1.length >=1){
             AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
         }
-
-        $(".grid-box tr input").prop("disabled",false);
-        $(".grid-box tr.aui-grid-row-soft-removed-marker input").prop("disabled",true);
+        AUIGrid.setCheckedRowsByValue(popup_grid_replacementTarget_list1, "id", []);
         removeRowsArr =[];
+        AUIGrid.setProp(popup_grid_replacementTarget_list1, { "enableSorting" : false} );
     }
 
     /* 정기교체 상세내역 > 운영->이동 버튼 */

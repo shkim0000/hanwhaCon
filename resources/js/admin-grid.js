@@ -3002,9 +3002,10 @@ function requestReplacementTargetCurrentData() {
 
 /* 정기교체대상 팝업  > 자산내역 */
 let popup_grid_replacementTarget_list1;
-
+let removedRowsId = [];
 function gridPopReplacementTargetList1() {
     /* 1. AUIGrid 칼럼 설정 */
+
     let columnLayout = [
         {
             dataField: "id",
@@ -3034,14 +3035,14 @@ function gridPopReplacementTargetList1() {
             headerText: "부서",
         }, {
             dataField: "category_installation_day",
-            headerText: "설치일",
+            headerText: "설치일c",
         }]
     /* 2. 그리드 속성 설정 */
 
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
+        enableSorting: true,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         softRemoveRowMode: true,
         /* 체크박스 */
@@ -3058,6 +3059,22 @@ function gridPopReplacementTargetList1() {
         /* 수정 */
         independentAllCheckBox : true,
         enableRestore: true,
+        /* 체크박스 기능 */
+        rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
+            let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
+            removedRowsId = removedRows.map(item => item.id);
+            if(removedRows.length === 0){
+                return true;
+            }else{
+                for(let i=0; i < removedRows.length; i++){
+                    if(item.id === removedRowsId[i]){
+                        return false;
+                    }
+                }
+                return true;
+            }
+
+        }
     }
 
     /* 그리드 생성 */
@@ -3087,7 +3104,7 @@ function gridPopReplacementTargetList1() {
 
     /* 개별선택 */
     AUIGrid.bind(popup_grid_replacementTarget_list1, "rowCheckClick", function (event) {
-        let rowCount = AUIGrid.getRowCount(popup_grid_replacementTarget_list1)
+        let rowCount = AUIGrid.getRowCount(popup_grid_replacementTarget_list1);
         let checkedItemsLength = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list1).length;
         let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true).length;
 
@@ -3147,7 +3164,7 @@ function gridPopReplacementTargetList2() {
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
+        // enableSorting: true,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 체크박스 */
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
@@ -3206,7 +3223,7 @@ function gridPopRegularChangeEnrollDetail(){
     /* 2. 그리드 속성 설정 */
     let gridPop_changeEnroll_history_pros = {
         selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
+        enableSorting: true,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 사이즈 지정 */
         headerHeight : 24, // 기본 헤더 높이 지정
