@@ -550,10 +550,16 @@
             {
                 dataField: "id",
                 headerText: "아이디",
-                visible : false
+                visible : false,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_title",
                 headerText: "제목",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_info", // 임의의 고유값
                 headerText: "상세정보",
@@ -561,48 +567,80 @@
                     type:"ButtonRenderer",
                     labelText:"상세정보",
                     onClick: function(event){
-                        alert("상세정보 팝업이 등장");
+                        lp_open('dueDiglienceCurrentAdd_pop', '자산실사계획 등록',1250,570);
                     }
+                },
+                filter: {
+                    showIcon: true,
                 }
             }, {
                 dataField: "category_progress",
                 headerText: "진행상태",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_start_date",
                 headerText: "시작일",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_finish_date",
                 headerText: "종료일",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_target_num",
                 headerText: "조사대상",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_existence_num",
                 headerText: "존재",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_unidentified_num",
                 headerText: "조사결과 미확인",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_non_existence_num",
                 headerText: "무존재",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_progress_percent",
                 headerText: "진행율(%)",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true, // 가로스크롤 없이 꽉 차게
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로스크롤 없이 꽉 차게
             pageRowCount: 30, // 페이지에 출력되는 row 개수
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -656,40 +694,6 @@
 
     /* 자산실사계획 등록 > 부서 > 선택 클릭시 */
     let cnt2 =0;
-    function selectDepartment(){
-
-        /* 체크된 행 찾기 */
-        let checkedRows = AUIGrid.getCheckedRowItemsAll(popup_grid_department_checkbox);
-
-        /* 조상 행 얻기 */
-        let ascendants;
-        let rowId = getSelectedRowId(); // 현재 선택된 행의 rowId 값 얻기
-        if (rowId != null) {
-            ascendants = AUIGrid.getAscendantsByRowId(popup_grid_department_checkbox, rowId); // 조상행들
-            console.log(ascendants)
-            if (ascendants && ascendants.length) {
-                for (var i = 0, len = ascendants.length; i < len; i++) {
-                    msg += "ID : " + ascendants[i]["id"] + ", Task Name : " + ascendants[i]["name"] + "\r\n";
-                }
-                alert(msg);
-            } else {
-                alert("Root에 해당되는 행으로 조상행(들)은 없습니다.");
-            }
-        } else{
-            console.log("응")
-        }
-
-
-        var item = new Object();
-
-/*        item.id = "grid_ID_1" + (++cnt2),
-            item.category_department = item.category_department
-
-        // parameter
-        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
-        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
-        AUIGrid.addRow(popup_grid_department_detail, item, "last");*/
-    }
 
     /*  부서 관련 그리드 열기 */
     function openDepartmentDetail(){
@@ -701,10 +705,11 @@
     // 현재 선택된 행의 rowId 값 반환
     function getSelectedRowId() {
         let selectedItems = AUIGrid.getCheckedRowItemsAll(popup_grid_department_checkbox);
-        console.log(selectedItems[0].rowIdValue)
-        if (selectedItems.length <= 0)
+        let selectedItemsArr = selectedItems.map(item => item.id);
+        if (selectedItemsArr.length <= 0)
             return null;
-        return selectedItems[0].rowIdValue;
+
+        return selectedItemsArr[0];
     };
 </script>
 </body>

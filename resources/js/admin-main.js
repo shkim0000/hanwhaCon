@@ -403,29 +403,7 @@ $(function(){
 
 /* [수정] 202301003 */
 /* 팝업창 열기 */
-let countDatepicker = 0;
-function countDate(){
-    countDatepicker++;
-    console.log(countDatepicker)
-    if(countDatepicker === 1){
-        $('.date input').datepicker('destroy');
-        setTimeout(function(){
-            $(".date input").datepicker({
-                changeMonth:true,
-                changeYear:true,
-            });
-
-        },20);
-    } else{
-        $(".date input").datepicker({
-            changeMonth:true,
-            changeYear:true,
-        });
-    }
-}
 function lp_open(id,title,width,height,e,type){
-    console.log(countDatepicker)
-    countDate();
     $("#"+id).dialog({
         title: title,
         width: width,
@@ -433,14 +411,9 @@ function lp_open(id,title,width,height,e,type){
         modal: true,
         resizable: false,
         dialogClass: 'no-close success-dialog',
-        close: function( event, ui ) {
-            countDatepicker = 0;
-
-            if(event.target.id === "gridPop_replacementTarget"){
-                $(".aui-grid-table tr input").prop("disabled",false);
-                AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
-                AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
-            }
+        open: function(event,ui) {
+            $('input:first').blur();
+            $('#ui-datepicker-div').hide();
         },
     });
     /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
@@ -510,23 +483,22 @@ function lp_open(id,title,width,height,e,type){
     }else if(id==="gridPop_replacementTarget"){
         gridPopReplacementTargetList1();
         gridPopReplacementTargetList2();
+    }else if(id==="gridPop_assetDuediligenceDetail"){
+        gridPopAssetChangeDetail();
+        gridPopAssetChangeHistory();
     }
 
 }
 
 
-
-
 /* 팝업창 닫기 */
 function lp_close(target){
-    countDatepicker = 0;
     if(target === "userGroup_pop"){
         /* 사용자 그룹정보 */
         AUIGrid.destroy('#popup_grid_groupBasicInformation');
         $("#" + target +"  .btn.trash").attr("data-btn","hide");
         $("#"+target).dialog("close");
     } else if(target === "gridPop_replacementTarget"){
-        $(".aui-grid-table tr input").prop("disabled",false);
         AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
         AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
         $("#"+target).dialog("close");

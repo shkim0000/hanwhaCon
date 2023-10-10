@@ -265,6 +265,10 @@ footer .btn{padding:7px 20px;border-radius:20px;background-color:#fff;color:#101
 .input-list.regular-x .date{width:calc(100% - 100px);max-width:none;}
 .input-list.medium{width:calc(33.33% - 8px);max-width:none;}
 .input-list.medium2{width:calc(50% - 8px);max-width:none;}
+/* 20231010 */
+.input-list.medium2.only{width:calc(66.66% - 8px);}
+.input-list.medium2.only > .input-title + *{width:calc(66.66% - 8px);}
+/* //20231010 */
 /* 20230912 */
 .input-list.medium3{width:calc(33.33% - 8px);max-width:none;}
 .input-list.medium3 .input-title{width:130px;}

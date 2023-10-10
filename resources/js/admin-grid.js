@@ -3010,32 +3010,59 @@ function gridPopReplacementTargetList1() {
         {
             dataField: "id",
             headerText: "아이디",
-            visible : false
+            visible : false,
+            filter: {
+                showIcon: true,
+            }
         },
         {
             dataField: "category_asset_status",
             headerText: "자산상태",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_item",
             headerText: "물품종류",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_model",
             headerText: "모델",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_start_date",
             headerText: "도입일",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_user",
             headerText: "사용자",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_department",
             headerText: "부서",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_installation_day",
-            headerText: "설치일c",
+            headerText: "설치일",
+            filter: {
+                showIcon: true,
+            }
         }]
     /* 2. 그리드 속성 설정 */
 
@@ -3059,6 +3086,8 @@ function gridPopReplacementTargetList1() {
         /* 수정 */
         independentAllCheckBox : true,
         enableRestore: true,
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
         /* 체크박스 기능 */
         rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
             let removedRows = AUIGrid.getRemovedItems(popup_grid_replacementTarget_list1, true);
@@ -3073,7 +3102,6 @@ function gridPopReplacementTargetList1() {
                 }
                 return true;
             }
-
         }
     }
 
@@ -3133,38 +3161,65 @@ function gridPopReplacementTargetList2() {
         {
             dataField: "id",
             headerText: "아이디",
-            visible : false
+            visible : false,
+            filter: {
+                showIcon: true,
+            }
         },
         {
             dataField: "category_asset_status",
             headerText: "자산상태",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_item",
             headerText: "물품종류",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_model",
             headerText: "모델",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_start_date",
             headerText: "도입일",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_user",
             headerText: "사용자",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_department",
             headerText: "부서",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_installation_day",
             headerText: "설치일",
+            filter: {
+                showIcon: true,
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
-        // enableSorting: true,
+        enableSorting: true,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 체크박스 */
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
@@ -3177,6 +3232,8 @@ function gridPopReplacementTargetList2() {
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount: 30, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
     }
 
 
@@ -3415,7 +3472,7 @@ function requestDueDiligenceHistoryData() {
     });
 }
 /* ---- 2023-09-18 ----------------------------------------------------------- */
-/* ---- 20231003----------------------------------------------------------- */
+/* ---- 20231010----------------------------------------------------------- */
 let  popup_grid_department_checkbox;
 function popupDepartmentCheckboxSearch(id,title,width,height,e) {
     /* 1. AUIGrid 칼럼 설정 */
@@ -3425,7 +3482,7 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
         width: 140,
         visible:false,
     }, {
-        dataField: "first-depth",
+        dataField: "category_dName",
         headerText: "",
         style: "left",
         width: 340
@@ -3448,7 +3505,7 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
         displayTreeOpen: true,
         treeColumnIndex: 1,
         showRowCheckColumn: true,
-        rowCheckDependingTree: true
+        rowCheckDependingTree: false
     }
 
 
@@ -3458,13 +3515,18 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
 
     // 체크박스 클린 이벤트 바인딩
     AUIGrid.bind(popup_grid_department_checkbox, "rowCheckClick", function (event) {
-        //	alert("rowIndex : " + event.rowIndex + ", id : " + event.item.id + ", name : " + event.item.name + ", checked : " + event.checked	+ ", isBranch : " + event.item._$isBranch + ", depth : " + event.item._$depth);
+        let depthMenu = event.item.children;
+
+        if( event.item._$isBranch === true && event.item._$depth ===1 && event.checked === true){
+            AUIGrid.setAllCheckedRows(popup_grid_department_checkbox, true);
+        } else if(event.item._$isBranch === true && event.item._$depth ===2 && event.checked === true){
+            let depthMenuArr = depthMenu.map(item => item.id);
+            for(let i=0; i<depthMenuArr.length; i++){
+                AUIGrid.addCheckedRowsByValue(popup_grid_department_checkbox, "id", depthMenuArr[i])
+            }
+        }
     });
 
-    // 전체 체크박스 클릭 이벤트 바인딩
-/*    AUIGrid.bind(popup_grid_department_checkbox, "rowAllChkClick", function (event) {
-        //	alert("전체 선택  checked : " + event.checked);
-    });*/
 }
 
 function requestGridPopDepartmentCheckbox() {
@@ -3472,6 +3534,28 @@ function requestGridPopDepartmentCheckbox() {
         AUIGrid.setGridData(popup_grid_department_checkbox, data);
     });
 }
+function selectDepartment(event){
+    /* 1. 체크 된 행 찾기 */
+    let checkedRows = AUIGrid.getCheckedRowItemsAll(popup_grid_department_checkbox);
+    let checkedDepartmentNameArr =[];
+    checkedDepartmentNameArr = checkedRows.map(item => item.category_dName);
+    let checkedUidNameArr = checkedRows.map(item => item.uid);
+    console.log(checkedDepartmentNameArr)
+    let item = new Object();
+
+    /* 행 추가(반복) */
+    for(let i=0; i<checkedRows.length;i++){
+            item.uid = checkedUidNameArr[i],
+            item.id = "T-Add" + (++cnt2),
+            item.category_department = checkedDepartmentNameArr[i];
+
+        AUIGrid.addRow(popup_grid_department_detail, item, "last");
+    }
+
+    /* 창 닫기 */
+    lp_close("gridPop_department_checkbox");
+}
+
 
 let popup_grid_department_detail;
 function popupDepartmentDetail() {
@@ -3543,3 +3627,156 @@ function requestGridPopDepartmentDetail() {
 }
 
 /* ---- //20231003 ----------------------------------------------------------- */
+/* ---- 20231010 ----------------------------------------------------------- */
+/* 자산실사  > 변경이력 */
+let popup_grid_assetChangeDetail;
+function gridPopAssetChangeDetail(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_change_item",
+            headerText: "변경항목",
+            filter: {
+                showIcon: true,
+            }
+
+        }, {
+            dataField: "category_before_change",
+            headerText: "변경 전",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_after_change",
+            headerText: "변경 후",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_change_time",
+            headerText: "변경시간",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_change_person",
+            headerText: "변경자",
+            filter: {
+                showIcon: true,
+            }
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_assetChangeDetail = AUIGrid.create("#popup_grid_assetChangeDetail", columnLayout, gridPros);
+    requestAssetChangeDetailData();
+}
+
+function requestAssetChangeDetailData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas25.json", function (data) {
+        AUIGrid.setGridData(popup_grid_assetChangeDetail, data);
+    });
+}
+
+/* 자산실사  > 실사이력 */
+let popup_grid_assetChangeHistory;
+function gridPopAssetChangeHistory(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_change_item",
+            headerText: "변경항목",
+            filter: {
+                showIcon: true,
+            }
+
+        }, {
+            dataField: "category_before_change",
+            headerText: "변경 전",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_after_change",
+            headerText: "변경 후",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_change_time",
+            headerText: "변경시간",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_change_person",
+            headerText: "변경자",
+            filter: {
+                showIcon: true,
+            }
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_assetChangeHistory = AUIGrid.create("#popup_grid_assetChangeHistory", columnLayout, gridPros);
+    requestAssetChangeHistoryData();
+}
+
+function requestAssetChangeHistoryData() {
+    $.get("../resources/lib/aui-grid/data/sample-datas25.json", function (data) {
+        AUIGrid.setGridData(popup_grid_assetChangeHistory, data);
+    });
+}
+/* ---- // 20231010 ----------------------------------------------------------- */

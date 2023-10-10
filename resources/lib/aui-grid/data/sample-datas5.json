@@ -82,8 +82,8 @@
     "category_add" : 3,
     "category_adjustment" :2 ,
     "category_realtime_confirm" : "2023-06-19",
-    "category_detail_place": "",
-    "category_note": "",
+    "category_detail_place": "2층 206호",
+    "category_note": "2022년 12월 쯤 자산 생김",
     "category_use_place": "행정동",
     "category_have_asset": "3"
   }

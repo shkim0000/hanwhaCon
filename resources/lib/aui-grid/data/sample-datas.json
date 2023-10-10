@@ -1,5 +1,6 @@
 [
   {
+    "id": "#grid_id_1",
     "category_product_name":"데스크탑",
     "category_asset_num":"2234580-1",
     "category_model_name":"DESK_SS_I7M31",
@@ -13,6 +14,7 @@
     "category_note":"비고"
   },
   {
+    "id": "#grid_id_2",
     "category_product_name":"모니터",
     "category_asset_num":"2234580-2",
     "category_model_name":"DESK_SS_I7M32",
@@ -26,6 +28,7 @@
     "category_note":"비고"
   },
   {
+    "id" :"#grid_id_3",
     "category_product_name":"프린터",
     "category_asset_num":"2234580-3",
     "category_model_name":"DESK_SS_I7M33",
@@ -39,6 +42,7 @@
     "category_note":"비고"
   },
   {
+    "id" :"#grid_id_4",
     "category_product_name":"데스크탑",
     "category_asset_num":"2234580-4",
     "category_model_name":"DESK_SS_I7M34",

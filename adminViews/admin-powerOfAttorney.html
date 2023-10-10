@@ -70,7 +70,7 @@
                 <h3>Row: <span></span></h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn">등록</button>
+                <button type="button" class="btn trash" onclick="deleteRowGrid();">선택삭제</button>
             </div>
         </div>
         <div id="userInfoGrid_ID" class="grid-box h-medium2"></div>
@@ -153,199 +153,6 @@
 </div>
 <!-- // 부서 조회 -->
 
-<!-- 사용자 정보 팝업 -->
-<div id="gridPop_userInfo" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <div class="custom-table">
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">회사</div></div>
-                    <div class="td"><div class="td-wrap">한화포탈</div></div>
-                    <div class="th"><div class="th-wrap center">부서</div></div>
-                    <div class="td"><div class="td-wrap">IT운영팀</div></div>
-                    <div class="th"><div class="th-wrap center">사번</div></div>
-                    <div class="td"><div class="td-wrap">4763728</div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">사용자명</div></div>
-                    <div class="td"><div class="td-wrap">홍길동</div></div>
-                    <div class="th"><div class="th-wrap center">권한그룹</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <label class="select">
-                                <select>
-                                    <option value="">선택1</option>
-                                    <option value="">선택2</option>
-                                    <option value="">선택3</option>
-                                </select>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="th"><div class="th-wrap center">직책</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">내션</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                    <div class="th"><div class="th-wrap center">이메일</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                    <div class="th"><div class="th-wrap center">기타</div></div>
-                    <div class="td"><div class="td-wrap"></div></div>
-                </div>
-            </div>
-            <div class="btn-wrap">
-                <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn" onclick="lp_close('gridPop_userInfo')">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- 사용자 그룹정보 -->
-<div id="userGroup_pop" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <div class="tab-box ver1">
-                <div class="tab-wrap">
-                    <ul>
-                        <li class="on"><button type="button" class="popBtn" id="groupBasicInformation">그룹 기본 정보</button></li>
-                        <li><button type="button" class="popBtn" id="userInformation" onclick="op_grid('userInformation')">그룹 사용자별 정보</button></li>
-                    </ul>
-                </div>
-                <div class="tabs on">
-                    <div class="tabs-inner-wrap">
-                        <div class="custom-table">
-                            <div class="row con-3">
-                                <div class="th">
-                                    <div class="th-wrap center"><p class="important">그룹코드</p></div>
-                                </div>
-                                <div class="td">
-                                    <div class="td-wrap">
-                                        <label class="input" data-isactive="readonly">
-                                            <input type="text" readonly>
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="th">
-                                    <div class="th-wrap center"><p class="important">그룹명</p></div>
-                                </div>
-                                <div class="td">
-                                    <div class="td-wrap">IT 운영팀</div>
-                                </div>
-                                <div class="th">
-                                    <div class="th-wrap center"><p class="important">사용여부</p></div>
-                                </div>
-                                <div class="td">
-                                    <div class="td-wrap center">
-                                        <label class="select">
-                                            <select>
-                                                <option></option>
-                                                <option>사용</option>
-                                                <option>미사용</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row con-3">
-                                <div class="th"><div class="th-wrap center">권한개요</div></div>
-                                <div class="td medium">
-                                    <div class="td-wrap">
-                                        <label class="input"><input type="text"></label>
-                                    </div>
-                                </div>
-                                <div class="th">
-                                    <div class="th-wrap center">업무구분</div>
-                                </div>
-                                <div class="td">
-                                    <div class="td-wrap center">
-                                        <label class="select">
-                                            <select>
-                                                <option>선택</option>
-                                                <option>사용자</option>
-                                                <option selected>관리자</option>
-                                            </select>
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="popup_grid_groupBasicInformation" class="grid-box h-small3"></div>
-                        <div class="btn-wrap">
-                            <button type="button" class="btn" onclick="lp_close('userGroup_pop')">닫기</button>
-                            <button type="button" class="btn save" onclick="save_Info('userGroup_pop');">저장</button>
-                            <button type="button" class="btn trash" data-btn="hide">삭제</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="tabs">
-                    <div class="tabs-inner-wrap">
-                        <div class="title-box">
-                            <div class="title">
-                                <h4>그룹변경 및 사용자 추가/삭제</h4>
-                            </div>
-                            <div class="btn-wrap">
-                                <button type="button" class="btn" onclick="changeGroup();">그룹변경</button>
-                                <button type="button" class="btn add-column" onclick="lp_open('gridPop_selectUser','사용자 선택',505,590);">사용자 추가</button>
-                                <button type="button" class="btn trash" onclick=" deleteSelectUserGrid();">사용자 삭제</button>
-                            </div>
-                        </div>
-                        <div id="popup_grid_userGroup" class="grid-box h-small3"></div>
-                        <div class="btn-wrap">
-                            <button type="button" class="btn" onclick="lp_close('userGroup_pop')">닫기</button>
-                            <button type="button" class="btn save">저장</button>
-                            <button type="button" class="btn trash">삭제</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 사용자 선택 검색 -->
-<div id="gridPop_selectUser" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list">
-                    <span class="input-title">사용자</span>
-                    <label class="input search">
-                        <input type="text">
-                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
-                    </label>
-                </div>
-            </div>
-            <div id="popup_grid_selectUser" class="grid-box"></div>
-            <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_close('gridPop_selectUser')">닫기</button>
-                <button type="button" class="btn" onclick="selectAddRow();">선택</button>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- 변경할 그룹 선택 -->
-<div id="gridPop_selectChangeGroup" class="popup">
-    <div class="pop-box">
-        <div class="pop-body">
-            <div class="input-wrap">
-                <div class="input-list only">
-                    <span class="input-title">사용자 그룹</span>
-                    <label class="select">
-                        <select>
-                            <option value="">시스템 관리자</option>
-                            <option value="">운영자</option>
-                            <option value="">시스템 관리자</option>
-                        </select>
-                    </label>
-                </div>
-            </div>
-            <div class="btn-wrap only">
-                <button type="button" class="btn" onclick="lp_close('gridPop_selectChangeGroup')">닫기</button>
-                <button type="button" class="btn save">저장</button>
-            </div>
-        </div>
-    </div>
-</div>
 <!-- // 팝업 -->
 
 <script>
@@ -442,15 +249,24 @@ function createAssetDetailGrid() {
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
+        rowIdField: "id",
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        softRemoveRowMode: false,
+        /* 체크박스 */
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
@@ -459,19 +275,6 @@ function createAssetDetailGrid() {
 
     /* grid-title에 row Count 가 추가되는 함수 */
     getRowCount(userInfoGrid_ID);
-
-    /* 더블 클릭시 팝업 */
-    AUIGrid.bind(userInfoGrid_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_detail").addClass("open").dialog({
-            title: "자산정보",
-            width: 1250,
-            height: 500,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
-        gridPopChangeHistory();
-    });
 }
 
 /* 4. 데이터 불러오기 */
@@ -539,6 +342,11 @@ function op_grid(id){
             gridPopUserGroup();
         },20);
     }
+}
+
+/* 행 삭제 */
+function deleteRowGrid(){
+    AUIGrid.removeCheckedRows(userInfoGrid_ID); // 체크된 행 삭제 처리
 }
 
 

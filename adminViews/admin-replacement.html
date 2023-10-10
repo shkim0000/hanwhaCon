@@ -629,9 +629,6 @@
                     modal: true,
                     resizable: false,
                     dialogClass: 'no-close success-dialog',
-                    close: function( event, ui ) {
-                        countDatepicker = 0;
-                    },
                 });
                 gridPopReplacementTarget();
             }else if(event.item.category_status ==="완료"){
@@ -643,9 +640,6 @@
                     modal: true,
                     resizable: false,
                     dialogClass: 'no-close success-dialog',
-                    close: function( event, ui ) {
-                        countDatepicker = 0;
-                    },
                 });
                 gridPopReplacementTargetCurrent();
             }
@@ -834,7 +828,7 @@
         whatRow = AUIGrid.getCheckedRowItems(popup_grid_replacementTarget_list1);
 
         for(let i=0; i < rows.length; i++){
-            whatRowArr.push({rowIndex :whatRow[i].rowIndex, uid : whatRow[i].item.uid});
+            whatRowArr.push({uid : whatRow[i].item.uid});
         }
 
         /* 얻은 행을 하단 그리드에 추가하기 */
@@ -848,7 +842,6 @@
 
         /* 체크 풀기 */
         AUIGrid.setCheckedRowsByValue(popup_grid_replacementTarget_list1, "id", []);
-        AUIGrid.setProp(popup_grid_replacementTarget_list1, { "enableSorting" : false} );
     };
 
 
@@ -859,6 +852,7 @@
         const rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
         const rowsArr2 = new Set(rows.map(row => row.uid)); // Set을 사용하여 중복 제거
         const whatRowArr2 = new Set();
+        let deleteRowIndexArr = [];
 
         if (rows.length <= 0) {
             alert('하단 그리드에서 체크된 행이 없습니다.');
@@ -868,25 +862,25 @@
         for (let i = 0; i < removedRows.length; i++) {
             const uid = removedRows[i].uid;
             if (rowsArr2.has(uid)) {
-                whatRowArr2.add(whatRowArr.find(row => row.uid === uid).rowIndex);
+                whatRowArr2.add(whatRowArr.find(row => row.uid === uid).uid);
+                deleteRowIndexArr = Array.from(whatRowArr2);
             }
         }
 
-        console.log(whatRowArr2)
-        whatRowArr2.forEach(rowIndex => {
-            AUIGrid.restoreSoftRows(popup_grid_replacementTarget_list1, rowIndex);
-        });
+        for(let i=0; i< rows.length; i++){
+            let deleteRowsId = AUIGrid.getRowIndexesByValue(popup_grid_replacementTarget_list1, "uid", deleteRowIndexArr[i] );
+            AUIGrid.restoreSoftRows(popup_grid_replacementTarget_list1, deleteRowsId)
+        }
 
         AUIGrid.removeCheckedRows(popup_grid_replacementTarget_list2);
 
-        whatRowArr = whatRowArr.filter(row => !whatRowArr2.has(row.rowIndex));
+        whatRowArr = whatRowArr.filter(row => !whatRowArr2.has(row.uid));
 
         if(!rows1.length >=1){
             AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
         }
         AUIGrid.setCheckedRowsByValue(popup_grid_replacementTarget_list1, "id", []);
         removeRowsArr =[];
-        AUIGrid.setProp(popup_grid_replacementTarget_list1, { "enableSorting" : false} );
     }
 
     /* 정기교체 상세내역 > 운영->이동 버튼 */
@@ -902,9 +896,7 @@
     function regularReplacementProgress(){
         let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
         AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
-        if($(".aui-grid-table tr input").is(":checked")){
-            $(".aui-grid-table tr input").prop("disabled",false);
-        }
+
         if(rows.length >= 1){
             AUIGrid.clearGridData(popup_grid_replacementTarget);
             setTimeout(function(){

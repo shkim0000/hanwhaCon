@@ -2,90 +2,73 @@
   {
     "uid" : "T0",
     "id": "T0",
-    "first-depth": "대표이사",
+    "category_dName": "대표이사",
     "children": [
       {
       "uid" : "T1",
       "id": "T1",
-      "first-depth": "총무부",
+      "category_dName": "총무부",
       "children": [
         {
         "uid" : "T2",
         "id": "T2",
-        "first-depth": "총무1팀"
+        "category_dName": "총무1팀"
         },
         {
           "uid" : "T3",
           "id": "T3",
-          "first-depth": "총무2팀"
+          "category_dName": "총무2팀"
         }
       ]
       },
       {
         "uid" : "T4",
         "id": "T4",
-        "first-depth": "인사부",
+        "category_dName": "인사부",
         "children": [
           {
             "uid" : "T5",
             "id": "T5",
-            "first-depth": "인사부1팀"
+            "category_dName": "인사부1팀"
           },
           {
             "uid" : "T6",
             "id": "T6",
-            "first-depth": "인사부2팀"
+            "category_dName": "인사부2팀"
           }
         ]
       },
       {
         "uid" : "T7",
         "id": "T7",
-        "first-depth": "1공장",
+        "category_dName": "1공장",
         "children": [
           {
             "uid" : "T8",
             "id": "T8",
-            "first-depth": "라인1"
+            "category_dName": "라인1"
           },
           {
             "uid" : "T9",
             "id": "T9",
-            "first-depth": "라인2"
+            "category_dName": "라인2"
           }
         ]
       },
       {
         "uid" : "T10",
         "id": "T10",
-        "first-depth": "2공장",
+        "category_dName": "2공장",
         "children": [
           {
             "uid" : "T11",
             "id": "T11",
-            "first-depth": "라인1"
+            "category_dName": "라인1"
           },
           {
             "uid" : "T12",
             "id": "T12",
-            "first-depth": "라인2"
-          }
-        ]
-      },
-      {
-        "uid" : "T7",
-        "id": "T7",
-        "first-depth": "영상부",
-        "children": [
-          {
-            "uid" : "T8",
-            "id": "T8",
-            "first-depth": "라인1"
-          },
-          {
-            "uid" : "T9",
-            "id": "T9",
-            "first-depth": "라인2"
+            "category_dName": "라인2"
           }
         ]
       }
