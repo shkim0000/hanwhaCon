@@ -73,7 +73,7 @@
                 <button type="button" class="btn trash" onclick="deleteRowGrid();">선택삭제</button>
             </div>
         </div>
-        <div id="userInfoGrid_ID" class="grid-box h-medium2"></div>
+        <div id="userProxyGrid_ID" class="grid-box h-medium2"></div>
 
         <div class="custom-table">
             <div class="row con-3">
@@ -158,90 +158,59 @@
 <script>
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
-let userInfoGrid_ID; // 세부 관리 자산 내역
+let userProxyGrid_ID; // 세부 관리 자산 내역
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
-createAssetDetailGrid();
-requestAssetDetailGridData();
+createUserProxyGrid();
+requestUserProxyGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
-function createAssetDetailGrid() {
+function createUserProxyGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
-            dataField: "category_product_name",
-            headerText: "물품명",
+            dataField: "id",
+            visible:false,
+        },
+        {
+            dataField: "category_num",
+            headerText: "사번",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
+            dataField: "category_user_name",
+            headerText: "사용자명",
             width: 180,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_model_name",
-            headerText: "모델명",
+            dataField: "category_agency_department_name",
+            headerText: "대행부서명",
             width: 280,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_user",
+            dataField: "category_department_code",
             headerText: "사용자",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_usage1",
-            headerText: "용도1",
+            dataField: "category_registrant",
+            headerText: "등록자",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_usage2",
-            headerText: "용도2",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_application_type",
-            headerText: "신청구분",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_application_content",
-            headerText: "신청내용",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_place",
-            headerText: "사용장소",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_asset_status",
-            headerText: "자산상태",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_note",
-            headerText: "비고",
+            dataField: "category_registration date",
+            headerText: "등록일",
             width: 160,
             filter: {
                 showIcon: true,
@@ -259,6 +228,7 @@ function createAssetDetailGrid() {
         enableRowCheckShiftKey: true,
         /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
@@ -271,23 +241,23 @@ function createAssetDetailGrid() {
     }
 
     /* 그리드 생성 */
-    userInfoGrid_ID = AUIGrid.create("#userInfoGrid_ID", columnLayout, gridPros);
+    userProxyGrid_ID = AUIGrid.create("#userProxyGrid_ID", columnLayout, gridPros);
 
     /* grid-title에 row Count 가 추가되는 함수 */
-    getRowCount(userInfoGrid_ID);
+    getRowCount(userProxyGrid_ID);
 }
 
 /* 4. 데이터 불러오기 */
-function requestAssetDetailGridData() {
-    $.get("../resources/lib/aui-grid/data/sample-datas.json", function (data) {
-        AUIGrid.setGridData(userInfoGrid_ID, data);
+function requestUserProxyGridData() {
+    $.get("../resources/lib/aui-grid/data/admin-po.json", function (data) {
+        AUIGrid.setGridData(userProxyGrid_ID, data);
     });
 }
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-    if (typeof userInfoGrid_ID !== "undefined") {
-        AUIGrid.resize(userInfoGrid_ID);
+    if (typeof userProxyGrid_ID !== "undefined") {
+        AUIGrid.resize(userProxyGrid_ID);
     }
 }
 
@@ -297,7 +267,7 @@ function exportTo(type) {
     // 내보내기 실행
     switch (type) {
         case "xlsx":
-            AUIGrid.exportToXlsx(userInfoGrid_ID, {
+            AUIGrid.exportToXlsx(userProxyGrid_ID, {
                 progressBar: true, // 진행바 표시
                 localControl:true,
                 // 스타일 상태 유지 여부(기본값:true)
@@ -314,13 +284,13 @@ $(document).on("click",".menu-btn",function(){
     if($(".contents").hasClass("active")){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
-            AUIGrid.resize(userInfoGrid_ID, innerWidth);
+            AUIGrid.resize(userProxyGrid_ID, innerWidth);
         },20)
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
-            AUIGrid.resize(userInfoGrid_ID, innerWidth);
+            AUIGrid.resize(userProxyGrid_ID, innerWidth);
         },20)
     }
 });
@@ -346,7 +316,7 @@ function op_grid(id){
 
 /* 행 삭제 */
 function deleteRowGrid(){
-    AUIGrid.removeCheckedRows(userInfoGrid_ID); // 체크된 행 삭제 처리
+    AUIGrid.removeCheckedRows(userProxyGrid_ID); // 체크된 행 삭제 처리
 }
 
 

@@ -1,0 +1,47 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_num":"4567894",
+    "category_user_name":"홍길동",
+    "category_agency_department_name":"총무1팀",
+    "category_department_code":"084423",
+    "category_registrant":"임꺽정",
+    "category_registration date":"2023-06-15 15:46:28"
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_num":"4567894",
+    "category_user_name":"홍길동",
+    "category_agency_department_name":"총무1팀",
+    "category_department_code":"084423",
+    "category_registrant":"임꺽정",
+    "category_registration date":"2023-06-15 15:46:28"
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_num":"4567894",
+    "category_user_name":"홍길동",
+    "category_agency_department_name":"총무1팀",
+    "category_department_code":"084423",
+    "category_registrant":"임꺽정",
+    "category_registration date":"2023-06-15 15:46:28"
+  },
+  {
+    "id" : "#grid_id_4",
+    "category_num":"4567894",
+    "category_user_name":"홍길동",
+    "category_agency_department_name":"총무1팀",
+    "category_department_code":"084423",
+    "category_registrant":"임꺽정",
+    "category_registration date":"2023-06-15 15:46:28"
+  },
+  {
+    "id" : "#grid_id_5",
+    "category_num":"4567894",
+    "category_user_name":"홍길동",
+    "category_agency_department_name":"총무1팀",
+    "category_department_code":"084423",
+    "category_registrant":"임꺽정",
+    "category_registration date":"2023-06-15 15:46:28"
+  }
+]

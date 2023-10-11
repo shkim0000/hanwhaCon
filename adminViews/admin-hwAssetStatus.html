@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>HW자산현황</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
+</head>
+<body>
+
+<!-- contents -->
+<div id="wrapper">
+
+    <div class="contents active">
+        <div class="page-indicator">
+            <ul>
+                <li><i class="fa-solid fa-house"></i></li>
+                <li>기업자산</li>
+                <li>HW자산현황</li>
+            </ul>
+        </div>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list x-small">
+                    <span class="input-title">자산번호</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small">
+                    <span class="input-title">SAP ID</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small">
+                    <span class="input-title">SW 종류</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small">
+                    <span class="input-title">VENDOR</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small">
+                    <span class="input-title">SW 제품명</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small2">
+                    <span class="input-title">라이선스 제품명</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small2">
+                    <span class="input-title">시스템 운영팀</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small2">
+                    <span class="input-title">시스템 운영자</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small2">
+                    <span class="input-title">시스템 운영팀</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+                <div class="input-list x-small2">
+                    <span class="input-title">시스템 운영자</span>
+                    <label class="input">
+                        <input type="text">
+                    </label>
+                </div>
+            </div>
+            <button type="button" class="btn search">검색</button>
+        </div>
+
+        <div class="title-box">
+            <div class="title"><h3>HW자산현황</h3></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn excel">엑셀 IMPORT</button>
+                <button type="button" class="btn excel">엑셀다운로드</button>
+                <button type="button" class="btn add-column">신규추가</button>
+                <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'SW 상세정보',850,760)">상세보기</button>
+                <button type="button" class="btn trash" onclick="deleteRowGrid();" >선택삭제</button>
+            </div>
+        </div>
+        <div id="hwAssetCurrent_ID" class="grid-box h-small5"></div>
+
+        <div class="title-box">
+            <div class="title flex">
+                <h3>SW자산 라이선스 현황</h3>
+            </div>
+        </div>
+        <div id="swAssetLicense_ID" class="grid-box h-small5"></div>
+
+        <div class="btn-wrap" style="margin-top:10px;">
+            <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'HW 상세정보',850,760)">HW 상세정보</button>
+        </div>
+    </div>
+</div>
+
+<!-- // contents -->
+
+<!-- 팝업 -->
+<!-- hw 상세정보 -->
+<div id="gridPop_hw_detail" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="title-box">
+                <div class="title">
+                    <h3>기업용 HW 정보</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center">자산번호</div></div>
+                    <div class="td"><div class="td-wrap"><p>2000355</p></div></div>
+                    <div class="th"><div class="th-wrap center">SAD ID</div></div>
+                    <div class="td"><div class="td-wrap"><p>000000652241</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>장비명</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>FF5710_1</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>장비용도</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>SAP 내부 통신 스위치 #1</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>IP</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>96.96.52.125</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>자산종류</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>NW스위치</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>자산형태</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>Pysical</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>장비위치(대)</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>죽전</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>장비위치(소)</p></div></div>
+                    <div class="td medium"><div class="td-wrap"><p>한화시스템/ICT 죽전 IDC 센터</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>VENDER</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>HP</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>하드웨어 모델</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>HPE FlexFabric 5710</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>하드웨어 시리얼</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>CN23KFS01S</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>도입일자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>2020-12-31</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>유효 전환일자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>폐기일자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p></p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>장비상태</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>운영</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>도입업체</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>동국시스템즈</p></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>유지보수 업체명</p></div></div>
+                    <div class="td whole"><div class="td-wrap"><p>동국시스템즈</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>시스템 운영팀</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>ITO</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>시스템 운영자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>신정우</p></div></div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>현업 운영팀</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>IT 전략팀</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>현업 담당자</p></div></div>
+                    <div class="td"><div class="td-wrap"><p>이상훈</p></div></div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>SW 라이선스 관리</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn add-column">등록</button>
+                </div>
+            </div>
+            <div id="popup_grid_license_manage_addf" class="grid-box h-small"></div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">수정</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_hw_detail')">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- //팝업 -->
+<script>
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    let hwAssetCurrent_ID;
+    let swAssetLicense_ID;
+
+
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+    createHWAssetCurrentGrid();
+    createSWAssetLicenseGrid();
+
+    requestHWAssetCurrentData();
+    requestSWAssetLicenseData();
+
+    /* 3. AUIGrid 그리드 옵션 */
+    function createHWAssetCurrentGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            }, {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                filter: {
+                    showIcon: true,
+                },
+            }, {
+                dataField: "category_sap_id",
+                headerText: "SAP ID",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_sw_item",
+                headerText: "SW종류",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_vendor",
+                headerText: "VENDOR",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_sw_item_name",
+                headerText: "SW제품명",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_sw_license_name",
+                headerText: "SW 라이선스 제품명",
+                filter: {
+                    showIcon: true,
+                },
+                width:250
+            }, {
+                dataField: "category_quantity",
+                headerText: "수량",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_quantity_usage",
+                headerText: "사용수량",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_quantity_left",
+                headerText: "남은수량",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_system_management_team",
+                headerText: "시스템운영팀",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_system_manager",
+                headerText: "시스템운영자",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_filed_operation_team",
+                headerText: "현업 운영팀",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_field_operator",
+                headerText: "현업담당자",
+                filter: {
+                    showIcon: true,
+                }
+            },]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            simplifySelectionEvent: true,
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            softRemoveRowMode:false,
+            editable: true,
+            /* 사이즈 지정 */
+            headerHeight : 30, // 기본 헤더 높이 지정
+            autoGridHeight:false,
+            fillColumnSizeMode: true,
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            enableFilter: true, // 필터 true 설정
+        }
+
+        /* 그리드 생성 */
+        hwAssetCurrent_ID = AUIGrid.create("#hwAssetCurrent_ID", columnLayout, gridPros);
+
+        /* 더블 클릭시 팝업 */
+        AUIGrid.bind(hwAssetCurrent_ID, "cellDoubleClick", function() {
+            lp_open('gridPop_hw_detail', 'HW 상세정보',850,760);
+        });
+    }
+    function createSWAssetLicenseGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            }, {
+                dataField: "category_hw_asset_num",
+                headerText: "HW 자산번호",
+                filter: {
+                    showIcon: true,
+                },
+            }, {
+                dataField: "category_hw_item_name",
+                headerText: "HW 장비명",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_hw_ip",
+                headerText: "HW IP",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_sw_quantity_usage",
+                headerText: "SW 사용 수량",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_manager",
+                headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_license_date",
+                headerText: "라이선스 할당일",
+                filter: {
+                    showIcon: true,
+                },
+            }]
+        /* 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            simplifySelectionEvent: true,
+            enableSorting: true, // 소팅
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            editable: true,
+            /* 사이즈 지정 */
+            headerHeight : 30, // 기본 헤더 높이 지정
+            autoGridHeight:false,
+            fillColumnSizeMode: true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            enableFilter: true, // 필터 true 설정
+        }
+
+        /* 그리드 생성 */
+        swAssetLicense_ID = AUIGrid.create("#swAssetLicense_ID", columnLayout, gridPros);
+    }
+    /* 4. 데이터 불러오기 */
+    function requestHWAssetCurrentData() {
+        $.get("../resources/lib/aui-grid/data/admin-sw.json", function (data) {
+            AUIGrid.setGridData(hwAssetCurrent_ID, data);
+        });
+    }
+
+    function requestSWAssetLicenseData() {
+        $.get("../resources/lib/aui-grid/data/admin-sw-license.json", function (data) {
+            AUIGrid.setGridData(swAssetLicense_ID, data);
+        });
+    }
+
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof hwAssetCurrent_ID !== "undefined") {
+            AUIGrid.resize(hwAssetCurrent_ID);
+        }
+        if(typeof swAssetLicense_ID !== "undefined"){
+            AUIGrid.resize(swAssetLicense_ID);
+        }
+    }
+
+    /* 6. 함수 관련 */
+    /* 메뉴버튼 클릭시(반응형) */
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(hwAssetCurrent_ID, innerWidth);
+                AUIGrid.resize(swAssetLicense_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(hwAssetCurrent_ID, innerWidth);
+                AUIGrid.resize(swAssetLicense_ID, innerWidth);
+            },20)
+        }
+    });
+
+    /* 행 삭제 */
+    function deleteRowGrid(){
+        let deleteList = AUIGrid.getCheckedRowItems(hwAssetCurrent_ID);
+
+        if(deleteList.length > 0){
+            AUIGrid.removeCheckedRows(hwAssetCurrent_ID); // 체크된 행 삭제 처리
+        } else {
+            alert("체크된 항목이 없습니다");
+        }
+        AUIGrid.removeCheckedRows(hwAssetCurrent_ID); // 체크된 행 삭제 처리
+    }
+
+</script>
+</body>
+</html>

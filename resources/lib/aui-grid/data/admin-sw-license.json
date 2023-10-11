@@ -1,0 +1,29 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_hw_asset_num":"2004522",
+    "category_hw_item_name":"sapesxi01",
+    "category_hw_ip":"96.96.96.93",
+    "category_sw_quantity_usage":1,
+    "category_manager":"임꺽정",
+    "category_license_date":"2020-06-20"
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_hw_asset_num":"2004522",
+    "category_hw_item_name":"sapesxi01",
+    "category_hw_ip":"96.96.96.93",
+    "category_sw_quantity_usage":1,
+    "category_manager":"임꺽정",
+    "category_license_date":"2020-06-20"
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_hw_asset_num":"2004522",
+    "category_hw_item_name":"sapesxi01",
+    "category_hw_ip":"96.96.96.93",
+    "category_sw_quantity_usage":1,
+    "category_manager":"임꺽정",
+    "category_license_date":"2020-06-20"
+  }
+]

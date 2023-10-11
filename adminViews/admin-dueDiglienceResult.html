@@ -67,14 +67,14 @@
                 </div>
                 <div class="input-list">
                     <span class="input-title">부서</span>
-                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서검색',505,530);">
+                    <label class="input search" data-place="department_checkSearch" onclick="lp_open('gridPop_department_checkbox','부서 검색',505,560,this)">
                         <input type="text" data-label="department">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">사용자</span>
-                    <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
+                    <label class="input search" data-place="user_only" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);">
                         <input type="text" data-label="user" readonly>
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
@@ -143,20 +143,23 @@
 </div>
 <!--//사용자 검색-->
 
-<!--부서 검색-->
-<div id="gridPop_department" class="popup">
+<!-- 부서검색 checkbox-ver -->
+<div id="gridPop_department_checkbox" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="input-wrap">
                 <div class="input-list">
                     <span class="input-title">부서</span>
                     <label class="input search">
-                        <input type="text">
+                        <input id="search_checkbox_department" type="text">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
-            <div id="popup_grid_department" class="grid-box"></div>
+            <div id="popup_grid_department_checkbox" class="grid-box"></div>
+            <div class="btn-wrap">
+                <button type="button" class="btn" data-place="department_search" onclick="selectDepartment(this);">선택</button>
+            </div>
         </div>
     </div>
 </div>
@@ -298,11 +301,11 @@
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createUserStatusGrid(); // 사용자별 현황
     createAssetStatusGrid(); // 자산별 현황
-    createDueDiglienceGrid();
+    // createDueDiglienceGrid();
 
     requestUserStatusGridData();
     requestAssetStatusGridData();
-    requestDueDiglienceGridData();
+    // requestDueDiglienceGridData();
 
     /* 3. AUIGrid 그리드 옵션 */
     /* [현황] : 사용자별 현황 */
@@ -461,45 +464,6 @@
             if(count === 0){
                 count++;
                 createDueDiglienceGrid();
-                setTimeout(function(){
-                    let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
-                    console.log(name)
-                    let primeCell = event.primeCell;
-                    let headerText = primeCell.headerText;
-                    let dataField = primeCell.dataField;
-                    let cellText = primeCell.item.category_user_name;
-                    console.log(headerText)
-
-                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
-
-                    name.forEach((i) => {
-                        if(i.category_product_name === headerText && dataField !== "category_row_sum"){
-                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
-                        }else{
-                            AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                        }
-                    });
-                },20);
-
-            }else{
-                let name = AUIGrid.getOrgGridData(dueDiglienceGrid_ID);
-                let primeCell = event.primeCell;
-                let headerText = primeCell.headerText;
-                let dataField = primeCell.dataField;
-                let cellText = primeCell.item.category_user_name;
-                console.log(headerText)
-
-                AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
-
-                name.forEach((i) => {
-                    if(i.category_product_name === headerText && dataField !== "category_row_sum"){
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_product_name",headerText);
-                    }else{
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID, "category_user_name", cellText);
-                    }
-                });
             }
 
         });
@@ -721,11 +685,9 @@
                     if(footerIndex === 0){
                         return false;
                     }else if(footerIndex >= 1 && footerIndex < columnLength - 1){
-                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
-                        AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+
                     }else if(footerIndex === columnLength - 1){
 
-                        AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
                     }
                 },20);
 
@@ -733,10 +695,9 @@
                 if(footerIndex === 0){
                     return false;
                 }else if( footerIndex >= 1 && footerIndex < columnLength - 1){
-                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
-                    AUIGrid.setFilterByValues(dueDiglienceGrid_ID,"category_user_name",columnArr[footerIndex]);
+
                 }else if(footerIndex === columnLength - 1){
-                    AUIGrid.clearFilterAll(dueDiglienceGrid_ID);
+
                 }
             }
         });
@@ -881,6 +842,7 @@
 
         /* 그리드 생성 */
         dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
+        requestDueDiglienceGridData();
     }
 
     /* 4. 데이터 불러오기 */
@@ -976,4 +938,7 @@
             },20)
         }
     });
+
+
+
 </script>

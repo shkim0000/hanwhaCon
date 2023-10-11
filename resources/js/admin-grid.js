@@ -73,6 +73,11 @@ function gridPopUser(id,title,width,height,e,type){
                 $("input[data-label='applicant']").val(applicantName);
 
                 $("#gridPop_user").dialog("close");
+            }else if(targetPlace === "user_only"){
+                userName = event.item.category_user_name;
+                $("input[data-label='user']").val(userName);
+
+                $("#gridPop_user").dialog("close");
             } else{
                 userName = event.item.category_user_name;
                 userDepartment = event.item.category_department;
@@ -3485,7 +3490,8 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
         dataField: "category_dName",
         headerText: "",
         style: "left",
-        width: 340
+        width: 340,
+
     }];
     /* 2. 그리드 속성 설정 */
     let gridPros = {
@@ -3505,7 +3511,9 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
         displayTreeOpen: true,
         treeColumnIndex: 1,
         showRowCheckColumn: true,
-        rowCheckDependingTree: false
+        rowCheckDependingTree: false,
+        /* 검색 */
+        searchByFormatValue :false
     }
 
 
@@ -3527,6 +3535,51 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
         }
     });
 
+    // 검색(search) Not Found 이벤트 바인딩
+    AUIGrid.bind(popup_grid_department_checkbox, "notFound", function (event) {
+        var term = event.term; // 찾는 문자열
+        var wrapFound = event.wrapFound; // wrapSearch 한 경우 만족하는 term 이 그리드에 1개 있는 경우.
+
+        if (wrapFound) {
+            alert('그리드 마지막 행을 지나 다시 찾았지만 다음 문자열을 찾을 수 없습니다 - ' + term);
+        } else {
+            alert('다음 문자열을 찾을 수 없습니다 - "' + term + '"');
+        }
+    });
+
+    // keyDown 이벤트 바인딩
+    let keyCount =0;
+    AUIGrid.bind(popup_grid_department_checkbox, "keyDown",	function(event) {
+        if(event.keyCode === 32) { // 스페이스바
+            let selectedItems = AUIGrid.getSelectedItems(popup_grid_department_checkbox);
+            let items = selectedItems.map(selects => selects.item);
+            let itemsId = items.map(item => item.id); // 아이디값
+            let itemsDepth = items.map(item => item._$depth); // 뎁스
+
+            let rowIdField = AUIGrid.getProp(popup_grid_department_checkbox, "rowIdField"); // rowIdField 얻기
+            console.log(rowIdField);
+            console.log(itemsId[0])
+            let isChecked = AUIGrid.isCheckedRowById(popup_grid_department_checkbox, rowIdField);
+
+
+            if(isChecked === false){
+                AUIGrid.addCheckedRowsByValue(popup_grid_department_checkbox, "id", itemsId[0]);
+            } else{
+                console.log(isChecked);
+                AUIGrid.addUncheckedRowsByIds(popup_grid_department_checkbox, "id", itemsId[0]);
+            }
+            // if(itemsDepth[0] === 1){
+            //     AUIGrid.setAllCheckedRows(popup_grid_department_checkbox, true);
+            // } else if(items._$depth===2){
+            //
+            // } else{
+            //
+            // }
+            return false; // 엔터 키의 기본 행위 안함.
+        }
+        return true; // 기본 행위 유지
+    });
+
 }
 
 function requestGridPopDepartmentCheckbox() {
@@ -3534,27 +3587,70 @@ function requestGridPopDepartmentCheckbox() {
         AUIGrid.setGridData(popup_grid_department_checkbox, data);
     });
 }
-function selectDepartment(event){
+function selectDepartment(e){
     /* 1. 체크 된 행 찾기 */
     let checkedRows = AUIGrid.getCheckedRowItemsAll(popup_grid_department_checkbox);
-    let checkedDepartmentNameArr =[];
-    checkedDepartmentNameArr = checkedRows.map(item => item.category_dName);
+    let checkedDepartmentNameArr = checkedRows.map(item => item.category_dName);
     let checkedUidNameArr = checkedRows.map(item => item.uid);
-    console.log(checkedDepartmentNameArr)
     let item = new Object();
 
     /* 행 추가(반복) */
     for(let i=0; i<checkedRows.length;i++){
             item.uid = checkedUidNameArr[i],
-            item.id = "T-Add" + (++cnt2),
+            item.id = "T-Add" + (++cnt2), /* 임의로 넣어준 값\ */
             item.category_department = checkedDepartmentNameArr[i];
-
         AUIGrid.addRow(popup_grid_department_detail, item, "last");
+    }
+
+    /* 그리드 기능 */
+    let targetPlace = $(e).attr("data-place");
+    console.log(targetPlace)
+    let userDepartment;
+
+    if(targetPlace === 'department_search'){
+        console.log("yes")
+        userDepartment = e.item.category_dName;
+        $("input[data-label='department']").val(userDepartment);
+    }else if(targetPlace==='department_add'){
+
     }
 
     /* 창 닫기 */
     lp_close("gridPop_department_checkbox");
 }
+
+/* 검색(enter) */
+$(document).ready(function(){
+    let input_department = $("#search_checkbox_department");
+
+    input_department.keyup(function(e){
+        if(e.keyCode === 13){
+            var term = input_department.val();
+            console.log(term)
+            if (term.trim() == "") {
+                alert("검색 하고자 하는 단어를 입력하십시오.");
+                return;
+            }
+
+            /*
+            var options = {
+                direction : true, // 검색 방향  (true : 다음, false : 이전 검색)
+                caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
+                wholeWord : true, // 온전한 단어 여부
+                wrapSearch : true, // 끝에서 되돌리기 여부
+            };*/
+
+            let options = {
+                direction : true, // 검색 방향  (true : 다음, false : 이전 검색)
+                caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
+                wholeWord : false, // 온전한 단어 여부
+                wrapSearch : true, // 끝에서 되돌리기 여부
+            };
+
+            AUIGrid.search(popup_grid_department_checkbox,"category_dName", term, options);
+        }
+    });
+});
 
 
 let popup_grid_department_detail;
@@ -3608,16 +3704,6 @@ function popupDepartmentDetail() {
     // 실제로 #grid_wrap 에 그리드 생성
     popup_grid_department_detail = AUIGrid.create("#popup_grid_department_detail", columnLayout, gridPros);
     requestGridPopDepartmentDetail();
-
-    // 체크박스 클린 이벤트 바인딩
-    AUIGrid.bind(popup_grid_department_checkbox, "rowCheckClick", function (event) {
-        //	alert("rowIndex : " + event.rowIndex + ", id : " + event.item.id + ", name : " + event.item.name + ", checked : " + event.checked	+ ", isBranch : " + event.item._$isBranch + ", depth : " + event.item._$depth);
-    });
-
-    // 전체 체크박스 클릭 이벤트 바인딩
-    /*    AUIGrid.bind(popup_grid_department_checkbox, "rowAllChkClick", function (event) {
-            //	alert("전체 선택  checked : " + event.checked);
-        });*/
 }
 
 function requestGridPopDepartmentDetail() {
@@ -3780,3 +3866,203 @@ function requestAssetChangeHistoryData() {
     });
 }
 /* ---- // 20231010 ----------------------------------------------------------- */
+/* ---- 20231011 ----------------------------------------------------------- */
+/* sw 상세정보 */
+let popup_grid_license_manage;
+
+function gridPopLicenseManage(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산정보",
+            filter: {
+                showIcon: true,
+            }
+
+        }, {
+            dataField: "category_visual",
+            headerText: "형태",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_sap_id",
+            headerText: "SAP ID",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_item_name",
+            headerText: "장비명",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_hardware_model",
+            headerText: "하드웨어모델",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_assignment_date",
+            headerText: "할당일",
+            filter: {
+                showIcon: true,
+            }
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_license_manage = AUIGrid.create("#popup_grid_license_manage", columnLayout, gridPros);
+    requestLicenseManageData();
+}
+
+function requestLicenseManageData() {
+    $.get("../resources/lib/aui-grid/data/admin-license.json", function (data) {
+        AUIGrid.setGridData(popup_grid_license_manage, data);
+    });
+}
+
+/* HW 상세정보 */
+let popup_grid_license_manage_addf;
+
+function gridPopLicenseManageAddf(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산정보",
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_sw",
+            headerText: "SW 종류",
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_sw_license",
+            headerText: "SW 라이선스 제품명",
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_quantity",
+            headerText: "수량",
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_assignment_date",
+            headerText: "할당일",
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_manager",
+            headerText: "담당자",
+            filter: {
+                showIcon: true,
+            },
+        },{
+            dataField: "category_del_btn", //임의의 고유값
+            headerText: "",
+            headerStyle: "my-header-style",
+            style: "my-column-style",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12,
+                iconHeight:16,
+                iconPosition:"aisleCenter",
+                iconTableRef:{
+                    "default":"../resources/img/icon/icon_delete.svg"
+                },
+                onClick: function(){
+                    clickItem = AUIGrid.getSelectedRows(popup_grid_license_manage_addf)[0];
+                    AUIGrid.removeRow(popup_grid_license_manage_addf, "selectedIndex");
+                },
+            },
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        softRemoveRowMode:false,
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_license_manage_addf = AUIGrid.create("#popup_grid_license_manage_addf", columnLayout, gridPros);
+    requestLicenseManageAddfData();
+}
+
+function requestLicenseManageAddfData() {
+    $.get("../resources/lib/aui-grid/data/admin-license.json", function (data) {
+        AUIGrid.setGridData(popup_grid_license_manage_addf, data);
+    });
+}
+
+/* 행 추가 */
+let add_id = 0;
+function addRow() {
+    var item = new Object();
+    item.id = "grid_ID_1" + (++add_id),
+        item.category_product = '',
+        item.category_item = '',
+        item.category_amount = '',
+
+        // parameter
+        // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
+        // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
+        AUIGrid.addRow(popup_grid_license_manage_addf, item, "first");
+};
+/* ---- // 20231011 ----------------------------------------------------------- */
+

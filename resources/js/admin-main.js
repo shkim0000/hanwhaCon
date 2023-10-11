@@ -127,6 +127,15 @@ $(function(){
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
+                    "<li>\n"+
+                        "<button type='button' class='btn'>기업자산</button>\n"+
+                        "<div class='depth'>\n"+
+                            "<ul>\n"+
+                                "<li><a href='#' class='linkBtn'>SW자산현황</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>HW자산현황</a></li>\n"+
+                            "</ul>\n"+
+                        "</div>\n"+
+                    "</li>\n"+
                 "</ul>\n"+
             "</div>\n"+
         "</div>\n"
@@ -312,6 +321,26 @@ $(function(){
         );
     });
 
+    /* 20231011 : 첨부파일2 : 리스트에 삭제 버튼 있는 */
+    $(".btn.add-file2").on("click",function(){
+        $(this).closest(".title-box").next(".table").find("tbody").append(
+            "<tr>\n"+
+                "<td>\n"+
+                    "<div class='td-wrap between'>\n"+
+                        "<div class='file-box long'>\n"+
+                            "<label class='file'>\n" +
+                                "<input type='file' class='fileUpload'>\n"+
+                                "<span class='btn'>파일선택</span>\n"+
+                            "</label>\n"+
+                            "<span></span>\n"+
+                        "</div>\n"+
+                        "<button type='button' class='btn trash ver2'>삭제</button>\n"+
+                    "</div>\n"+
+                "</td>\n"+
+            "</tr>\n"
+        );
+    });
+
     /* 테이블 내 첨부파일 */
     $(document).on("click",".file-box .btn",function(){
         let fileName;
@@ -333,6 +362,10 @@ $(function(){
     $(".btn.trash").on("click",function(){
         $(this).closest(".title-box").siblings(".table").find("tbody tr").has("input[type='checkbox']:checked").remove();
         $(".table thead input[type='checkbox']").prop("checked",false);
+    });
+
+    $(document).on("click",".btn.trash.ver2",function(){
+        $(this).closest("tr").remove();
     });
 
     /* 체크박스 선택 */
@@ -387,15 +420,6 @@ $(function(){
             $(this).parent().addClass("on");
             $(this).closest(".tab-box").find(".tabs").removeClass("on");
             $(this).closest(".tab-box").find("[data-tabs="+i+"]").addClass("on");
-/*            if(id === "groupBasicInformation"){
-                console.log("으아ㅡ아ㅡ아ㅡ아")
-                if ($("#" + id +"  .btn.trash").data('btn') === "hide"){
-                    alert("기본 그룹정보가 등록되면 등록 가능합니다.");
-
-                }
-            }else{
-
-            }*/
         });
     });
 });
@@ -486,6 +510,12 @@ function lp_open(id,title,width,height,e,type){
     }else if(id==="gridPop_assetDuediligenceDetail"){
         gridPopAssetChangeDetail();
         gridPopAssetChangeHistory();
+    }else if(id==="gridPop_sw_detail"){
+        /* 기업자산 > SW 상세정보 */
+        gridPopLicenseManage();
+    }else if(id==="gridPop_hw_detail"){
+        /* 기업자산 > HW 상세정보 */
+        gridPopLicenseManageAddf();
     }
 
 }
