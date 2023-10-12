@@ -133,6 +133,7 @@ $(function(){
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>SW자산현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>HW자산현황</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>SAP자산현황</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -516,6 +517,9 @@ function lp_open(id,title,width,height,e,type){
     }else if(id==="gridPop_hw_detail"){
         /* 기업자산 > HW 상세정보 */
         gridPopLicenseManageAddf();
+    }else if(id==="swLicenseSearch_pop"){
+        /* 기업자산 > HW 상세정보 > SW 라이선스 검색 */
+        subPopupSWLicenseSearch(id,title,width,height, e);
     }
 
 }

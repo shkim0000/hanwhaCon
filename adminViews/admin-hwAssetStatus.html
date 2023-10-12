@@ -127,6 +127,7 @@
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'HW 상세정보',850,760)">HW 상세정보</button>
+            <button type="button" class="btn" onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350)">SW 라이선스 검색</button>
         </div>
     </div>
 </div>
@@ -219,7 +220,7 @@
                     <h3>SW 라이선스 관리</h3>
                 </div>
                 <div class="btn-wrap">
-                    <button type="button" class="btn add-column">등록</button>
+                    <button type="button" class="btn add-column" onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350)">등록</button>
                 </div>
             </div>
             <div id="popup_grid_license_manage_addf" class="grid-box h-small"></div>
@@ -232,13 +233,39 @@
     </div>
 </div>
 
+<!-- SW 라이선스 검색 -->
+<!-- 팝업내 > SW 라이선스검색 -->
+<div id="swLicenseSearch_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap search-ver con-3">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">자산번호</span>
+                        <label class="input">
+                            <input type="text" data-label="assetNumber">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">SW 제품명</span>
+                        <label class="input">
+                            <input type="text" readonly data-label="item">
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
+            </div>
+            <div id="popup_subGrid_swLicenseSearch" class="grid-box h-small"></div>
+        </div>
+    </div>
+</div>
+
 <!-- //팝업 -->
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
     let hwAssetCurrent_ID;
     let swAssetLicense_ID;
-
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createHWAssetCurrentGrid();
@@ -366,7 +393,7 @@
 
         /* 더블 클릭시 팝업 */
         AUIGrid.bind(hwAssetCurrent_ID, "cellDoubleClick", function() {
-            lp_open('gridPop_hw_detail', 'HW 상세정보',850,760);
+            lp_open('gridPop_hw_detail', 'HW 상세정보',850,770);
         });
     }
     function createSWAssetLicenseGrid() {
@@ -413,7 +440,7 @@
                 filter: {
                     showIcon: true,
                 },
-            }]
+            }];
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
@@ -470,14 +497,14 @@
             setTimeout(function(){
                 AUIGrid.resize(hwAssetCurrent_ID, innerWidth);
                 AUIGrid.resize(swAssetLicense_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(hwAssetCurrent_ID, innerWidth);
                 AUIGrid.resize(swAssetLicense_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 

@@ -1,0 +1,46 @@
+[
+  {
+    "id" : "#grid_id_1",
+    "category_asset_num":"2014063",
+    "category_sw_product":"MSSQL",
+    "category_sw_item":"MSSQL 2019",
+    "category_sw_license_name":"MSSQL 2019 STD",
+    "category_assignment_date date":""
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_asset_num":"2014063",
+    "category_sw_product":"MSSQL",
+    "category_sw_item":"MSSQL 2016",
+    "category_sw_license_name":"MSSQL 2016 STD",
+    "category_quantity":2,
+    "category_assignment_date date":""
+  },
+  {
+    "id" : "#grid_id_3",
+    "category_asset_num":"2014063",
+    "category_sw_product":"MSSQL",
+    "category_sw_item":"MSSQL 2017",
+    "category_sw_license_name":"MSSQL 2017 STD",
+    "category_quantity":2,
+    "category_assignment_date date":""
+  },
+  {
+    "id" : "#grid_id_4",
+    "category_asset_num":"2014063",
+    "category_sw_product":"MSSQL",
+    "category_sw_item":"MSSQL 2018",
+    "category_sw_license_name":"MSSQL 2018 STD",
+    "category_quantity":2,
+    "category_assignment_date date":""
+  },
+  {
+    "id" : "#grid_id_5",
+    "category_asset_num":"2014063",
+    "category_sw_product":"MSSQL",
+    "category_sw_item":"MSSQL 2020",
+    "category_sw_license_name":"MSSQL 2020 STD",
+    "category_quantity":"",
+    "category_assignment_date date":""
+  }
+]

@@ -520,8 +520,8 @@ $(function(){
         } else{
             AUIGrid.clearFilterAll(popup_subGrid_assetSearch);
         }
-    })
-})
+    });
+});
 
 function requestSubPopupAssetSearch() {
     $.get("../resources/lib/aui-grid/data/sample-datas14.json", function (data) {
@@ -3548,33 +3548,32 @@ function popupDepartmentCheckboxSearch(id,title,width,height,e) {
     });
 
     // keyDown 이벤트 바인딩
-    let keyCount =0;
     AUIGrid.bind(popup_grid_department_checkbox, "keyDown",	function(event) {
         if(event.keyCode === 32) { // 스페이스바
             let selectedItems = AUIGrid.getSelectedItems(popup_grid_department_checkbox);
             let items = selectedItems.map(selects => selects.item);
             let itemsId = items.map(item => item.id); // 아이디값
             let itemsDepth = items.map(item => item._$depth); // 뎁스
-
-            let rowIdField = AUIGrid.getProp(popup_grid_department_checkbox, "rowIdField"); // rowIdField 얻기
-            console.log(rowIdField);
-            console.log(itemsId[0])
-            let isChecked = AUIGrid.isCheckedRowById(popup_grid_department_checkbox, rowIdField);
-
+            let isChecked = AUIGrid.isCheckedRowById(popup_grid_department_checkbox, itemsId[0]);
+            let childrenArr = items.map(item => item.children);
+            let childrenId;
 
             if(isChecked === false){
-                AUIGrid.addCheckedRowsByValue(popup_grid_department_checkbox, "id", itemsId[0]);
+                if(itemsDepth[0] === 1){
+                    AUIGrid.setAllCheckedRows(popup_grid_department_checkbox, true);
+                } else if(itemsDepth[0] ===2){
+                    childrenId = childrenArr[0].map(item => item.id);
+
+                    AUIGrid.addCheckedRowsByIds(popup_grid_department_checkbox, itemsId[0]);
+                    AUIGrid.addCheckedRowsByIds(popup_grid_department_checkbox, childrenId);
+                } else{
+                    AUIGrid.addCheckedRowsByIds(popup_grid_department_checkbox, itemsId[0]);
+                }
             } else{
-                console.log(isChecked);
-                AUIGrid.addUncheckedRowsByIds(popup_grid_department_checkbox, "id", itemsId[0]);
+                AUIGrid.addUncheckedRowsByIds(popup_grid_department_checkbox, itemsId[0]);
+
             }
-            // if(itemsDepth[0] === 1){
-            //     AUIGrid.setAllCheckedRows(popup_grid_department_checkbox, true);
-            // } else if(items._$depth===2){
-            //
-            // } else{
-            //
-            // }
+
             return false; // 엔터 키의 기본 행위 안함.
         }
         return true; // 기본 행위 유지
@@ -3594,27 +3593,20 @@ function selectDepartment(e){
     let checkedUidNameArr = checkedRows.map(item => item.uid);
     let item = new Object();
 
-    /* 행 추가(반복) */
-    for(let i=0; i<checkedRows.length;i++){
-            item.uid = checkedUidNameArr[i],
-            item.id = "T-Add" + (++cnt2), /* 임의로 넣어준 값\ */
-            item.category_department = checkedDepartmentNameArr[i];
-        AUIGrid.addRow(popup_grid_department_detail, item, "last");
-    }
-
     /* 그리드 기능 */
     let targetPlace = $(e).attr("data-place");
-    console.log(targetPlace)
-    let userDepartment;
-
     if(targetPlace === 'department_search'){
-        console.log("yes")
-        userDepartment = e.item.category_dName;
-        $("input[data-label='department']").val(userDepartment);
+        /* 해당 인풋창 나열 */
+        $("input[data-label='department']").val(checkedDepartmentNameArr.join(", "));
     }else if(targetPlace==='department_add'){
-
+        /* 행 추가(반복) */
+        for(let i=0; i<checkedRows.length;i++){
+            item.uid = checkedUidNameArr[i],
+                item.id = "T-Add" + (++cnt2), /* 임의로 넣어준 값\ */
+                item.category_department = checkedDepartmentNameArr[i];
+            AUIGrid.addRow(popup_grid_department_detail, item, "last");
+        }
     }
-
     /* 창 닫기 */
     lp_close("gridPop_department_checkbox");
 }
@@ -3625,20 +3617,12 @@ $(document).ready(function(){
 
     input_department.keyup(function(e){
         if(e.keyCode === 13){
-            var term = input_department.val();
-            console.log(term)
+            let term = input_department.val();
+
             if (term.trim() == "") {
                 alert("검색 하고자 하는 단어를 입력하십시오.");
                 return;
             }
-
-            /*
-            var options = {
-                direction : true, // 검색 방향  (true : 다음, false : 이전 검색)
-                caseSensitive : true, // 대소문자 구분 여부 (true : 대소문자 구별, false :  무시)
-                wholeWord : true, // 온전한 단어 여부
-                wrapSearch : true, // 끝에서 되돌리기 여부
-            };*/
 
             let options = {
                 direction : true, // 검색 방향  (true : 다음, false : 이전 검색)
@@ -3911,7 +3895,7 @@ function gridPopLicenseManage(){
             }
         }, {
             dataField: "category_assignment_date",
-            headerText: "할당일",
+            headerText: "할당일sw",
             filter: {
                 showIcon: true,
             }
@@ -3964,36 +3948,51 @@ function gridPopLicenseManageAddf(){
         {
             dataField: "category_asset_num",
             headerText: "자산정보",
+            editable: false,
             filter: {
                 showIcon: true,
             },
         }, {
-            dataField: "category_sw",
+            dataField: "category_sw_product",
             headerText: "SW 종류",
+            editable: false,
             filter: {
                 showIcon: true,
             },
         }, {
-            dataField: "category_sw_license",
+            dataField: "category_sw_item",
             headerText: "SW 라이선스 제품명",
+            editable: false,
             filter: {
                 showIcon: true,
             },
+            width:200
         }, {
             dataField: "category_quantity",
             headerText: "수량",
+            editable: true,
             filter: {
                 showIcon: true,
             },
-        }, {
-            dataField: "category_assignment_date",
-            headerText: "할당일",
-            filter: {
-                showIcon: true,
+            renderer: {
+                type: "NumberStepRenderer",
+                min: 0,
+                max: 50,
+                step: 1,
+                inputHeight: 28, // input 높이 지정
+                textEditable: true,
             },
-        }, {
+            width:90
+        },{
             dataField: "category_manager",
             headerText: "담당자",
+            editable:true,
+            editRenderer : {
+                type : "InputEditRenderer",
+                showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
+                textAlign : "right", // 오른쪽 정렬로 입력되도록 설정
+                maxlength : 10,
+            },
             filter: {
                 showIcon: true,
             },
@@ -4001,6 +4000,7 @@ function gridPopLicenseManageAddf(){
             dataField: "category_del_btn", //임의의 고유값
             headerText: "",
             headerStyle: "my-header-style",
+            editable: false,
             style: "my-column-style",
             renderer: {
                 type: "IconRenderer",
@@ -4015,6 +4015,7 @@ function gridPopLicenseManageAddf(){
                     AUIGrid.removeRow(popup_grid_license_manage_addf, "selectedIndex");
                 },
             },
+            width:60
         }];
 
     /* 2. 그리드 속성 설정 */
@@ -4024,14 +4025,14 @@ function gridPopLicenseManageAddf(){
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         softRemoveRowMode:false,
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
         /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
         fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 4,
+        pageRowCount: 5,
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -4041,13 +4042,6 @@ function gridPopLicenseManageAddf(){
 
     /* 그리드 생성 */
     popup_grid_license_manage_addf = AUIGrid.create("#popup_grid_license_manage_addf", columnLayout, gridPros);
-    requestLicenseManageAddfData();
-}
-
-function requestLicenseManageAddfData() {
-    $.get("../resources/lib/aui-grid/data/admin-license.json", function (data) {
-        AUIGrid.setGridData(popup_grid_license_manage_addf, data);
-    });
 }
 
 /* 행 추가 */
@@ -4064,5 +4058,97 @@ function addRow() {
         // rowPos : rowIndex 인 경우 해당 index 에 삽입, first : 최상단, last : 최하단, selectionUp : 선택된 곳 위, selectionDown : 선택된 곳 아래
         AUIGrid.addRow(popup_grid_license_manage_addf, item, "first");
 };
+
+/*  HW 상세정보  > SW 라이선스 검색 */
+let popup_subGrid_swLicenseSearch;
+
+function subPopupSWLicenseSearch(id,title,width,height,e){
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_sw_product",
+            headerText: "SW종류",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_sw_item",
+            headerText: "SW제품명",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_sw_license_name",
+            headerText: "SW라이선스 제품명",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_quantity",
+            headerText: "남는 수량",
+            filter: {
+                showIcon: true,
+            }
+        }]
+
+    let gridPros = {
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    popup_subGrid_swLicenseSearch = AUIGrid.create("#popup_subGrid_swLicenseSearch", columnLayout, gridPros);
+    requestSubPopupSWLicenseSearch();
+
+    /* 그리드 사용 함수 */
+    AUIGrid.bind(popup_subGrid_swLicenseSearch, "cellDoubleClick", function(event){
+        $("#swLicenseSearch_pop input[data-label='assetNumber']").val(event.category_sw_product);
+        $("#swLicenseSearch_pop input[data-label='item']").val(event.category_sw_item);
+        let rowData = AUIGrid.getSelectedRows(popup_subGrid_swLicenseSearch)[0];
+        /* 담당자 이름 : 공란이어도 상관없음. */
+        let manager = "홍길자";
+        let changeItem = {
+            category_asset_num: rowData.category_asset_num,
+            category_sw_product: rowData.category_sw_product,
+            category_sw_item: rowData.category_sw_item,
+            category_quantity: rowData.category_quantity,
+            category_manager: manager
+        }
+
+        AUIGrid.addRow(popup_grid_license_manage_addf, changeItem,"last");
+        lp_close("swLicenseSearch_pop");
+    });
+}
+
+function requestSubPopupSWLicenseSearch() {
+    $.get("../resources/lib/aui-grid/data/admin-datasSWL.json", function (data) {
+        AUIGrid.setGridData(popup_subGrid_swLicenseSearch, data);
+    });
+}
+
 /* ---- // 20231011 ----------------------------------------------------------- */
 

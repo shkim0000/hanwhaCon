@@ -2,6 +2,14 @@
   {
     "id" : "#grid_id_1",
     "category_asset_num":"2014063",
+    "category_sw_product":"기타",
+    "category_sw_item":"",
+    "category_quantity":2,
+    "category_assignment_date date":""
+  },
+  {
+    "id" : "#grid_id_2",
+    "category_asset_num":"2014063",
     "category_visual":"Virtual",
     "category_sap_id":"",
     "category_item_name":"sapesxi01",
@@ -9,39 +17,30 @@
     "category_assignment_date date":"2023-06-11"
   },
   {
-    "id" : "#grid_id_2",
-    "category_num":"2015431",
-    "category_user_name":"Psyical",
-    "category_agency_department_name":"000000651214",
-    "category_department_code":"sapesxi04",
-    "category_registrant":"DL380 Gen10",
-    "category_registration date":"2023-06-22"
-  },
-  {
     "id" : "#grid_id_3",
-    "category_num":"2015431",
-    "category_user_name":"Psyical",
-    "category_agency_department_name":"000000651214",
-    "category_department_code":"sapesxi04",
-    "category_registrant":"DL380 Gen10",
-    "category_registration date":"2023-06-22"
+    "category_asset_num":"2014063",
+    "category_visual":"Virtual",
+    "category_sap_id":"",
+    "category_item_name":"sapesxi01",
+    "category_hardware_model":"DL380 Gen10",
+    "category_assignment_date date":"2023-06-11"
   },
   {
     "id" : "#grid_id_4",
-    "category_num":"2015431",
-    "category_user_name":"Psyical",
-    "category_agency_department_name":"000000651214",
-    "category_department_code":"sapesxi04",
-    "category_registrant":"DL380 Gen10",
-    "category_registration date":"2023-06-22"
+    "category_asset_num":"2014063",
+    "category_visual":"Virtual",
+    "category_sap_id":"",
+    "category_item_name":"sapesxi01",
+    "category_hardware_model":"DL380 Gen10",
+    "category_assignment_date date":"2023-06-11"
   },
   {
     "id" : "#grid_id_5",
-    "category_num":"2015431",
-    "category_user_name":"Psyical",
-    "category_agency_department_name":"000000651214",
-    "category_department_code":"sapesxi04",
-    "category_registrant":"DL380 Gen10",
-    "category_registration date":"2023-06-22"
+    "category_asset_num":"2014063",
+    "category_visual":"Virtual",
+    "category_sap_id":"",
+    "category_item_name":"sapesxi01",
+    "category_hardware_model":"DL380 Gen10",
+    "category_assignment_date date":"2023-06-11"
   }
 ]

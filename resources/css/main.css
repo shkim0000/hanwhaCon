@@ -250,6 +250,9 @@ footer .btn{padding:7px 20px;border-radius:20px;background-color:#fff;color:#101
 [data-btn=show]{display:flex;}
 
 /* input */
+/* 20231011 */
+input{text-overflow:ellipsis;white-space:nowrap;overflow:hidden;}
+/* // 20231011 */
 .input-wrap{display:flex;align-items:center;justify-content:space-between;background-color: #efefef;border-radius:4px;padding:10px;gap:10px;margin-bottom:40px;}
 .input-wrap.a-end{align-items:flex-end;}
 .input-wrap .btn.search{min-width:90px;}
