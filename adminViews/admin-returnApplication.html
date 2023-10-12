@@ -588,23 +588,28 @@
             }
 
         ]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true, // 가로 스크롤 X
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -708,7 +713,6 @@
                     onClick: function(){
                         /* 선택한 행들 얻기 */
                         let rows = AUIGrid.getSelectedRows(returnAssetGrid_ID);
-                        console.log(rows)
 
                         // 얻은 행을 상단 그리드에 추가하기
                         AUIGrid.addRow( holdingAssetGrid_ID, rows, "last");
@@ -720,23 +724,26 @@
             }
 
         ]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            softRemoveRowMode: false,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true, // 가로 스크롤 X
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
-            softRemoveRowMode: false,
         }
 
         /* 그리드 생성 */
@@ -767,14 +774,14 @@
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(returnAssetGrid_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(returnAssetGrid_ID, innerWidth);
-            },20)
+            },20);
         }
     });
     /* 6. 함수 관련 */

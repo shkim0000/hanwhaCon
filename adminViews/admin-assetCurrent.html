@@ -154,15 +154,9 @@
             <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '반납신청',1250,810)">반납신청</button>
             <button type="button" class="btn" onclick="lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,780)">대연연장신청</button>
             <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop', '인수인계신청',1250,730)">인수인계신청</button>
-            <!--
-            <button type="button" class="btn" data-popup="takingOverEnroll_pop">인수인계신청</button>
-            <button type="button" class="btn" data-popup="assetNewEnroll_pop">자산신규등록신청</button>
-            -->
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>
-            <!--<button type="button" class="btn" data-popup="managerSelect_pop">담당자 선택</button>
-            <button type="button" class="btn" data-popup="gridPop_processingHistory">처리이력</button>-->
         </div>
     </div>
 </div>
@@ -1035,150 +1029,7 @@
         </div>
     </div>
 </div>
-
-<!-- 팝업내 > 처리이력 (사용X)  -->
-<!--
-<div id="gridPop_processingHistory" class="popup grid no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>처리 이력</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="title-box">
-                <div class="title">
-                    <h3>처리이력</h3>
-                </div>
-            </div>
-            <div id="popup_grid_processingHistory" class="grid-box h-small"></div>
-
-            <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
--->
-
-<!-- 자산신규등록신청 (사용X)  -->
-<!--
-<div id="assetNewEnroll_pop" class="popup grid big no">
-    <div class="pop-box">
-        <div class="pop-head">
-            <h3>자산신규등록신청</h3>
-            <button type="button" class="close-btn"></button>
-        </div>
-        <div class="pop-body">
-            <div class="custom-table">
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center">신청번호</div></div>
-                    <div class="td"><div class="td-wrap">122141</div></div>
-                    <div class="th"><div class="th-wrap center">신청구분</div></div>
-                    <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
-                    <div class="th"><div class="th-wrap center">신청상태</div></div>
-                    <div class="td"><div class="td-wrap">상신완료</div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
-                    <div class="td whole"><div class="td-wrap"><p>홍길동</p></div></div>
-                </div>
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
-                    <div class="td"><div class="td-wrap"><p>신규충원</p></div></div>
-                    <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
-                    <div class="td medium"><div class="td-wrap"><p>데스크탑 - 100대 입고 자산입고</p></div></div>
-                </div>
-                <div class="row">
-                    <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
-                    <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
-                </div>
-            </div>
-
-            <div class="title-box">
-                <div class="title">
-                    <h3>처리이력</h3>
-                </div>
-            </div>
-            <div id="popup_grid_newAssetEnroll" class="grid-box h-small"></div>
-
-            <div class="title-box">
-                <div class="title">
-                    <h3 class="important">첨부파일</h3>
-                </div>
-                <div class="btn-wrap">
-                    <label class="file">
-                        <input type="file">
-                        <span class="btn add-file">파일추가</span>
-                    </label>
-                    <button type="button" class="btn trash">선택 삭제</button>
-                </div>
-            </div>
-            <div class="table">
-                <table>
-                    <colgroup>
-                        <col style="width:50px">
-                        <col style="width:calc(100% - 50px);">
-                    </colgroup>
-                    <thead>
-                    <tr>
-                        <th>
-                            <div class="th-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </th>
-                        <th><p>파일명</p></th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="td-wrap center">
-                                <label class="check no-text">
-                                    <input type="checkbox">
-                                    <span></span>
-                                </label>
-                            </div>
-                        </td>
-                        <td>
-                            <div class="td-wrap">
-                                <div class="file-box long">
-                                    <label class="file">
-                                        <input type="file" class="fileUpload">
-                                        <span class="btn">파일선택</span>
-                                    </label>
-                                    <span>선택된 파일 없음</span>
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="btn-wrap">
-                <button type="button" class="btn">저장</button>
-                <button type="button" class="btn" data-btn="cancel">닫기</button>
-            </div>
-        </div>
-    </div>
-</div>
--->
 <!-- // 팝업 -->
-
-<style>
-    .my-header-style{background: #f37321;color:white;border-color:#9d9d9d;}
-    .my-column-style{background: #fff3ec;}
-
-    /* 그리드 내에 검색 팝업 박스 */
-    .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;min-height:20px;}
-    .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
-    .search_grid_style > div::after{content:'';width:1px;height:100%;position:absolute;right:30px;top:50%;transform:translateY(-50%);background-color:#dbdbdb;}
-    .search_grid_style .aui-grid-button-renderer{width:auto;display:flex;justify-content:center;background-color:transparent;color:#414141;border-radius:0;border:0;}
-</style>
-
 <script type="text/javascript">
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
@@ -1266,79 +1117,26 @@
         /* 그리드 생성 */
         applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
 
+        /* [수정] 20231012 */
         // 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여)
         AUIGrid.bind(applicationGrid_ID, "cellDoubleClick", function(event) {
             let result = AUIGrid.getCellValue(applicationGrid_ID, event.rowIndex, "category_application_division");
-            let width = 1250;
-            let height = 590;
+
             if(result === "신규신청"){
-                $("#newEnroll_pop").dialog({
-                    title:"신규신청",
-                    width: 1400,
-                    height: height,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                })
-                gridPopNewEnrollDetail(width,height);
-                gridPopNewEnrollHistory(width,height);
+                lp_open('newEnroll_pop','신규 신청',1250,900);
             } else if(result ==="교체신청"){
-                $("#changeEnroll_pop").dialog({
-                    title: "교체신청",
-                    width: width,
-                    height:height,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopChangeEnrollDetail(width,height);
-                gridPopChangeEnrollHistory(width,height);
+                lp_open('changeEnroll_pop','교체 신청',1250,850);
             } else if(result ==="대여신청"){
-                $("#rentalEnroll_pop").dialog({
-                    title: "대여신청",
-                    width: width,
-                    height:height,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopRentalEnrollDetail(width,height);
-                gridPopRentalEnrollHistory(width,height);
+                lp_open('rentalEnroll_pop', '대여 신청',1250,900);
             } else if (result === "반납신청"){
-                $("#returnEnroll_pop").dialog({
-                    title: "반납신청",
-                    width: width,
-                    height:height,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopReturnEnrollDetail(width,height);
-                gridPopReturnEnrollHistory(width,height);
+                lp_open('returnEnroll_pop', '반납신청',1250,810);
             } else if (result === "대여연장신청"){
-                $("#rentalExtensionEnroll_pop").dialog({
-                    title: "대여연장신청",
-                    width: width,
-                    height:height,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopRentalExtensionEnrollDetail(width,height);
-                gridPopRentalExtensionEnrollHistory(width,height);
+                lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,780);
             } else if(result === "인수인계신청"){
-                $("#takingOverEnroll_pop").dialog({
-                    title: "인수인계신청",
-                    width: width,
-                    height:height,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog'
-                });
-                gridPopTakeoverEnrollDetail(width,height);
-                gridPopTakeoverEnrollHistory(width,height);
+                lp_open('takingOverEnroll_pop', '인수인계신청',1250,730);
             }
         });
+        /* // [수정] 20231012 */
     }
 
     /* 4. 데이터 불러오기 */

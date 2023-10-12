@@ -1,0 +1,1655 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>관리자 페이지 팝업 모음</title>
+
+    <!-- jQuery -->
+    <script src="../resources/lib/jquery-3.6.1/jquery-3.6.1.js"></script>
+    <script src="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.js"></script>
+    <link rel="stylesheet" href="../resources/lib/jquery-ui-1.13.2/jquery-ui-1.13.2.css">
+
+    <!-- AUI grid -->
+    <script src="../resources/lib/aui-grid/js/AUIGridLicense.js"></script>
+    <script src="../resources/lib/aui-grid/js/AUIGrid.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/ajax.js"></script>
+    <script type="text/javascript" src="../resources/lib/aui-grid/js/common.js"></script>
+
+    <link rel="stylesheet" href="../resources/lib/aui-grid/css/AUIGrid_style.css">
+
+    <!--font-awesome -->
+    <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
+
+    <!-- 개별 소스 -->
+    <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="../resources/js/admin-main.js"></script>
+    <script src="../resources/js/admin-grid.js"></script>
+</head>
+<body>
+<!-- 팝업 버튼 -->
+    <!-- [기본검색 팝업 모음] -->
+    <div class="btn-wrap" style="margin-top:150px;">
+        <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
+        <button type="button" class="btn" data-popup="gridPop_department" onclick="lp_open('gridPop_department','부서검색',505,530)">부서 검색</button>
+        <button type="button" class="btn" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530)">담당자 검색</button>
+    </div>
+
+
+    <!-- [신청 팝업 모음] -->
+    <div class="btn-wrap" style="margin-top:20px;">
+        <button type="button" class="btn" onclick="lp_open('newEnroll_pop','신규 신청',1250,900);">신규신청</button>
+        <button type="button" class="btn" onclick="lp_open('changeEnroll_pop','교체 신청',1250,850);">교체신청</button>
+        <button type="button" class="btn" onclick="lp_open('rentalEnroll_pop', '대여 신청',1250,900);">대여신청</button>
+        <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '반납신청',1250,810);">반납신청</button>
+        <button type="button" class="btn" onclick="lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,780);">대연연장신청</button>
+        <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop', '인수인계신청',1250,730);">인수인계신청</button>
+        <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>
+    </div>
+
+    <!-- [상신 팝업 모음] -->
+    <div class="btn-wrap" style="margin-top:10px;">
+        <button type="button" class="btn" onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신 팝업</button>
+        <button type="button" class="btn" onclick="lp_open('submitSearch_pop','Search Employee',800,860)">상신 > 검색조건 팝업</button>
+        <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
+        <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
+    </div>
+
+    <!-- [넷클라이언트 관련 팝업 모음] -->
+    <div class="btn-wrap" style="margin-top:10px;">
+        <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
+        <button type="button" class="btn" onclick="lp_open('nonNetClient','정보없음',520,180);">NetClient없을때</button>
+        <button type="button" class="btn" onclick="lp_open('haveNetClient','사용자 장비 정보',1250,800);">NetClient정보</button>
+    </div>
+
+<!-- //팝업 버튼 -->
+
+
+<!-- 팝업 -->
+<!-- [기본 팝업 모음] -->
+    <!-- 사용자 검색 -->
+    <div id="gridPop_user" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="input-wrap">
+                    <div class="input-list">
+                        <span class="input-title">사용자</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+                <div id="popup_grid_user" class="grid-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 부서 검색 -->
+    <div id="gridPop_department" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="input-wrap">
+                    <div class="input-list">
+                        <span class="input-title">부서</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+                <div id="popup_grid_department" class="grid-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 담당자 검색 -->
+    <div id="gridPop_manager" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="input-wrap">
+                    <div class="input-list">
+                        <span class="input-title">담당자</span>
+                        <label class="input search">
+                            <input type="text">
+                            <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        </label>
+                    </div>
+                </div>
+                <div id="popup_grid_manager" class="grid-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 모델 정보 -->
+    <div id="model_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="tab-box">
+                    <div class="tab-title"><h4>데스크탑</h4></div>
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">표준 PC</button></li>
+                            <li><button type="button" class="popBtn">고성능 PC</button></li>
+                            <li><button type="button" class="popBtn">삼성 PC</button></li>
+                            <li><button type="button" class="popBtn">DESKI7</button></li>
+                            <li><button type="button" class="popBtn">DESK-XXX</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on"><img src="../resources/img/sample_desktop.png" alt=""></div>
+                    <div class="tabs"><img src="" alt="2"></div>
+                    <div class="tabs"><img src="" alt="3"></div>
+                    <div class="tabs"><img src="" alt="4"></div>
+                    <div class="tabs"><img src="" alt="5"></div>
+                </div>
+                <div class="tab-box">
+                    <div class="tab-title"><h4>노트북</h4></div>
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">표준 노트북</button></li>
+                            <li><button type="button" class="popBtn">LG 그램</button></li>
+                            <li><button type="button" class="popBtn">삼성 갤럭시</button></li>
+                            <li><button type="button" class="popBtn">HP 표준</button></li>
+                            <li><button type="button" class="popBtn">씽크패드</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on"><img src="../resources/img/sample_notebook.jpeg" alt=""></div>
+                    <div class="tabs"><img src="" alt="2"></div>
+                    <div class="tabs"><img src="" alt="3"></div>
+                    <div class="tabs"><img src="" alt="4"></div>
+                    <div class="tabs"><img src="" alt="5"></div>
+                </div>
+                <div class="tab-box">
+                    <div class="tab-title"><h4>프린터</h4></div>
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">잉크젯</button></li>
+                            <li><button type="button" class="popBtn">레이저</button></li>
+                            <li><button type="button" class="popBtn">칼라레이저</button></li>
+                            <li><button type="button" class="popBtn">복합기</button></li>
+                            <li><button type="button" class="popBtn">칼라복합기</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on"><img src="../resources/img/sample_printer.jpeg" alt=""></div>
+                    <div class="tabs"><img src="" alt="2"></div>
+                    <div class="tabs"><img src="" alt="3"></div>
+                    <div class="tabs"><img src="" alt="4"></div>
+                    <div class="tabs"><img src="" alt="5"></div>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('model_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- // [기본 팝업 모음] -->
+
+<!-- [신청 팝업 모음] -->
+    <!-- 저장 시 미출고 자산 알림 팝업 -->
+    <div id="saveCheck_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <p class="center">미출고 자산이 있습니다</p>
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('saveCheck_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 신규신청 -->
+    <div id="newEnroll_pop" class="popup s-interval">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">신청번호</div></div>
+                        <div class="td"><div class="td-wrap">122141</div></div>
+                        <div class="th"><div class="th-wrap center">신청구분</div></div>
+                        <div class="td"><div class="td-wrap">자산 신규 신청</div></div>
+                        <div class="th"><div class="th-wrap center">신청상태</div></div>
+                        <div class="td"><div class="td-wrap">상신완료</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
+                                    <input type="text" data-label="user" readonly>
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search">
+                                    <input type="text" data-label="department" readonly>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">행정동</option>
+                                        <option value="">행정동</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>신규충원</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                        <div class="td whole">
+                            <div class="td-wrap">
+                                <label class="input">
+                                    <input type="text">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>자산정보</h3>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn primary">출고</button>
+                        <button type="button" class="btn">취소</button>
+                    </div>
+                </div>
+                <div id="popup_grid_newEnroll_detail" class="grid-box h-small"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>업무배정</h3>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn">배정</button>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search">
+                                    <input type="text" data-label="manager_department" readonly>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                    <input type="text" data-label="manager" readonly>
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                    </div>
+                </div>
+
+                <!-- 결재이력 -->
+                <div class="title-box">
+                    <div class="title">
+                        <h3>결재이력</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_newEnroll_history" class="grid-box h-small"></div>
+
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>첨부파일</h3>
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><p>파일명</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn">저장</button>
+                    <button type="button" class="btn" onclick="lp_close('newEnroll_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 교체신청 -->
+    <div id="changeEnroll_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">신청번호</div></div>
+                        <div class="td"><div class="td-wrap">122141</div></div>
+                        <div class="th"><div class="th-wrap center">신청구분</div></div>
+                        <div class="td"><div class="td-wrap">자산 신규 신청</div></div>
+                        <div class="th"><div class="th-wrap center">신청상태</div></div>
+                        <div class="td"><div class="td-wrap">상신완료</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">행정동</option>
+                                        <option value="">행정동</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">자산노후</option>
+                                        <option value="">자산노후</option>
+                                        <option value="">자산노후</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p class="important">관리자 메모</p></div></div>
+                        <div class="td whole"><div class="td-wrap"></div></div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>자산정보</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_changeEnroll_detail" class="grid-box h-small"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>업무배정</h3>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn">배정</button>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search">
+                                    <input type="text" data-label="manager_department" readonly>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                    <input type="text" data-label="manager" readonly>
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                    </div>
+                </div>
+
+                <!-- 처리이력 -->
+                <div class="title-box">
+                    <div class="title">
+                        <h3>처리이력</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_change_history" class="grid-box"></div>
+
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3 class="important">첨부파일</h3>
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><p>파일명</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn">배정</button>
+                    <button type="button" class="btn" onclick="lp_close('changeEnroll_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 대여신청 -->
+    <div id="rentalEnroll_pop" class="popup s-interval">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">신청번호</div></div>
+                        <div class="td"><div class="td-wrap">122141</div></div>
+                        <div class="th"><div class="th-wrap center">신청구분</div></div>
+                        <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                        <div class="th"><div class="th-wrap center">신청상태</div></div>
+                        <div class="td"><div class="td-wrap">상신완료</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">행정동</option>
+                                        <option value="">행정동</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">신규충원</option>
+                                        <option value="">신규충원</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p>대여기간</p></div></div>
+                        <div class="td whole"><div class="td-wrap"><p>2023-06-16 ~ 2023-07-16</p></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                        <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>대여자산정보</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_rentalEnroll_detail" class="grid-box h-small"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>업무배정</h3>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn">배정</button>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search">
+                                    <input type="text" data-label="manager_department" readonly>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                    <input type="text" data-label="manager" readonly>
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                    </div>
+                </div>
+
+                <!-- 처리이력 -->
+                <div class="title-box">
+                    <div class="title">
+                        <h3>처리이력</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_rental_history" class="grid-box"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3 class="important">첨부파일</h3>
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><p>파일명</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('rentalEnroll_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 반납신청 -->
+    <div id="returnEnroll_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">신청번호</div></div>
+                        <div class="td"><div class="td-wrap">122141</div></div>
+                        <div class="th"><div class="th-wrap center">신청구분</div></div>
+                        <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                        <div class="th"><div class="th-wrap center">신청상태</div></div>
+                        <div class="td"><div class="td-wrap">상신완료</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자명</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">행정동</option>
+                                        <option value="">행정동</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">대여반납</option>
+                                        <option value="">대여반납</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>신규 부서 입사자 지급</p></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                        <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>반납자산정보</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_returnEnroll_detail" class="grid-box h-small"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>업무배정</h3>
+                    </div>
+                    <div class="btn-wrap">
+                        <button type="button" class="btn">배정</button>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search">
+                                    <input type="text" data-label="manager_department" readonly>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>담당자</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search" data-place="manager_search" onclick="lp_open('gridPop_manager','담당자 검색',505,530,this)">
+                                    <input type="text" data-label="manager" readonly>
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>연락처</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>010-0000-0000</p></div></div>
+                    </div>
+                </div>
+
+                <!--  처리이력 -->
+                <div class="title-box">
+                    <div class="title">
+                        <h3>처리이력</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_return_history" class="grid-box"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3 class="important">첨부파일</h3>
+                    </div>
+                    <!--<div class="btn-wrap">
+                        <label class="file">
+                            <input type="file">
+                            <span class="btn add-file">파일추가</span>
+                        </label>
+                        <button type="button" class="btn trash">선택 삭제</button>
+                    </div>-->
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="2"><p>파일명</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td colspan="2">
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('returnEnroll_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 인수인계 신청  -->
+    <div id="takingOverEnroll_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">신청번호</div></div>
+                        <div class="td"><div class="td-wrap">122141</div></div>
+                        <div class="th"><div class="th-wrap center">신청구분</div></div>
+                        <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                        <div class="th"><div class="th-wrap center">신청상태</div></div>
+                        <div class="td"><div class="td-wrap">상신완료</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>인수자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>임꺽정</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>인수부서</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>총무부</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">인수인계</div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>관련 내용이 작성됩니다.</p></div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                        <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>인수인계자산</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_takeOverEnroll_detail" class="grid-box h-small"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>처리이력</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_takeOverEnroll_history" class="grid-box"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3 class="important">첨부파일</h3>
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><p>파일명</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('takingOverEnroll_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 대여연장 신청 -->
+    <div id="rentalExtensionEnroll_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">신청번호</div></div>
+                        <div class="td"><div class="td-wrap">122141</div></div>
+                        <div class="th"><div class="th-wrap center">신청구분</div></div>
+                        <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
+                        <div class="th"><div class="th-wrap center">신청상태</div></div>
+                        <div class="td"><div class="td-wrap">상신완료</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>홍길동</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>양현모</p></div></div>
+                        <div class="th"><div class="th-wrap center"><p>사용자 부서</p></div></div>
+                        <div class="td"><div class="td-wrap"><p>IT운영</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>사용장소</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">행정동</option>
+                                        <option value="">행정동</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>상세위치</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>서울특별시 송파구 문정동</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">신규충원</option>
+                                        <option value="">신규충원</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p>신청내용</p></div></div>
+                        <div class="td medium"><div class="td-wrap"><p>관련 내용이 작성됩니다.</p></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">대여기간</div></div>
+                        <div class="td whole"><div class="td-wrap">2023-06-07 ~ 2023-08-09</div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap center"><p>관리자 메모</p></div></div>
+                        <div class="td whole"><div class="td-wrap"><p>새상품</p></div></div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3>대여자산 연장신청정보</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_rentalExtension_detail" class="grid-box h-small"></div>
+
+                <!-- 처리이력 -->
+                <div class="title-box">
+                    <div class="title">
+                        <h3>처리이력</h3>
+                    </div>
+                </div>
+                <div id="popup_grid_rentalExtension_history" class="grid-box"></div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h3 class="important">첨부파일</h3>
+                    </div>
+                </div>
+                <div class="table">
+                    <table>
+                        <thead>
+                        <tr>
+                            <th><p>파일명</p></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <div class="td-wrap">
+                                    <a href="ddd.pdf" class="download" download="">TEST.exe</a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('rentalExtensionEnroll_pop')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 팝업내 > 자산검색 -->
+    <div id="assetSearch_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="input-wrap search-ver con-3">
+                    <div class="input-lists">
+                        <div class="input-list">
+                            <span class="input-title">자산분류</span>
+                            <label class="input">
+                                <input type="text" readonly data-label="product">
+                            </label>
+                        </div>
+                        <div class="input-list">
+                            <span class="input-title">품목</span>
+                            <label class="input">
+                                <input type="text" readonly data-label="item">
+                            </label>
+                        </div>
+                        <div class="input-list">
+                            <span class="input-title">자산번호</span>
+                            <label class="input">
+                                <input type="text" data-label="assetNumber">
+                            </label>
+                        </div>
+                    </div>
+                    <button type="button" class="btn search">검색</button>
+                </div>
+                <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
+            </div>
+        </div>
+    </div>
+<!-- // [신규신청 팝업 모음] -->
+
+<!-- [넷클라이언트 관련 팝업 모음] -->
+    <!--NetClient 정보 없을 때 팝업-->
+    <div id="nonNetClient" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <p class="center">사용자의 NetClient 정보가 없습니다.</p>
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="lp_close('nonNetClient')">확인</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--NetClient 정보가 있을 때 팝업-->
+    <div id="haveNetClient" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="tab-box ver1">
+                    <div class="tab-wrap">
+                        <ul>
+                            <li class="on"><button type="button" class="popBtn">HW정보</button></li>
+                            <li><button type="button" class="popBtn" id="swInformation">SW정보</button></li>
+                            <li><button type="button" class="popBtn" id="boxInformation">BOX정보</button></li>
+                        </ul>
+                    </div>
+                    <div class="tabs on">
+                        <!--기본정보-->
+                        <div class="tabs-inner-wrap">
+                            <div class="table-title"><h4>기본 정보</h4></div>
+                            <div class="custom-table">
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">사용자명</div></div>
+                                    <div class="td"><div class="td-wrap">최승창</div></div>
+                                    <div class="th"><div class="th-wrap center">부서명</div></div>
+                                    <div class="td"><div class="td-wrap">WORKGROUP</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">이메일</div></div>
+                                    <div class="td"><div class="td-wrap">hongildong@gmail.com</div></div>
+                                    <div class="th"><div class="th-wrap center">전화번호</div></div>
+                                    <div class="td"><div class="td-wrap">010-2004-1949</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">IP 주소</div></div>
+                                    <div class="td"><div class="td-wrap">192.168.99.77</div></div>
+                                    <div class="th"><div class="th-wrap center">MAC Address</div></div>
+                                    <div class="td"><div class="td-wrap">F89710C5F8A</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">서버명</div></div>
+                                    <div class="td"><div class="td-wrap">TCO-Server</div></div>
+                                    <div class="th"><div class="th-wrap center">서버 IP</div></div>
+                                    <div class="td"><div class="td-wrap">192.168.99.71</div></div>
+                                </div>
+                            </div>
+                            <div class="table-title"><h4>H/W 정보</h4></div>
+                            <div class="custom-table">
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">제조회사</div></div>
+                                    <div class="td"><div class="td-wrap">LENOVO</div></div>
+                                    <div class="th"><div class="th-wrap center">모델</div></div>
+                                    <div class="td"><div class="td-wrap">Lenovo ideapad 520S-14KB (80X2)</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">운영체제</div></div>
+                                    <div class="td"><div class="td-wrap">Windows10 Professional, 64-bit(x64)</div></div>
+                                    <div class="th"><div class="th-wrap center">운영체제 언어</div></div>
+                                    <div class="td"><div class="td-wrap">한국어</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">운영체제 버전</div></div>
+                                    <div class="td"><div class="td-wrap">6.3</div></div>
+                                    <div class="th"><div class="th-wrap center">운영체제 서비스팩</div></div>
+                                    <div class="td"><div class="td-wrap">0</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">IE 버전</div></div>
+                                    <div class="td"><div class="td-wrap">11.789.19041.0</div></div>
+                                    <div class="th"><div class="th-wrap center">IE 서비스팩</div></div>
+                                    <div class="td"><div class="td-wrap">0</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">프로세서</div></div>
+                                    <div class="td"><div class="td-wrap">Core(TM) i5-7200U CPU 2400Mhz</div></div>
+                                    <div class="th"><div class="th-wrap center">메모리</div></div>
+                                    <div class="td"><div class="td-wrap">8192 Mb</div></div>
+                                </div>
+                                <div class="row con-2">
+                                    <div class="th"><div class="th-wrap center">바이오스 시리얼</div></div>
+                                    <div class="td"><div class="td-wrap">MP18JEQD</div></div>
+                                    <div class="th"><div class="th-wrap center">장비타입</div></div>
+                                    <div class="td"><div class="td-wrap">Notebook</div></div>
+                                </div>
+                            </div>
+                            <div class="table-title"><h4>추가 정보</h4></div>
+                            <div class="custom-table">
+                                <div class="table">
+                                    <table>
+                                        <thead>
+                                        <tr>
+                                            <th>드라이브</th>
+                                            <th>전체</th>
+                                            <th>여유공간</th>
+                                            <th>파일시스템</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>C:\</td>
+                                            <td>237.23 GB</td>
+                                            <td>123.04 GB</td>
+                                            <td>NTFS</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <table class="left">
+                                        <tr>
+                                            <th rowspan="2">NIC #1</th>
+                                            <th>랜카드</th>
+                                            <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IP 주소</th>
+                                            <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2">NIC #2</th>
+                                            <th>랜카드</th>
+                                            <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IP 주소</th>
+                                            <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2">NIC #3</th>
+                                            <th>랜카드</th>
+                                            <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IP 주소</th>
+                                            <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2">NIC #4</th>
+                                            <th>랜카드</th>
+                                            <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IP 주소</th>
+                                            <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2">NIC #5</th>
+                                            <th>랜카드</th>
+                                            <td>TAP-Windows Adapter V9 - SecuwaySSLU</td>
+                                        </tr>
+                                        <tr>
+                                            <th>IP 주소</th>
+                                            <td>0.0.0.0(00FFBBQIOEFJ01040)</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2" colspan="2">비디오카드</th>
+                                            <td>MirageDriver</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Intel(R) HD Graphics 620</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">사운드카드</th>
+                                            <td>Realtek High Definition Audio</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="2" colspan="2">모니터</th>
+                                            <td>H2775F [27 inch]</td>
+                                        </tr>
+                                        <tr>
+                                            <td>일반 PnP 모니터 [14 inch]</td>
+                                        </tr>
+                                        <tr>
+                                            <th rowspan="5" colspan="2">프린터</th>
+                                            <td>MicroSoft XPS Document Writer v4 [PORTPROMPT]</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microsoft IPP Class Driver [wejfiwofje-wegw]</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microsoft IPP Class Driver [fwejfpwejfiwofje-wegw]</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microsoft Shared fjepwfwjfpwejf [10294]</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Microsoft Shared fjepwfwjefwejfiofpwejf [10294]</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">바이오스</th>
+                                            <td>4QNC1499VJEWP</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">바이오스 날짜</th>
+                                            <td>20191119</td>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="2">DMI 서비스</th>
+                                            <td>Not Available</td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tabs">
+                        <div class="tabs-inner-wrap">
+                            <div id="popup_grid_swInformation"></div>
+                        </div>
+                    </div>
+                    <div class="tabs">
+                        <div class="tabs-inner-wrap">
+                            <div id="popup_grid_boxInformation"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 자산 정보 -->
+    <div id="gridPop_assetDetail" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="title-box">
+                    <div class="title">
+                        <h4>자산상세정보</h4>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">물품종류</div></div>
+                        <div class="td"><div class="td-wrap">모니터</div></div>
+                        <div class="th"><div class="th-wrap center">품목</div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="input search">
+                                    <input type="text" placeholder="27인치 노트북">
+                                    <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center">자산번호</div></div>
+                        <div class="td"><div class="td-wrap">4763728</div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">자산상태</div></div>
+                        <div class="td"><div class="td-wrap">운영</div></div>
+                        <div class="th"><div class="th-wrap center">모델명</div></div>
+                        <div class="td">
+                            <div class="td-wrap">LG-MO-27MD</div>
+                        </div>
+                        <div class="th"><div class="th-wrap center">규격#1</div></div>
+                        <div class="td"><div class="td-wrap"></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">규격#2</div></div>
+                        <div class="td"><div class="td-wrap"></div></div>
+                        <div class="th"><div class="th-wrap center">규격#3</div></div>
+                        <div class="td"><div class="td-wrap"></div></div>
+                        <div class="th"><div class="th-wrap center">규격#4</div></div>
+                        <div class="td"><div class="td-wrap"></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">규격#5</div></div>
+                        <div class="td"><div class="td-wrap"></div></div>
+                        <div class="th"><div class="th-wrap center">설치일</div></div>
+                        <div class="td"><div class="td-wrap">2023-01-17</div></div>
+                        <div class="th"><div class="th-wrap center"></div></div>
+                        <div class="td"><div class="td-wrap"></div></div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center"><p class="important">용도1</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select">
+                                    <select>
+                                        <option value="">사무용</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p class="important">용도2</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select">
+                                    <select>
+                                        <option value="">개인용</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center"><p class="important">필수부품</p></div></div>
+                        <div class="td">
+                            <div class="td-wrap">
+                                <label class="select">
+                                    <select>
+                                        <option value="">미지급</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">자산위치</div></div>
+                        <div class="td half">
+                            <div class="td-wrap">
+                                <label class="select whole">
+                                    <select>
+                                        <option value="">선택</option>
+                                        <option value="">행정동</option>
+                                        <option value="">성수동</option>
+                                    </select>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="th"><div class="th-wrap center">상세위치</div></div>
+                        <div class="td half">
+                            <div class="td-wrap">
+                                <label class="input">
+                                    <input type="text">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row con-3">
+                        <div class="th"><div class="th-wrap center">메모</div></div>
+                        <div class="td whole">
+                            <div class="td-wrap">자리 1번 모니터</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h4>사용자 정보</h4>
+                    </div>
+                </div>
+                <div class="custom-table">
+                    <div class="row con-2">
+                        <div class="th"><div class="th-wrap center">사용자</div></div>
+                        <div class="td"><div class="td-wrap">홍길동</div></div>
+                        <div class="th"><div class="th-wrap center">부서</div></div>
+                        <div class="td"><div class="td-wrap">IT운영</div></div>
+                    </div>
+                    <div class="row con-2">
+                        <div class="th"><div class="th-wrap center">사번</div></div>
+                        <div class="td"><div class="td-wrap">756598</div></div>
+                    </div>
+                </div>
+
+                <div class="title-box">
+                    <div class="title">
+                        <h4>실사이력</h4>
+                    </div>
+                </div>
+                <div id="popup_grid_assetDetail" class="grid-box h-small"></div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn save">저장</button>
+                    <button type="button" class="btn cancel" onclick="lp_close('gridPop_assetDetail')">닫기</button>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- // [넷클라이언트 관련 팝업 모음] -->
+
+<!-- [상신 팝업 모음] -->
+    <!-- 상신 -->
+    <div id="submit_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="custom-table design-ver">
+                    <div class="row">
+                        <div class="th"><div class="th-wrap">상신제목</div></div>
+                        <div class="td"><div class="td-wrap">[정보자산관리시스템]신규신청</div></div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap">결재경로</div></div>
+                        <div class="td">
+                            <div class="td-wrap column">
+                                <ul class="submit-list">
+                                    <li>
+                                        <p>결재</p>
+                                        <span>[01]</span>
+                                    </li>
+                                    <li>
+                                        <p>협조결재</p>
+                                        <span>[01]</span>
+                                    </li>
+                                    <li>
+                                        <p>결재참조</p>
+                                        <span>[01]</span>
+                                    </li>
+                                    <li>
+                                        <p>병렬결재</p>
+                                        <span>[01]</span>
+                                    </li>
+                                    <li>
+                                        <p>병렬협조결재</p>
+                                        <span>[01]</span>
+                                    </li>
+                                    <li>
+                                        <p>참조</p>
+                                        <span>[01]</span>
+                                    </li>
+                                    <li>
+                                        <p>수신</p>
+                                        <span>[07]</span>
+                                    </li>
+                                </ul>
+                                <div class="btn-wrap end">
+                                    <button type="button" class="btn" onclick="moveRowsToDown()";><i class="fa-solid fa-chevron-down"></i></button>
+                                    <button type="button" class="btn" onclick="moveRowsToUp();"><i class="fa-solid fa-chevron-up"></i></button>
+                                    <button type="button" class="btn" onclick="lp_open('submitSearch_pop','Search Employee',800,860)">결재선추가</button>
+                                </div>
+                                <div id="popup_grid_submitList" class="grid-box"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="th"><div class="th-wrap">첨부파일</div></div>
+                        <div class="td">
+                            <div class="td-wrap column">
+                                <div class="title-box end ">
+                                    <div class="btn-wrap add-file-wrap">
+                                        <button type="button" class="btn add-file">파일 추가</button>
+                                        <button type="button" class="btn trash">선택 삭제</button>
+                                    </div>
+                                </div>
+                                <div class="table">
+                                    <table>
+                                        <colgroup>
+                                            <col style="width:50px">
+                                            <col style="width:calc(100% - 50px);">
+                                        </colgroup>
+                                        <thead>
+                                        <tr>
+                                            <th>
+                                                <div class="th-wrap center">
+                                                    <label class="check no-text">
+                                                        <input type="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </th>
+                                            <th><p>자산분류</p></th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr>
+                                            <td>
+                                                <div class="td-wrap center">
+                                                    <label class="check no-text">
+                                                        <input type="checkbox">
+                                                        <span></span>
+                                                    </label>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="td-wrap">
+                                                    <div class="file-box long">
+                                                        <label class="file">
+                                                            <input type="file" class="fileUpload">
+                                                            <span class="btn">파일선택</span>
+                                                        </label>
+                                                        <span>선택된 파일 없음</span>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="row">
+                        <div class="th"><div class="th-wrap">상신의견</div></div>
+                        <div class="td">
+                            <div class="td-wrap column">
+                                <label class="input textarea">
+                                    <textarea rows="3"></textarea>
+                                </label>
+                                <span class="count-words"><span>0</span> / 500</span>
+                            </div>
+                        </div>
+                    </div>-->
+                </div>
+
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">미리보기</button>
+                    <button type="button" class="btn primary send">상신</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="submitSearch_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h4>검색조건</h4>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn search">조회</button>
+                        </div>
+                    </div>
+                    <div class="input-wrap search-ver">
+                        <div class="input-list">
+                            <span class="input-title">성명</span>
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                        <div class="input-list">
+                            <span class="input-title">Circle ID</span>
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                        <div class="input-list">
+                            <span class="input-title">부서명</span>
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                        <div class="input-list whole">
+                            <span class="input-title">결재종류</span>
+                            <div class="check-wrap">
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>결재</span>
+                                </label>
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>협조결재</span>
+                                </label>
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>결재참조</span>
+                                </label>
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>병렬협조결재</span>
+                                </label>
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>병렬결재</span>
+                                </label>
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>참조</span>
+                                </label>
+                                <label class="check">
+                                    <input type="radio" name="a">
+                                    <span>수신</span>
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h4>검색한 임직원</h4>
+                        </div>
+                    </div>
+                    <div class="box-wrap">
+                        <div id="popup_subGrid_searchExecutives" class="grid-box h-small"></div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h4>결재라인에 추가할 임직원</h4>
+                        </div>
+                    </div>
+                    <div class="box-wrap">
+                        <div id="popup_subGrid_addExecutives" class="grid-box h-small"></div>
+                    </div>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn" onclick="addingResult()">추가</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="submitApprovalChange_pop" class="popup">
+        <div class="pop-box">
+            <div class="pop-body">
+                <div class="box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h4>검색조건</h4>
+                        </div>
+                        <div class="btn-wrap">
+                            <button type="button" class="btn search">조회</button>
+                        </div>
+                    </div>
+                    <div class="input-wrap search-ver">
+                        <div class="input-list">
+                            <span class="input-title">성명</span>
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                        <div class="input-list">
+                            <span class="input-title">Circle ID</span>
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                        <div class="input-list">
+                            <span class="input-title">부서명</span>
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="box">
+                    <div class="title-box">
+                        <div class="title">
+                            <h4>검색한 임직원</h4>
+                        </div>
+                    </div>
+                    <div class="box-wrap">
+                        <div id="popup_subGrid_approvalChange" class="grid-box h-small"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- // [상신 팝업 모음] -->
+
+
+
+<!-- // 팝업 -->
+
+</body>
+</html>

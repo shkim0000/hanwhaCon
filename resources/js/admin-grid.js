@@ -559,7 +559,6 @@ function gridPopNewEnrollHistory(id,title,width,height){
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 사이즈 지정 */
         headerHeight : 24, // 기본 헤더 높이 지정
-        fillColumnSizeMode: true, // 가로 스크롤 X
         autoGridHeight : true, // 게시되는 data에 맞게 height지정
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
@@ -2881,7 +2880,7 @@ function requestAssetClassificationData(){
  //자산분류 팝업
 /* //[수정]2023-09-26 */
 
-/* [수정]202361004 */
+/* [수정]2023-10-12 */
 /* 정기교체 작업등록 팝업에서 정기교체 대상 그리드 */
 let popup_grid_replacementTarget;
 function gridPopReplacementTarget(id,title,width,height) {

@@ -517,11 +517,6 @@
 </div>
 <!-- // 팝업 -->
 
-<style>
-    .myField3{background-color:#ebaf88;}
-    .my-custom-style3{background-color:#ebaf88;font-weight:700}
-
-</style>
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
@@ -562,22 +557,20 @@
         ];
 
 
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
-            enableFilter: true,
-            useContextMenu: true,
             fixedColumnCount: 1,
-            // fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
-            displayTreeOpen: true,
-            // 체크박스 사용 안함
-            showRowCheckColumn: false,
             showRowNumColumn: false,
-            showFooter: true,
-            copyDisplayValue: true, //그리드 데이터 복사 가능
+            simplifySelectionEvent: true, // 이벤트 발생 시 간소화된 정보만 받을지 여부를 지정
             editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
-            simplifySelectionEvent: true
-
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true,
+            /* 컨텍스트 메뉴 */
+            useContextMenu: true,
+            /* 푸터 */
+            showFooter: true,
         }
 
 
@@ -760,20 +753,20 @@
         ];
 
 
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
-            enableFilter: true,
-            useContextMenu: true,
             fixedColumnCount: 1,
-            // fixedRowCount: 2,// 최초 보여질 때 모두 열린 상태로 출력 여부
-            displayTreeOpen: true,
-            // 체크박스 사용 안함
-            showRowCheckColumn: false,
             showRowNumColumn: false,
-            showFooter: true,
-            copyDisplayValue: true, //그리드 데이터 복사 가능
+            simplifySelectionEvent: true, // 이벤트 발생 시 간소화된 정보만 받을지 여부를 지정
             editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true,
+            /* 컨텍스트 메뉴 */
+            useContextMenu: true,
+            /* 푸터 */
+            showFooter: true,
 
         }
 
@@ -1020,39 +1013,32 @@
                     showIcon: true,
                 }
             }]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            simplifySelectionEvent: true, //이벤트 발생 시 간소화된 정보만 받을지 여부를 지정
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            simplifySelectionEvent: true,
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
         dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
-        // requestDueDiglienceGridData();
 
-        /* 더블 클릭시 팝업 */
+        /* 20231012 : 더블 클릭시 팝업 */
         AUIGrid.bind(dueDiglienceGrid_ID, "cellDoubleClick", function(event) {
-            $("#gridPop_assetDetail").dialog({
-                title: "자산정보",
-                width: 1250,
-                height:860,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopAssetDetail();
+            lp_open('gridPop_assetDetail','자산정보',1250,720);
         });
     }
 
@@ -1067,6 +1053,7 @@
             AUIGrid.setGridData(userStatusGrid_ID, data);
         });
     }
+    /* [삭제 요청] 20231012 */
     function requestDueDiglienceGridData() {
         $.get("../resources/lib/aui-grid/data/sample-datas23.json", function (data) {
             AUIGrid.setGridData(dueDiglienceGrid_ID, data);
@@ -1116,7 +1103,7 @@
                 AUIGrid.resize(userStatusGrid_ID, halfWidth);
                 AUIGrid.resize(assetStatusGrid_ID, halfWidth);
                 AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
@@ -1125,7 +1112,7 @@
                 AUIGrid.resize(userStatusGrid_ID, halfWidth);
                 AUIGrid.resize(assetStatusGrid_ID, halfWidth);
                 AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 </script>

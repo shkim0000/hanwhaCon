@@ -511,17 +511,13 @@
     </div>
 </div>
 <!-- // 팝업 -->
-<style>
-    .my-header-style{background: #9d9d9d;color:white;border-color:#9d9d9d;}
-    .my-column-style{background: #cccccc;color:white;}
-</style>
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
     let holdingAssetGrid_ID;
     let enrollGrid_ID;
 
-    /* 1-2. dropdown menu 리스트 */
+    /* 20231012 : [삭제 부탁드립니다.] 1-2. dropdown menu 리스트 */
     let groupList1 = ["데스크탑", "모니터"];
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
@@ -614,22 +610,27 @@
             }
 
         ]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            softRemoveRowMode:false,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode:true,
-            softRemoveRowMode:false,
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -639,7 +640,7 @@
         /* 키보드로 클릭하기 기능 구현중 */
         AUIGrid.bind(holdingAssetGrid_ID, "cellClick,keyDown",	function(event) {
             if(event.keyCode === 32){
-                var item = event.item, rowIdField, rowId;
+                let item = event.item, rowIdField, rowId;
                 rowIdField = AUIGrid.getProp(event.pid, "rowIdField"); // rowIdField 얻기
                 rowId = item[rowIdField];
                 // 이미 체크 선택되었는지 검사
@@ -773,22 +774,25 @@
                 }
             }
         ]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 :  2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            softRemoveRowMode: false,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode:true,
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
-            softRemoveRowMode: false,
         }
 
         /* 그리드 생성 */
@@ -819,14 +823,14 @@
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 
@@ -837,7 +841,7 @@
         AUIGrid.removeCheckedRows(enrollGrid_ID); // 체크된 행 삭제 처리
         let removedRows = AUIGrid.getRemovedItems(enrollGrid_ID, true); // 삭제 처리된 아이템 있는지 보기
         if (removedRows.length <= 0) {
-            alert("삭제 처리되어 마크된 행이 없습니다.")
+            alert("삭제 처리되어 마크된 행이 없습니다.");
             return;
         }
         AUIGrid.removeSoftRows(enrollGrid_ID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
@@ -847,7 +851,6 @@
     $(".btn.check").on("click",function(){
         // 상단 그리드의 체크된 행들 얻기
         let rows = AUIGrid.getCheckedRowItemsAll(holdingAssetGrid_ID);
-        console.log(rows[0].id)
         if (rows.length <= 0) {
             alert('상단 그리드에서 체크된 행이 없습니다.');
             return;
@@ -859,8 +862,8 @@
         AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
 
         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(enrollGrid_ID, str)
-    })
+        AUIGrid.updateRowsById(enrollGrid_ID, str);
+    });
 </script>
 </body>
 </html>

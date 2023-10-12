@@ -639,6 +639,9 @@ label[data-isActive="readonly"]{background:#cacaca;}
 }
 /* 20230912 */
 .title-box .input-list{width:50%;}
+/* 20231012 */
+.title-box .btn-wrap.long-ver.end{justify-content:flex-end;}
+/* //20231012 */
 .title-box .btn-wrap.long-ver .btn.excel{min-width:141px;}
 .title-box .btn-wrap.long-ver .btn.primary{min-width:86px;}
 /* 2023912 */
@@ -661,6 +664,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .btn-wrap.only{margin-top:55px;}
 .btn-wrap.center{justify-content:center;margin-top:40px;}
 .btn-wrap.end{justify-content:flex-end;margin-bottom:10px;margin-top:10px;}
+.btn-wrap.end.only{justify-content:flex-end;}
 .btn-wrap.end .file{width:auto;}
 .btn-wrap.end.hide{display:none;}
 .btn-wrap.end.hide.open{display:flex;}
@@ -954,3 +958,15 @@ tbody tr p{text-align:center;}
 .text-box .btn{justify-content:center;align-items:center;min-width:110px;font-size:14px;padding:5px 8px;}
 .popup .text-box .input{height:30px;}
 
+/* AUIGrid 내 디자인 커스텀 */
+/* 그리드 컬럼 색상 */
+.my-header-style{background: #f37321;color:white;border-color:#9d9d9d;}
+.my-column-style{background: #fff3ec;}
+.myField3{background-color:#ebaf88;}
+.my-custom-style3{background-color:#ebaf88;font-weight:700}
+
+/* 그리드 내에 검색 팝업 박스 */
+.search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;min-height:20px;}
+.search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
+.search_grid_style > div::after{content:'';width:1px;height:calc(100% - 4px);position:absolute;right:30px;top:50%;transform:translateY(-50%);background-color:#dbdbdb;}
+.search_grid_style .aui-grid-button-renderer{width:auto;display:flex;justify-content:center;background-color:transparent;color:#414141;border-radius:0;border:0;}
