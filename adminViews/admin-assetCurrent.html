@@ -136,11 +136,9 @@
             </div>
             <div class="btn-wrap">
                 <button type="button" class="btn excel">엑셀다운로드</button>
-                <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
             </div>
         </div>
         <div id="applicationGrid_ID" class="grid-box"></div>
-
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
@@ -1043,7 +1041,7 @@
     /* 신청정보 */
     function createApplicationGrid() {
         /* 기본 그리드(예시) */
-        /* 1. AUIGrid 칼럼 설정 */
+        /* 20231012 :  1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
                 dataField: "id",
@@ -1053,59 +1051,97 @@
                 dataField: "category_application_num",
                 headerText: "신청번호",
                 width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_application_division",
                 headerText: "신청구분",
-                width: 180
+                width: 180,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_application_date",
                 headerText: "신청일자",
-                width: 280
+                width: 280,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_content",
                 headerText: "내용",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_application_reason",
                 headerText: "신청사유",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_department",
                 headerText: "부서명",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_user_name",
                 headerText: "사용자",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_count",
                 headerText: "수량",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_status",
                 headerText: "상태",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_processing_date",
                 headerText: "처리일자",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_final_arbiter",
                 headerText: "최종 결재자",
-                width: 160
+                width: 160,
+                filter: {
+                    showIcon: true,
+                }
             }]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            softRemoveRowMode: false,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            autoGridHeight : true,
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            softRemoveRowMode: false,
+            pageRowCount: 20, // 페이지에 출력되는 row 개수
+            /* 기능 : 체크 기능 막기 */
             rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
                 if (item.category_status !== "임시저장") {
                     return false;
@@ -1158,21 +1194,16 @@
             innerWidth = innerWidth + 260;
             setTimeout(function(){
                 AUIGrid.resize(applicationGrid_ID, innerWidth);
-            },20)
+            },20);
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(applicationGrid_ID, innerWidth);
-            },20)
+            },20);
         }
     });
-    /* 6. 사용하는 함수 */
-    /* 그리드 행 선택 삭제 */
-    function deleteRowGrid(){
-        AUIGrid.removeCheckedRows(applicationGrid_ID); // 체크된 행 삭제 처리
-    }
 
-    /* 신규신청 팝업에서 저장 클릭 시, 열릴 팝업 설정 */
+    /* [20231012 : 필요없는 함수 같은데 확인 후 삭제 부탁드립니다!]신규신청 팝업에서 저장 클릭 시, 열릴 팝업 설정 */
     function newEnrollValidation(){
         var isValid = AUIGrid.validateGridData(popup_grid_newEnroll_detail, ["name", "country"], "필수 필드는 반드시 값을 직접 입력해야 합니다.");
     }

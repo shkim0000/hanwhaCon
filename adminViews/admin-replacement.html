@@ -82,7 +82,7 @@
         <div class="title-box">
             <div class="title"><h3>정기교체</h3></div>
             <div class="btn-wrap">
-                <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,530)">등록</button>
+                <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,530);">등록</button>
             </div>
         </div>
         <div id="replacement_ID" class="grid-box h-small5"></div>
@@ -101,7 +101,7 @@
         <div id="replacementDetail_ID" class="grid-box h-small5"></div>
 
         <div class="btn-wrap" style="margin-top:10px;">
-            <button type="button" class="btn" onclick="lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530)">정기교체작업등록현황</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530);">정기교체작업등록현황</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,570)">정기교체작업 등록</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_replacementTarget', '정기교체대상',1250,720)">정기교체대상</button>
         </div>
@@ -516,15 +516,7 @@
 <!-- //팝업 -->
 
 <style>
-    .my-header-style{background: #9d9d9d;color:white;border-color:#9d9d9d;}
-    .my-header-style:hover{background: #e2e2e2;color:#444;border-color:#9d9d9d;}
-    .my-column-style {background: #eeeeee;color: #005500;font-weight: bold;}
     tr.aui-grid-row-soft-removed-marker *{font-weight: bold;color:#FF007F!important;}
-
-    .search_grid_style > div{box-sizing:border-box;margin-left:4px;background-color:#fff;border:1px solid #dbdbdb;border-radius:4px;min-height:20px;}
-    .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
-    .search_grid_style > div::after{content:'';width:1px;height:calc(100% - 4px);position:absolute;right:30px;top:50%;transform:translateY(-50%);background-color:#dbdbdb;}
-    .search_grid_style .aui-grid-button-renderer{width:auto;display:flex;justify-content:center;background-color:transparent;color:#414141;border-radius:0;border:0;}
 </style>
 
 <script>
@@ -532,9 +524,6 @@
     /* 1. AUIGrid 생성 후 반환 ID */
     let replacement_ID;
     let replacementDetail_ID;
-
-    /* 1-2. dropdown menu 리스트 */
-    let adjustmentList = ["선택","신규","반납","타부서변경","기타"];
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createReplacementGrid();
@@ -586,13 +575,11 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             simplifySelectionEvent: true,
             enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             editable: false,
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
             autoGridHeight:false,
@@ -603,6 +590,7 @@
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -621,29 +609,10 @@
         /* 더블클릭시 정기교체 작업등록 팝업 */
         AUIGrid.bind(replacement_ID, "cellDoubleClick", function(event,item){
             if(event.item.category_status === "임시저장"){
-                countDate();
-                $("#gridPop_replacement").addClass("open").dialog({
-                    title: "정기교체작업 등록",
-                    width: 1250,
-                    height: 530,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog',
-                });
-                gridPopReplacementTarget();
+                lp_open('gridPop_replacement', '정기교체작업 등록',1250,530);
             }else if(event.item.category_status ==="완료"){
-                countDate();
-                $("#gridPop_replacement_current").addClass("open").dialog({
-                    title: "정기교체작업등록현황",
-                    width: 1250,
-                    height: 530,
-                    modal: true,
-                    resizable: false,
-                    dialogClass: 'no-close success-dialog',
-                });
-                gridPopReplacementTargetCurrent();
+                lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530);
             }
-
         });
     }
     function createReplacementDetailGrid() {
@@ -657,21 +626,39 @@
                     {
                         dataField: "category_user_status",
                         headerText: "상태",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_use_department",
                         headerText: "사용부서",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_user_name",
                         headerText: "사용자",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_asset_num",
                         headerText: "자산번호",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_item",
-                        headerText: "물품종류"
+                        headerText: "물품종류",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_model",
-                        headerText: "모델"
+                        headerText: "모델",
+                        filter: {
+                            showIcon: true,
+                        }
                     }
                 ]
             },
@@ -684,26 +671,44 @@
                         dataField: "category_division",
                         headerText: "구분",
                         headerStyle:"my-header-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_item_current",
                         headerText: "물품종류",
                         headerStyle:"my-header-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_model_current",
                         headerText: "모델",
                         headerStyle:"my-header-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_nonapplication_reason",
                         headerText: "미신청사유",
                         headerStyle:"my-header-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_application_date",
                         headerText: "신청일자",
                         headerStyle:"my-header-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_applicant",
                         headerText: "신청자",
                         headerStyle:"my-header-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     }
                 ]
             },
@@ -714,12 +719,21 @@
                     {
                         dataField: "category_asset_num_newasset",
                         headerText: "구분",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_item_newasset",
                         headerText: "물품종류",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_model_newmodel",
                         headerText: "모델",
+                        filter: {
+                            showIcon: true,
+                        }
                     }
                 ]
             },
@@ -727,11 +741,13 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            simplifySelectionEvent: true,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
             autoGridHeight:false,
@@ -740,9 +756,9 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            /* 그리드복사 + 필터 */
-            simplifySelectionEvent: true,
+            /* 그리드복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -751,21 +767,7 @@
 
         /* 더블 클릭시 팝업 */
         AUIGrid.bind(replacementDetail_ID, "cellDoubleClick", function(event) {
-            countDate();
-            let width = 1250;
-            let height = 670;
-            $("#regularChangeEnroll_pop").dialog({
-                title: "교체신청_정기교체",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog',
-                close: function( event, ui ) {
-                    countDatepicker = 0;
-                },
-            });
-            gridPopRegularChangeEnrollDetail();
+            lp_open('regularChangeEnroll_pop', '교체신청_정기교체',1250,670);
         });
 
         /* row 수 세기 */
@@ -803,14 +805,14 @@
             setTimeout(function(){
                 AUIGrid.resize(replacement_ID, innerWidth);
                 AUIGrid.resize(replacementDetail_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(replacement_ID, innerWidth);
                 AUIGrid.resize(replacementDetail_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 
@@ -896,6 +898,7 @@
     function regularReplacementProgress(){
         let rows = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2);
         AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
+        AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list2, false);
 
         if(rows.length >= 1){
             AUIGrid.clearGridData(popup_grid_replacementTarget);

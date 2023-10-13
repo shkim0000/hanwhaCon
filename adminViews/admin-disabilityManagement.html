@@ -133,15 +133,14 @@
         }];
 
 
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "uid",  // 행 구별 필드명 지정
-            fillColumnSizeMode: true,
             editable: true,
             uneditableNewRowsOnPaste: true,
-            /* 필터 + 복사 */
-            enableFilter: true,
-            copyDisplayValue: true,
+            /* 사이즈 지정 */
+            headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true,
             /* context-menu */
             useContextMenu: true,
             showRowCheckColumn: false,
@@ -151,10 +150,14 @@
             /* 트리 */
             treeColumnIndex : 1,
             displayTreeOpen: true,
-            /* 페이징 */
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             pageRowCount: 100, // 한 화면에 출력되는 행 개수 30개로 지정
+            /* 그리드 복사 */
+            copyDisplayValue: true,
+            /* 필터*/
+            enableFilter: true,
         }
 
         /* 그리드 생성 */
@@ -231,13 +234,13 @@
             innerWidth = innerWidth + 260;
             setTimeout(function(){
                 AUIGrid.resize(disabilityManagement_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(disabilityManagement_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 
@@ -287,7 +290,6 @@
                 // 행 추가 시 셀렉션을 이동시킴
                 AUIGrid.bind(disabilityManagement_ID, "addRowFinish", function (event) {
                     var selectionIdxes = AUIGrid.getSelectedIndex(event.pid);
-                    console.log(selectionIdxes)
                     AUIGrid.setSelectionByIndex(event.pid, selectionIdxes[0],1);
                 });
 
@@ -309,8 +311,6 @@
                 newItem.category_usage = "";
                 newItem.category_enroll = "";
                 newItem.category_date_written = ""
-                // 행 위치 시킬 곳, 셀렉트 값.
-                var rowPos = document.getElementById("disabilityManagement_ID").value;
 
                 // parameter
                 // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)

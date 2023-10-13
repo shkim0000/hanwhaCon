@@ -200,19 +200,6 @@
 
         /* 그리드 생성 */
         usePlaceManagement_ID = AUIGrid.create("#usePlaceManagement_ID", columnLayout, gridPros);
-
-        /* 더블클릭 시 팝업 이벤트  */
-        // AUIGrid.bind(usePlaceManagement_ID, "cellDoubleClick", function(event) {
-        //     $("#gridPop_itemManagement").addClass("open").dialog({
-        //         title: "강제회수",
-        //         width: 800,
-        //         height: 265,
-        //         modal: true,
-        //         resizable: false,
-        //         dialogClass: 'no-close success-dialog'
-        //     });
-        //     lp_open('gridPop_itemManagement', '품목관리',800,265)
-        // });
     }
 
 
@@ -240,13 +227,13 @@
             innerWidth = innerWidth + 260;
             setTimeout(function(){
                 AUIGrid.resize(usePlaceManagement_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(usePlaceManagement_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 </script>

@@ -286,7 +286,7 @@ function gridPopNewEnrollDetail(id,title,width,height){
                             lp_open("assetSearch_pop","자산검색",800,500, resultData, "newEnroll");
                         }
                     },
-                    width:200,
+                    width:"10%"
                 },{
                     dataField: "category_admin_quantity",
                     headerText: "수량",
@@ -308,7 +308,6 @@ function gridPopNewEnrollDetail(id,title,width,height){
                 }, {
                     dataField: "category_item_name",
                     headerText: "모델명",
-                    width:150,
                 }, {
                     dataField: "category_essential_parts",
                     headerText: "필수부품",
@@ -329,10 +328,10 @@ function gridPopNewEnrollDetail(id,title,width,height){
                             lp_open('gridPop_user','사용자 검색',505,530,resultData,"newEnroll")
                         }
                     },
-                    width: 150,
                 },{
                     dataField: "category_release_date",
-                    headerText: "출고일자"
+                    headerText: "출고일자",
+                    width:"10%"
                 }
             ]
         },
@@ -348,7 +347,7 @@ function gridPopNewEnrollDetail(id,title,width,height){
         editable: true,
         /* 사이즈 지정 */
         headerHeight : 24, // 기본 헤더 높이 지정
-        // autoGridHeight : true,
+        autoGridHeight : true,
         fillColumnSizeMode:true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
@@ -423,16 +422,20 @@ function subPopupAssetSearch(id,title,width,height, e, type){
     let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
     popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);
@@ -3145,11 +3148,7 @@ function gridPopReplacementTargetList1() {
         }else{
             AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
         }
-
     });
-
-
-
 }
 function requestReplacementTargetList1Data() {
     $.get("../resources/lib/aui-grid/data/admin-datas3.json", function (data) {
@@ -3228,6 +3227,7 @@ function gridPopReplacementTargetList2() {
         /* 체크박스 */
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
         enableRowCheckShiftKey: true,
+        independentAllCheckBox : true,
         /* 사이즈 지정 */
         headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode: true,
@@ -3240,9 +3240,30 @@ function gridPopReplacementTargetList2() {
         enableFilter: true, // 필터 true 설정
     }
 
-
     /* 그리드 생성 */
     popup_grid_replacementTarget_list2 = AUIGrid.create("#popup_grid_replacementTarget_list2", columnLayout, gridPros);
+
+    /* 전체선택 */
+    AUIGrid.bind(popup_grid_replacementTarget_list2, "rowAllChkClick", function (event) {
+        if(event.checked){
+            let uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "id");
+            AUIGrid.setCheckedRowsByValue(event.pid, "id", uniqueValues);
+        } else {
+            AUIGrid.setCheckedRowsByValue(event.pid, "id", []);
+        }
+    });
+
+    /* 개별선택 */
+    AUIGrid.bind(popup_grid_replacementTarget_list2, "rowCheckClick", function (event) {
+        let rowCount = AUIGrid.getRowCount(popup_grid_replacementTarget_list2);
+        let checkedItemsLength = AUIGrid.getCheckedRowItemsAll(popup_grid_replacementTarget_list2).length;
+
+        if(checkedItemsLength === rowCount){
+            AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list2, true);
+        }else{
+            AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list2, false);
+        }
+    });
 }
 
 /* 정기교체 상세내역 > 교체신청_정기교체  */

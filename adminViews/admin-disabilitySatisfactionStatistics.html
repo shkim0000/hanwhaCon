@@ -338,8 +338,6 @@ let disabilitySatisfactionDetail_ID;
 createDisabilitySatisfactionGrid();
 requestDisabilitySatisfactionData();
 
-
-
 /* 3. AUIGrid 그리드 옵션 */
 function createDisabilitySatisfactionGrid() {
     /* 기본 그리드(예시) */
@@ -414,124 +412,30 @@ function createDisabilitySatisfactionGrid() {
             filter: {
                 showIcon: true,
             }
-        }]
+        }];
 
-    /* 중간에 응답/미응답 합산결과 계산식 필요시 사용. 필요없을시 삭제 */
-    /* var columnLayout = [];
-
-    columnLayout[0] = { // 연도 칼럼 생성
-        headerText: "id",
-        dataField: "id",
-        visible:false,
-    }
-
-    columnLayout.push({
-        dataField: "category_take_action_person",
-        headerText: "조치자",
-        width: 180,
-        filter: {
-            showIcon: true,
-        },
-        cellMerge: true
-    });
-
-    columnLayout.push({
-        dataField: "category_sum",
-        headerText: "총계",
-        width: 160,
-        filter: {
-            showIcon: true,
-        },
-        cellMerge: true,
-
-    });
-
-    columnLayout.push({
-        dataField: "category_request_sum",
-        headerText: "",
-        width: 160,
-        filter: {
-            showIcon: true,
-        },
-        labelFunction(rowIndex, columnIndex, value, headerText, item, dataField) {
-            if(item.category_request_sum === "응답"){
-                let sum = item.category_very_satisfied + item.category_satisfied + item.category_average + item.category_dissatisfied  + item.category_very_dissatisfied;
-                return "응답: " + sum;
-            }else if(item.category_request_sum === "미응답"){
-                let sum = item.category_very_satisfied + item.category_satisfied + item.category_average + item.category_dissatisfied  + item.category_very_dissatisfied;
-                return "미응답: " + sum;
-            }
-        },
-    });
-
-    columnLayout.push({
-        dataField: "category_very_satisfied",
-        headerText: "매우만족",
-        width: 280,
-        filter: {
-            showIcon: true,
-        }
-    });
-
-    columnLayout.push({
-        dataField: "category_satisfied",
-        headerText: "매우만족",
-        width: 280,
-        filter: {
-            showIcon: true,
-        }
-    });
-
-    columnLayout.push({
-        dataField: "category_average",
-        headerText: "매우만족",
-        width: 280,
-        filter: {
-            showIcon: true,
-        }
-    });
-
-    columnLayout.push({
-        dataField: "category_dissatisfied",
-        headerText: "매우만족",
-        width: 280,
-        filter: {
-            showIcon: true,
-        }
-    });
-
-    columnLayout.push({
-        dataField: "category_very_dissatisfied",
-        headerText: "매우만족",
-        width: 280,
-        filter: {
-            showIcon: true,
-        }
-    });*/
-
-
-    /* 2. 그리드 속성 설정 */
+    /* 20231012 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
         selectionMode: "singleRow",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
+        /* 셀 병합 */
+        enableCellMerge: true,
         setCellMerge:true,
         cellMergeRowSpan : true,
-        enableCellMerge: true,
-
-
-
     }
 
     /* 그리드 생성 */
@@ -633,25 +537,24 @@ function createDisabilitySatisfactionDetailGrid() {
             }
         }];
 
-    /* 2. 그리드 속성 설정 */
+    /* 20231012 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
         selectionMode: "singleRow",
         enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
-        setCellMerge:true,
-        cellMergeRowSpan : true,
-        enableCellMerge: true,
     }
 
     /* 그리드 생성 */
@@ -659,19 +562,9 @@ function createDisabilitySatisfactionDetailGrid() {
     requestDisabilitySatisfactionDetailData();
     getRowCount2(disabilitySatisfactionDetail_ID);
 
-    /* 더블 클릭시 팝업 */
+    /* 20231012 : 더블 클릭시 팝업 */
     AUIGrid.bind(disabilitySatisfactionDetail_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_disabledCurrent").dialog({
-            title: "장애 신고 신청 현황",
-            width: 1250,
-            height: 800,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
-        gridPopDisabledDetail();
-        gridPopDisabledHistory();
-        gridPopDisabledListHistory();
+        lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,800);
     });
 }
 

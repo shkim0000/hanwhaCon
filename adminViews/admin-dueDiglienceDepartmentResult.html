@@ -412,19 +412,6 @@
 
         /* 그리드 생성 */
         adjustmentTargetDetails_ID = AUIGrid.create("#adjustmentTargetDetails_ID", columnLayout, gridPros);
-
-        /* 더블 클릭시 팝업 */
-        AUIGrid.bind(adjustmentTargetDetails_ID, "cellDoubleClick", function(event) {
-            $("#gridPop_detail").addClass("open").dialog({
-                title: "자산정보",
-                width: 1250,
-                height: 500,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopChangeHistory();
-        });
     }
     /* 4. 데이터 불러오기 */
     function requestDepartmentSubmitStatusData() {

@@ -266,13 +266,17 @@ function createAssetDetailGrid() {
     let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
@@ -282,17 +286,9 @@ function createAssetDetailGrid() {
     /* grid-title에 row Count 가 추가되는 함수 */
     getRowCount(userInfoGrid_ID);
 
-    /* 더블 클릭시 팝업 */
+    /* 20231012 : 더블 클릭시 팝업 */
     AUIGrid.bind(userInfoGrid_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_userInfo").addClass("open").dialog({
-            title: "사용자정보",
-            width: 1000,
-            height: 280,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
-        gridPopChangeHistory();
+        lp_open('gridPop_userInfo','사용자 정보',1000,280);
     });
 }
 
@@ -334,13 +330,13 @@ $(document).on("click",".menu-btn",function(){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
             AUIGrid.resize(userInfoGrid_ID, innerWidth);
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
             AUIGrid.resize(userInfoGrid_ID, innerWidth);
-        },20)
+        },20);
     }
 });
 

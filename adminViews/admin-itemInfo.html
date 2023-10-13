@@ -127,7 +127,7 @@
         }, {
             dataField: "category_classification_name",
             headerText: "자산분류",
-            editable: true,
+            editable: false,
             style: "left",
             width:"22%",
             filter: {
@@ -155,6 +155,8 @@
                 visibleFunction :  function(rowIndex, columnIndex, value, item, dataField ) {
                     if(item._$depth ===1) {
                         return false;
+                    }else if(item._$depth ===2){
+                        return true;
                     }
                 }
             },
@@ -200,22 +202,22 @@
             rowIdField: "id",  // 행 구별 필드명 지정
             editable: true,
             fillColumnSizeMode: true,
-            /* 필터 + 복사 */
-            enableFilter: true,
-            copyDisplayValue: true,
             /* context-menu */
             useContextMenu: true,
             showRowCheckColumn: false,
             softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
             softRemovePolicy: "exceptNew",
             enableRightDownFocus: true, //  컨텍스트 메뉴를 보기 위해 오른쪽 클릭을 한 경우 클릭 지점이 왼쪽 클릭과 같이 셀 선택을 할지 여부
-            /* 트리 */
-            treeColumnIndex : 1,
-            displayTreeOpen: true,
-            /* 페이징 */
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             pageRowCount: 100, // 한 화면에 출력되는 행 개수 30개로 지정
+            /* 트리 */
+            treeColumnIndex : 1,
+            displayTreeOpen: true,
+            /* 필터 + 복사 */
+            enableFilter: true,
+            copyDisplayValue: true,
         }
 
         /* 그리드 생성 */
@@ -240,7 +242,11 @@
 
             /* 해당 조건에서 보이는 context-menu */
             if (event.dataField === "category_classification_name") {
-                return contextMenus_top;
+                if(event.item._$depth === 1){
+                    return contextMenus_top;
+                }else {
+                    return false;
+                }
             } else if(event.dataField === "category_isUSage"){
                 if(event.item._$depth !== 1){
                     return contextMenus_usage;
@@ -277,7 +283,7 @@
         }, {
             dataField: "category_classification_name",
             headerText: "자산분류",
-            editable: true,
+            editable: false,
             style: "left",
             width:"22%",
             filter: {
@@ -305,6 +311,8 @@
                 visibleFunction :  function(rowIndex, columnIndex, value, item, dataField ) {
                     if(item._$depth ===1) {
                         return false;
+                    }else if(item._$depth ===2){
+                        return true;
                     }
                 }
             },
@@ -324,9 +332,7 @@
                 return "my-file-selected";
             },
             labelFunction: function (rowIndex, columnIndex, value, headerText, item) {
-
                 if(item._$depth === 1){
-                    console.log()
                     return null;
                 } else{
                     if (typeof value == "undefined" || value == "") {
@@ -392,8 +398,11 @@
 
             /* 해당 조건에서 보이는 context-menu */
             if (event.dataField === "category_classification_name") {
-                console.log("맞아")
-                return contextMenus_top;
+                if(event.item._$depth === 1){
+                    return contextMenus_top;
+                }else {
+                    return false;
+                }
             } else if(event.dataField === "category_isUSage"){
                 if(event.item._$depth !== 1){
                     return contextMenus_usage;
@@ -429,7 +438,7 @@
         }, {
             dataField: "category_classification_name",
             headerText: "자산분류",
-            editable: true,
+            editable: false,
             style: "left",
             width:"22%",
             filter: {
@@ -457,6 +466,8 @@
                 visibleFunction :  function(rowIndex, columnIndex, value, item, dataField ) {
                     if(item._$depth ===1) {
                         return false;
+                    }else if(item._$depth ===2){
+                        return true;
                     }
                 }
             },
@@ -478,7 +489,6 @@
             labelFunction: function (rowIndex, columnIndex, value, headerText, item) {
 
                 if(item._$depth === 1){
-                    console.log()
                     return null;
                 } else{
                     if (typeof value == "undefined" || value == "") {
@@ -544,8 +554,11 @@
 
             /* 해당 조건에서 보이는 context-menu */
             if (event.dataField === "category_classification_name") {
-                console.log("맞아")
-                return contextMenus_top;
+                if(event.item._$depth === 1){
+                    return contextMenus_top;
+                }else {
+                    return false;
+                }
             } else if(event.dataField === "category_isUSage"){
                 if(event.item._$depth !== 1){
                     return contextMenus_usage;
@@ -615,7 +628,7 @@
                 AUIGrid.resize(basicItemInfo_ID, halfWidth);
                 AUIGrid.resize(regularItemInfo_ID, halfWidth);
                 AUIGrid.resize(rentalItemInfo_ID, halfWidth);
-            },20)
+            },20);
 
         } else{
             halfWidth = halfWidth - 130;
@@ -623,7 +636,7 @@
                 AUIGrid.resize(basicItemInfo_ID, halfWidth);
                 AUIGrid.resize(regularItemInfo_ID, halfWidth);
                 AUIGrid.resize(rentalItemInfo_ID, halfWidth);
-            },20)
+            },20);
         }
     });
 
@@ -632,14 +645,14 @@
         switch (event.contextIndex) {
             case 0:
                 /* 1. 하위 품목 추가 */
-                var selectedItems = AUIGrid.getSelectedItems(basicItemInfo_ID);
+                let selectedItems = AUIGrid.getSelectedItems(basicItemInfo_ID);
                 if (selectedItems.length <= 0)
                     return;
 
-                var selItem = selectedItems[0].item;
-                var parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
+                let selItem = selectedItems[0].item;
+                let parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
 
-                var newItem = new Object();
+                let newItem = new Object();
                 newItem.parentRowId = parentRowId; // 부모의 rowId 값을 보관해 놓음...나중에 개발자가 유용하게 쓰기 위함...실제 그리드는 사용하지 않음.
                 newItem.id = selItem.id + "-자식";
                 newItem.category_classification_name = "";
@@ -647,8 +660,6 @@
                 newItem.category_file_upload = "";
                 newItem.category_file_name = "";
                 newItem.category_isUSage = ""
-                // 행 위치 시킬 곳, 셀렉트 값.
-                var rowPos = document.getElementById("basicItemInfo_ID").value;
 
                 // parameter
                 // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
@@ -684,14 +695,14 @@
         switch (event.contextIndex) {
             case 0:
                 /* 1. 하위 품목 추가 */
-                var selectedItems = AUIGrid.getSelectedItems(regularItemInfo_ID);
+                let selectedItems = AUIGrid.getSelectedItems(regularItemInfo_ID);
                 if (selectedItems.length <= 0)
                     return;
 
-                var selItem = selectedItems[0].item;
-                var parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
+                let selItem = selectedItems[0].item;
+                let parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
 
-                var newItem = new Object();
+                let newItem = new Object();
                 newItem.parentRowId = parentRowId; // 부모의 rowId 값을 보관해 놓음...나중에 개발자가 유용하게 쓰기 위함...실제 그리드는 사용하지 않음.
                 newItem.id = selItem.id + "-자식";
                 newItem.category_classification_name = "";
@@ -699,8 +710,6 @@
                 newItem.category_file_upload = "";
                 newItem.category_file_name = "";
                 newItem.category_isUSage = ""
-                // 행 위치 시킬 곳, 셀렉트 값.
-                var rowPos = document.getElementById("regularItemInfo_ID").value;
 
                 // parameter
                 // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
@@ -736,14 +745,14 @@
         switch (event.contextIndex) {
             case 0:
                 /* 1. 하위 품목 추가 */
-                var selectedItems = AUIGrid.getSelectedItems(rentalItemInfo_ID);
+                let selectedItems = AUIGrid.getSelectedItems(rentalItemInfo_ID);
                 if (selectedItems.length <= 0)
                     return;
 
-                var selItem = selectedItems[0].item;
-                var parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
+                let selItem = selectedItems[0].item;
+                let parentRowId = selItem.uid; // 선택행의 자식으로 행 추가
 
-                var newItem = new Object();
+                let newItem = new Object();
                 newItem.parentRowId = parentRowId; // 부모의 rowId 값을 보관해 놓음...나중에 개발자가 유용하게 쓰기 위함...실제 그리드는 사용하지 않음.
                 newItem.id = selItem.id + "-자식";
                 newItem.category_classification_name = "";
@@ -751,8 +760,6 @@
                 newItem.category_file_upload = "";
                 newItem.category_file_name = "";
                 newItem.category_isUSage = ""
-                // 행 위치 시킬 곳, 셀렉트 값.
-                var rowPos = document.getElementById("rentalItemInfo_ID").value;
 
                 // parameter
                 // item : 삽입하고자 하는 아이템 Object 또는 배열(배열인 경우 다수가 삽입됨)
@@ -786,16 +793,16 @@
 
     /* 파일 업로드 */
     //파일 저장 캐시
-    var myFileCaches = {};
+    let myFileCaches = {};
 
     // 최근 그리드 파일 선택 행 아이템 보관 변수
-    var recentGridItem = null;
+    let recentGridItem = null;
 
     //그리드의 셀 버턴 클릭 처리
     // 파일 선택하기
     $('#file_basic').on('change', function (evt) {
-        var data = null;
-        var file = evt.target.files[0];
+        let data = null;
+        let file = evt.target.files[0];
         if (typeof file == "undefined") {
             alert("파일 선택 시 취소!!");
 
@@ -832,8 +839,8 @@
     });
 
     $('#file_regular').on('change', function (evt) {
-        var data = null;
-        var file = evt.target.files[0];
+        let data = null;
+        let file = evt.target.files[0];
         if (typeof file == "undefined") {
             alert("파일 선택 시 취소!!");
 
@@ -870,8 +877,8 @@
     });
 
     $('#file_rental').on('change', function (evt) {
-        var data = null;
-        var file = evt.target.files[0];
+        let data = null;
+        let file = evt.target.files[0];
         if (typeof file == "undefined") {
             alert("파일 선택 시 취소!!");
 
@@ -911,19 +918,19 @@
 /* input */
     function basicButtonClick(item) {
         recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
-        var input = $("#file_basic");
+        let input = $("#file_basic");
         input.trigger('click'); // 파일 브라우저 열기
     };
 
     function regularButtonClick(item) {
         recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
-        var input = $("#file_regular");
+        let input = $("#file_regular");
         input.trigger('click'); // 파일 브라우저 열기
     };
 
     function rentalButtonClick(item) {
         recentGridItem = item; // 그리드의 클릭한 행 아이템 보관
-        var input = $("#file_rental");
+        let input = $("#file_rental");
         input.trigger('click'); // 파일 브라우저 열기
     };
 </script>

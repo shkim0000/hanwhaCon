@@ -445,12 +445,6 @@
     </div>
 </div>
 <!-- // 팝업 -->
-<style>
-    .input-design{position:relative;}
-    .input-design2{position:relative;}
-    .input-design2::after{content:'';width:calc(100% - 10px);height:calc(100% - 14px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}
-    .input-design::after{content:'';width:calc(100% - 10px);height:calc(100% - 6px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}
-</style>
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -470,7 +464,6 @@ requestAssetEnrollData();
 
 
 /* 3. AUIGrid 그리드 옵션 */
-
 function createNewAssetEnrollGrid() {
     /* 기본 그리드(예시) */
     /* 1. AUIGrid 칼럼 설정 */
@@ -487,6 +480,9 @@ function createNewAssetEnrollGrid() {
             renderer: {
                 type: "DropDownListRenderer",
                 list: groupList1
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_model_name",
@@ -502,6 +498,9 @@ function createNewAssetEnrollGrid() {
                         }
                     }
                 },
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_enroll_count",
@@ -518,6 +517,9 @@ function createNewAssetEnrollGrid() {
                 allowNegative: true, // 마이너스 부호(-) 허용 여부
                 textAlign: "right", // 오른쪽 정렬로 입력되도록 설정
                 autoThousandSeparator: true // 천단위 구분자 삽입 여부
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_asset_num",
@@ -530,6 +532,9 @@ function createNewAssetEnrollGrid() {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
                 onlyNumeric : true, // 0~9만 입력가능
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_serial_key",
@@ -537,26 +542,31 @@ function createNewAssetEnrollGrid() {
             editRenderer : {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
-                // maxlength : 15, // 글자수 10으로 제한 (천단위 구분자 삽입(autoThousandSeparator=true)로 한 경우 구분자 포함해서 10자로 제한)
-                // regExp : "^[a-zA-Z]+$",
+            },
+            filter: {
+                showIcon: true,
             }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231012 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: false, // 소팅
+        editable: true, // 수정 모드
+        softRemoveRowMode: false,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        rowHeight:38,
+        /* 페이지네이션 */
         usePaging: false, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode:true,
-        softRemoveRowMode: false,
-        rowHeight:38,
-        editable: true, // 수정 모드
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
@@ -566,7 +576,7 @@ function createNewAssetEnrollGrid() {
 
 function createAssetEnrollGrid() {
     /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
+    /* 20231012 : 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
             dataField: "id",
@@ -579,6 +589,9 @@ function createAssetEnrollGrid() {
             renderer: {
                 type: "DropDownListRenderer",
                 list: groupList1
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_model_name",
@@ -593,6 +606,9 @@ function createAssetEnrollGrid() {
                         }
                     }
                 },
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_enroll_count",
@@ -605,6 +621,9 @@ function createAssetEnrollGrid() {
                 allowNegative: true, // 마이너스 부호(-) 허용 여부
                 textAlign: "right", // 오른쪽 정렬로 입력되도록 설정
                 autoThousandSeparator: true // 천단위 구분자 삽입 여부
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_asset_num",
@@ -616,6 +635,9 @@ function createAssetEnrollGrid() {
                 type : "InputEditRenderer",
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
                 onlyNumeric : true, // 0~9만 입력가능
+            },
+            filter: {
+                showIcon: true,
             }
         }, {
             dataField: "category_serial_key",
@@ -628,29 +650,39 @@ function createAssetEnrollGrid() {
                 showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
                 // maxlength : 15, // 글자수 10으로 제한 (천단위 구분자 삽입(autoThousandSeparator=true)로 한 경우 구분자 포함해서 10자로 제한)
                 // regExp : "^[a-zA-Z]+$",
+            },
+            filter: {
+                showIcon: true,
             }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231012 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
+        rowIdTrustMode: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: true,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 체크박스 */
+        showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+        enableRowCheckShiftKey: true,
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode:true,
-        editable: true,
-        rowIdTrustMode: true,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false);
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     assetEnroll_ID = AUIGrid.create("#assetEnroll_ID", columnLayout, gridPros);
-
 }
+
 $(document).on("click",".menu-btn",function(){
     let gridInnerWidth = $('.grid-sub-box').innerWidth();
     let innerWidth = $(".contents").innerWidth() - 40 - gridInnerWidth - 75;
@@ -659,14 +691,14 @@ $(document).on("click",".menu-btn",function(){
         setTimeout(function(){
             AUIGrid.resize(newAssetEnroll_ID, innerWidth);
             AUIGrid.resize(assetEnroll_ID, innerWidth);
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 180;
         setTimeout(function(){
             AUIGrid.resize(newAssetEnroll_ID, innerWidth);
             AUIGrid.resize(assetEnroll_ID, innerWidth);
-        },20)
+        },20);
     }
 });
 
@@ -687,16 +719,18 @@ function requestAssetEnrollData() {
 
 
 
-/* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+/* 20231012 : 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
     if (typeof newAssetEnroll_ID !== "undefined"){
         AUIGrid.resize(newAssetEnroll_ID);
+    }
+    if (typeof assetEnroll_ID !== "undefined"){
+        AUIGrid.resize(assetEnroll_ID);
     }
 }
 
 /* 6. 함수 관련 모음 */
 /* 그리드 행 선택 삭제 */
-
 function deleteRowGrid(){
     AUIGrid.removeCheckedRows(assetEnroll_ID); // 체크된 행 삭제 처리
     let removedRows = AUIGrid.getRemovedItems(assetEnroll_ID, true); // 삭제 처리된 아이템 있는지 보기
@@ -809,7 +843,7 @@ $(document).ready(function () {
             else reader.readAsArrayBuffer(file);
 
         }
-    })
+    });
 
 
 });

@@ -285,13 +285,13 @@ $(document).on("click",".menu-btn",function(){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
             AUIGrid.resize(userProxyGrid_ID, innerWidth);
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
             AUIGrid.resize(userProxyGrid_ID, innerWidth);
-        },20)
+        },20);
     }
 });
 
@@ -304,15 +304,6 @@ $('#userGroup_pop').on('dialogclose', function(event) {
 
     /* 2. 그룹 사용자별 정보 */
 });
-
-/* 버튼 클릭시 그리드 제시(탭메뉴) */
-function op_grid(id){
-    if(id === "userInformation"){
-        setTimeout(function(){
-            gridPopUserGroup();
-        },20);
-    }
-}
 
 /* 행 삭제 */
 function deleteRowGrid(){

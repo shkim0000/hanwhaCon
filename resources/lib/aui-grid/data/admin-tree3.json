@@ -24,5 +24,50 @@
       "category_file_name": "",
       "category_isUSage": "Y"
     }]
+  },
+  {
+    "uid": "J0",
+    "id": "J0",
+    "category_classification_name": "모니터",
+    "category_item": "",
+    "category_file_upload": "",
+    "category_file_name": "",
+    "category_isUSage": "",
+    "children": [{
+      "uid": "J1",
+      "id": "J1",
+      "category_classification_name": "",
+      "category_item": "표준 PC",
+      "category_file_upload": "",
+      "category_file_name": "",
+      "category_isUSage": "Y"
+    },{
+      "uid": "J2",
+      "id": "J2",
+      "category_classification_name": "",
+      "category_item": "표준 PC",
+      "category_file_upload": "",
+      "category_file_name": "",
+      "category_isUSage": "Y"
+    }]
+  },
+  {
+    "uid": "G0",
+    "id": "G0",
+    "category_classification_name": "모니터",
+    "category_item": "",
+    "category_file_upload": "",
+    "category_file_name": "",
+    "category_isUSage": ""
+  },
+  {
+    "uid": "M0",
+    "id": "M0",
+    "category_classification_name": "강남",
+    "category_item": "",
+    "category_file_upload": "",
+    "category_file_name": "",
+    "category_isUSage": ""
   }
+
 ]

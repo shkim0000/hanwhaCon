@@ -141,6 +141,7 @@ $(function(){
             "</div>\n"+
         "</div>\n"
     );
+
 });
 
 $(function(){
@@ -440,8 +441,16 @@ function lp_open(id,title,width,height,e,type){
             $('input:first').blur();
             $('#ui-datepicker-div').hide();
         },
+        close: function( event, ui ) {
+            if (event.target.id === "gridPop_replacementTarget") {
+                AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
+                AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list2, false);
+                AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
+            }
+        }
     });
-    /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
+
+
     if(id === "gridPop_user"){
         gridPopUser(id,title,width,height,e, type) ;
     } else if (id === "gridPop_manager"){
@@ -449,23 +458,43 @@ function lp_open(id,title,width,height,e,type){
     } else if(id === "gridPop_department"){
         popupDepartmentSearch(id,title,width,height,e)
     } else if(id === "newEnroll_pop"){
+        /* 자산신청 > 신규신청팝업 */
         gridPopNewEnrollDetail(id,title,width,height);
         gridPopNewEnrollHistory(id,title,width,height);
+        setTimeout(function(){
+            gridSizePopupBig(popup_grid_newEnroll_detail,1250);
+            gridSizePopup(popup_grid_newEnroll_history,1250);
+        },20);
     } else if(id === "changeEnroll_pop"){
+        /* 자산신청 > 교체신청팝업 */
         gridPopChangeEnrollDetail(id,title,width,height);
         gridPopChangeEnrollHistory(id,title,width,height);
+        gridSizePopup(popup_grid_changeEnroll_detail,1250);
+        gridSizePopup(popup_grid_change_history,1250);
     } else if (id === "rentalEnroll_pop"){
+        /* 자산신청 > 대여신청 */
         gridPopRentalEnrollDetail(id,title,width,height);
         gridPopRentalEnrollHistory(id,title,width,height);
+        gridSizePopup(popup_grid_rentalEnroll_detail,1250);
+        gridSizePopup(popup_grid_rental_history,1250);
     } else if (id === "returnEnroll_pop"){
+        /* 자산신청 > 대여연장신청 */
         gridPopReturnEnrollDetail(id,title,width,height);
         gridPopReturnEnrollHistory(id,title,width,height);
+        gridSizePopup(popup_grid_returnEnroll_detail,1250);
+        gridSizePopup(popup_grid_return_history,1250);
     } else if (id === "takingOverEnroll_pop"){
+        /* 자산신청 > 인수인계신청 */
         gridPopTakeoverEnrollDetail(id,title,width,height);
         gridPopTakeoverEnrollHistory(id,title,width,height);
+        gridSizePopup(popup_grid_takeOverEnroll_detail,1250);
+        gridSizePopup(popup_grid_takeOverEnroll_history,1250);
     } else if (id === "rentalExtensionEnroll_pop"){
+        /* 자산신청 > 대여연장신청 */
         gridPopRentalExtensionEnrollDetail(id,title,width,height);
         gridPopRentalExtensionEnrollHistory(id,title,width,height);
+        gridSizePopup(popup_grid_rentalExtension_detail,1250);
+        gridSizePopup(popup_grid_rentalExtension_history,1250);
     } else if (id === "gridPop_rental_info"){
         // popupChangeAssetInfo(id,title,width,height);
     } else if (id==="submit_pop"){
@@ -520,8 +549,11 @@ function lp_open(id,title,width,height,e,type){
     }else if(id==="swLicenseSearch_pop"){
         /* 기업자산 > HW 상세정보 > SW 라이선스 검색 */
         subPopupSWLicenseSearch(id,title,width,height, e);
+    } else if(id==="gridPop_detail"){
+        /* 자산현황 >  변경이력 조회 */
+        gridPopChangeHistory();
+        gridPopDueDiligenceHistory();
     }
-
 }
 
 
@@ -533,8 +565,9 @@ function lp_close(target){
         $("#" + target +"  .btn.trash").attr("data-btn","hide");
         $("#"+target).dialog("close");
     } else if(target === "gridPop_replacementTarget"){
-        AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
         AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
+        AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list2, false);
+        AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
         $("#"+target).dialog("close");
     } else if(target){
         $("#"+target).dialog("close");
@@ -557,4 +590,19 @@ function getRowCount2(gridname){
     setTimeout(function(){
         $(".title-box .row-count > span").text(AUIGrid.getRowCount(gridname));
     },100)
+}
+
+function gridSize(gridname){
+    let innerWidth = $(".contents").innerWidth() - 40;
+    AUIGrid.resize(gridname, innerWidth);
+}
+
+function gridSizePopup(gridname,width){
+    let innerWidth = width - 28;
+    AUIGrid.resize(gridname, innerWidth);
+}
+
+function gridSizePopupBig(gridname,width){
+    let innerWidth = width - 44;
+    AUIGrid.resize(gridname, innerWidth);
 }

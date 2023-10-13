@@ -73,5 +73,80 @@
         ]
       }
     ]
+  },
+  {
+    "uid" : "J0",
+    "id": "J0",
+    "category_dName": "대표이사",
+    "children": [
+      {
+        "uid" : "J1",
+        "id": "J1",
+        "category_dName": "총무부",
+        "children": [
+          {
+            "uid" : "J2",
+            "id": "J2",
+            "category_dName": "총무1팀"
+          },
+          {
+            "uid" : "J3",
+            "id": "J3",
+            "category_dName": "총무2팀"
+          }
+        ]
+      },
+      {
+        "uid" : "J4",
+        "id": "J4",
+        "category_dName": "인사부",
+        "children": [
+          {
+            "uid" : "J5",
+            "id": "J5",
+            "category_dName": "인사부1팀"
+          },
+          {
+            "uid" : "J6",
+            "id": "J6",
+            "category_dName": "인사부2팀"
+          }
+        ]
+      },
+      {
+        "uid" : "J7",
+        "id": "J7",
+        "category_dName": "1공장",
+        "children": [
+          {
+            "uid" : "J8",
+            "id": "J8",
+            "category_dName": "라인1"
+          },
+          {
+            "uid" : "J9",
+            "id": "J9",
+            "category_dName": "라인2"
+          }
+        ]
+      },
+      {
+        "uid" : "J10",
+        "id": "J10",
+        "category_dName": "2공장",
+        "children": [
+          {
+            "uid" : "J11",
+            "id": "J11",
+            "category_dName": "라인1"
+          },
+          {
+            "uid" : "J12",
+            "id": "J12",
+            "category_dName": "라인2"
+          }
+        ]
+      }
+    ]
   }
 ]

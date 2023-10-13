@@ -168,43 +168,6 @@
         </div>
         <div id="enrollGrid_ID" class="grid-box h-small2"></div>
 
-        <!--        <div class="title-box">-->
-        <!--            <div class="title">-->
-        <!--                <h3>첨부파일</h3>-->
-        <!--            </div>-->
-        <!--            <div class="btn-wrap">-->
-        <!--                <label class="file">-->
-        <!--                    <input type="file">-->
-        <!--                    <span  class="btn add-file">파일추가</span>-->
-        <!--                </label>-->
-        <!--                <button type="button" class="btn trash">선택 삭제</button>-->
-        <!--            </div>-->
-        <!--        </div>-->
-        <!--        <div class="table">-->
-        <!--            <table>-->
-        <!--                <colgroup>-->
-        <!--                    <col style="width:50px">-->
-        <!--                    <col style="width:calc(100% - 50px);">-->
-        <!--                </colgroup>-->
-        <!--                <thead>-->
-        <!--                <tr>-->
-        <!--                    <th>-->
-        <!--                        <div class="th-wrap center">-->
-        <!--                            <label class="check no-text">-->
-        <!--                                <input type="checkbox">-->
-        <!--                                <span></span>-->
-        <!--                            </label>-->
-        <!--                        </div>-->
-        <!--                    </th>-->
-        <!--                    <th><p>자산분류</p></th>-->
-        <!--                </tr>-->
-        <!--                </thead>-->
-        <!--                <tbody>-->
-        <!--                <tr>-->
-        <!--                </tr>-->
-        <!--                </tbody>-->
-        <!--            </table>-->
-        <!--        </div>-->
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">결재</button>
@@ -433,17 +396,6 @@
                         </div>
                     </div>
                 </div>
-                <!--<div class="row">
-                    <div class="th"><div class="th-wrap">상신의견</div></div>
-                    <div class="td">
-                        <div class="td-wrap column">
-                            <label class="input textarea">
-                                <textarea rows="3"></textarea>
-                            </label>
-                            <span class="count-words"><span>0</span> / 500</span>
-                        </div>
-                    </div>
-                </div>-->
             </div>
 
             <div class="btn-wrap">
@@ -627,9 +579,10 @@
                     type: "DropDownListRenderer",
                     list: groupList1
                 },
+                width:"30%",
                 filter: {
                     showIcon: true,
-                }
+                },
             }, {
                 dataField: "category_item",
                 headerText: "품목",
@@ -644,6 +597,7 @@
                         }
                     },
                 },
+                width:"30%",
                 filter: {
                     showIcon: true,
                 }
@@ -658,6 +612,7 @@
                     inputHeight: 28, // input 높이 지정
                     textEditable: false
                 },
+                width:"30%",
                 filter: {
                     showIcon: true,
                 }
@@ -676,24 +631,32 @@
                     onClick: function(){
                         AUIGrid.removeRow(enrollGrid_ID, "selectedIndex");
                     }
-                }
+                },
+                width:"10%",
             }]
-        /* 2. 그리드 속성 설정 */
+        /* 20231012 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            softRemoveRowMode:false,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            autoGridHeight : true,
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode:true,
-            softRemoveRowMode:false,
+            pageRowCount: 20, // 페이지에 출력되는 row 개수
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -721,14 +684,21 @@
             innerWidth = innerWidth + 260;
             setTimeout(function(){
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
         }
+    });
+
+
+    $(document).ready(function(){
+        setTimeout(function(){
+            gridSize(enrollGrid_ID);
+        },20);
     });
 
     /* 6. 함수 관련 */

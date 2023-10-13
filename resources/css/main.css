@@ -970,3 +970,9 @@ tbody tr p{text-align:center;}
 .search_grid_style > div::before{content:'\f002';font-family:"Font Awesome 6 Free";font-weight:var(--bold);color:#9f9d9d;position:absolute;right:12px;top:51%;transform:translateY(-50%);}
 .search_grid_style > div::after{content:'';width:1px;height:calc(100% - 4px);position:absolute;right:30px;top:50%;transform:translateY(-50%);background-color:#dbdbdb;}
 .search_grid_style .aui-grid-button-renderer{width:auto;display:flex;justify-content:center;background-color:transparent;color:#414141;border-radius:0;border:0;}
+
+/* 그리드 내 인풋박스 */
+.input-design{position:relative;}
+.input-design2{position:relative;}
+.input-design2::after{content:'';width:calc(100% - 10px);height:calc(100% - 14px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}
+.input-design::after{content:'';width:calc(100% - 10px);height:calc(100% - 6px);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border-radius:2px;border:1px solid #aca8a8;}

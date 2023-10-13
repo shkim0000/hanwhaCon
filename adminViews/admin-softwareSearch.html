@@ -77,14 +77,16 @@
                 <h3 class="important">S/W 설치현황</h3>
             </div>
         </div>
-        <div id="softwareCurrentGrid_ID" class="grid-box h-small"></div>
+        <!-- 20231012  : h-small4 로 수정 -->
+        <div id="softwareCurrentGrid_ID" class="grid-box h-small4"></div>
 
         <div class="title-box">
             <div class="title">
                 <h3 class="important">S/W 설치내역</h3>
             </div>
         </div>
-        <div id="softwareHistoryGrid_ID" class="grid-box h-small"></div>
+        <!-- 20231012  : h-small4 로 수정 -->
+        <div id="softwareHistoryGrid_ID" class="grid-box h-small4"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
@@ -372,14 +374,14 @@
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 
