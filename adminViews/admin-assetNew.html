@@ -61,14 +61,6 @@
             </div>
         </div>
         <div class="custom-table">
-            <!--<div class="row con-3">
-                <div class="th"><div class="th-wrap center">신청번호</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-                <div class="th"><div class="th-wrap center">신청구분</div></div>
-                <div class="td"><div class="td-wrap">자사 신규 신청</div></div>
-                <div class="th"><div class="th-wrap center">신청상태</div></div>
-                <div class="td"><div class="td-wrap"></div></div>
-            </div>-->
             <div class="row con-3">
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
@@ -124,10 +116,7 @@
                 <div class="th"><div class="th-wrap center"><p>설치 요청일</p></div></div>
                 <div class="td">
                     <div class="td-wrap">
-                        <label class="date single
-
-
-">
+                        <label class="date single">
                             <input type="text">
                         </label>
                     </div>
@@ -680,13 +669,17 @@
     }
     $(document).on("click",".menu-btn",function(){
         let innerWidth = $(".contents").innerWidth() - 40;
+
         if($(".contents").hasClass("active")){
+            console.log("active-true")
             innerWidth = innerWidth + 260;
+            console.log(innerWidth);
             setTimeout(function(){
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
             },20);
 
         } else{
+            console.log("active-false")
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(enrollGrid_ID, innerWidth);

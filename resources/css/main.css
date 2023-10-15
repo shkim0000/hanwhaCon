@@ -169,6 +169,9 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 /* [추가] 2031005 */
 .grid-box.h-small5{height:300px;}
 /* // [추가] 2031005 */
+/* 20231012 */
+.grid-box.grid-10{height:330px;}
+/* //20231012 */
 .grid-box.h-medium {height:550px;}
 /* [추가]20230925 */
 .grid-box.h-medium2 {height:400px;}

@@ -461,10 +461,8 @@ function lp_open(id,title,width,height,e,type){
         /* 자산신청 > 신규신청팝업 */
         gridPopNewEnrollDetail(id,title,width,height);
         gridPopNewEnrollHistory(id,title,width,height);
-        setTimeout(function(){
-            gridSizePopupBig(popup_grid_newEnroll_detail,1250);
-            gridSizePopup(popup_grid_newEnroll_history,1250);
-        },20);
+        gridSizePopup(popup_grid_newEnroll_detail,1250);
+        gridSizePopup(popup_grid_newEnroll_history,1250);
     } else if(id === "changeEnroll_pop"){
         /* 자산신청 > 교체신청팝업 */
         gridPopChangeEnrollDetail(id,title,width,height);
@@ -478,7 +476,7 @@ function lp_open(id,title,width,height,e,type){
         gridSizePopup(popup_grid_rentalEnroll_detail,1250);
         gridSizePopup(popup_grid_rental_history,1250);
     } else if (id === "returnEnroll_pop"){
-        /* 자산신청 > 대여연장신청 */
+        /* 자산신청 > 반납신청 */
         gridPopReturnEnrollDetail(id,title,width,height);
         gridPopReturnEnrollHistory(id,title,width,height);
         gridSizePopup(popup_grid_returnEnroll_detail,1250);
@@ -495,22 +493,27 @@ function lp_open(id,title,width,height,e,type){
         gridPopRentalExtensionEnrollHistory(id,title,width,height);
         gridSizePopup(popup_grid_rentalExtension_detail,1250);
         gridSizePopup(popup_grid_rentalExtension_history,1250);
-    } else if (id === "gridPop_rental_info"){
-        // popupChangeAssetInfo(id,title,width,height);
     } else if (id==="submit_pop"){
+        /* 상신 */
         popupSubmitList(id,title,width,height);
     } else if (id === "submitSearch_pop"){
+        /* 상신 */
         subPopupSearchExecutives(id,title,width,height);
         subPopupAddExecutives(id,title,width,height);
     } else if (id === "submitApprovalChange_pop"){
+        /* 상신 */
         subPopupApprovalChange(id,title,width,height);
     } else if (id === "gridPop_disabledAddRow"){
+        /* 장애신고 > 장애신고 */
         popupAddDisabled(id,title,width,height);
+        gridSizePopup(popup_grid_disabledAddRow,1230);
     } else if (id ==="gridPop_disabledCurrent"){
+        /* 장애신고 > 장애신고현황 */
         gridPopDisabledDetail(id,title,width,height);
         gridPopDisabledHistory(id,title,width,height);
         gridPopDisabledListHistory(id,title,width,height);
     }  else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
+        /* 엑셀 import함수 질문하기 */
         popupConsistency(id,title,width,height);
     } else if (id === "assetSearch_pop"){
         subPopupAssetSearch(id,title,width,height,e,type);

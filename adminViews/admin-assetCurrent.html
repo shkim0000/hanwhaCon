@@ -100,7 +100,7 @@
                 </div>
                 <div class="input-list">
                     <span class="input-title">자산번호</span>
-                    <label class="input search" onclick="lp_open('assetSearch_pop','자산검색',800,500,this,'normal');">
+                    <label class="input search" onclick="lp_open('assetSearch_pop','자산검색',800,480,this,'normal');">
                         <input type="text" data-label="assetNumber" readonly>
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
@@ -154,7 +154,7 @@
             <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop', '인수인계신청',1250,730)">인수인계신청</button>
         </div>
         <div class="btn-wrap" style="margin-top:10px;">
-            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>
+            <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,480)">자산검색</button>
         </div>
     </div>
 </div>
@@ -1023,7 +1023,8 @@
                 </div>
                 <button type="button" class="btn search">검색</button>
             </div>
-            <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
+            <!-- 20231012 -->
+            <div id="popup_subGrid_assetSearch" class="grid-box grid-10"></div>
         </div>
     </div>
 </div>
@@ -1141,6 +1142,8 @@
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             pageRowCount: 20, // 페이지에 출력되는 row 개수
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
             /* 기능 : 체크 기능 막기 */
             rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
                 if (item.category_status !== "임시저장") {
