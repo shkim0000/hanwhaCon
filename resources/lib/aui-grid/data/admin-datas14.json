@@ -1,6 +1,7 @@
 [
   {
   "id": "#grid_id_1",
+  "uid":"uid1",
   "category_product": "데스크탑",
   "category_asset_num": "2234580",
   "category_model_name": "DESK-SS-I7M32",
@@ -10,7 +11,58 @@
   },
   {
     "id": "#grid_id_2",
+    "uid":"uid2",
     "category_product": "모니터",
+    "category_asset_num": "2234580",
+    "category_model_name": "DESK-SS-I7M32",
+    "category_start_date": "2021-05-13",
+    "category_department_name": "본사창고",
+    "category_asset_status": "가용"
+  },
+  {
+    "id": "#grid_id_3",
+    "uid":"uid3",
+    "category_product": "데스크탑",
+    "category_asset_num": "2234580",
+    "category_model_name": "DESK-SS-I7M32",
+    "category_start_date": "2021-05-13",
+    "category_department_name": "본사창고",
+    "category_asset_status": "가용"
+  },
+  {
+    "id": "#grid_id_4",
+    "uid":"uid4",
+    "category_product": "마우스",
+    "category_asset_num": "2234580",
+    "category_model_name": "DESK-SS-I7M32",
+    "category_start_date": "2021-05-13",
+    "category_department_name": "본사창고",
+    "category_asset_status": "가용"
+  },
+  {
+    "id": "#grid_id_5",
+    "uid":"uid5",
+    "category_product": "마우스",
+    "category_asset_num": "2234580",
+    "category_model_name": "DESK-SS-I7M32",
+    "category_start_date": "2021-05-13",
+    "category_department_name": "본사창고",
+    "category_asset_status": "가용"
+  },
+  {
+    "id": "#grid_id_6",
+    "uid":"uid6",
+    "category_product": "키보드",
+    "category_asset_num": "2234580",
+    "category_model_name": "DESK-SS-I7M32",
+    "category_start_date": "2021-05-13",
+    "category_department_name": "본사창고",
+    "category_asset_status": "가용"
+  },
+  {
+    "id": "#grid_id_7",
+    "uid":"uid7",
+    "category_product": "키보드",
     "category_asset_num": "2234580",
     "category_model_name": "DESK-SS-I7M32",
     "category_start_date": "2021-05-13",

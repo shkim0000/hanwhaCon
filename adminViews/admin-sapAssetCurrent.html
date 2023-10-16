@@ -41,7 +41,7 @@
             </ul>
         </div>
 
-        <div id="sapAssetCurrent_ID" class="grid-box h-large2"></div>
+        <div id="sapAssetCurrent_ID" class="grid-box grid-28"></div>
     </div>
 </div>
 
@@ -163,7 +163,7 @@
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 200, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 28, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -177,7 +177,7 @@
     /* 4. 데이터 불러오기 */
     function requestSapAssetCurrentData() {
         $.get("../resources/lib/aui-grid/data/admin-sw.json", function (data) {
-            AUIGrid.setGridData(swAssetCurrent_ID, data);
+            AUIGrid.setGridData(sapAssetCurrent_ID, data);
         });
     }
 

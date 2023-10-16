@@ -240,23 +240,26 @@
                 label: "사용안함", callback: contextItemHandler_usage_basic
             }];
 
-            /* 해당 조건에서 보이는 context-menu */
-            if (event.dataField === "category_classification_name") {
-                if(event.item._$depth === 1){
-                    return contextMenus_top;
-                }else {
-                    return false;
-                }
-            } else if(event.dataField === "category_isUSage"){
-                if(event.item._$depth !== 1){
-                    return contextMenus_usage;
-                }else{
-                    return false;
-                }
-            } else{
+            /* 20231016 : 해당 조건에서 보이는 context-menu */
+            if(event.target === "header"){
                 return false;
+            }else{
+                if (event.dataField === "category_classification_name") {
+                    if(event.item._$depth === 1){
+                        return contextMenus_top;
+                    }else {
+                        return false;
+                    }
+                } else if(event.dataField === "category_isUSage"){
+                    if(event.item._$depth !== 1){
+                        return contextMenus_usage;
+                    }else{
+                        return false;
+                    }
+                } else{
+                    return false;
+                }
             }
-
         });
 
         // 에디팅 시작 이벤트 바인딩

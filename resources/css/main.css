@@ -171,12 +171,19 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 /* // [추가] 2031005 */
 /* 20231012 */
 .grid-box.grid-10{height:330px;}
+.grid-box.grid-20{height:605px;}
+.grid-box.grid-22{height:655px;}
+.grid-box.grid-25{height:717px;}
+.grid-box.grid-28 {height:800px;}
 /* //20231012 */
 .grid-box.h-medium {height:550px;}
 /* [추가]20230925 */
 .grid-box.h-medium2 {height:400px;}
+/* 20231012 */
+.grid-box.h-medium3 {height:350px;}
+.grid-box.h-medium4 {height:380px;}
 .grid-box.h-large {height:650px;}
-.grid-box.h-large2 {height:800px;}
+
 /* //[추가]2023-09-25 */
 #popup_grid_detail{width:1200px;}
 .l-grid{width:1200px;}
@@ -476,6 +483,8 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .pop-body .btn-wrap.add-file-wrap{margin-top:0;}
 .pop-body .btn-wrap.add-file-wrap > *{width:auto;}
 
+
+
 /* 레이어 팝업 */
 .ui-dialog{background:var(--color10);border-radius:8px;padding:0;font-family:"Noto Sans", sans-serif;color:#414141;}
 .ui-dialog .ui-dialog-content{padding:0;}
@@ -662,8 +671,11 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* //20231005 */
 .title-box .title > *{position:relative;padding-left:14px;font-size:20px;font-weight:var(--bold);}
 .title-box .title > *::before{content:'';width:4px;height:16px;background-color:var(--color1);position:absolute;left:0;top:50%;transform:translateY(-50%);}
+/* 20231012 */
+.title-box .btn-wrap > .btn{padding-top:6px;padding-bottom:6px;}
 .btn-wrap{gap:8px;}
-.btn-wrap.form{justify-content:center;margin-top:38px;}
+/* 20231012 */
+.btn-wrap.form{justify-content:center;margin-top:25px;}
 .btn-wrap.only{margin-top:55px;}
 .btn-wrap.center{justify-content:center;margin-top:40px;}
 .btn-wrap.end{justify-content:flex-end;margin-bottom:10px;margin-top:10px;}
@@ -830,14 +842,8 @@ tbody tr p{text-align:center;}
     .row.con-3 .td.medium,
     .row.con-3 .td {width:calc(100% - 120px);border-bottom:1px solid var(--line1);}
     .row.con-3 .td.medium, .row > .th:nth-last-child(2) , .row > .td:nth-last-child(1) {border-bottom:0}
-    .custom-table .td.whole .date{max-width:none;width:calc(50% - 8px);}
-
-    /*.popup .td + .th{border-left:1px solid var(--line1);}*/
-    /*.popup .row.con-3 .td.medium,*/
-    /*.popup .row.con-3 .td {border-bottom:0;}*/
-    /*.popup .row.con-3 .td.medium,*/
-    /*.popup .row > .th,*/
-    /*.popup .row > .td {border-bottom:0;}*/
+    /* 20231012 */
+    .custom-table .td.whole .date{max-width:none;width:calc(50% - 17px);}
 
     /* [추가] 20230925 */
     .row.con-3 .td.no-th{width:100%;}

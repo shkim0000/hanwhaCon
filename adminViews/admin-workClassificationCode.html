@@ -46,7 +46,8 @@
                 <button type="button" class="btn" onclick="lp_open('gridPop_workClassificationCode','업무구분코드',800,310)"> 등록</button>
             </div>
         </div>
-        <div id="workClassificationCode_ID" class="grid-box h-large"></div>
+        <!-- 20231012 : class 수정 -->
+        <div id="workClassificationCode_ID" class="grid-box grid-25"></div>
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_workClassificationCode','업무구분코드',800,310)">업무구분코드</button>
@@ -199,6 +200,7 @@
             fillColumnSizeMode:true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount: 25,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */

@@ -95,8 +95,8 @@
                 <button type="button" class="btn add-column" onclick="lp_open('gridPop_disabledAddRow','장애대상 추가',1230,430);">추가</button>
             </div>
         </div>
-        <!-- 장애 대상 목록 그리드 -->
-        <div id="disabledList_ID" class="grid-box h-small"></div>
+        <!-- 20231012 : class 추가 장애 대상 목록 그리드 -->
+        <div id="disabledList_ID" class="grid-box grid-10"></div>
 
         <div class="title-box">
             <div class="title">
@@ -572,10 +572,10 @@ function createDisabledListGrid() {
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
-        autoGridHeight : true,
         fillColumnSizeMode:true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount: 10,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */

@@ -138,7 +138,8 @@
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="applicationGrid_ID" class="grid-box"></div>
+        <!-- 20231012 -->
+        <div id="applicationGrid_ID" class="grid-box h-medium"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
@@ -1036,7 +1037,6 @@
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
     createApplicationGrid();
-    requestApplicationStatusData();
 
     /* 3. AUIGrid 그리드 옵션 */
     /* 신청정보 */
@@ -1135,7 +1135,6 @@
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
-            autoGridHeight : true,
             fillColumnSizeMode:true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
@@ -1150,11 +1149,12 @@
                     return false;
                 }
                 return true;
-            },
+            }
         }
 
         /* 그리드 생성 */
         applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+        requestApplicationStatusData();
 
         /* [수정] 20231012 */
         // 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여)
@@ -1168,7 +1168,7 @@
             } else if(result ==="대여신청"){
                 lp_open('rentalEnroll_pop', '대여 신청',1250,900);
             } else if (result === "반납신청"){
-                lp_open('returnEnroll_pop', '반납신청',1250,810);
+                lp_open('returnEnroll_pop', '반납신청',1250,820);
             } else if (result === "대여연장신청"){
                 lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,780);
             } else if(result === "인수인계신청"){

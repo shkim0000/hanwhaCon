@@ -50,7 +50,7 @@
                 <button type="button" class="btn" onclick="lp_open('userGroup_pop','사용자 그룹 정보',1250,800);">등록</button>
             </div>
         </div>
-        <div id="userInfoGrid_ID" class="grid-box h-medium"></div>
+        <div id="userInfoGrid_ID" class="grid-box grid-20"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530);">사용자 검색</button>
@@ -331,7 +331,9 @@ function createAssetDetailGrid() {
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount: 20,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */

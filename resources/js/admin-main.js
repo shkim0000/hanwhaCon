@@ -461,7 +461,7 @@ function lp_open(id,title,width,height,e,type){
         /* 자산신청 > 신규신청팝업 */
         gridPopNewEnrollDetail(id,title,width,height);
         gridPopNewEnrollHistory(id,title,width,height);
-        gridSizePopup(popup_grid_newEnroll_detail,1250);
+        gridSizePopupBig(popup_grid_newEnroll_detail,1250);
         gridSizePopup(popup_grid_newEnroll_history,1250);
     } else if(id === "changeEnroll_pop"){
         /* 자산신청 > 교체신청팝업 */
@@ -513,16 +513,21 @@ function lp_open(id,title,width,height,e,type){
         gridPopDisabledHistory(id,title,width,height);
         gridPopDisabledListHistory(id,title,width,height);
     }  else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
-        /* 엑셀 import함수 질문하기 */
+        /* (작업전) excel Import */
         popupConsistency(id,title,width,height);
     } else if (id === "assetSearch_pop"){
+        /* 자산검색 */
         subPopupAssetSearch(id,title,width,height,e,type);
     } else if (id === "haveNetClient"){
+        /* 자산현황 > 자산조회 : 사용자 장비 정보 팝업 */
         popupSwInformation(id,title,width,height);
         popupBoxInformation(id,title,width,height);
     } else if (id === "gridPop_serviceDesk_detail"){
+        /* 서비스 데스크 > 서비스 신청 현황 */
         gridPopServiceDeskDetail(id,title,width,height);
         gridPopServiceDeskHistory(id,title,width,height);
+        gridSizePopup(popup_grid_serviceDesk_detail,1250);
+        gridSizePopup(popup_grid_serviceDesk_history,1250);
     }else if(id === "gridPop_selectUser"){
         gridPopSelectUser();
     }else if(id === "gridPop_assetClassification"){
@@ -543,6 +548,10 @@ function lp_open(id,title,width,height,e,type){
     }else if(id==="gridPop_assetDuediligenceDetail"){
         gridPopAssetChangeDetail();
         gridPopAssetChangeHistory();
+    }else if(id==="regularChangeEnroll_pop"){
+        /* 정기교체 > 정기교체 진행상황 > 상세 팝업 */
+        gridPopRegularChangeEnrollDetail();
+        gridSizePopup(popup_grid_regularChangeEnroll_detail,1250);
     }else if(id==="gridPop_sw_detail"){
         /* 기업자산 > SW 상세정보 */
         gridPopLicenseManage();
@@ -556,6 +565,8 @@ function lp_open(id,title,width,height,e,type){
         /* 자산현황 >  변경이력 조회 */
         gridPopChangeHistory();
         gridPopDueDiligenceHistory();
+        gridSizePopup(popup_grid_changeHistory,1250);
+        gridSizePopup(popup_grid_duediligenceHistory,1250);
     }
 }
 
@@ -593,11 +604,6 @@ function getRowCount2(gridname){
     setTimeout(function(){
         $(".title-box .row-count > span").text(AUIGrid.getRowCount(gridname));
     },100)
-}
-
-function gridSize(gridname){
-    let innerWidth = $(".contents").innerWidth() - 40;
-    AUIGrid.resize(gridname, innerWidth);
 }
 
 function gridSizePopup(gridname,width){

@@ -116,14 +116,14 @@
                 <button type="button" class="btn trash" onclick="deleteRowGrid();" >선택삭제</button>
             </div>
         </div>
-        <div id="hwAssetCurrent_ID" class="grid-box h-small5"></div>
+        <div id="hwAssetCurrent_ID" class="grid-box grid-10"></div>
 
         <div class="title-box">
             <div class="title flex">
                 <h3>SW자산 라이선스 현황</h3>
             </div>
         </div>
-        <div id="swAssetLicense_ID" class="grid-box h-small5"></div>
+        <div id="swAssetLicense_ID" class="grid-box grid-10"></div>
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'HW 상세정보',850,760)">HW 상세정보</button>
@@ -381,6 +381,7 @@
             enableRowCheckShiftKey: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount: 10,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
@@ -455,6 +456,7 @@
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount: 10,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */

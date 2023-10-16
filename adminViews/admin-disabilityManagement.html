@@ -41,7 +41,8 @@
             </ul>
         </div>
 
-        <div id="disabilityManagement_ID" class="grid-box h-large2"></div>
+        <!-- 20231012 : class추가 -->
+        <div id="disabilityManagement_ID" class="grid-box grid-28"></div>
     </div>
 </div>
 <!-- // contents -->
@@ -153,7 +154,8 @@
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 100, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 28, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
             copyDisplayValue: true,
             /* 필터*/
@@ -165,6 +167,7 @@
 
         // 컨텍스트 메뉴 이벤트 바인딩
         AUIGrid.bind(disabilityManagement_ID, "contextMenu", function (event) {
+            console.log(event);
 
             // 컨텍스트 메뉴에 보일 아이템 리스트
             /* 상위 분류 */
@@ -181,25 +184,30 @@
                 label: "사용안함", callback: contextItemHandler_usage
             }];
 
-            /* 해당 조건에서 보이는 context-menu */
-            if (event.dataField === "category_classification_top") {
-                console.log(event.item)
-                if(event.item._$depth === 1){
-                    return contextMenus_top;
-                }else{
+            /* 20231016 : 해당 조건에서 보이는 context-menu */
+            if(event.target === "header"){
+                return false;
+            }else{
+                if (event.dataField === "category_classification_top") {
+                    if(event.item._$depth === 1){
+                        return contextMenus_top;
+                    }else{
+                        return false;
+                    }
+                } else if(event.dataField === "category_usage"){
+                    if(event.item._$depth !== 1){
+                        return contextMenus_usage;
+                    }else{
+                        return false;
+                    }
+                } else{
                     return false;
                 }
-            } else if(event.dataField === "category_usage"){
-                return contextMenus_usage;
-            } else{
-                return false;
             }
-
         });
 
         // 에디팅 시작 이벤트 바인딩
         AUIGrid.bind(disabilityManagement_ID, "cellEditBegin", function (event) {
-            console.log( event.value)
             if(event.dataField === "category_classification_top" || event.dataField === "category_classification_down"){
                 if ( event.value !== '') {
                     return true;
@@ -210,7 +218,6 @@
             return false;
         });
     }
-
 
     /* 4. 데이터 불러오기 */
     function requestDisabilityManagementData() {

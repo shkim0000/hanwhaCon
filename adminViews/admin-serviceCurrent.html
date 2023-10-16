@@ -168,7 +168,8 @@
                 <button type="button" class="btn">취소</button>
             </div>
         </div>
-        <div id="serviceStatusGrid_ID" class="grid-box"></div>
+        <!-- 20231012  : h-medium2 class추가 -->
+        <div id="serviceStatusGrid_ID" class="grid-box h-medium2"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_serviceDesk_detail','서비스데스크 신청 현황',1250,800);">서비스데스크 신청 현황</button>
@@ -307,9 +308,7 @@ let serviceStatusGrid_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createServiceStatusGrid(); // 서비스신청현황
-
 requestServiceStatusGridData();
-
 /* 3. AUIGrid 그리드 옵션 */
 function createServiceStatusGrid() {
     /* 기본 그리드(예시) */
@@ -322,7 +321,7 @@ function createServiceStatusGrid() {
         }, {
             dataField: "category_application_num",
             headerText: "신청번호",
-            width: 160,
+            width: 180,
             filter: {
                 showIcon: true,
             }
@@ -403,7 +402,7 @@ function createServiceStatusGrid() {
         enableRowCheckShiftKey: true,
         /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
-        fillColumnSizeMode:true,
+        fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
@@ -419,7 +418,7 @@ function createServiceStatusGrid() {
 
     /* 20231012 : 더블 클릭시 팝업 */
     AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
-        lp_open("gridPop_detail","서비스데스크 신청 현황",1250,820);
+        lp_open("gridPop_serviceDesk_detail","서비스데스크 신청 현황",1250,740);
     });
 }
 

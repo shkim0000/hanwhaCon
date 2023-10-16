@@ -124,11 +124,11 @@
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="forcedRecallGrid_ID" class="grid-box"></div>
+        <div id="forcedRecallGrid_ID" class="grid-box h-medium"></div>
 
 
         <div class="btn-wrap">
-            <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '강제회수',1250,750)">강제회수</button>
+            <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '강제회수',1250,800)">강제회수</button>
         </div>
 
     </div>
@@ -257,7 +257,8 @@
                     <h3>반납자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_returnEnroll_detail" class="grid-box h-small"></div>
+            <!-- 20231012  : h-small class 삭제 -->
+            <div id="popup_grid_returnEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -472,19 +473,9 @@
         /* grid-title에 row Count 가 추가되는 함수 */
         getRowCount(forcedRecallGrid_ID);
 
-
         AUIGrid.bind(forcedRecallGrid_ID, "cellDoubleClick", function(event) {
-
-            /* 자산정보 팝업에 대한 부분 추가되어야 함. */
-            $("#returnEnroll_pop").addClass("open").dialog({
-                title: "강제회수",
-                width: 1250,
-                height: 500,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            lp_open('returnEnroll_pop', '강제회수',1250,570)
+            /* 20231012: 자산정보 팝업에 대한 부분 추가되어야 함. */
+            lp_open('returnEnroll_pop', '강제회수',1250,830);
         });
     }
 

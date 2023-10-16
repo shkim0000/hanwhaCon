@@ -168,9 +168,8 @@
 /* 1. AUIGrid 생성 후 반환 ID */
 let enrollCurrentGrid_ID;
 
-/* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+/* 20231012 : 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createEnrollCurrentGrid();
-requestEnrollCurrentData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createEnrollCurrentGrid() {
@@ -257,8 +256,12 @@ function createEnrollCurrentGrid() {
         enableFilter: true, // 필터 true 설정
     }
 
-    /* 그리드 생성 */
-    enrollCurrentGrid_ID = AUIGrid.create("#enrollCurrent_ID", columnLayout, gridPros);
+    /* 20231012 : 그리드 생성 */
+    setTimeout(function(){
+        enrollCurrentGrid_ID = AUIGrid.create("#enrollCurrent_ID", columnLayout, gridPros);
+        requestEnrollCurrentData();
+    },100);
+
 
     /* 셀 더블클릭 이벤트 바인딩 */
     AUIGrid.bind(enrollCurrentGrid_ID, "cellDoubleClick", function(event) {
@@ -297,8 +300,6 @@ $(document).on("click",".menu-btn",function(){
         },20);
     }
 });
-
-
 </script>
 </body>
 </html>

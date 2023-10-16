@@ -85,7 +85,7 @@
                 <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,530);">등록</button>
             </div>
         </div>
-        <div id="replacement_ID" class="grid-box h-small5"></div>
+        <div id="replacement_ID" class="grid-box grid-10"></div>
 
         <div class="title-box hide-ver">
             <div class="title flex">
@@ -98,7 +98,7 @@
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="replacementDetail_ID" class="grid-box h-small5"></div>
+        <div id="replacementDetail_ID" class="grid-box grid-10"></div>
 
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530);">정기교체작업등록현황</button>
@@ -310,7 +310,7 @@
                     <button type="button" class="btn primary check" onclick="downBtnClick(this);">선택</button>
                 </div>
             </div>
-            <div id="popup_grid_replacementTarget_list1" class="grid-box h-small"></div>
+            <div id="popup_grid_replacementTarget_list1" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -322,7 +322,7 @@
                     <button type="button" class="btn delete" onclick="upBtnClick();">선택삭제</button>
                 </div>
             </div>
-            <div id="popup_grid_replacementTarget_list2" class="grid-box h-small"></div>
+            <div id="popup_grid_replacementTarget_list2" class="grid-box"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn">등록</button>
@@ -586,6 +586,7 @@
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount: 10,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
@@ -754,6 +755,7 @@
             fillColumnSizeMode: false,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount: 10,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드복사 */
@@ -905,7 +907,7 @@
             setTimeout(function(){
                 AUIGrid.addRow(popup_grid_replacementTarget, rows, "last");
                 AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
-            },20)
+            },20);
         }
         lp_close("gridPop_replacementTarget");
     }
