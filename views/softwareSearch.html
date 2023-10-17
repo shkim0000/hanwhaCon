@@ -77,18 +77,21 @@
                 <h3 class="important">S/W 설치현황</h3>
             </div>
         </div>
-        <div id="softwareCurrentGrid_ID" class="grid-box h-small"></div>
+        <div id="softwareCurrentGrid_ID" class="grid-box grid-8"></div>
 
         <div class="title-box">
             <div class="title">
                 <h3 class="important">S/W 설치내역</h3>
             </div>
         </div>
-        <div id="softwareHistoryGrid_ID" class="grid-box h-small"></div>
+        <div id="softwareHistoryGrid_ID" class="grid-box grid-10"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
         </div>
+        -->
     </div>
 </div>
 
@@ -209,19 +212,24 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
+            softRemoveRowMode:false,
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 8, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode:true,
-            softRemoveRowMode:false,
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -290,17 +298,20 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode:true,
+            /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
 
@@ -335,7 +346,7 @@
         AUIGrid.removeCheckedRows(enrollGrid_ID); // 체크된 행 삭제 처리
         let removedRows = AUIGrid.getRemovedItems(enrollGrid_ID, true); // 삭제 처리된 아이템 있는지 보기
         if (removedRows.length <= 0) {
-            alert("삭제 처리되어 마크된 행이 없습니다.")
+            alert("삭제 처리되어 마크된 행이 없습니다.");
             return;
         }
         AUIGrid.removeSoftRows(enrollGrid_ID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
@@ -357,7 +368,7 @@
         AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
 
         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(enrollGrid_ID, str)
+        AUIGrid.updateRowsById(enrollGrid_ID, str);
     });
 
     /* 메뉴버튼 클릭시(반응형) */
@@ -368,14 +379,14 @@
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
                 AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
                 AUIGrid.resize(enrollGrid_ID, innerWidth);
-            },20)
+            },20);
         }
     });
 

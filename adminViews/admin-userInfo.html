@@ -73,12 +73,15 @@
                 <button type="button" class="btn excel" onclick="exportTo('xlsx')">엑셀다운로드</button>
             </div>
         </div>
-        <div id="userInfoGrid_ID" class="grid-box grid-22"></div>
+        <div id="userInfoGrid_ID" class="grid-box grid-23tw"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530);">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_userInfo','사용자 정보',1000,280);">사용자 정보</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -272,7 +275,7 @@ function createAssetDetailGrid() {
         headerHeight : 30, // 기본 헤더 높이 지정
         /* 20231012 페이지네이션 */
         usePaging: true, // 페이징 사용
-        pageRowCount: 25,
+        pageRowCount: 23,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */

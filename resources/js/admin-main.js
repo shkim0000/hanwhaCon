@@ -615,3 +615,14 @@ function gridSizePopupBig(gridname,width){
     let innerWidth = width - 44;
     AUIGrid.resize(gridname, innerWidth);
 }
+
+function hide_open(){
+    $(".title-box.hide-ver").addClass("open");
+}
+function hide_open2(){
+    $(".title-box.hide-ver2").addClass("open");
+}
+
+function hide_open_only(){
+    $(".title-box.hide-ver-only").addClass("open");
+}

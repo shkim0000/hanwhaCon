@@ -84,7 +84,8 @@
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="departmentSubmitStatus_ID" class="grid-box h-small4"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="departmentSubmitStatus_ID" class="grid-box grid-8"></div>
 
         <div class="title-box hide-ver">
             <div class="title"><h3>상세내역</h3></div>
@@ -92,7 +93,8 @@
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="adjustmentTargetDetails_ID" class="grid-box h-small4"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="adjustmentTargetDetails_ID" class="grid-box grid-8"></div>
         <div class="btn-wrap end hide">
             <button type="button" class="btn save" onclick="lp_open('saveCheck','확인',520,190);">저장</button>
         </div>
@@ -114,20 +116,6 @@
     </div>
 </div>
 <!-- //팝업 -->
-
-<style>
-    .my-cell-style {
-        background: #fff;
-        font-weight: bold;
-        color: #FF007F;
-    }
-    .my-column-style {
-        background: #eeeeee;
-        color: #005500;
-        font-weight: bold;
-    }
-</style>
-
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
@@ -269,9 +257,9 @@
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount:8,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            simplifySelectionEvent: true,
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */
@@ -401,9 +389,9 @@
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount:8,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            simplifySelectionEvent: true,
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */

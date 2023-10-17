@@ -157,7 +157,8 @@
                     <button type="button" class="btn primary check">선택</button>
                 </div>
             </div>
-            <div id="holdingAssetGrid_ID" class="grid-box h-small"></div>
+            <!-- 20231016 : class 수정 -->
+            <div id="holdingAssetGrid_ID" class="grid-box grid-5"></div>
         </div>
 
         <div class="title-box">
@@ -165,13 +166,16 @@
                 <h3 class="important">반납자신청정보</h3>
             </div>
         </div>
-        <div id="returnAssetGrid_ID" class="grid-box h-small"></div>
+        <!-- 20231016 : class 수정 -->
+        <div id="returnAssetGrid_ID" class="grid-box grid-5"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">결재</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
         </div>
@@ -181,6 +185,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -588,7 +593,7 @@
             }
 
         ]
-        /* 20231012 : 2. 그리드 속성 설정 */
+        /* 20231016 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
             selectionMode: "multipleCells",
@@ -605,7 +610,7 @@
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -724,7 +729,7 @@
             }
 
         ]
-        /* 20231012 : 2. 그리드 속성 설정 */
+        /* 20231016 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
             selectionMode: "multipleCells",
@@ -738,7 +743,7 @@
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -801,7 +806,7 @@
         AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
 
         /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(returnAssetGrid_ID, str)
+        AUIGrid.updateRowsById(returnAssetGrid_ID, str);
     });
 </script>
 </body>

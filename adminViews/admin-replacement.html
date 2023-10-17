@@ -85,7 +85,7 @@
                 <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,530);">등록</button>
             </div>
         </div>
-        <div id="replacement_ID" class="grid-box grid-10"></div>
+        <div id="replacement_ID" class="grid-box grid-8"></div>
 
         <div class="title-box hide-ver">
             <div class="title flex">
@@ -100,11 +100,14 @@
         </div>
         <div id="replacementDetail_ID" class="grid-box grid-10"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530);">정기교체작업등록현황</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_replacement', '정기교체작업 등록',1250,570)">정기교체작업 등록</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_replacementTarget', '정기교체대상',1250,720)">정기교체대상</button>
         </div>
+        -->
     </div>
 </div>
 
@@ -241,7 +244,7 @@
                     <button type="button" class="btn add-column" onclick="lp_open('gridPop_replacementTarget', '정기교체대상',1250,720)">추가</button>
                 </div>
             </div>
-            <div id="popup_grid_replacementTarget" class="grid-box h-small"></div>
+            <div id="popup_grid_replacementTarget" class="grid-box grid-5"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
@@ -310,7 +313,8 @@
                     <button type="button" class="btn primary check" onclick="downBtnClick(this);">선택</button>
                 </div>
             </div>
-            <div id="popup_grid_replacementTarget_list1" class="grid-box"></div>
+            <!-- 20231016 : class 추가 -->
+            <div id="popup_grid_replacementTarget_list1" class="grid-box grid-5"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -322,7 +326,8 @@
                     <button type="button" class="btn delete" onclick="upBtnClick();">선택삭제</button>
                 </div>
             </div>
-            <div id="popup_grid_replacementTarget_list2" class="grid-box"></div>
+            <!-- 20231016 : class 추가 -->
+            <div id="popup_grid_replacementTarget_list2" class="grid-box grid-5"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn">등록</button>
@@ -586,7 +591,7 @@
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
-            pageRowCount: 10,
+            pageRowCount: 8,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */

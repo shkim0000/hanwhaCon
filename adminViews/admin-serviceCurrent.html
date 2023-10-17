@@ -168,12 +168,15 @@
                 <button type="button" class="btn">취소</button>
             </div>
         </div>
-        <!-- 20231012  : h-medium2 class추가 -->
-        <div id="serviceStatusGrid_ID" class="grid-box h-medium2"></div>
+        <!-- 20231012  : class추가 -->
+        <div id="serviceStatusGrid_ID" class="grid-box grid-15"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_serviceDesk_detail','서비스데스크 신청 현황',1250,800);">서비스데스크 신청 현황</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -308,7 +311,7 @@ let serviceStatusGrid_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createServiceStatusGrid(); // 서비스신청현황
-requestServiceStatusGridData();
+
 /* 3. AUIGrid 그리드 옵션 */
 function createServiceStatusGrid() {
     /* 기본 그리드(예시) */
@@ -407,19 +410,23 @@ function createServiceStatusGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        pageRowCount:15, // 페이지에 출력되는 row 개수
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
-    /* 그리드 생성 */
-    serviceStatusGrid_ID = AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
+    /* 20231016 : 그리드 생성 */
+    setTimeout(function(){
+        serviceStatusGrid_ID = AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
+        requestServiceStatusGridData();
+        /* 20231012 : 더블 클릭시 팝업 */
+        AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
+            lp_open("gridPop_serviceDesk_detail","서비스데스크 신청 현황",1250,740);
+        });
+    },150);
 
-    /* 20231012 : 더블 클릭시 팝업 */
-    AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
-        lp_open("gridPop_serviceDesk_detail","서비스데스크 신청 현황",1250,740);
-    });
 }
 
 /* 4. 데이터 불러오기 */

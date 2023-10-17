@@ -94,12 +94,16 @@
                 <button type="button" class="btn excel" onclick="exportTo('xlsx')">엑셀다운로드</button>
             </div>
         </div>
-        <div id="enrollCurrent_ID" class="grid-box h-medium"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="enrollCurrent_ID" class="grid-box grid-22"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_applicationStatus','신청현황',1250,615)">신청현황</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -236,7 +240,7 @@ function createEnrollCurrentGrid() {
                 showIcon: true,
             }
         }];
-    /* 20231012 : 2. 그리드 속성 설정 */
+    /* 20231016 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
         enableSorting: true, // 소팅
@@ -250,6 +254,7 @@ function createEnrollCurrentGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        pageRowCount: 22, // 페이지에 출력되는 row 개수
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         /* 필터 */
@@ -260,14 +265,13 @@ function createEnrollCurrentGrid() {
     setTimeout(function(){
         enrollCurrentGrid_ID = AUIGrid.create("#enrollCurrent_ID", columnLayout, gridPros);
         requestEnrollCurrentData();
-    },100);
 
-
-    /* 셀 더블클릭 이벤트 바인딩 */
-    AUIGrid.bind(enrollCurrentGrid_ID, "cellDoubleClick", function(event) {
-        lp_open('gridPop_applicationStatus','신청현황',1250,615);
-        getRowCount(popup_grid_application_status);
-    });
+        /* 셀 더블클릭 이벤트 바인딩 */
+        AUIGrid.bind(enrollCurrentGrid_ID, "cellDoubleClick", function(event) {
+            lp_open('gridPop_applicationStatus','신청현황',1250,615);
+            getRowCount(popup_grid_application_status);
+        });
+    },150);
 }
 
 /* 4. 데이터 불러오기 */

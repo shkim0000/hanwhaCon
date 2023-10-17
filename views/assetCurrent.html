@@ -44,7 +44,6 @@
         </div>
         <div class="input-wrap">
             <div class="input-lists">
-                <!-- [수정] : 메뉴 > 신청구분 > 기간 > 진행 상태 > 사용자 > 부서 > 자산번호 > 신청사유 순으로 수정 -->
                 <div class="input-list">
                     <span class="input-title">메뉴</span>
                     <label class="select">
@@ -156,8 +155,11 @@
             </div>
         </div>
 
-        <div id="applicationGrid_ID" class="grid-box"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="applicationGrid_ID" class="grid-box grid-20"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('newEnroll_pop','신규 신청',1250,570,this);">신규신청</button>
@@ -167,6 +169,7 @@
             <button type="button" class="btn" onclick="lp_open('takingOverEnroll_pop','인수인계신청',1250,570,this);">인수인계신청</button>
             <button type="button" class="btn" onclick="lp_open('rentalExtensionEnroll_pop','대연연장신청',1250,570,this);">대연연장신청</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -805,13 +808,6 @@
 </div>
 
 <!-- // 팝업 -->
-
-<style>
-    /* 음영이 들어가야 하는 그리드 셀에 적용 */
-    .my-header-style{background: #cccccc;}
-    .my-column-style{background: #cccccc;}
-</style>
-
 <script type="text/javascript">
 /* AUIGrid */
 /* 1. AUIGrid 생성 후 반환 ID */
@@ -825,7 +821,7 @@ requestApplicationStatusData();
 /* 신청정보 */
 function createApplicationGrid() {
     /* 기본 그리드(예시) */
-    /* 1. AUIGrid 칼럼 설정 */
+    /* 20231016 : 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
             dataField: "id",
@@ -835,61 +831,104 @@ function createApplicationGrid() {
             dataField: "category_application_num",
             headerText: "신청번호",
             width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_application_division",
             headerText: "신청구분",
-            width: 180
+            width: 180,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_application_date",
             headerText: "신청일자",
-            width: 280
+            width: 280,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_content",
             headerText: "내용",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_application_reason",
             headerText: "신청사유",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_department",
             headerText: "부서명",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_user_name",
             headerText: "사용자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_count",
             headerText: "수량",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_status",
             headerText: "상태",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_processing_date",
             headerText: "처리일자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_final_arbiter",
             headerText: "최종 결재자",
-            width: 160
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231016 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        softRemoveRowMode:false,
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 체크 */
         showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
         independentAllCheckBox : true,
         enableRowCheckShiftKey: true,
-        selectionMode: "multipleCells",
-        enableSorting: true, // 소팅
-        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        softRemoveRowMode:false,
+        pageRowCount: 20, // 페이지에 출력되는 row 개수
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+        /* 기능 : 로드 시 체크 기능 막기 */
         rowCheckDisabledFunction: function (rowIndex, isChecked, item) {
             if (item.category_status !== "임시저장") {
                 return false;
@@ -897,85 +936,29 @@ function createApplicationGrid() {
             return true;
         },
     }
-
     /* 그리드 생성 */
     applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
 
-    // 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여)
+    /* 20231016 : 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여) */
     AUIGrid.bind(applicationGrid_ID, "cellDoubleClick", function(event) {
         let result = AUIGrid.getCellValue(applicationGrid_ID, event.rowIndex, "category_application_division");
-        let width = 1250,
-            height = 590;
+
         if(result === "신규신청"){
-            $("#newEnroll_pop").dialog({
-                title: "신규신청",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopNewEnrollDetail(width,height);
-            gridPopNewEnrollHistory(width,height);
-        } else if(result === "교체신청"){
-            $("#changeEnroll_pop").dialog({
-                title: "교체신청",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopChangeEnrollDetail(width,height);
-            gridPopChangeEnrollHistory(width,height);
-        } else if(result === "대여신청"){
-            $("#rentalEnroll_pop").dialog({
-                title: "대여신청",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopRentalEnrollDetail(width,height);
-            gridPopRentalEnrollHistory(width,height);
-        } else if(result === "반납신청"){
-            $("#returnEnroll_pop").dialog({
-                title: "반납신청",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopReturnEnrollDetail(width,height);
-            gridPopReturnEnrollHistory(width,height);
+            lp_open('newEnroll_pop','신규 신청',1250,900);
+        } else if(result ==="교체신청"){
+            lp_open('changeEnroll_pop','교체 신청',1250,850);
+        } else if(result ==="대여신청"){
+            lp_open('rentalEnroll_pop', '대여 신청',1250,900);
+        } else if (result === "반납신청"){
+            lp_open('returnEnroll_pop', '반납신청',1250,820);
+        } else if (result === "대여연장신청"){
+            lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,780);
         } else if(result === "인수인계신청"){
-            $("#takingOverEnroll_pop").dialog({
-                title: "인수인계신청",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopTakeoverEnrollDetail(width,height);
-            gridPopTakeoverEnrollHistory(width,height);
-        } else if(result === "대여연장신청"){
-            $("#rentalExtensionEnroll_pop").dialog({
-                title: "대여연장신청",
-                width: width,
-                height:height,
-                modal: true,
-                resizable: false,
-                dialogClass: 'no-close success-dialog'
-            });
-            gridPopRentalExtensionEnrollDetail(width,height);
-            gridPopRentalExtensionEnrollHistory(width,height);
+            lp_open('takingOverEnroll_pop', '인수인계신청',1250,730);
         }
     });
 
-    // 전체 체크박스 클릭 이벤트 바인딩
+    /* 20231016[주석 수정] : 전체 체크박스 클릭 이벤트 바인딩 */
     AUIGrid.bind(applicationGrid_ID, "rowAllChkClick", function (event) {
         if (event.checked) {
             // name 의 값들 얻기
@@ -1016,14 +999,14 @@ $(document).on("click",".menu-btn",function(){
     if($(".contents").hasClass("active")){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
-            AUIGrid.resize(applicationGrid_ID, innerWidth)
-        },20)
+            AUIGrid.resize(applicationGrid_ID, innerWidth);
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
-            AUIGrid.resize(applicationGrid_ID, innerWidth)
-        },20)
+            AUIGrid.resize(applicationGrid_ID, innerWidth);
+        },20);
     }
 });
 </script>

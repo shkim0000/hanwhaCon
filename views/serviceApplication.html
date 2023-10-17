@@ -151,13 +151,15 @@
                 <button type="button" class="btn add-column" onclick="addRow()">추가</button>
             </div>
         </div>
-        <div id="serviceApplication_ID" class="grid-box"></div>
+        <div id="serviceApplication_ID" class="grid-box grid-12"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" data-popup="submit_pop">상신</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('assetSearch_pop', '자산검색', 800,350)">자산검색</button>
@@ -168,6 +170,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -510,46 +513,75 @@ function createServiceApplicationGrid() {
         {
             dataField: "category_user_name",
             headerText: "사용자명",
+            filter: {
+                showIcon: true,
+            }
         },{
             dataField: "category_department",
             headerText: "부서",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_usage",
             headerText: "용도",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_use_date",
             headerText: "사용기간",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_software_name",
             headerText: "소프트웨어명",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_quantity",
             headerText: "수량",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_cost",
             headerText: "소요비용",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_order_text",
             headerText: "요청내용",
+            filter: {
+                showIcon: true,
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode:true,
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
@@ -578,13 +610,13 @@ $(document).on("click",".menu-btn",function(){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
             AUIGrid.resize(serviceApplication_ID, innerWidth);
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
             AUIGrid.resize(serviceApplication_ID, innerWidth);
-        },20)
+        },20);
     }
 });
 
@@ -598,8 +630,6 @@ function addRow() {
     let assetNum = $("input[data-label='asset_num']").val();
     let date = $("#date-prev").val() + " ~ " + $("#date-next").val();
     let orderText = $("#order_text").val();
-
-
 
     item.id = "grid_ID_1" + (++cnt2),
         item.category_user_name = user,

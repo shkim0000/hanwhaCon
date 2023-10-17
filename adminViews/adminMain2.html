@@ -29,6 +29,10 @@
     <!-- 개별 소스 -->
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
+
+    <style>
+
+    </style>
 </head>
 <body class="main-page">
 
@@ -37,15 +41,6 @@
 
     <div class="contents">
         <div class="dashboard-wrap us am">
-            <div class="main-image-wrap">
-                <div class="image-box">
-                    <img src="../resources/img/user-main-img.jpg" alt="메인">
-                </div>
-                <div class="main-title-box">
-                    <span>I</span>T <span>A</span>SSET <span>M</span>ANAGEMENT<br>
-                    <span>S</span>YSTEM
-                </div>
-            </div>
             <div class="main-con-box">
                 <div class="preview-list-wrap">
                     <div class="preview-list grid-ver">
@@ -165,7 +160,13 @@
 <style>
     .myField3{background-color:#ebaf88;}
     .my-custom-style3{background-color:#ebaf88;font-weight:700}
-
+    .header-color{background-color: #414141;}
+    .aui-grid-header-panel .aui-grid-table tr td{border:0;}
+    .aui-grid-default-header *{color:#fff;font-size:17px;font-family:"Noto Sans", sans-serif;font-weight:400}
+    .aui-grid-body-panel .aui-grid-table tr td{border-bottom:0;}
+    .aui-grid{border:0;}
+    .aui-grid-row-background{background-color:#fff;}
+    .aui-grid-alternative-row-background{background-color:#f9f9f9}
 </style>
 <script type="text/javascript">
     /* AUIGrid */
@@ -201,24 +202,23 @@
                 visible:false,
             }, {
                 dataField: "category_item",
-                headerStyle: "myField3",
+                headerStyle: "header-color",
                 headerText: "물품종류",
-                style: "my-custom-style3",
             }, {
                 dataField: "category_available",
-                headerStyle: "myField3",
+                headerStyle: "header-color",
                 headerText: "가용",
             }, {
                 dataField: "category_fixed",
-                headerStyle: "myField3",
+                headerStyle: "header-color",
                 headerText: "수리중",
             }, {
                 dataField: "category_trash",
-                headerStyle: "myField3",
+                headerStyle: "header-color",
                 headerText: "폐기",
             }, {
                 dataField: "category_move",
-                headerStyle: "myField3",
+                headerStyle: "header-color",
                 headerText: "이동",
             }];
 
@@ -231,7 +231,7 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
+            headerHeight : 52, // 기본 헤더 높이 지정
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
@@ -242,7 +242,7 @@
 
         columnLayout.push({
             headerText: "계",
-            headerStyle: "myField3",
+            headerStyle: "header-color",
             dataField: "category_row_sum",  // 임의로 지정하십시오. expFunction 에서 반환된 값이 여기에 보관됩니다.
             dataType: "numeric",
             formatString: "#,##0",
@@ -270,7 +270,6 @@
                 dataField: "category_division",
                 headerText: "구분",
                 headerStyle: "myField3",
-                style: "my-custom-style3",
             }, {
                 dataField: "category_check",
                 headerText: "담당자확인",
@@ -318,7 +317,6 @@
                 dataField: "category_item",
                 headerText: "물품종류",
                 headerStyle: "myField3",
-                style: "my-custom-style3",
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
@@ -369,7 +367,6 @@
                 dataField: "category_division",
                 headerText: "구분",
                 headerStyle: "myField3",
-                style: "my-custom-style3",
             }, {
                 dataField: "category_declaration",
                 headerText: "신고건",

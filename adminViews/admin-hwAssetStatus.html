@@ -116,7 +116,7 @@
                 <button type="button" class="btn trash" onclick="deleteRowGrid();" >선택삭제</button>
             </div>
         </div>
-        <div id="hwAssetCurrent_ID" class="grid-box grid-10"></div>
+        <div id="hwAssetCurrent_ID" class="grid-box grid-8"></div>
 
         <div class="title-box">
             <div class="title flex">
@@ -125,10 +125,13 @@
         </div>
         <div id="swAssetLicense_ID" class="grid-box grid-10"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'HW 상세정보',850,760)">HW 상세정보</button>
             <button type="button" class="btn" onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350)">SW 라이선스 검색</button>
         </div>
+        -->
     </div>
 </div>
 
@@ -271,9 +274,6 @@
     createHWAssetCurrentGrid();
     createSWAssetLicenseGrid();
 
-    requestHWAssetCurrentData();
-    requestSWAssetLicenseData();
-
     /* 3. AUIGrid 그리드 옵션 */
     function createHWAssetCurrentGrid() {
         /* 기본 그리드(예시) */
@@ -381,7 +381,7 @@
             enableRowCheckShiftKey: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
-            pageRowCount: 10,
+            pageRowCount: 8,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */
@@ -389,13 +389,15 @@
             enableFilter: true, // 필터 true 설정
         }
 
-        /* 그리드 생성 */
-        hwAssetCurrent_ID = AUIGrid.create("#hwAssetCurrent_ID", columnLayout, gridPros);
-
-        /* 더블 클릭시 팝업 */
-        AUIGrid.bind(hwAssetCurrent_ID, "cellDoubleClick", function() {
-            lp_open('gridPop_hw_detail', 'HW 상세정보',850,770);
-        });
+        setTimeout(function(){
+            /* 그리드 생성 */
+            hwAssetCurrent_ID = AUIGrid.create("#hwAssetCurrent_ID", columnLayout, gridPros);
+            requestHWAssetCurrentData();
+            /* 더블 클릭시 팝업 */
+            AUIGrid.bind(hwAssetCurrent_ID, "cellDoubleClick", function() {
+                lp_open('gridPop_hw_detail', 'HW 상세정보',850,770);
+            });
+        },150);
     }
     function createSWAssetLicenseGrid() {
         /* 기본 그리드(예시) */
@@ -464,8 +466,12 @@
             enableFilter: true, // 필터 true 설정
         }
 
-        /* 그리드 생성 */
-        swAssetLicense_ID = AUIGrid.create("#swAssetLicense_ID", columnLayout, gridPros);
+        setTimeout(function(){
+            /* 그리드 생성 */
+            swAssetLicense_ID = AUIGrid.create("#swAssetLicense_ID", columnLayout, gridPros);
+            requestSWAssetLicenseData();
+        },150);
+
     }
     /* 4. 데이터 불러오기 */
     function requestHWAssetCurrentData() {

@@ -54,20 +54,20 @@
                     <span class="input-title">부서명</span>
                     <label class="input search">
                         <input type="text" value="IT운영">
-                        <button type="button" data-label="readonly" onclick="createUserAssetManagementStatusGrid();"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <button type="button" data-label="readonly" onclick="hide_open();createUserAssetManagementStatusGrid();"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
         </div>
 
-        <div class="title-box">
+        <div class="title-box hide-ver">
             <div class="title">
                 <h3>부서 사용자별 자산 현황</h3>
             </div>
         </div>
-        <div id="userAssetManagementStatusGrid_ID" class="grid-box"></div>
+        <div id="userAssetManagementStatusGrid_ID" class="grid-box grid-10"></div>
 
-        <div class="title-box hide-ver">
+        <div class="title-box hide-ver2">
             <div class="title">
                 <h3>세부 관리 자산 내역</h3>
             </div>
@@ -75,10 +75,14 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="assetDetailGrid_ID" class="grid-box"></div>
+        <div id="assetDetailGrid_ID" class="grid-box grid-12tw"></div>
+
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -309,7 +313,7 @@ function createUserAssetManagementStatusGrid() {
             onClick: function (event) {
                 if(count === 0) {
                     count++;
-                    $(".title-box.hide-ver").addClass("open");
+                    hide_open2();
                     createAssetDetailGrid();
                     requestAssetDetailGridData();
                     setTimeout(function(){
@@ -435,35 +439,30 @@ function createAssetDetailGrid() {
                 showIcon: true,
             }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231016 : 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        /*pageRowCount: 10,*/ // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        /* autoGridHeight : true */
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
     assetDetailGrid_ID = AUIGrid.create("#assetDetailGrid_ID", columnLayout, gridPros);
 
-    /* 더블 클릭시 팝업 */
+    /* 20231016 : 더블 클릭시 팝업 */
     AUIGrid.bind(assetDetailGrid_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_detail").addClass("open").dialog({
-            title: "자산정보",
-            width: 1250,
-            height: 500,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
-        });
+        lp_open("gridPop_detail","자산정보",1250,450);
     });
 
 }

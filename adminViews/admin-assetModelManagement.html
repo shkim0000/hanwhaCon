@@ -71,12 +71,15 @@
                 <button type="button" class="btn" onclick="lp_open('gridPop_modelManagement','모델관리',800,305)"> 등록</button>
             </div>
         </div>
-        <div id="assetClassification_ID" class="grid-box h-large"></div>
+        <div id="assetClassification_ID" class="grid-box grid-24"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('gridPop_modelManagement','모델관리',800,305)">모델관리</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_assetClassification','자산분류팝업',505,470,this)">자산분류팝업</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -236,6 +239,7 @@
             fillColumnSizeMode:true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount:24,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
             /* 그리드 복사 */

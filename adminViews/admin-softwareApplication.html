@@ -147,21 +147,21 @@
             </div>
         </div>
 
-
         <div class="title-box end">
             <div class="btn-wrap">
                 <button type="button" class="btn add-column" onclick="addRow()">추가</button>
                 <button type="button" class="btn trash" onclick="deleteRowGrid()">선택삭제</button>
             </div>
         </div>
-        <div id="serviceApplication_ID" class="grid-box h-small2"></div>
-
+        <div id="serviceApplication_ID" class="grid-box grid-12"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send"  onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
         </div>
@@ -171,6 +171,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -621,6 +622,7 @@ function createServiceApplicationGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        pageRowCount:12, // 페이지에 출력되는 row 개수
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         /* 필터 */

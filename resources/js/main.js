@@ -440,3 +440,18 @@ function lp_close(target){
                 $("#"+lp_id).dialog("close");*/
     }
 }
+
+/* 20231016 추가 */
+function hide_open(){
+    $(".title-box.hide-ver").addClass("open");
+}
+function hide_open2(){
+    $(".title-box.hide-ver2").addClass("open");
+}
+
+function hide_open_only(){
+    $(".hide-ver-only").addClass("open");
+    setTimeout(function(){
+        createAssetStatusGrid();createUserStatusGrid();
+    },20);
+}

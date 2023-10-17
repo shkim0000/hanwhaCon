@@ -114,7 +114,8 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="dueDiglienceGrid_ID" class="grid-box h-medium"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="dueDiglienceGrid_ID" class="grid-box grid-12"></div>
 
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_assetDuediligenceDetail','자산정보',1250,830);">자산정보</button>
@@ -619,7 +620,6 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            simplifySelectionEvent: true,
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */
@@ -824,9 +824,9 @@
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
+            pageRowCount : 12,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            simplifySelectionEvent: true,
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */

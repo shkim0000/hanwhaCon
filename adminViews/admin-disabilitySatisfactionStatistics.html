@@ -74,7 +74,7 @@
                 <button type="button" class="btn exel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="disabilitySatisfaction_ID" class="grid-box h-small2"></div>
+        <div id="disabilitySatisfaction_ID" class="grid-box grid-8"></div>
 
         <div class="title-box" data-sequence="second">
             <div class="grid-title">
@@ -84,12 +84,15 @@
                 <button type="button" class="btn exel">엑셀다운로드</button>
             </div>
         </div>
-        <div id="disabilitySatisfactionDetail_ID" class="grid-box h-small2"></div>
+        <div id="disabilitySatisfactionDetail_ID" class="grid-box grid-10"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,800);">장애 신고 신청 현황</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -425,6 +428,7 @@ function createDisabilitySatisfactionGrid() {
         fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount:8,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
@@ -549,6 +553,7 @@ function createDisabilitySatisfactionDetailGrid() {
         fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount:10,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */

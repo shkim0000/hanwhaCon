@@ -91,7 +91,8 @@
         </div>
         <div class="list-box">
             <div class="multiple-grid-wrap center">
-                <div id="newAssetEnroll_ID" class="grid-box input-grid"></div>
+                <!-- 20231016 : class 추가 -->
+                <div id="newAssetEnroll_ID" class="grid-box grid-1"></div>
                 <div class="btn-wrap">
                     <button type="button" class="btn add-column" onclick="addRow();">적용</button>
                 </div>
@@ -107,11 +108,14 @@
                 <button type="button" class="btn trash" onclick="deleteRowGrid();">선택 삭제</button>
             </div>
         </div>
-        <div id="assetEnroll_ID" class="grid-box"></div>
+        <div id="assetEnroll_ID" class="grid-box grid-10"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn primary send" onclick="validation()">상신</button>
-        </div>excelImport_pop
+        </div>
+
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">사용자 검색</button>
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('excelImport_pop','엑셀 IMPORT',1250,570,this)">엑셀 IMPORT</button>
@@ -122,6 +126,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -459,10 +464,6 @@ let groupList2 = [["데스크탑1", "데스크탑2", "데스크탑3"], ["모니�
 createNewAssetEnrollGrid();
 createAssetEnrollGrid();
 
-requestNewAssetEnrollData();
-requestAssetEnrollData();
-
-
 /* 3. AUIGrid 그리드 옵션 */
 function createNewAssetEnrollGrid() {
     /* 기본 그리드(예시) */
@@ -556,22 +557,18 @@ function createNewAssetEnrollGrid() {
         softRemoveRowMode: false,
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
         /* 사이즈 지정 */
-        headerHeight : 30, // 기본 헤더 높이 지정
+        headerHeight : 24, // 기본 헤더 높이 지정
         fillColumnSizeMode:true,
-        rowHeight:38,
-        /* 페이지네이션 */
-        usePaging: false, // 페이징 사용
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        rowHeight:34,
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
-    /* 그리드 생성 */
+    /* 20231016 : 그리드 생성 */
     newAssetEnroll_ID = AUIGrid.create("#newAssetEnroll_ID", columnLayout, gridPros);
-
+    requestNewAssetEnrollData();
 }
 
 function createAssetEnrollGrid() {
@@ -672,7 +669,8 @@ function createAssetEnrollGrid() {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false);
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        pageRowCount: 10, // 페이지에 출력되는 row 개수
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         /* 필터 */
@@ -681,6 +679,7 @@ function createAssetEnrollGrid() {
 
     /* 그리드 생성 */
     assetEnroll_ID = AUIGrid.create("#assetEnroll_ID", columnLayout, gridPros);
+    requestAssetEnrollData();
 }
 
 /* 4. 데이터 불러오기 */

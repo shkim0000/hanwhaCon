@@ -124,13 +124,15 @@
                 <button type="button" class="btn excel">엑셀다운로드</button>
             </div>
         </div>
-        <!-- 20231012  : h-medium class 추가 -->
-        <div id="forcedRecallGrid_ID" class="grid-box h-medium"></div>
+        <!-- 20231012 : class 추가 -->
+        <div id="forcedRecallGrid_ID" class="grid-box grid-20"></div>
 
-
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '강제회수',1250,830)">강제회수</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -453,7 +455,7 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            pageRowCount: 30, // 페이지에 출력되는 row 개수
+            pageRowCount: 20, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */

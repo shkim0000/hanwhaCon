@@ -148,12 +148,14 @@
                 <button type="button" class="btn add-column" onclick="addRow()">추가</button>
             </div>
         </div>
-        <div id="enrollGrid_ID" class="grid-box h-small"></div>
+        <div id="enrollGrid_ID" class="grid-box grid-14"></div>
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send"  onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('model_pop','모델 검색',540,766);">모델정보</button>
@@ -164,6 +166,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -632,19 +635,22 @@ function createEnrollGrid() {
                 }
             },
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 202310116 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode:true,
-        softRemoveRowMode:false,
+        pageRowCount: 14, // 페이지에 출력되는 row 개수
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
 
@@ -695,7 +701,7 @@ $(".popBtn").on("dblclick", function(){
     AUIGrid.addRow(enrollGrid_ID, insertObj, "last");
     $(this).closest("#model_pop").removeClass("open");
 
-    lp_close("model_pop")
+    lp_close("model_pop");
 });
 
 /* 메뉴버튼 클릭시(반응형) */
@@ -705,13 +711,13 @@ $(document).on("click",".menu-btn",function(){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
             AUIGrid.resize(enrollGrid_ID, innerWidth)
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
             AUIGrid.resize(enrollGrid_ID, innerWidth)
-        },20)
+        },20);
     }
 });
 </script>

@@ -98,13 +98,15 @@
             </div>
         </div>
         <!-- 20231012 : class 추가 -->
-        <div id="dueDiglienceCurrentGrid_ID" class="grid-box h-medium"></div>
+        <div id="dueDiglienceCurrentGrid_ID" class="grid-box grid-22"></div>
 
-
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('returnEnroll_pop', '강제회수',1250,570)">강제회수</button>
             <button type="button" class="btn" onclick="lp_open('dueDiglienceCurrentAdd_pop', '자산실사계획 등록',1250,570)">자산실사계획 등록</button>
         </div>
+        -->
 
     </div>
 </div>
@@ -626,7 +628,7 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            pageRowCount: 30, // 페이지에 출력되는 row 개수
+            pageRowCount: 22, // 페이지에 출력되는 row 개수
             /* 필터 */
             enableFilter: true, // 필터 true 설정
         }
@@ -638,7 +640,8 @@
 
         AUIGrid.bind(dueDiglienceCurrentGrid_ID, "cellDoubleClick", function(event) {
             /* 20231012 : 자산정보 팝업에 대한 부분 추가되어야 함. */
-            lp_open('returnEnroll_pop', '강제회수',1250,570);
+            lp_open('returnEnroll_pop', '강제회수',1250,750
+            );
         });
     }
 

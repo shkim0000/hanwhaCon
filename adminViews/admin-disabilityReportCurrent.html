@@ -194,12 +194,15 @@
             </div>
         </div>
         <!-- 20231012 : class 추가 장애신고목록 그리드 -->
-        <div id="disabledDC_ID" class="grid-box h-medium4"></div>
+        <div id="disabledDC_ID" class="grid-box grid-14"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,800);">장애 신고 신청 현황</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -439,7 +442,6 @@ let disabledDC_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createDisabledDCGrid();
-requestDisabledDCData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createDisabledDCGrid() {
@@ -528,6 +530,7 @@ function createDisabledDCGrid() {
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        pageRowCount:14, // 페이지에 출력되는 row 개수
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
         /* 필터 */
@@ -535,12 +538,15 @@ function createDisabledDCGrid() {
     }
 
     /* 그리드 생성 */
-    disabledDC_ID = AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
+    setTimeout(function(){
+        disabledDC_ID = AUIGrid.create("#disabledDC_ID", columnLayout, gridPros);
+        requestDisabledDCData();
+        /* 20231012 : 더블 클릭시 팝업 */
+        AUIGrid.bind(disabledDC_ID, "cellDoubleClick", function(event) {
+            lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,800);
+        });
+    },150);
 
-    /* 20231012 : 더블 클릭시 팝업 */
-    AUIGrid.bind(disabledDC_ID, "cellDoubleClick", function(event) {
-        lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,800);
-    });
 }
 
 /* 4. 데이터 불러오기 */

@@ -75,7 +75,8 @@
             </div>
         </div>
         <div class="list-box">
-            <div id="itemListGrid_ID" class="grid-box h-small2"></div>
+            <!-- 20231016 : class 추가 -->
+            <div id="itemListGrid_ID" class="grid-box grid-5"></div>
         </div>
 
         <div class="title-box">
@@ -84,7 +85,8 @@
             </div>
         </div>
         <div class="list-box">
-            <div id="detailGrid_ID" class="grid-box h-small2"></div>
+            <!-- 20231016 : class 추가 -->
+            <div id="detailGrid_ID" class="grid-box grid-5"></div>
         </div>
 
         <div class="title-box">
@@ -93,7 +95,8 @@
             </div>
         </div>
         <div class="list-box">
-            <div id="mailListGrid_ID" class="grid-box h-small2"></div>
+            <!-- 20231016 : class 추가 -->
+            <div id="mailListGrid_ID" class="grid-box grid-5"></div>
         </div>
 
     </div>
@@ -166,6 +169,11 @@
             enableRowCheckShiftKey: true,
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount:5, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */
@@ -266,6 +274,11 @@
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount:5, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */
@@ -319,6 +332,11 @@
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount:5, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */
@@ -349,8 +367,6 @@
             AUIGrid.setGridData(mailListGrid_ID, data);
         });
     }
-
-
 
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */

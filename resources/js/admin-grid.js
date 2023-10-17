@@ -3329,7 +3329,7 @@ function gridPopReplacementTarget(id,title,width,height) {
                 showIcon: true,
             }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231016 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
@@ -3341,7 +3341,7 @@ function gridPopReplacementTarget(id,title,width,height) {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 100, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -3513,7 +3513,7 @@ function gridPopReplacementTargetList1() {
                 showIcon: true,
             }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231016 :  2. 그리드 속성 설정 */
 
     let gridPros = {
         rowIdField: "id",
@@ -3530,7 +3530,7 @@ function gridPopReplacementTargetList1() {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount:30, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount:5, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 수정 */
         independentAllCheckBox : true,
@@ -3662,7 +3662,7 @@ function gridPopReplacementTargetList2() {
                 showIcon: true,
             }
         }]
-    /* 2. 그리드 속성 설정 */
+    /* 20231016 : 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
@@ -3678,7 +3678,7 @@ function gridPopReplacementTargetList2() {
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 30, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 5, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: false, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능

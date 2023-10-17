@@ -52,7 +52,8 @@
             <div class="input-lists">
                 <div class="input-list">
                     <span class="input-title">부서명</span>
-                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서검색',505,530); ">
+                    <!-- 20231016 : 온클릭 이벤트 추가 -->
+                    <label class="input search" data-place="department_search" onclick="lp_open('gridPop_department','부서검색',505,530);hide_open();">
                         <input type="text" data-label="department">
                         <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
@@ -60,14 +61,15 @@
             </div>
         </div>
 
-        <div class="title-box">
+        <div class="title-box hide-ver">
             <div class="title">
                 <h3>부서 관리 자산 현황</h3>
             </div>
         </div>
-        <div id="assetManagementStatusGrid_ID" class="grid-box"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="assetManagementStatusGrid_ID" class="grid-box grid-8"></div>
 
-        <div class="title-box">
+        <div class="title-box hide-ver2">
             <div class="title">
                 <h3>세부 관리 자산 내역</h3>
             </div>
@@ -75,11 +77,16 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="assetDetailGrid_ID" class="grid-box"></div>
+        <!-- 20231016 : class 추가 -->
+        <div id="assetDetailGrid_ID" class="grid-box grid-10"></div>
+
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_department','부서검색',505,530);">부서검색</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -332,6 +339,8 @@
             $(".aui-grid-renderer-base.aui-grid-footer-renderer").removeClass("on");
             if(count === 0){
                 count++;
+                /* 20231016 */
+                hide_open2();
                 createAssetDetailGrid();
                 setTimeout(function(){
                     let name = AUIGrid.getOrgGridData(assetDetailGrid_ID);
@@ -525,9 +534,11 @@
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
             headerHeight : 30, // 기본 헤더 높이 지정
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount:10, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */

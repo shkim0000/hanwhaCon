@@ -155,13 +155,16 @@
                 <button type="button" class="btn add-column" onclick="addRow()">추가</button>
             </div>
         </div>
-        <div id="enrollGrid_ID" class="grid-box h-small2"></div>
+        <!-- 20231016 : class 변경 -->
+        <div id="enrollGrid_ID" class="grid-box grid-14"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
             <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">결재</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('model_pop','모델정보',540,766)">모델정보</button>
@@ -172,6 +175,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -623,7 +627,7 @@
                 },
                 width:"10%",
             }]
-        /* 20231012 : 2. 그리드 속성 설정 */
+        /* 20231016 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
             selectionMode: "multipleCells",
@@ -641,7 +645,7 @@
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            pageRowCount: 20, // 페이지에 출력되는 row 개수
+            pageRowCount: 14, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 필터 */
@@ -713,7 +717,7 @@
             category_amount: 1,
         }
         AUIGrid.addRow(enrollGrid_ID, insertObj, "last");
-        lp_close('model_pop')
+        lp_close('model_pop');
     })
 
 </script>

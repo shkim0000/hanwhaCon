@@ -11,7 +11,7 @@
 
 /* 그리드 메인 외곽 DIV */
 .aui-grid {
-	font-family: 'Malgun Gothic', '맑은 고딕', AppleSDGothicNeo-Light, sans-serif;
+	font-family:"Noto Sans", sans-serif;
 	font-size: 12px;
 	line-height: 1.2em;
 	border: 1px solid #bdbdbd;

@@ -73,7 +73,7 @@
                 <button type="button" class="btn trash" onclick="deleteRowGrid();">선택삭제</button>
             </div>
         </div>
-        <div id="userProxyGrid_ID" class="grid-box h-medium2"></div>
+        <div id="userProxyGrid_ID" class="grid-box grid-12"></div>
 
         <div class="custom-table">
             <div class="row con-3">
@@ -107,10 +107,13 @@
             </div>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530);">사용자 검색</button>
             <button type="button" class="btn" onclick="lp_open('gridPop_department','부서 검색',505,530);">부서 검색</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -231,6 +234,7 @@ function createUserProxyGrid() {
         fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount:12,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
