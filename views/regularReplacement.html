@@ -59,23 +59,26 @@
                 <h3>보유자산(정기교체대상)</h3>
             </div>
         </div>
-        <div id="holdingsGrid_ID" class="grid-box h-small4"></div>
+        <div id="holdingsGrid_ID" class="grid-box grid-8"></div>
 
         <div class="title-box">
             <div class="title">
                 <h3>신청자산정보</h3>
             </div>
         </div>
-        <div id="enrollAssetGrid_ID" class="grid-box h-small4"></div>
+        <div id="enrollAssetGrid_ID" class="grid-box grid-8"></div>
 
         <div class="btn-wrap form">
             <button type="button" class="btn save">저장</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn model" onclick="lp_open('model_pop','모델 검색',540,740);">모델 정보</button>
             <button type="button" class="btn" onclick="lp_open('reason_pop','미신청 사유',505,310)">미신청 사유</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -306,8 +309,8 @@ function createHoldingsGrid() {
         fillColumnSizeMode:true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount: 8, // 한 화면에 출력되는 행 개수 30개로 지정
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -433,6 +436,7 @@ function createEnrollAssetGrid() {
         fillColumnSizeMode: true,
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount: 8,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */

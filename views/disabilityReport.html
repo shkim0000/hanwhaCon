@@ -71,11 +71,11 @@
                 <h3>장애 대상 목록</h3>
             </div>
             <div class="btn-wrap">
-                <button type="button" class="btn add-column" onclick="lp_open('gridPop_disabledAddRow','장애대상 추가',1230,540);">추가</button>
+                <button type="button" class="btn add-column" onclick="lp_open('gridPop_disabledAddRow','장애대상 추가',1230,590);">추가</button>
             </div>
         </div>
-        <!-- 장애 대상 목록 그리드 -->
-        <div id="disabledList_ID" class="grid-box h-small"></div>
+        <!-- 20231016 : 장애 대상 목록 그리드 -->
+        <div id="disabledList_ID" class="grid-box grid-10"></div>
 
         <div class="title-box">
             <div class="title">
@@ -93,6 +93,8 @@
             <button type="button" class="btn primary send" onclick="lp_open('submit_pop','결재상신 화면',900,860)">상신</button>
         </div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap">
             <button type="button" class="btn" onclick="lp_open('gridPop_user','사용자 검색',505,530)">사용자 검색</button>
             <button type="button" class="btn asset" onclick="lp_open('gridPop_disabledAddRow','장애대상 추가',1230,540);">장애대상 추가</button>
@@ -104,6 +106,7 @@
             <button type="button" class="btn" onclick="lp_open('submitApprovalChange_pop','Search Employee',800,530)">상신 > 결재선 변경 팝업</button>
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -132,7 +135,7 @@
             </div>
         </div>
         <div class="pop-body">
-            <div id="popup_grid_disabledAddRow" class="grid-box"></div>
+            <div id="popup_grid_disabledAddRow" class="grid-box grid-12"></div>
             <div class="btn-wrap">
                 <button type="button" class="btn save" onclick="lp_close('gridPop_disabledAddRow')">저장</button>
             </div>
@@ -528,22 +531,24 @@ function createDisabledListGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
+        /* 사이즈 지정 */
+        headerHeight: 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode:true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount: 10,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        autoGridHeight : true,
-        fillColumnSizeMode:true,
-        softRemoveRowMode: false,// 소프트 제거 모드 사용 안함
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
-    }
+    };
 
     /* 그리드 생성 */
     disabledList_ID = AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
@@ -602,13 +607,13 @@ $(document).on("click",".menu-btn",function(){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
             AUIGrid.resize(disabledList_ID, innerWidth);
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
             AUIGrid.resize(disabledList_ID, innerWidth);
-        },20)
+        },20);
     }
 });
 

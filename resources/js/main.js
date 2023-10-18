@@ -145,13 +145,12 @@ $(function(){
     });
     -
 
-    /* sidebar 설정 */
+    /* 20231016 : sidebar 설정 */
     $(document).ready(function(){
         let pageName = $('.page-indicator ul li:nth-child(2)').text();
         let finalDepthName = $('.page-indicator ul li:last-child').text();
 
-        // HTML 페이지의 title과 page-indicator에 있는 텍스트가 일치하면, sidebar에 open 클래스를 부여합니다.
-        if($('title').text() === pageName){
+        if(pageName){
             $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
                 return $(this).text() === pageName;
@@ -159,7 +158,7 @@ $(function(){
             currentListEl.addClass('active');
             currentListEl.siblings('.depth').addClass('active');
         }
-        if($('title').text() === finalDepthName){
+        if(finalDepthName){
             $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
                 return $(this).text() === finalDepthName;
@@ -229,42 +228,6 @@ $(function(){
     });
 
     /* 첨부파일 */
-/*    $(".btn.add-file").on("click",function(){
-        let fileName;
-       $(this).prev().queue(function(){
-           $(this).change(function(){
-               fileName = $(this).val();
-               let fileNameSlice = fileName.split("\\").reverse()[0];
-               $(this).closest(".title-box").next(".table").find("tbody").append(
-                    "<tr>\n"+
-                        "<td>\n"+
-                            "<div class='td-wrap center'>\n" +
-                                "<label class='check no-text'>\n"+
-                                    "<input type='checkbox'>\n"+
-                                    "<span></span>\n"+
-                                "</label>\n"+
-                            "</div>\n"+
-                        "</td>\n"+
-                        "<td>\n"+
-                            "<div class='td-wrap'>\n"+
-                                "<div class='file-box long'>\n"+
-                                       "<label class='file'>\n" +
-                                           "<input type='file' class='fileUpload'>\n"+
-                                               "<span class='btn'>파일선택</span>\n"+
-                                       "</label>\n"+
-                                    "<span>"+fileNameSlice+"</span>\n"+
-                                "</div>\n"+
-                            "</div>\n"+
-                        "</td>\n"+
-                    "</tr>\n"
-                );
-           });
-       }).dequeue(function(){
-           fileName = "";
-       });
-    }); */
-
-    /* 첨부파일 */
     $(".btn.add-file").on("click",function(){
         $(this).closest(".title-box").next(".table").find("tbody").append(
             "<tr>\n"+
@@ -290,8 +253,6 @@ $(function(){
             "</tr>\n"
         );
     });
-
-
 
     /* 테이블 내 첨부파일 */
     $(document).on("click",".file-box .btn",function(){
@@ -381,50 +342,78 @@ function lp_open(id,title,width,height,e){
         resizable: false,
         dialogClass: 'no-close success-dialog'
     });
-    /* 페이지 하단에 버튼이 없어지면 없어질 코드입니다 */
+
     if(id === "gridPop_user"){
         gridPopUser(id,title,width,height,e) ;
     } else if(id === "gridPop_department"){
         popupDepartmentSearch(id,title,width,height,e)
+    } else if (id === "assetSearch_pop"){
+        /* 자산검색 */
+        subPopupAssetSearch(id,title,width,height,e);
     } else if(id === "newEnroll_pop"){
-        gridPopNewEnrollDetail(id,title,width,height);
-        gridPopNewEnrollHistory(id,title,width,height);
+        /* 자산신청 > 신규신청 팝업 */
+        gridPopNewEnrollDetail();
+        gridPopNewEnrollHistory();
+        gridSizePopup(popup_grid_newEnroll_detail,1250);
+        gridSizePopup(popup_grid_newEnroll_history,1250);
     } else if(id === "changeEnroll_pop"){
-        gridPopChangeEnrollDetail(id,title,width,height);
-        gridPopChangeEnrollHistory(id,title,width,height);
+        /* 자산신청 > 교체신청팝업 */
+        gridPopChangeEnrollDetail();
+        gridPopChangeEnrollHistory();
+        gridSizePopup(popup_grid_changeEnroll_detail,1250);
+        gridSizePopup(popup_grid_change_history,1250);
     } else if (id === "rentalEnroll_pop"){
-        gridPopRentalEnrollDetail(id,title,width,height);
-        gridPopRentalEnrollHistory(id,title,width,height);
+        /* 자산신청 > 대여신청 */
+        gridPopRentalEnrollDetail();
+        gridPopRentalEnrollHistory();
+        gridSizePopup(popup_grid_rentalEnroll_detail,1250);
+        gridSizePopup(popup_grid_rental_history,1250);
     } else if (id === "returnEnroll_pop"){
-        gridPopReturnEnrollDetail(id,title,width,height);
-        gridPopReturnEnrollHistory(id,title,width,height);
+        /* 자산신청 > 반납신청 */
+        gridPopReturnEnrollDetail();
+        gridPopReturnEnrollHistory();
+        gridSizePopup(popup_grid_returnEnroll_detail,1250);
+        gridSizePopup(popup_grid_return_history,1250);
     } else if (id === "takingOverEnroll_pop"){
-        gridPopTakeoverEnrollDetail(id,title,width,height);
-        gridPopTakeoverEnrollHistory(id,title,width,height);
+        /* 자산신청 > 인수인계신청 */
+        gridPopTakeoverEnrollDetail();
+        gridPopTakeoverEnrollHistory();
+        gridSizePopup(popup_grid_takeOverEnroll_detail,1250);
+        gridSizePopup(popup_grid_takeOverEnroll_history,1250);
     } else if (id === "rentalExtensionEnroll_pop"){
-        gridPopRentalExtensionEnrollDetail(id,title,width,height);
-        gridPopRentalExtensionEnrollHistory(id,title,width,height);
-    } else if (id === "gridPop_rental_info"){
-        // popupChangeAssetInfo(id,title,width,height);
+        /* 자산신청 > 대여연장신청 */
+        gridPopRentalExtensionEnrollDetail();
+        gridPopRentalExtensionEnrollHistory();
+        gridSizePopup(popup_grid_rentalExtension_detail,1250);
+        gridSizePopup(popup_grid_rentalExtension_history,1250);
+    } else if (id === "gridPop_assetDetail"){
+        /* 자산현황 > 자산조회 */
+        gridPopAssetDetail();
     } else if (id==="submit_pop"){
+        /* 상신 */
         popupSubmitList(id,title,width,height);
     } else if (id === "submitSearch_pop"){
+        /* 상신 */
         subPopupSearchExecutives(id,title,width,height);
         subPopupAddExecutives(id,title,width,height);
     } else if (id === "submitApprovalChange_pop"){
+        /* 상신 */
         subPopupApprovalChange(id,title,width,height);
-    } else if (id === "gridPop_disabledAddRow"){
-        popupAddDisabled(id,title,width,height);
-    } else if (id ==="gridPop_disabledCurrent"){
-        gridPopDisabledDetail();
-        gridPopDisabledHistory();
-    } else if ( id==="gridPop_serviceDesk_detail"){
+    } else if (id==="gridPop_serviceDesk_detail"){
+        /* 서비스데스크 > 서비스 신청현황 */
         gridPopServiceDeskCurrent();
         gridPopServiceDeskHistory();
-    }else if(id === "gridPop_assetDetail"){
-        gridPopAssetDetail();
-    }else if(id === "assetSearch_pop"){
-        subPopupAssetSearch(id,title,width,height,e);
+        gridSizePopup(popup_grid_serviceDesk_current,1250);
+        gridSizePopup(popup_grid_serviceDesk_history,1250);
+    } else if (id === "gridPop_disabledAddRow"){
+        /* 장애신고 */
+        popupAddDisabled();
+    } else if (id ==="gridPop_disabledCurrent"){
+        /* 장애신고 > 장애신고현황 */
+        gridPopDisabledDetail();
+        gridPopDisabledHistory();
+        gridSizePopup(popup_grid_disabledCurrent_detail,1250);
+        gridSizePopup(popup_grid_disabledCurrent_history,1250);
     }
 }
 /* 팝업창 닫기 */
@@ -442,6 +431,17 @@ function lp_close(target){
 }
 
 /* 20231016 추가 */
+function gridSizePopup(gridname,width){
+    let innerWidth = width - 28;
+    AUIGrid.resize(gridname, innerWidth);
+}
+
+function gridSizePopupBig(gridname,width){
+    let innerWidth = width - 44;
+    AUIGrid.resize(gridname, innerWidth);
+}
+
+
 function hide_open(){
     $(".title-box.hide-ver").addClass("open");
 }

@@ -114,13 +114,13 @@
         <div id="dueDiglienceGrid_ID" class="grid-box grid-12"></div>
 
         <!-- 간이 버튼 모음 주석처리 -->
-        <!--
+
         <div class="btn-wrap">
-            <button type="button" class="btn" onclick="lp_open('gridPop_detail','자산정보',1250,500);">자산정보</button>
+            <button type="button" class="btn" onclick="lp_open('gridPop_assetDetail','자산정보',1250,720);">자산정보</button>
             <button type="button" class="btn" onclick="lp_open('nonNetClient','정보없음',520,180);">NetClient없을때</button>
             <button type="button" class="btn" onclick="lp_open('haveNetClient','사용자 장비 정보',1250,800);">NetClient정보</button>
         </div>
-        -->
+
     </div>
 </div>
 <!-- // contents -->
@@ -340,12 +340,14 @@
                 </div>
                 <div class="tabs">
                     <div class="tabs-inner-wrap">
-                        <div id="popup_grid_swInformation"></div>
+                        <!-- 20231016 -->
+                        <div id="popup_grid_swInformation" class="grid-box grid-22"></div>
                     </div>
                 </div>
                 <div class="tabs">
                     <div class="tabs-inner-wrap">
-                        <div id="popup_grid_boxInformation"></div>
+                        <!-- 20231016 -->
+                        <div id="popup_grid_boxInformation" class="grid-box grid-22"></div>
                     </div>
                 </div>
             </div>
@@ -1091,28 +1093,50 @@
         }
     });
 
-    /* 메뉴버튼 클릭시(반응형) */
+    /* 20231016  : 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
+        let windowWidth = $(window).innerWidth();
         let innerWidth = $(".contents").innerWidth() - 38;
         let halfWidth = ($(".contents").innerWidth() - 82)/2;
 
-        if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
-            halfWidth = halfWidth + 130;
-            setTimeout(function(){
-                AUIGrid.resize(userStatusGrid_ID, halfWidth);
-                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
-                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-            },20);
+        if(windowWidth > 970){
+            if($(".contents").hasClass("active")){
+                innerWidth = innerWidth + 260;
+                halfWidth = halfWidth + 130;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
 
-        } else{
-            innerWidth = innerWidth - 260;
-            halfWidth = halfWidth - 130;
-            setTimeout(function(){
-                AUIGrid.resize(userStatusGrid_ID, halfWidth);
-                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
-                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-            },20);
+            } else{
+                innerWidth = innerWidth - 260;
+                halfWidth = halfWidth - 130;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
+            }
+        }else{
+            if($(".contents").hasClass("active")){
+                innerWidth = innerWidth + 260;
+                halfWidth = halfWidth + 130;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
+
+            } else{
+                innerWidth = innerWidth - 260;
+                halfWidth = halfWidth - 130;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
+            }
         }
     });
 </script>

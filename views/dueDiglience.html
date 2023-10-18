@@ -123,7 +123,7 @@
         <div class="title-box end">
             <div class="btn-wrap">
                 <button type="button" class="btn save">저장</button>
-                <button type="button" class="btn add-column" onclick="lp_open('assetSearch_pop', '자산검색', 800,350,'due')">추가</button>
+                <button type="button" class="btn add-column" onclick="lp_open('assetSearch_pop', '자산검색', 800,470,'due')">추가</button>
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
@@ -159,23 +159,10 @@
                 </div>
                 <button type="button" class="btn search">검색</button>
             </div>
-            <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
+            <div id="popup_subGrid_assetSearch" class="grid-box grid-10"></div>
         </div>
     </div>
 </div>
-
-<style>
-    .my-cell-style {
-        background: #fff;
-        font-weight: bold;
-        color: #FF007F;
-    }
-    .my-column-style {
-        background: #eeeeee;
-        color: #005500;
-        font-weight: bold;
-    }
-</style>
 
 <script>
 /* AUIGrid */
@@ -187,8 +174,6 @@ let groupList = ["존재", "미존재"]; //-- 드랍다운리스트에 출력할
 let groupList2 = ["행정동","사무실","공장"]
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createDueDiglienceGrid();
-
-requestDueDiglienceGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createDueDiglienceGrid() {
@@ -313,8 +298,12 @@ function createDueDiglienceGrid() {
         enableFilter: true, // 필터 true 설정
     }
 
-    /* 그리드 생성 */
-    dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
+    /* 20231016 */
+    setTimeout(function(){
+        /* 그리드 생성 */
+        dueDiglienceGrid_ID = AUIGrid.create("#dueDiglienceGrid_ID", columnLayout, gridPros);
+        requestDueDiglienceGridData();
+    },150);
 }
 
 /* 4. 데이터 불러오기 */

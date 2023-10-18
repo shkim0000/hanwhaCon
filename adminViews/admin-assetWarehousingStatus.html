@@ -152,14 +152,15 @@
             </div>
 
             <div class="title-box">
-                <div class="grid-title">
+                <!-- 20231016 : class 추가 -->
+                <div class="grid-title small">
                     <h3>총 수량: <span></span></h3>
                 </div>
                 <div class="btn-wrap">
                     <button type="button" class="btn excel">엑셀다운로드</button>
                 </div>
             </div>
-            <div id="popup_grid_application_status" class="grid-box h-small2"></div>
+            <div id="popup_grid_application_status" class="grid-box grid-10"></div>
             <div class="btn-wrap">
                 <button type="button" class="btn" onclick="lp_close('gridPop_applicationStatus')">닫기</button>
             </div>
@@ -268,7 +269,8 @@ function createEnrollCurrentGrid() {
 
         /* 셀 더블클릭 이벤트 바인딩 */
         AUIGrid.bind(enrollCurrentGrid_ID, "cellDoubleClick", function(event) {
-            lp_open('gridPop_applicationStatus','신청현황',1250,615);
+            /* 20231016 */
+            lp_open('gridPop_applicationStatus','신청현황',1250,570);
             getRowCount(popup_grid_application_status);
         });
     },150);

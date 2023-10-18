@@ -16,7 +16,6 @@ $(function(){
         "</header>"
     );
 
-    /* [수정] 20231005 */
     /* sidebar 추가 */
     $('#wrapper').prepend(
         "<div class='sidebar'>\n"+
@@ -44,11 +43,11 @@ $(function(){
                                 "<li><a href='#' class='linkBtn'>자산상태변경</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>전부서자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>부서 사용자별 조회</a></li>\n"+
+                                "<li><a href='#' class='linkBtn'>S/W 조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>변경이력조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>변경이력조회 - 공용자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>미반납 자산현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>강제회수</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>강제회수현황</a></li>\n"+
                             "</ul>\n"+
                         "</div>\n"+
                     "</li>\n"+
@@ -85,7 +84,6 @@ $(function(){
                         "<button type='button' class='btn'>자산실사</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사현황</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사 결과조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사 부서별 결과조회</a></li>\n"+
@@ -101,23 +99,12 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>환경설정</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>메일설정</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>메일편집기</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
                         "<button type='button' class='btn'>기준정보</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>사용자정보</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>사용자그룹 권한관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>사용자정보 - 권한대행</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산분류관리</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>자산품목관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산모델관리</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>신청구분</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>장애처리유형관리</a></li>\n"+
@@ -183,7 +170,6 @@ $(function(){
     });
 
 
-
     $(".date input").keydown(function(){
         $(this).val("");
     });
@@ -193,33 +179,12 @@ $(function(){
     });
 
 
-    /* 팝업 열기 */
-    /*    $("[data-popup]").on("click", function(){
-            let id = $(this).attr("data-popup");
-            $("#"+id).addClass("open");
-        });*/
-
-    /* 팝업 닫기 */
-    /*    $(".popup .close-btn, [data-btn='cancel']").on("click", function(){
-            $(this).closest(".popup").removeClass("open");
-        });*/
-
-    /* 딤처리 부분 닫기 */
-    /*    $(document).on("click", function(e){
-            let i = e.target;
-            if($(e.target).hasClass("popup open")){
-                $(e.target).removeClass("open");
-            }
-        });*/
-
-
-    /* sidebar 설정 */
+    /* 20231016 : sidebar 설정 */
     $(document).ready(function(){
         let pageName = $('.page-indicator ul li:nth-child(2)').text();
         let finalDepthName = $('.page-indicator ul li:last-child').text();
 
-        // HTML 페이지의 title과 page-indicator에 있는 텍스트가 일치하면, sidebar에 open 클래스를 부여합니다.
-        if($('title').text() === pageName){
+        if(pageName){
             $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
                 return $(this).text() === pageName;
@@ -227,11 +192,12 @@ $(function(){
             currentListEl.addClass('active');
             currentListEl.siblings('.depth').addClass('active');
         }
-        if($('title').text() === finalDepthName){
+        if(finalDepthName){
             $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
                 return $(this).text() === finalDepthName;
             });
+            console.log(currentListEl)
             currentListEl.closest('.depth').siblings('.btn').addClass('active');
             currentListEl.addClass('active');
             currentListEl.closest('.depth').addClass('active');
@@ -427,7 +393,7 @@ $(function(){
 });
 
 
-/* [수정] 202301003 */
+/* [수정] 20231016 */
 /* 팝업창 열기 */
 function lp_open(id,title,width,height,e,type){
     $("#"+id).dialog({
@@ -450,13 +416,16 @@ function lp_open(id,title,width,height,e,type){
         }
     });
 
-
     if(id === "gridPop_user"){
         gridPopUser(id,title,width,height,e, type) ;
+    } else if(id === "gridPop_selectUser"){
+        gridPopSelectUser();
     } else if (id === "gridPop_manager"){
         gridPopManager(id,title,width,height,e);
     } else if(id === "gridPop_department"){
         popupDepartmentSearch(id,title,width,height,e)
+    } else if(id === "gridPop_department_checkbox"){
+        popupDepartmentCheckboxSearch(e);
     } else if(id === "newEnroll_pop"){
         /* 자산신청 > 신규신청팝업 */
         gridPopNewEnrollDetail(id,title,width,height);
@@ -505,53 +474,62 @@ function lp_open(id,title,width,height,e,type){
         subPopupApprovalChange(id,title,width,height);
     } else if (id === "gridPop_disabledAddRow"){
         /* 장애신고 > 장애신고 */
-        popupAddDisabled(id,title,width,height);
+        popupAddDisabled();
         gridSizePopup(popup_grid_disabledAddRow,1230);
     } else if (id ==="gridPop_disabledCurrent"){
         /* 장애신고 > 장애신고현황 */
-        gridPopDisabledDetail(id,title,width,height);
-        gridPopDisabledHistory(id,title,width,height);
-        gridPopDisabledListHistory(id,title,width,height);
+        gridPopDisabledDetail();
+        gridPopDisabledHistory();
+        gridPopDisabledListHistory();
     }  else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
         /* (작업전) excel Import */
         popupConsistency(id,title,width,height);
     } else if (id === "assetSearch_pop"){
         /* 자산검색 */
-        subPopupAssetSearch(id,title,width,height,e,type);
+        subPopupAssetSearch(e,type);
     } else if (id === "haveNetClient"){
         /* 자산현황 > 자산조회 : 사용자 장비 정보 팝업 */
-        popupSwInformation(id,title,width,height);
-        popupBoxInformation(id,title,width,height);
+        popupSwInformation();
+        popupBoxInformation();
     } else if (id === "gridPop_serviceDesk_detail"){
         /* 서비스 데스크 > 서비스 신청 현황 */
-        gridPopServiceDeskDetail(id,title,width,height);
-        gridPopServiceDeskHistory(id,title,width,height);
+        gridPopServiceDeskDetail();
+        gridPopServiceDeskHistory();
         gridSizePopup(popup_grid_serviceDesk_detail,1250);
         gridSizePopup(popup_grid_serviceDesk_history,1250);
-    }else if(id === "gridPop_selectUser"){
-        gridPopSelectUser();
-    }else if(id === "gridPop_assetClassification"){
-        gridPopAssetClassification(id,title,width,height,e);
     }else if(id === "gridPop_applicationStatus") {
+        /* 자산등록 > 자산입고 현황 */
         popupApplicationStatus();
     }else if(id === "gridPop_assetDetail"){
+        /* 자산정보 */
         gridPopAssetDetail();
-    }else if(id === "gridPop_department_checkbox"){
-        popupDepartmentCheckboxSearch(id,title,width,height,e);
     }else if(id==="gridPop_replacement_current"){
+        /* 정기교체 > '완료'상태 일 경우 더블 클릭시 나오는 팝업 */
         gridPopReplacementTargetCurrent();
     }else if(id==="gridPop_replacement"){
+        /* 정기교체 > 등록 버튼 클릭시 나오는 팝업 */
         gridPopReplacementTarget();
     }else if(id==="gridPop_replacementTarget"){
+        /* 정기교체 > 등록 버튼 + 추가 버튼 클릭시 나오는 팝업 */
         gridPopReplacementTargetList1();
         gridPopReplacementTargetList2();
-    }else if(id==="gridPop_assetDuediligenceDetail"){
-        gridPopAssetChangeDetail();
-        gridPopAssetChangeHistory();
     }else if(id==="regularChangeEnroll_pop"){
         /* 정기교체 > 정기교체 진행상황 > 상세 팝업 */
         gridPopRegularChangeEnrollDetail();
         gridSizePopup(popup_grid_regularChangeEnroll_detail,1250);
+    }else if(id==="gridPop_assetDuediligenceDetail"){
+        /* 자산실사 > 자산실사 결과조회 */
+        gridPopAssetChangeDetail();
+        gridPopAssetChangeHistory();
+    }else if(id==="gridPop_detail"){
+        /* 자산현황 >  변경이력 조회 */
+        gridPopChangeHistory();
+        gridPopDueDiligenceHistory();
+        gridSizePopup(popup_grid_changeHistory,1250);
+        gridSizePopup(popup_grid_duediligenceHistory,1250);
+    }else if(id === "gridPop_assetClassification"){
+        /* 기준정보 > 자산모델관리 */
+        gridPopAssetClassification(e);
     }else if(id==="gridPop_sw_detail"){
         /* 기업자산 > SW 상세정보 */
         gridPopLicenseManage();
@@ -560,13 +538,7 @@ function lp_open(id,title,width,height,e,type){
         gridPopLicenseManageAddf();
     }else if(id==="swLicenseSearch_pop"){
         /* 기업자산 > HW 상세정보 > SW 라이선스 검색 */
-        subPopupSWLicenseSearch(id,title,width,height, e);
-    } else if(id==="gridPop_detail"){
-        /* 자산현황 >  변경이력 조회 */
-        gridPopChangeHistory();
-        gridPopDueDiligenceHistory();
-        gridSizePopup(popup_grid_changeHistory,1250);
-        gridSizePopup(popup_grid_duediligenceHistory,1250);
+        subPopupSWLicenseSearch();
     }
 }
 

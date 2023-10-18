@@ -130,35 +130,56 @@
     /* // 부서 검색 */
 /* ------------------------------------------------------------------------ */
 
-/* [신청 팝업 모음] ----------------------------------------------------------- */
+/* 20231016 [신청 팝업 모음] ----------------------------------------------------------- */
 /* 1. 신규신청 */
     /* 자산정보 */
     let popup_grid_newEnroll_detail;
-    function gridPopNewEnrollDetail(id,title,width,height){
+    function gridPopNewEnrollDetail(){
         /* 1. AUIGrid 칼럼 설정 */
         let gridPop_newEnroll_detail_column = [
             {
                 dataField: "category_product",
                 headerText: "자산분류",
+                filter: {
+                    showIcon: true,
+                }
             },{
                 dataField: "category_product",
                 headerText: "품목",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_item_name",
                 headerText: "모델명",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPop_newEnroll_detail_pros = {
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
             autoGridHeight : true,
             fillColumnSizeMode:true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false);
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -173,20 +194,29 @@
 
     /* 처리이력 */
     let popup_grid_newEnroll_history;
-    function gridPopNewEnrollHistory(id,title,width,height){
+    function gridPopNewEnrollHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let gridPop_newEnroll_history_column = [
             {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                filter: {
+                    showIcon: true,
+                }
             },
         ]
         /* 2. 그리드 속성 설정 */
@@ -194,13 +224,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true, // 가로 스크롤 X
+            autoGridHeight: true,
+            /* 페이지네이션 */
             usePaging: true, // 페이징 사용
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
+            pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
             showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            autoGridHeight : true, // 게시되는 data에 맞게 height지정
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -217,7 +253,7 @@
 /* 2. 교체신청  */
     /* 자산 정보 */
     let popup_grid_changeEnroll_detail;
-    function gridPopChangeEnrollDetail(id,title,width,height){
+    function gridPopChangeEnrollDetail(){
         /* 1. AUIGrid 칼럼 설정 */
         let gridPop_changeEnroll_history_column = [
             {
@@ -229,11 +265,17 @@
                         headerText: "자산번호",
                         headerStyle: "my-header-style",
                         style: "my-column-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     },{
                         dataField: "category_model_name",
                         headerText: "모델명",
                         headerStyle: "my-header-style",
                         style: "my-column-style",
+                        filter: {
+                            showIcon: true,
+                        }
                     }
                 ]
             },
@@ -243,16 +285,28 @@
                 children:[
                     {
                         dataField:"category_note",
-                        headerText: "자산분류"
+                        headerText: "자산분류",
+                        filter: {
+                            showIcon: true,
+                        }
                     }, {
                         dataField:"category_changeProduct_name",
                         headerText: "모델명",
+                        filter: {
+                            showIcon: true,
+                        }
                     }, {
                         dataField: "category_changeAsset_num",
                         headerText: "자산번호",
+                        filter: {
+                            showIcon: true,
+                        }
                     }, {
                         dataField: "category_user_name",
-                        headerText: "사용자"
+                        headerText: "사용자",
+                        filter: {
+                            showIcon: true,
+                        }
                     }
                 ]
             }]
@@ -261,10 +315,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            autoGridHeight : true,
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
             fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -279,24 +342,36 @@
 
     /* 처리이력 */
     let popup_grid_change_history;
-    function gridPopChangeEnrollHistory(id,title,width,height){
+    function gridPopChangeEnrollHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let gridPop_changeEnroll_history_column = [
             {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_opinion",
-                headerText: "결재의견"
+                headerText: "결재의견",
+                filter: {
+                    showIcon: true,
+                }
             }
         ]
         /* 2. 그리드 속성 설정 */
@@ -304,13 +379,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            autoGridHeight : true, // 게시되는 data에 맞게 height지정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -327,31 +408,52 @@
 /* 3. 대여신청 */
     /* 자산정보 */
     let popup_grid_rentalEnroll_detail;
-    function gridPopRentalEnrollDetail(id,title,width,height){
+    function gridPopRentalEnrollDetail(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
                 dataField: "category_product",
                 headerText: "자산분류",
+                filter: {
+                    showIcon: true,
+                }
             },{
                 dataField: "category_item",
                 headerText: "품목",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_num",
                 headerText: "자산번호",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_item_name",
                 headerText: "모델명",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            autoGridHeight : true,
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
             fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -366,24 +468,36 @@
     }
     /* 처리이력 */
     let popup_grid_rental_history;
-    function gridPopRentalEnrollHistory(id,title,width,height){
+    function gridPopRentalEnrollHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout3 = [
             {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_opinion",
-                headerText: "결재의견"
+                headerText: "결재의견",
+                filter: {
+                    showIcon: true,
+                }
             }
         ]
         /* 2. 그리드 속성 설정 */
@@ -391,13 +505,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            autoGridHeight : true, // 게시되는 data에 맞게 height지정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -414,33 +534,57 @@
 /* 4. 반납신청 */
     /* 자산정보 */
     let popup_grid_returnEnroll_detail;
-    function gridPopReturnEnrollDetail(id,title,width,height){
+    function gridPopReturnEnrollDetail(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {   dataField: "category_asset_num",
                 headerText: "자산번호",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_product",
                 headerText: "자산분류",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_item",
                 headerText: "품목",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            autoGridHeight : true,
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
             fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -454,24 +598,36 @@
     }
     /* 처리이력 */
     let popup_grid_return_history;
-    function gridPopReturnEnrollHistory(id,title,width,height){
+    function gridPopReturnEnrollHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_opinion",
-                headerText: "결재의견"
+                headerText: "결재의견",
+                filter: {
+                    showIcon: true,
+                }
             }
         ]
         /* 2. 그리드 속성 설정 */
@@ -479,13 +635,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            autoGridHeight : true, // 게시되는 data에 맞게 height지정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -502,36 +664,63 @@
 /* 5. 인수인계 신청 */
     /* 자산정보 */
     let popup_grid_takeOverEnroll_detail;
-    function gridPopTakeoverEnrollDetail(id,title,width,height){
+    function gridPopTakeoverEnrollDetail(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {   dataField: "category_asset_num",
                 headerText: "자산번호",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_product",
                 headerText: "자산분류",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_item",
                 headerText: "품목",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_asset_status",
                 headerText: "자산상태",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_takeover_time",
                 headerText: "인수완료시간",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            autoGridHeight : true,
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
             fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -545,24 +734,36 @@
     }
     /* 처리이력 */
     let popup_grid_takeOverEnroll_history
-    function gridPopTakeoverEnrollHistory(id,title,width,height){
+    function gridPopTakeoverEnrollHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_opinion",
-                headerText: "결재의견"
+                headerText: "결재의견",
+                filter: {
+                    showIcon: true,
+                }
             }
         ]
         /* 2. 그리드 속성 설정 */
@@ -570,13 +771,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            autoGridHeight : true, // 게시되는 data에 맞게 height지정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -593,33 +800,57 @@
 /* 6. 대여연장신청 */
     /* 자산정보 */
     let popup_grid_rentalExtension_detail;
-    function gridPopRentalExtensionEnrollDetail(id,title,width,height){
+    function gridPopRentalExtensionEnrollDetail(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {   dataField: "category_asset_num",
                 headerText: "자산번호",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_product",
                 headerText: "자산분류",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_item",
                 headerText: "품목",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_model_name",
                 headerText: "모델명",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_rental_extension_time",
                 headerText: "대여연장기간",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            autoGridHeight : true,
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
             fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -633,24 +864,36 @@
     }
     /* 처리이력 */
     let popup_grid_rentalExtension_history;
-    function gridPopRentalExtensionEnrollHistory(id,title,width,height){
+    function gridPopRentalExtensionEnrollHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_manager",
                 headerText: "담당자",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_time",
                 headerText: "시간",
+                filter: {
+                    showIcon: true,
+                }
             },
             {
                 dataField: "category_opinion",
-                headerText: "결재의견"
+                headerText: "결재의견",
+                filter: {
+                    showIcon: true,
+                }
             }
         ]
         /* 2. 그리드 속성 설정 */
@@ -658,13 +901,19 @@
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            autoGridHeight: true,
+            /* 페이지네이션 */
+            usePaging: true,
             pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            fillColumnSizeMode: true, // 가로 스크롤 X
-            autoGridHeight : true, // 게시되는 data에 맞게 height지정
+            pageRowCount: 3,
+            showPageRowSelect: true,
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -1068,10 +1317,10 @@
 
 /* ------------------------------------------------------------------------------------------------ */
 
-/* [장애신고 - 장애신고 : 장애대상 추가 팝업 ]----------------------------------------------------------- */
+/* 20231016 : [장애신고 - 장애신고 : 장애대상 추가 팝업 ]----------------------------------------------------------- */
     /* 장애대상 추가 */
     let popup_grid_disabledAddRow;
-    function popupAddDisabled(id,title,width,height){
+    function popupAddDisabled(){
         /* 팝업 그리드(예시) */
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
@@ -1139,7 +1388,7 @@
             {
                 dataField: "category_description",
                 headerText: "신청내용",
-                width: 160,
+                width:"20%",
                 filter: {
                     showIcon: true,
                 }
@@ -1155,6 +1404,7 @@
             {
                 dataField: "category_asset_state",
                 headerText: "자산상태",
+                width:"10%",
                 filter: {
                     showIcon: true,
                 }
@@ -1162,6 +1412,7 @@
             {
                 dataField: "category_note",
                 headerText: "비고",
+                width:"13%",
                 filter: {
                     showIcon: true,
                 }
@@ -1170,21 +1421,27 @@
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
-            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
-            enableRowCheckShiftKey: true,
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
-            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            usePaging: true, // 페이징 사용
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
-            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-            softRemoveRowMode: false,
-            copyDisplayValue: true, //그리드 데이터 복사 가능
             editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+            softRemoveRowMode: false,
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 체크박스 */
+            showRowCheckColumn: true,// 엑스트라 체크박스 표시 설정
+            enableRowCheckShiftKey: true,
+            /* 사이즈 지정 */
+            headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode:true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pageRowCount: 12, // 한 화면에 출력되는 행 개수 12개로 지정
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
             enableFilter: true, // 필터 true 설정
-            autoGridHeight: true,
+
         }
 
         /* 그리드 생성 */
@@ -1201,7 +1458,7 @@
     }
     /* // 장애대상 추가 */
 
-    /* 장애 신고 신청 현황 */
+    /* 20231016 : 장애 신고 신청 현황 */
         /* 자산정보 */
         let popup_grid_disabledCurrent_detail;
         function gridPopDisabledDetail() {
@@ -1215,28 +1472,52 @@
                 {
                     dataField: "category_asset_num",
                     headerText: "자산번호",
+                    filter: {
+                        showIcon: true,
+                    }
                 },{
                     dataField: "category_product",
                     headerText: "자산분류",
+                    filter: {
+                        showIcon: true,
+                    }
                 }, {
                     dataField: "category_product",
                     headerText: "품목",
+                    filter: {
+                        showIcon: true,
+                    }
                 }, {
                     dataField: "category_item_name",
                     headerText: "모델명",
+                    filter: {
+                        showIcon: true,
+                    }
                 }, {
                     dataField: "category_place",
-                    headerText: "자산위치"
+                    headerText: "자산위치",
+                    filter: {
+                        showIcon: true,
+                    }
                 }]
             /* 2. 그리드 속성 설정 */
             let gridPros = {
                 selectionMode: "multipleCells",
                 enableSorting: true, // 소팅
                 noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-                headerHeight : 30, // 기본 헤더 높이 지정
-                pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-                autoGridHeight : true,
+                /* 사이즈 지정 */
+                headerHeight : 24, // 기본 헤더 높이 지정
+                autoGridHeight: true,
                 fillColumnSizeMode:true,
+                /* 페이지네이션 */
+                usePaging: true, // 페이징 사용
+                pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+                pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+                showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+                /* 그리드 복사 */
+                copyDisplayValue: true, //그리드 데이터 복사 가능
+                /* 필터 */
+                enableFilter: true, // 필터 true 설정
             }
 
             /* 그리드 생성 */
@@ -1248,7 +1529,6 @@
                 AUIGrid.setGridData(popup_grid_disabledCurrent_detail, data);
             });
         }
-
 
         /* 처리이력 */
         let popup_grid_disabledCurrent_history;
@@ -1264,25 +1544,46 @@
                 {
                     dataField: "category_history_desc",
                     headerText: "처리내용",
+                    filter: {
+                        showIcon: true,
+                    }
                 },{
                     dataField: "category_manager",
                     headerText: "조치자",
+                    filter: {
+                        showIcon: true,
+                    }
                 }, {
                     dataField: "category_date",
                     headerText: "처리일시",
+                    filter: {
+                        showIcon: true,
+                    }
                 }, {
                     dataField: "category_state",
                     headerText: "상태",
+                    filter: {
+                        showIcon: true,
+                    }
                 }]
             /* 2. 그리드 속성 설정 */
             let gridPros = {
                 selectionMode: "multipleCells",
                 enableSorting: true, // 소팅
                 noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-                headerHeight : 30, // 기본 헤더 높이 지정
-                pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-                autoGridHeight : true,
+                /* 사이즈 지정 */
+                headerHeight : 24, // 기본 헤더 높이 지정
+                autoGridHeight: true,
                 fillColumnSizeMode:true,
+                /* 페이지네이션 */
+                usePaging: true, // 페이징 사용
+                pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+                pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+                showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+                /* 그리드 복사 */
+                copyDisplayValue: true, //그리드 데이터 복사 가능
+                /* 필터 */
+                enableFilter: true, // 필터 true 설정
             }
 
         /* 그리드 생성 */
@@ -1345,10 +1646,10 @@ function searchClickAssetNum() {
 /* // 장애 신고 신청 현황 */
 /* ------------------------------------------------------------------------ */
 
-/* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
+/* 20231016 : [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
 /* 결재 이력  */
 let popup_grid_serviceDesk_current; // 서비스데스크 신청현황
-function gridPopServiceDeskCurrent(id,title,width,height){
+function gridPopServiceDeskCurrent(){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
         {
@@ -1359,40 +1660,76 @@ function gridPopServiceDeskCurrent(id,title,width,height){
         {
             dataField: "category_user_name",
             headerText: "사용자명",
+            filter: {
+                showIcon: true,
+            }
         },{
             dataField: "category_department",
             headerText: "부서",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_usage",
             headerText: "용도",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_num",
             headerText: "자산번호",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_asset_type",
             headerText: "자산종류",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_product_type",
             headerText: "물품종류",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_quantity",
             headerText: "수량",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_cost",
             headerText: "소요비용",
+            filter: {
+                showIcon: true,
+            }
         }, {
             dataField: "category_order_text",
             headerText: "요청내용",
+            filter: {
+                showIcon: true,
+            }
         }]
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
-        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        autoGridHeight : true,
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        autoGridHeight: true,
         fillColumnSizeMode:true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
     }
 
     /* 그리드 생성 */
@@ -1406,10 +1743,10 @@ function requestServiceDeskCurrent(){
 }
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
 
-/* [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
+/* 20231016 : [서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
     /* 결재 이력  */
     let popup_grid_serviceDesk_history; // 서비스데스크 신청현황
-    function gridPopServiceDeskHistory(id,title,width,height){
+    function gridPopServiceDeskHistory(){
         /* 1. AUIGrid 칼럼 설정 */
         let columnLayout = [
             {
@@ -1420,25 +1757,46 @@ function requestServiceDeskCurrent(){
             {
                 dataField: "category_history_desc",
                 headerText: "처리내용",
+                filter: {
+                    showIcon: true,
+                }
             },{
                 dataField: "category_manager",
                 headerText: "조치자",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_date",
                 headerText: "처리일시",
+                filter: {
+                    showIcon: true,
+                }
             }, {
                 dataField: "category_state",
                 headerText: "상태",
+                filter: {
+                    showIcon: true,
+                }
             }]
         /* 2. 그리드 속성 설정 */
         let gridPros = {
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-            headerHeight : 30, // 기본 헤더 높이 지정
-            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-            autoGridHeight : true,
+            /* 사이즈 지정 */
+            headerHeight : 24, // 기본 헤더 높이 지정
+            autoGridHeight: true,
             fillColumnSizeMode:true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            pageRowCount: 3, // 한 화면에 출력되는 행 개수 30개로 지정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
         }
 
         /* 그리드 생성 */
@@ -1453,7 +1811,7 @@ function requestServiceDeskCurrent(){
 /* //[서비스 신청 현황 - 서비스데스트 신청현황 팝업 ]----------------------------------------------------------- */
 
 
-/* [추가] 자산정보 */
+/* 20231016 : [추가] 자산정보 */
 let popup_grid_assetDetail;
 function gridPopAssetDetail(){
     /* 1. AUIGrid 칼럼 설정 */
@@ -1527,18 +1885,22 @@ function gridPopAssetDetail(){
         rowIdField: "id",
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
-        headerHeight : 30, // 기본 헤더 높이 지정
+        /* 사이즈 지정 */
+        headerHeight : 24, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount: 4,
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true,
-        autoGridHeight : true,
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
-        softRemoveRowMode: false, // 소프트 제거 모드 사용 안함
     }
 
     /* 그리드 생성 */
@@ -1554,7 +1916,7 @@ function requestAssetDetailData() {
 /* // 자산정보 */
 
 /* 자산검색 팝업 */
-/* 자산검색 */
+/*  20231016 : 자산검색 */
 let popup_subGrid_assetSearch;
 
 function subPopupAssetSearch(id,title,width,height, e){
@@ -1595,16 +1957,19 @@ function subPopupAssetSearch(id,title,width,height, e){
     let gridPros = {
         selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true, // 가로 스크롤 X
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         pageRowCount: 10, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        fillColumnSizeMode: true, // 가로 스크롤 X
-        autoGridHeight : true, // 게시되는 data에 맞게 height지정
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정
     }
     popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);

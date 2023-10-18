@@ -235,7 +235,7 @@
             </div>
 
             <div class="btn-wrap">
-                <button type="button" class="btn" data-btn="cancel" onclick="lp_close('gridPop_detail')">닫기</button>
+                <button type="button" class="btn" data-btn="cancel" onclick="lp_close('gridPop_serviceDesk_detail')">닫기</button>
             </div>
         </div>
     </div>
@@ -248,8 +248,6 @@ let serviceStatusGrid_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createServiceStatusGrid(); // 서비스신청현황
-
-requestServiceStatusGridData();
 
 /* 3. AUIGrid 그리드 옵션 */
 function createServiceStatusGrid() {
@@ -344,21 +342,15 @@ function createServiceStatusGrid() {
         enableFilter: true, // 필터 true 설정
     }
 
-    /* 그리드 생성 */
-    serviceStatusGrid_ID = AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
-
-    /* 더블 클릭시 팝업 */
-    AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
-        $("#gridPop_serviceDesk_detail").addClass("open").dialog({
-            title: "서비스데스크 신청 현황",
-            width: 1250,
-            height: 500,
-            modal: true,
-            resizable: false,
-            dialogClass: 'no-close success-dialog'
+    setTimeout(function(){
+        /* 그리드 생성 */
+        serviceStatusGrid_ID = AUIGrid.create("#serviceStatusGrid_ID", columnLayout, gridPros);
+        requestServiceStatusGridData();
+        /* 20231016 : 더블 클릭시 팝업 */
+        AUIGrid.bind(serviceStatusGrid_ID, "cellDoubleClick", function(event) {
+            lp_open("gridPop_serviceDesk_detail","서비스데스크 신청 현황",1250,720);
         });
-        gridPopServiceDeskHistory();
-    });
+    },150);
 }
 
 /* 4. 데이터 불러오기 */

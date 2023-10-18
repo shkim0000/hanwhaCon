@@ -73,7 +73,8 @@
                             <h3 class="list-title"><span>사용자별 현황</span></h3>
                         </div>
                     </div>
-                    <div id="userStatusGrid_ID" class="grid-box h-small2"></div>
+                    <!-- 20231016 -->
+                    <div id="userStatusGrid_ID" class="grid-box grid-10"></div>
                 </div>
                 <div class="multiple-grid-box">
                     <div class="title-box">
@@ -84,7 +85,8 @@
                             <button type="button" class="btn primary send" data-popup="submit_pop">결재</button>
                         </div>
                     </div>
-                    <div id="assetStatusGrid_ID" class="grid-box h-small2"></div>
+                    <!-- 20231016 -->
+                    <div id="assetStatusGrid_ID" class="grid-box grid-10"></div>
                 </div>
             </div>
         </div>
@@ -96,8 +98,10 @@
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
             </div>
         </div>
-        <div id="dueDiglienceGrid_ID" class="grid-box h-medium"></div>
+        <div id="dueDiglienceGrid_ID" class="grid-box grid-12"></div>
 
+        <!-- 간이 버튼 모음 주석처리 -->
+        <!--
         <div class="btn-wrap" style="margin-top:10px;">
             <button type="button" class="btn" onclick="lp_open('submit_pop','결재상신 화면',900,860)">결재상신 화면</button>
             <button type="button" class="btn" onclick="lp_open('submitSearch_pop','Search Employee',800,860)">상신 > 검색조건 팝업</button>
@@ -105,6 +109,7 @@
             <button type="button" class="btn" onclick="openWindowPop('../views/previewApproval.html','미리보기')">상신 > 미리보기</button>
             <button type="button" class="btn" onclick="lp_open('not_complete_pop','',550, 170)">조정완료안됨</button>
         </div>
+        -->
     </div>
 </div>
 <!-- // contents -->
@@ -767,9 +772,6 @@ function createDueDiglienceGrid() {
             filter: {
                 showIcon: true,
             },
-            /*----------추가------------*/
-
-            /*----------추가------------*/
         }, {
             dataField: "category_product_name",
             headerText: "물품명",
@@ -820,13 +822,11 @@ function createDueDiglienceGrid() {
         }, {
             dataField: "category_reason_non_existence",
             headerText: "미존재 사유",
+            style:"input-design",
             width: 160,
             filter: {
                 showIcon: true,
             },
-            /*------------추가------------- */
-            style:"input-design",
-            /*------------추가------------- */
         }, {
             dataField: "category_investigate-date",
             headerText: "조사일",
@@ -842,7 +842,6 @@ function createDueDiglienceGrid() {
                 showIcon: true,
             }
         },
-        /*---------------추가---------------------*/
         {
             dataField: "category_use_place",
             headerText: "사용장소",
@@ -881,22 +880,22 @@ function createDueDiglienceGrid() {
     /* 2. 그리드 속성 설정 */
     let gridPros = {
         rowIdField: "id",
-        showRowCheckColumn: false,// 엑스트라 체크박스 표시 설정
-        enableRowCheckShiftKey: true,
-        /*-----------추가(주석처리)-------------*/
-        /* selectionMode: "multipleCells",*/
-        /*-----------추가(주석처리)-------------*/
-
+        selectionMode: "multipleCells",
         enableSorting: true, // 소팅
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
         noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        /* 사이즈 지정 */
         headerHeight : 30, // 기본 헤더 높이 지정
+        /* 페이지네이션 */
         usePaging: true, // 페이징 사용
+        pageRowCount : 12,
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
-        simplifySelectionEvent: true,
+        /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
-        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 필터 */
         enableFilter: true, // 필터 true 설정,
+        /* 사용 기능 */
         rowStyleFunction: function (rowIndex, item) {
             if (item.category_after_change == "미존재") {
                 return "my-custom-style";
@@ -978,28 +977,50 @@ $("[data-popup ='submit_pop']").on("click",function(){
     }
 });
 
-/* 메뉴버튼 클릭시(반응형) */
+/* 20231016  : 메뉴버튼 클릭시(반응형) */
 $(document).on("click",".menu-btn",function(){
+    let windowWidth = $(window).innerWidth();
     let innerWidth = $(".contents").innerWidth() - 38;
     let halfWidth = ($(".contents").innerWidth() - 82)/2;
 
-    if($(".contents").hasClass("active")){
-        innerWidth = innerWidth + 260;
-        halfWidth = halfWidth + 130;
-        setTimeout(function(){
-            AUIGrid.resize(userStatusGrid_ID, halfWidth);
-            AUIGrid.resize(assetStatusGrid_ID, halfWidth);
-            AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-        },20)
+    if(windowWidth > 970){
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            halfWidth = halfWidth + 130;
+            setTimeout(function(){
+                AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+            },20);
 
-    } else{
-        innerWidth = innerWidth - 260;
-        halfWidth = halfWidth - 130;
-        setTimeout(function(){
-            AUIGrid.resize(userStatusGrid_ID, halfWidth);
-            AUIGrid.resize(assetStatusGrid_ID, halfWidth);
-            AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-        },20)
+        } else{
+            innerWidth = innerWidth - 260;
+            halfWidth = halfWidth - 130;
+            setTimeout(function(){
+                AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+            },20);
+        }
+    }else{
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            halfWidth = halfWidth + 130;
+            setTimeout(function(){
+                AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
+                AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
+                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+            },20);
+
+        } else{
+            innerWidth = innerWidth - 260;
+            halfWidth = halfWidth - 130;
+            setTimeout(function(){
+                AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
+                AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
+                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+            },20);
+        }
     }
 });
 </script>

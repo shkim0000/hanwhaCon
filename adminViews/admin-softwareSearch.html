@@ -36,7 +36,7 @@
         <div class="page-indicator">
             <ul>
                 <li><i class="fa-solid fa-house"></i></li>
-                <li>자산신청</li>
+                <li>자산현황</li>
                 <li>S/W 조회</li>
             </ul>
         </div>
@@ -331,77 +331,31 @@
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof holdingAssetGrid_ID !== "undefined") {
-            AUIGrid.resize(holdingAssetGrid_ID);
+        if (typeof softwareCurrentGrid_ID !== "undefined") {
+            AUIGrid.resize(softwareCurrentGrid_ID);
         }
-        if (typeof enrollGrid_ID !== "undefined"){
-            AUIGrid.resize(enrollGrid_ID);
+        if (typeof softwareHistoryGrid_ID !== "undefined"){
+            AUIGrid.resize(softwareHistoryGrid_ID);
         }
     }
     /* 6. 함수 관련 */
-    /* 행 삭제 */
-    function deleteRowGrid(){
-        AUIGrid.removeCheckedRows(enrollGrid_ID); // 체크된 행 삭제 처리
-        let removedRows = AUIGrid.getRemovedItems(enrollGrid_ID, true); // 삭제 처리된 아이템 있는지 보기
-        if (removedRows.length <= 0) {
-            alert("삭제 처리되어 마크된 행이 없습니다.")
-            return;
-        }
-        AUIGrid.removeSoftRows(enrollGrid_ID); // softRemoveRowMode 가 true 일 때 삭제를 하면 그리드 상에 마크가 되는데, 이를 실제로 그리드에서 삭제 함.
-    }
-
-    /* 인수인계신청 > 선택한 날짜 그리드 삽입 */
-    $(".btn.check").on("click",function(){
-        // 상단 그리드의 체크된 행들 얻기
-        let rows = AUIGrid.getCheckedRowItemsAll(holdingAssetGrid_ID);
-        console.log(rows[0].id)
-        if (rows.length <= 0) {
-            alert('상단 그리드에서 체크된 행이 없습니다.');
-            return;
-        }
-        /* 얻은 행을 하단 그리드에 추가하기 */
-        AUIGrid.addRow(enrollGrid_ID, rows, "last");
-
-        /* 선택한 상단 그리드 행들 삭제 */
-        AUIGrid.removeCheckedRows(holdingAssetGrid_ID);
-
-        /* 다른 그리드의 해당 컬럼명의 값에 추가 */
-        AUIGrid.updateRowsById(enrollGrid_ID, str)
-    });
-
     /* 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
         let innerWidth = $(".contents").innerWidth() - 38;
         if($(".contents").hasClass("active")){
             innerWidth = innerWidth + 260;
             setTimeout(function(){
-                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
-                AUIGrid.resize(enrollGrid_ID, innerWidth);
+                AUIGrid.resize(softwareCurrentGrid_ID, innerWidth);
+                AUIGrid.resize(softwareHistoryGrid_ID, innerWidth);
             },20);
 
         } else{
             innerWidth = innerWidth - 260;
             setTimeout(function(){
-                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
-                AUIGrid.resize(enrollGrid_ID, innerWidth);
+                AUIGrid.resize(softwareCurrentGrid_ID, innerWidth);
+                AUIGrid.resize(softwareHistoryGrid_ID, innerWidth);
             },20);
         }
-    });
-
-    /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
-    $(".quantity-list li button").each(function(){
-        $(this).on("click",function(){
-            let name = $(this).find('.name').text();
-            let comparisonObj = AUIGrid.getOrgGridData(holdingAssetGrid_ID);
-
-            AUIGrid.clearFilterAll(holdingAssetGrid_ID);
-
-            comparisonObj.forEach((i) => {
-                if(name === i.category_product_name){
-                    AUIGrid.setFilterByValues(holdingAssetGrid_ID, "category_product_name", i.category_product_name);
-                }
-            });
-        });
     });
 </script>
 </body>

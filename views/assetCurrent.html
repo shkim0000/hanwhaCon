@@ -240,7 +240,8 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_newEnroll_detail" class="grid-box h-small"></div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
+            <div id="popup_grid_newEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -263,6 +264,7 @@
                     <h3>결재이력</h3>
                 </div>
             </div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
             <div id="popup_grid_newEnroll_history" class="grid-box"></div>
 
             <div class="title-box">
@@ -342,7 +344,8 @@
                     <h3>자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_changeEnroll_detail" class="grid-box h-small"></div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
+            <div id="popup_grid_changeEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -365,6 +368,7 @@
                     <h3>결재이력</h3>
                 </div>
             </div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
             <div id="popup_grid_change_history" class="grid-box"></div>
 
             <div class="title-box">
@@ -450,7 +454,8 @@
                     <h3>대여자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_rentalEnroll_detail" class="grid-box h-small"></div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
+            <div id="popup_grid_rentalEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -473,6 +478,7 @@
                     <h3>결재이력</h3>
                 </div>
             </div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
             <div id="popup_grid_rental_history" class="grid-box"></div>
 
             <div class="title-box">
@@ -555,7 +561,8 @@
                     <h3>반납자산정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_returnEnroll_detail" class="grid-box h-small"></div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
+            <div id="popup_grid_returnEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
@@ -578,6 +585,7 @@
                     <h3>결재이력</h3>
                 </div>
             </div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
             <div id="popup_grid_return_history" class="grid-box"></div>
 
             <div class="title-box">
@@ -657,13 +665,15 @@
                     <h3>인수인계자산</h3>
                 </div>
             </div>
-            <div id="popup_grid_takeOverEnroll_detail" class="grid-box h-small"></div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
+            <div id="popup_grid_takeOverEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>결재이력</h3>
                 </div>
             </div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
             <div id="popup_grid_takeOverEnroll_history" class="grid-box"></div>
 
             <div class="title-box">
@@ -749,13 +759,15 @@
                     <h3>대여자산 연장신청정보</h3>
                 </div>
             </div>
-            <div id="popup_grid_rentalExtension_detail" class="grid-box h-small"></div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
+            <div id="popup_grid_rentalExtension_detail" class="grid-box"></div>
 
             <div class="title-box">
                 <div class="title">
                     <h3>결재이력</h3>
                 </div>
             </div>
+            <!-- 20231016  : grid-box 외 class는 지워주세요 -->
             <div id="popup_grid_rentalExtension_history" class="grid-box"></div>
 
             <div class="title-box">
@@ -815,7 +827,7 @@ let applicationGrid_ID;
 
 /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
 createApplicationGrid();
-requestApplicationStatusData();
+
 
 /* 3. AUIGrid 그리드 옵션 */
 /* 신청정보 */
@@ -937,39 +949,41 @@ function createApplicationGrid() {
         },
     }
     /* 그리드 생성 */
-    applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+    setTimeout(function(){
+        applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+        requestApplicationStatusData();
+        /* 20231016 : 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여) */
+        AUIGrid.bind(applicationGrid_ID, "cellDoubleClick", function(event) {
+            let result = AUIGrid.getCellValue(applicationGrid_ID, event.rowIndex, "category_application_division");
 
-    /* 20231016 : 셀 더블클릭 이벤트 바인딩 , (더블클릭시, dataField의 신청구분 value에 따라 팝업요소에 open 클래스 부여) */
-    AUIGrid.bind(applicationGrid_ID, "cellDoubleClick", function(event) {
-        let result = AUIGrid.getCellValue(applicationGrid_ID, event.rowIndex, "category_application_division");
+            if(result === "신규신청"){
+                lp_open('newEnroll_pop','신규 신청',1250,840);
+            } else if(result ==="교체신청"){
+                lp_open('changeEnroll_pop','교체 신청',1250,820);
+            } else if(result ==="대여신청"){
+                lp_open('rentalEnroll_pop', '대여 신청',1250,870);
+            } else if (result === "반납신청"){
+                lp_open('returnEnroll_pop', '반납신청',1250,790);
+            } else if (result === "대여연장신청"){
+                lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,750);
+            } else if(result === "인수인계신청"){
+                lp_open('takingOverEnroll_pop', '인수인계신청',1250,710);
+            }
+        });
 
-        if(result === "신규신청"){
-            lp_open('newEnroll_pop','신규 신청',1250,900);
-        } else if(result ==="교체신청"){
-            lp_open('changeEnroll_pop','교체 신청',1250,850);
-        } else if(result ==="대여신청"){
-            lp_open('rentalEnroll_pop', '대여 신청',1250,900);
-        } else if (result === "반납신청"){
-            lp_open('returnEnroll_pop', '반납신청',1250,820);
-        } else if (result === "대여연장신청"){
-            lp_open('rentalExtensionEnroll_pop', '대여연장신청',1250,780);
-        } else if(result === "인수인계신청"){
-            lp_open('takingOverEnroll_pop', '인수인계신청',1250,730);
-        }
-    });
-
-    /* 20231016[주석 수정] : 전체 체크박스 클릭 이벤트 바인딩 */
-    AUIGrid.bind(applicationGrid_ID, "rowAllChkClick", function (event) {
-        if (event.checked) {
-            // name 의 값들 얻기
-            var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "category_status");
-            // Anna 제거하기
-            uniqueValues.splice(uniqueValues.indexOf("category_status"), 1);
-            AUIGrid.setCheckedRowsByValue(event.pid, "category_status", uniqueValues);
-        } else {
-            AUIGrid.setCheckedRowsByValue(event.pid, "category_status", []);
-        }
-    });
+        /* 20231016[주석 수정] : 전체 체크박스 클릭 이벤트 바인딩 */
+        AUIGrid.bind(applicationGrid_ID, "rowAllChkClick", function (event) {
+            if (event.checked) {
+                // name 의 값들 얻기
+                var uniqueValues = AUIGrid.getColumnDistinctValues(event.pid, "category_status");
+                // Anna 제거하기
+                uniqueValues.splice(uniqueValues.indexOf("category_status"), 1);
+                AUIGrid.setCheckedRowsByValue(event.pid, "category_status", uniqueValues);
+            } else {
+                AUIGrid.setCheckedRowsByValue(event.pid, "category_status", []);
+            }
+        });
+    },150);
 }
 
 /* 4. 데이터 불러오기 */

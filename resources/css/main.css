@@ -160,6 +160,14 @@ body.main-page .contents{height:calc(100vh - 192px);min-height:731px;background:
 /* // [추가] 20231005 */
 .multiple-grid-box .title-box {min-height:40px;margin-bottom:8px;}
 .multiple-grid-box .title-box .list-title{margin-bottom:0;}
+
+/* 20231016 */
+@media(max-width:970px){
+    .multiple-grid-wrap{flex-direction:column;}
+    .multiple-grid-box{width:100%;}
+}
+/* //20231016 */
+
 .grid-box{height:380px;}
 .grid-box > *{width:100%!important;}
 .grid-box.input-grid{height:70px;}
@@ -557,12 +565,12 @@ label[data-isActive="readonly"]{background:#cacaca;}
 .popup .input-list{width:100%;}
 .popup .input-list.only .input-title{margin-right:20px;}
 .popup .input-list.only .input-title + *{width:calc(100% - 120px);}
-.popup .input-title{font-weight:var(--bold);min-width:60px;}
+.popup .input-title{font-weight:var(--bold);min-width:80px;}
 /* 수정 20231003 */
 .popup .aui-grid-default-header *{font-size: 12px;}
 .popup .aui-grid-renderer-base {font-size:12px;}
 .popup .select > select{height:24px;}
-.popup .input{width:calc(100% - 100px);border-color:var(--line1);padding-right:10px;}
+.popup .input{width:calc(100% - 80px);border-color:var(--line1);padding-right:10px;}
 .popup .input > input {font-size:14px;height:24px;}
 .popup .input.textarea{height:auto;margin-top:30px;width:100%;}
 /* //수정 20231003 */
@@ -675,9 +683,10 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* //20231012 */
 .title-box .btn-wrap.long-ver .btn.excel{min-width:141px;}
 .title-box .btn-wrap.long-ver .btn.primary{min-width:86px;}
-/* 2023912 */
+/* 20231016 */
 .title-box .grid-title{font-size:20px;font-weight:var(--bold);}
 .title-box .grid-title h3 span{color:var(--color1);}
+.title-box .grid-title.small{font-size:16px;}
 /* 20231005 */
 .title-box .title > .row-count{padding-left:0;font-size:16px;}
 .title-box .title > .row-count::before{display:none;}
@@ -848,12 +857,12 @@ tbody tr p{text-align:center;}
 .custom-table.design-ver .td{border:1px solid var(--line1);border-radius:4px;}
 
 @media(max-width:1485px){
-    /*.popup .row.con-3 .td{width:calc(33.3% - 120px);}*/
-    /*.popup .row.con-3 .td.whole{width:calc(100% - 120px);}*/
-    /*.popup .row.con-3 .td.whole .date-wrap{width:100%;}*/
-    /*.popup .row.con-3 .td.half{width:calc(50% - 120px);}*/
-    /*.popup .row.con-3 .td.medium{width:calc(66.6% - 120px);max-width:none;}*/
-    /*.popup .row.con-3 .td.medium .select + .select{margin-left:8px;}*/
+    .popup .row.con-3 .td{width:calc(33.3% - 120px);}
+    .popup .row.con-3 .td.whole{width:calc(100% - 120px);}
+    .popup .row.con-3 .td.whole .date-wrap{width:100%;}
+    .popup .row.con-3 .td.half{width:calc(50% - 120px);}
+    .popup .row.con-3 .td.medium{width:calc(66.6% - 120px);max-width:none;}
+    .popup .row.con-3 .td.medium .select + .select{margin-left:8px;}
 }
 
 @media(max-width:1220px) {
@@ -870,15 +879,16 @@ tbody tr p{text-align:center;}
     .row.con-2 .td,
     .row.con-3 .td.medium,
     .row.con-3 .td {width:calc(100% - 120px);border-bottom:1px solid var(--line1);}
+    .row.con-3 .td.no-th{width:100%;}
     .row.con-3 .td.medium, .row > .th:nth-last-child(2) , .row > .td:nth-last-child(1) {border-bottom:0}
-    /* 20231012 */
     .custom-table .td.whole .date{max-width:none;width:calc(50% - 17px);}
 
-    /* [추가] 20230925 */
-    .row.con-3 .td.no-th{width:100%;}
-    /* //[추가] 20230925 */
-
-
+    .popup .td + .th{border-left:1px solid var(--line1);}
+    .popup .row.con-3 .td.medium,
+    .popup .row.con-3 .td {border-bottom:0;}
+    .popup .row.con-3 .td.medium,
+    .popup .row > .th,
+    .popup .row > .td {border-bottom:0;}
 }
 
 /* custom-table 의 input */
@@ -999,7 +1009,6 @@ tbody tr p{text-align:center;}
 .title-box.hide-ver.open , .title-box.hide-ver.open + *,
 .title-box.hide-ver2.open , .title-box.hide-ver2.open + *{display:flex;}
 
-
 /* text-box */
 .text-box{display:flex;gap:8px;margin-top:8px;}
 .text-box .btn{justify-content:center;align-items:center;min-width:110px;font-size:14px;padding:5px 8px;}
@@ -1007,7 +1016,7 @@ tbody tr p{text-align:center;}
 
 /* AUIGrid 내 디자인 커스텀 */
 /* 그리드 컬럼 색상 */
-.my-header-style{background: #f37321;color:white;border-color:#9d9d9d;}
+.my-header-style{background: #ebaf88;border-color:#9d9d9d;}
 .my-column-style{background: #fff3ec;}
 .myField3{background-color:#ebaf88;}
 .my-custom-style3{background-color:#ebaf88;font-weight:700}

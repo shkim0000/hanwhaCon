@@ -178,7 +178,8 @@
                     <h3>정기교체대상</h3>
                 </div>
             </div>
-            <div id="popup_grid_replacementTarget_current" class="grid-box h-small"></div>
+            <!-- 20231016 -->
+            <div id="popup_grid_replacementTarget_current" class="grid-box grid-12"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn">수정</button>
@@ -514,7 +515,7 @@
                 </div>
                 <button type="button" class="btn search">검색</button>
             </div>
-            <div id="popup_subGrid_assetSearch" class="grid-box h-small"></div>
+            <div id="popup_subGrid_assetSearch" class="grid-box grid-10"></div>
         </div>
     </div>
 </div>
@@ -617,7 +618,7 @@
             if(event.item.category_status === "임시저장"){
                 lp_open('gridPop_replacement', '정기교체작업 등록',1250,530);
             }else if(event.item.category_status ==="완료"){
-                lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,530);
+                lp_open('gridPop_replacement_current', '정기교체작업등록현황',1250,700);
             }
         });
     }
