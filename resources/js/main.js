@@ -4,98 +4,100 @@ let color = ["orange","yellow","lightOrange","lightPink","blue","green","purple"
 $(function(){
 
     /* header 추가 */
-    $('body').prepend(
-"<header>\n"+
+    if(!$("body").hasClass("mail")){
+        $('body').prepend(
+            "<header>\n"+
             "<div class='inner'>\n"+
-                "<button type='button' class='menu-btn'></button>\n"+
-                "<a href='#'>IAMS V2</a>\n"+
+            "<button type='button' class='menu-btn'></button>\n"+
+            "<a href='#'>IAMS V2</a>\n"+
             "</div>\n"+
             "<div class='inner'>\n"+
-                "<div class='account'>\n"+
-                    "[<span>홍길동</span> / <span>IT운영</span>]\n"+
-                "</div>\n"+
-                "<button type='button' class='logout-btn'>Logout</button>\n"+
+            "<div class='account'>\n"+
+            "[<span>홍길동</span> / <span>IT운영</span>]\n"+
             "</div>\n"+
-        "</header>"
-    );
+            "<button type='button' class='logout-btn'>Logout</button>\n"+
+            "</div>\n"+
+            "</header>"
+        );
 
-    /* sidebar 추가 */
-    $('#wrapper').prepend(
-"<div class='sidebar'>\n"+
+        /* sidebar 추가 */
+        $('#wrapper').prepend(
+            "<div class='sidebar'>\n"+
             "<div class='menu'>\n"+
-                "<ul>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>자산신청</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>신규신청</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>교체신청</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>대여신청</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>대여연장신청</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>반납신청</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>인수인계신청</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>자산현황</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>부서자산조회</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>부서 사용자별 자산조회</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>S/W 조회</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>서비스데스크</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>서비스 신청현황</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>서비스 신청</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>장애신고</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>장애신고</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>장애신고현황</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>자산등록</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>자산등록</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>자산실사</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
-                                "<li><a href='#' class='linkBtn'>자산실사현황</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                    "<li>\n"+
-                        "<button type='button' class='btn'>정기교체</button>\n"+
-                        "<div class='depth'>\n"+
-                            "<ul>\n"+
-                                "<li><a href='#' class='linkBtn'>모델신청</a></li>\n"+
-                            "</ul>\n"+
-                        "</div>\n"+
-                    "</li>\n"+
-                "</ul>\n"+
+            "<ul>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>자산신청</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>신규신청</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>교체신청</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>대여신청</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>대여연장신청</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>반납신청</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>인수인계신청</a></li>\n"+
+            "</ul>\n"+
             "</div>\n"+
-        "</div>\n"
-    );
+            "</li>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>자산현황</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>부서자산조회</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>부서 사용자별 자산조회</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>S/W 조회</a></li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</li>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>서비스데스크</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>서비스 신청현황</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>서비스 신청</a></li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</li>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>장애신고</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>장애신고</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>장애신고현황</a></li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</li>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>자산등록</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>자산등록</a></li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</li>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>자산실사</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
+            "<li><a href='#' class='linkBtn'>자산실사현황</a></li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</li>\n"+
+            "<li>\n"+
+            "<button type='button' class='btn'>정기교체</button>\n"+
+            "<div class='depth'>\n"+
+            "<ul>\n"+
+            "<li><a href='#' class='linkBtn'>모델신청</a></li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</li>\n"+
+            "</ul>\n"+
+            "</div>\n"+
+            "</div>\n"
+        );
+    }
 });
 
 $(function(){

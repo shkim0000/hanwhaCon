@@ -254,6 +254,7 @@
                 </div>
             </div>
             <div class="text-box">
+                <p class="t-title important">처리내용</p>
                 <label class="input">
                     <input type="text" placeholder="처리내용">
                 </label>
@@ -341,6 +342,8 @@ let disabilitySatisfactionDetail_ID;
 createDisabilitySatisfactionGrid();
 requestDisabilitySatisfactionData();
 
+let countOpen = 0;
+
 /* 3. AUIGrid 그리드 옵션 */
 function createDisabilitySatisfactionGrid() {
     /* 기본 그리드(예시) */
@@ -353,69 +356,75 @@ function createDisabilitySatisfactionGrid() {
         }, {
             dataField: "category_take_action_person",
             headerText: "조치자",
-            width: 180,
             filter: {
                 showIcon: true,
             },
             cellMerge: true
         }, {
             dataField: "category_sum",
-            headerText: "총계",
-            width: 160,
+            headerText: "장애건수",
             filter: {
                 showIcon: true,
             },
             cellMerge: true
-        },  {
-            dataField: "category_request_sum",
-            headerText: "",
-            width: 160,
+        },   {
+            dataField: "category_request",
+            headerText: "응답건수",
+            children: [{
+                dataField: "category_respond",
+                headerText: "응답",
+                filter: {
+                    showIcon: true,
+                },
+            }, {
+                dataField: "category_unanswered",
+                headerText: "미응답",
+                filter: {
+                    showIcon: true,
+                },
+            }]
+        },
+        {
+            dataField: "category_satisfaction",
+            headerText: "만족도",
             filter: {
                 showIcon: true,
             },
-            renderer : {
-                type : "ButtonRenderer",
-                onClick : function(event) {
-                    /* 해당하는 그리드 실행 */
-                    createDisabilitySatisfactionDetailGrid();
+            children:[
+                {
+                    dataField: "category_very_satisfied",
+                    headerText: "매우만족(5)",
+                    filter: {
+                        showIcon: true,
+                    }
+                }, {
+                    dataField: "category_satisfied",
+                    headerText: "만족(4)",
+                    filter: {
+                        showIcon: true,
+                    }
+                }, {
+                    dataField: "category_average",
+                    headerText: "보통(3)",
+                    filter: {
+                        showIcon: true,
+                    }
+                }, {
+                    dataField: "category_dissatisfied",
+                    headerText: "불만(2)",
+                    filter: {
+                        showIcon: true,
+                    }
+                }, {
+                    dataField: "category_very_dissatisfied",
+                    headerText: "매우불만(1)",
+                    filter: {
+                        showIcon: true,
+                    }
                 }
-            }
-        },{
-            dataField: "category_very_satisfied",
-            headerText: "매우만족",
-            width: 280,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_satisfied",
-            headerText: "만족",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_average",
-            headerText: "보통",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_dissatisfied",
-            headerText: "불만",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_very_dissatisfied",
-            headerText: "매우불만",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }];
+            ]
+
+        },];
 
     /* 20231012 : 2. 그리드 속성 설정 */
     let gridPros = {
@@ -436,15 +445,20 @@ function createDisabilitySatisfactionGrid() {
         editable: false, // 수정가능여부, 그리드 데이터 수정 가능
         /* 필터 */
         enableFilter: true, // 필터 true 설정
-        /* 셀 병합 */
-        enableCellMerge: true,
-        setCellMerge:true,
-        cellMergeRowSpan : true,
     }
 
     /* 그리드 생성 */
     disabilitySatisfaction_ID = AUIGrid.create("#disabilitySatisfaction_ID", columnLayout, gridPros);
     getRowCount(disabilitySatisfaction_ID);
+
+    /* 그리드 관련 기능 */
+    AUIGrid.bind(disabilitySatisfaction_ID, "cellClick", function(event) {
+        if(countOpen === 0){
+            countOpen++;
+            createDisabilitySatisfactionDetailGrid();
+        }
+    });
+
 }
 
 function createDisabilitySatisfactionDetailGrid() {
@@ -469,7 +483,15 @@ function createDisabilitySatisfactionDetailGrid() {
             filter: {
                 showIcon: true,
             },
-        },  {
+
+        },   {
+            dataField: "category_asset",
+            headerText: "자산분류",
+            width: 160,
+            filter: {
+                showIcon: true,
+            },
+        },{
             dataField: "category_item",
             headerText: "물품종류",
             width: 160,
@@ -500,7 +522,7 @@ function createDisabilitySatisfactionDetailGrid() {
         }, {
             dataField: "category_application_date",
             headerText: "신청일시",
-            width: 160,
+            width: 280,
             filter: {
                 showIcon: true,
             }
@@ -520,7 +542,14 @@ function createDisabilitySatisfactionDetailGrid() {
             }
         },{
             dataField: "category_manager",
-            headerText: "처리자",
+            headerText: "담당자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_service_status",
+            headerText: "서비스 상태",
             width: 160,
             filter: {
                 showIcon: true,
@@ -533,8 +562,29 @@ function createDisabilitySatisfactionDetailGrid() {
                 showIcon: true,
             }
         },{
+            dataField: "category_satisfaction",
+            headerText: "만족도",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },{
             dataField: "category_complete_date",
             headerText: "완료일자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_complete_date",
+            headerText: "완료일자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        },{
+            dataField: "category_processing_date",
+            headerText: "처리일자",
             width: 160,
             filter: {
                 showIcon: true,
@@ -590,10 +640,13 @@ function requestDisabilitySatisfactionDetailData() {
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-
     // 크기가 변경되었을 때 AUIGrid.resize() 함수 호출
-    if (typeof disabledDC_ID !== "undefined") {
-        AUIGrid.resize(disabledDC_ID);
+    if (typeof disabilitySatisfaction_ID !== "undefined") {
+        AUIGrid.resize(disabilitySatisfaction_ID);
+    }
+
+    if (typeof disabilitySatisfactionDetail_ID !== "undefined") {
+        AUIGrid.resize(disabilitySatisfactionDetail_ID);
     }
 };
 
@@ -602,13 +655,15 @@ $(document).on("click",".menu-btn",function(){
     if($(".contents").hasClass("active")){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
-            AUIGrid.resize(disabledDC_ID, innerWidth);
+            AUIGrid.resize(disabilitySatisfaction_ID, innerWidth);
+            AUIGrid.resize(disabilitySatisfactionDetail_ID, innerWidth);
         },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
-            AUIGrid.resize(disabledDC_ID, innerWidth);
+            AUIGrid.resize(disabilitySatisfaction_ID, innerWidth);
+            AUIGrid.resize(disabilitySatisfactionDetail_ID, innerWidth);
         },20);
     }
 });

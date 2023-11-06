@@ -167,6 +167,13 @@ $(function(){
     $(".date input").datepicker({
         changeMonth:true,
         changeYear:true,
+        closeText:'초기화',
+        showButtonPanel: true,
+        onClose: function () {
+            if ($(window.event.srcElement).hasClass('ui-datepicker-close')) {
+                $(this).val('');
+            }
+        }
     });
 
 
@@ -416,129 +423,178 @@ function lp_open(id,title,width,height,e,type){
         }
     });
 
-    if(id === "gridPop_user"){
-        gridPopUser(id,title,width,height,e, type) ;
-    } else if(id === "gridPop_selectUser"){
-        gridPopSelectUser();
-    } else if (id === "gridPop_manager"){
-        gridPopManager(id,title,width,height,e);
-    } else if(id === "gridPop_department"){
-        popupDepartmentSearch(id,title,width,height,e)
-    } else if(id === "gridPop_department_checkbox"){
-        popupDepartmentCheckboxSearch(e);
-    } else if(id === "newEnroll_pop"){
-        /* 자산신청 > 신규신청팝업 */
-        gridPopNewEnrollDetail(id,title,width,height);
-        gridPopNewEnrollHistory(id,title,width,height);
-        gridSizePopupBig(popup_grid_newEnroll_detail,1250);
-        gridSizePopup(popup_grid_newEnroll_history,1250);
-    } else if(id === "changeEnroll_pop"){
-        /* 자산신청 > 교체신청팝업 */
-        gridPopChangeEnrollDetail(id,title,width,height);
-        gridPopChangeEnrollHistory(id,title,width,height);
-        gridSizePopup(popup_grid_changeEnroll_detail,1250);
-        gridSizePopup(popup_grid_change_history,1250);
-    } else if (id === "rentalEnroll_pop"){
-        /* 자산신청 > 대여신청 */
-        gridPopRentalEnrollDetail(id,title,width,height);
-        gridPopRentalEnrollHistory(id,title,width,height);
-        gridSizePopup(popup_grid_rentalEnroll_detail,1250);
-        gridSizePopup(popup_grid_rental_history,1250);
-    } else if (id === "returnEnroll_pop"){
-        /* 자산신청 > 반납신청 */
-        gridPopReturnEnrollDetail(id,title,width,height);
-        gridPopReturnEnrollHistory(id,title,width,height);
-        gridSizePopup(popup_grid_returnEnroll_detail,1250);
-        gridSizePopup(popup_grid_return_history,1250);
-    } else if (id === "takingOverEnroll_pop"){
-        /* 자산신청 > 인수인계신청 */
-        gridPopTakeoverEnrollDetail(id,title,width,height);
-        gridPopTakeoverEnrollHistory(id,title,width,height);
-        gridSizePopup(popup_grid_takeOverEnroll_detail,1250);
-        gridSizePopup(popup_grid_takeOverEnroll_history,1250);
-    } else if (id === "rentalExtensionEnroll_pop"){
-        /* 자산신청 > 대여연장신청 */
-        gridPopRentalExtensionEnrollDetail(id,title,width,height);
-        gridPopRentalExtensionEnrollHistory(id,title,width,height);
-        gridSizePopup(popup_grid_rentalExtension_detail,1250);
-        gridSizePopup(popup_grid_rentalExtension_history,1250);
-    } else if (id==="submit_pop"){
-        /* 상신 */
-        popupSubmitList(id,title,width,height);
-    } else if (id === "submitSearch_pop"){
-        /* 상신 */
-        subPopupSearchExecutives(id,title,width,height);
-        subPopupAddExecutives(id,title,width,height);
-    } else if (id === "submitApprovalChange_pop"){
-        /* 상신 */
-        subPopupApprovalChange(id,title,width,height);
-    } else if (id === "gridPop_disabledAddRow"){
-        /* 장애신고 > 장애신고 */
-        popupAddDisabled();
-        gridSizePopup(popup_grid_disabledAddRow,1230);
-    } else if (id ==="gridPop_disabledCurrent"){
-        /* 장애신고 > 장애신고현황 */
-        gridPopDisabledDetail();
-        gridPopDisabledHistory();
-        gridPopDisabledListHistory();
-    }  else if(id==="excelImport_pop" || id==="gridPop_enrollCurrent"){
-        /* (작업전) excel Import */
-        popupConsistency(id,title,width,height);
-    } else if (id === "assetSearch_pop"){
-        /* 자산검색 */
-        subPopupAssetSearch(e,type);
-    } else if (id === "haveNetClient"){
-        /* 자산현황 > 자산조회 : 사용자 장비 정보 팝업 */
-        popupSwInformation();
-        popupBoxInformation();
-    } else if (id === "gridPop_serviceDesk_detail"){
-        /* 서비스 데스크 > 서비스 신청 현황 */
-        gridPopServiceDeskDetail();
-        gridPopServiceDeskHistory();
-        gridSizePopup(popup_grid_serviceDesk_detail,1250);
-        gridSizePopup(popup_grid_serviceDesk_history,1250);
-    }else if(id === "gridPop_applicationStatus") {
-        /* 자산등록 > 자산입고 현황 */
-        popupApplicationStatus();
-    }else if(id === "gridPop_assetDetail"){
-        /* 자산정보 */
-        gridPopAssetDetail();
-    }else if(id==="gridPop_replacement_current"){
-        /* 정기교체 > '완료'상태 일 경우 더블 클릭시 나오는 팝업 */
-        gridPopReplacementTargetCurrent();
-    }else if(id==="gridPop_replacement"){
-        /* 정기교체 > 등록 버튼 클릭시 나오는 팝업 */
-        gridPopReplacementTarget();
-    }else if(id==="gridPop_replacementTarget"){
-        /* 정기교체 > 등록 버튼 + 추가 버튼 클릭시 나오는 팝업 */
-        gridPopReplacementTargetList1();
-        gridPopReplacementTargetList2();
-    }else if(id==="regularChangeEnroll_pop"){
-        /* 정기교체 > 정기교체 진행상황 > 상세 팝업 */
-        gridPopRegularChangeEnrollDetail();
-        gridSizePopup(popup_grid_regularChangeEnroll_detail,1250);
-    }else if(id==="gridPop_assetDuediligenceDetail"){
-        /* 자산실사 > 자산실사 결과조회 */
-        gridPopAssetChangeDetail();
-        gridPopAssetChangeHistory();
-    }else if(id==="gridPop_detail"){
-        /* 자산현황 >  변경이력 조회 */
-        gridPopChangeHistory();
-        gridPopDueDiligenceHistory();
-        gridSizePopup(popup_grid_changeHistory,1250);
-        gridSizePopup(popup_grid_duediligenceHistory,1250);
-    }else if(id === "gridPop_assetClassification"){
-        /* 기준정보 > 자산모델관리 */
-        gridPopAssetClassification(e);
-    }else if(id==="gridPop_sw_detail"){
-        /* 기업자산 > SW 상세정보 */
-        gridPopLicenseManage();
-    }else if(id==="gridPop_hw_detail"){
-        /* 기업자산 > HW 상세정보 */
-        gridPopLicenseManageAddf();
-    }else if(id==="swLicenseSearch_pop"){
-        /* 기업자산 > HW 상세정보 > SW 라이선스 검색 */
-        subPopupSWLicenseSearch();
+    switch (id) {
+        case "gridPop_user":
+            gridPopUser(e, type);
+            break;
+
+        case "gridPop_selectUser":
+            gridPopSelectUser();
+            break;
+
+        case "gridPop_manager":
+            gridPopManager(id, title, width, height, e);
+            break;
+
+        case "gridPop_department":
+            popupDepartmentSearch(id, title, width, height, e);
+            break;
+
+        case "gridPop_department_checkbox":
+            popupDepartmentCheckboxSearch(e);
+            break;
+
+        case "newEnroll_pop":
+            /* 자산신청 > 신규신청 */
+            gridPopNewEnrollDetail();
+            gridPopNewEnrollHistory();
+            gridSizePopupBig(popup_grid_newEnroll_detail, 1250);
+            gridSizePopup(popup_grid_newEnroll_history, 1250);
+            break;
+
+        case "changeEnroll_pop":
+            /* 자산신청 > 교체신청 */
+            gridPopChangeEnrollDetail();
+            gridPopChangeEnrollHistory();
+            gridSizePopup(popup_grid_changeEnroll_detail, 1250);
+            gridSizePopup(popup_grid_change_history, 1250);
+            break;
+
+        case "rentalEnroll_pop":
+            /* 자산신청 > 대여신청 */
+            gridPopRentalEnrollDetail();
+            gridPopRentalEnrollHistory();
+            gridSizePopup(popup_grid_rentalEnroll_detail, 1250);
+            gridSizePopup(popup_grid_rental_history, 1250);
+            break;
+
+        case "returnEnroll_pop":
+            /* 자산신청 > 반납신청 */
+            gridPopReturnEnrollDetail();
+            gridPopReturnEnrollHistory();
+            gridSizePopup(popup_grid_returnEnroll_detail, 1250);
+            gridSizePopup(popup_grid_return_history, 1250);
+            break;
+        case "takingOverEnroll_pop":
+            /* 자산신청 > 인수인계신청 */
+            gridPopTakeoverEnrollDetail();
+            gridPopTakeoverEnrollHistory();
+            gridSizePopup(popup_grid_takeOverEnroll_detail, 1250);
+            gridSizePopup(popup_grid_takeOverEnroll_history, 1250);
+            break;
+        case "rentalExtensionEnroll_pop":
+            /* 자산신청 > 대여연장신청 */
+            gridPopRentalExtensionEnrollDetail();
+            gridPopRentalExtensionEnrollHistory();
+            gridSizePopup(popup_grid_rentalExtension_detail, 1250);
+            gridSizePopup(popup_grid_rentalExtension_history, 1250);
+            break;
+        case "submit_pop":
+            /* 상신 */
+            popupSubmitList(id, title, width, height);
+            break;
+        case "submitSearch_pop":
+            /* 상신 */
+            subPopupSearchExecutives(id, title, width, height);
+            subPopupAddExecutives(id, title, width, height);
+            break;
+        case "submitApprovalChange_pop":
+            /* 상신 */
+            subPopupApprovalChange(id, title, width, height);
+            break;
+
+        case "excelImport_pop":
+            popupConsistency();
+            gridSizePopup(popup_grid_consistency, 1250);
+            break;
+
+        case "gridPop_disabledCurrent":
+            /* 장애신고현황 */
+            gridPopDisabledDetail();
+            gridPopDisabledHistory();
+            gridPopDisabledListHistory();
+            break;
+
+        case "gridPop_disabledAddRow":
+            /* 장애신고 > 장애신고 */
+            popupAddDisabled();
+            gridSizePopup(popup_grid_disabledAddRow, 1230);
+            break;
+            
+        case "assetSearch_pop":
+            /* 자산검색 */
+            subPopupAssetSearch(e, type);
+            break;
+        case "haveNetClient":
+            /* 자산현황 > 자산조회 : 사용자 장비 정보 팝업 */
+            popupSwInformation();
+            popupBoxInformation();
+            break;
+        case "gridPop_serviceDesk_detail":
+            /* 서비스 데스크 > 서비스 신청 현황 */
+            gridPopServiceDeskDetail();
+            gridPopServiceDeskHistory();
+            gridSizePopup(popup_grid_serviceDesk_detail, 1250);
+            gridSizePopup(popup_grid_serviceDesk_history, 1250);
+            break;
+        case "gridPop_applicationStatus":
+            /* 자산등록 > 자산입고 현황 */
+            popupApplicationStatus();
+            break;
+        case "gridPop_assetDetail":
+            /* 자산정보 */
+            gridPopAssetDetail();
+            break;
+        case "gridPop_replacement_current":
+            /* 정기교체 > '완료'상태 일 경우 더블 클릭시 나오는 팝업 */
+            gridPopReplacementTargetCurrent();
+            break;
+        case "gridPop_replacement":
+            /* 정기교체 > 등록 버튼 클릭시 나오는 팝업 */
+            gridPopReplacementTarget();
+            break;
+        case "gridPop_replacementTarget":
+            /* 정기교체 > 등록 버튼 + 추가 버튼 클릭시 나오는 팝업 */
+            gridPopReplacementTargetList1();
+            gridPopReplacementTargetList2();
+            break;
+        case "regularChangeEnroll_pop":
+            /* 정기교체 > 정기교체 진행상황 > 상세 팝업 */
+            gridPopRegularChangeEnrollDetail();
+            gridSizePopup(popup_grid_regularChangeEnroll_detail, 1250);
+            break;
+        case "gridPop_assetDuediligenceDetail":
+            /* 자산실사 > 자산실사 결과조회 */
+            gridPopAssetChangeDetail();
+            gridPopAssetChangeHistory();
+            break;
+        case "gridPop_detail":
+            /* 자산현황 >  변경이력 조회 */
+            gridPopChangeHistory();
+            gridPopDueDiligenceHistory();
+            gridSizePopup(popup_grid_changeHistory, 1250);
+            gridSizePopup(popup_grid_duediligenceHistory, 1250);
+            break;
+        case "gridPop_assetClassification":
+            /* 기준정보 > 자산모델관리 */
+            gridPopAssetClassification(e);
+            break;
+
+        case "gridPop_sw_detail":
+            /* 기업자산 > SW 상세정보 */
+            gridPopLicenseManage();
+            break;
+        case "gridPop_hw_detail":
+            /* 기업자산 > HW 상세정보 */
+            gridPopLicenseManageAddf();
+            break;
+        case "swLicenseSearch_pop":
+            /* 기업자산 > HW 상세정보 > SW 라이선스 검색 */
+            subPopupSWLicenseSearch();
+            break;
+
+        default:
+            break;
     }
 }
 
@@ -593,8 +649,4 @@ function hide_open(){
 }
 function hide_open2(){
     $(".title-box.hide-ver2").addClass("open");
-}
-
-function hide_open_only(){
-    $(".title-box.hide-ver-only").addClass("open");
 }

@@ -41,8 +41,10 @@
         let userName;
         let userDepartment;
         let userID;
-        if(targetPlace === 'user_search'){
-            AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+        let disabledOccurrence;
+
+        AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+            if(targetPlace === "user_search"){
                 userName = event.item.category_user_name;
                 userDepartment = event.item.category_department;
                 userID = event.item.category_employeeID;
@@ -54,9 +56,12 @@
                 $("input[data-label='employee']").val(userID);
 
                 $("#gridPop_user").dialog("close");
-            });
-        } else{
-            AUIGrid.bind(popup_grid_user, "cellDoubleClick", function(event) {
+            } else if(targetPlace === "disabled-occurrence"){
+                disabledOccurrence = event.item.category_user_name;
+                $("input[data-label='disabled-occurrence-val']").val(disabledOccurrence);
+
+                $("#gridPop_user").dialog("close");
+            }else{
                 userName = event.item.category_user_name;
                 userDepartment = event.item.category_department;
 
@@ -64,8 +69,8 @@
                 $("input[data-label='change_department']").val(userDepartment);
 
                 $("#gridPop_user").dialog("close");
-            });
-        }
+            }
+        });
     }
     function requestGridPopUser() {
         $.get("../resources/lib/aui-grid/data/sample-datas4.json", function (data) {
@@ -1975,24 +1980,33 @@ function subPopupAssetSearch(id,title,width,height, e){
     popup_subGrid_assetSearch = AUIGrid.create("#popup_subGrid_assetSearch", columnLayout, gridPros);
     requestSubPopupAssetSearch();
 
+    /* 20231106 그리드 기능 수정 */
     let targetPlace = $(e).attr("data-place");
     let assetNum;
-    if(targetPlace === "asset_search"){
-        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
-            assetNum = event.item.category_asset_num;
+    let disabledAssetNum;
 
-            $("input[data-label='asset_num']").val(assetNum);
+    AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+        if(targetPlace === "asset_search"){
+            AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+                assetNum = event.item.category_asset_num;
 
-            $("#assetSearch_pop").dialog("close");
-        })
-    }
-    if(e === 'due'){
-        AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
-            console.log(event.item.category_asset_num);
-            addRow(event.item.category_asset_num, event.item.category_product, event.item.category_item_name);
-            $("#assetSearch_pop").dialog("close");
-        })
-    }
+                $("input[data-label='asset_num']").val(assetNum);
+
+                lp_close("assetSearch_pop");
+            })
+        } else if (targetPlace === 'disabled-assetNum') {
+            disabledAssetNum = event.item.category_asset_num;
+            $("input[data-label='disabled-assetNum-val']").val(disabledAssetNum);
+            lp_close("assetSearch_pop");
+        }
+        if(e === 'due'){
+            AUIGrid.bind(popup_subGrid_assetSearch, "cellDoubleClick", function(event){
+                addRow(event.item.category_asset_num, event.item.category_product, event.item.category_item_name);
+                lp_close("assetSearch_pop");
+            })
+        }
+    })
+
 }
 
 /* 자산검색 팝업에서 자산번호 input 에 4자 이상 입력했을 때 자동 필터링 함수 */

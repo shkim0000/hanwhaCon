@@ -1,68 +1,40 @@
 [
   {
-    "id": "#grid_id1",
-    "category_take_action_person": "홍길동",
-    "category_sum": 22,
-    "category_request_sum": "응답 : 12",
-    "category_very_satisfied": 1,
-    "category_satisfied": 2,
-    "category_average": 2,
-    "category_dissatisfied": 5,
-    "category_very_dissatisfied": 2
-
-  },
-  {
-    "id": "#grid_id2",
-    "category_take_action_person": "홍길동",
-    "category_request_sum": "미응답 : 10",
-    "category_very_satisfied": 2,
-    "category_satisfied": 2,
-    "category_average": 2,
-    "category_dissatisfied": 2,
-    "category_very_dissatisfied": 2
-  },
-  {
-    "id": "#grid_id3",
-    "category_take_action_person": "임윤아",
-    "category_sum":22,
-    "category_request_sum": "응답 : 12",
-    "category_very_satisfied": 1,
-    "category_satisfied": 2,
-    "category_average": 2,
-    "category_dissatisfied": 5,
-    "category_very_dissatisfied": 2
-
-  },
-  {
     "id": "#grid_id4",
     "category_take_action_person": "임윤아",
-    "category_request_sum": "미응답 : 10",
+    "category_sum": 10,
+    "category_respond": 4,
+    "category_unanswered": 6,
     "category_very_satisfied": 2,
     "category_satisfied": 2,
-    "category_average": 2,
-    "category_dissatisfied": 2,
-    "category_very_dissatisfied": 2
+    "category_average": 0,
+    "category_dissatisfied": 0,
+    "category_very_dissatisfied": 0
   },
   {
     "id": "#grid_id5",
     "category_take_action_person": "강동원",
-    "category_sum": 22,
-    "category_request_sum": "응답 : 12",
-    "category_very_satisfied": 1,
+    "category_sum": 10,
+    "category_respond": 4,
+    "category_unanswered": 6,
+    "category_very_satisfied": 2,
     "category_satisfied": 2,
-    "category_average": 2,
-    "category_dissatisfied": 5,
-    "category_very_dissatisfied": 2
+    "category_average": 0,
+    "category_dissatisfied": 0,
+    "category_very_dissatisfied": 0
 
   },
   {
     "id": "#grid_id6",
-    "category_take_action_person": "강동원",
-    "category_request_sum": "미응답 : 10",
+    "category_take_action_person": "김민수",
+    "category_sum": 10,
+    "category_respond": 4,
+    "category_unanswered": 6,
     "category_very_satisfied": 2,
     "category_satisfied": 2,
-    "category_average": 2,
-    "category_dissatisfied": 2,
-    "category_very_dissatisfied": 2
+    "category_average": 0,
+    "category_dissatisfied": 0,
+    "category_very_dissatisfied": 0
   }
+
 ]

@@ -70,7 +70,7 @@
                     </label>
                 </div>
                 <div class="input-list">
-                    <span class="input-title">물품종류</span>
+                    <span class="input-title">자산분류</span>
                     <label class="select">
                         <select>
                             <option>데스크탑</option>
@@ -79,12 +79,9 @@
                     </label>
                 </div>
                 <div class="input-list">
-                    <span class="input-title">품목</span>
-                    <label class="select">
-                        <select>
-                            <option>데스크탑</option>
-                            <option>모니터</option>
-                        </select>
+                    <span class="input-title">모델명</span>
+                    <label class="input">
+                        <input type="text">
                     </label>
                 </div>
                 <div class="input-list">
@@ -186,8 +183,9 @@
         </div>
 
         <div class="title-box">
-            <div class="title">
-                <h3>장애 신고 목록</h3>
+            <!--row count class 추가 및 스타일 추가  -->
+            <div class="grid-title">
+                <h3>Row: <span></span></h3>
             </div>
             <div class="btn-wrap">
                 <a href="#" download="test.txt" class="btn excel">엑셀다운로드</a>
@@ -329,7 +327,7 @@
                     </div>
                 </div>
                 <div class="row con-3">
-                    <div class="th"><div class="th-wrap center"><p>담당부서</p></div></div>
+                    <div class="th"><div class="th-wrap center"><p>조치분류</p></div></div>
                     <div class="td medium">
                         <div class="td-wrap">
                             <label class="select">
@@ -364,6 +362,7 @@
                 </div>
             </div>
             <div class="text-box">
+                <span class="t-title important">처리내용</span>
                 <label class="input">
                     <input type="text" placeholder="처리내용">
                 </label>
@@ -453,29 +452,15 @@ function createDisabledDCGrid() {
             headerText: "아이디",
             visible:false
         }, {
-            dataField: "category_disable_num",
-            headerText: "장애접수번호",
+            dataField: "category_application_num",
+            headerText: "신청번호",
             width: 180,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_registration_date",
-            headerText: "장애등록일시",
-            width: 160,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_status",
-            headerText: "상태",
-            width: 280,
-            filter: {
-                showIcon: true,
-            }
-        }, {
-            dataField: "category_item_name",
-            headerText: "물품명",
+            dataField: "category_service",
+            headerText: "서비스구분",
             width: 160,
             filter: {
                 showIcon: true,
@@ -483,40 +468,75 @@ function createDisabledDCGrid() {
         }, {
             dataField: "category_model_name",
             headerText: "모델명",
+            width: 280,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_request",
+            headerText: "요청내용",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_asset_num",
-            headerText: "자산번호",
+            dataField: "category_applicant",
+            headerText: "신청자",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_registrant",
-            headerText: "등록자",
+            dataField: "category_join_date",
+            headerText: "신청일시",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_publisher",
-            headerText: "발행자",
+            dataField: "category_user",
+            headerText: "사용자",
             width: 160,
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_person_charge",
-            headerText: "조치자",
+            dataField: "category_department",
+            headerText: "부서",
             width: 160,
             filter: {
                 showIcon: true,
             }
-        }]
-    /* 20231012 : 2. 그리드 속성 설정 */
+        }, {
+            dataField: "category_manager",
+            headerText: "담당자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_service_status",
+            headerText: "서비스 상태",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_process_content",
+            headerText: "처리내용",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_finish_date",
+            headerText: "완료일자",
+            width: 160,
+            filter: {
+                showIcon: true,
+            }
+        }];
+
     let gridPros = {
         rowIdField: "id",
         selectionMode: "multipleCells",
@@ -545,6 +565,7 @@ function createDisabledDCGrid() {
         AUIGrid.bind(disabledDC_ID, "cellDoubleClick", function(event) {
             lp_open('gridPop_disabledCurrent','장애신고 신청 현황',1250,800);
         });
+        getRowCount(disabledDC_ID);
     },150);
 
 }
@@ -558,7 +579,6 @@ function requestDisabledDCData() {
 
 /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
 window.onresize = function () {
-
     // 크기가 변경되었을 때 AUIGrid.resize() 함수 호출
     if (typeof disabledDC_ID !== "undefined") {
         AUIGrid.resize(disabledDC_ID);
@@ -582,27 +602,18 @@ $(document).on("click",".menu-btn",function(){
 });
 
 /* 서비스상태 버튼을 눌렀을 때, 그리드 필터링 이벤트 함수 */
-$(".quantity-list li button").each(function(){
-    $(this).on("click",function(){
-        let name = $(this).find('.name').text();
+$(document).on("click", ".quantity-list li button", function(){
+    let name = $(this).find('.name').text();
+    let comparisonObj = AUIGrid.getOrgGridData(disabledDC_ID);
 
-        if(name === "신청"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "신청");
-        } else if (name === "접수"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "접수");
-        } else if (name === "조치중"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "조치중");
-        } else if (name === "완료"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "완료");
-        } else if (name === "보류"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "보류");
-        } else if (name === "수리중"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", "수리중");
-        } else if (name === "전체"){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", ["신청","접수","조치중","완료","보류","수리중"]);
+    AUIGrid.clearFilterAll(disabledDC_ID);
+
+    comparisonObj.forEach((i) => {
+        if(name === i.category_service_status){
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_service_status", i.category_service_status);
         }
-    })
-})
+    });
+});
 
 </script>
 </body>

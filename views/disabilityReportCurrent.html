@@ -299,7 +299,7 @@ function createDisabledDCGrid() {
                 showIcon: true,
             }
         }, {
-            dataField: "category_status",
+            dataField: "category_service_status",
             headerText: "상태",
             width: 280,
             filter: {
@@ -401,11 +401,11 @@ $(document).on("click", ".quantity-list li button", function(){
     AUIGrid.clearFilterAll(disabledDC_ID);
 
     comparisonObj.forEach((i) => {
-        if(name === i.category_status){
-            AUIGrid.setFilterByValues(disabledDC_ID, "category_status", i.category_status);
+        if(name === i.category_service_status){
+            AUIGrid.setFilterByValues(disabledDC_ID, "category_service_status", i.category_service_status);
         }
     });
-})
+});
 
 
 /* 메뉴버튼 클릭시(반응형) */
@@ -415,13 +415,13 @@ $(document).on("click",".menu-btn",function(){
         innerWidth = innerWidth + 260;
         setTimeout(function(){
             AUIGrid.resize(disabledDC_ID, innerWidth);
-        },20)
+        },20);
 
     } else{
         innerWidth = innerWidth - 260;
         setTimeout(function(){
             AUIGrid.resize(disabledDC_ID, innerWidth);
-        },20)
+        },20);
     }
 });
 

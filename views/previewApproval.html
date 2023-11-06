@@ -22,101 +22,170 @@
     <!--font-awesome -->
     <link rel="stylesheet" href="../resources/lib/font-awesome/css/all.min.css">
 
+    <!-- google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap" rel="stylesheet">
+
     <!-- 개별 소스 -->
-    <link rel="stylesheet" href="../resources/css/main.css">
+<!--    <link rel="stylesheet" href="../resources/css/main.css">-->
     <script src="../resources/js/main.js"></script>
 </head>
-<body>
+<body class="mail" style="margin:12px 16px 24px;">
 
 <!-- contents -->
-<div id="wrap">
-    <div class="preview-title-box">
-        <span>Information Asset Management System</span>
-        <h1>[정보자산관리시스템] 자산신청</h1>
+<div id="wrap" style="font-family:'Noto Sans', sans-serif;">
+    <div class="preview-title-box" style="padding:0;margin:0;box-sizing:border-box;display:flex;align-items:center;background-color:#f2f4f6;">
+        <span style="display:flex;padding:12px;font-size:14px;font-weight:700;color:#fff;background-color:#f37321;">Information Asset Management System</span>
+        <h1 style="margin:0;box-sizing:border-box;font-size:16px;font-weight:700;padding:10px 15px;">[정보자산관리시스템] 자산신청</h1>
     </div>
 
-    <div class="inner-wrap">
-        <div class="info-desc">
+    <div class="inner-wrap" style="box-sizing:border-box;">
+        <div class="info-desc" style="box-sizing:border-box;display:flex;align-items:center;justify-content:flex-end;margin:10px 0;font-weight:700;font-size:14px;">
             <span class="p-name">IT 기획팀 박선욱 팀원</span>
             <span class="p-date">2023-07-24</span>
         </div>
-        <div class="caution-box">
-            <p>※ 주의사항</p>
-            <ul class="dot-list">
-                <li>사무 업무용으로 사용되는 개인/공용/교대 PC에 대한 신청이 가능합니다.</li>
-                <li>지급된 PC는 사용부서에서 철저히 관리해야 하며 매년 자산실사에 협조해야 합니다.</li>
-                <li>파손,분실 등으로 인한 자산 손실 시 정보전략팀에 즉시 통보해야 하며 관련 규정에 따라 처벌될 수 있습니다.</li>
-                <li>설치희망일자와 실제 지급일자는 다를 수 있으며 재고상황에 따라 일자가 조정될 수 있습니다.</li>
+        <div class="caution-box" style="box-sizing:border-box;font-size:16px;padding:8px 12px;border:1px solid #ddd;border-radius:4px;margin-bottom:20px;">
+            <p style="font-size:14px;font-weight:700;color:red;box-sizing:border-box;margin:0;">※ 주의사항</p>
+            <ul class="dot-list" style="box-sizing:border-box;font-size:12px;margin-top:8px;list-style:none;padding:0;">
+                <li style="box-sizing:border-box;position:relative;">- 사무 업무용으로 사용되는 개인/공용/교대 PC에 대한 신청이 가능합니다.</li>
+                <li style="box-sizing:border-box;margin-top:4px;position:relative;">- 지급된 PC는 사용부서에서 철저히 관리해야 하며 매년 자산실사에 협조해야 합니다.</li>
+                <li style="box-sizing:border-box;margin-top:4px;position:relative;">- 파손,분실 등으로 인한 자산 손실 시 정보전략팀에 즉시 통보해야 하며 관련 규정에 따라 처벌될 수 있습니다.</li>
+                <li style="box-sizing:border-box;margin-top:4px;position:relative;">- 설치희망일자와 실제 지급일자는 다를 수 있으며 재고상황에 따라 일자가 조정될 수 있습니다.</li>
             </ul>
         </div>
-        <div class="box design-ver">
-            <div class="title-box">
-                <div class="title">
-                    <h4>사용자정보</h4>
+
+        <!-- 사용자 정보 -->
+        <div style="margin-top:30px;">
+            <div class="title-box" style="margin-bottom:8px;">
+                <div class="title" style="position:relative;margin-bottom:3px;font-size:16px;font-weight:700;">
+                    <h4 style="box-sizing:border-box;display:inline-block;margin:0;padding-left:10px;line-height:0.9;border-left:3px solid #f37321;">신청자 정보</h4>
                 </div>
             </div>
-            <div class="custom-table">
-                <div class="row con-3">
-                    <div class="th"><div class="th-wrap">부서명</div></div>
-                    <div class="td"><div class="td-wrap">IT 기획팀</div></div>
-                    <div class="th"><div class="th-wrap">사용자</div></div>
-                    <div class="td"><div class="td-wrap">박선욱</div></div>
-                    <div class="th"><div class="th-wrap">사용용도</div></div>
-                    <div class="td"><div class="td-wrap">개인</div></div>
-                </div>
+
+            <div class="table" style="box-sizing:border-box;width:100%;border:1px solid #ddd;font-size:14px;">
+                <table style="box-sizing:border-box;width:100%;border-collapse:collapse;border-spacing:0;">
+                    <colgroup>
+                        <col style="width:8%;min-width:85px;">
+                        <col style="width:25.33%">
+                        <col style="width:8%;min-width:85px;">
+                        <col style="width:25.33%">
+                        <col style="width:8%;min-width:85px;">
+                        <col style="width:25.33%">
+                    </colgroup>
+                    <tbody>
+                    <tr style="box-sizing:border-box;">
+                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:7px 7px;">
+                            <div class="th-wrap">신청구분</div>
+                        </th>
+                        <td style="box-sizing:border-box;padding:7px;border-left:1px solid #ddd;">
+                            <div class="td-wrap">업무문의</div>
+                        </td>
+                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:7px 7px;border-left:1px solid #ddd;">
+                            <div class="th-wrap">신청구분</div>
+                        </th>
+                        <td style="box-sizing:border-box;padding:7px;border-left:1px solid #ddd;">
+                            <div class="td-wrap">업무문의</div>
+                        </td>
+                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:7px 7px;border-left:1px solid #ddd;">
+                            <div class="th-wrap">신청구분</div>
+                        </th>
+                        <td style="box-sizing:border-box;padding:7px;border-left:1px solid #ddd;">
+                            <div class="td-wrap">업무문의</div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="box design-ver">
-            <div class="title-box">
-                <div class="title">
-                    <h4>신청 내용</h4>
+
+        <!-- 신청내용 -->
+        <div style="margin-top:20px;">
+            <div class="title-box" style="margin-bottom:8px;">
+                <div class="title" style="position:relative;margin-bottom:3px;font-size:18px;font-weight:700;">
+                    <h4 style="box-sizing:border-box;display:inline-block;font-size:16px;margin:0;padding-left:10px;line-height:0.9;border-left:3px solid #f37321;">신청내용</h4>
                 </div>
             </div>
-            <div class="custom-table">
-                <div class="row">
-                    <div class="th"><div class="th-wrap">신청구분</div></div>
-                    <div class="td"><div class="td-wrap">업무문의</div></div>
-                </div>
-                <div class="row">
-                    <div class="th"><div class="th-wrap">상세사유</div></div>
-                    <div class="td"><div class="td-wrap">테스트입니다. 혹시라도 결재가 올라가면 반려처리해주시기 바랍니다.</div></div>
-                </div>
-                <div class="row">
-                    <div class="th"><div class="th-wrap">사용장소</div></div>
-                    <div class="td">
-                        <div class="td-wrap">
-                            <div class="table">
-                                <table>
+            <div class="table" style="box-sizing:border-box;width:100%;border:1px solid #ddd;font-size:14px;">
+                <table style="box-sizing:border-box;width:100%;border-collapse:collapse;border-spacing:0;">
+                    <tbody>
+                    <tr style="box-sizing:border-box;border-bottom:1px solid #ddd;">
+                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:7px 14px;">
+                            <div class="th-wrap">신청구분</div>
+                        </th>
+                        <td style="box-sizing:border-box;padding:7px;border-left:1px solid #ddd;">
+                            <div class="td-wrap">업무문의</div>
+                        </td>
+                    </tr>
+                    <tr style="box-sizing:border-box;border-bottom:1px solid #ddd;">
+                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:7px 14px;">
+                            <div class="th-wrap">상세사유</div>
+                        </th>
+                        <td style="box-sizing:border-box;padding:7px;border-left:1px solid #ddd;">
+                            <div class="td-wrap">테스트 입니다. 혹시라도 결재가 올라가면 반려처리 부탁드립니다.</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th style="background-color:#f2f4f6;padding:7px 14px;">
+                            <div class="th-wrap">사용장소</div>
+                        </th>
+                        <td style="padding:7px;border-left:1px solid #ddd;">
+                            <div class="td-wrap" style="box-sizing:border-box;border:1px solid #ddd;">
+                                <table  style="box-sizing:border-box;width:100%;border-collapse:collapse;border-spacing:0;font-size:12px;">
+                                    <colgroup>
+                                        <col style="width:50%;">
+                                        <col style="width:50%;">
+                                    </colgroup>
                                     <thead>
-                                    <tr>
-                                        <th><div class="th-wrap center">자산종류</div></th>
-                                        <th><div class="th-wrap center">신청수량</div></th>
+                                    <tr style="border-bottom:1px solid #ddd;">
+                                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:4px 8px;">
+                                            <div class="th-wrap">자산종류</div>
+                                        </th>
+                                        <th style="box-sizing:border-box;background-color:#f2f4f6;padding:4px 8px;border-left:1px solid #ddd;">
+                                            <div class="th-wrap">신청수량</div>
+                                        </th>
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <tr>
-                                        <td><div class="td-wrap center">노트북</div></td>
-                                        <td><div class="td-wrap center">1</div></td>
+                                    <tr style="border-bottom:1px solid #ddd;">
+                                        <td style="box-sizing:border-box;padding:4px;">
+                                            <div class="td-wrap" style="text-align:center">노트북</div>
+                                        </td>
+                                        <td style="box-sizing:border-box;padding:4px;border-left:1px solid #ddd;">
+                                            <div class="td-wrap" style="text-align:center">1</div>
+                                        </td>
+                                    </tr>
+                                    <tr style="border-bottom:1px solid #ddd;">
+                                        <td style="box-sizing:border-box;padding:4px;">
+                                            <div class="td-wrap" style="text-align:center">모니터</div>
+                                        </td>
+                                        <td style="box-sizing:border-box;padding:4px;border-left:1px solid #ddd;">
+                                            <div class="td-wrap" style="text-align:center">1</div>
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td><div class="td-wrap center">노트북</div></td>
-                                        <td><div class="td-wrap center">1</div></td>
-                                    </tr>
-                                    <tr>
-                                        <td><div class="td-wrap center">전체</div></td>
-                                        <td><div class="td-wrap center">2</div></td>
+                                        <td style="box-sizing:border-box;padding:4px;">
+                                            <div class="td-wrap" style="text-align:center">전체</div>
+                                        </td>
+                                        <td style="box-sizing:border-box;padding:4px;border-left:1px solid #ddd;">
+                                            <div class="td-wrap" style="text-align:center">2</div>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
                             </div>
-                        </div>
-                    </div>
-                </div>
+                        </td>
+                    </tr>
+
+                    </tbody>
+                </table>
             </div>
         </div>
-        <div class="box design-ver">
-            <div class="confirm-box">
-                <p class="p-desc">신청자 본인은 주의사항을 모두 인지하였습니다.</p>
+
+        <!-- 주의사항 인지 -->
+        <div style="margin-top:30px;">
+            <div class="confirm-box" style="box-sizing:border-box;min-height:180px;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:50px;background-color:#f2f4f6;">
+                <p class="p-desc" style="font-weight:700;">신청자 본인은 주의사항을 모두 인지하였습니다.</p>
                 <p>작 성 자 : <span>박선욱</span></p>
             </div>
         </div>

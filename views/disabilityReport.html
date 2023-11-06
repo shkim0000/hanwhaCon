@@ -46,7 +46,7 @@
             </div>
         </div>
         <div class="custom-table">
-            <div class="row con-4">
+            <div class="row con-5">
                 <div class="th"><div class="th-wrap center">신청자</div></div>
                 <div class="td">
                     <div class="td-wrap">홍길동</div>
@@ -112,6 +112,23 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!-- 사용자 검색 -->
+<div id="gridPop_user" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap">
+                <div class="input-list">
+                    <span class="input-title">사용자</span>
+                    <label class="input search">
+                        <input type="text">
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+            </div>
+            <div id="popup_grid_user" class="grid-box"></div>
+        </div>
+    </div>
+</div>
 
 <!--[팝업] 장애대상 추가 -->
 <div id="gridPop_disabledAddRow" class="popup">
@@ -121,15 +138,15 @@
                 <div class="input-list">
                     <span class="input-title">발생자</span>
                     <label class="input">
-                        <input type="text" id="myInput">
-                        <button type="button" onclick="searchClickGenerator()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" id="myInput" data-label="disabled-occurrence-val" onkeypress="if(event.keyCode==13){searchClickGenerator();}">
+                        <button type="button"  data-place="disabled-occurrence" onclick="lp_open('gridPop_user','사용자 검색',505,530,this);"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
                 <div class="input-list">
                     <span class="input-title">자산번호</span>
                     <label class="input">
-                        <input type="text" id="myAssetNum">
-                        <button type="button" onclick="searchClickAssetNum()"><i class="fa-solid fa-magnifying-glass"></i></button>
+                        <input type="text" id="myAssetNum" data-label="disabled-assetNum-val"  onkeypress="if(event.keyCode==13){searchClickAssetNum();}">
+                        <button type="button"  data-place="disabled-assetNum" onclick="lp_open('assetSearch_pop', '자산검색', 800,470,this);"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </label>
                 </div>
             </div>
@@ -143,6 +160,38 @@
     </div>
 </div>
 
+<!-- 팝업내 > 자산검색 -->
+<div id="assetSearch_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap search-ver con-3">
+                <div class="input-lists">
+                    <div class="input-list">
+                        <span class="input-title">자산분류</span>
+                        <label class="input">
+                            <input type="text" data-label="product">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">품목</span>
+                        <label class="input">
+                            <input type="text" data-label="item">
+                        </label>
+                    </div>
+                    <div class="input-list">
+                        <span class="input-title">자산번호</span>
+                        <label class="input">
+                            <input type="text" data-label="assetNumber">
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn search">검색</button>
+            </div>
+            <!-- 20231012 -->
+            <div id="popup_subGrid_assetSearch" class="grid-box grid-10"></div>
+        </div>
+    </div>
+</div>
 <!-- 상신 -->
 <div id="submit_pop" class="popup">
     <div class="pop-box">
@@ -552,6 +601,8 @@ function createDisabledListGrid() {
 
     /* 그리드 생성 */
     disabledList_ID = AUIGrid.create("#disabledList_ID", columnLayout, gridPros);
+
+
 }
 
 /* 4. 데이터 불러오기 */
