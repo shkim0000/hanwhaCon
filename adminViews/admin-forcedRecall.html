@@ -192,10 +192,20 @@
 </div>
 
 <!-- 미반납자산회수 -->
-<div id="returnEnroll_pop" class="popup">
+<!--<div id="returnEnroll_pop" class="popup">
     <div class="pop-box">
         <div class="pop-body">
             <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청번호</div></div>
+                    <div class="td"><div class="td-wrap">
+                        <div class="date-wrap">
+                            <label class="date limit add">
+                                <input type="text" id="returnDate">
+                            </label>
+                        </div>
+                    </div></div>
+                </div>
                 <div class="row con-3">
                     <div class="th"><div class="th-wrap center">신청번호</div></div>
                     <div class="td"><div class="td-wrap"><p>122141</p></div></div>
@@ -259,7 +269,7 @@
                     <h3>반납자산정보</h3>
                 </div>
             </div>
-            <!-- 20231012  : h-small class 삭제 -->
+            &lt;!&ndash; 20231012  : h-small class 삭제 &ndash;&gt;
             <div id="popup_grid_returnEnroll_detail" class="grid-box"></div>
 
             <div class="title-box">
@@ -294,7 +304,7 @@
                 </div>
             </div>
 
-            <!--  결재이력 -->
+            &lt;!&ndash;  결재이력 &ndash;&gt;
             <div class="title-box">
                 <div class="title">
                     <h3>결재이력</h3>
@@ -306,13 +316,13 @@
                 <div class="title">
                     <h3 class="important">첨부파일</h3>
                 </div>
-                <!--<div class="btn-wrap">
+                &lt;!&ndash;<div class="btn-wrap">
                     <label class="file">
                         <input type="file">
                         <span class="btn add-file">파일추가</span>
                     </label>
                     <button type="button" class="btn trash">선택 삭제</button>
-                </div>-->
+                </div>&ndash;&gt;
             </div>
             <div class="table">
                 <table>
@@ -339,8 +349,66 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->
+<!-- 미반납자산회수 -->
+<div id="returnEnroll_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">신청자</div></div>
+                    <input type="hidden" id="creationUserNo" value="${foUser.EmpNo }">
+                    <div class="td"><div class="td-wrap" id="creationUser">${foUser.Name }</div></div>
+                    <div class="th"><div class="th-wrap center">사용자</div></div>
+                    <input type="hidden" id="userEmpNo">
+                    <div class="td"><div class="td-wrap" id="user"></div></div>
+                    <div class="th"><div class="th-wrap center">사용부서</div></div>
+                    <div class="td"><div class="td-wrap" id="userDept"></div></div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">사용장소</div></div>
+                    <div class="td"><div class="td-wrap" id="useLocation"></div></div>
+                    <div class="th"><div class="th-wrap center">상세위치</div></div>
+                    <div class="td"><div class="td-wrap" id="useLocationDetail"></div></div>
+                    <div class="th"><div class="th-wrap center">반납희망일</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <div class="date-wrap whole">
+                                <label class="date single add">
+                                    <input type="text" id="returnDate">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>신청구분</p></div></div>
+                    <div class="td" id="appType"><p>강제회수</p></div>
+                    <div class="th"><div class="th-wrap center"><p>신청사유</p></div></div>
+                    <div class="td medium">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text" id="appReason">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
+            <div class="title-box">
+                <div class="title">
+                    <h3>반납자산정보</h3>
+                </div>
+            </div>
+            <div id="popup_grid_forceReturn_detail" class="grid-box h-small"></div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn primary send" onclick="goUpper()">결재</button>
+                <button type="button" class="btn" onclick="lp_close('returnEnroll_pop')">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- // 팝업 -->
 <script type="text/javascript">
     /* AUIGrid */

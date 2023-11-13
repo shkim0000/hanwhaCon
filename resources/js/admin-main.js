@@ -39,6 +39,7 @@ $(function(){
                         "<button type='button' class='btn'>자산현황</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
+                                "<li><a href='#' class='linkBtn'>자산현황조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>자산상태변경</a></li>\n"+
                                 "<li><a href='#' class='linkBtn'>전부서자산조회</a></li>\n"+
@@ -416,7 +417,8 @@ function lp_open(id,title,width,height,e,type){
         },
         close: function( event, ui ) {
             if (event.target.id === "gridPop_replacementTarget") {
-                AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1, false);
+                AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list1,
+                    false);
                 AUIGrid.setAllCheckedRows(popup_grid_replacementTarget_list2, false);
                 AUIGrid.clearGridData(popup_grid_replacementTarget_list2);
             }
@@ -540,6 +542,7 @@ function lp_open(id,title,width,height,e,type){
         case "gridPop_applicationStatus":
             /* 자산등록 > 자산입고 현황 */
             popupApplicationStatus();
+            gridSizePopup(popup_grid_application_status, 1250);
             break;
         case "gridPop_assetDetail":
             /* 자산정보 */

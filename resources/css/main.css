@@ -400,6 +400,8 @@ textarea{width:100%;background:none;border:0;padding:8px 12px;resize:none;outlin
     .input-list.regular{width:calc(100% - 7px)}
 
     /* 20231011 */
+    .input-list.medium3.only{width:100%;}
+    .input-list.medium3.only .input-title{width:90px;}
     .input-list.x-small,
     .input-list.x-small2{width:calc(50% - 8px);}
     /* // 20231011 */
@@ -694,7 +696,7 @@ label[data-isActive="readonly"]{background:#cacaca;}
 /* 기본 추가 */
 .important{display:inline-block;position:relative;padding-right:16px;}
 .important::after{content:'*';position:absolute;top:2px;right:0;color:var(--important);}
-.title-box{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;
+.title-box{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;
 /* 20230918 */
     flex-wrap:wrap;gap:20px;
 }
