@@ -30,48 +30,114 @@
     <link rel="stylesheet" href="../resources/css/main.css">
     <script src="../resources/js/main.js"></script>
 </head>
-<body class="main-page">
+<body class="user-main-page">
 
 <!-- contents -->
 <div id="wrapper">
-
     <div class="contents">
-        <div class="preview-list">
-            <div class="preview-card">
-                <div class="card-title">자산 신청현황</div>
-                <ul>
-                    <li><a href="#">신규신청</a></li>
-                    <li><a href="#">대여신청</a></li>
-                    <li><a href="#">교체신청</a></li>
-                    <li><a href="#">대여연장</a></li>
-                    <li><a href="#">반납신청</a></li>
-                    <li><a href="#">인수인계</a></li>
+        <div class="top">
+            <div class="bg">
+                <img src="../resources/img/main-hw-bg.svg" alt="">
+            </div>
+            <div class="preview-list">
+                <div class="menu-box">
+                    <div class="mtitle-box">
+                        <h3>자산 신청현황</h3>
+                    </div>
+                    <ul class="badge-list">
+                        <li><a href="#"><img src="../resources/img/badge1.svg" alt=""><span>신규 신청</span></a></li>
+                        <li><a href="#"><img src="../resources/img/badge2.svg" alt=""><span>교체 신청</span></a></li>
+                        <li><a href="#"><img src="../resources/img/badge3.svg" alt=""><span>반납 신청</span></a></li>
+                    </ul>
+
+                    <ul class="badge-list">
+                        <li><a href="#"><img src="../resources/img/badge4.svg" alt=""><span>대여 신청</span></a></li>
+                        <li><a href="#"><img src="../resources/img/badge5.svg" alt=""><span>대여 연장</span></a></li>
+                        <li><a href="#"><img src="../resources/img/badge6.svg" alt=""><span>인수 인계</span></a></li>
+                    </ul>
+                </div>
+                <div class="menu-wrap">
+                    <div class="menu-small">
+                        <div class="mtitle-box">
+                            <h3>자산관리</h3>
+                        </div>
+                        <ul class="badge-list">
+                            <li><a href="#"><img src="../resources/img/badge1.svg" alt=""><span>내 자산 조회</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge2.svg" alt=""><span>자산실사</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge3.svg" alt=""><span>자산관리</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="menu-small">
+                        <div class="mtitle-box">
+                            <h3>서비스데스크</h3>
+                        </div>
+                        <ul class="badge-list">
+                            <li><a href="#"><img src="../resources/img/badge1.svg" alt=""><span>부품 신청</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge2.svg" alt=""><span>SW 신청</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge3.svg" alt=""><span>장애 신고</span></a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <ul class="help-list">
+                    <li>
+                        <img src="../resources/img/icon/icon_phone.svg" alt="">
+                        <span>IT 헬프데스크</span>
+                    </li>
+                    <li>공장 6293</li>
+                    <li>서울 9282</li>
                 </ul>
             </div>
-            <div class="preview-card">
-                <div class="card-title">자산 현황</div>
-                <ul>
-                    <li><a href="#">내 자산조회</a></li>
-                    <li><a href="#">부서자산조회</a></li>
-                </ul>
-            </div>
-            <div class="preview-card">
-                <div class="card-title">서비스 데스크</div>
-                <ul>
-                    <li><a href="#">네트워크 신청</a></li>
-                    <li><a href="#">PC부품 신청</a></li>
-                    <li><a href="#">키보드, 마우스 신청</a></li>
-                    <li><a href="#">기타 신청 하나</a></li>
-                    <li><a href="#">기타 신청 둘</a></li>
-                    <li><a href="#">기타 신청 셋</a></li>
-                </ul>
+            <div class="myinfo-wrap">
+                <div class="myinfo">
+                    <div class="user-box">
+                        <p>박선옥 님</p>
+                        <button type="button" class="btn">새로고침</button>
+                    </div>
+                    <div class="info">
+                        <p>개인알림영역</p>
+                        <ul>
+                            <li>
+                                <span class="info-tit">반납예정일</span>
+                                <span class="info-date">2023.10.30</span>
+                            </li>
+                            <li>
+                                <span class="info-tit">자산실사기간</span>
+                                <span class="info-date">2023.10.30
+                            <br>~2023.11.12
+                            </span>
+                            </li>
+                            <li>
+                                <span class="info-tit">정기교체기간</span>
+                                <span class="info-date">2023.10.30
+                            <br>~2023.11.12
+                            </span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="link-wrap">
+                    <a href="#"></a>
+                    <a href="#">정보자산 관리기준 한눈에 보기</a>
+                </div>
             </div>
         </div>
-        <div class="echarts-wrapper">
-            <div id="echarts" style="width: 1200px;height:450px;"></div>
+        <div class="bottom">
+            <div class="g-box">
+                <div class="g-title">
+                    <h3>부서자산 보유 현황</h3>
+                </div>
+                <div id="departmentAsset_ID" class="grid-box grid-12"></div>
+            </div>
+            <div class="g-box">
+                <div class="g-title">
+                    <h3>나의신청현황(올해)</h3>
+                </div>
+                <div id="mineAsset_ID" class="grid-box grid-12"></div>
+            </div>
         </div>
     </div>
-    <footer>
+<!--    <footer>
         <div class="contact">
             <ul>
                 <li>IT 자산관련 문의 : 555-XXXX</li>
@@ -82,46 +148,357 @@
         <div class="logos">
             <img src="../resources/img/h_logo.png" alt="logo">
         </div>
-    </footer>
+    </footer>-->
 </div>
 
 <!-- // contents -->
-<script type="text/javascript">
-    // Initialize the echarts instance based on the prepared dom
-    var myChart = echarts.init(document.getElementById('echarts'));
+<script>
+    /* AUIGrid */
+    /* 1. AUIGrid 생성 후 반환 ID */
+    let holdingAssetGrid_ID; // 보유자산
+    let applicationGrid_ID; // 신청자산
 
-    // Specify the configuration items and data for the chart
-    var option = {
-        title: {
-            text: '나의 IT 서비스'
-        },
-        tooltip: {},
-        legend: {
-            data: ['신청','처리중','완료']
-        },
-        xAxis: {
-            data: ['신규신청', '대여신청', '인수인계신청', '서비스요청']
-        },
-        yAxis: {},
-        series: [
+
+    /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
+    /* 그리드 생성 */
+    createHoldingAssetGrid(); // 보유자산 정보
+    createEnrollAssetGrid(); // 신청자산 정보
+
+    /* 그리드 삽입 */
+    requestHoldingAssetData();
+    requestApplicationStatusData()
+
+    /* 3. AUIGrid 그리드 옵션 */
+    /* 보유자산 그리드 */
+    function createHoldingAssetGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
             {
-                name: '신청',
-                type: 'bar',
-                data: [5, 20, 36, 10, 10, 20]
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
             }, {
-                name: '처리중',
-                type: 'bar',
-                data: [10, 10, 6, 30, 40, 12]
+                dataField: "category_product_name",
+                headerText: "물품종류",
+                minWidth: 180,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
             }, {
-                name: '완료',
-                type: 'bar',
-                data: [48, 12, 31, 10, 10, 20]
-            }
-        ]
-    };
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                minWidth: 280,
+                width:"20%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_department",
+                headerText: "부서",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_user_name",
+                headerText: "사용자",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_classification_use",
+                headerText: "용도구분",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_place",
+                headerText: "설치장소",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                },
+            }, {
+                dataField: "category_date",
+                headerText: "설치일",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_status",
+                headerText: "자산상태",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }]
+        /* 20231016 : 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            softRemoveRowMode: true, // 소프트 제거 모드 사용 안함
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
+            headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount:5, // 페이지에 출력되는 row 개수
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
+        }
 
-    // Display the chart using the configuration items and data just specified.
-    myChart.setOption(option);
+        /* 그리드 생성 */
+        holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
+
+        /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
+        AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event) {
+
+            /* 클릭한 row 가 삭제된 data 인지 확인합니다. */
+            let isDel = AUIGrid.isRemovedByRowIndex(holdingAssetGrid_ID, event.rowIndex);
+
+            if(!isDel){
+                /* 팝업창 열려야 함 */
+                lp_open('model_pop','모델 검색',540,766);
+                //클릭한 row의 정보를 clickItem 변수에 저장
+                clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
+                whatRow = event.rowIndex;
+                rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
+            }
+        });
+    }
+
+    /* 신청자산정보 그리드*/
+    function createEnrollAssetGrid() {
+        /* 기본 그리드(예시) */
+        /* 1. AUIGrid 칼럼 설정 */
+        let columnLayout = [
+            {
+                dataField: "id",
+                headerText: "아이디",
+                visible:false
+            }, {
+                dataField: "category_product_name",
+                headerText: "물품종류",
+                minWidth: 180,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_num",
+                headerText: "자산번호",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_model_name",
+                headerText: "모델명",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_classification_use",
+                headerText: "용도구분",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_place",
+                headerText: "설치장소",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_asset_status",
+                headerText: "자산상태",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                }
+            }, {
+                dataField: "category_note",
+                headerText: "교체물품종류",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                },
+                headerStyle: "my-header-style",
+                style: "my-column-style",
+            }, {
+                dataField: "category_changeProduct_name",
+                headerText: "모델명",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                },
+                headerStyle: "my-header-style",
+                style: "my-column-style",
+            }, {
+                dataField: "category_product_quantity",
+                headerText: "수량",
+                minWidth: 160,
+                width:"10%",
+                filter: {
+                    showIcon: true,
+                },
+                headerStyle: "my-header-style",
+                style: "my-column-style",
+            }, {
+                dataField: "category_del_btn", //임의의 고유값
+                headerText: "",
+                headerStyle: "my-header-style",
+                style: "my-column-style",
+                renderer: {
+                    type: "IconRenderer",
+                    iconWidth:12,
+                    iconHeight:16,
+                    iconPosition:"aisleCenter",
+                    iconTableRef:{
+                        "default":"../resources/img/icon/icon_delete.svg"
+                    },
+                    onClick: function(event){
+                        clickItem = event.item;
+
+                        let removedItem = AUIGrid.getRemovedItems(holdingAssetGrid_ID);
+
+                        if(removedItem.length > 0){
+                            let result = AUIGrid.getRowIndexesByValue(holdingAssetGrid_ID, "category_asset_num", clickItem.category_asset_num);
+
+                            for(let i = 0; i < removedItem.length; i++){
+                                if(removedItem[i].category_asset_num === clickItem.category_asset_num){
+                                    AUIGrid.restoreSoftRows(holdingAssetGrid_ID, result[0]);
+                                    AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
+                                    return;
+                                } else if(removedItem[i].category_asset_num !== clickItem.category_asset_num){
+                                    AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
+                                    AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
+                                    return;
+                                }
+                            }
+                        } else{
+                            AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
+                            AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
+                        }
+
+
+                        /* 삭제버튼을 눌렀을 때 보유자산 숫자 +1 */
+                        let haveName = clickItem.category_product_name;
+                        $(".quantity-list li").each(function(){
+                            if($(this).find(".name").text() === haveName){
+                                let num = parseInt($(this).find(".num").text());
+                                $(this).find(".num").text(num + 1);
+                            }
+                            if($(this).find(".name").text() === "총수량"){
+                                let num = parseInt($(this).find(".num").text());
+                                $(this).find(".num").text(num + 1);
+                            }
+                        })
+                    },
+                    width:100,
+                }
+            }]
+        /* 20231016 : 2. 그리드 속성 설정 */
+        let gridPros = {
+            rowIdField: "id",
+            selectionMode: "multipleCells",
+            enableSorting: true, // 소팅
+            softRemoveRowMode: true, // 소프트 제거 모드 사용 안함
+            noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+            /* 사이즈 지정 */
+            headerHeight : 30, // 기본 헤더 높이 지정
+            fillColumnSizeMode: true,
+            /* 페이지네이션 */
+            usePaging: true, // 페이징 사용
+            pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+            showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+            pageRowCount:5, // 페이지에 출력되는 row 개수
+            /* 그리드 복사 */
+            copyDisplayValue: true, //그리드 데이터 복사 가능
+            /* 필터 */
+            enableFilter: true, // 필터 true 설정
+        }
+        /* 그리드 생성 */
+        applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+    }
+
+    /* 4. 데이터 불러오기 */
+    function requestHoldingAssetData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
+            AUIGrid.setGridData(holdingAssetGrid_ID, data);
+        });
+    }
+
+    function requestApplicationStatusData() {
+        $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
+            AUIGrid.setGridData(applicationGrid_ID, data);
+        });
+    }
+
+    /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
+    window.onresize = function () {
+        if (typeof holdingAssetGrid_ID !== "undefined") {
+            AUIGrid.resize(holdingAssetGrid_ID);
+        }
+        if (typeof applicationGrid_ID !== "undefined"){
+            AUIGrid.resize(applicationGrid_ID);
+        }
+    }
+
+    /* 6. 관련 함수 */
+    /* 메뉴버튼 클릭시(반응형) */
+    $(document).on("click",".menu-btn",function(){
+        let innerWidth = $(".contents").innerWidth() - 38;
+        if($(".contents").hasClass("active")){
+            innerWidth = innerWidth + 260;
+            setTimeout(function(){
+                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+                AUIGrid.resize(applicationGrid_ID, innerWidth);
+            },20)
+
+        } else{
+            innerWidth = innerWidth - 260;
+            setTimeout(function(){
+                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
+                AUIGrid.resize(applicationGrid_ID, innerWidth);
+            },20)
+        }
+    });
 </script>
 </body>
 </html>

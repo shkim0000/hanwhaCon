@@ -2740,26 +2740,32 @@ function popupSwInformation(){
         },
         {
             dataField: "category_sw_name",
-            headerText: "S/W 이름",
+            headerText: "소프트웨어",
             filter: {
                 showIcon: true,
             }
         },
         {
             dataField: "category_original_sw_name",
-            headerText: "원본 S/W 이름",
+            headerText: "제조사",
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_search_date",
-            headerText: "검색일자",
+            dataField: "category_license",
+            headerText: "라이선스",
             filter: {
                 showIcon: true,
             }
         },  {
-            dataField: "category_statistics",
-            headerText: "통계보기",
+            dataField: "category_install_date",
+            headerText: "설치일",
+            filter: {
+                showIcon: true,
+            }
+        },  {
+            dataField: "category_license_type",
+            headerText: "라이선스유형",
             filter: {
                 showIcon: true,
             }
@@ -2776,7 +2782,7 @@ function popupSwInformation(){
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 22, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
@@ -2793,8 +2799,7 @@ function popupSwInformation(){
             AUIGrid.create("#popup_grid_swInformation", columnLayout, gridPros);
             requestSwInformationData();
         }, 10);
-
-    })
+    });
 }
 
 function requestSwInformationData() {
@@ -2815,27 +2820,45 @@ function popupBoxInformation(){
             visible:false
         },
         {
-            dataField: "category_sw_name",
-            headerText: "S/W 이름",
+            dataField: "category_cp_name",
+            headerText: "제어판표시명",
             filter: {
                 showIcon: true,
             }
         },
         {
-            dataField: "category_original_sw_name",
-            headerText: "원본 S/W 이름",
+            dataField: "category_publisher",
+            headerText: "게시자",
             filter: {
                 showIcon: true,
             }
         }, {
-            dataField: "category_search_date",
-            headerText: "검색일자",
+            dataField: "category_ip",
+            headerText: "IP",
             filter: {
                 showIcon: true,
             }
         },  {
-            dataField: "category_statistics",
-            headerText: "통계보기",
+            dataField: "category_mac",
+            headerText: "MAC",
+            filter: {
+                showIcon: true,
+            }
+        },  {
+            dataField: "category_computer_name",
+            headerText: "컴퓨터명",
+            filter: {
+                showIcon: true,
+            }
+        },  {
+            dataField: "category_registration_date",
+            headerText: "등록일",
+            filter: {
+                showIcon: true,
+            }
+        },  {
+            dataField: "category_user_name",
+            headerText: "사용자명",
             filter: {
                 showIcon: true,
             }
@@ -2852,7 +2875,7 @@ function popupBoxInformation(){
         /* 페이지네이션 */
         usePaging: true, // 페이징 사용
         pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
-        pageRowCount: 22, // 한 화면에 출력되는 행 개수 30개로 지정
+        pageRowCount: 12, // 한 화면에 출력되는 행 개수 30개로 지정
         showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
         /* 그리드 복사 */
         copyDisplayValue: true, //그리드 데이터 복사 가능
