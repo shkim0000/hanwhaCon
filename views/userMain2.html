@@ -37,7 +37,7 @@
     <div class="contents">
         <div class="top">
             <div class="bg">
-                <img src="../resources/img/main-hw-bg.svg" alt="">
+                <img src="../resources/img/h_bg.svg" alt="">
             </div>
             <div class="preview-list">
                 <div class="menu-box">
@@ -62,9 +62,9 @@
                             <h3>자산관리</h3>
                         </div>
                         <ul class="badge-list">
-                            <li><a href="#"><img src="../resources/img/badge1.svg" alt=""><span>내 자산 조회</span></a></li>
-                            <li><a href="#"><img src="../resources/img/badge2.svg" alt=""><span>자산실사</span></a></li>
-                            <li><a href="#"><img src="../resources/img/badge3.svg" alt=""><span>자산관리</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge7.svg" alt=""><span>내 자산 조회</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge8.svg" alt=""><span>자산실사</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge9.svg" alt=""><span>정기교체</span></a></li>
                         </ul>
                     </div>
                     <div class="menu-small">
@@ -72,9 +72,9 @@
                             <h3>서비스데스크</h3>
                         </div>
                         <ul class="badge-list">
-                            <li><a href="#"><img src="../resources/img/badge1.svg" alt=""><span>부품 신청</span></a></li>
-                            <li><a href="#"><img src="../resources/img/badge2.svg" alt=""><span>SW 신청</span></a></li>
-                            <li><a href="#"><img src="../resources/img/badge3.svg" alt=""><span>장애 신고</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge10.svg" alt=""><span>부품 신청</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge11.svg" alt=""><span>SW 신청</span></a></li>
+                            <li><a href="#"><img src="../resources/img/badge12.svg" alt=""><span>장애 신고</span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -113,12 +113,18 @@
                             <br>~2023.11.12
                             </span>
                             </li>
+                            <li>
+                                <span class="info-tit">정기교체기간</span>
+                                <span class="info-date">2023.10.30
+                            <br>~2023.11.12
+                            </span>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <div class="link-wrap">
-                    <a href="#"></a>
-                    <a href="#">정보자산 관리기준 한눈에 보기</a>
+                    <a href="#"><img src="../resources/img/icon/icon_lightbulb.svg" alt="">자체 해결 가이드</a>
+                    <a href="#"><img src="../resources/img/icon/icon_dns.svg" alt="">정보자산 관리기준 한눈에 보기</a>
                 </div>
             </div>
         </div>
@@ -127,36 +133,50 @@
                 <div class="g-title">
                     <h3>부서자산 보유 현황</h3>
                 </div>
-                <div id="departmentAsset_ID" class="grid-box grid-12"></div>
+                <div id="departmentAsset_ID" class="grid-box main-grid-5"></div>
             </div>
             <div class="g-box">
                 <div class="g-title">
                     <h3>나의신청현황(올해)</h3>
                 </div>
-                <div id="mineAsset_ID" class="grid-box grid-12"></div>
+                <div id="mineAsset_ID" class="grid-box main-grid-5"></div>
             </div>
         </div>
     </div>
-<!--    <footer>
-        <div class="contact">
-            <ul>
-                <li>IT 자산관련 문의 : 555-XXXX</li>
-                <li>기타 자산관련 문의 : 555-XXXX</li>
-                <li>서비스데스크 : 555-XXXX</li>
-            </ul>
-        </div>
+    <footer>
         <div class="logos">
-            <img src="../resources/img/h_logo.png" alt="logo">
+            <img src="../resources/img/h_logo.svg" alt="한화 로고 토탈 에너지 로고">
+            <p>Copyright ⓒ 2016 Hanwha TotalEnergies Petrochemical Co., Ltd All rights reserved.</p>
         </div>
-    </footer>-->
+    </footer>
 </div>
 
 <!-- // contents -->
+<style>
+    /* aui-grid 높이 */
+    .main-grid-5{height:402px;}
+    .aui-grid-header-panel .aui-grid-default-header.aui-grid-user-custom-header:hover span {color:#000!important;}
+    .aui-grid-default-header,
+    .aui-grid-user-custom-header{background-color:#414141;color:#FFFFFF;}
+    .aui-grid{border:0;}
+    .aui-grid-row-background{background-color:#fff;}
+    .aui-grid-alternative-row-background{background-color:#f9f9f9}
+    .aui-grid-header-panel .aui-grid-table tr td{border:0;}
+    .aui-grid-default-header *{color:#fff;font-size:17px;font-family:"Noto Sans", sans-serif;font-weight:400}
+    .aui-grid-body-panel .aui-grid-table tr td{border-bottom:0;}
+    .aui-grid-header-panel .aui-grid-table tr{position:relative}
+    .aui-grid-header-panel .aui-grid-table tr::before{content:'';width:4px;height:52px;background-color:#414141;position:absolute;right:4px;top:0;}
+
+    /* aui-grid > footer */
+    .aui-grid-default-footer{background-color:#EEEEEE;}
+    .aui-grid-footer-division-line{border-top:1px solid #B6B6B6!important;}
+    .aui-grid-paging-panel{border-top:0;}
+</style>
 <script>
     /* AUIGrid */
     /* 1. AUIGrid 생성 후 반환 ID */
-    let holdingAssetGrid_ID; // 보유자산
-    let applicationGrid_ID; // 신청자산
+    let departmentAsset_ID; // 보유자산
+    let mineAsset_ID; // 신청자산
 
 
     /* 2. AUIGrid 그리드 생성 + 데이터 요청 */
@@ -181,76 +201,37 @@
             }, {
                 dataField: "category_product_name",
                 headerText: "물품종류",
-                minWidth: 180,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
+                headerStyle : "aui-grid-user-custom-header",
             }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
+                dataField: "category_personal",
+                headerText: "개인",
+                headerStyle : "aui-grid-user-custom-header",
             }, {
-                dataField: "category_model_name",
-                headerText: "모델명",
-                minWidth: 280,
-                width:"20%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_department",
-                headerText: "부서",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_user_name",
-                headerText: "사용자",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_classification_use",
-                headerText: "용도구분",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_place",
-                headerText: "설치장소",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                },
-            }, {
-                dataField: "category_date",
-                headerText: "설치일",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }]
+                dataField: "category_public",
+                headerText: "공용",
+                headerStyle : "aui-grid-user-custom-header",
+            }];
+
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText : "합계",
+            dataField: "category_product_name",
+            positionField: "category_product_name",
+        }, {
+            dataField: "category_personal",
+            positionField: "category_personal",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_public",
+            positionField: "category_public",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }];
+
+
         /* 20231016 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
@@ -259,7 +240,8 @@
             softRemoveRowMode: true, // 소프트 제거 모드 사용 안함
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
-            headerHeight : 30, // 기본 헤더 높이 지정
+            headerHeight : 52, // 기본 헤더 높이 지정
+            rowHeight : 52, // 기본 헤더 높이 지정
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
@@ -268,28 +250,14 @@
             pageRowCount:5, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            /* 필터 */
-            enableFilter: true, // 필터 true 설정
+            /* 푸터 */
+            showFooter : true,
+            footerHeight:52,
         }
 
         /* 그리드 생성 */
-        holdingAssetGrid_ID = AUIGrid.create("#holdingAssetGrid_ID", columnLayout, gridPros);
-
-        /* 보유자산을 클릭했을 때 모델 정보 팝업 동작 */
-        AUIGrid.bind(holdingAssetGrid_ID, "cellDoubleClick", function(event) {
-
-            /* 클릭한 row 가 삭제된 data 인지 확인합니다. */
-            let isDel = AUIGrid.isRemovedByRowIndex(holdingAssetGrid_ID, event.rowIndex);
-
-            if(!isDel){
-                /* 팝업창 열려야 함 */
-                lp_open('model_pop','모델 검색',540,766);
-                //클릭한 row의 정보를 clickItem 변수에 저장
-                clickItem = AUIGrid.getSelectedRows(holdingAssetGrid_ID)[0];
-                whatRow = event.rowIndex;
-                rowData = AUIGrid.getSelectedRows(holdingAssetGrid_ID);
-            }
-        });
+        departmentAsset_ID = AUIGrid.create("#departmentAsset_ID", columnLayout, gridPros);
+        AUIGrid.setFooter(departmentAsset_ID, footerLayout);
     }
 
     /* 신청자산정보 그리드*/
@@ -302,146 +270,56 @@
                 headerText: "아이디",
                 visible:false
             }, {
-                dataField: "category_product_name",
-                headerText: "물품종류",
-                minWidth: 180,
-                width:"10%",
+                dataField: "category_application",
+                headerText: "신청구분",
+                headerStyle : "aui-grid-user-custom-header",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_asset_num",
-                headerText: "자산번호",
-                minWidth: 160,
-                width:"10%",
+                dataField: "category_num_cases_process",
+                headerText: "처리건수",
+                headerStyle : "aui-grid-user-custom-header",
                 filter: {
                     showIcon: true,
                 }
             }, {
-                dataField: "category_model_name",
-                headerText: "모델명",
-                minWidth: 160,
-                width:"10%",
+                dataField: "category_complete",
+                headerText: "완료",
+                headerStyle : "aui-grid-user-custom-header",
                 filter: {
                     showIcon: true,
                 }
-            }, {
-                dataField: "category_classification_use",
-                headerText: "용도구분",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_place",
-                headerText: "설치장소",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_asset_status",
-                headerText: "자산상태",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                }
-            }, {
-                dataField: "category_note",
-                headerText: "교체물품종류",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                },
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-            }, {
-                dataField: "category_changeProduct_name",
-                headerText: "모델명",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                },
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-            }, {
-                dataField: "category_product_quantity",
-                headerText: "수량",
-                minWidth: 160,
-                width:"10%",
-                filter: {
-                    showIcon: true,
-                },
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-            }, {
-                dataField: "category_del_btn", //임의의 고유값
-                headerText: "",
-                headerStyle: "my-header-style",
-                style: "my-column-style",
-                renderer: {
-                    type: "IconRenderer",
-                    iconWidth:12,
-                    iconHeight:16,
-                    iconPosition:"aisleCenter",
-                    iconTableRef:{
-                        "default":"../resources/img/icon/icon_delete.svg"
-                    },
-                    onClick: function(event){
-                        clickItem = event.item;
+            }];
 
-                        let removedItem = AUIGrid.getRemovedItems(holdingAssetGrid_ID);
+        /* 1-2. 푸터 설정 */
+        let footerLayout = [{
+            labelText : "합계",
+            dataField: "category_application",
+            positionField: "category_application",
+        }, {
+            dataField: "category_num_cases_process",
+            positionField: "category_num_cases_process",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }, {
+            dataField: "category_complete",
+            positionField: "category_complete",
+            operation: "SUM",
+            style: "aui-grid-my-column",
+            formatString: "#,##0"
+        }];
 
-                        if(removedItem.length > 0){
-                            let result = AUIGrid.getRowIndexesByValue(holdingAssetGrid_ID, "category_asset_num", clickItem.category_asset_num);
-
-                            for(let i = 0; i < removedItem.length; i++){
-                                if(removedItem[i].category_asset_num === clickItem.category_asset_num){
-                                    AUIGrid.restoreSoftRows(holdingAssetGrid_ID, result[0]);
-                                    AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
-                                    return;
-                                } else if(removedItem[i].category_asset_num !== clickItem.category_asset_num){
-                                    AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
-                                    AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
-                                    return;
-                                }
-                            }
-                        } else{
-                            AUIGrid.removeRow(applicationGrid_ID, event.rowIndex);
-                            AUIGrid.addRow(holdingAssetGrid_ID, clickItem, "last");
-                        }
-
-
-                        /* 삭제버튼을 눌렀을 때 보유자산 숫자 +1 */
-                        let haveName = clickItem.category_product_name;
-                        $(".quantity-list li").each(function(){
-                            if($(this).find(".name").text() === haveName){
-                                let num = parseInt($(this).find(".num").text());
-                                $(this).find(".num").text(num + 1);
-                            }
-                            if($(this).find(".name").text() === "총수량"){
-                                let num = parseInt($(this).find(".num").text());
-                                $(this).find(".num").text(num + 1);
-                            }
-                        })
-                    },
-                    width:100,
-                }
-            }]
         /* 20231016 : 2. 그리드 속성 설정 */
         let gridPros = {
             rowIdField: "id",
             selectionMode: "multipleCells",
             enableSorting: true, // 소팅
-            softRemoveRowMode: true, // 소프트 제거 모드 사용 안함
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
-            headerHeight : 30, // 기본 헤더 높이 지정
+            headerHeight : 52, // 기본 헤더 높이 지정
+            rowHeight : 52, // 기본 헤더 높이 지정
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
@@ -450,53 +328,78 @@
             pageRowCount:5, // 페이지에 출력되는 row 개수
             /* 그리드 복사 */
             copyDisplayValue: true, //그리드 데이터 복사 가능
-            /* 필터 */
-            enableFilter: true, // 필터 true 설정
+            /* 푸터 */
+            showFooter : true,
+            footerHeight:52,
         }
         /* 그리드 생성 */
-        applicationGrid_ID = AUIGrid.create("#applicationGrid_ID", columnLayout, gridPros);
+        mineAsset_ID = AUIGrid.create("#mineAsset_ID", columnLayout, gridPros);
+        AUIGrid.setFooter(mineAsset_ID, footerLayout);
     }
 
     /* 4. 데이터 불러오기 */
     function requestHoldingAssetData() {
         $.get("../resources/lib/aui-grid/data/sample-datas6.json", function (data) {
-            AUIGrid.setGridData(holdingAssetGrid_ID, data);
+            AUIGrid.setGridData(departmentAsset_ID, data);
         });
     }
 
     function requestApplicationStatusData() {
         $.get("../resources/lib/aui-grid/data/sample-datas-id.json", function (data) {
-            AUIGrid.setGridData(applicationGrid_ID, data);
+            AUIGrid.setGridData(mineAsset_ID, data);
         });
     }
 
     /* 5. AUIGrid 그리드 윈도우 리사이징 이벤트 */
     window.onresize = function () {
-        if (typeof holdingAssetGrid_ID !== "undefined") {
-            AUIGrid.resize(holdingAssetGrid_ID);
+        if (typeof departmentAsset_ID !== "undefined") {
+            AUIGrid.resize(departmentAsset_ID);
         }
-        if (typeof applicationGrid_ID !== "undefined"){
-            AUIGrid.resize(applicationGrid_ID);
+        if (typeof mineAsset_ID !== "undefined"){
+            AUIGrid.resize(mineAsset_ID);
         }
     }
 
     /* 6. 관련 함수 */
     /* 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
-        let innerWidth = $(".contents").innerWidth() - 38;
-        if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
-            setTimeout(function(){
-                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
-                AUIGrid.resize(applicationGrid_ID, innerWidth);
-            },20)
+        let windowWidth = $(window).innerWidth();
+        let innerWidth = $(".g-box").innerWidth() ;
 
-        } else{
-            innerWidth = innerWidth - 260;
-            setTimeout(function(){
-                AUIGrid.resize(holdingAssetGrid_ID, innerWidth - 10);
-                AUIGrid.resize(applicationGrid_ID, innerWidth);
-            },20)
+        if($(".contents").hasClass("active")) {
+            if (windowWidth >= 1240) {
+                console.log("1")
+                innerWidth = innerWidth + 70;
+                setTimeout(function () {
+                    AUIGrid.resize(mineAsset_ID, innerWidth);
+                    AUIGrid.resize(departmentAsset_ID, innerWidth);
+                }, 20);
+            } else {
+                windowWidth = windowWidth - 96;
+                console.log("2")
+                setTimeout(function () {
+                    AUIGrid.resize(mineAsset_ID, windowWidth);
+                    AUIGrid.resize(departmentAsset_ID, windowWidth);
+                }, 20)
+
+            }
+        }else{
+            if (windowWidth >= 1240) {
+                console.log("3")
+                innerWidth = innerWidth - 192;
+                setTimeout(function(){
+                    AUIGrid.resize(mineAsset_ID, innerWidth);
+                    AUIGrid.resize(departmentAsset_ID, innerWidth);
+                },20)
+            } else {
+                windowWidth = windowWidth - 356;
+                console.log("4")
+                setTimeout(function () {
+                    AUIGrid.resize(mineAsset_ID, windowWidth);
+                    AUIGrid.resize(departmentAsset_ID, windowWidth);
+                }, 20)
+
+            }
         }
     });
 </script>
