@@ -4,7 +4,7 @@ $(function(){
     $('body').prepend(
         "<header>\n"+
                     "<div class='inner'>\n"+
-                        "<button type='button' class='menu-btn'></button>\n"+
+                        "<button type='button' class='menu-btn on'></button>\n"+
                         "<a href='#'>IAMS V2</a>\n"+
                     "</div>\n"+
                     "<div class='inner'>\n"+
@@ -18,11 +18,11 @@ $(function(){
 
     /* sidebar 추가 */
     $('#wrapper').prepend(
-        "<div class='sidebar'>\n"+
+        "<div class='sidebar open'>\n"+
             "<div class='menu'>\n"+
                 "<ul>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>자산신청</button>\n"+
+                        "<button type='button' class='btn'>자산<br>신청</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
@@ -36,7 +36,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>자산현황</button>\n"+
+                        "<button type='button' class='btn'>자산<br>현황</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산현황조회</a></li>\n"+
@@ -53,7 +53,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>서비스데스크</button>\n"+
+                        "<button type='button' class='btn'>서비스<br>데스크</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>서비스 신청현황</a></li>\n"+
@@ -63,7 +63,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>장애신고</button>\n"+
+                        "<button type='button' class='btn'>장애<br>신고</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>장애신고현황</a></li>\n"+
@@ -73,7 +73,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>자산등록</button>\n"+
+                        "<button type='button' class='btn'>자산<br>등록</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산신규등록</a></li>\n"+
@@ -82,7 +82,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>자산실사</button>\n"+
+                        "<button type='button' class='btn'>자산<br>실사</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>자산실사현황</a></li>\n"+
@@ -92,7 +92,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>정기교체</button>\n"+
+                        "<button type='button' class='btn'>정기<br>교체</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>정기교체 진행상황</a></li>\n"+
@@ -100,7 +100,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>기준정보</button>\n"+
+                        "<button type='button' class='btn'>기준<br>정보</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>사용자정보</a></li>\n"+
@@ -116,7 +116,7 @@ $(function(){
                         "</div>\n"+
                     "</li>\n"+
                     "<li>\n"+
-                        "<button type='button' class='btn'>기업자산</button>\n"+
+                        "<button type='button' class='btn'>기업<br>자산</button>\n"+
                         "<div class='depth'>\n"+
                             "<ul>\n"+
                                 "<li><a href='#' class='linkBtn'>SW자산현황</a></li>\n"+
@@ -130,6 +130,12 @@ $(function(){
         "</div>\n"
     );
 
+    if($("body").hasClass("user-main-page")){
+        $(".menu-btn").removeClass("on");
+        $(".sidebar").removeClass("open");
+        $(".sidebar").addClass("close");
+    }
+
 });
 
 $(function(){
@@ -137,13 +143,35 @@ $(function(){
         let sidebar = $(".sidebar");
         let contents = $(".contents");
         if(!sidebar.hasClass("open")){
+            $(this).addClass("on");
+            sidebar.removeClass("close");
             sidebar.addClass("open");
+            contents.removeClass("close");
             contents.addClass("active");
         }else{
+            $(this).removeClass("on");
             sidebar.removeClass("open");
+            sidebar.addClass("close");
             contents.removeClass("active");
+            contents.addClass("close");
         }
     });
+
+    $(document).on("mouseenter",".sidebar.close .btn",function(){
+        if(!$(this).hasClass("on")){
+            $(".sidebar.close .btn").removeClass("on");
+            $(this).addClass("on");
+        }else{
+            $(".sidebar.close .btn").removeClass("on");
+        }
+    });
+
+    $(document).on("mouseleave",".sidebar.close .menu > ul > li",function(){
+        $(".sidebar.close .btn").removeClass("on");
+    });
+
+
+
     /* datepicker */
     $(".date.limit.prev input").datepicker({
         changeMonth:true,

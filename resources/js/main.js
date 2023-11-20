@@ -8,7 +8,7 @@ $(function(){
         $('body').prepend(
             "<header>\n"+
             "<div class='inner'>\n"+
-            "<button type='button' class='menu-btn'></button>\n"+
+            "<button type='button' class='menu-btn on'></button>\n"+
             "<a href='#'>IAMS V2</a>\n"+
             "</div>\n"+
             "<div class='inner'>\n"+
@@ -22,11 +22,11 @@ $(function(){
 
         /* sidebar 추가 */
         $('#wrapper').prepend(
-            "<div class='sidebar'>\n"+
+    "<div class='sidebar open'>\n"+
             "<div class='menu'>\n"+
             "<ul>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>자산신청</button>\n"+
+            "<button type='button' class='btn'>자산<br>신청</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
@@ -40,7 +40,7 @@ $(function(){
             "</div>\n"+
             "</li>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>자산현황</button>\n"+
+            "<button type='button' class='btn'>자산<br>현황</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>자산조회</a></li>\n"+
@@ -51,7 +51,7 @@ $(function(){
             "</div>\n"+
             "</li>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>서비스데스크</button>\n"+
+            "<button type='button' class='btn'>서비스<br>데스크</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>서비스 신청현황</a></li>\n"+
@@ -60,7 +60,7 @@ $(function(){
             "</div>\n"+
             "</li>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>장애신고</button>\n"+
+            "<button type='button' class='btn'>장애<br>신고</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>장애신고</a></li>\n"+
@@ -69,7 +69,7 @@ $(function(){
             "</div>\n"+
             "</li>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>자산등록</button>\n"+
+            "<button type='button' class='btn'>자산<br>등록</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>자산등록</a></li>\n"+
@@ -77,7 +77,7 @@ $(function(){
             "</div>\n"+
             "</li>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>자산실사</button>\n"+
+            "<button type='button' class='btn'>자산<br>실사</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>자산실사</a></li>\n"+
@@ -86,7 +86,7 @@ $(function(){
             "</div>\n"+
             "</li>\n"+
             "<li>\n"+
-            "<button type='button' class='btn'>정기교체</button>\n"+
+            "<button type='button' class='btn'>정기<br>교체</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
             "<li><a href='#' class='linkBtn'>모델신청</a></li>\n"+
@@ -97,6 +97,12 @@ $(function(){
             "</div>\n"+
             "</div>\n"
         );
+
+        if($("body").hasClass("user-main-page")){
+            $(".menu-btn").removeClass("on");
+            $(".sidebar").removeClass("open");
+            $(".sidebar").addClass("close");
+        }
     }
 });
 
@@ -104,14 +110,103 @@ $(function(){
     $(document).on("click", ".menu-btn", function(){
         let sidebar = $(".sidebar");
         let contents = $(".contents");
+
         if(!sidebar.hasClass("open")){
+            /* 1. 사이드 바 - open-ver */
+            $(this).addClass("on");
+            sidebar.removeClass("close on");
             sidebar.addClass("open");
+
+            let lastActiveBtn= $('.sidebar.open .btn.active').next().find("li").length;
+            $('.sidebar.open .btn.active').next().css(`height`, `${lastActiveBtn * 39.2}`);
+
             contents.addClass("active");
         }else{
+            /* 2. 사이드 바 : close-ver */
+            $(this).removeClass("on");
             sidebar.removeClass("open");
+
             contents.removeClass("active");
+
         }
     });
+
+    $(document).on("mouseenter", ".menu-btn", function(){
+        if(!$(this).hasClass("on")){
+            $(".sidebar").addClass("close on");
+        }
+    });
+
+    $(document).on("mouseleave", ".sidebar.close.on .menu", function(){
+        $(this).closest(".sidebar").removeClass("close on")
+    });
+
+
+    $(document).on("mouseenter",".sidebar.close .btn",function(){
+        if(!$(this).hasClass("open")){
+            $(".sidebar.close .btn").removeClass("open");
+            $(this).addClass("open");
+
+            let num = $(this).next(".depth").find("ul li").length;
+            $(this).next(".depth").css(`height`,`${num * 27.19 + 5}`);
+        }else{
+            $(".sidebar.close .btn").removeClass("open");
+
+
+        }
+    });
+
+    $(document).on("mouseleave",".sidebar.close .menu > ul > li",function(){
+        $(".sidebar.close .btn").removeClass("open");
+        if(!$(".sidebar .depth .btn").hasClass("active")){
+            $(".sidebar.close .depth").css(`height`,0);
+        }
+    });
+
+    /* 20231016 : sidebar 설정 */
+    $(document).ready(function(){
+        let pageName = $('.page-indicator ul li:nth-child(2)').text();
+        let finalDepthName = $('.page-indicator ul li:last-child').text();
+
+        if(pageName){
+            $('.sidebar').addClass('open');
+            let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
+                return $(this).text() === pageName;
+            });
+            currentListEl.addClass('active');
+            currentListEl.siblings('.depth').addClass('active');
+        }
+
+        /* 사이드바 초기 설정 */
+        if(finalDepthName){
+            // $('.sidebar').addClass('open');
+            let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
+                return $(this).text() === finalDepthName;
+            });
+            currentListEl.closest('.depth').siblings('.btn').addClass('active');
+            currentListEl.addClass('active');
+            currentListEl.closest('.depth').addClass('active');
+            let num = currentListEl.closest('.depth').find('ul li').length;
+            currentListEl.closest('.depth').css(`height`, `${num * 39.2}`);
+        }
+    })
+
+    $(".sidebar .menu ul li .btn").on("click",function(){
+        if($(this).closest(".sidebar").hasClass("open")){
+            if($(this).hasClass("active")){
+                $(this).removeClass("active");
+                $(this).siblings(".depth").removeClass("active").css('height','0');
+            } else if(!$(this).hasClass("active")){
+                $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
+                $(this).closest(".menu").find(".btn.active").removeClass("active");
+                $(this).addClass("active");
+                let num = $(this).siblings(".depth").find("ul li").length;
+                $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);
+            }
+        }
+
+    });
+
     /* datepicker */
     $(".date.limit.prev input").datepicker({
         changeMonth:true,
@@ -144,46 +239,6 @@ $(function(){
 
     $(".date input").keyup(function(){
         $(this).val("");
-    });
-    -
-
-    /* 20231016 : sidebar 설정 */
-    $(document).ready(function(){
-        let pageName = $('.page-indicator ul li:nth-child(2)').text();
-        let finalDepthName = $('.page-indicator ul li:last-child').text();
-
-        if(pageName){
-            $('.sidebar').addClass('open');
-            let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
-                return $(this).text() === pageName;
-            });
-            currentListEl.addClass('active');
-            currentListEl.siblings('.depth').addClass('active');
-        }
-        if(finalDepthName){
-            $('.sidebar').addClass('open');
-            let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
-                return $(this).text() === finalDepthName;
-            });
-            currentListEl.closest('.depth').siblings('.btn').addClass('active');
-            currentListEl.addClass('active');
-            currentListEl.closest('.depth').addClass('active');
-            let num = currentListEl.closest('.depth').find('ul li').length;
-            currentListEl.closest('.depth').css(`height`, `${num * 39.2}`);
-        }
-    })
-
-    $(".sidebar .menu ul li .btn").on("click",function(){
-        if($(this).hasClass("active")){
-            $(this).removeClass("active");
-            $(this).siblings(".depth").removeClass("active").css('height','0');
-        } else if(!$(this).hasClass("active")){
-            $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
-            $(this).closest(".menu").find(".btn.active").removeClass("active");
-            $(this).addClass("active");
-            let num = $(this).siblings(".depth").find("ul li").length;
-            $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);
-        }
     });
 
     /* 행 추가 버튼 클릭 : 일반 테이블 */

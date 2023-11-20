@@ -305,13 +305,13 @@
     $(document).on("click",".menu-btn",function(){
         let innerWidth = $(".contents").innerWidth() - 38;
         if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
+            innerWidth = innerWidth + 164;
             setTimeout(function(){
                 AUIGrid.resize(assetClassification_ID, innerWidth);
             },20);
 
         } else{
-            innerWidth = innerWidth - 260;
+            innerWidth = innerWidth - 164;
             setTimeout(function(){
                 AUIGrid.resize(assetClassification_ID, innerWidth);
             },20);

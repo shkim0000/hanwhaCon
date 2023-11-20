@@ -623,23 +623,44 @@
     /* 6. 함수 관련 모음 */
     /* 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
+        let windowWidth = $(window).innerWidth();
+        let innerWidth = $(".contents").innerWidth() - 62;
         let halfWidth = ($(".contents").innerWidth() - 82)/2;
 
-        if($(".contents").hasClass("active")){
-            halfWidth = halfWidth + 130;
-            setTimeout(function(){
-                AUIGrid.resize(basicItemInfo_ID, halfWidth);
-                AUIGrid.resize(regularItemInfo_ID, halfWidth);
-                AUIGrid.resize(rentalItemInfo_ID, halfWidth);
-            },20);
+        if(windowWidth > 970){
+            if($(".contents").hasClass("active")){
+                halfWidth = halfWidth + 82;
+                setTimeout(function(){
+                    AUIGrid.resize(basicItemInfo_ID, halfWidth);
+                    AUIGrid.resize(regularItemInfo_ID, halfWidth);
+                    AUIGrid.resize(rentalItemInfo_ID, halfWidth);
+                },20);
 
-        } else{
-            halfWidth = halfWidth - 130;
-            setTimeout(function(){
-                AUIGrid.resize(basicItemInfo_ID, halfWidth);
-                AUIGrid.resize(regularItemInfo_ID, halfWidth);
-                AUIGrid.resize(rentalItemInfo_ID, halfWidth);
-            },20);
+            } else{
+                halfWidth = halfWidth - 82;
+                setTimeout(function(){
+                    AUIGrid.resize(basicItemInfo_ID, halfWidth);
+                    AUIGrid.resize(regularItemInfo_ID, halfWidth);
+                    AUIGrid.resize(rentalItemInfo_ID, halfWidth);
+                },20);
+            }
+        }else{
+            if($(".contents").hasClass("active")){
+                innerWidth = innerWidth + 164;
+                setTimeout(function(){
+                    AUIGrid.resize(basicItemInfo_ID, innerWidth);
+                    AUIGrid.resize(regularItemInfo_ID, innerWidth);
+                    AUIGrid.resize(rentalItemInfo_ID, innerWidth);
+                },20);
+
+            } else{
+                innerWidth = innerWidth - 164;
+                setTimeout(function(){
+                    AUIGrid.resize(basicItemInfo_ID, innerWidth);
+                    AUIGrid.resize(regularItemInfo_ID, innerWidth);
+                    AUIGrid.resize(rentalItemInfo_ID, innerWidth);
+                },20);
+            }
         }
     });
 

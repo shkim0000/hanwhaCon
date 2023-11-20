@@ -111,8 +111,8 @@
             <div class="btn-wrap">
                 <button type="button" class="btn excel">엑셀 IMPORT</button>
                 <button type="button" class="btn excel">엑셀다운로드</button>
-                <button type="button" class="btn add-column">신규추가</button>
-                <button type="button" class="btn" onclick="lp_open('gridPop_sw_detail', 'SW 상세정보',850,900)">상세보기</button>
+                <button type="button" class="btn add-column" onclick="lp_open('gridPop_sw_add', 'SW 상세정보',850,900);">신규추가</button>
+                <button type="button" class="btn" onclick="lp_open('gridPop_sw_detail', 'SW 상세정보',850,900);">상세보기</button>
                 <button type="button" class="btn trash" onclick="deleteRowGrid();" >선택삭제</button>
             </div>
         </div>
@@ -137,6 +137,253 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<!-- sw 신규추가 -->
+<div id="gridPop_sw_add" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="title-box">
+                <div class="title">
+                    <h3>기업용 SW 정보</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center">자산번호</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">SAD ID</div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>SW 종류</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>VENDOR</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>SW 제품명</p></div></div>
+                    <div class="td whole">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center"><p>수량</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="number">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>사용 수량</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="number">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>남은 수량</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="number">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>시스템 운영팀</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>시스템 운영자</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center"><p>현업 운영팀</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center"><p>현업 담당자</p></div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>라이선스 기본정보</h3>
+                </div>
+            </div>
+            <div class="custom-table">
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">SW라이선스 제품명</div></div>
+                    <div class="td whole">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-3">
+                    <div class="th"><div class="th-wrap center">라이선스 할당 단위</div></div>
+                    <div class="td whole">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center">라이선스 사용기간</div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">라이선스 만료 기간</div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row con-2">
+                    <div class="th"><div class="th-wrap center">구매일자</div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="date single">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="th"><div class="th-wrap center">구매업체</div></div>
+                    <div class="td">
+                        <div class="td-wrap center">
+                            <label class="input">
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>라이선스 문서</h3>
+                </div>
+                <div class="btn-wrap">
+                    <button type="button" class="btn add-file2">첨부</button>
+                </div>
+            </div>
+            <div class="table">
+                <table>
+                    <thead>
+                    <tr>
+                        <th><p>파일명</p></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="td-wrap between">
+                                <div class="file-box long">
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
+                                    <span></span>
+                                </div>
+                                <button type="button" class="btn trash ver2">삭제</button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="td-wrap between">
+                                <div class="file-box long">
+                                    <label class="file">
+                                        <input type="file" class="fileUpload">
+                                        <span class="btn">파일선택</span>
+                                    </label>
+                                    <span></span>
+                                </div>
+                                <button type="button" class="btn trash ver2">삭제</button>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="title-box">
+                <div class="title">
+                    <h3>라이선스 문서</h3>
+                </div>
+            </div>
+            <div id="popup_grid_license_manage" class="grid-box h-small"></div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn">수정</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_sw_detail')">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- sw 상세정보 -->
 <div id="gridPop_sw_detail" class="popup">
     <div class="pop-box">

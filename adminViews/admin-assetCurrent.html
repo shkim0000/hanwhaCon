@@ -1195,12 +1195,12 @@
     $(document).on("click",".menu-btn",function(){
         let innerWidth = $(".contents").innerWidth() - 40;
         if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
+            innerWidth = innerWidth + 164;
             setTimeout(function(){
                 AUIGrid.resize(applicationGrid_ID, innerWidth);
             },20);
         } else{
-            innerWidth = innerWidth - 260;
+            innerWidth = innerWidth - 164;
             setTimeout(function(){
                 AUIGrid.resize(applicationGrid_ID, innerWidth);
             },20);

@@ -699,15 +699,15 @@ $(document).on("click",".menu-btn",function(){
     let listBoxWidth = $("#newAssetEnroll_ID").innerWidth();
     let innerWidth = $(".contents").innerWidth() - 40;
     if($(".contents").hasClass("active")){
-        listBoxWidth = listBoxWidth + 210;
-        innerWidth = innerWidth + 260;
+        listBoxWidth = listBoxWidth + 132;
+        innerWidth = innerWidth + 164;
         setTimeout(function(){
             AUIGrid.resize(newAssetEnroll_ID, listBoxWidth);
             AUIGrid.resize(assetEnroll_ID, innerWidth);
         },20);
     } else{
-        listBoxWidth = listBoxWidth - 205;
-        innerWidth = innerWidth - 260;
+        listBoxWidth = listBoxWidth - 132;
+        innerWidth = innerWidth - 164;
         setTimeout(function(){
             AUIGrid.resize(newAssetEnroll_ID, listBoxWidth);
             AUIGrid.resize(assetEnroll_ID, innerWidth);

@@ -916,26 +916,46 @@
 
     /* 메뉴버튼 클릭시(반응형) */
     $(document).on("click",".menu-btn",function(){
+        let windowWidth = $(window).innerWidth();
         let innerWidth = $(".contents").innerWidth() - 38;
         let halfWidth = ($(".contents").innerWidth() - 82)/2;
 
-        if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
-            halfWidth = halfWidth + 130;
-            setTimeout(function(){
-                AUIGrid.resize(userStatusGrid_ID, halfWidth);
-                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
-                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-            },20);
+        if(windowWidth > 970){
+            if($(".contents").hasClass("active")){
+                innerWidth = innerWidth + 164;
+                halfWidth = halfWidth + 82;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
 
-        } else{
-            innerWidth = innerWidth - 260;
-            halfWidth = halfWidth - 130;
-            setTimeout(function(){
-                AUIGrid.resize(userStatusGrid_ID, halfWidth);
-                AUIGrid.resize(assetStatusGrid_ID, halfWidth);
-                AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
-            },20);
+            } else{
+                innerWidth = innerWidth - 164;
+                halfWidth = halfWidth - 82;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(assetStatusGrid_ID, halfWidth);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
+            }
+        }else{
+            if($(".contents").hasClass("active")){
+                innerWidth = innerWidth + 164;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
+
+            } else{
+                innerWidth = innerWidth - 164;
+                setTimeout(function(){
+                    AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
+                    AUIGrid.resize(dueDiglienceGrid_ID, innerWidth);
+                },20);
+            }
         }
     });
 </script>

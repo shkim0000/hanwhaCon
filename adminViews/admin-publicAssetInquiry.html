@@ -403,7 +403,7 @@
         let innerWidth = $(".contents").innerWidth() - 62;
 
         if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
+            innerWidth = innerWidth + 164;
             setTimeout(function(){
                 AUIGrid.resize(itemListGrid_ID, innerWidth);
                 AUIGrid.resize(detailGrid_ID, innerWidth);
@@ -411,7 +411,7 @@
             },20);
 
         } else{
-            innerWidth = innerWidth - 260;
+            innerWidth = innerWidth - 164;
             setTimeout(function(){
                 AUIGrid.resize(itemListGrid_ID, innerWidth);
                 AUIGrid.resize(detailGrid_ID, innerWidth);

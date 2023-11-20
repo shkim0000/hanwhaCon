@@ -985,8 +985,8 @@ $(document).on("click",".menu-btn",function(){
 
     if(windowWidth > 970){
         if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
-            halfWidth = halfWidth + 130;
+            innerWidth = innerWidth + 164;
+            halfWidth = halfWidth + 82;
             setTimeout(function(){
                 AUIGrid.resize(userStatusGrid_ID, halfWidth);
                 AUIGrid.resize(assetStatusGrid_ID, halfWidth);
@@ -994,8 +994,8 @@ $(document).on("click",".menu-btn",function(){
             },20);
 
         } else{
-            innerWidth = innerWidth - 260;
-            halfWidth = halfWidth - 130;
+            innerWidth = innerWidth - 164;
+            halfWidth = halfWidth - 82;
             setTimeout(function(){
                 AUIGrid.resize(userStatusGrid_ID, halfWidth);
                 AUIGrid.resize(assetStatusGrid_ID, halfWidth);
@@ -1004,8 +1004,7 @@ $(document).on("click",".menu-btn",function(){
         }
     }else{
         if($(".contents").hasClass("active")){
-            innerWidth = innerWidth + 260;
-            halfWidth = halfWidth + 130;
+            innerWidth = innerWidth + 164;
             setTimeout(function(){
                 AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
                 AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
@@ -1013,8 +1012,7 @@ $(document).on("click",".menu-btn",function(){
             },20);
 
         } else{
-            innerWidth = innerWidth - 260;
-            halfWidth = halfWidth - 130;
+            innerWidth = innerWidth - 164;
             setTimeout(function(){
                 AUIGrid.resize(userStatusGrid_ID, innerWidth - 24);
                 AUIGrid.resize(assetStatusGrid_ID, innerWidth - 24);
