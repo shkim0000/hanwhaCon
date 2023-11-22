@@ -4474,9 +4474,91 @@ function requestLicenseManageData() {
     });
 }
 
+/* sw 상세정보 > 신규추가 */
+let popup_grid_license_manage2;
+
+function gridPopLicenseManage2(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산정보",
+            filter: {
+                showIcon: true,
+            }
+
+        }, {
+            dataField: "category_visual",
+            headerText: "형태",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_sap_id",
+            headerText: "SAP ID",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_item_name",
+            headerText: "장비명",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_hardware_model",
+            headerText: "하드웨어모델",
+            filter: {
+                showIcon: true,
+            }
+        }, {
+            dataField: "category_assignment_date",
+            headerText: "할당일sw",
+            filter: {
+                showIcon: true,
+            }
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        editable: false, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        autoGridHeight : true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 4,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_license_manage2 = AUIGrid.create("#popup_grid_license_manage2", columnLayout, gridPros);
+    requestLicenseManageData();
+}
+
+function requestLicenseManageData() {
+    $.get("../resources/lib/aui-grid/data/admin-license.json", function (data) {
+        AUIGrid.setGridData(popup_grid_license_manage2, data);
+    });
+}
+
 /* HW 상세정보 */
 let popup_grid_license_manage_addf;
-
 function gridPopLicenseManageAddf(){
     /* 1. AUIGrid 칼럼 설정 */
     let columnLayout = [
@@ -4599,10 +4681,121 @@ function addRow() {
         AUIGrid.addRow(popup_grid_license_manage_addf, item, "first");
 };
 
+/* 20231121 : HW 상세정보 > 신규신청 */
+let popup_grid_license_manage_addf2;
+function gridPopLicenseManageAddf2(){
+    /* 1. AUIGrid 칼럼 설정 */
+    let columnLayout = [
+        {
+            dataField: "id",
+            headerText: "아이디",
+            visible : false
+        },
+        {
+            dataField: "category_asset_num",
+            headerText: "자산정보",
+            editable: false,
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_sw_product",
+            headerText: "SW 종류",
+            editable: false,
+            filter: {
+                showIcon: true,
+            },
+        }, {
+            dataField: "category_sw_item",
+            headerText: "SW 라이선스 제품명",
+            editable: false,
+            filter: {
+                showIcon: true,
+            },
+            width:200
+        }, {
+            dataField: "category_quantity",
+            headerText: "수량",
+            editable: true,
+            filter: {
+                showIcon: true,
+            },
+            renderer: {
+                type: "NumberStepRenderer",
+                min: 0,
+                max: 50,
+                step: 1,
+                inputHeight: 28, // input 높이 지정
+                textEditable: true,
+            },
+            width:90
+        },{
+            dataField: "category_manager",
+            headerText: "담당자",
+            editable:true,
+            editRenderer : {
+                type : "InputEditRenderer",
+                showEditorBtnOver : true, // 마우스 오버 시 에디터버턴 보이기
+                textAlign : "right", // 오른쪽 정렬로 입력되도록 설정
+                maxlength : 10,
+            },
+            filter: {
+                showIcon: true,
+            },
+        },{
+            dataField: "category_del_btn", //임의의 고유값
+            headerText: "",
+            headerStyle: "my-header-style",
+            editable: false,
+            style: "my-column-style",
+            renderer: {
+                type: "IconRenderer",
+                iconWidth:12,
+                iconHeight:16,
+                iconPosition:"aisleCenter",
+                iconTableRef:{
+                    "default":"../resources/img/icon/icon_delete.svg"
+                },
+                onClick: function(){
+                    clickItem = AUIGrid.getSelectedRows(popup_grid_license_manage_addf2)[0];
+                    AUIGrid.removeRow(popup_grid_license_manage_addf2, "selectedIndex");
+                },
+            },
+            width:60
+        }];
+
+    /* 2. 그리드 속성 설정 */
+    let gridPros = {
+        rowIdField: "id",
+        selectionMode: "multipleCells",
+        enableSorting: true, // 소팅
+        noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
+        softRemoveRowMode:false,
+        editable: true, // 수정가능여부, 그리드 데이터 수정 가능
+        /* 사이즈 지정 */
+        headerHeight : 30, // 기본 헤더 높이 지정
+        fillColumnSizeMode: true,
+        /* 페이지네이션 */
+        usePaging: true, // 페이징 사용
+        pagingMode: "simple", // 페이징을 간단한 유형으로 나오도록 설정
+        pageRowCount: 5,
+        showPageRowSelect: true, // 페이지 행 개수 select UI 출력 여부 (기본값 : false)
+        /* 그리드 복사 */
+        copyDisplayValue: true, //그리드 데이터 복사 가능
+        /* 필터 */
+        enableFilter: true, // 필터 true 설정
+    }
+
+    /* 그리드 생성 */
+    popup_grid_license_manage_addf2 = AUIGrid.create("#popup_grid_license_manage_addf2", columnLayout, gridPros);
+}
+/* //HW 상세정보 > 신규신청 */
+
+
 /*  HW 상세정보  > SW 라이선스 검색 */
 let popup_subGrid_swLicenseSearch;
 
-function subPopupSWLicenseSearch(){
+function subPopupSWLicenseSearch(e){
     let columnLayout = [
         {
             dataField: "id",
@@ -4664,6 +4857,8 @@ function subPopupSWLicenseSearch(){
     popup_subGrid_swLicenseSearch = AUIGrid.create("#popup_subGrid_swLicenseSearch", columnLayout, gridPros);
     requestSubPopupSWLicenseSearch();
 
+    let targetPlace = $(e).attr("data-place");
+
     /* 그리드 사용 함수 */
     AUIGrid.bind(popup_subGrid_swLicenseSearch, "cellDoubleClick", function(event){
         $("#swLicenseSearch_pop input[data-label='assetNumber']").val(event.category_sw_product);
@@ -4678,8 +4873,13 @@ function subPopupSWLicenseSearch(){
             category_quantity: rowData.category_quantity,
             category_manager: manager
         }
+        if(targetPlace === "info"){
+            AUIGrid.addRow(popup_grid_license_manage_addf, changeItem,"last");
+        }else if(targetPlace ==="register"){
+            AUIGrid.addRow(popup_grid_license_manage_addf2, changeItem,"last");
+        }
 
-        AUIGrid.addRow(popup_grid_license_manage_addf, changeItem,"last");
+
         lp_close("swLicenseSearch_pop");
     });
 }

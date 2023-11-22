@@ -109,10 +109,10 @@
         <div class="title-box">
             <div class="title"><h3>HW자산현황</h3></div>
             <div class="btn-wrap">
-                <button type="button" class="btn excel">엑셀 IMPORT</button>
-                <button type="button" class="btn excel">엑셀다운로드</button>
+                <button type="button" class="btn excel" onclick="lp_open('excelOnlyImport_pop','엑셀 IMPORT',850,230,this)">엑셀 IMPORT</button>
+                <button type="button" class="btn excel" onclick="exportTo('xlsx')">엑셀다운로드</button>
                 <button type="button" class="btn add-column" onclick="lp_open('gridPop_hw_add', 'SW 상세정보',850,760)">신규추가</button>
-                <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'SW 상세정보',850,760)">상세보기</button>
+                <button type="button" class="btn" onclick="lp_open('gridPop_hw_detail', 'HW 상세정보',850,770)">상세보기</button>
                 <button type="button" class="btn trash" onclick="deleteRowGrid();" >선택삭제</button>
             </div>
         </div>
@@ -138,6 +138,31 @@
 <!-- // contents -->
 
 <!-- 팝업 -->
+<div id="excelOnlyImport_pop" class="popup">
+    <div class="pop-box">
+        <div class="pop-body">
+            <div class="input-wrap search-ver">
+                <div class="input-list medium">
+                    <span class="input-title">Import 파일</span>
+                    <div class="search-file-box">
+                        <label class="file">
+                            <input type="file" class="fileUpload" accept=".xlsx" id="fileSelector">
+                            <span>선택된 파일 없음</span>
+                        </label>
+                        <i class="fa-solid fa-magnifying-glass"></i>
+                    </div>
+                </div>
+                <button type="button" class="btn">양식 다운로드</button>
+            </div>
+
+            <div class="btn-wrap">
+                <button type="button" class="btn save">저장</button>
+                <button type="button" class="btn" onclick="lp_close('excelOnlyImport_pop')">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- 신규추가 -->
 <div id="gridPop_hw_add" class="popup">
     <div class="pop-box">
@@ -349,14 +374,14 @@
                     <h3>SW 라이선스 관리</h3>
                 </div>
                 <div class="btn-wrap">
-                    <button type="button" class="btn add-column" onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350)">등록</button>
+                    <button type="button" class="btn add-column"  data-place="register"  onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350,this)">등록</button>
                 </div>
             </div>
-            <div id="popup_grid_license_manage_addf" class="grid-box h-small"></div>
+            <div id="popup_grid_license_manage_addf2" class="grid-box h-small"></div>
 
             <div class="btn-wrap">
                 <button type="button" class="btn">수정</button>
-                <button type="button" class="btn" onclick="lp_close('gridPop_hw_detail')">닫기</button>
+                <button type="button" class="btn" onclick="lp_close('gridPop_hw_add')">닫기</button>
             </div>
         </div>
     </div>
@@ -447,7 +472,7 @@
                     <h3>SW 라이선스 관리</h3>
                 </div>
                 <div class="btn-wrap">
-                    <button type="button" class="btn add-column" onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350)">등록</button>
+                    <button type="button" class="btn add-column" data-place="info" onclick="lp_open('swLicenseSearch_pop', 'SW 라이선스 검색',850,350,this)">등록</button>
                 </div>
             </div>
             <div id="popup_grid_license_manage_addf" class="grid-box h-small"></div>
@@ -621,6 +646,10 @@
             AUIGrid.bind(hwAssetCurrent_ID, "cellDoubleClick", function() {
                 lp_open('gridPop_hw_detail', 'HW 상세정보',850,770);
             });
+            /* 일반 클릭 시 */
+            AUIGrid.bind(hwAssetCurrent_ID, "cellClick", function() {
+                requestSWAssetLicenseData();
+            });
         },150);
     }
     function createSWAssetLicenseGrid() {
@@ -693,7 +722,6 @@
         setTimeout(function(){
             /* 그리드 생성 */
             swAssetLicense_ID = AUIGrid.create("#swAssetLicense_ID", columnLayout, gridPros);
-            requestSWAssetLicenseData();
         },150);
 
     }
@@ -751,6 +779,32 @@
         }
         AUIGrid.removeCheckedRows(hwAssetCurrent_ID); // 체크된 행 삭제 처리
     }
+
+    /* 엑셀 다운로드 */
+    function exportTo(type) {
+
+        // 날짜 변환
+        const today = new Date();
+        const month = ("0" + (today.getMonth() + 1)).slice(-2);
+        const date = ("0" + today.getDate()).slice(-2);
+        const year = today.getFullYear().toString().slice(-2);
+
+        const formattedDate = year + month + date;
+
+        const exportProps = {
+            // 저장할 파일명
+            fileName : "HW 상세내역"+formattedDate,
+            progressBar : true,
+            exportWithStyle : false
+        }
+
+        // 내보내기 실행
+        switch (type) {
+            case "xlsx":
+                AUIGrid.exportToXlsx(hwAssetCurrent_ID,exportProps);
+                break;
+        }
+    };
 
 </script>
 </body>

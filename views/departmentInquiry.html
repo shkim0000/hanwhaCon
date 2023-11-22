@@ -345,8 +345,8 @@
             showFooter: true,
             copyDisplayValue: true, //그리드 데이터 복사 가능
             editable: false, // 수정가능여부, 그리드 데이터 수정 가능
-            enableFilter: true, // 필터 true 설정
-            simplifySelectionEvent: true
+            simplifySelectionEvent: true,
+            selectionMode: "multipleCells",
 
         }
 
@@ -547,6 +547,7 @@
 
         /* 2. 그리드 속성 설정 */
         let gridPros = {
+            selectionMode: "multipleCells",
             enableFilter: true,
             useContextMenu: true,
             fixedColumnCount: 1,
@@ -761,6 +762,7 @@
         let gridPros = {
             rowIdField: "id",
             selectionMode: "multipleCells",
+            showSelectionBorder: true,
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */

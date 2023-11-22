@@ -142,32 +142,101 @@ $(function(){
     $(document).on("click", ".menu-btn", function(){
         let sidebar = $(".sidebar");
         let contents = $(".contents");
+
         if(!sidebar.hasClass("open")){
+            /* 1. 사이드 바 - open-ver */
             $(this).addClass("on");
-            sidebar.removeClass("close");
+            sidebar.removeClass("close on");
             sidebar.addClass("open");
-            contents.removeClass("close");
+
+            let lastActiveBtn= $('.sidebar.open .btn.active').next().find("li").length;
+            $('.sidebar.open .btn.active').next().css(`height`, `${lastActiveBtn * 39.2}`);
+
             contents.addClass("active");
         }else{
+            /* 2. 사이드 바 : close-ver */
             $(this).removeClass("on");
             sidebar.removeClass("open");
-            sidebar.addClass("close");
+
             contents.removeClass("active");
-            contents.addClass("close");
+
         }
     });
 
-    $(document).on("mouseenter",".sidebar.close .btn",function(){
+    $(document).on("mouseenter", ".menu-btn", function(){
         if(!$(this).hasClass("on")){
-            $(".sidebar.close .btn").removeClass("on");
-            $(this).addClass("on");
+            $(".sidebar").addClass("close on");
+        }
+    });
+
+    $(document).on("mouseleave", ".sidebar.close.on .menu", function(){
+        $(this).closest(".sidebar").removeClass("close on")
+    });
+
+
+    $(document).on("mouseenter",".sidebar.close .btn",function(){
+        if(!$(this).hasClass("open")){
+            $(".sidebar.close .btn").removeClass("open");
+            $(this).addClass("open");
+
+            let num = $(this).next(".depth").find("ul li").length;
+            $(this).next(".depth").css(`height`,`${num * 27.19 + 5}`);
         }else{
-            $(".sidebar.close .btn").removeClass("on");
+            $(".sidebar.close .btn").removeClass("open");
+
+
         }
     });
 
     $(document).on("mouseleave",".sidebar.close .menu > ul > li",function(){
-        $(".sidebar.close .btn").removeClass("on");
+        $(".sidebar.close .btn").removeClass("open");
+        if(!$(".sidebar .depth .btn").hasClass("active")){
+            $(".sidebar.close .depth").css(`height`,0);
+        }
+    });
+
+    /* 20231016 : sidebar 설정 */
+    $(document).ready(function(){
+        let pageName = $('.page-indicator ul li:nth-child(2)').text();
+        let finalDepthName = $('.page-indicator ul li:last-child').text();
+
+        if(pageName){
+            $('.sidebar').addClass('open');
+            let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
+                return $(this).text() === pageName;
+            });
+            currentListEl.addClass('active');
+            currentListEl.siblings('.depth').addClass('active');
+        }
+
+        /* 사이드바 초기 설정 */
+        if(finalDepthName){
+            // $('.sidebar').addClass('open');
+            let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
+                return $(this).text() === finalDepthName;
+            });
+            currentListEl.closest('.depth').siblings('.btn').addClass('active');
+            currentListEl.addClass('active');
+            currentListEl.closest('.depth').addClass('active');
+            let num = currentListEl.closest('.depth').find('ul li').length;
+            currentListEl.closest('.depth').css(`height`, `${num * 39.2}`);
+        }
+    })
+
+    $(".sidebar .menu ul li .btn").on("click",function(){
+        if($(this).closest(".sidebar").hasClass("open")){
+            if($(this).hasClass("active")){
+                $(this).removeClass("active");
+                $(this).siblings(".depth").removeClass("active").css('height','0');
+            } else if(!$(this).hasClass("active")){
+                $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
+                $(this).closest(".menu").find(".btn.active").removeClass("active");
+                $(this).addClass("active");
+                let num = $(this).siblings(".depth").find("ul li").length;
+                $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);
+            }
+        }
+
     });
 
 
@@ -214,46 +283,6 @@ $(function(){
         $(this).val("");
     });
 
-
-    /* 20231016 : sidebar 설정 */
-    $(document).ready(function(){
-        let pageName = $('.page-indicator ul li:nth-child(2)').text();
-        let finalDepthName = $('.page-indicator ul li:last-child').text();
-
-        if(pageName){
-            $('.sidebar').addClass('open');
-            let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
-                return $(this).text() === pageName;
-            });
-            currentListEl.addClass('active');
-            currentListEl.siblings('.depth').addClass('active');
-        }
-        if(finalDepthName){
-            $('.sidebar').addClass('open');
-            let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
-                return $(this).text() === finalDepthName;
-            });
-            console.log(currentListEl)
-            currentListEl.closest('.depth').siblings('.btn').addClass('active');
-            currentListEl.addClass('active');
-            currentListEl.closest('.depth').addClass('active');
-            let num = currentListEl.closest('.depth').find('ul li').length;
-            currentListEl.closest('.depth').css(`height`, `${num * 39.2}`);
-        }
-    })
-
-    $(".sidebar .menu ul li .btn").on("click",function(){
-        if($(this).hasClass("active")){
-            $(this).removeClass("active");
-            $(this).siblings(".depth").removeClass("active").css('height','0');
-        } else if(!$(this).hasClass("active")){
-            $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
-            $(this).closest(".menu").find(".btn.active").removeClass("active");
-            $(this).addClass("active");
-            let num = $(this).siblings(".depth").find("ul li").length;
-            $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);
-        }
-    });
 
     /* 행 추가 버튼 클릭 : 일반 테이블 */
     $(".btn.add-column").on("click",function(){
@@ -610,18 +639,26 @@ function lp_open(id,title,width,height,e,type){
             /* 기준정보 > 자산모델관리 */
             gridPopAssetClassification(e);
             break;
-
         case "gridPop_sw_detail":
             /* 기업자산 > SW 상세정보 */
             gridPopLicenseManage();
+            break;
+        case "gridPop_sw_add":
+            /* 기업자산 > SW 신규추가 */
+            gridPopLicenseManage2();
             break;
         case "gridPop_hw_detail":
             /* 기업자산 > HW 상세정보 */
             gridPopLicenseManageAddf();
             break;
+        case "gridPop_hw_add":
+            /* 기업자산 > HW 상세정보 > 신규추가 */
+            gridPopLicenseManageAddf2();
+            gridSizePopup(popup_grid_license_manage_addf2, 850);
+            break;
         case "swLicenseSearch_pop":
             /* 기업자산 > HW 상세정보 > SW 라이선스 검색 */
-            subPopupSWLicenseSearch();
+            subPopupSWLicenseSearch(e);
             break;
 
         default:

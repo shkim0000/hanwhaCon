@@ -29,7 +29,7 @@ $(function(){
             "<button type='button' class='btn'>자산<br>신청</button>\n"+
             "<div class='depth'>\n"+
             "<ul>\n"+
-            "<li><a href='#' class='linkBtn'>자산신청현황</a></li>\n"+
+            "<li><a href='https://iea.daouoffice.com/app/mail' class='linkBtn'>자산신청현황</a></li>\n"+
             "<li><a href='#' class='linkBtn'>신규신청</a></li>\n"+
             "<li><a href='#' class='linkBtn'>교체신청</a></li>\n"+
             "<li><a href='#' class='linkBtn'>대여신청</a></li>\n"+
@@ -132,8 +132,13 @@ $(function(){
     });
 
     $(document).on("mouseenter", ".menu-btn", function(){
-        if(!$(this).hasClass("on")){
-            $(".sidebar").addClass("close on");
+        let closestBody = $(this).closest("body");
+        if(!closestBody.hasClass("user-main-page")){
+            if(!$(this).hasClass("on")){
+                $(".sidebar").addClass("close on");
+            }
+        }else{
+            return false;
         }
     });
 
@@ -151,9 +156,11 @@ $(function(){
             $(this).next(".depth").css(`height`,`${num * 27.19 + 5}`);
         }else{
             $(".sidebar.close .btn").removeClass("open");
-
-
         }
+    });
+
+    $(document).on("click",".sidebar.close a",function(event){
+        event.preventDefault();
     });
 
     $(document).on("mouseleave",".sidebar.close .menu > ul > li",function(){
