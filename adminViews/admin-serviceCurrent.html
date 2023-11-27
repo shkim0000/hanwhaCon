@@ -45,6 +45,73 @@
                 <div class="input-list">
                     <span class="input-title">서비스 구분</span>
                     <label class="select">
+                        <select id="serviceType" onchange="serviceStatus(this.value);">
+                            <option value="">선택</option>
+                            <c:forEach var="nes" items="${servdt}">
+                                <option value="${nes.Code}">${nes.Name}</option>
+                            </c:forEach>
+                        </select>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">사용자</span>
+                    <label class="input search" data-place="user_search" onclick="lp_open('gridPop_user','사용자 검색',505,530,this)">
+                        <input type="text" data-label="user" id="searchUser" readonly>
+                        <button type="button"><i class="fa-solid fa-magnifying-glass"></i></button>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">요청내용</span>
+                    <label class="input">
+                        <input id="requestContent" type="text">
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">부서</span>
+                    <label class="input search">
+                        <input type="hidden" id="DeptCode">
+                        <input type="text" data-label="department" id="searchDept"readonly>
+                    </label>
+                </div>
+                <div class="input-list">
+                    <span class="input-title">서비스 상태</span>
+                    <label class="select">
+                        <select id="serviceState">
+                            <option value="">선택</option>
+                            <option value="0">임시저장</option>
+                            <option value="1">신청</option>
+                            <option value="2">조치중</option>
+                            <option value="3">결재반려</option>
+                            <option value="4">완료</option>
+                            <option value="5">취소</option>
+
+                            <%-- <c:forEach var="sst" items="${serviceState}">
+                            <option value="${sst.Code}">${sst.Name}</option>
+                        </c:forEach> --%>
+                        </select>
+                    </label>
+                </div>
+
+                <div class="input-list">
+                    <span class="input-title">기간</span>
+                    <div class="date-wrap">
+                        <label class="date limit start">
+                            <input id="startDate" type="text">
+                        </label>
+                        <span>~</span>
+                        <label class="date limit end">
+                            <input id="endDate" type="text">
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <button type="button" id="serviceSearch" class="btn search">검색</button>
+        </div>
+        <div class="input-wrap">
+            <div class="input-lists">
+                <div class="input-list">
+                    <span class="input-title">서비스 구분</span>
+                    <label class="select">
                         <select>
                             <option value="">네트워크 신청</option>
                             <option value="">PC 부품신청</option>
