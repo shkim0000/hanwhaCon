@@ -204,8 +204,6 @@ $(function(){
                 $(this).removeClass("active");
                 $(this).siblings(".depth").removeClass("active").css('height','0');
             } else if(!$(this).hasClass("active")){
-                $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
-                $(this).closest(".menu").find(".btn.active").removeClass("active");
                 $(this).addClass("active");
                 let num = $(this).siblings(".depth").find("ul li").length;
                 $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);

@@ -178,20 +178,25 @@ $(function(){
         if(!$(this).hasClass("open")){
             $(".sidebar.close .btn").removeClass("open");
             $(this).addClass("open");
+            console.log("1")
 
             let num = $(this).next(".depth").find("ul li").length;
             $(this).next(".depth").css(`height`,`${num * 27.19 + 5}`);
+
+
         }else{
             $(".sidebar.close .btn").removeClass("open");
-
+            console.log("2")
 
         }
     });
 
     $(document).on("mouseleave",".sidebar.close .menu > ul > li",function(){
         $(".sidebar.close .btn").removeClass("open");
+        console.log("3")
         if(!$(".sidebar .depth .btn").hasClass("active")){
             $(".sidebar.close .depth").css(`height`,0);
+            console.log("4")
         }
     });
 
@@ -201,6 +206,7 @@ $(function(){
         let finalDepthName = $('.page-indicator ul li:last-child').text();
 
         if(pageName){
+            console.log("5")
             $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
                 return $(this).text() === pageName;
@@ -208,9 +214,11 @@ $(function(){
             currentListEl.addClass('active');
             currentListEl.siblings('.depth').addClass('active');
         }
+        console.log("6")
 
         /* 사이드바 초기 설정 */
         if(finalDepthName){
+            console.log("7")
             // $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
                 return $(this).text() === finalDepthName;
@@ -223,14 +231,19 @@ $(function(){
         }
     })
 
+
     $(".sidebar .menu ul li .btn").on("click",function(){
+        console.log("8")
         if($(this).closest(".sidebar").hasClass("open")){
+            console.log("9")
             if($(this).hasClass("active")){
+                console.log("10")
                 $(this).removeClass("active");
                 $(this).siblings(".depth").removeClass("active").css('height','0');
             } else if(!$(this).hasClass("active")){
-                $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
-                $(this).closest(".menu").find(".btn.active").removeClass("active");
+                console.log("11")
+                // $(this).closest(".menu").find(".depth.active").removeClass("active").css('height','0');
+                // $(this).closest(".menu").find(".btn.active").removeClass("active");
                 $(this).addClass("active");
                 let num = $(this).siblings(".depth").find("ul li").length;
                 $(this).siblings(".depth").addClass("active").css(`height`,`${num * 39.2}`);
@@ -238,7 +251,6 @@ $(function(){
         }
 
     });
-
 
 
     /* datepicker */
