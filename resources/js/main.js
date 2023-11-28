@@ -116,10 +116,13 @@ $(function(){
             $(this).addClass("on");
             sidebar.removeClass("close on");
             sidebar.addClass("open");
+            console.log("open")
 
-            let lastActiveBtn= $('.sidebar.open .btn.active').next().find("li").length;
-            $('.sidebar.open .btn.active').next().css(`height`, `${lastActiveBtn * 39.2}`);
-
+            $('.sidebar.open .btn.active').each(function (){
+                console.log("this")
+                let num = $(this).next().find("li").length;
+                $(this).next().css('height', `${num * 39.2}px`);
+            });
             contents.addClass("active");
         }else{
             /* 2. 사이드 바 : close-ver */

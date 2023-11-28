@@ -149,9 +149,11 @@ $(function(){
             sidebar.removeClass("close on");
             sidebar.addClass("open");
 
-            let lastActiveBtn= $('.sidebar.open .btn.active').next().find("li").length;
-            $('.sidebar.open .btn.active').next().css(`height`, `${lastActiveBtn * 39.2}`);
-
+            $('.sidebar.open .btn.active').each(function (){
+                console.log("this")
+                let num = $(this).next().find("li").length;
+                $(this).next().css('height', `${num * 39.2}px`);
+            });
             contents.addClass("active");
         }else{
             /* 2. 사이드 바 : close-ver */
@@ -206,7 +208,6 @@ $(function(){
         let finalDepthName = $('.page-indicator ul li:last-child').text();
 
         if(pageName){
-            console.log("5")
             $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.btn').filter(function(){
                 return $(this).text() === pageName;
@@ -214,11 +215,9 @@ $(function(){
             currentListEl.addClass('active');
             currentListEl.siblings('.depth').addClass('active');
         }
-        console.log("6")
 
         /* 사이드바 초기 설정 */
         if(finalDepthName){
-            console.log("7")
             // $('.sidebar').addClass('open');
             let currentListEl = $('.sidebar .menu ul').find('.linkBtn').filter(function(){
                 return $(this).text() === finalDepthName;
