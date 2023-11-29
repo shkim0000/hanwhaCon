@@ -143,18 +143,20 @@
             </div>
         </div>
     </div>
+
     <footer>
         <div class="logos">
             <img src="../resources/img/h_logo.svg" alt="한화 로고 토탈 에너지 로고">
             <p>Copyright ⓒ 2016 Hanwha TotalEnergies Petrochemical Co., Ltd All rights reserved.</p>
         </div>
     </footer>
+
 </div>
 
 <!-- // contents -->
 <style>
     /* aui-grid 높이 */
-    .main-grid-5{height:402px;}
+    .main-grid-5{height:305px;}
     .aui-grid-header-panel .aui-grid-default-header.aui-grid-user-custom-header:hover span {color:#000!important;}
     .aui-grid-default-header,
     .aui-grid-user-custom-header{background-color:#414141;color:#FFFFFF;}
@@ -162,10 +164,8 @@
     .aui-grid-row-background{background-color:#fff;}
     .aui-grid-alternative-row-background{background-color:#f9f9f9}
     .aui-grid-header-panel .aui-grid-table tr td{border:0;}
-    .aui-grid-default-header *{color:#fff;font-size:17px;font-family:"Noto Sans", sans-serif;font-weight:400}
+    .aui-grid-default-header *{color:#fff;font-size:16px;font-family:"Noto Sans", sans-serif;font-weight:400}
     .aui-grid-body-panel .aui-grid-table tr td{border-bottom:0;}
-    .aui-grid-header-panel .aui-grid-table tr{position:relative}
-    .aui-grid-header-panel .aui-grid-table tr::before{content:'';width:4px;height:52px;background-color:#414141;position:absolute;right:4px;top:0;}
 
     /* aui-grid > footer */
     .aui-grid-default-footer{background-color:#EEEEEE;}
@@ -240,8 +240,8 @@
             softRemoveRowMode: true, // 소프트 제거 모드 사용 안함
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
-            headerHeight : 52, // 기본 헤더 높이 지정
-            rowHeight : 52, // 기본 헤더 높이 지정
+            headerHeight : 38, // 기본 헤더 높이 지정
+            rowHeight : 38, // 기본 헤더 높이 지정
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
@@ -252,7 +252,7 @@
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 푸터 */
             showFooter : true,
-            footerHeight:52,
+            footerHeight:38,
         }
 
         /* 그리드 생성 */
@@ -318,8 +318,8 @@
             enableSorting: true, // 소팅
             noDataMessage: "출력할 데이터가 없습니다.", // 데이터 없을 경우
             /* 사이즈 지정 */
-            headerHeight : 52, // 기본 헤더 높이 지정
-            rowHeight : 52, // 기본 헤더 높이 지정
+            headerHeight : 38, // 기본 헤더 높이 지정
+            rowHeight : 38, // 기본 헤더 높이 지정
             fillColumnSizeMode: true,
             /* 페이지네이션 */
             usePaging: true, // 페이징 사용
@@ -330,7 +330,7 @@
             copyDisplayValue: true, //그리드 데이터 복사 가능
             /* 푸터 */
             showFooter : true,
-            footerHeight:52,
+            footerHeight:42,
         }
         /* 그리드 생성 */
         mineAsset_ID = AUIGrid.create("#mineAsset_ID", columnLayout, gridPros);
